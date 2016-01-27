@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave", "CustomModbusSlave\CustomModbusSlave.csproj", "{9244D783-9410-4026-B3EF-49435F79A74A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlaveConsoleApp", "CustomModbusSlaveConsoleApp\CustomModbusSlaveConsoleApp.csproj", "{EB3B372F-234C-43F2-B80A-776A01A24BB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.MicroclimatEs2gApp", "CustomModbusSlave.MicroclimatEs2gApp\CustomModbusSlave.MicroclimatEs2gApp.csproj", "{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9244D783-9410-4026-B3EF-49435F79A74A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9244D783-9410-4026-B3EF-49435F79A74A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9244D783-9410-4026-B3EF-49435F79A74A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9244D783-9410-4026-B3EF-49435F79A74A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB3B372F-234C-43F2-B80A-776A01A24BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB3B372F-234C-43F2-B80A-776A01A24BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB3B372F-234C-43F2-B80A-776A01A24BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB3B372F-234C-43F2-B80A-776A01A24BB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

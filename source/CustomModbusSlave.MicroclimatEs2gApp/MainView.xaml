@@ -1,0 +1,41 @@
+﻿<Window x:Class="CustomModbusSlave.MicroclimatEs2gApp.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:microclimatEs2GApp="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp"
+    Title="MainView" Height="350" Width="525">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="2*"/>
+			<RowDefinition Height="1*"/>
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Label Grid.Column="0" Margin="2,2,2,2" Width="90" Content="COM порт:" />
+			<Grid Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="3*"/>
+					<ColumnDefinition Width="1*"/>
+				</Grid.ColumnDefinitions>
+				<ComboBox Grid.Column="0" Margin="2,2,2,2" ItemsSource="{Binding ComPortsAvailable}" SelectedItem="{Binding SelectedComName}" />
+				<Button Grid.Column="1" Margin="2,2,2,2" VerticalContentAlignment="Center" Command="{Binding GetPortsAvailableCommand}" Content="⟳" FontSize="20" Padding="0,-6,0,0" />
+			</Grid>
+			<Button Grid.Column="3" Margin="2,2,2,2" Command="{Binding Path=ClosePortCommand, Mode=OneTime}" Content="Отключиться" />
+			<Button Grid.Column="2" Margin="2,2,2,2" Command="{Binding Path=OpenPortCommand, Mode=OneTime}" Content="Подключиться" />
+		</Grid>
+		<TabControl Grid.Row="1">
+			<TabItem Header="МУК 1">
+				<microclimatEs2GApp:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm}"/>
+			</TabItem>
+			<TabItem Header="МУК 2"></TabItem>
+			<TabItem Header="МУК 3"></TabItem>
+			<TabItem Header="МУК 4"></TabItem>
+		</TabControl>
+		<microclimatEs2GApp:ProgramLogView Grid.Row="2" DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}"/>
+	</Grid>
+</Window>

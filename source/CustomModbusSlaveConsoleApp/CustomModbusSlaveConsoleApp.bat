@@ -1,0 +1,1 @@
+CustomModbusSlaveConsoleApp -portname:COM2 -baudrate:57600

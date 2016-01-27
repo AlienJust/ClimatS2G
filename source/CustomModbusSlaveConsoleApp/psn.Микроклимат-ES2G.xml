@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Микроклимат ркабины ES2G" Version="1" Description="Конфигурация микроклимата кабины ES2G" Id="EFD2522E-E852-4253-A4E0-E3C7E4FF3FF5" RpdId="33">
+	<PsnMeters>
+		<PsnMeter Address="0x01" Name="РПД" />
+		<PsnMeter Address="0x02" Name="МУК заслонки" />
+		<PsnMeter Address="0x03" Name="МУК испарителя" />
+		<PsnMeter Address="0x04" Name="МУК конденсатора" />
+		<PsnMeter Address="0x05" Name="МУК теплого пола" />
+		<PsnMeter Address="0x06" Name="БС-СМ" />
+		<PsnMeter Address="0x1E" Name="БВС" />
+		<PsnMeter Address="0x01" Name="РПД" />
+		<PsnMeter Address="0x20" Name="Технический абонент" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="между КСМ и МУК заслонки 03">
+			<Request Length="8" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="becb0559-02b1-4c60-aaa5-edd1fdbed6fd" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
+			</Request>
+			<Reply Length="39" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС КПО3 с КПО3.ПЧ1" Id="d96c7dda-81e1-4a5f-98d9-386ac121de4a" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ1, ℃" Expression="[u9] * 2.0" Id="478128bf-0749-41ad-8102-faac26577c58" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО3.ПЧ1, В" Expression="[u10] * 10.0" Id="f3168f35-1779-4b4c-84a4-1b7f2ec3cb04" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ2, ℃" Expression="[u11] * 2.0" Id="983a308d-89b6-4719-ab25-98d720ab6963" />
+				<VarVal Position="37.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
+				<VarVal Position="38.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="между КСМ и МУК испарителя 03">
+			<Request Length="8" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="13b06650-ef44-4f24-8e4c-bea3ce3f7732" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="4f44fba2-1371-407d-9ae0-265d2bf79386" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="c3ed1fd2-48fc-4d49-a9da-f58548033a75" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="8600310f-237f-4bd1-af61-96bdb45e5073" />
+			</Request>
+			<Reply Length="41" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="1b69224c-0480-46ca-9ee2-a4b970421ec7" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="24681147-6324-40c5-8bb1-53388a5d341b" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС КПО3 с КПО3.ПЧ1" Id="6d61082f-0afb-4e4e-ab26-4e77d1090da9" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ1, ℃" Expression="[u9] * 2.0" Id="e3d6952a-1717-4e73-8cad-18ef5716fbde" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО3.ПЧ1, В" Expression="[u10] * 10.0" Id="d6d91237-694d-4032-8ca6-41841186beac" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ2, ℃" Expression="[u11] * 2.0" Id="d71b76a8-11d0-4b31-bfc5-2c089f43f41c" />
+				<VarVal Position="39.0" Length="8" Name="#CRCH" Id="2b198b86-3572-4f0e-9a6c-75eb9d2d26ef" />
+				<VarVal Position="40.0" Length="8" Name="#CRCL" Id="e918aed8-b5c7-4604-a177-003a4537343e" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="между КСМ и МУК конденсатора 03">
+			<Request Length="8" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="27cf4e42-2c94-4a2a-afe9-d432a72d7895" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="2d78f04d-906a-474b-a4de-a72e25fee875" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="3522fe6a-4990-4672-ad49-f09686991f05" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="786532a9-6779-4450-a03f-8af1b5764802" />
+			</Request>
+			<Reply Length="29" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="5b7dcd74-800c-4fc6-955b-eb6a801d8376" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="c334bbf7-f8b0-48a3-9627-c85d6abde6bf" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС КПО3 с КПО3.ПЧ1" Id="e095ff49-ddcb-4e20-bf74-3d7546e62f9d" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ1, ℃" Expression="[u9] * 2.0" Id="fa0331be-11b5-4267-baf2-aaea0723dee5" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО3.ПЧ1, В" Expression="[u10] * 10.0" Id="e98d6e24-0e37-4420-8881-aafb078e383d" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ2, ℃" Expression="[u11] * 2.0" Id="6731f209-2469-4687-866c-3be8f93accbf" />
+				<VarVal Position="27.0" Length="8" Name="#CRCH" Id="0c6b8668-9f04-474e-ae06-a533620dceb8" />
+				<VarVal Position="28.0" Length="8" Name="#CRCL" Id="b71f8c37-d95f-44d6-a227-9521061f5d79" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="между КСМ и МУК теплого пола 03">
+			<Request Length="8" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="6c751ccd-c42b-4a94-af8d-3f6e89666f86" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="830718d4-4b8b-4e7d-8ddc-b3fd2c976514" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="00849a53-545b-4104-98c3-2b50453894b8" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="c8114bfa-fda4-44eb-bd79-0a40ddccd960" />
+			</Request>
+			<Reply Length="31" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="5f2ac73b-5195-46ed-92e2-7ce6557fa720" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="30147e85-84aa-4b3d-bb66-8c689c4f3121" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС КПО3 с КПО3.ПЧ1" Id="31163d76-f863-45aa-bdfb-edef6ee7330b" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ1, ℃" Expression="[u9] * 2.0" Id="016c8aea-4cab-400d-a425-1776f26ab947" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО3.ПЧ1, В" Expression="[u10] * 10.0" Id="d9765612-49f7-41be-83a8-cde3946805e7" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ2, ℃" Expression="[u11] * 2.0" Id="5490eed0-96f2-4022-8cbb-f1649bc03193" />
+				<VarVal Position="29.0" Length="8" Name="#CRCH" Id="a87327a7-041b-4d43-9c97-f5988557c719" />
+				<VarVal Position="30.0" Length="8" Name="#CRCL" Id="5bbdb842-8dd8-452b-b0eb-94febf48321f" />
+			</Reply>
+		</CmdMask>
+		
+		<CmdMask Name="между КСМ и МУК заслонки 10">
+			<Request Length="21" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
+				<DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="becb0559-02b1-4c60-aaa5-edd1fdbed6fd" />
+				<VarVal Position="19.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
+				<VarVal Position="20.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
+			</Request>
+			<Reply Length="8" Position="21">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
+				<DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС КПО3 с КПО3.ПЧ1" Id="d96c7dda-81e1-4a5f-98d9-386ac121de4a" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ1, ℃" Expression="[u9] * 2.0" Id="478128bf-0749-41ad-8102-faac26577c58" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО3.ПЧ1, В" Expression="[u10] * 10.0" Id="f3168f35-1779-4b4c-84a4-1b7f2ec3cb04" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ2, ℃" Expression="[u11] * 2.0" Id="983a308d-89b6-4719-ab25-98d720ab6963" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
+			</Reply>
+		</CmdMask>
+		
+		<CmdMask Name="между КСМ и МУК испарителя 0x10">
+			<Request Length="21" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
+				<DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="becb0559-02b1-4c60-aaa5-edd1fdbed6fd" />
+				<VarVal Position="19.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
+				<VarVal Position="20.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
+			</Request>
+			<Reply Length="8" Position="21">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
+				<DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
+			</Reply>
+		</CmdMask>
+
+
+		<CmdMask Name="между КСМ и МУК конденсатора 0x10">
+			<Request Length="15" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
+				<DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="becb0559-02b1-4c60-aaa5-edd1fdbed6fd" />
+				<VarVal Position="13.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
+				<VarVal Position="14.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
+			</Request>
+			<Reply Length="8" Position="15">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
+				<DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
+			</Reply>
+		</CmdMask>
+
+		<CmdMask Name="между КСМ и МУК теплого пола 0x10">
+			<Request Length="21" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
+				<DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="becb0559-02b1-4c60-aaa5-edd1fdbed6fd" />
+				<VarVal Position="19.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
+				<VarVal Position="20.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
+			</Request>
+			<Reply Length="8" Position="21">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
+				<DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
+			</Reply>
+		</CmdMask>
+
+
+		<CmdMask Name="между КСМ и БС-СМ">
+			<Request Length="21" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
+				<DefVal Position="1.0" Length="8" Value="0x20" Name="#NCMD" Id="becb0559-02b1-4c60-aaa5-edd1fdbed6fd" />
+				<VarVal Position="19.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
+				<VarVal Position="20.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
+			</Request>
+			<Reply Length="8" Position="21">
+				<!--TODO: -->
+				<DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
+				<DefVal Position="1.0" Length="8" Value="0x20" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
+			</Reply>
+		</CmdMask>
+
+		<CmdMask Name="между КСМ и БВС 0x41 (cmd: 65 dec)">
+			<Request Length="4" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x1E" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="becb0559-02b1-4c60-aaa5-edd1fdbed6fd" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
+			</Request>
+			<Reply Length="8" Position="4">
+				<!--TODO: -->
+				<DefVal Position="0.0" Length="8" Value="0x1E" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
+			</Reply>
+		</CmdMask>
+
+		<CmdMask Name="между КСМ и техническим абонентом (cmd: 33 dec)">
+			<Request Length="8" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
+				<DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="becb0559-02b1-4c60-aaa5-edd1fdbed6fd" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
+			</Request>
+			<Reply Length="8" Position="4">
+				<!--TODO: -->
+				<DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
+				<DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
+			</Reply>
+		</CmdMask>
+
+		<CmdMask Name="между КСМ и РПД 03">
+			<Request Length="8" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="6c751ccd-c42b-4a94-af8d-3f6e89666f86" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="830718d4-4b8b-4e7d-8ddc-b3fd2c976514" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="00849a53-545b-4104-98c3-2b50453894b8" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="c8114bfa-fda4-44eb-bd79-0a40ddccd960" />
+			</Request>
+			<Reply Length="15" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="5f2ac73b-5195-46ed-92e2-7ce6557fa720" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="30147e85-84aa-4b3d-bb66-8c689c4f3121" />
+				<VarVal Position="13.0" Length="8" Name="#CRCH" Id="a87327a7-041b-4d43-9c97-f5988557c719" />
+				<VarVal Position="14.0" Length="8" Name="#CRCL" Id="5bbdb842-8dd8-452b-b0eb-94febf48321f" />
+			</Reply>
+		</CmdMask>
+	</Commands>
+</PsnConfiguration>

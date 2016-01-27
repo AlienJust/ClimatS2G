@@ -1,0 +1,1 @@
+projects build binaries are here in /debug and /release subdirs
