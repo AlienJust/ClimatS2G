@@ -26,6 +26,6 @@
 		<TextBlock Grid.Row="2" Grid.Column="0" Text="Температура 1w адрес 2"/>
 		<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
 
-		<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=Reply, Mode=OneWay}"/>
+		<TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Reply, Mode=OneWay}" IsReadOnly="True"/>
 	</Grid>
 </UserControl>

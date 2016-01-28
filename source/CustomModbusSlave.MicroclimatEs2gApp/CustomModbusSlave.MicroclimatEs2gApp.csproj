@@ -117,7 +117,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Command\ICommand.cs" />
     <Compile Include="ICommandListener.cs" />
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="MainViewModel.cs" />
