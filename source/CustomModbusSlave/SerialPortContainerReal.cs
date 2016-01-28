@@ -7,12 +7,12 @@ namespace CustomModbusSlave {
 	public class SerialPortContainerReal : ISerialPortContainer {
 		private SerialPort _port;
 
-		public byte[] ReadBytes(int count, int timeoutSeconds) {
+		public byte[] ReadBytes(int count, TimeSpan timeout) {
 			if (_port == null) throw new NullReferenceException("Serial port is null");
 			if (!_port.IsOpen) throw new Exception("Serial port is not opened");
 
 			var extender = new SerialPortExtender(_port, Console.WriteLine);
-			return extender.ReadBytes(count, timeoutSeconds, false);
+			return extender.ReadBytes(count, timeout, false);
 		}
 
 		public void CloseCurrentPort() {

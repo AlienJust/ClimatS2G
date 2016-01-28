@@ -25,8 +25,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			if (code == 0x03 && data.Count == 39) {
 				_notifier.Notify(() => {
 					FlapPosition = (data[3] * 256.0 + data[4]).ToString("f2");
-					TemperatureAddress1 = (data[5] * 256.0 + data[6]).ToString("f2");
-					TemperatureAddress2 = (data[7] * 256.0 + data[8]).ToString("f2");
+					TemperatureAddress1 = (new DataDoubleTextPresenter(data[5], data[6], 1.0, 2)).PresentAsText();
+					TemperatureAddress2 = (new DataDoubleTextPresenter(data[7], data[8], 1.0, 2)).PresentAsText();
 					Reply = data.ToText();
 				});
 			}
@@ -77,5 +77,29 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 				}
 			}
 		}
+	}
+
+	class DataDoubleTextPresenter : ITextPresenter {
+		private readonly byte _lowByte;
+		private readonly byte _highByte;
+		private readonly double _modifier;
+		private readonly int _digitsAfterDotCount;
+
+		public DataDoubleTextPresenter(byte highByte, byte lowByte, double modifier, int digitsAfterDotCount)
+		{
+			_lowByte = lowByte;
+			_highByte = highByte;
+			_modifier = modifier;
+			_digitsAfterDotCount = digitsAfterDotCount;
+		}
+
+		public string PresentAsText() {
+			if (_highByte == 0x85 && _lowByte == 0x00) return "Обрыв датчика";
+			return ((_highByte*256.0 + _lowByte)*_modifier).ToString("f" + _digitsAfterDotCount);
+		}
+	}
+
+	internal interface ITextPresenter {
+		string PresentAsText();
 	}
 }

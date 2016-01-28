@@ -86,7 +86,7 @@ namespace CustomModbusSlave {
 					var waiter = new AutoResetEvent(false);
 					_backgroundWorker.AddWork(() => {
 						try {
-							var bytes = _portContainer.ReadBytes(16, 1);
+							var bytes = _portContainer.ReadBytes(16, TimeSpan.FromSeconds(1));
 							Logger.Log("Retreived bytes from port: " + bytes.ToText());
 							lock (_incomingBuffer.SyncRoot) {
 								foreach (var b in bytes) {
