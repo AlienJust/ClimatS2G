@@ -30,8 +30,8 @@
 			<ColumnDefinition/>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
-		<TextBlock Grid.Row="0" Grid.Column="0" Text="Положение заслонки"/>
-		<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=FlapPosition, Mode=OneWay}"/>
+		<TextBlock Grid.Row="0" Grid.Column="0" Text="ШИМ вентилятора"/>
+		<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=FanPwm, Mode=OneWay}"/>
 
 		<TextBlock Grid.Row="1" Grid.Column="0" Text="Температура 1w адрес 1"/>
 		<TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=TemperatureAddress1, Mode=OneWay}"/>
@@ -40,44 +40,47 @@
 		<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
 
 		<TextBlock Grid.Row="3" Grid.Column="0" Text="Байт входных сигналов"/>
-		<TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=IncomingSignals, Mode=OneWay}"/>
 
 		<TextBlock Grid.Row="4" Grid.Column="0" Text="Байт выходных сигналов"/>
-		<TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=OutgoingSignals, Mode=OneWay}"/>
 
 		<TextBlock Grid.Row="5" Grid.Column="0" Text="Аналоговый вход"/>
-		<TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Path=AnalogInput, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="6" Grid.Column="0" Text="Этап работы в автоматическом режиме"/>
-		<TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="6" Grid.Column="0" Text="ШИМ обогрев (PID рег.)"/>
+		<TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Path=HeatingPwm, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="7" Grid.Column="0" Text="Диагностика 1 (плата МУК)"/>
-		<TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="7" Grid.Column="0" Text="Этап работы в автоматическом режиме"/>
+		<TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Path=AutomaticModeStage, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="8" Grid.Column="0" Text="Диагностика 2 (периферия МУК)"/>
-		<TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="8" Grid.Column="0" Text="8 - Режим работы регулятора температуры; "/>
+		<TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Path=TemperatureRegulatorWorkMode, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="9" Grid.Column="0" Text="Диагностика 3 (1w адрес 1)"/>
-		<TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="9" Grid.Column="0" Text="9 – Рассчитанная уставка температуры; "/>
+		<TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Path=CalculatedTemperatureSetting, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="10" Grid.Column="0" Text="Диагностика 4 (1w адрес 2)"/>
-		<TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="10" Grid.Column="0" Text="10 - Обороты вент-ра "/>
+		<TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Path=FanSpeed, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="11" Grid.Column="0" Text="Emerson диагностика"/>
-		<TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="11" Grid.Column="0" Text="11 - Диагностика 1 (плата МУК, обмен); "/>
+		<TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding Path=Diagnostic1, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="12" Grid.Column="0" Text="Emerson температура"/>
-		<TextBlock Grid.Row="12" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="12" Grid.Column="0" Text="12 - Диагностика 2 (вентилятор); "/>
+		<TextBlock Grid.Row="12" Grid.Column="1" Text="{Binding Path=Diagnostic2, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="13" Grid.Column="0" Text="Emerson давление"/>
-		<TextBlock Grid.Row="13" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="13" Grid.Column="0" Text="13 - Диагностика 3 (Emerson); "/>
+		<TextBlock Grid.Row="13" Grid.Column="1" Text="{Binding Path=Diagnostic3, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="14" Grid.Column="0" Text="Emerson уставка на клапан"/>
-		<TextBlock Grid.Row="14" Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneWay}"/>
+		<TextBlock Grid.Row="14" Grid.Column="0" Text="14 - Диагностика 4 (1w адрес 1); "/>
+		<TextBlock Grid.Row="14" Grid.Column="1" Text="{Binding Path=Diagnostic4, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="15" Grid.Column="0" Text="Номер версии ПО"/>
-		<TextBlock Grid.Row="15" Grid.Column="1" Text="{Binding Path=FirmwareBuildNumber, Mode=OneWay}"/>
+		<TextBlock Grid.Row="15" Grid.Column="0" Text="15 - Диагностика 5 (1w адрес 2); "/>
+		<TextBlock Grid.Row="15" Grid.Column="1" Text="{Binding Path=Diagnostic5, Mode=OneWay}"/>
 
-		<TextBox Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Reply, Mode=OneWay}" IsReadOnly="True"/>
+		<TextBlock Grid.Row="16" Grid.Column="0" Text="Номер версии ПО"/>
+		<TextBlock Grid.Row="16" Grid.Column="1" Text="{Binding Path=FirmwareBuildNumber, Mode=OneWay}"/>
+
+		<TextBox Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Reply, Mode=OneWay}" IsReadOnly="True"/>
 	</Grid>
 </UserControl>
