@@ -2,9 +2,9 @@
 
 namespace CustomModbusSlave.MicroclimatEs2gApp
 {
-	public partial class MukFlapDataView : UserControl
+	public partial class MukVaporizerFanDataView : UserControl
 	{
-		public MukFlapDataView()
+		public MukVaporizerFanDataView()
 		{
 			InitializeComponent();
 		}

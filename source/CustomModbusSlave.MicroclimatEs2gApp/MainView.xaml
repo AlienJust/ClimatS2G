@@ -29,12 +29,14 @@
 			<Button Grid.Column="2" Margin="2,2,2,2" Command="{Binding Path=OpenPortCommand, Mode=OneTime}" Content="Подключиться" />
 		</Grid>
 		<TabControl Grid.Row="1">
-			<TabItem Header="МУК 1">
+			<TabItem Header="МУК Заслонки">
 				<microclimatEs2GApp:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm}"/>
 			</TabItem>
-			<TabItem Header="МУК 2"></TabItem>
-			<TabItem Header="МУК 3"></TabItem>
-			<TabItem Header="МУК 4"></TabItem>
+			<TabItem Header="МУК вентилятора испарителя">
+				<microclimatEs2GApp:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm}"/>
+			</TabItem>
+			<TabItem Header="МУК вентилятора конденсатора"></TabItem>
+			<TabItem Header="МУК теплого пола"></TabItem>
 		</TabControl>
 		<microclimatEs2GApp:ProgramLogView Grid.Row="2" DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}"/>
 	</Grid>

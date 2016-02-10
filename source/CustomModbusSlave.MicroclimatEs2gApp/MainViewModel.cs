@@ -33,6 +33,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		private bool _isPortOpened;
 		private readonly MukFlapDataViewModel _mukFlapDataVm;
+		private readonly MukVaporizerFanDataViewModel _mukVaporizerDataVm;
 
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem) {
 			_notifier = notifier;
@@ -52,7 +53,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
 			_mukFlapDataVm = new MukFlapDataViewModel(_notifier);
-
+			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier);
 			GetPortsAvailable();
 			_logger.Log("Программа загружена");
 		}
@@ -60,6 +61,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
 			_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
 			_mukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			_mukVaporizerDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 		}
 
 		private void GetPortsAvailable() {
@@ -150,6 +152,11 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		public MukFlapDataViewModel MukFlapDataVm {
 			get { return _mukFlapDataVm; }
+		}
+
+		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm
+		{
+			get { return _mukVaporizerDataVm; }
 		}
 	}
 }
