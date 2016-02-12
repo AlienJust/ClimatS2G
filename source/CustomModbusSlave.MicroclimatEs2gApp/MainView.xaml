@@ -30,13 +30,17 @@
 		</Grid>
 		<TabControl Grid.Row="1">
 			<TabItem Header="МУК Заслонки">
-				<microclimatEs2GApp:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm}"/>
+				<microclimatEs2GApp:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}"/>
 			</TabItem>
 			<TabItem Header="МУК вентилятора испарителя">
-				<microclimatEs2GApp:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm}"/>
+				<microclimatEs2GApp:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
 			</TabItem>
-			<TabItem Header="МУК вентилятора конденсатора"></TabItem>
-			<TabItem Header="МУК теплого пола"></TabItem>
+			<TabItem Header="МУК вентилятора конденсатора">
+				<microclimatEs2GApp:MukFridgeFanDataView DataContext="{Binding Path=MukFridgeFanDataVm, Mode=OneTime}"/>
+			</TabItem>
+			<TabItem Header="МУК теплого пола">
+				<microclimatEs2GApp:MukWarmFloorDataView DataContext="{Binding Path=MukWarmFloorDataVm, Mode=OneTime}"/>
+			</TabItem>
 		</TabControl>
 		<microclimatEs2GApp:ProgramLogView Grid.Row="2" DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}"/>
 	</Grid>

@@ -18,8 +18,15 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		private string _firmwareBuildNumber;
 		private string _reply;
-		
-
+		private string _diagnostic5;
+		private string _diagnostic4;
+		private string _diagnostic3;
+		private string _diagnostic2;
+		private string _diagnostic1;
+		private string _fanSpeed;
+		private string _calculatedTemperatureSetting;
+		private string _temperatureRegulatorWorkMode;
+		private string _automaticModeStage;
 
 		public MukVaporizerFanDataViewModel(IThreadNotifier notifier)
 		{
@@ -40,15 +47,69 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 					OutgoingSignals = (new ByteTextPresenter(data[12], true)).PresentAsText();
 
 					AnalogInput = (new UshortTextPresenter(data[14], data[13], true)).PresentAsText();
-					HeatingPwm = (new UshortTextPresenter(data[16], data[15], true)).PresentAsText();
-					
-					FirmwareBuildNumber = (new DataDoubleTextPresenter(data[34], data[33], 1.0, 0)).PresentAsText();
+					HeatingPwm = (new UshortTextPresenter(data[16], data[15], false)).PresentAsText();
+					AutomaticModeStage = (new UshortTextPresenter(data[18], data[17], false)).PresentAsText();
+					TemperatureRegulatorWorkMode = (new UshortTextPresenter(data[20], data[19], false)).PresentAsText();
+					CalculatedTemperatureSetting = (new UshortTextPresenter(data[22], data[21], false)).PresentAsText();
+					FanSpeed = (new UshortTextPresenter(data[24], data[23], false)).PresentAsText();
+					Diagnostic1 = (new UshortTextPresenter(data[26], data[25], true)).PresentAsText();
+					Diagnostic2 = (new UshortTextPresenter(data[28], data[27], true)).PresentAsText();
+					Diagnostic3 = (new UshortTextPresenter(data[30], data[29], true)).PresentAsText();
+					Diagnostic4 = (new UshortTextPresenter(data[32], data[31], true)).PresentAsText();
+					Diagnostic5 = (new UshortTextPresenter(data[34], data[33], false)).PresentAsText();
+
+					FirmwareBuildNumber = (new DataDoubleTextPresenter(data[36], data[35], 1.0, 0)).PresentAsText();
 
 					Reply = data.ToText();
 				});
 			}
 		}
-		
+
+		public string AutomaticModeStage {
+			get { return _automaticModeStage; }
+			set { if (_automaticModeStage != value){_automaticModeStage = value;RaisePropertyChanged(()=>AutomaticModeStage);} }
+		}
+
+		public string TemperatureRegulatorWorkMode {
+			get { return _temperatureRegulatorWorkMode; }
+			set { if (_temperatureRegulatorWorkMode != value) { _temperatureRegulatorWorkMode = value; RaisePropertyChanged(()=>TemperatureRegulatorWorkMode);} }
+		}
+
+		public string CalculatedTemperatureSetting {
+			get { return _calculatedTemperatureSetting; }
+			set { if (_calculatedTemperatureSetting != value){_calculatedTemperatureSetting = value;RaisePropertyChanged(()=>CalculatedTemperatureSetting);} }
+		}
+
+		public string FanSpeed {
+			get { return _fanSpeed; }
+			set { if (_fanSpeed != value){_fanSpeed = value;RaisePropertyChanged(()=>FanSpeed);} }
+		}
+
+		public string Diagnostic1 {
+			get { return _diagnostic1; }
+			set { if (_diagnostic1 != value){_diagnostic1 = value;RaisePropertyChanged(()=>Diagnostic1);} }
+		}
+
+		public string Diagnostic2 {
+			get { return _diagnostic2; }
+			set { if (_diagnostic2 != value) { _diagnostic2 = value; RaisePropertyChanged(() => Diagnostic2); } }
+		}
+
+		public string Diagnostic3 {
+			get { return _diagnostic3; }
+			set { if (_diagnostic3 != value) { _diagnostic3 = value; RaisePropertyChanged(() => Diagnostic3); } }
+		}
+
+		public string Diagnostic4 {
+			get { return _diagnostic4; }
+			set { if (_diagnostic4 != value) { _diagnostic4 = value; RaisePropertyChanged(() => Diagnostic4); } }
+		}
+
+		public string Diagnostic5 {
+			get { return _diagnostic5; }
+			set { if (_diagnostic5 != value) { _diagnostic5 = value; RaisePropertyChanged(() => Diagnostic5); } }
+		}
+
 		public string FanPwm {
 			get { return _fanPwm; }
 			set {

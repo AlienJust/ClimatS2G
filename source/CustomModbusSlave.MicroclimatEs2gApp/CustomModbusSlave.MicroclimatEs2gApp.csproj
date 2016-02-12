@@ -117,6 +117,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MukFridgeFanDataView.xaml.cs">
+      <DependentUpon>MukFridgeFanDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFridgeFanDataViewModel.cs" />
+    <Compile Include="MukWarmFloorDataViewModel.cs" />
+    <Compile Include="MukWarmFloorDataView.xaml.cs">
+      <DependentUpon>MukWarmFloorDataView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UshortTextPresenter.cs" />
     <Compile Include="ByteTextPresenter.cs" />
     <Compile Include="DataDoubleTextPresenter.cs" />
@@ -128,6 +136,14 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MukFridgeFanDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukWarmFloorDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MukVaporizerFanDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

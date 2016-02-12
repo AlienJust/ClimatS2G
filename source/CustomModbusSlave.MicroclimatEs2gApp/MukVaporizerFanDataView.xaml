@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:microclimatEs2GApp="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
@@ -54,28 +54,28 @@
 		<TextBlock Grid.Row="7" Grid.Column="0" Text="Этап работы в автоматическом режиме"/>
 		<TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Path=AutomaticModeStage, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="8" Grid.Column="0" Text="8 - Режим работы регулятора температуры; "/>
+		<TextBlock Grid.Row="8" Grid.Column="0" Text="Режим работы регулятора температуры"/>
 		<TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Path=TemperatureRegulatorWorkMode, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="9" Grid.Column="0" Text="9 – Рассчитанная уставка температуры; "/>
+		<TextBlock Grid.Row="9" Grid.Column="0" Text="Рассчитанная уставка температуры"/>
 		<TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Path=CalculatedTemperatureSetting, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="10" Grid.Column="0" Text="10 - Обороты вент-ра "/>
+		<TextBlock Grid.Row="10" Grid.Column="0" Text="Обороты вент-ра"/>
 		<TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Path=FanSpeed, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="11" Grid.Column="0" Text="11 - Диагностика 1 (плата МУК, обмен); "/>
+		<TextBlock Grid.Row="11" Grid.Column="0" Text="Диагностика 1 (плата МУК, обмен)"/>
 		<TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding Path=Diagnostic1, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="12" Grid.Column="0" Text="12 - Диагностика 2 (вентилятор); "/>
+		<TextBlock Grid.Row="12" Grid.Column="0" Text="Диагностика 2 (вентилятор)"/>
 		<TextBlock Grid.Row="12" Grid.Column="1" Text="{Binding Path=Diagnostic2, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="13" Grid.Column="0" Text="13 - Диагностика 3 (Emerson); "/>
+		<TextBlock Grid.Row="13" Grid.Column="0" Text="Диагностика 3 (Emerson)"/>
 		<TextBlock Grid.Row="13" Grid.Column="1" Text="{Binding Path=Diagnostic3, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="14" Grid.Column="0" Text="14 - Диагностика 4 (1w адрес 1); "/>
+		<TextBlock Grid.Row="14" Grid.Column="0" Text="Диагностика 4 (1w адрес 1)"/>
 		<TextBlock Grid.Row="14" Grid.Column="1" Text="{Binding Path=Diagnostic4, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="15" Grid.Column="0" Text="15 - Диагностика 5 (1w адрес 2); "/>
+		<TextBlock Grid.Row="15" Grid.Column="0" Text="Диагностика 5 (1w адрес 2)"/>
 		<TextBlock Grid.Row="15" Grid.Column="1" Text="{Binding Path=Diagnostic5, Mode=OneWay}"/>
 
 		<TextBlock Grid.Row="16" Grid.Column="0" Text="Номер версии ПО"/>

@@ -34,6 +34,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private bool _isPortOpened;
 		private readonly MukFlapDataViewModel _mukFlapDataVm;
 		private readonly MukVaporizerFanDataViewModel _mukVaporizerDataVm;
+		private readonly MukFridgeFanDataViewModel _mukFridgeFanDataVm;
+		private readonly MukWarmFloorDataViewModel _mukWarmFloorDataVm;
 
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem) {
 			_notifier = notifier;
@@ -54,6 +56,9 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 			_mukFlapDataVm = new MukFlapDataViewModel(_notifier);
 			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier);
+			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
+			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier);
+
 			GetPortsAvailable();
 			_logger.Log("Программа загружена");
 		}
@@ -62,6 +67,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
 			_mukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_mukVaporizerDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			_mukFridgeFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			_mukWarmFloorDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 		}
 
 		private void GetPortsAvailable() {
@@ -157,6 +164,14 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm
 		{
 			get { return _mukVaporizerDataVm; }
+		}
+
+		public MukFridgeFanDataViewModel MukFridgeFanDataVm {
+			get { return _mukFridgeFanDataVm; }
+		}
+
+		public MukWarmFloorDataViewModel MukWarmFloorDataVm {
+			get { return _mukWarmFloorDataVm; }
 		}
 	}
 }
