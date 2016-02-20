@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
-using System.Threading;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
@@ -51,7 +50,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ES2G.xml")).LoadConfiguration();
 			_serialChannel = new SerialChannel(
 				new CommandPartSearcherPsnConfigBased(psnConfig),
-				new SerialPortContainerReal());
+				new SerialPortContainerRealWithTest("Test", new SerialPortContainerReal(), new SerialPortContainerTest()));
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
 			_mukFlapDataVm = new MukFlapDataViewModel(_notifier);

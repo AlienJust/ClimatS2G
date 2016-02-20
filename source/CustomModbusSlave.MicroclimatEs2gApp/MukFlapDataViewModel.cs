@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
@@ -43,27 +40,27 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 					
 					FlapPosition = (data[3] * 256.0 + data[4]).ToString("f2");
 
-					TemperatureAddress1 = (new DataDoubleTextPresenter(data[6], data[5], 1.0, 2)).PresentAsText();
-					TemperatureAddress2 = (new DataDoubleTextPresenter(data[8], data[7], 1.0, 2)).PresentAsText();
+					TemperatureAddress1 = (new DataDoubleTextPresenter(data[6], data[5], 0.01, 2)).PresentAsText();
+					TemperatureAddress2 = (new DataDoubleTextPresenter(data[8], data[7], 0.01, 2)).PresentAsText();
 					
 					IncomingSignals = (new ByteTextPresenter(data[10], true)).PresentAsText();
 					OutgoingSignals = (new ByteTextPresenter(data[12], true)).PresentAsText();
 					
 					AnalogInput = (new UshortTextPresenter(data[14], data[13], true)).PresentAsText();
 					AutomaticModeStage = (new UshortTextPresenter(data[16], data[15], true)).PresentAsText();
-					
-					Diagnostic1 = (new UshortTextPresenter(data[18], data[17], true)).PresentAsText();
-					Diagnostic2 = (new UshortTextPresenter(data[20], data[19], true)).PresentAsText();
-					Diagnostic3 = (new UshortTextPresenter(data[22], data[21], true)).PresentAsText();
-					Diagnostic4 = (new UshortTextPresenter(data[24], data[23], true)).PresentAsText();
 
-					EmersonDiagnostic = (new UshortTextPresenter(data[24], data[23], true)).PresentAsText();
-					EmersonTemperature = (new UshortTextPresenter(data[26], data[23], false)).PresentAsText();
-					EmersonPressure = (new UshortTextPresenter(data[28], data[23], false)).PresentAsText();
-					EmersonValveSetting = (new UshortTextPresenter(data[30], data[23], false)).PresentAsText();
+					Diagnostic1 = (new UshortTextPresenter(data[18], data[17], true)).PresentAsText(); // TODO: parse bits
+					Diagnostic2 = (new UshortTextPresenter(data[20], data[19], true)).PresentAsText(); // TODO: parse bits
+					Diagnostic3 = (new UshortTextPresenter(data[22], data[21], true)).PresentAsText(); // TODO: parse bits
+					Diagnostic4 = (new UshortTextPresenter(data[24], data[23], true)).PresentAsText(); // TODO: parse bits
+
+					EmersonDiagnostic = (new UshortTextPresenter(data[26], data[25], true)).PresentAsText(); // TODO: parse bits
+					EmersonTemperature = (new DataDoubleTextPresenter(data[28], data[27], 0.01, 2)).PresentAsText();
+					EmersonPressure = (new DataDoubleTextPresenter(data[30], data[29], 0.01, 2)).PresentAsText();
+					EmersonValveSetting = (new UshortTextPresenter(data[32], data[31], false)).PresentAsText();
 
 
-					FirmwareBuildNumber = (new UshortTextPresenter(data[32], data[31], false)).PresentAsText();
+					FirmwareBuildNumber = (new UshortTextPresenter(data[34], data[33], false)).PresentAsText();
 					// 33 34  35 36  37 38   
 				});
 			}

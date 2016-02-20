@@ -16,10 +16,8 @@ namespace CustomModbusSlave {
 		}
 
 		public void CloseCurrentPort() {
-			if (_port != null)
-			{
-				if (_port.IsOpen)
-				{
+			if (_port != null) {
+				if (_port.IsOpen) {
 					_port.Close();
 				}
 			}
@@ -27,7 +25,7 @@ namespace CustomModbusSlave {
 
 		public void SelectPort(string portName, int baudRate) {
 			CloseCurrentPort();
-			
+
 			_port = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
 			_port.Open();
 		}
