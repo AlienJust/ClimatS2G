@@ -26,11 +26,9 @@ namespace CustomModbusSlave {
 
 		public byte[] ReadBytes(int count, TimeSpan timeout)
 		{
-
 			if (!_isPortOpen) throw new Exception("Serial port is not opened");
-
 			var resultBytes = new byte[count];
-
+			
 			for (int i = 0; i < count; ++i) {
 				resultBytes[i] = _bytes[_currrentPosition];
 				_currrentPosition = _currrentPosition + 1;

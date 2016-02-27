@@ -37,7 +37,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 				{
 					FanPwm = (data[3] * 256.0 + data[4]).ToString("f2");
 
-					CondensingPressure = (new DataDoubleTextPresenter(data[6], data[5], 1.0, 2)).PresentAsText();
+					CondensingPressure = (new DataDoubleTextPresenter(data[6], data[5], 0.1, 2)).PresentAsText();
 
 					IncomingSignals = (new ByteTextPresenter(data[8], true)).PresentAsText();
 					OutgoingSignals = (new ByteTextPresenter(data[10], true)).PresentAsText();

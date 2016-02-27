@@ -56,7 +56,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 					EmersonDiagnostic = (new UshortTextPresenter(data[26], data[25], true)).PresentAsText(); // TODO: parse bits
 					EmersonTemperature = (new DataDoubleTextPresenter(data[28], data[27], 0.01, 2)).PresentAsText();
-					EmersonPressure = (new DataDoubleTextPresenter(data[30], data[29], 0.01, 2)).PresentAsText();
+					EmersonPressure = (new DataDoubleTextPresenter(data[30], data[29], 0.1, 2)).PresentAsText();
 					EmersonValveSetting = (new UshortTextPresenter(data[32], data[31], false)).PresentAsText();
 
 

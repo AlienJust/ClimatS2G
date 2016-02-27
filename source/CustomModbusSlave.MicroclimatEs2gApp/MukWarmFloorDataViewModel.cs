@@ -32,13 +32,13 @@ namespace CustomModbusSlave.MicroclimatEs2gApp {
 					HeatingPwm = (data[3]*256.0 + data[4]).ToString("f2");
 
 					AnalogInput = (new UshortTextPresenter(data[6], data[5], true)).PresentAsText();
-					TemperatureRegulatorWorkMode = (new UshortTextPresenter(data[8], data[7], false)).PresentAsText();
+					TemperatureRegulatorWorkMode = (new DataDoubleTextPresenter(data[8], data[7], 0.01, 2)).PresentAsText();
 
 					IncomingSignals = (new ByteTextPresenter(data[10], true)).PresentAsText();
 					OutgoingSignals = (new ByteTextPresenter(data[12], true)).PresentAsText();
 
 					AutomaticModeStage = (new UshortTextPresenter(data[14], data[13], false)).PresentAsText();
-					CalculatedTemperatureSetting = (new UshortTextPresenter(data[16], data[15], false)).PresentAsText();
+					CalculatedTemperatureSetting = (new DataDoubleTextPresenter(data[16], data[15], 0.01, 2)).PresentAsText();
 
 					Diagnostic1 = (new UshortTextPresenter(data[18], data[17], true)).PresentAsText();
 					Diagnostic2 = (new UshortTextPresenter(data[20], data[19], true)).PresentAsText();
