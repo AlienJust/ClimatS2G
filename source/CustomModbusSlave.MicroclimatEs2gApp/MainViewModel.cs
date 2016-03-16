@@ -80,7 +80,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private void ClosePort() {
 			_serialChannel.CloseCurrentPortAsync(ex => _notifier.Notify(() => {
 				if (ex == null) {
-					_isPortOpened = false;
+					IsPortOpened = false;
 					_logger.Log("Порт " + _selectedComName + " закрыт");
 					_closePortCommand.RaiseCanExecuteChanged();
 					_openPortCommand.RaiseCanExecuteChanged();
@@ -94,7 +94,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private void OpenPort() {
 			_serialChannel.SelectPortAsync(_selectedComName, 57600,ex => _notifier.Notify(() => {
 				if (ex == null) {
-					_isPortOpened = true;
+					IsPortOpened = true;
 					_logger.Log("Порт " + _selectedComName + " открыт");
 					_closePortCommand.RaiseCanExecuteChanged();
 					_openPortCommand.RaiseCanExecuteChanged();
@@ -171,6 +171,16 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		public MukWarmFloorDataViewModel MukWarmFloorDataVm {
 			get { return _mukWarmFloorDataVm; }
+		}
+
+		public bool IsPortOpened {
+			get { return _isPortOpened; }
+			set {
+				if (_isPortOpened != value) {
+					_isPortOpened = value;
+					RaisePropertyChanged(() => IsPortOpened);
+				}
+			}
 		}
 	}
 }

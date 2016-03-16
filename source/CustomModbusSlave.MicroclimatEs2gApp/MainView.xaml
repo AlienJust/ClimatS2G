@@ -1,8 +1,120 @@
-﻿<Window x:Class="CustomModbusSlave.MicroclimatEs2gApp.MainView"
+﻿<controls:MetroWindow  x:Class="CustomModbusSlave.MicroclimatEs2gApp.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:microclimatEs2GApp="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp"
-    Title="MainView" Height="350" Width="525">
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
+    Title="Технический абонент" Height="350" Width="525" ResizeMode="CanResizeWithGrip">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+				<!-- Accent and AppTheme setting -->
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<Style x:Key="AzureTabItem" TargetType="{x:Type TabItem}">
+				<Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}"/>
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="TabItem">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+								</Grid.ColumnDefinitions>
+								<Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" Padding="4,1,8,1" BorderThickness="0,0,0,4" Margin="2,2,0,0" SnapsToDevicePixels="True">
+									<Border.Style>
+										<Style TargetType="Border">
+											<Setter Property="Background">
+												<Setter.Value>
+													<SolidColorBrush Color="{DynamicResource Gray5}"/>
+												</Setter.Value>
+											</Setter>
+										</Style>
+									</Border.Style>
+									<TextBlock x:Name="root" FontSize="12">
+										<TextBlock.Style>
+											<Style TargetType="TextBlock">
+												<Setter Property="Foreground">
+													<Setter.Value>
+														<SolidColorBrush Color="{DynamicResource BlackColor}" />
+													</Setter.Value>
+												</Setter>
+											</Style>
+										</TextBlock.Style>
+										<ContentPresenter ContentSource="Header" RecognizesAccessKey="True" />
+									</TextBlock>
+								</Border>
+								<Canvas Grid.Column="1" Height="10" Width="5" x:Name="arrow" Margin="0,4,0,0" HorizontalAlignment="Left" SnapsToDevicePixels="True">
+									<Path Data="M 0 0 L 5 5 L 0 10 Z" StrokeThickness="0" Fill="{DynamicResource AccentColorBrush}"/>
+								</Canvas>
+							</Grid>
+							<ControlTemplate.Triggers>
+								<Trigger Property="IsSelected" Value="true">
+									<Setter TargetName="root" Property="Foreground">
+										<Setter.Value>
+											<SolidColorBrush Color="{DynamicResource WhiteColor}" />
+										</Setter.Value>
+									</Setter>
+									<Setter TargetName="border" Property="Background">
+										<Setter.Value>
+											<SolidColorBrush Color="{DynamicResource AccentColor}"/>
+										</Setter.Value>
+									</Setter>
+									<Setter TargetName="border" Property="BorderBrush">
+										<Setter.Value>
+											<SolidColorBrush Color="{DynamicResource AccentColor}"/>
+										</Setter.Value>
+									</Setter>
+									<Setter TargetName="arrow" Property="Visibility" Value="Visible"/>
+								</Trigger>
+								<Trigger Property="IsSelected" Value="false">
+									<Setter TargetName="root" Property="Foreground">
+										<Setter.Value>
+											<SolidColorBrush Color="{DynamicResource BlackColor}" />
+										</Setter.Value>
+									</Setter>
+									<Setter TargetName="arrow" Property="Visibility" Value="Hidden"/>
+								</Trigger>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter TargetName="root" Property="Foreground">
+										<Setter.Value>
+											<SolidColorBrush Color="{DynamicResource WhiteColor}" />
+										</Setter.Value>
+									</Setter>
+									<Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource AccentColorBrush}"></Setter>
+									<Setter TargetName="border" Property="Background">
+										<Setter.Value>
+											<SolidColorBrush Color="{DynamicResource AccentColor}"/>
+										</Setter.Value>
+									</Setter>
+								</Trigger>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<BooleanToVisibilityConverter x:Key="BtwConverter"/>
+			<converters:BooleanToVisibilityConverter x:Key="InvertedBtwConverter" InvertVisibility="True"/>
+		</ResourceDictionary>
+	</Window.Resources>
+	<controls:MetroWindow.RightWindowCommands>
+		<controls:WindowCommands>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Margin="2,2,2,2" Text="Порт:" VerticalAlignment="Center"/>
+				<ComboBox Margin="2,2,2,2" ItemsSource="{Binding ComPortsAvailable}" SelectedItem="{Binding SelectedComName}" />
+				<Button Margin="2,2,2,2" Content="⟳" Command="{Binding GetPortsAvailableCommand}" FontWeight="SemiBold" FontSize="15"/>
+			</StackPanel>
+			<Button Margin="2,2,2,2" Command="{Binding Path=OpenPortCommand, Mode=OneTime}" Content="Подкл." Visibility="{Binding Path=IsPortOpened, Mode=OneWay, Converter={StaticResource InvertedBtwConverter}}"/>
+			<Button Margin="2,2,2,2" Command="{Binding Path=ClosePortCommand, Mode=OneTime}" Content="Откл." Visibility="{Binding Path=IsPortOpened, Mode=OneWay, Converter={StaticResource BtwConverter}}"/>
+		</controls:WindowCommands>
+	</controls:MetroWindow.RightWindowCommands>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
@@ -28,20 +140,20 @@
 			<Button Grid.Column="3" Margin="2,2,2,2" Command="{Binding Path=ClosePortCommand, Mode=OneTime}" Content="Отключиться" />
 			<Button Grid.Column="2" Margin="2,2,2,2" Command="{Binding Path=OpenPortCommand, Mode=OneTime}" Content="Подключиться" />
 		</Grid>
-		<TabControl Grid.Row="1">
-			<TabItem Header="МУК Заслонки">
+		<TabControl Grid.Row="1" TabStripPlacement="Left">
+			<TabItem Header="МУК Заслонки" Style="{StaticResource AzureTabItem}">
 				<microclimatEs2GApp:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}"/>
 			</TabItem>
-			<TabItem Header="МУК вентилятора испарителя">
+			<TabItem Header="МУК вентилятора испарителя" Style="{StaticResource AzureTabItem}">
 				<microclimatEs2GApp:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
 			</TabItem>
-			<TabItem Header="МУК вентилятора конденсатора">
+			<TabItem Header="МУК вентилятора конденсатора" Style="{StaticResource AzureTabItem}">
 				<microclimatEs2GApp:MukFridgeFanDataView DataContext="{Binding Path=MukFridgeFanDataVm, Mode=OneTime}"/>
 			</TabItem>
-			<TabItem Header="МУК теплого пола">
+			<TabItem Header="МУК теплого пола" Style="{StaticResource AzureTabItem}">
 				<microclimatEs2GApp:MukWarmFloorDataView DataContext="{Binding Path=MukWarmFloorDataVm, Mode=OneTime}"/>
 			</TabItem>
 		</TabControl>
 		<microclimatEs2GApp:ProgramLogView Grid.Row="2" DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}"/>
 	</Grid>
-</Window>
+</controls:MetroWindow>
