@@ -2,8 +2,9 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
+using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp
+namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer
 {
 	class MukVaporizerFanDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;

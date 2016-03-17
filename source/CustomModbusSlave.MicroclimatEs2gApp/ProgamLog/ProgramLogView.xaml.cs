@@ -12,15 +12,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp
-{
+namespace CustomModbusSlave.MicroclimatEs2gApp.ProgamLog {
 	/// <summary>
 	/// Interaction logic for ProgramLogView.xaml
 	/// </summary>
-	public partial class ProgramLogView : UserControl
-	{
-		public ProgramLogView()
-		{
+	public partial class ProgramLogView : UserControl {
+		public ProgramLogView() {
 			InitializeComponent();
 		}
 	}

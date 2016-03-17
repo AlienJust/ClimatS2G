@@ -1,6 +1,6 @@
 using System;
-using System.IO;
 using System.Threading;
+using AlienJust.Support.Text;
 using CustomModbusSlave.Contracts;
 
 namespace CustomModbusSlave {
@@ -51,6 +51,11 @@ namespace CustomModbusSlave {
 			CloseCurrentPort();
 			
 			_isPortOpen = true;
+		}
+
+		public void Send(byte[] bytes) {
+			// do nothing;
+			Console.WriteLine("TEST SENDER SEND: " + bytes.ToText());
 		}
 	}
 }

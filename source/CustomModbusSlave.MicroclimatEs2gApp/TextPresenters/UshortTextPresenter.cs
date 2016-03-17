@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
+using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters.Contracts;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp {
+namespace CustomModbusSlave.MicroclimatEs2gApp.TextPresenters {
 	class UshortTextPresenter : ITextPresenter
 	{
 		private readonly byte _lowByte;

@@ -12,20 +12,24 @@ namespace CustomModbusSlave {
 	public class SerialChannel : ISerialChannel, ICommandPartFoundListener {
 		public static readonly ILogger Logger = new RelayActionLogger(Console.WriteLine, new DateTimeFormatter(" > "));
 		public event CommandHearedDelegate CommandHeared;
+		public event CommandHearedWithReplyPossibilityDelegate CommandHearedWithReplyPossibility;
+
 		private readonly SingleThreadedRelayQueueWorker<Action> _backgroundWorker;
 		private readonly IWorker<Action> _readDataScheduler;
 		private readonly IWorker<Action> _notifyWorker;
 		private readonly SynchronizedCollection<byte> _incomingBuffer;
 
 		private readonly ISerialPortContainer _portContainer;
+		private readonly ISendAbility _sendAbility;
 		private readonly ICommandPartSearcher _commandPartSearcher;
 		
 		private bool _dontStop;
 		private readonly object _dontStopSync;
 
-		public SerialChannel(ICommandPartSearcher commandPartSearcher, ISerialPortContainer portContainer) {
+		public SerialChannel(ICommandPartSearcher commandPartSearcher, ISerialPortContainer portContainer, ISendAbility sendAbility) {
 			_commandPartSearcher = commandPartSearcher;
 			_portContainer = portContainer;
+			_sendAbility = sendAbility;
 
 			_dontStop = true;
 			_dontStopSync = new object();
@@ -84,31 +88,40 @@ namespace CustomModbusSlave {
 			_readDataScheduler.AddWork(() => {
 				while (true) {
 					var waiter = new AutoResetEvent(false);
+
+
+
 					_backgroundWorker.AddWork(() => {
 						try {
-							var bytes = _portContainer.ReadBytes(16, TimeSpan.FromSeconds(1));
-							Logger.Log("Retreived bytes from port: " + bytes.ToText());
+							Logger.Log("Reading bytes from port (8 bytes, timeout 1 second)...");
+							var bytes = _portContainer.ReadBytes(8, TimeSpan.FromSeconds(1));
+							Logger.Log("Readed bytes from port: " + bytes.ToText());
 							lock (_incomingBuffer.SyncRoot) {
 								foreach (var b in bytes) {
 									_incomingBuffer.Add(b);
 								}
 							}
+							AnalyzeIncomingBuffer(); // analyzing in io thread to have possibility to reply
 						}
 						catch (Exception ex) {
-							Console.WriteLine(ex);
+							Logger.Log(ex);
 						}
 						finally {
 							waiter.Set();
 						}
 					});
+
+
+
+					// back to read data scheduler thread:
 					waiter.WaitOne();
-					AnalyzeIncomingBuffer();
-					Console.WriteLine("INCOMING BUFFER BYTES COUNT = " + _incomingBuffer.Count);
+
+					Logger.Log("INCOMING BUFFER BYTES COUNT = " + _incomingBuffer.Count);
 
 					lock (_dontStopSync) {
 						if (!_dontStop) return;
 					}
-					Thread.Sleep(50);
+					//Thread.Sleep(50);
 					lock (_dontStopSync) {
 						if (!_dontStop) return;
 					}
@@ -123,6 +136,11 @@ namespace CustomModbusSlave {
 		}
 
 		public void CommandPartFound(ICommandPart commandPart) {
+			// ultra fast synchronious notification with possibility to reply:
+			var commandHearedFast = CommandHearedWithReplyPossibility;
+			if (commandHearedFast != null) commandHearedFast.Invoke(commandPart, _sendAbility);
+
+			// slow async notification
 			_notifyWorker.AddWork(() => {
 				try {
 					var commandHeared = CommandHeared;

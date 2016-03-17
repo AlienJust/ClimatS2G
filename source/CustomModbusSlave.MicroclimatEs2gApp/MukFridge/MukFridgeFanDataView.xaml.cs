@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp
+namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
 {
 	public partial class MukFridgeFanDataView : UserControl
 	{

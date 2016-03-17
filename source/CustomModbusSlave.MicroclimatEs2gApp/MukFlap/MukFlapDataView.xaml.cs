@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp
+namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap
 {
 	public partial class MukFlapDataView : UserControl
 	{

@@ -4,6 +4,11 @@
     xmlns:microclimatEs2GApp="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
+    xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.ProgamLog"
+    xmlns:mukFlap="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap"
+    xmlns:mukVaporizer="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer"
+    xmlns:mukFridge="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFridge"
+    xmlns:mukWarmFloor="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor"
     Title="Технический абонент" Height="350" Width="525" ResizeMode="CanResizeWithGrip">
 	<Window.Resources>
 		<ResourceDictionary>
@@ -117,43 +122,24 @@
 	</controls:MetroWindow.RightWindowCommands>
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="2*"/>
 			<RowDefinition Height="1*"/>
 		</Grid.RowDefinitions>
-		<Grid Grid.Row="0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-			<Label Grid.Column="0" Margin="2,2,2,2" Width="90" Content="COM порт:" />
-			<Grid Grid.Column="1">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="3*"/>
-					<ColumnDefinition Width="1*"/>
-				</Grid.ColumnDefinitions>
-				<ComboBox Grid.Column="0" Margin="2,2,2,2" ItemsSource="{Binding ComPortsAvailable}" SelectedItem="{Binding SelectedComName}" />
-				<Button Grid.Column="1" Margin="2,2,2,2" VerticalContentAlignment="Center" Command="{Binding GetPortsAvailableCommand}" Content="⟳" FontSize="20" Padding="0,-6,0,0" />
-			</Grid>
-			<Button Grid.Column="3" Margin="2,2,2,2" Command="{Binding Path=ClosePortCommand, Mode=OneTime}" Content="Отключиться" />
-			<Button Grid.Column="2" Margin="2,2,2,2" Command="{Binding Path=OpenPortCommand, Mode=OneTime}" Content="Подключиться" />
-		</Grid>
-		<TabControl Grid.Row="1" TabStripPlacement="Left">
+		<TabControl Grid.Row="0" TabStripPlacement="Left">
 			<TabItem Header="МУК Заслонки" Style="{StaticResource AzureTabItem}">
-				<microclimatEs2GApp:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}"/>
+				<mukFlap:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}"/>
 			</TabItem>
 			<TabItem Header="МУК вентилятора испарителя" Style="{StaticResource AzureTabItem}">
-				<microclimatEs2GApp:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
+				<mukVaporizer:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
 			</TabItem>
 			<TabItem Header="МУК вентилятора конденсатора" Style="{StaticResource AzureTabItem}">
-				<microclimatEs2GApp:MukFridgeFanDataView DataContext="{Binding Path=MukFridgeFanDataVm, Mode=OneTime}"/>
+				<mukFridge:MukFridgeFanDataView DataContext="{Binding Path=MukFridgeFanDataVm, Mode=OneTime}"/>
 			</TabItem>
 			<TabItem Header="МУК теплого пола" Style="{StaticResource AzureTabItem}">
-				<microclimatEs2GApp:MukWarmFloorDataView DataContext="{Binding Path=MukWarmFloorDataVm, Mode=OneTime}"/>
+				<mukWarmFloor:MukWarmFloorDataView DataContext="{Binding Path=MukWarmFloorDataVm, Mode=OneTime}"/>
 			</TabItem>
 		</TabControl>
-		<microclimatEs2GApp:ProgramLogView Grid.Row="2" DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}"/>
+		<GridSplitter Grid.Row="1" Height="4" BorderBrush="DeepSkyBlue" BorderThickness="1" VerticalAlignment="Top" Background="DeepSkyBlue" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
+		<progamLog:ProgramLogView Grid.Row="1" DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}" Margin="4,8,6,4"/>
 	</Grid>
 </controls:MetroWindow>

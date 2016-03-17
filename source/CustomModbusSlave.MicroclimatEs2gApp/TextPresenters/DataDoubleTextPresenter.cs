@@ -1,4 +1,6 @@
-﻿namespace CustomModbusSlave.MicroclimatEs2gApp {
+﻿using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters.Contracts;
+
+namespace CustomModbusSlave.MicroclimatEs2gApp.TextPresenters {
 	class DataDoubleTextPresenter : ITextPresenter {
 		private readonly byte _lowByte;
 		private readonly byte _highByte;

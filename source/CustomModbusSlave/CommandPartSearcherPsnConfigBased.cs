@@ -37,6 +37,7 @@ namespace CustomModbusSlave {
 									commandPartBytes.Add(incomingBuffer[i]);
 									incomingBuffer.RemoveAt(i);
 								}
+								Logger.Log("COMMAND PART FOUND <<<<<<<<<<<<<<<<<<<<<<<<<<");
 								listener.CommandPartFound(new CommandPartSimple((byte)commandPart.Address.DefinedValue, (byte)commandPart.CommandCode.DefinedValue, commandPartBytes));
 								i--; // to check from the same position again after removing items from list
 							}

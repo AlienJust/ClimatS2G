@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<PsnConfiguration Name="Микроклимат ркабины ES2G" Version="1" Description="Конфигурация микроклимата кабины ES2G" Id="EFD2522E-E852-4253-A4E0-E3C7E4FF3FF5" RpdId="33">
+<PsnConfiguration Name="Микроклимат ркабины ES2G" Version="1" Description="Конфигурация микроклимата кабины ES2G" Id="efd2522e-e852-4253-a4e0-e3c7e4ff3ff5" RpdId="33">
 	<PsnMeters>
 		<PsnMeter Address="0x01" Name="РПД" />
 		<PsnMeter Address="0x02" Name="МУК заслонки" />
@@ -12,6 +12,22 @@
 		<PsnMeter Address="0x20" Name="Технический абонент" />
 	</PsnMeters>
 	<Commands>
+		<CmdMask Name="между КСМ и техническим абонентом (cmd: 33 dec)">
+			<Request Length="8" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
+				<DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="becb0559-02b1-4c60-aaa5-edd1fdbed6fd" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
+			</Request>
+			<Reply Length="8" Position="8">
+				<!--TODO: -->
+				<DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
+				<DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
+			</Reply>
+		</CmdMask>
+		
 		<CmdMask Name="между КСМ и МУК заслонки 03">
 			<Request Length="8" Position="0" CycleMsTime="100">
 				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
@@ -183,21 +199,7 @@
 			</Reply>
 		</CmdMask>
 
-		<CmdMask Name="между КСМ и техническим абонентом (cmd: 33 dec)">
-			<Request Length="8" Position="0" CycleMsTime="100">
-				<DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="42ede9e8-38ca-45f5-9647-961d37d3fe32" />
-				<DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="becb0559-02b1-4c60-aaa5-edd1fdbed6fd" />
-				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
-				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
-			</Request>
-			<Reply Length="8" Position="4">
-				<!--TODO: -->
-				<DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
-				<DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
-				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
-				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
-			</Reply>
-		</CmdMask>
+		
 
 		<CmdMask Name="между КСМ и РПД 03">
 			<Request Length="8" Position="0" CycleMsTime="100">

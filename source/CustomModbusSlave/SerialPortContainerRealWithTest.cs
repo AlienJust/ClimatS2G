@@ -35,5 +35,10 @@ namespace CustomModbusSlave {
 			_currentPortConatiner = portName != _testPortName ? _realPortContainer : _testContainer;
 			_currentPortConatiner.SelectPort(portName, baudRate);
 		}
+
+		public void Send(byte[] bytes) {
+			if (_currentPortConatiner == null) throw new NullReferenceException("_currentPortConatiner is null");
+			_currentPortConatiner.Send(bytes);
+		}
 	}
 }

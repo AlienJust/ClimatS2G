@@ -71,12 +71,15 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandPartSearcherPsnConfigBasedFast.cs" />
     <Compile Include="Contracts\CommandHearedDelegate.cs" />
     <Compile Include="CommandPartSearcherPsnConfigBased.cs" />
     <Compile Include="CommandPartSimple.cs" />
+    <Compile Include="Contracts\CommandHearedWithReplyPossibilityDelegate.cs" />
     <Compile Include="Contracts\ICommandPart.cs" />
     <Compile Include="Contracts\ICommandPartFoundListener.cs" />
     <Compile Include="Contracts\ICommandPartSearcher.cs" />
+    <Compile Include="Contracts\ISendAbility.cs" />
     <Compile Include="Contracts\ISerialChannel.cs" />
     <Compile Include="Contracts\ISerialPortContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

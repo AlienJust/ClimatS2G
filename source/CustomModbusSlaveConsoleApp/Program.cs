@@ -17,9 +17,11 @@ namespace CustomModbusSlaveConsoleApp
 
 			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ES2G.xml")).LoadConfiguration();
 			//Console.WriteLine(psnConfig.CommandParts);
+
+			var serialPortContainer = new SerialPortContainerReal();
 			var sch = new SerialChannel(
 				new CommandPartSearcherPsnConfigBased(psnConfig),
-				new SerialPortContainerReal());
+				serialPortContainer, serialPortContainer);
 			sch.CommandHeared += SchOnCommandHeared;
 			sch.SelectPortAsync(argPortName, argBaudRate, null);
 			//Thread.Sleep(5000);

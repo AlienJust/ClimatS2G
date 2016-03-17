@@ -125,59 +125,62 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MukFridgeFanDataView.xaml.cs">
+    <Compile Include="MukFridge\MukFridgeFanDataView.xaml.cs">
       <DependentUpon>MukFridgeFanDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFridgeFanDataViewModel.cs" />
-    <Compile Include="MukWarmFloorDataViewModel.cs" />
-    <Compile Include="MukWarmFloorDataView.xaml.cs">
+    <Compile Include="MukFridge\MukFridgeFanDataViewModel.cs" />
+    <Compile Include="MukWarmFloor\MukWarmFloorDataViewModel.cs" />
+    <Compile Include="MukWarmFloor\MukWarmFloorDataView.xaml.cs">
       <DependentUpon>MukWarmFloorDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UshortTextPresenter.cs" />
-    <Compile Include="ByteTextPresenter.cs" />
-    <Compile Include="DataDoubleTextPresenter.cs" />
+    <Compile Include="ProgamLog\ILogLine.cs" />
+    <Compile Include="ProgamLog\ListBoxBehavior.cs" />
+    <Compile Include="ProgamLog\ProgramLogView.xaml.cs">
+      <DependentUpon>ProgramLogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProgamLog\ProgramLogViewModel.cs" />
+    <Compile Include="ProgamLog\LogLineSimple.cs" />
+    <Compile Include="TextPresenters\UshortTextPresenter.cs" />
+    <Compile Include="TextPresenters\ByteTextPresenter.cs" />
+    <Compile Include="TextPresenters\DataDoubleTextPresenter.cs" />
     <Compile Include="ICommandListener.cs" />
-    <Compile Include="ITextPresenter.cs" />
+    <Compile Include="TextPresenters\Contracts\ITextPresenter.cs" />
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MukFridgeFanDataView.xaml">
+    <Page Include="MukFridge\MukFridgeFanDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukWarmFloorDataView.xaml">
+    <Page Include="MukWarmFloor\MukWarmFloorDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukVaporizerFanDataView.xaml">
+    <Page Include="MukVaporizer\MukVaporizerFanDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFlapDataView.xaml">
+    <Page Include="MukFlap\MukFlapDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProgramLogView.xaml">
+    <Page Include="ProgamLog\ProgramLogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MukVaporizerFanDataViewModel.cs" />
-    <Compile Include="MukVaporizerFanDataView.xaml.cs">
+    <Compile Include="MukVaporizer\MukVaporizerFanDataViewModel.cs" />
+    <Compile Include="MukVaporizer\MukVaporizerFanDataView.xaml.cs">
       <DependentUpon>MukVaporizerFanDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlapDataViewModel.cs" />
-    <Compile Include="MukFlapDataView.xaml.cs">
+    <Compile Include="MukFlap\MukFlapDataViewModel.cs" />
+    <Compile Include="MukFlap\MukFlapDataView.xaml.cs">
       <DependentUpon>MukFlapDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProgramLogView.xaml.cs">
-      <DependentUpon>ProgramLogView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProgramLogViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

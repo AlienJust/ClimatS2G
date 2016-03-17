@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
@@ -9,12 +10,17 @@ using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using AlienJust.Support.UserInterface.Contracts;
 using CustomModbusSlave.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlap;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFridge;
+using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer;
+using CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor;
+using CustomModbusSlave.MicroclimatEs2gApp.ProgamLog;
 using DataAbstractionLevel.Low.PsnConfig;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp
 {
-	class MainViewModel : ViewModelBase, IUserInterfaceRoot
-	{
+	class MainViewModel : ViewModelBase, IUserInterfaceRoot {
+		private const string TestPortName = "ТЕСТ";
 		private List<string> _comPortsAvailable;
 		private string _selectedComName;
 
@@ -48,9 +54,13 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
 
 			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ES2G.xml")).LoadConfiguration();
+
+			var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest());
 			_serialChannel = new SerialChannel(
-				new CommandPartSearcherPsnConfigBased(psnConfig),
-				new SerialPortContainerRealWithTest("Test", new SerialPortContainerReal(), new SerialPortContainerTest()));
+				new CommandPartSearcherPsnConfigBasedFast(psnConfig),
+				portConatiner, portConatiner);
+
+			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
 			_mukFlapDataVm = new MukFlapDataViewModel(_notifier);
@@ -62,6 +72,13 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_logger.Log("Программа загружена");
 		}
 
+		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendAbility) {
+			if (commandPart.Address == 20 && commandPart.CommandCode == 33) {
+				sendAbility.Send(commandPart.ReplyBytes.ToArray());
+				_notifier.Notify(() => _logger.Log("Reply sended"));
+			}
+		}
+
 		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
 			_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
 			_mukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
@@ -71,7 +88,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		}
 
 		private void GetPortsAvailable() {
-			var ports = new List<string> { "Test" }; // TODO: extract constant
+			var ports = new List<string> { TestPortName };
 			ports.AddRange(SerialPort.GetPortNames());
 			ComPortsAvailable = ports;
 			if (ComPortsAvailable.Count > 0) SelectedComName = ComPortsAvailable[0];
