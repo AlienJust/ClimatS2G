@@ -39,7 +39,7 @@ namespace CustomModbusSlave {
 			if (!_port.IsOpen) throw new Exception("Serial port is not opened");
 
 			_port.Write(bytes, 0, bytes.Length);
-			Logger.Log("Sended >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			Logger.Log("Sended >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + bytes.ToText());
 		}
 	}
 }
