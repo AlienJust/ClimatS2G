@@ -174,12 +174,11 @@
 				<VarVal Position="19.0" Length="8" Name="#CRCH" Id="ffce11a4-f971-446c-b842-2c8417545bf6" />
 				<VarVal Position="20.0" Length="8" Name="#CRCL" Id="558f38d3-d201-4793-8623-29a691428893" />
 			</Request>
-			<Reply Length="8" Position="21">
-				<!--TODO: -->
+			<Reply Length="20" Position="21">
 				<DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="5cc84622-9dcb-4a65-92b6-fc74c949e610" />
 				<DefVal Position="1.0" Length="8" Value="0x20" Name="#NCMD" Id="9885cc85-918e-44ea-a049-63fe08d0f945" />
-				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
-				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
+				<VarVal Position="18.0" Length="8" Name="#CRCH" Id="920ca800-a84b-4143-ad66-c7678914e50b" />
+				<VarVal Position="19.0" Length="8" Name="#CRCL" Id="4ea7fa6d-41fd-44f6-8ea3-cb6c8020848b" />
 			</Reply>
 		</CmdMask>
 
