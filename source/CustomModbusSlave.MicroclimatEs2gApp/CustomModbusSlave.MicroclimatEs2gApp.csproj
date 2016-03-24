@@ -121,6 +121,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BsSm\BsSmReplyDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BsSm\BsSmRequestDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BsSm\BsSmStateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -129,18 +141,37 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BsSm\BsSmDataCommand32ReplyBuilderFromReplyDataBytes.cs" />
+    <Compile Include="BsSm\BsSmDataCommand32ReplySimple.cs" />
     <Compile Include="BsSm\BsSmDataCommand32RequestSimple.cs" />
     <Compile Include="BsSm\BsSmDataView.xaml.cs">
       <DependentUpon>BsSmDataView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BsSm\BsSmReplyDataView.xaml.cs">
+      <DependentUpon>BsSmReplyDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\BsSmReplyDataViewModel.cs" />
+    <Compile Include="BsSm\BsSmRequestDataView.xaml.cs">
+      <DependentUpon>BsSmRequestDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\BsSmRequestDataViewModel.cs" />
+    <Compile Include="BsSm\BsSmStateBuilderFromByte.cs" />
+    <Compile Include="BsSm\BsSmStateSimple.cs" />
+    <Compile Include="BsSm\BsSmStateView.xaml.cs">
+      <DependentUpon>BsSmStateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\BsSmStateViewModel.cs" />
     <Compile Include="BsSm\BuilderBsSmDataCommand32RequestFromCommandPartDataBytes.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkMode.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromInt.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromString.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkModeExtensions.cs" />
+    <Compile Include="BsSm\IBsSmDataCommand32Reply.cs" />
     <Compile Include="BsSm\IBsSmDataCommand32Request.cs" />
+    <Compile Include="BsSm\IBsSmState.cs" />
     <Compile Include="BsSm\IBuilder.cs" />
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
+    <Compile Include="BsSm\IUpdateable.cs" />
     <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
     <Compile Include="MukFridge\MukFridgeFanDataView.xaml.cs">
