@@ -6,7 +6,64 @@ using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap
 {
-	class MukFlapDataViewModel : ViewModelBase, ICommandListener {
+	internal interface IMukFlapReply03 {
+		ushort FlapPosition { get; }
+		int TemperatureAddress1 { get; }
+		int TemperatureAddress2 { get; }
+		IIncomingSignals IncomingSignals { get; }
+		byte OutgoingSignals { get; }
+		ushort AnalogInput { get; }
+		MukFlapWorkmodeStage AutomaticModeStage { get; } // TODO: convert to
+		IMukFlapDiagnostic1 Diagnostic1 { get; }
+		IMukFlapDiagnostic2 Diagnostic2 { get; }
+		IMukFlapDiagnostic3OneWireSensor Diagnostic3OneWire1 { get; }
+		IMukFlapDiagnostic3OneWireSensor Diagnostic4OneWire2 { get; }
+		IEmersonDiagnostic EmersonDiagnostic { get; }
+		string EmersonTemperature { get; set; }
+		string EmersonPressure { get; set; }
+		string EmersonValveSetting { get; set; }
+		ushort FirmwareBuildNumber { get; set; }
+	}
+
+	interface IIncomingSignals {
+		bool SignalToTurnOnEmersion1 { get; }
+		bool SignalToTurnOnEmersion2 { get; }
+	}
+
+	interface IMukFlapDiagnostic1 {
+		bool NoEmersionControllerAnswer { get; }
+		bool SensorOneWire1Error { get; }
+		bool SensorOneWire2Error { get; }
+	}
+	interface IMukFlapDiagnostic2 {
+		bool OsShowsFlapDoesNotReachLimitPositions { get; }
+		bool OsShowsFlapDoesNotReach50Percent { get; }
+	}
+	interface IMukFlapDiagnostic3OneWireSensor {
+		bool OneWireSensorError { get; }
+		OneWireSensorErrorCode ErrorCode { get; }
+	}
+
+	internal enum OneWireSensorErrorCode {
+		None,
+		FoundDeviceWithUnknownFamilyCode,
+		SensorNotFound,
+		NoReactionOnReset,
+		SensorShowsIncorrectWorking
+	}
+
+	interface IEmersonDiagnostic {
+		bool ErrorValve1 { get; }
+		bool ErrorValve2 { get; }
+		bool ErrorPressureSensor1 { get; }
+		bool ErrorPressureSensor2 { get; }
+		bool ErrorTemperatureSensor1 { get; }
+		bool ErrorTemperatureSensor2 { get; }
+		bool ErrorTemperatureSensor3 { get; }
+	}
+
+
+	class MukFlapDataViewModel : ViewModelBase, ICommandListener, IMukFlapReply03 {
 		private readonly IThreadNotifier _notifier;
 		private readonly string _header = "МУК заслонки";
 
