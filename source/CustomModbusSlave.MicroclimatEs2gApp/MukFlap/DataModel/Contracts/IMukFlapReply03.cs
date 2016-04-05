@@ -12,9 +12,9 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts {
 		IMukFlapDiagnostic3OneWireSensor Diagnostic3OneWire1 { get; }
 		IMukFlapDiagnostic3OneWireSensor Diagnostic4OneWire2 { get; }
 		IEmersonDiagnostic EmersonDiagnostic { get; }
-		string EmersonTemperature { get; set; }
-		string EmersonPressure { get; set; }
-		string EmersonValveSetting { get; set; }
-		ushort FirmwareBuildNumber { get; set; }
+		string EmersonTemperature { get; }
+		string EmersonPressure { get; }
+		string EmersonValveSetting { get; }
+		ushort FirmwareBuildNumber { get; }
 	}
 }

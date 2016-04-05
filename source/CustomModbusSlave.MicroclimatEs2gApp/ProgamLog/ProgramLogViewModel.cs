@@ -10,6 +10,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.ProgamLog {
 		private readonly ICommand _clearLogCmd;
 
 		private bool _scrollAutomaticly;
+		private bool _isEnabled;
 		private ILogLine _selectedLine;
 
 		public ProgramLogViewModel(IUserInterfaceRoot userInterfaceRoot) {
@@ -17,7 +18,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.ProgamLog {
 			_logLines = new ObservableCollection<ILogLine>();
 
 			_clearLogCmd = new RelayCommand(ClearLog);
-			ScrollAutomaticly = true;
+			_scrollAutomaticly = true;
+			_isEnabled = false;
 		}
 
 		private void ClearLog() {
@@ -42,12 +44,24 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.ProgamLog {
 			}
 		}
 
+		public bool IsEnabled {
+			get { return _isEnabled; }
+			set {
+				if (_isEnabled != value) {
+					_isEnabled = value;
+					RaisePropertyChanged(() => IsEnabled);
+				}
+			}
+		}
+
 
 		public void Log(string text) {
 			_userInterfaceRoot.Notifier.Notify(() => {
-				var logLine = new LogLineSimple(text);
-				LogLines.Add(logLine);
-				if (ScrollAutomaticly) SelectedLine = logLine;
+				if (_isEnabled) {
+					var logLine = new LogLineSimple(text);
+					LogLines.Add(logLine);
+					if (ScrollAutomaticly) SelectedLine = logLine;
+				}
 			});
 		}
 

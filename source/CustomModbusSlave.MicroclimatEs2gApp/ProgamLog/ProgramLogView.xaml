@@ -32,9 +32,11 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition/>
 				<ColumnDefinition/>
+				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-			<CheckBox IsChecked="{Binding Path=ScrollAutomaticly, Mode=TwoWay}" Content="Автопрокрутка"/>
-			<Button Grid.Column="1" Content="Очистить" Command="{Binding Path=ClearLogCmd, Mode=OneTime}"/>
+			<CheckBox IsChecked="{Binding Path=IsEnabled, Mode=TwoWay}" Content="Вести лог"/>
+			<CheckBox Grid.Column="1" IsChecked="{Binding Path=ScrollAutomaticly, Mode=TwoWay}" Content="Автопрокрутка"/>
+			<Button Grid.Column="2" Content="Очистить" Command="{Binding Path=ClearLogCmd, Mode=OneTime}"/>
 		</Grid>
 	</Grid>
 </UserControl>
