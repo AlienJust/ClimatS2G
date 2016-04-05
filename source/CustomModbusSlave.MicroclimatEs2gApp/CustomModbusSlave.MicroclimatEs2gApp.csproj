@@ -174,7 +174,8 @@
     <Compile Include="BsSm\IUpdateable.cs" />
     <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
-    <Compile Include="MukFlap\DataModel\Contracts\MukFlapDiagnostic3OneWireSensor.cs" />
+    <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapReply03.cs" />
+    <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapDiagnostic3OneWireSensor.cs" />
     <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapDiagnostic2.cs" />
     <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapDiagnostic1.cs" />
     <Compile Include="MukFlap\DataModel\SimpleRelease\IncomingSignals.cs" />
@@ -185,8 +186,8 @@
     <Compile Include="MukFlap\DataModel\Contracts\IMukFlapDiagnostic2.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\IMukFlapDiagnostic3OneWireSensor.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\IMukFlapReply03.cs" />
-    <Compile Include="MukFlap\DataModel\Contracts\MukFlapWorkmodeStage.cs" />
-    <Compile Include="MukFlap\DataModel\Contracts\OneWireSensorErrorCode.cs" />
+    <Compile Include="MukFlap\DataModel\Contracts\Enums\MukFlapWorkmodeStage.cs" />
+    <Compile Include="MukFlap\DataModel\Contracts\Enums\OneWireSensorErrorCode.cs" />
     <Compile Include="MukFridge\MukFridgeFanDataView.xaml.cs">
       <DependentUpon>MukFridgeFanDataView.xaml</DependentUpon>
     </Compile>
