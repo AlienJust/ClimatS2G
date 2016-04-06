@@ -172,11 +172,14 @@
     <Compile Include="BsSm\IBsSmDataCommand32Reply.cs" />
     <Compile Include="BsSm\IBsSmDataCommand32Request.cs" />
     <Compile Include="BsSm\IBsSmState.cs" />
-    <Compile Include="BsSm\IBuilder.cs" />
+    <Compile Include="IBuilder.cs" />
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
     <Compile Include="BsSm\IUpdateable.cs" />
     <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
+    <Compile Include="Bvs\BvsDataViewModel.cs" />
+    <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
+    <Compile Include="Bvs\BvsReply65TelemetryBuilder.cs" />
     <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapReply03.cs" />
     <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapDiagnostic3OneWireSensor.cs" />
     <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapDiagnostic2.cs" />
@@ -277,9 +280,7 @@
       <Name>CustomModbusSlave</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bvs\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="intelecon x gray.ico" />
   </ItemGroup>

@@ -198,8 +198,6 @@
 			</Reply>
 		</CmdMask>
 
-		
-
 		<CmdMask Name="между КСМ и РПД 03">
 			<Request Length="8" Position="0" CycleMsTime="100">
 				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="6c751ccd-c42b-4a94-af8d-3f6e89666f86" />
