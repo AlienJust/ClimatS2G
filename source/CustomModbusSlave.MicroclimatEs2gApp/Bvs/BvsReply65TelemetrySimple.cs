@@ -1,5 +1,5 @@
 namespace CustomModbusSlave.MicroclimatEs2gApp.Bvs {
-	class BvsReply65Telemetry : IBvsReply65Telemetry {
+	class BvsReply65TelemetrySimple : IBvsReply65Telemetry {
 		public bool BvsInput1 { get; set; }
 		public bool BvsInput2 { get; set; }
 		public bool BvsInput3 { get; set; }

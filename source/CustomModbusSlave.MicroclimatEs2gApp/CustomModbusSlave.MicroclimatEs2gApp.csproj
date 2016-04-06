@@ -172,6 +172,7 @@
     <Compile Include="BsSm\IBsSmDataCommand32Reply.cs" />
     <Compile Include="BsSm\IBsSmDataCommand32Request.cs" />
     <Compile Include="BsSm\IBsSmState.cs" />
+    <Compile Include="Bvs\BvsReply65TelemetrySimple.cs" />
     <Compile Include="IBuilder.cs" />
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
     <Compile Include="BsSm\IUpdateable.cs" />
