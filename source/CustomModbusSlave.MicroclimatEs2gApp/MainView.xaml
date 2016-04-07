@@ -9,6 +9,7 @@
     xmlns:mukFridge="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFridge"
     xmlns:mukWarmFloor="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor"
     xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
+    xmlns:bvs="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
     Title="Технический абонент" Height="480" Width="640" ResizeMode="CanResizeWithGrip">
 	<Window.Resources>
 		<ResourceDictionary>
@@ -139,12 +140,15 @@
 				<mukWarmFloor:MukWarmFloorDataView DataContext="{Binding Path=MukWarmFloorDataVm, Mode=OneTime}"/>
 			</TabItem>
 			<TabItem Header="БС-СМ" Style="{StaticResource AzureTabItem}" BorderBrush="Blue">
-				<bsSm:BsSmDataView DataContext="{Binding Path=BsSmDataVm, Mode=OneTime}"></bsSm:BsSmDataView>
+				<bsSm:BsSmDataView DataContext="{Binding Path=BsSmDataVm, Mode=OneTime}"/>
 			</TabItem>
-			<TabItem Header="БВС" Style="{StaticResource AzureTabItem}" BorderBrush="Orange"></TabItem>
-			<TabItem Header="КСМ" Style="{StaticResource AzureTabItem}" BorderBrush="Green"></TabItem>
-			<TabItem Header="Запись параметров" Style="{StaticResource AzureTabItem}" BorderBrush="Red"></TabItem>
-		</TabControl>
+			<TabItem Header="БВС" Style="{StaticResource AzureTabItem}" BorderBrush="Green">
+				<bvs:BvsDataView DataContext="{Binding Path=BvsDataVm}"/>
+			</TabItem>
+			<TabItem Header="КСМ" Style="{StaticResource AzureTabItem}" BorderBrush="Red">
+				
+			</TabItem>
+			</TabControl>
 		<GridSplitter Grid.Row="1" Height="4" BorderBrush="DeepSkyBlue" BorderThickness="1" VerticalAlignment="Top" Background="DeepSkyBlue" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
 		<progamLog:ProgramLogView Grid.Row="1" DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}" Margin="4,8,6,4"/>
 	</Grid>

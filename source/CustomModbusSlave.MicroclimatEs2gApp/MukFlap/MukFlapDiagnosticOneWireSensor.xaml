@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.MukFlap.MukFlapDiagnosticOneWireSensor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+	<StackPanel>
+		<CheckBox Content="Ошибка датчика" IsChecked="{Binding Path=OneWireSensorError, Mode=OneTime}"/>
+		<local:OneWireErrorCodeView DataContext="{Binding Path=ErrorCode, Mode=OneTime}"/>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Число ошибок связи"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=LinkErrorCount, Mode=OneTime}"/>
+		</Grid>
+	</StackPanel>
+</UserControl>

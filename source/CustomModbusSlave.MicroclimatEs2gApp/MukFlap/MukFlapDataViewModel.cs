@@ -7,7 +7,7 @@ using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap
 {
-	class MukFlapDataViewModel : ViewModelBase, ICommandListener/*, IMukFlapReply03*/ {
+	class MukFlapDataViewModel : ViewModelBase, ICommandListener/*, IMukFlapReply03Telemetry*/ {
 		private readonly IThreadNotifier _notifier;
 		private readonly string _header = "МУК заслонки";
 

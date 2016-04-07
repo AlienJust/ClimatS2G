@@ -104,9 +104,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 			}
 		}
 
-		public IBsSmState BsSmState {
-			get { return _bsSmStateVm; }
-		}
+		public IBsSmState BsSmState => _bsSmStateVm;
 
 		public int BsSmVersionNumber {
 			get {
