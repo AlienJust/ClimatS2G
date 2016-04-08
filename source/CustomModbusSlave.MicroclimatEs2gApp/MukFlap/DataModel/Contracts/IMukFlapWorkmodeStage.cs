@@ -1,6 +1,8 @@
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts.Enums;
+
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts {
 	internal interface IMukFlapWorkmodeStage {
-		int AbsoluteValue { get; set; }
-		MukFlapWorkmodeStage KnownValue { get; set; }
+		int AbsoluteValue { get; }
+		MukFlapWorkmodeStage KnownValue { get; }
 	}
 }

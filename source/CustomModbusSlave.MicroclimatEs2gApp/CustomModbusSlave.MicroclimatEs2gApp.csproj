@@ -114,6 +114,50 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Themes, Version=3.0.16174.17450, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.Themes.3.0.16174.17450\lib\net40\Xceed.Wpf.Themes.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Themes.Metro, Version=3.0.16174.17450, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.Themes.Metro.3.0.16174.17450\lib\net40\Xceed.Wpf.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Themes.Office2007, Version=3.0.16174.17450, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.Themes.Office2007.3.0.16174.17450\lib\net40\Xceed.Wpf.Themes.Office2007.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.0.16174.17450, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.Toolkit.3.0.16174.17450\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit.Themes.Metro, Version=3.0.16174.17450, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.Toolkit.Themes.Metro.3.0.16174.17450\lib\net40\Xceed.Wpf.Toolkit.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit.Themes.Office2007, Version=3.0.16174.17450, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.Toolkit.Themes.Office2007.3.0.16174.17450\lib\net40\Xceed.Wpf.Toolkit.Themes.Office2007.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -141,6 +185,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Bvs\BvsReply65TelemetryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ksm\KsmDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ksm\KsmWritableParameterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,12 +247,34 @@
     <Compile Include="Bvs\BvsDataViewModel.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
     <Compile Include="Bvs\BvsReply65TelemetryBuilder.cs" />
+    <Compile Include="Ksm\KsmDataView.xaml.cs">
+      <DependentUpon>KsmDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ksm\KsmDataViewModel.cs" />
+    <Compile Include="Ksm\KsmWritableParameterView.xaml.cs">
+      <DependentUpon>KsmWritableParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlap\Converters\EnumMukFlapWorkmodeStageToStringConverter.cs" />
+    <Compile Include="MukFlap\Converters\EnumOneWireSensorErrorCodeToStringConverter.cs" />
+    <Compile Include="MukFlap\DataModel\Build\EmersonDiagnosticBuilder.cs" />
+    <Compile Include="MukFlap\DataModel\Build\IncomingSignalsBuilder.cs" />
+    <Compile Include="MukFlap\DataModel\Build\MukFlapDiagnostic1Builder.cs" />
+    <Compile Include="MukFlap\DataModel\Build\MukFlapDiagnostic2Builder.cs" />
+    <Compile Include="MukFlap\DataModel\Build\MukFlapWorkmodeStageBuilder.cs" />
+    <Compile Include="MukFlap\DataModel\Build\OneWireSensorErrorCodeBuilder.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\IMukFlapWorkmodeStage.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\IOneWireSensorErrorCode.cs" />
-    <Compile Include="MukFlap\EmersionDiagnosticView.xaml.cs">
+    <Compile Include="MukFlap\DataModel\Contracts\MukFlapWorkmodeStageSimple.cs" />
+    <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapReply03Telemetry.cs" />
+    <Compile Include="MukFlap\DataModel\Build\MukFlapReply03TelemetryBuilder.cs" />
+    <Compile Include="MukFlap\MukFlapDataViewModelOld.cs" />
+    <Compile Include="MukFlap\View\EmersionDiagnosticView.xaml.cs">
       <DependentUpon>EmersionDiagnosticView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlap\OneWireErrorCodeView.xaml.cs">
+    <Compile Include="MukFlap\View\MukFlapDataViewOld.xaml.cs">
+      <DependentUpon>MukFlapDataViewOld.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlap\View\OneWireErrorCodeView.xaml.cs">
       <DependentUpon>OneWireErrorCodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapDiagnosticOneWireSensor.cs" />
@@ -216,22 +290,22 @@
     <Compile Include="MukFlap\DataModel\Contracts\IMukFlapReply03Telemetry.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\Enums\MukFlapWorkmodeStage.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\Enums\OneWireSensorErrorCode.cs" />
-    <Compile Include="MukFlap\IncomingSignalsView.xaml.cs">
+    <Compile Include="MukFlap\View\IncomingSignalsView.xaml.cs">
       <DependentUpon>IncomingSignalsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlap\MukFalpWorkmodeStageView.xaml.cs">
+    <Compile Include="MukFlap\View\MukFalpWorkmodeStageView.xaml.cs">
       <DependentUpon>MukFalpWorkmodeStageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlap\MukFlapDiagnostic1View.xaml.cs">
+    <Compile Include="MukFlap\View\MukFlapDiagnostic1View.xaml.cs">
       <DependentUpon>MukFlapDiagnostic1View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlap\MukFlapDiagnostic2View.xaml.cs">
+    <Compile Include="MukFlap\View\MukFlapDiagnostic2View.xaml.cs">
       <DependentUpon>MukFlapDiagnostic2View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlap\MukFlapDiagnosticOneWireSensor.xaml.cs">
+    <Compile Include="MukFlap\View\MukFlapDiagnosticOneWireSensor.xaml.cs">
       <DependentUpon>MukFlapDiagnosticOneWireSensor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlap\MukFlapReply03TelemetryView.xaml.cs">
+    <Compile Include="MukFlap\View\MukFlapReply03TelemetryView.xaml.cs">
       <DependentUpon>MukFlapReply03TelemetryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFridge\MukFridgeFanDataView.xaml.cs">
@@ -260,35 +334,39 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MukFlap\EmersionDiagnosticView.xaml">
+    <Page Include="MukFlap\View\EmersionDiagnosticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlap\OneWireErrorCodeView.xaml">
+    <Page Include="MukFlap\View\MukFlapDataViewOld.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlap\View\OneWireErrorCodeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlap\IncomingSignalsView.xaml">
+    <Page Include="MukFlap\View\IncomingSignalsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlap\MukFalpWorkmodeStageView.xaml">
+    <Page Include="MukFlap\View\MukFalpWorkmodeStageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlap\MukFlapDiagnostic1View.xaml">
+    <Page Include="MukFlap\View\MukFlapDiagnostic1View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlap\MukFlapDiagnostic2View.xaml">
+    <Page Include="MukFlap\View\MukFlapDiagnostic2View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlap\MukFlapDiagnosticOneWireSensor.xaml">
+    <Page Include="MukFlap\View\MukFlapDiagnosticOneWireSensor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlap\MukFlapReply03TelemetryView.xaml">
+    <Page Include="MukFlap\View\MukFlapReply03TelemetryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,7 +382,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFlap\MukFlapDataView.xaml">
+    <Page Include="MukFlap\View\MukFlapDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -319,7 +397,7 @@
       <DependentUpon>MukVaporizerFanDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlap\MukFlapDataViewModel.cs" />
-    <Compile Include="MukFlap\MukFlapDataView.xaml.cs">
+    <Compile Include="MukFlap\View\MukFlapDataView.xaml.cs">
       <DependentUpon>MukFlapDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -1,11 +1,11 @@
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts {
 	internal interface IMukFlapReply03Telemetry {
-		ushort FlapPosition { get; }
-		int TemperatureAddress1 { get; }
-		int TemperatureAddress2 { get; }
+		int FlapPosition { get; }
+		double TemperatureAddress1 { get; }
+		double TemperatureAddress2 { get; }
 		IIncomingSignals IncomingSignals { get; }
 		byte OutgoingSignals { get; }
-		ushort AnalogInput { get; }
+		double AnalogInput { get; }
 		IMukFlapWorkmodeStage AutomaticModeStage { get; }
 		IMukFlapDiagnostic1 Diagnostic1 { get; }
 		IMukFlapDiagnostic2 Diagnostic2 { get; }
@@ -14,7 +14,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts {
 		IEmersonDiagnostic EmersonDiagnostic { get; }
 		double EmersonTemperature { get; }
 		double EmersonPressure { get; }
-		string EmersonValveSetting { get; }
-		ushort FirmwareBuildNumber { get; }
+		int EmersonValveSetting { get; }
+		int FirmwareBuildNumber { get; }
 	}
 }

@@ -11,6 +11,8 @@ using AlienJust.Support.Text;
 using AlienJust.Support.UserInterface.Contracts;
 using CustomModbusSlave.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.BsSm;
+using CustomModbusSlave.MicroclimatEs2gApp.Bvs;
+using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFridge;
 using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer;
@@ -43,6 +45,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private readonly MukFridgeFanDataViewModel _mukFridgeFanDataVm;
 		private readonly MukWarmFloorDataViewModel _mukWarmFloorDataVm;
 		private readonly BsSmDataViewModel _bsSmDataVm;
+		private readonly BvsDataViewModel _bvsDataVm;
+		private readonly KsmDataViewModel _ksmDataVm;
 
 
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem) {
@@ -71,6 +75,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
 			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier);
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
+			_bvsDataVm = new BvsDataViewModel(_notifier);
+			_ksmDataVm = new KsmDataViewModel(); // TODO:
 
 			GetPortsAvailable();
 			_logger.Log("Программа загружена");
@@ -208,5 +214,9 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 				}
 			}
 		}
+
+		public BvsDataViewModel BvsDataVm => _bvsDataVm;
+
+		public KsmDataViewModel KsmDataVm => _ksmDataVm;
 	}
 }

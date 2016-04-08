@@ -8,7 +8,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Bvs {
 		private readonly IThreadNotifier _notifier;
 		private IBvsReply65Telemetry _reply65Telemetry;
 
-		private BvsDataViewModel(IThreadNotifier notifier) {
+		public BvsDataViewModel(IThreadNotifier notifier) {
 			_notifier = notifier;
 		}
 

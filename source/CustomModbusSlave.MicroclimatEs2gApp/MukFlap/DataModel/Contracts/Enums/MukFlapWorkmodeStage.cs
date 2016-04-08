@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts {
+﻿namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts.Enums {
 	enum MukFlapWorkmodeStage {
 		ControllerInitialization, // 0
 		FlapTesting, // 1
@@ -6,5 +6,7 @@
 		WorkModeWithFailedFlap, // 3
 		WorkModePwmCorrectionBack, // 4
 		NoKsm // 5
+		,
+		Unknown // any other value
 	}
 }

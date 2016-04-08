@@ -10,6 +10,8 @@
     xmlns:mukWarmFloor="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor"
     xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
     xmlns:bvs="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
+    xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap.View"
+    xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
     Title="Технический абонент" Height="480" Width="640" ResizeMode="CanResizeWithGrip">
 	<Window.Resources>
 		<ResourceDictionary>
@@ -128,27 +130,39 @@
 		</Grid.RowDefinitions>
 		<TabControl Grid.Row="0" TabStripPlacement="Left">
 			<TabItem Header="МУК Заслонки" Style="{StaticResource AzureTabItem}">
-				<mukFlap:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}"/>
+				<ScrollViewer>
+					<view:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}"/>
+				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="МУК вентилятора испарителя" Style="{StaticResource AzureTabItem}">
-				<mukVaporizer:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
+				<ScrollViewer>
+					<mukVaporizer:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
+				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="МУК вентилятора конденсатора" Style="{StaticResource AzureTabItem}">
-				<mukFridge:MukFridgeFanDataView DataContext="{Binding Path=MukFridgeFanDataVm, Mode=OneTime}"/>
+				<ScrollViewer>
+					<mukFridge:MukFridgeFanDataView DataContext="{Binding Path=MukFridgeFanDataVm, Mode=OneTime}"/>
+				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="МУК теплого пола" Style="{StaticResource AzureTabItem}">
-				<mukWarmFloor:MukWarmFloorDataView DataContext="{Binding Path=MukWarmFloorDataVm, Mode=OneTime}"/>
+				<ScrollViewer>
+					<mukWarmFloor:MukWarmFloorDataView DataContext="{Binding Path=MukWarmFloorDataVm, Mode=OneTime}"/>
+				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="БС-СМ" Style="{StaticResource AzureTabItem}" BorderBrush="Blue">
-				<bsSm:BsSmDataView DataContext="{Binding Path=BsSmDataVm, Mode=OneTime}"/>
+				<ScrollViewer>
+					<bsSm:BsSmDataView DataContext="{Binding Path=BsSmDataVm, Mode=OneTime}"/>
+				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="БВС" Style="{StaticResource AzureTabItem}" BorderBrush="Green">
-				<bvs:BvsDataView DataContext="{Binding Path=BvsDataVm}"/>
+				<ScrollViewer>
+					<bvs:BvsDataView DataContext="{Binding Path=BvsDataVm, Mode=OneTime}"/>
+				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="КСМ" Style="{StaticResource AzureTabItem}" BorderBrush="Red">
-				
+				<ksm:KsmDataView DataContext="{Binding Path=KsmDataVm, Mode=OneTime}"/>
 			</TabItem>
-			</TabControl>
+		</TabControl>
 		<GridSplitter Grid.Row="1" Height="4" BorderBrush="DeepSkyBlue" BorderThickness="1" VerticalAlignment="Top" Background="DeepSkyBlue" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
 		<progamLog:ProgramLogView Grid.Row="1" DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}" Margin="4,8,6,4"/>
 	</Grid>
