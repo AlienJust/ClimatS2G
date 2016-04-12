@@ -32,8 +32,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		private readonly RelayCommand _openPortCommand;
 		private readonly RelayCommand _closePortCommand;
-		private readonly RelayCommand _getPortsAvailableCommand;
-		
+
 		private readonly ProgramLogViewModel _programLogVm;
 		private readonly ILogger _logger;
 
@@ -45,8 +44,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private readonly MukFridgeFanDataViewModel _mukFridgeFanDataVm;
 		private readonly MukWarmFloorDataViewModel _mukWarmFloorDataVm;
 		private readonly BsSmDataViewModel _bsSmDataVm;
-		private readonly BvsDataViewModel _bvsDataVm;
-		private readonly KsmDataViewModel _ksmDataVm;
 
 
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem) {
@@ -55,7 +52,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 			_openPortCommand = new RelayCommand(OpenPort, () => !_isPortOpened);
 			_closePortCommand = new RelayCommand(ClosePort, () => _isPortOpened);
-			_getPortsAvailableCommand = new RelayCommand(GetPortsAvailable);
+			GetPortsAvailableCommand = new RelayCommand(GetPortsAvailable);
 
 			_programLogVm = new ProgramLogViewModel(this);
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
@@ -75,8 +72,9 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
 			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier);
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
-			_bvsDataVm = new BvsDataViewModel(_notifier);
-			_ksmDataVm = new KsmDataViewModel(); // TODO:
+			BvsDataVm = new BvsDataViewModel(_notifier);
+
+			KsmDataVm = new KsmDataViewModel(_notifier); // TODO:
 
 			GetPortsAvailable();
 			_logger.Log("Программа загружена");
@@ -134,9 +132,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			}));
 		}
 
-		public IThreadNotifier Notifier {
-			get { return _notifier; }
-		}
+		public IThreadNotifier Notifier => _notifier;
 
 		public List<string> ComPortsAvailable
 		{
@@ -174,19 +170,11 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			get { return _closePortCommand; }
 		}
 
-		public RelayCommand GetPortsAvailableCommand
-		{
-			get { return _getPortsAvailableCommand; }
-		}
+		public RelayCommand GetPortsAvailableCommand { get; }
 
-		public ProgramLogViewModel ProgramLogVm
-		{
-			get { return _programLogVm; }
-		}
+		public ProgramLogViewModel ProgramLogVm => _programLogVm;
 
-		public MukFlapDataViewModel MukFlapDataVm {
-			get { return _mukFlapDataVm; }
-		}
+		public MukFlapDataViewModel MukFlapDataVm => _mukFlapDataVm;
 
 		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm
 		{
@@ -215,8 +203,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			}
 		}
 
-		public BvsDataViewModel BvsDataVm => _bvsDataVm;
+		public BvsDataViewModel BvsDataVm { get; }
 
-		public KsmDataViewModel KsmDataVm => _ksmDataVm;
+		public KsmDataViewModel KsmDataVm { get; }
 	}
 }
