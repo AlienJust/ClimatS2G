@@ -13,14 +13,14 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 			_notifier = notifier;
 			_parameterVmList = new List<KsmWritableParameterViewModel>();
 			for (int i = 0; i < 50; ++i) {
-				_parameterVmList.Add(new KsmWritableParameterViewModel(i, "Параметр " + (i + 1)));
+				_parameterVmList.Add(new KsmWritableParameterViewModel(i, "Параметр " + (i + 1), this, new DoubleUshortConverterSimple()));
 			}
 		}
 
 		public List<KsmWritableParameterViewModel> ParameterVmList => _parameterVmList;
 
 		public void SetParameterAsync(int zeroBasedParameterNumber, ushort value, Action<Exception> callback) {
-		
+			// тут должна быть очередь потокобезопасная
 		}
 	}
 
@@ -112,11 +112,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 		public void SetCurrentValue(double currentValue) {
 			CurrentValue = currentValue;
 		}
-	}
-
-	internal interface IDoubleUshortConverter {
-		ushort ConvertToUshort(double value);
-		double ConvertToDouble(ushort value);
 	}
 
 	internal interface IParameterSetter {

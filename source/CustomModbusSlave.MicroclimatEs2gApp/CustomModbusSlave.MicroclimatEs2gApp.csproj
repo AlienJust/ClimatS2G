@@ -247,6 +247,7 @@
     <Compile Include="Bvs\BvsDataViewModel.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
     <Compile Include="Bvs\BvsReply65TelemetryBuilder.cs" />
+    <Compile Include="Ksm\IDoubleUshortConverter.cs" />
     <Compile Include="Ksm\KsmDataView.xaml.cs">
       <DependentUpon>KsmDataView.xaml</DependentUpon>
     </Compile>
