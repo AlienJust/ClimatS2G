@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.BsSm.BsSmReplyDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
+             mc:Ignorable="d" 
+             d:DesignHeight="320" d:DesignWidth="400">
+	<StackPanel Orientation="Vertical">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Целевая температура в кабине машиниста (смещение)"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=TargetTemperatureInsideTheCabin, Mode=OneWay}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Уровень скорости вентилированя"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=FanSpeedLevel, Mode=OneWay}"/>
+		</Grid>
+		<CheckBox Content="D6 Включение нагрева пола машиниста" IsChecked="{Binding Path=IsWarmFloorOn, Mode=OneWay}"/>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Астрономическое время"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=AstronomicTime, Mode=OneWay}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Время отложенного старта"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=DelayedStartTime, Mode=OneWay}"/>
+		</Grid>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Температура наружного воздуха"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureOutdoor, Mode=OneWay}"/>
+		</Grid>
+		<bsSm:BsSmStateView DataContext="{Binding Path=BsSmState, Mode=OneTime}"/>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Версия ПО БС-СМ"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=BsSmVersionNumber, Mode=OneWay}"/>
+		</Grid>
+		<TextBox Text="{Binding Path=ReplyText, Mode=OneWay}" IsReadOnly="True"/>
+	</StackPanel>
+</UserControl>
