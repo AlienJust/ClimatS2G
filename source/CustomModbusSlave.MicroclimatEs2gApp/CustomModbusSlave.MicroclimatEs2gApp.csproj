@@ -226,10 +226,6 @@
     </Compile>
     <Compile Include="BsSm\BsSmStateViewModel.cs" />
     <Compile Include="BsSm\BuilderBsSmDataCommand32RequestFromCommandPartDataBytes.cs" />
-    <Compile Include="BsSm\ClimaticSystemWorkMode.cs" />
-    <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromInt.cs" />
-    <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromString.cs" />
-    <Compile Include="BsSm\ClimaticSystemWorkModeExtensions.cs" />
     <Compile Include="BsSm\IBsSmDataCommand32Reply.cs" />
     <Compile Include="BsSm\IBsSmDataCommand32Request.cs" />
     <Compile Include="BsSm\IBsSmState.cs" />
@@ -240,7 +236,6 @@
     <Compile Include="Bvs\BvsReply65TelemetryView.xaml.cs">
       <DependentUpon>BvsReply65TelemetryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IBuilder.cs" />
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
     <Compile Include="BsSm\IUpdateable.cs" />
     <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
@@ -431,6 +426,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CustomModbusSlave.MicroclimatEs2gApp.Common\CustomModbusSlave.MicroclimatEs2gApp.Common.csproj">
+      <Project>{b20b54d7-e4ed-4b62-9308-9c975339f965}</Project>
+      <Name>CustomModbusSlave.MicroclimatEs2gApp.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomModbusSlave\CustomModbusSlave.csproj">
       <Project>{9244d783-9410-4026-b3ef-49435f79a74a}</Project>
       <Name>CustomModbusSlave</Name>

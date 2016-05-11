@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<PsnConfiguration Name="Микроклимат ркабины ES2G" Version="1" Description="Конфигурация микроклимата кабины ES2G" Id="efd2522e-e852-4253-a4e0-e3c7e4ff3ff5" RpdId="33">
+<PsnConfiguration Name="Микроклимат кабины ES2G" Version="1" Description="Конфигурация микроклимата кабины ES2G" Id="efd2522e-e852-4253-a4e0-e3c7e4ff3ff5" RpdId="33">
 	<PsnMeters>
 		<PsnMeter Address="0x01" Name="РПД" />
 		<PsnMeter Address="0x02" Name="МУК заслонки" />

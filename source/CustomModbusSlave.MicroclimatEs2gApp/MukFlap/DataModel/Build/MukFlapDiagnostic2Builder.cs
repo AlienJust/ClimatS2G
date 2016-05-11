@@ -10,7 +10,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 
 		public IMukFlapDiagnostic2 Build() {
 			return new MukFlapDiagnostic2(
-				(_absoluteValue & 0x40) == 0x20, // zb bit 5
+				(_absoluteValue & 0x20) == 0x20, // zb bit 5
 				(_absoluteValue & 0x40) == 0x40 // zb bit 6
 				);
 		}
