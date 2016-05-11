@@ -18,7 +18,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm
 		}
 		
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (addr != 0x08) return;
+			if (addr != 0x10) return;
 			if (code == 0x20 && data.Count == 27) { // request
 				_notifier.Notify(() => {
 					BsSmRequestDataVm = new BsSmDataCommand32RequestBuilderFromCommandPartDataBytes(data.Skip(2).Take(data.Count - 4).ToList()).Build();
