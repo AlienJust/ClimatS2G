@@ -43,7 +43,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private readonly MukFlapDataViewModel _mukFlapDataVm;
 		private readonly MukVaporizerFanDataViewModel _mukVaporizerDataVm;
 		private readonly MukFridgeFanDataViewModel _mukFridgeFanDataVm;
-		private readonly MukWarmFloorDataViewModel _mukWarmFloorDataVm;
 		private readonly BsSmDataViewModel _bsSmDataVm;
 
 
@@ -71,7 +70,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_mukFlapDataVm = new MukFlapDataViewModel(_notifier);
 			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier);
 			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
-			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier);
+			MukFlapReturnAirDataVm = new MukWarmFloorDataViewModel(_notifier);
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
 			BvsDataVm = new BvsDataViewModel(_notifier);
 
@@ -93,7 +92,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_mukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_mukVaporizerDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_mukFridgeFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-			_mukWarmFloorDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			MukFlapReturnAirDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_bsSmDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 		}
 
@@ -161,15 +160,9 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			}
 		}
 
-		public RelayCommand OpenPortCommand
-		{
-			get { return _openPortCommand; }
-		}
+		public RelayCommand OpenPortCommand => _openPortCommand;
 
-		public RelayCommand ClosePortCommand
-		{
-			get { return _closePortCommand; }
-		}
+		public RelayCommand ClosePortCommand => _closePortCommand;
 
 		public RelayCommand GetPortsAvailableCommand { get; }
 
@@ -186,9 +179,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			get { return _mukFridgeFanDataVm; }
 		}
 
-		public MukWarmFloorDataViewModel MukWarmFloorDataVm {
-			get { return _mukWarmFloorDataVm; }
-		}
+		public MukWarmFloorDataViewModel MukFlapReturnAirDataVm { get; }
 
 		public BsSmDataViewModel BsSmDataVm {
 			get { return _bsSmDataVm; }
