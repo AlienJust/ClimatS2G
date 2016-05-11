@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap.View"
              xmlns:views="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.Views;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
-             mc:Ignorable="d" d:DesignWidth="400" Height="882">
+             mc:Ignorable="d" d:DesignWidth="400">
 	<StackPanel>
 		<Grid>
 			<Grid.ColumnDefinitions>

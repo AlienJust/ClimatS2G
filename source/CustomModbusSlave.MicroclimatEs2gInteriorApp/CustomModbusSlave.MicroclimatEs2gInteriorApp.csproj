@@ -321,6 +321,12 @@
     <Compile Include="MukFlapReturnAir\DataModel\Contracts\IMukFlapReturnAirReply03Telemetry.cs" />
     <Compile Include="MukFlapReturnAir\DataModel\SimpleReleases\MukFlapReturnAirReply03Telemetry.cs" />
     <Compile Include="MukFlapReturnAir\MukFlapReturnAirViewModel.cs" />
+    <Compile Include="MukFlapReturnAir\Views\MukFlapReturnAirDataView.xaml.cs">
+      <DependentUpon>MukFlapReturnAirDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapReturnAir\Views\MukFlapReturnAirReply03TelemetryView.xaml.cs">
+      <DependentUpon>MukFlapReturnAirReply03TelemetryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukFridge\MukFridgeFanDataView.xaml.cs">
       <DependentUpon>MukFridgeFanDataView.xaml</DependentUpon>
     </Compile>
@@ -374,6 +380,14 @@
     <Page Include="MukFlapOuterAir\View\MukFlapReply03TelemetryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapReturnAir\Views\MukFlapReturnAirDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapReturnAir\Views\MukFlapReturnAirReply03TelemetryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFridge\MukFridgeFanDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
