@@ -5,7 +5,6 @@
     xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
     xmlns:mukVaporizer="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer"
     xmlns:mukFridge="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFridge"
-    xmlns:mukWarmFloor="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor"
     xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
     xmlns:bvs="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
     xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap.View"
@@ -156,7 +155,7 @@
 			</TabItem>
 			<TabItem Header="МУК заслонки лето зима" Style="{StaticResource AzureTabItem}">
 				<ScrollViewer>
-					<mukWarmFloor:MukWarmFloorDataView DataContext="{Binding Path=MukWarmFloorDataVm, Mode=OneTime}"/>
+					<view1:MukFlapReturnAirDataView DataContext="{Binding Path=MukWarmFloorDataVm, Mode=OneTime}"/>
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="БС-СМ" Style="{StaticResource AzureTabItem}" BorderBrush="Blue">

@@ -331,10 +331,6 @@
       <DependentUpon>MukFridgeFanDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFridge\MukFridgeFanDataViewModel.cs" />
-    <Compile Include="MukWarmFloor\MukWarmFloorDataViewModel.cs" />
-    <Compile Include="MukWarmFloor\MukWarmFloorDataView.xaml.cs">
-      <DependentUpon>MukWarmFloorDataView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ProgamLog\ILogLine.cs" />
     <Compile Include="ProgamLog\ListBoxBehavior.cs" />
     <Compile Include="ProgamLog\ProgramLogView.xaml.cs">
@@ -390,10 +386,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFridge\MukFridgeFanDataView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukWarmFloor\MukWarmFloorDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

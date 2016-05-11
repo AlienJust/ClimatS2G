@@ -13,11 +13,10 @@ using CustomModbusSlave.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.BsSm;
 using CustomModbusSlave.MicroclimatEs2gApp.Bvs;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFridge;
 using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer;
-using CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor;
 using CustomModbusSlave.MicroclimatEs2gApp.ProgamLog;
 using DataAbstractionLevel.Low.PsnConfig;
 
@@ -40,10 +39,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private readonly SerialChannel _serialChannel;
 
 		private bool _isPortOpened;
-		private readonly MukFlapDataViewModel _mukFlapDataVm;
-		private readonly MukVaporizerFanDataViewModel _mukVaporizerDataVm;
-		private readonly MukFridgeFanDataViewModel _mukFridgeFanDataVm;
-		private readonly BsSmDataViewModel _bsSmDataVm;
 
 
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem) {
@@ -67,11 +62,12 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
-			_mukFlapDataVm = new MukFlapDataViewModel(_notifier);
-			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier);
-			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
-			MukFlapReturnAirDataVm = new MukWarmFloorDataViewModel(_notifier);
-			_bsSmDataVm = new BsSmDataViewModel(_notifier);
+			MukFlapDataVm = new MukFlapDataViewModel(_notifier);
+			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModel(_notifier);
+			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
+			MukFlapReturnAirDataVm = new MukFlapReturnAirViewModel(_notifier);
+
+			BsSmDataVm = new BsSmDataViewModel(_notifier);
 			BvsDataVm = new BvsDataViewModel(_notifier);
 
 			KsmDataVm = new KsmDataViewModel(_notifier); // TODO:
@@ -89,11 +85,11 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
 			_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
-			_mukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-			_mukVaporizerDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-			_mukFridgeFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			MukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			MukVaporizerFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			MukFridgeFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			MukFlapReturnAirDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-			_bsSmDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			BsSmDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 		}
 
 		private void GetPortsAvailable() {
@@ -168,22 +164,15 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		public ProgramLogViewModel ProgramLogVm => _programLogVm;
 
-		public MukFlapDataViewModel MukFlapDataVm => _mukFlapDataVm;
+		public MukFlapDataViewModel MukFlapDataVm { get; }
 
-		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm
-		{
-			get { return _mukVaporizerDataVm; }
-		}
+		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm { get; }
 
-		public MukFridgeFanDataViewModel MukFridgeFanDataVm {
-			get { return _mukFridgeFanDataVm; }
-		}
+		public MukFridgeFanDataViewModel MukFridgeFanDataVm { get; }
 
-		public MukWarmFloorDataViewModel MukFlapReturnAirDataVm { get; }
+		public MukFlapReturnAirViewModel MukFlapReturnAirDataVm { get; }
 
-		public BsSmDataViewModel BsSmDataVm {
-			get { return _bsSmDataVm; }
-		}
+		public BsSmDataViewModel BsSmDataVm { get; }
 
 		public bool IsPortOpened {
 			get { return _isPortOpened; }
