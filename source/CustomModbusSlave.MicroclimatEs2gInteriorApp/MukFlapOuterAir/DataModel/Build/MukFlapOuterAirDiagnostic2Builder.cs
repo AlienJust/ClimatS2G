@@ -2,14 +2,14 @@ using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
-	class MukFlapOuterAirDiagnostic2Builder : IBuilder<IMukFlapDiagnostic2> {
+	class MukFlapOuterAirDiagnostic2Builder : IBuilder<IMukFlapOuterAirDiagnostic2> {
 		private readonly int _absoluteValue;
 		public MukFlapOuterAirDiagnostic2Builder(int absoluteValue) {
 			_absoluteValue = absoluteValue;
 		}
 
-		public IMukFlapDiagnostic2 Build() {
-			return new MukFlapOuterAirDiagnostic2(
+		public IMukFlapOuterAirDiagnostic2 Build() {
+			return new MukFlapOuterAirOuterAirDiagnostic2(
 				(_absoluteValue & 0x01) == 0x01, // zb bit 0
 				(_absoluteValue & 0x02) == 0x02, // zb bit 1
 				(_absoluteValue & 0x04) == 0x04, // zb bit 2

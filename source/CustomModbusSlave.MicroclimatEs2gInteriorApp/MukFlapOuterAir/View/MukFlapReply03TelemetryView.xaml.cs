@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.View {
+namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.View {
 	/// <summary>
 	/// Логика взаимодействия для MukFlapReply03TelemetryView.xaml
 	/// </summary>

@@ -256,41 +256,28 @@
     </Compile>
     <Compile Include="Ksm\KsmWritableParameterViewModel.cs" />
     <Compile Include="MukFlap\Converters\EnumMukFlapWorkmodeStageToStringConverter.cs" />
-    <Compile Include="MukFlap\Converters\EnumOneWireSensorErrorCodeToStringConverter.cs" />
     <Compile Include="MukFlap\DataModel\Build\EmersonDiagnosticBuilder.cs" />
     <Compile Include="MukFlap\DataModel\Build\IncomingSignalsBuilder.cs" />
     <Compile Include="MukFlap\DataModel\Build\MukFlapDiagnostic1Builder.cs" />
-    <Compile Include="MukFlap\DataModel\Build\MukFlapDiagnostic2Builder.cs" />
     <Compile Include="MukFlap\DataModel\Build\MukFlapWorkmodeStageBuilder.cs" />
-    <Compile Include="MukFlap\DataModel\Build\OneWireSensorErrorCodeBuilder.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\IMukFlapWorkmodeStage.cs" />
-    <Compile Include="MukFlap\DataModel\Contracts\IOneWireSensorErrorCode.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\MukFlapWorkmodeStageSimple.cs" />
     <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapReply03Telemetry.cs" />
     <Compile Include="MukFlap\DataModel\Build\MukFlapReply03TelemetryBuilder.cs" />
-    <Compile Include="MukFlap\MukFlapDataViewModelOld.cs" />
     <Compile Include="MukFlap\View\EmersionDiagnosticView.xaml.cs">
       <DependentUpon>EmersionDiagnosticView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlap\View\MukFlapDataViewOld.xaml.cs">
       <DependentUpon>MukFlapDataViewOld.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlap\View\OneWireErrorCodeView.xaml.cs">
-      <DependentUpon>OneWireErrorCodeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapDiagnosticOneWireSensor.cs" />
-    <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapDiagnostic2.cs" />
     <Compile Include="MukFlap\DataModel\SimpleRelease\MukFlapDiagnostic1.cs" />
     <Compile Include="MukFlap\DataModel\SimpleRelease\IncomingSignals.cs" />
     <Compile Include="MukFlap\DataModel\SimpleRelease\EmersonDiagnostic.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\IEmersonDiagnostic.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\IIncomingSignals.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\IMukFlapDiagnostic1.cs" />
-    <Compile Include="MukFlap\DataModel\Contracts\IMukFlapDiagnostic2.cs" />
-    <Compile Include="MukFlap\DataModel\Contracts\IMukFlapDiagnosticOneWireSensor.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\IMukFlapReply03Telemetry.cs" />
     <Compile Include="MukFlap\DataModel\Contracts\Enums\MukFlapWorkmodeStage.cs" />
-    <Compile Include="MukFlap\DataModel\Contracts\Enums\OneWireSensorErrorCode.cs" />
     <Compile Include="MukFlap\View\IncomingSignalsView.xaml.cs">
       <DependentUpon>IncomingSignalsView.xaml</DependentUpon>
     </Compile>
@@ -299,12 +286,6 @@
     </Compile>
     <Compile Include="MukFlap\View\MukFlapDiagnostic1View.xaml.cs">
       <DependentUpon>MukFlapDiagnostic1View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFlap\View\MukFlapDiagnostic2View.xaml.cs">
-      <DependentUpon>MukFlapDiagnostic2View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFlap\View\MukFlapDiagnosticOneWireSensor.xaml.cs">
-      <DependentUpon>MukFlapDiagnosticOneWireSensor.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlap\View\MukFlapReply03TelemetryView.xaml.cs">
       <DependentUpon>MukFlapReply03TelemetryView.xaml</DependentUpon>
@@ -343,10 +324,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFlap\View\OneWireErrorCodeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MukFlap\View\IncomingSignalsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -356,14 +333,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MukFlap\View\MukFlapDiagnostic1View.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MukFlap\View\MukFlapDiagnostic2View.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MukFlap\View\MukFlapDiagnosticOneWireSensor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

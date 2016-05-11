@@ -64,12 +64,44 @@
     <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromString.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkModeExtensions.cs" />
     <Compile Include="IBuilder.cs" />
+    <Compile Include="MukFlap\Diagnostic2\Builders\MukFlapDiagnostic2Builder.cs" />
+    <Compile Include="MukFlap\Diagnostic2\Contracts\IMukFlapDiagnostic2.cs" />
+    <Compile Include="MukFlap\Diagnostic2\SimpleReleases\MukFlapDiagnostic2.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\EnumOneWireSensorErrorCodeToStringConverter.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\IMukFlapDiagnosticOneWireSensor.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\IOneWireSensorErrorCode.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\MukFlapDiagnosticOneWireSensor.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\MukFlapDiagnosticOneWireSensorBuilder.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\OneWireSensorErrorCode.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\OneWireSensorErrorCodeBuilder.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\OneWireSensorErrorCodeSimple.cs" />
+    <Compile Include="MukFlap\Views\MukFlapDiagnostic2View.xaml.cs">
+      <DependentUpon>MukFlapDiagnostic2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlap\Views\MukFlapDiagnosticOneWireSensorView.xaml.cs">
+      <DependentUpon>MukFlapDiagnosticOneWireSensorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlap\Views\OneWireErrorCodeView.xaml.cs">
+      <DependentUpon>OneWireErrorCodeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="AnyCommandPartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlap\Views\MukFlapDiagnostic2View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlap\Views\MukFlapDiagnosticOneWireSensorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlap\Views\OneWireErrorCodeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

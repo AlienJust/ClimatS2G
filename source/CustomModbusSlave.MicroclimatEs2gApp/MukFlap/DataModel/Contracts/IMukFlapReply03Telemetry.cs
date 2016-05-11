@@ -1,3 +1,6 @@
+using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DataModel.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
+
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts {
 	internal interface IMukFlapReply03Telemetry {
 		int FlapPosition { get; }

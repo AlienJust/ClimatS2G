@@ -1,9 +1,10 @@
+using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease {
 	class MukFlapReply03Telemetry : IMukFlapReply03Telemetry {
 		public MukFlapReply03Telemetry(int flapPosition, double temperatureAddress1, double temperatureAddress2, IIncomingSignals incomingSignals, byte outgoingSignals, double analogInput, IMukFlapWorkmodeStage automaticModeStage
-			, IMukFlapDiagnostic1 diagnostic1, IMukFlapDiagnostic2 diagnostic2, IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1, IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2
+			, IMukFlapDiagnostic1 diagnostic1, IMukFlapOuterAirDiagnostic2 diagnostic2, IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1, IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2
 			, IEmersonDiagnosticCircuit1 emersonDiagnosticCircuit1, double emersonTemperatureCircuit1, double emersonPressureCircuit1, int emersonValveSettingCircuit1
 			, IEmersonDiagnosticCircuit2 emersonDiagnosticCircuit2, double emersonTemperatureCircuit2, double emersonPressureCircuit2, int emersonValveSettingCircuit2, int firmwareBuildNumber) {
 			FlapPosition = flapPosition;
@@ -38,7 +39,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease {
 		public double AnalogInput { get; }
 		public IMukFlapWorkmodeStage AutomaticModeStage { get; }
 		public IMukFlapDiagnostic1 Diagnostic1 { get; }
-		public IMukFlapDiagnostic2 Diagnostic2 { get; }
+		public IMukFlapOuterAirDiagnostic2 Diagnostic2 { get; }
 		public IMukFlapDiagnosticOneWireSensor Diagnostic3OneWire1 { get; }
 		public IMukFlapDiagnosticOneWireSensor Diagnostic4OneWire2 { get; }
 
