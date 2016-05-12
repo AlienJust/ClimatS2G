@@ -1,7 +1,6 @@
-using System;
 using CustomModbusSlave.MicroclimatEs2gApp.BsSm.SimpleRelease;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build {
 	class WorkModeBuilderFromByte : IBuilder<IWorkMode> {
 		private readonly byte _absoluteValue;
 

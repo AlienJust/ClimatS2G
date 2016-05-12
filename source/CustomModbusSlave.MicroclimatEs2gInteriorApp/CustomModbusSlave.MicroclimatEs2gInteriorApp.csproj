@@ -169,11 +169,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BsSm\BsSmReplyDataView.xaml">
+    <Page Include="BsSm\BsSmAndKsm1ReplyDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BsSm\BsSmRequestDataView.xaml">
+    <Page Include="BsSm\BsSmAndKsm1RequestDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,6 +182,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BsSm\WorkMode2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BsSm\WorkModeReplyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,17 +217,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BsSm\Build\BsSmDataCommand32ReplyBuilderFromReplyDataBytes.cs" />
-    <Compile Include="BsSm\SimpleRelease\BsSmDataCommand32ReplySimple.cs" />
-    <Compile Include="BsSm\SimpleRelease\BsSmDataCommand32RequestSimple.cs" />
+    <Compile Include="BsSm\Build\BsSmAndKsm1DataCommand32ReplyBuilderFromCommandPartDataBytes.cs" />
+    <Compile Include="BsSm\Build\WorkModeReplyBuilderFromByte.cs" />
+    <Compile Include="BsSm\Contracts\IWorkModeReply.cs" />
+    <Compile Include="BsSm\SimpleRelease\WorkModeReplySimple.cs" />
+    <Compile Include="BsSm\SimpleRelease\BsSmAndKsm1DataCommand32ReplySimple.cs" />
+    <Compile Include="BsSm\SimpleRelease\BsSmAndKsm1DataCommand32RequestSimple.cs" />
     <Compile Include="BsSm\BsSmDataView.xaml.cs">
       <DependentUpon>BsSmDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BsSm\BsSmReplyDataView.xaml.cs">
-      <DependentUpon>BsSmReplyDataView.xaml</DependentUpon>
+    <Compile Include="BsSm\BsSmAndKsm1ReplyDataView.xaml.cs">
+      <DependentUpon>BsSmAndKsm1ReplyDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BsSm\BsSmRequestDataView.xaml.cs">
-      <DependentUpon>BsSmRequestDataView.xaml</DependentUpon>
+    <Compile Include="BsSm\BsSmAndKsm1RequestDataView.xaml.cs">
+      <DependentUpon>BsSmAndKsm1RequestDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BsSm\Build\BsSmStateBuilderFromByte.cs" />
     <Compile Include="BsSm\Build\WorkMode2BuilderFromByte.cs" />
@@ -234,15 +241,18 @@
       <DependentUpon>BsSmStateView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BsSm\BsSmStateViewModel.cs" />
-    <Compile Include="BsSm\Build\BuilderBsSmDataCommand32RequestBuilderFromCommandPartDataBytes.cs" />
+    <Compile Include="BsSm\Build\BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes.cs" />
     <Compile Include="BsSm\Contracts\IWorkMode.cs" />
     <Compile Include="BsSm\Build\WorkModeBuilderFromByte.cs" />
-    <Compile Include="BsSm\Contracts\IBsSmDataCommand32Reply.cs" />
-    <Compile Include="BsSm\Contracts\IBsSmDataCommand32Request.cs" />
+    <Compile Include="BsSm\Contracts\IBsSmAndKsm1DataCommand32Reply.cs" />
+    <Compile Include="BsSm\Contracts\IBsSmAndKsm1DataCommand32Request.cs" />
     <Compile Include="BsSm\Contracts\IBsSmState.cs" />
     <Compile Include="BsSm\SimpleRelease\WorkModeSimple.cs" />
     <Compile Include="BsSm\WorkMode2View.xaml.cs">
       <DependentUpon>WorkMode2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\WorkModeReplyView.xaml.cs">
+      <DependentUpon>WorkModeReplyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BsSm\WorkModeView.xaml.cs">
       <DependentUpon>WorkModeView.xaml</DependentUpon>

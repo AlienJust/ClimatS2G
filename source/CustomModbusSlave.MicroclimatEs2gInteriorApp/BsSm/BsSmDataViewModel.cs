@@ -2,64 +2,72 @@
 using System.Linq;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
+using CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build;
+using CustomModbusSlave.MicroclimatEs2gApp.BsSm.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.Common;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm
 {
 	class BsSmDataViewModel : ViewModelBase, ICommandListener {
-		private IBsSmDataCommand32Request _bsSmRequestDataVm;
-		private IBsSmDataCommand32Reply _bsSmReplyDataVm;
+		private IBsSmAndKsm1DataCommand32Request _bsSmAndKsm1RequestDataVm;
+		private IBsSmAndKsm1DataCommand32Reply _bsSmAndKsm1ReplyDataVm;
 		private readonly IThreadNotifier _notifier;
 
 		public BsSmDataViewModel(IThreadNotifier notifier) {
 			_notifier = notifier;
 
-			//_bsSmRequestDataVm = new BsSmRequestDataViewModel(notifier);
-			//_bsSmReplyDataVm = new BsSmReplyDataViewModel(notifier);
+			BsSmAndKsm1RequestDataTextVm = new AnyCommandPartViewModel();
+			BsSmAndKsm1ReplyDataTextVm = new AnyCommandPartViewModel();
 		}
 		
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (addr != 0x10) return;
-			if (code == 0x20 && data.Count == 27) { // request
+			if (addr != 0x0A) return;
+			if (code == 0x20 && data.Count == 27) { // request KSM1
 				_notifier.Notify(() => {
-					BsSmRequestDataVm = new BsSmDataCommand32RequestBuilderFromCommandPartDataBytes(data.Skip(2).Take(data.Count - 4).ToList()).Build();
-					//RequestText = data.ToText();
+					BsSmAndKsm1RequestDataVm = new BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes(data.Skip(2).Take(data.Count - 4).ToList()).Build();
+					BsSmAndKsm1RequestDataTextVm.Update(data);
 				});
 			}
-			else if (code == 0x20 && data.Count == 47) { // request
+			else if (code == 0x20 && data.Count == 47) { // reply KSM1
 				_notifier.Notify(() => {
 					// TODO:
-					//BsSmReplyDataVm = new BsSmDataCommand32RequestBuilderFromCommandPartDataBytes(data.Skip(2).Take(data.Count - 4).ToList()).Build();
+					//BsSmAndKsm1ReplyDataVm = new BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes(data.Skip(2).Take(data.Count - 4).ToList()).Build();
 					//Reply = data.ToText();
+					BsSmAndKsm1ReplyDataVm = new BsSmAndKsm1DataCommand32ReplyBuilderFromCommandPartDataBytes(data.Skip(2).Take(data.Count - 4).ToList()).Build();
+					BsSmAndKsm1ReplyDataTextVm.Update(data);
 				});
 			}
 		}
 
-		public IBsSmDataCommand32Request BsSmRequestDataVm
+		public IBsSmAndKsm1DataCommand32Request BsSmAndKsm1RequestDataVm
 		{
 			get
 			{
-				return _bsSmRequestDataVm;
+				return _bsSmAndKsm1RequestDataVm;
 			}
 			set
 			{
-				if (_bsSmRequestDataVm != value) {
-					_bsSmRequestDataVm = value;
-					RaisePropertyChanged(()=>BsSmRequestDataVm);
+				if (_bsSmAndKsm1RequestDataVm != value) {
+					_bsSmAndKsm1RequestDataVm = value;
+					RaisePropertyChanged(()=>BsSmAndKsm1RequestDataVm);
 				}
 			}
 		}
 
+		public AnyCommandPartViewModel BsSmAndKsm1RequestDataTextVm { get; }
 
-		public IBsSmDataCommand32Reply BsSmReplyDataVm {
+		public IBsSmAndKsm1DataCommand32Reply BsSmAndKsm1ReplyDataVm {
 			get {
-				return _bsSmReplyDataVm;
+				return _bsSmAndKsm1ReplyDataVm;
 			}
 			set {
-				if (_bsSmReplyDataVm != value) {
-					_bsSmReplyDataVm = value;
-					RaisePropertyChanged(() => BsSmReplyDataVm);
+				if (_bsSmAndKsm1ReplyDataVm != value) {
+					_bsSmAndKsm1ReplyDataVm = value;
+					RaisePropertyChanged(() => BsSmAndKsm1ReplyDataVm);
 				}
 			}
 		}
+
+		public AnyCommandPartViewModel BsSmAndKsm1ReplyDataTextVm { get; }
 	}
 }

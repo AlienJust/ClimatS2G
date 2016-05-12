@@ -4,10 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
+             xmlns:common="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="400">
+             d:DesignHeight="1100" d:DesignWidth="400">
 	<StackPanel Orientation="Vertical">
-		<bsSm:BsSmRequestDataView DataContext="{Binding Path=BsSmRequestDataVm, Mode=OneTime}"/>
-		<bsSm:BsSmReplyDataView DataContext="{Binding Path=BsSmReplyDataVm, Mode=OneTime}"/>
+		<bsSm:BsSmAndKsm1RequestDataView DataContext="{Binding Path=BsSmAndKsm1RequestDataVm, Mode=OneTime}"/>
+		<common:AnyCommandPartView DataContext="{Binding Path=BsSmAndKsm1RequestDataTextVm, Mode=OneTime}"/>
+		<bsSm:BsSmAndKsm1ReplyDataView DataContext="{Binding Path=BsSmAndKsm1ReplyDataVm, Mode=OneTime}"/>
+		<common:AnyCommandPartView DataContext="{Binding Path=BsSmAndKsm1ReplyDataTextVm, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>
