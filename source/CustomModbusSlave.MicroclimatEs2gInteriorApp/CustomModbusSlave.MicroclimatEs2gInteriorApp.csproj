@@ -328,6 +328,16 @@
     <Compile Include="MukFlapOuterAir\View\MukFlapReply03TelemetryView.xaml.cs">
       <DependentUpon>MukFlapReply03TelemetryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MukFlapWinterSummer\DataModel\Builders\MukFlapWinterSummerReply03TelemetryBuilder.cs" />
+    <Compile Include="MukFlapWinterSummer\DataModel\Contracts\IMukFlapWinterSummerReply03Telemetry.cs" />
+    <Compile Include="MukFlapWinterSummer\DataModel\SimpleReleases\MukFlapWinterSummerReply03Telemetry.cs" />
+    <Compile Include="MukFlapWinterSummer\MukFlapWinterSummerViewModel.cs" />
+    <Compile Include="MukFlapWinterSummer\Views\MukFlapWinterSummerDataView.xaml.cs">
+      <DependentUpon>MukFlapWinterSummerDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapWinterSummer\Views\MukFlapWinterSummerReply03TelemetryView.xaml.cs">
+      <DependentUpon>MukFlapWinterSummerReply03TelemetryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukFlapReturnAir\DataModel\Builders\MukFlapReturnAirReply03TelemetryBuilder.cs" />
     <Compile Include="MukFlapReturnAir\DataModel\Contracts\IMukFlapReturnAirReply03Telemetry.cs" />
     <Compile Include="MukFlapReturnAir\DataModel\SimpleReleases\MukFlapReturnAirReply03Telemetry.cs" />
@@ -387,6 +397,14 @@
     <Page Include="MukFlapOuterAir\View\MukFlapReply03TelemetryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapWinterSummer\Views\MukFlapWinterSummerDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapWinterSummer\Views\MukFlapWinterSummerReply03TelemetryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFlapReturnAir\Views\MukFlapReturnAirDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
