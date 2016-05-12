@@ -31,9 +31,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm
 			else if (code == 0x20 && data.Count == 47) { // reply KSM1
 				_notifier.Notify(() => {
 					// TODO:
-					//BsSmAndKsm1ReplyDataVm = new BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes(data.Skip(2).Take(data.Count - 4).ToList()).Build();
-					//Reply = data.ToText();
-					BsSmAndKsm1ReplyDataVm = new BsSmAndKsm1DataCommand32ReplyBuilderFromCommandPartDataBytes(data.Skip(2).Take(data.Count - 4).ToList()).Build();
+					BsSmAndKsm1ReplyDataVm = new BsSmAndKsm1DataCommand32ReplyBuilderFromCommandPartDataBytes(data).Build();
 					BsSmAndKsm1ReplyDataTextVm.Update(data);
 				});
 			}

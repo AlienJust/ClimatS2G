@@ -8,9 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="1100" d:DesignWidth="400">
 	<StackPanel Orientation="Vertical">
-		<bsSm:BsSmAndKsm1RequestDataView DataContext="{Binding Path=BsSmAndKsm1RequestDataVm, Mode=OneTime}"/>
+		<bsSm:BsSmAndKsm1RequestDataView DataContext="{Binding Path=BsSmAndKsm1RequestDataVm, Mode=OneWay}"/>
 		<common:AnyCommandPartView DataContext="{Binding Path=BsSmAndKsm1RequestDataTextVm, Mode=OneTime}"/>
-		<bsSm:BsSmAndKsm1ReplyDataView DataContext="{Binding Path=BsSmAndKsm1ReplyDataVm, Mode=OneTime}"/>
+		<bsSm:BsSmAndKsm1ReplyDataView DataContext="{Binding Path=BsSmAndKsm1ReplyDataVm, Mode=OneWay}"/>
 		<common:AnyCommandPartView DataContext="{Binding Path=BsSmAndKsm1ReplyDataTextVm, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>
