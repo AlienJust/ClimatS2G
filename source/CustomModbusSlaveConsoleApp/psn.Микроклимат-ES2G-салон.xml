@@ -5,7 +5,8 @@
 		<PsnMeter Address="0x02" Name="МУК заслонки наружного воздуха" />
 		<PsnMeter Address="0x03" Name="МУК вентилятора испарителя" />
 		<PsnMeter Address="0x04" Name="МУК вентилятора конденсатора" />
-		<PsnMeter Address="0x06" Name="МУК заслонки рециркуляционного воздуха" />
+		<PsnMeter Address="0x06" Name="МУК вытяжного вентилятора" />
+		<PsnMeter Address="0x07" Name="МУК заслонки рециркуляционного воздуха" />
 		<PsnMeter Address="0x08" Name="МУК заслонки лето зима" />
 		
 		<PsnMeter Address="0x0A" Name="БС-СМ" />
@@ -106,12 +107,27 @@
 
 		<CmdMask Name="между КСМ и МУК заслонки рециркуляционного воздуха 03">
 			<Request Length="8" Position="0" CycleMsTime="100">
-				<DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="6c751ccd-c42b-4a94-af8d-3f6e89666f86" />
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="6c751ccd-c42b-4a94-af8d-3f6e89666f86" />
 				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="830718d4-4b8b-4e7d-8ddc-b3fd2c976514" />
 				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="00849a53-545b-4104-98c3-2b50453894b8" />
 				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="c8114bfa-fda4-44eb-bd79-0a40ddccd960" />
 			</Request>
 			<Reply Length="43" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="5f2ac73b-5195-46ed-92e2-7ce6557fa720" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="30147e85-84aa-4b3d-bb66-8c689c4f3121" />
+				<VarVal Position="41.0" Length="8" Name="#CRCH" Id="a87327a7-041b-4d43-9c97-f5988557c719" />
+				<VarVal Position="42.0" Length="8" Name="#CRCL" Id="5bbdb842-8dd8-452b-b0eb-94febf48321f" />
+			</Reply>
+		</CmdMask>
+
+		<CmdMask Name="между КСМ и МУК заслонки зима лето 03">
+			<Request Length="8" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="6c751ccd-c42b-4a94-af8d-3f6e89666f86" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="830718d4-4b8b-4e7d-8ddc-b3fd2c976514" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="00849a53-545b-4104-98c3-2b50453894b8" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="c8114bfa-fda4-44eb-bd79-0a40ddccd960" />
+			</Request>
+			<Reply Length="47" Position="8">
 				<DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="5f2ac73b-5195-46ed-92e2-7ce6557fa720" />
 				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="30147e85-84aa-4b3d-bb66-8c689c4f3121" />
 				<VarVal Position="41.0" Length="8" Name="#CRCH" Id="a87327a7-041b-4d43-9c97-f5988557c719" />
