@@ -77,9 +77,19 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		}
 
 		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendAbility) {
-			if (commandPart.Address == 20 && commandPart.CommandCode == 33) {
-				sendAbility.Send(commandPart.ReplyBytes.ToArray());
-				_notifier.Notify(() => _logger.Log("Reply sended"));
+			if (commandPart.Address == 20) {
+				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
+					sendAbility.Send(commandPart.ReplyBytes.ToArray()); // send back, no real writing yet
+					Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
+					_notifier.Notify(() => _logger.Log("Reply sended"));
+				}
+				else if (commandPart.CommandCode == 16 && commandPart.ReplyBytes.Count == 109) {
+					// todo: send back
+					Console.WriteLine("Accepted 50 params command =============================================================================================================================================");
+					_notifier.Notify(() => {
+						KsmDataVm.AcceptCommandAllParameters(commandPart.ReplyBytes.ToList());
+					});
+				}
 			}
 		}
 

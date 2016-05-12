@@ -243,6 +243,7 @@
     <Compile Include="Bvs\BvsDataViewModel.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
     <Compile Include="Bvs\BvsReply65TelemetryBuilder.cs" />
+    <Compile Include="Ksm\IAllParametersAccepter.cs" />
     <Compile Include="Ksm\ICurrentValueSettable.cs" />
     <Compile Include="Ksm\IDoubleUshortConverter.cs" />
     <Compile Include="Ksm\IKsmWritableParameterViewModel.cs" />

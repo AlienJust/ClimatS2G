@@ -5,7 +5,7 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
-	class KsmDataViewModel : ViewModelBase, IParameterSetter {
+	class KsmDataViewModel : ViewModelBase, IParameterSetter, IAllParametersAccepter {
 		private readonly IThreadNotifier _notifier;
 		private readonly BlockingCollection<Tuple<int, ushort, Action<Exception>>> _itemsToWrite;
 		private readonly List<KsmWritableParameterViewModel> _parameterVmList;
@@ -25,6 +25,13 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 			// тут должна быть очередь потокобезопасная
 			// нужен поток для обработки ответов - сразу использовать UiNotifier
 			_itemsToWrite.Add(new Tuple<int, ushort, Action<Exception>>(zeroBasedParameterNumber, value, callback));
+		}
+
+		public void AcceptCommandAllParameters(IList<byte> bytes) {
+			// update all parameters
+			for (int i = 0; i < 50; ++i) {
+				_parameterVmList[i].SetCurrentValue(bytes[7 + i*2]*256.0 + bytes[8 + i*2]*1.0);
+			}
 		}
 	}
 }
