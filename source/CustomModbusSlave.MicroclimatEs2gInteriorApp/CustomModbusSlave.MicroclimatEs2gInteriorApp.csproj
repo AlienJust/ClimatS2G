@@ -177,10 +177,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BsSm\BsSmStateView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="BsSm\WorkMode2View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -232,21 +228,14 @@
     <Compile Include="BsSm\BsSmAndKsm1RequestDataView.xaml.cs">
       <DependentUpon>BsSmAndKsm1RequestDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BsSm\Build\BsSmStateBuilderFromByte.cs" />
     <Compile Include="BsSm\Build\WorkMode2BuilderFromByte.cs" />
     <Compile Include="BsSm\Contracts\IWorkMode2.cs" />
     <Compile Include="BsSm\SimpleRelease\WorkMode2Simple.cs" />
-    <Compile Include="BsSm\SimpleRelease\BsSmStateSimple.cs" />
-    <Compile Include="BsSm\BsSmStateView.xaml.cs">
-      <DependentUpon>BsSmStateView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="BsSm\BsSmStateViewModel.cs" />
     <Compile Include="BsSm\Build\BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes.cs" />
     <Compile Include="BsSm\Contracts\IWorkMode.cs" />
     <Compile Include="BsSm\Build\WorkModeBuilderFromByte.cs" />
     <Compile Include="BsSm\Contracts\IBsSmAndKsm1DataCommand32Reply.cs" />
     <Compile Include="BsSm\Contracts\IBsSmAndKsm1DataCommand32Request.cs" />
-    <Compile Include="BsSm\Contracts\IBsSmState.cs" />
     <Compile Include="BsSm\SimpleRelease\WorkModeSimple.cs" />
     <Compile Include="BsSm\WorkMode2View.xaml.cs">
       <DependentUpon>WorkMode2View.xaml</DependentUpon>
@@ -265,7 +254,6 @@
       <DependentUpon>BvsReply65TelemetryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
-    <Compile Include="BsSm\IUpdateable.cs" />
     <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
     <Compile Include="Bvs\BvsDataViewModel.cs" />

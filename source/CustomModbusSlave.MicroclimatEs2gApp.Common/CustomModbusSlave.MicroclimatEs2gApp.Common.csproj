@@ -59,6 +59,14 @@
       <DependentUpon>AnyCommandPartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnyCommandPartViewModel.cs" />
+    <Compile Include="BsSm\BsSmState\BsSmStateBuilderFromByte.cs" />
+    <Compile Include="BsSm\BsSmState\BsSmStateSimple.cs" />
+    <Compile Include="BsSm\BsSmState\BsSmStateView.xaml.cs">
+      <DependentUpon>BsSmStateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\BsSmState\BsSmStateViewModel.cs" />
+    <Compile Include="BsSm\BsSmState\IBsSmState.cs" />
+    <Compile Include="IUpdateable.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkMode.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromInt.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromString.cs" />
@@ -85,11 +93,16 @@
       <DependentUpon>OneWireErrorCodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TelemetryIsNullException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="AnyCommandPartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BsSm\BsSmState\BsSmStateView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFlap\Views\MukFlapDiagnostic2View.xaml">
       <Generator>MSBuild:Compile</Generator>

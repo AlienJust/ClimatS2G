@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
+             xmlns:bsSmState="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm.BsSmState;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
              mc:Ignorable="d" 
              d:DesignHeight="320" d:DesignWidth="400">
 	<StackPanel Orientation="Vertical">
@@ -49,7 +49,7 @@
 			<TextBlock Text="Температура наружного воздуха"/>
 			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureOutdoor, Mode=OneWay}"/>
 		</Grid>
-		<bsSm:BsSmStateView DataContext="{Binding Path=BsSmState, Mode=OneTime}"/>
+		<bsSmState:BsSmStateView DataContext="{Binding Path=BsSmState, Mode=OneTime}"/>
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="4*"/>

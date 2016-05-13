@@ -177,10 +177,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BsSm\BsSmStateView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Bvs\BvsDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -219,16 +215,9 @@
       <DependentUpon>BsSmRequestDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BsSm\BsSmRequestDataViewModel.cs" />
-    <Compile Include="BsSm\BsSmStateBuilderFromByte.cs" />
-    <Compile Include="BsSm\BsSmStateSimple.cs" />
-    <Compile Include="BsSm\BsSmStateView.xaml.cs">
-      <DependentUpon>BsSmStateView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="BsSm\BsSmStateViewModel.cs" />
     <Compile Include="BsSm\BuilderBsSmDataCommand32RequestFromCommandPartDataBytes.cs" />
     <Compile Include="BsSm\IBsSmDataCommand32Reply.cs" />
     <Compile Include="BsSm\IBsSmDataCommand32Request.cs" />
-    <Compile Include="BsSm\IBsSmState.cs" />
     <Compile Include="Bvs\BvsDataView.xaml.cs">
       <DependentUpon>BvsDataView.xaml</DependentUpon>
     </Compile>
@@ -237,9 +226,7 @@
       <DependentUpon>BvsReply65TelemetryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
-    <Compile Include="BsSm\IUpdateable.cs" />
     <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
-    <Compile Include="BsSm\TelemetryIsNullException.cs" />
     <Compile Include="Bvs\BvsDataViewModel.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
     <Compile Include="Bvs\BvsReply65TelemetryBuilder.cs" />

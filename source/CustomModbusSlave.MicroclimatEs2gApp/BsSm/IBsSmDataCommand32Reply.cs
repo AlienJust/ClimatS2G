@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm.BsSmState;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 	internal interface IBsSmDataCommand32Reply {

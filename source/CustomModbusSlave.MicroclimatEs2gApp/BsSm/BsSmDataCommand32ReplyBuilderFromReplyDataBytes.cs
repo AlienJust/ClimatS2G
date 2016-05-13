@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm.BsSmState;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 	class BsSmDataCommand32ReplyBuilderFromReplyDataBytes : IBuilder<IBsSmDataCommand32Reply> {
