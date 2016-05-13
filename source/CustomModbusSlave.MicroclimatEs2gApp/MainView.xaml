@@ -3,8 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
-    xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.ProgamLog"
-    xmlns:mukFlap="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap"
     xmlns:mukVaporizer="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer"
     xmlns:mukFridge="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFridge"
     xmlns:mukWarmFloor="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor"
@@ -12,6 +10,7 @@
     xmlns:bvs="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
     xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap.View"
     xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
+    xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
     Title="Технический абонент" Height="480" Width="640" ResizeMode="CanResizeWithGrip">
 	<Window.Resources>
 		<ResourceDictionary>

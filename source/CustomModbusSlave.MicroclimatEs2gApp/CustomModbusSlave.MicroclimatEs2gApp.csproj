@@ -286,19 +286,6 @@
     <Compile Include="MukWarmFloor\MukWarmFloorDataView.xaml.cs">
       <DependentUpon>MukWarmFloorDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProgamLog\ILogLine.cs" />
-    <Compile Include="ProgamLog\ListBoxBehavior.cs" />
-    <Compile Include="ProgamLog\ProgramLogView.xaml.cs">
-      <DependentUpon>ProgramLogView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProgamLog\ProgramLogViewModel.cs" />
-    <Compile Include="ProgamLog\LogLineSimple.cs" />
-    <Compile Include="TextPresenters\UshortTextPresenter.cs" />
-    <Compile Include="TextPresenters\ByteTextPresenter.cs" />
-    <Compile Include="TextPresenters\DataDoubleTextPresenter.cs" />
-    <Compile Include="ICommandListener.cs" />
-    <Compile Include="TextPresenters\Contracts\ITextPresenter.cs" />
-    <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -341,10 +328,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFlap\View\MukFlapDataView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ProgamLog\ProgramLogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

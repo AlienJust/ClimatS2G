@@ -1,6 +1,7 @@
 ﻿using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using System.Collections.Generic;
+using CustomModbusSlave.MicroclimatEs2gApp.Common;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Bvs {
 

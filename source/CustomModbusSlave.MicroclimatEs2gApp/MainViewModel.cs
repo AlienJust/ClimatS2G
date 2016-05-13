@@ -12,12 +12,13 @@ using AlienJust.Support.UserInterface.Contracts;
 using CustomModbusSlave.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.BsSm;
 using CustomModbusSlave.MicroclimatEs2gApp.Bvs;
+using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFridge;
 using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer;
 using CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor;
-using CustomModbusSlave.MicroclimatEs2gApp.ProgamLog;
 using DataAbstractionLevel.Low.PsnConfig;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp

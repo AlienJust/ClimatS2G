@@ -2,6 +2,7 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
+using CustomModbusSlave.MicroclimatEs2gApp.Common;
 using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor {
