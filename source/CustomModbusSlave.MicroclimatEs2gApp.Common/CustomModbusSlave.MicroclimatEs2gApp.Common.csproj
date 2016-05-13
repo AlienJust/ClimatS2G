@@ -74,6 +74,8 @@
     </Compile>
     <Compile Include="BsSm\BsSmState\BsSmStateViewModel.cs" />
     <Compile Include="BsSm\BsSmState\IBsSmState.cs" />
+    <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticSimple.cs" />
+    <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticBuilder.cs" />
     <Compile Include="ICommandListener.cs" />
     <Compile Include="IUpdateable.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkMode.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="BsSm\ClimaticSystemWorkModeExtensions.cs" />
     <Compile Include="IBuilder.cs" />
     <Compile Include="IUserInterfaceRoot.cs" />
+    <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
     <Compile Include="MukFlap\Diagnostic2\Builders\MukFlapDiagnostic2Builder.cs" />
     <Compile Include="MukFlap\Diagnostic2\Contracts\IMukFlapDiagnostic2.cs" />
     <Compile Include="MukFlap\Diagnostic2\SimpleReleases\MukFlapDiagnostic2.cs" />
@@ -141,6 +144,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EvaporatorFan\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
