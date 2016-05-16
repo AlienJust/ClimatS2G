@@ -11,6 +11,7 @@
     xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
     xmlns:view1="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.View"
     xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
+    xmlns:views="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.Views"
     Title="Технический абонент, салон" Height="480" Width="640" ResizeMode="CanResizeWithGrip">
 	<Window.Resources>
 		<ResourceDictionary>
@@ -155,7 +156,7 @@
 			</TabItem>
 			<TabItem Header="МУК заслонки лето зима" Style="{StaticResource AzureTabItem}">
 				<ScrollViewer>
-					<view1:MukFlapReturnAirDataView DataContext="{Binding Path=MukWarmFloorDataVm, Mode=OneTime}"/>
+					<views:MukFlapWinterSummerDataView DataContext="{Binding Path=MukFlapWinterSummerDataVm, Mode=OneTime}"/>
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="БС-СМ" Style="{StaticResource AzureTabItem}" BorderBrush="Blue">
