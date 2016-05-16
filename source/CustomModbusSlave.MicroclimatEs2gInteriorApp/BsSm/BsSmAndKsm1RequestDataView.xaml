@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.BsSm.BsSmAndKsm1RequestDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500">
+	<StackPanel Orientation="Vertical">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Текущая расчетная максимальная потребляемая мощность по 380В"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=MaximumPower, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Температура в салоне"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureInterior, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Температура наружного воздуха"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureOutdoor, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Разница между требуемым и текущим значением температуры в салоне"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureDelta, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<TextBlock Text="Режим работы:" FontWeight="SemiBold"/>
+			<bsSm:WorkModeView Grid.Row="1" DataContext="{Binding Path=CurrentClimaticWorkMode, Mode=OneTime}"/>
+		</Grid>
+
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<TextBlock Text="Режим работы 2:" FontWeight="SemiBold"/>
+			<bsSm:WorkMode2View Grid.Row="1" DataContext="{Binding Path=CurrentClimaticWorkMode2, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Величина мощности 1 ступени"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=PowerValueStage1, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="37*"/>
+				<ColumnDefinition Width="83*"/>
+				<ColumnDefinition Width="30*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Величина мощности 2 ступени" Grid.ColumnSpan="2"/>
+			<TextBlock Grid.Column="2" Text="{Binding Path=PowerValueStage2, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Величина мощности 3 ступени"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=PowerValueStage3, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Неисправность 1"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Fault1, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="41*"/>
+				<ColumnDefinition Width="79*"/>
+				<ColumnDefinition Width="30*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Неисправность 2" Grid.ColumnSpan="2"/>
+			<TextBlock Grid.Column="2" Text="{Binding Path=Fault2, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Неисправность 3"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Fault3, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Неисправность 4"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Fault4, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Неисправность 5"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Fault5, Mode=OneTime}"/>
+		</Grid>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Резерв (усредненное значение температуры)"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=ReserveOrTemperatureAverageValue, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="CO2 уровень в данном сегменте"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Co2LevelInCurrentSegment, Mode=OneTime}"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Резерв 25"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve25, Mode=OneTime}"/>
+		</Grid>
+	</StackPanel>
+</UserControl>
