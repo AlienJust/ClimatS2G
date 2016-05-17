@@ -15,16 +15,16 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 			_itemsToWrite = new BlockingCollection<Tuple<int, ushort, Action<Exception>>>();
 			_parameterVmList = new List<KsmCommonWritableParameterViewModel>();
 
-			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(0, "Датчик 1wire №1 ", new UshortToDoubleConverterNcalc("UshRv * 0.01"), new DoubleTextFormatterSimple("f2", "хз")));
-			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(1, "Датчик 1wire №2 ", new UshortToDoubleConverterNcalc("UshRv * 0.01"), new DoubleTextFormatterSimple("f2", "хз")));
+			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(0, "Датчик 1wire №1 ", new UshortToDoubleConverterNcalc("UshRv * 0.01"), new DoubleTextFormatterSimple("f2", "хз"), false));
+			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(1, "Датчик 1wire №2 ", new UshortToDoubleConverterNcalc("UshRv * 0.01"), new DoubleTextFormatterSimple("f2", "хз"), false));
 
-			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(2, "Резерв", new UshortToDoubleConverterNcalc("UshRv * 1.0"), new DoubleTextFormatterSimple("f0", "хз")));
-			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(3, "Резерв", new UshortToDoubleConverterNcalc("UshRv * 1.0"), new DoubleTextFormatterSimple("f0", "хз")));
+			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(2, "Резерв", new UshortToDoubleConverterNcalc("UshRv * 1.0"), new DoubleTextFormatterSimple("f0", "хз"), false));
+			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(3, "Резерв", new UshortToDoubleConverterNcalc("UshRv * 1.0"), new DoubleTextFormatterSimple("f0", "хз"), false));
 
-			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(4, "PIC порт B", new UshortToDoubleConverterNcalc("UshRv * 1.0"), new DoubleTextFormatterBits("хxxxxxxx")));
+			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(4, "PIC порт B", new UshortToDoubleConverterNcalc("UshRv * 1.0"), new DoubleTextFormatterBits("хxxxxxxx"), true));
 
 			for (int i = 5; i < 60; ++i) {
-				_parameterVmList.Add(new KsmCommonWritableParameterViewModel(i, "Параметр " + (i + 1), new UshortToDoubleConverterNcalc("UshRv * 0.01"), new DoubleTextFormatterSimple("f2", "хз")));
+				_parameterVmList.Add(new KsmCommonWritableParameterViewModel(i, "Параметр " + (i + 1), new UshortToDoubleConverterNcalc("UshRv * 0.01"), new DoubleTextFormatterSimple("f2", "хз"), false));
 			}
 		}
 

@@ -74,6 +74,10 @@
     </Compile>
     <Compile Include="BsSm\BsSmState\BsSmStateViewModel.cs" />
     <Compile Include="BsSm\BsSmState\IBsSmState.cs" />
+    <Compile Include="Bvs\BvsDataViewModel.cs" />
+    <Compile Include="Bvs\BvsReply65TelemetryBuilder.cs" />
+    <Compile Include="Bvs\BvsReply65TelemetrySimple.cs" />
+    <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
     <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticSimple.cs" />
     <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticBuilder.cs" />
     <Compile Include="ICommandListener.cs" />

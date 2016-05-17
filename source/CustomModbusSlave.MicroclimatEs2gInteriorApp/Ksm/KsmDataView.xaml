@@ -9,8 +9,10 @@
     <ListBox ItemsSource="{Binding Path=ParameterVmList, Mode=OneTime}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<local:KsmWritableParameterView/>
-				</DataTemplate>
+					<Border BorderThickness="2" BorderBrush="DarkOrange">
+					<local:KsmCommonWritableParameterView/>
+				</Border>
+			</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
 </UserControl>

@@ -72,7 +72,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 			BsSmDataVm = new BsSmDataViewModel(_notifier);
 			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
-			BvsDataVm2 = new Bvs2DataViewModel(_notifier, 0x1D);
+			BvsDataVm2 = new BvsDataViewModel(_notifier, 0x1D);
 
 			KsmDataVm = new KsmDataViewModel(_notifier); // TODO:
 
@@ -209,7 +209,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		}
 
 		public BvsDataViewModel BvsDataVm { get; }
-		public Bvs2DataViewModel BvsDataVm2 { get; }
+		public BvsDataViewModel BvsDataVm2 { get; }
 
 		public KsmDataViewModel KsmDataVm { get; }
 	}

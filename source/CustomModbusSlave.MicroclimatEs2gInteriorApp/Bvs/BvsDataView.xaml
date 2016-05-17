@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
-             mc:Ignorable="d" d:DesignWidth="300" Height="400">
+             mc:Ignorable="d" d:DesignWidth="600" Height="400">
 	<Grid>
 		<local:BvsReply65TelemetryView DataContext="{Binding Path=Reply65Telemetry}"/>
 	</Grid>
