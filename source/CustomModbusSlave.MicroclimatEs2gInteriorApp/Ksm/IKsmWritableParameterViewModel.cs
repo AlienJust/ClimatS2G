@@ -2,6 +2,6 @@
 	internal interface IKsmWritableParameterViewModel {
 		string Name { get; }
 		double ValueToSet { get; set; }
-		double CurrentValue { get; }
+		double ReceivedValue { get; }
 	}
 }

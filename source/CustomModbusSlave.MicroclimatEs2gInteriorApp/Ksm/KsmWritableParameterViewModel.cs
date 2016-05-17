@@ -10,7 +10,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 		private readonly ICommand _setCommand;
 		private readonly ICommand _resetCommand;
 		private double _valueToSet;
-		private double _currentValue;
+		private double _receivedValue;
 		private bool _isWaitingForSetComplete;
 
 
@@ -74,22 +74,22 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 			}
 		}
 
-		public double CurrentValue {
+		public double ReceivedValue {
 			get {
-				return _currentValue;
+				return _receivedValue;
 
 			}
 
 			private set {
-				if (_currentValue != value) {
-					_currentValue = value;
-					RaisePropertyChanged(() => CurrentValue);
+				if (_receivedValue != value) {
+					_receivedValue = value;
+					RaisePropertyChanged(() => ReceivedValue);
 				}
 			}
 		}
 
 		public void SetCurrentValue(double currentValue) {
-			CurrentValue = currentValue;
+			ReceivedValue = currentValue;
 		}
 	}
 }

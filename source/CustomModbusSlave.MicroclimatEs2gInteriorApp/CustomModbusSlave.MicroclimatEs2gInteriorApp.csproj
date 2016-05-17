@@ -97,6 +97,10 @@
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net40\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NCalc, Version=1.3.8.0, Culture=neutral, PublicKeyToken=973cde3f1cafed03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\NCalc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ServiceModel" />
@@ -201,6 +205,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Ksm\KsmCommonWritableParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ksm\KsmWritableBitView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Ksm\KsmWritableParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -259,15 +271,28 @@
     <Compile Include="Bvs\BvsDataViewModel.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
     <Compile Include="Bvs\BvsReply65TelemetryBuilder.cs" />
+    <Compile Include="Ksm\DoubleTextFormatterBits.cs" />
+    <Compile Include="Ksm\DoubleTextFormatterSimple.cs" />
     <Compile Include="Ksm\IAllParametersAccepter.cs" />
     <Compile Include="Ksm\ICurrentValueSettable.cs" />
+    <Compile Include="Ksm\IDoubleTextFormatter.cs" />
     <Compile Include="Ksm\IDoubleUshortConverter.cs" />
     <Compile Include="Ksm\IKsmWritableParameterViewModel.cs" />
+    <Compile Include="Ksm\IParameterRoot.cs" />
     <Compile Include="Ksm\IParameterSetter.cs" />
+    <Compile Include="Ksm\IUshortToDoubleConverter.cs" />
+    <Compile Include="Ksm\KsmCommonWritableParameterViewModel.cs" />
     <Compile Include="Ksm\KsmDataView.xaml.cs">
       <DependentUpon>KsmDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ksm\KsmDataViewModel.cs" />
+    <Compile Include="Ksm\KsmCommonWritableParameterView.xaml.cs">
+      <DependentUpon>KsmCommonWritableParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ksm\KsmWritableBitView.xaml.cs">
+      <DependentUpon>KsmWritableBitView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ksm\KsmWritableBitViewModel.cs" />
     <Compile Include="Ksm\KsmWritableParameterView.xaml.cs">
       <DependentUpon>KsmWritableParameterView.xaml</DependentUpon>
     </Compile>

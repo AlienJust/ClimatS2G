@@ -7,14 +7,16 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Bvs {
 
 	internal class BvsDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;
+		private readonly byte _addr;
 		private IBvsReply65Telemetry _reply65Telemetry;
 
-		public BvsDataViewModel(IThreadNotifier notifier) {
+		public BvsDataViewModel(IThreadNotifier notifier, byte addr) {
 			_notifier = notifier;
+			_addr = addr;
 		}
 
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (addr == 0x1E && code == 0x41) {
+			if (_addr == addr && code == 0x41) {
 				_notifier.Notify(() => {
 					Reply65Telemetry = new BvsReply65TelemetryBuilder(data).Build();
 				});

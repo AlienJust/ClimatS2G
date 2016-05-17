@@ -71,13 +71,16 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			MukFlapWinterSummerDataVm = new MukFlapWinterSummerViewModel(_notifier);
 
 			BsSmDataVm = new BsSmDataViewModel(_notifier);
-			BvsDataVm = new BvsDataViewModel(_notifier);
+			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
+			BvsDataVm2 = new BvsDataViewModel(_notifier, 0x1D);
 
 			KsmDataVm = new KsmDataViewModel(_notifier); // TODO:
 
 			GetPortsAvailable();
 			_logger.Log("Программа загружена");
 		}
+
+		
 
 		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendAbility) {
 			if (commandPart.Address == 20) {
@@ -86,9 +89,9 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 					Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
 					_notifier.Notify(() => _logger.Log("Reply sended"));
 				}
-				else if (commandPart.CommandCode == 16 && commandPart.ReplyBytes.Count == 109) {
+				else if (commandPart.CommandCode == 16 && commandPart.ReplyBytes.Count == 129) {
 					// todo: send back
-					Console.WriteLine("Accepted 50 params command =============================================================================================================================================");
+					Console.WriteLine("Accepted 60 params command =============================================================================================================================================");
 					_notifier.Notify(() => {
 						KsmDataVm.AcceptCommandAllParameters(commandPart.ReplyBytes.ToList());
 					});
@@ -106,6 +109,9 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			MukFlapWinterSummerDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 
 			BsSmDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+
+			BvsDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			BvsDataVm2.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 		}
 
 		private void GetPortsAvailable() {
@@ -203,6 +209,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		}
 
 		public BvsDataViewModel BvsDataVm { get; }
+		public BvsDataViewModel BvsDataVm2 { get; }
 
 		public KsmDataViewModel KsmDataVm { get; }
 	}
