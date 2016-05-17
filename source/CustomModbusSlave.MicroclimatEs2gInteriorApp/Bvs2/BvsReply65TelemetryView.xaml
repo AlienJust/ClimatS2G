@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.Bvs.Bvs2Reply65TelemetryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="650">
+	<StackPanel>
+		<CheckBox Content="Вход №1: Контроль защитного автомата питания 380 в компрессора 1" IsChecked="{Binding Path=BvsInput1, Mode=OneTime}" />
+		<CheckBox Content="Вход №2: Контроль защитного автомата питания 380 в компрессора 2" IsChecked="{Binding Path=BvsInput2, Mode=OneTime}" />
+		<CheckBox Content="Вход №3: Контроль защитного автомата питания 380 в вентилятора конденсатора" IsChecked="{Binding Path=BvsInput3, Mode=OneTime}" />
+		<CheckBox Content="Вход №4: Контроль защитного автомата питания 380 в калорифера" IsChecked="{Binding Path=BvsInput4, Mode=OneTime}" />
+		<CheckBox Content="Вход №5: Контроль защитного автомата трансформатора 380/220 В" IsChecked="{Binding Path=BvsInput5, Mode=OneTime}" />
+		<CheckBox Content="Вход №6: Контроль защитного автомата питания 380 в рециркуляционых нагревателей" IsChecked="{Binding Path=BvsInput6, Mode=OneTime}" />
+		<CheckBox Content="Вход №7: Контроль защитного автомата питания 110 в вентилятора испарителя 1" IsChecked="{Binding Path=BvsInput7, Mode=OneTime}" />
+		<CheckBox Content="Вход №8: Контроль защитного автомата питания 110 в вентилятора испарителя 2" IsChecked="{Binding Path=BvsInput8, Mode=OneTime}" />
+
+		<CheckBox Content="Вход №9: Контроль защитного автомата питания 110 в вытяжных вентиляторов" IsChecked="{Binding Path=BvsInput9, Mode=OneTime}" />
+		<CheckBox Content="Вход №10: Контроль защитного автомата питания 380 в УОВ" IsChecked="{Binding Path=BvsInput10, Mode=OneTime}" />
+		<CheckBox Content="Вход №11: Контроль срабатывания контактора питания 380 в УОВ" IsChecked="{Binding Path=BvsInput11, Mode=OneTime}" />
+		<CheckBox Content="Вход №12: Контроль термостата предельной температуры 60° С в модуле ламп УОВ" IsChecked="{Binding Path=BvsInput12, Mode=OneTime}" />
+		<CheckBox Content="Вход №13: Контроль термостата предельной температуры в блоке розжига ЭПРА 1  УФ ламп в УОВ" IsChecked="{Binding Path=BvsInput13, Mode=OneTime}" />
+		<CheckBox Content="Вход №14: Контроль термостата предельной температуры в блоке розжига ЭПРА 2  УФ ламп в УОВ" IsChecked="{Binding Path=BvsInput14, Mode=OneTime}" />
+		<CheckBox Content="Вход №15: Контроль термостата предельной температуры в блоке розжига ЭПРА 3  УФ ламп в УОВ ателя" IsChecked="{Binding Path=BvsInput15, Mode=OneTime}" />
+		<CheckBox Content="Вход №16: Контроль термостата предельной температуры в блоке розжига ЭПРА 4  УФ ламп в УОВ" IsChecked="{Binding Path=BvsInput16, Mode=OneTime}" />
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Grid.Column="0" Text="Статус"></TextBlock>
+			<TextBlock Grid.Column="1" Text="{Binding Status, Mode=OneTime}"></TextBlock>
+		</Grid>
+	</StackPanel>
+</UserControl>

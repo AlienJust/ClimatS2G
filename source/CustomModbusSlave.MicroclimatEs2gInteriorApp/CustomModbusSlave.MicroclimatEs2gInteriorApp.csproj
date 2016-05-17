@@ -193,6 +193,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Bvs2\BvsDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Bvs2\BvsReply65TelemetryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Bvs\BvsDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -258,6 +266,16 @@
     <Compile Include="BsSm\WorkModeView.xaml.cs">
       <DependentUpon>WorkModeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Bvs2\BvsDataView.xaml.cs">
+      <DependentUpon>BvsDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bvs2\BvsDataViewModel.cs" />
+    <Compile Include="Bvs2\BvsReply65TelemetryBuilder.cs" />
+    <Compile Include="Bvs2\BvsReply65TelemetrySimple.cs" />
+    <Compile Include="Bvs2\BvsReply65TelemetryView.xaml.cs">
+      <DependentUpon>BvsReply65TelemetryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bvs2\IBvsReply65Telemetry.cs" />
     <Compile Include="Bvs\BvsDataView.xaml.cs">
       <DependentUpon>BvsDataView.xaml</DependentUpon>
     </Compile>

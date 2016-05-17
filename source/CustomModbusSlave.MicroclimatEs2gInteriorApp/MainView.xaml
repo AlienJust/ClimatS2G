@@ -171,7 +171,7 @@
 			</TabItem>
 			<TabItem Header="БВС2" Style="{StaticResource AzureTabItem}" BorderBrush="Green">
 				<ScrollViewer>
-					<bvs:BvsDataView DataContext="{Binding Path=BvsDataVm2, Mode=OneTime}"/>
+					<bvs:Bvs2DataView DataContext="{Binding Path=BvsDataVm2, Mode=OneTime}"/>
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="КСМ" Style="{StaticResource AzureTabItem}" BorderBrush="Red">
