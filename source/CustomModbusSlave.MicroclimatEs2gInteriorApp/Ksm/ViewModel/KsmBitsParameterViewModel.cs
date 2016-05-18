@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.ModelViewViewModel;
+using CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel {
 	class KsmBitsParameterViewModel : ViewModelBase, IKsmParameterViewModel {

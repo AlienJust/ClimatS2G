@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
+namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters {
 	class TextFormatterSimple : ITextFormatter<ushort?> {
 		private readonly string _format;
 		private readonly string _nullFormat;

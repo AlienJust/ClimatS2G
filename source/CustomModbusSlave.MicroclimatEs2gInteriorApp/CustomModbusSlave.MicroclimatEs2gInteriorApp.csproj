@@ -282,12 +282,12 @@
     <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
     <Compile Include="Ksm\DoubleUshortConverterSimple.cs" />
-    <Compile Include="Ksm\TextFormatterBits.cs" />
-    <Compile Include="Ksm\TextFormatterNcalcDouble.cs" />
-    <Compile Include="Ksm\TextFormatterSimple.cs" />
+    <Compile Include="Ksm\TextFormatters\TextFormatterBits.cs" />
+    <Compile Include="Ksm\TextFormatters\TextFormatterNcalcDouble.cs" />
+    <Compile Include="Ksm\TextFormatters\TextFormatterSimple.cs" />
     <Compile Include="Ksm\IAllParametersAccepter.cs" />
     <Compile Include="Ksm\ICurrentValueSettable.cs" />
-    <Compile Include="Ksm\ITextFormatter.cs" />
+    <Compile Include="Ksm\TextFormatters\ITextFormatter.cs" />
     <Compile Include="Ksm\IDoubleUshortConverter.cs" />
     <Compile Include="Ksm\IKsmWritableParameterViewModel.cs" />
     <Compile Include="Ksm\IParameterRoot.cs" />
@@ -297,6 +297,7 @@
       <DependentUpon>KsmBitsParameterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ksm\TemplateSelector\KsmParameterViewSelector.cs" />
+    <Compile Include="Ksm\TextFormatters\TextFormatterWorkStage.cs" />
     <Compile Include="Ksm\UshortToDoubleConverterNcalc.cs" />
     <Compile Include="Ksm\ViewModel\IKsmBitParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\IKsmParameterViewModel.cs" />
