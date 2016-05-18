@@ -6,68 +6,23 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
-	<UserControl.Resources>
-		<BooleanToVisibilityConverter x:Key="BtwConverter"></BooleanToVisibilityConverter>
-	</UserControl.Resources>
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-
+             d:DesignHeight="30" d:DesignWidth="500">
+	<Border BorderBrush="DodgerBlue" BorderThickness="8,0,0,2" Margin="0,0,0,4">
 		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="{Binding Path=Name, Mode=OneTime}"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=ReceivedValue, Mode=OneWay}"/>
-			<xctk:DoubleUpDown Grid.Column="2" Value="{Binding Path=ValueToSet, Mode=TwoWay}"/>
-			<Button Grid.Column="3" Content="Set" Command="{Binding Path=CommandSetValue, Mode=OneTime}"/>
-			<Button Grid.Column="4" Content="Reset" Command="{Binding Path=CommandResetValue, Mode=OneTime}"/>
-		</Grid>
-		<Expander Grid.Row="1" Header="Биты" Visibility="{Binding Path=ShowBits, Mode=OneTime, Converter={StaticResource BtwConverter}}">
 			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
-				<ksm:KsmWritableBitView Grid.Row="0" DataContext="{Binding Path=Bit0Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="1" DataContext="{Binding Path=Bit1Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="2" DataContext="{Binding Path=Bit2Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="3" DataContext="{Binding Path=Bit3Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="4" DataContext="{Binding Path=Bit4Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="5" DataContext="{Binding Path=Bit5Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="6" DataContext="{Binding Path=Bit6Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="7" DataContext="{Binding Path=Bit7Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="8" DataContext="{Binding Path=Bit8Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="9" DataContext="{Binding Path=Bit9Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="10" DataContext="{Binding Path=Bit10Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="11" DataContext="{Binding Path=Bit11Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="12" DataContext="{Binding Path=Bit12Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="13" DataContext="{Binding Path=Bit13Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="14" DataContext="{Binding Path=Bit14Value, Mode=OneTime}"/>
-				<ksm:KsmWritableBitView Grid.Row="15" DataContext="{Binding Path=Bit15Value, Mode=OneTime}"/>
-				
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="4*"/>
+					<ColumnDefinition Width="1*"/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="{Binding Path=Name, Mode=OneTime}"  VerticalAlignment="Center"/>
+				<TextBlock Grid.Column="1" Text="{Binding Path=ReceivedValueFormatted, Mode=OneWay}" TextAlignment="Right" VerticalAlignment="Center" Margin="0,0,4,0"/>
+				<xctk:DoubleUpDown Grid.Column="2" Value="{Binding Path=ValueToSet, Mode=TwoWay}"/>
+				<Button Grid.Column="3" Content="Set" Command="{Binding Path=CommandSetValue, Mode=OneTime}"/>
+				<Button Grid.Column="4" Content="Reset" Command="{Binding Path=CommandResetValue, Mode=OneTime}"/>
 			</Grid>
-		</Expander>
-	</Grid>
+		</Grid>
+	</Border>
 </UserControl>

@@ -209,6 +209,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Ksm\KsmBitsParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Ksm\KsmDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -277,17 +281,27 @@
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
     <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
-    <Compile Include="Ksm\DoubleTextFormatterBits.cs" />
-    <Compile Include="Ksm\DoubleTextFormatterSimple.cs" />
+    <Compile Include="Ksm\DoubleUshortConverterSimple.cs" />
+    <Compile Include="Ksm\TextFormatterBits.cs" />
+    <Compile Include="Ksm\TextFormatterNcalcDouble.cs" />
+    <Compile Include="Ksm\TextFormatterSimple.cs" />
     <Compile Include="Ksm\IAllParametersAccepter.cs" />
     <Compile Include="Ksm\ICurrentValueSettable.cs" />
-    <Compile Include="Ksm\IDoubleTextFormatter.cs" />
+    <Compile Include="Ksm\ITextFormatter.cs" />
     <Compile Include="Ksm\IDoubleUshortConverter.cs" />
     <Compile Include="Ksm\IKsmWritableParameterViewModel.cs" />
     <Compile Include="Ksm\IParameterRoot.cs" />
     <Compile Include="Ksm\IParameterSetter.cs" />
     <Compile Include="Ksm\IUshortToDoubleConverter.cs" />
+    <Compile Include="Ksm\KsmBitsParameterView.xaml.cs">
+      <DependentUpon>KsmBitsParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ksm\TemplateSelector\KsmParameterViewSelector.cs" />
+    <Compile Include="Ksm\UshortToDoubleConverterNcalc.cs" />
+    <Compile Include="Ksm\ViewModel\IKsmBitParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\IKsmParameterViewModel.cs" />
+    <Compile Include="Ksm\ViewModel\ISettableKsmParameter.cs" />
+    <Compile Include="Ksm\ViewModel\KsmBitParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\KsmBitsParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\KsmCommonWritableParameterViewModel.cs" />
     <Compile Include="Ksm\KsmDataView.xaml.cs">

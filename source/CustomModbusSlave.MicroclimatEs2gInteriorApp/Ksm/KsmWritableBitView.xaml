@@ -10,7 +10,7 @@
 			<ColumnDefinition Width="5*"/>
 			<ColumnDefinition Width="3*"/>
 		</Grid.ColumnDefinitions>
-		<CheckBox Grid.Row="0" Grid.Column="0" Content="{Binding Path=Name, Mode=OneTime}" IsChecked="{Binding Path=ReceivedBitValue, Mode=OneWay}"/>
+		<CheckBox Grid.Row="0" Grid.Column="0" Content="{Binding Path=Name, Mode=OneWay}" IsChecked="{Binding Path=ReceivedBitValue, Mode=OneWay}" IsHitTestVisible="False" Focusable="False"/>
 		<CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding Path=BitValueToSet, Mode=TwoWay}"/>
 	</Grid>
 </UserControl>
