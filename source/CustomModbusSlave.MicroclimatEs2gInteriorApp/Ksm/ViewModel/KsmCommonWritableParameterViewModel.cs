@@ -38,7 +38,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel {
 		public string ReceivedValueFormatted => _currentValueFormatter.Format(_receivedValue);
 
 		public string Name { get; }
-		public bool ShowBits => false;
 
 		public void SetCurrentValue(ushort? currentValue) {
 			ReceivedValue = currentValue;

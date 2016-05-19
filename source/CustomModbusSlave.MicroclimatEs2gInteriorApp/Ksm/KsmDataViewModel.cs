@@ -11,6 +11,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 		private readonly IThreadNotifier _notifier;
 		private readonly BlockingCollection<Tuple<int, ushort, Action<Exception>>> _itemsToWrite;
 		private readonly List<IKsmParameterViewModel> _parameterVmList;
+		private const string UnknownBits = "xxxx xxxx xxxx xxxx";
 
 		public KsmDataViewModel(IThreadNotifier notifier) {
 			_notifier = notifier;
@@ -18,8 +19,9 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 			_parameterVmList = new List<IKsmParameterViewModel> {
 				new KsmCommonWritableParameterViewModel(0, "Датчик 1wire №1", new TextFormatterNcalcDouble("UshRv * 0.01", "f2", "хз"))
 				, new KsmCommonWritableParameterViewModel(1, "Датчик 1wire №2 ", new TextFormatterNcalcDouble("UshRv * 0.01", "f2", "хз"))
-				, new KsmCommonWritableParameterViewModel(2, "Резерв" /*, new UshortToDoubleConverterNcalc("UshRv * 1.0")*/, new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз")), new KsmCommonWritableParameterViewModel(3, "Резерв" /*, new UshortToDoubleConverterNcalc("UshRv * 1.0")*/, new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
-				, new KsmBitsParameterViewModel(4, "PIC порт B", new TextFormatterBits("хxxxxxxx хxxxxxxx")
+				, new KsmCommonWritableParameterViewModel(2, "Резерв", new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
+				, new KsmCommonWritableParameterViewModel(3, "Резерв", new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
+				, new KsmBitsParameterViewModel(4, "PIC порт B", new TextFormatterBits(UnknownBits)
 					, new List<IKsmBitParameterViewModel> {
 						new KsmBitParameterViewModel(0, "PB.0 = 0: сегмент — мастер, иначе слейв"),
 						new KsmBitParameterViewModel(1, "PB.1 = 0: пожар"),
@@ -29,20 +31,20 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 						new KsmBitParameterViewModel(5, "PB.5 = 0: 50 % охлаждение (30 кВт компрессора) с включением вентиляторов испарителя и конденсатора"),
 						new KsmBitParameterViewModel(6, "PB.6 = 0: 100 % охлаждение (20 кВт и 30 кВт компрессоров) с включением вентиляторов испарителя и конденсатора"),
 					})
-				, new KsmBitsParameterViewModel(5, "PIC порт A", new TextFormatterBits("хxxxxxxx хxxxxxxx")
+				, new KsmBitsParameterViewModel(5, "PIC порт A", new TextFormatterBits(UnknownBits)
 					, new List<IKsmBitParameterViewModel> {
 						new KsmBitParameterViewModel(4, "PA.4 = 0: Подогрев картера, включение"),
 					})
-				, new KsmBitsParameterViewModel(6, "PIC порт C", new TextFormatterBits("хxxxxxxx хxxxxxxx")
+				, new KsmBitsParameterViewModel(6, "PIC порт C", new TextFormatterBits(UnknownBits)
 					, new List<IKsmBitParameterViewModel> {
 						new KsmBitParameterViewModel(2, "PC.2 = 0: Клапан разгрузки кондиционера, включение"),
 						new KsmBitParameterViewModel(6, "PC.6 = 0: Включение реле разрешения подачи питания на компрессор 1 (20 кВ)"),
 						new KsmBitParameterViewModel(7, "PC.7 = 0: Включение обеззараживателя"),
 					})
-				, new KsmBitsParameterViewModel(7, "Диагностика контроллера (ErrorsFlags)", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
+				, new KsmBitsParameterViewModel(7, "Диагностика контроллера (ErrorsFlags)", new TextFormatterBits(UnknownBits), null)
 				, new KsmCommonWritableParameterViewModel(8, "Этап работы", new TextFormatterWorkStage())
 
-				, new KsmBitsParameterViewModel(9, "Регистр аварий 1 в режиме включено", new TextFormatterBits("хxxxxxxx хxxxxxxx")
+				, new KsmBitsParameterViewModel(9, "Регистр аварий 1 в режиме включено", new TextFormatterBits(UnknownBits)
 					, new List<IKsmBitParameterViewModel> {
 						new KsmBitParameterViewModel(0, "b.0 - Резерв"),
 						new KsmBitParameterViewModel(1, "b.1 - Не пройден тест заслонки зима лето"),
@@ -53,7 +55,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 						new KsmBitParameterViewModel(6, "b.6 - Не пройден тест заслонки наружного воздуха"),
 						new KsmBitParameterViewModel(7, "b.7 - Нет 380 вольт"),
 					})
-					, new KsmBitsParameterViewModel(10, "Регистр аварий 2 в режиме включено", new TextFormatterBits("хxxxxxxx хxxxxxxx")
+				, new KsmBitsParameterViewModel(10, "Регистр аварий 2 в режиме включено", new TextFormatterBits(UnknownBits)
 					, new List<IKsmBitParameterViewModel> {
 						new KsmBitParameterViewModel(0, "b.0 - Резерв"),
 						new KsmBitParameterViewModel(1, "b.1 - Резерв"),
@@ -62,9 +64,9 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 						new KsmBitParameterViewModel(4, "b.4 - Автомат 380 В выключен компрессора 2"),
 						new KsmBitParameterViewModel(5, "b.5 - Автомат 380 В выключен компрессора 1"),
 						new KsmBitParameterViewModel(6, "b.6 - Датчик высокого давления МУКа конденсатора не в диапазоне"),
-						new KsmBitParameterViewModel(7, "b.7 - Датчик низкого давления и температуры от Emerson не в диапазоне"),
+						new KsmBitParameterViewModel(7, "b.7 - Датчик низкого давления и температуры от Emerson не в диапазоне")
 					})
-					, new KsmBitsParameterViewModel(11, "Регистр аварий 3 в режиме включено", new TextFormatterBits("хxxxxxxx хxxxxxxx")
+				, new KsmBitsParameterViewModel(11, "Регистр аварий 3 в режиме включено", new TextFormatterBits(UnknownBits)
 					, new List<IKsmBitParameterViewModel> {
 						new KsmBitParameterViewModel(0, "b.0 - Срабатывание аппаратного отключение компрессора 2 по Pmax"),
 						new KsmBitParameterViewModel(1, "b.1 - Срабатывание аппаратного отключение компрессора 2 по Pmin"),
@@ -73,22 +75,54 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 						new KsmBitParameterViewModel(4, "b.4 - Срабатывание аппаратного отключение компрессора 1 по Pmax"),
 						new KsmBitParameterViewModel(5, "b.5 - Срабатывание аппаратного отключение компрессора 1 по Pmin"),
 						new KsmBitParameterViewModel(6, "b.6 - Срабатывание термостата компрессора 1"),
-						new KsmBitParameterViewModel(7, "b.7 - Не пройден контроль разрешение работы компрессора 1"),
+						new KsmBitParameterViewModel(7, "b.7 - Не пройден контроль разрешение работы компрессора 1")
 					})
-					, new KsmBitsParameterViewModel(12, "Регистр аварий в режиме резерв", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
-					, new KsmBitsParameterViewModel(13, "Регистр аварий в режиме отстой", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
-					, new KsmBitsParameterViewModel(14, "Регистр аварий 1 в режиме обслуживание", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
-					, new KsmBitsParameterViewModel(15, "Регистр аварий 2 в режиме обслуживание", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
-					, new KsmBitsParameterViewModel(16, "Регистр аварий 3 в режиме обслуживание", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
-					, new KsmBitsParameterViewModel(17, "Регистр аварий в режиме мойка", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
-					, new KsmBitsParameterViewModel(18, "Регистр аварий 1 в режиме ручной", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
-					, new KsmBitsParameterViewModel(19, "Регистр аварий 2 в режиме ручной", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
-					, new KsmBitsParameterViewModel(20, "Регистр аварий 3 в режиме ручной", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
-					, new KsmBitsParameterViewModel(21, "Регистр аварий в режиме выключено", new TextFormatterBits("хxxxxxxx хxxxxxxx"), null)
+				, new KsmBitsParameterViewModel(12, "Регистр аварий в режиме резерв", new TextFormatterBits(UnknownBits), null)
+				, new KsmBitsParameterViewModel(13, "Регистр аварий в режиме отстой", new TextFormatterBits(UnknownBits), null)
+				, new KsmBitsParameterViewModel(14, "Регистр аварий 1 в режиме обслуживание", new TextFormatterBits(UnknownBits), null)
+				, new KsmBitsParameterViewModel(15, "Регистр аварий 2 в режиме обслуживание", new TextFormatterBits(UnknownBits), null)
+				, new KsmBitsParameterViewModel(16, "Регистр аварий 3 в режиме обслуживание", new TextFormatterBits(UnknownBits), null)
+				, new KsmBitsParameterViewModel(17, "Регистр аварий в режиме мойка", new TextFormatterBits(UnknownBits), null)
+				, new KsmBitsParameterViewModel(18, "Регистр аварий 1 в режиме ручной", new TextFormatterBits(UnknownBits), null)
+				, new KsmBitsParameterViewModel(19, "Регистр аварий 2 в режиме ручной", new TextFormatterBits(UnknownBits), null)
+				, new KsmBitsParameterViewModel(20, "Регистр аварий 3 в режиме ручной", new TextFormatterBits(UnknownBits), null)
+				, new KsmBitsParameterViewModel(21, "Регистр аварий в режиме выключено", new TextFormatterBits(UnknownBits), null)
 
+				, new KsmBitsParameterViewModel(22, "Состояние обмена 1 (ErrorsResponse), 1 = ошибка обмена", new TextFormatterBits(UnknownBits)
+					, new List<IKsmBitParameterViewModel> {
+						new KsmBitParameterViewModel(0, "b.0 - вычитка текущих данных из МУК заслонки наружного воздуха"),
+						new KsmBitParameterViewModel(1, "b.1 - запись команд в МУК заслонки наружного воздуха"),
+						new KsmBitParameterViewModel(2, "b.2 - вычитка текущих данных из МУК испарителя"),
+						new KsmBitParameterViewModel(3, "b.3 - запись команд в МУК испарителя"),
+						new KsmBitParameterViewModel(4, "b.4 - вычитка текущих данных из МУК конденсатора"),
+						new KsmBitParameterViewModel(5, "b.5 - запись команд в МУК конденсатора"),
+						new KsmBitParameterViewModel(6, "b.6 - вычитка текущих данных из МУК вытяжного вентилятора"),
+						new KsmBitParameterViewModel(7, "b.7 - запись команд в МУК вытяжного вентилятора")
+					})
+
+				, new KsmBitsParameterViewModel(23, "Состояние обмена 2 (ErrorsResponse), 1 = ошибка обмена", new TextFormatterBits(UnknownBits)
+					, new List<IKsmBitParameterViewModel> {
+						new KsmBitParameterViewModel(0, "b.0 - вычитка текущих данных из МУК рециркуляционной заслонки"),
+						new KsmBitParameterViewModel(1, "b.1 - запись команд в МУК рециркуляционной заслонки"),
+						new KsmBitParameterViewModel(2, "b.2 - вычитка текущих данных из МУК заслонки зима-лето"),
+						new KsmBitParameterViewModel(3, "b.3 - запись команд в МУК заслонки зима-лето"),
+						new KsmBitParameterViewModel(4, "b.4 - обмен с БС-СМ"),
+						new KsmBitParameterViewModel(5, "b.5 - обмен с БВС"),
+						new KsmBitParameterViewModel(6, "b.6 - обмен с БВС2"),
+						new KsmBitParameterViewModel(7, "b.7 - запись данных в РПД")
+					})
+
+				, new KsmBitsParameterViewModel(24, "Состояние обмена 3 (ErrorsResponse), 1 = ошибка обмена", new TextFormatterBits(UnknownBits)
+					, new List<IKsmBitParameterViewModel> {
+						new KsmBitParameterViewModel(0, "b.0 - вычитка корректируемого параметра из программы технического абонента"),
+						new KsmBitParameterViewModel(1, "b.1 - отсылка текущих данных техническому абоненту")
+					})
+
+					, new KsmCommonWritableParameterViewModel(25, "Уставка ШИМ на клапан разгрузки", new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
+					, new KsmCommonWritableParameterViewModel(26, "Ручной принудительный режим", new TextFormatterForcedManualMode())
 			};
 
-			for (int i = 22; i < 60; ++i) {
+			for (int i = 27; i < 60; ++i) {
 				_parameterVmList.Add(new KsmCommonWritableParameterViewModel(i, "Параметр " + (i + 1), new TextFormatterSimple("f2", "хз")));
 			}
 		}

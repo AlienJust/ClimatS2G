@@ -14,9 +14,12 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters {
 		string Convert(ushort x) {
 			string result = string.Empty;
 
-			for(int i = 0; i < 16; ++i) {
-				if (((x >> i) & 0x01) == 0x01) result += "1";
-				else result += "0";
+			for (int j = 0; j < 4; ++j) { // 4 times
+				for (int i = 0; i < 4; ++i) { // 4 bits
+					if (((x >> i + j*4) & 0x01) == 0x01) result += "1";
+					else result += "0";
+				}
+				result += " ";
 			}
 
 			return result;

@@ -10,23 +10,23 @@
              d:DesignHeight="300" d:DesignWidth="300">
 	<UserControl.Resources>
 		<DataTemplate DataType="{x:Type vm:KsmCommonWritableParameterViewModel}">
-			<local:KsmCommonWritableParameterView />
+			<local:KsmReadonlyCommonParameterView />
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type vm:KsmBitsParameterViewModel}">
-			<local:KsmBitsParameterView />
+			<local:KsmReadonlyBitsParameterView />
 		</DataTemplate>
 		<!--<templateSelector:KsmParameterViewSelector
             KsmCommonWritableParameterDataTemplate="{StaticResource addTemplate}"
             KsmBitsParameterDataTemplate="{StaticResource editTemplate}"
             x:Key="ksmParameterViewSelector" />-->
 	</UserControl.Resources>
-    <ListBox ItemsSource="{Binding Path=ParameterVmList, Mode=OneTime}">
-			<!--<ListBox.ItemTemplate>
+	<ListBox ItemsSource="{Binding Path=ParameterVmList, Mode=OneTime}">
+		<!--<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Border BorderThickness="2" BorderBrush="DarkOrange">
 					<local:KsmCommonWritableParameterView/>
 				</Border>
 			</DataTemplate>
 			</ListBox.ItemTemplate>-->
-		</ListBox>
+	</ListBox>
 </UserControl>

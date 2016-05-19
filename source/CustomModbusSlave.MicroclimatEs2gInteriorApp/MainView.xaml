@@ -12,7 +12,7 @@
     xmlns:view1="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.View"
     xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
     xmlns:views="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.Views"
-    Title="Технический абонент, салон" Height="600" Width="800" ResizeMode="CanResizeWithGrip">
+    Title="Технический абонент, салон" Height="600" Width="900" ResizeMode="CanResizeWithGrip">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>

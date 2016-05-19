@@ -1,7 +1,6 @@
-namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
-	internal interface IKsmParameterViewModel : ISettableKsmParameter {
+namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel {
+	internal interface IKsmParameterViewModel : ICurrentSettableKsmParameter {
 		string Name { get; }
-		bool ShowBits { get; }
 		string ReceivedValueFormatted { get; }
 	}
 }

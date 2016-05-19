@@ -209,7 +209,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ksm\KsmBitsParameterView.xaml">
+    <Page Include="Ksm\KsmReadonlyBitsParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -217,11 +217,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Ksm\KsmCommonWritableParameterView.xaml">
+    <Page Include="Ksm\KsmReadonlyCommonParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Ksm\KsmWritableBitView.xaml">
+    <Page Include="Ksm\KsmReadonlyBitView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -289,19 +289,18 @@
     <Compile Include="Ksm\ICurrentValueSettable.cs" />
     <Compile Include="Ksm\TextFormatters\ITextFormatter.cs" />
     <Compile Include="Ksm\IDoubleUshortConverter.cs" />
-    <Compile Include="Ksm\IKsmWritableParameterViewModel.cs" />
     <Compile Include="Ksm\IParameterRoot.cs" />
     <Compile Include="Ksm\IParameterSetter.cs" />
     <Compile Include="Ksm\IUshortToDoubleConverter.cs" />
-    <Compile Include="Ksm\KsmBitsParameterView.xaml.cs">
-      <DependentUpon>KsmBitsParameterView.xaml</DependentUpon>
+    <Compile Include="Ksm\KsmReadonlyBitsParameterView.xaml.cs">
+      <DependentUpon>KsmReadonlyBitsParameterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ksm\TemplateSelector\KsmParameterViewSelector.cs" />
     <Compile Include="Ksm\TextFormatters\TextFormatterWorkStage.cs" />
     <Compile Include="Ksm\UshortToDoubleConverterNcalc.cs" />
     <Compile Include="Ksm\ViewModel\IKsmBitParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\IKsmParameterViewModel.cs" />
-    <Compile Include="Ksm\ViewModel\ISettableKsmParameter.cs" />
+    <Compile Include="Ksm\ViewModel\ICurrentSettableKsmParameter.cs" />
     <Compile Include="Ksm\ViewModel\KsmBitParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\KsmBitsParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\KsmCommonWritableParameterViewModel.cs" />
@@ -309,13 +308,13 @@
       <DependentUpon>KsmDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ksm\KsmDataViewModel.cs" />
-    <Compile Include="Ksm\KsmCommonWritableParameterView.xaml.cs">
-      <DependentUpon>KsmCommonWritableParameterView.xaml</DependentUpon>
+    <Compile Include="Ksm\KsmReadonlyCommonParameterView.xaml.cs">
+      <DependentUpon>KsmReadonlyCommonParameterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ksm\KsmWritableBitView.xaml.cs">
-      <DependentUpon>KsmWritableBitView.xaml</DependentUpon>
+    <Compile Include="Ksm\KsmReadonlyBitView.xaml.cs">
+      <DependentUpon>KsmReadonlyBitView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ksm\KsmWritableBitViewModel.cs" />
+    <Compile Include="Ksm\KsmReadonlyBitViewModel.cs" />
     <Compile Include="MukFlapOuterAir\Converters\EnumMukFlapOuterAirWorkmodeStageToStringConverter.cs" />
     <Compile Include="MukFlapOuterAir\DataModel\Build\EmersonDiagnosticCircuit1Builder.cs" />
     <Compile Include="MukFlapOuterAir\DataModel\Build\EmersonDiagnosticCircuit2Builder.cs" />
