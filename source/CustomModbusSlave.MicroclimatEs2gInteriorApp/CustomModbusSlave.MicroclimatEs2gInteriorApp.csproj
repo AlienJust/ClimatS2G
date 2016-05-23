@@ -315,6 +315,17 @@
       <DependentUpon>KsmReadonlyBitView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ksm\KsmReadonlyBitViewModel.cs" />
+    <Compile Include="MukAirExhauster\BuildAndConvert\EnumAutomaticStageModeConverter.cs" />
+    <Compile Include="MukAirExhauster\Data\Contracts\IReply03Data.cs" />
+    <Compile Include="MukAirExhauster\View\AirExhausterDataView.xaml.cs">
+      <DependentUpon>AirExhausterDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukAirExhauster\View\AirExhausterReply03DataView.xaml.cs">
+      <DependentUpon>AirExhausterReply03DataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukAirExhauster\View\AutomaticWorkmodeStageView.xaml.cs">
+      <DependentUpon>AutomaticWorkmodeStageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukFlapOuterAir\Converters\EnumMukFlapOuterAirWorkmodeStageToStringConverter.cs" />
     <Compile Include="MukFlapOuterAir\DataModel\Build\EmersonDiagnosticCircuit1Builder.cs" />
     <Compile Include="MukFlapOuterAir\DataModel\Build\EmersonDiagnosticCircuit2Builder.cs" />
@@ -388,6 +399,18 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MukAirExhauster\View\AirExhausterDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukAirExhauster\View\AirExhausterReply03DataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukAirExhauster\View\AutomaticWorkmodeStageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MukFlapOuterAir\View\EmersionDiagnosticCircuit2View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
