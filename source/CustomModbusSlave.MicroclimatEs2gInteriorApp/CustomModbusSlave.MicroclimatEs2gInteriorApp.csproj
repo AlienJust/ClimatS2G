@@ -316,9 +316,15 @@
     </Compile>
     <Compile Include="Ksm\KsmReadonlyBitViewModel.cs" />
     <Compile Include="MukAirExhauster\BuildAndConvert\EnumAutomaticStageModeConverter.cs" />
+    <Compile Include="MukAirExhauster\Data\AutomaticStageModeBuilder.cs" />
+    <Compile Include="MukAirExhauster\Data\AutomaticStageModeExtensions.cs" />
     <Compile Include="MukAirExhauster\Data\Contracts\AutomaticWorkmodeStage.cs" />
+    <Compile Include="MukAirExhauster\Data\AutomaticWorkmodeStageSimple.cs" />
     <Compile Include="MukAirExhauster\Data\Contracts\IAutomaticWorkmodeStage.cs" />
     <Compile Include="MukAirExhauster\Data\Contracts\IReply03Data.cs" />
+    <Compile Include="MukAirExhauster\Data\Reply03DataBuilder.cs" />
+    <Compile Include="MukAirExhauster\Data\Reply03DataSimple.cs" />
+    <Compile Include="MukAirExhauster\ViewModel\MukAirExhausterDataViewModel.cs" />
     <Compile Include="MukAirExhauster\View\AirExhausterDataView.xaml.cs">
       <DependentUpon>AirExhausterDataView.xaml</DependentUpon>
     </Compile>

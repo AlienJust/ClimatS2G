@@ -15,6 +15,7 @@ using CustomModbusSlave.MicroclimatEs2gApp.Bvs;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
+using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.ViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer;
@@ -67,6 +68,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			MukFlapDataVm = new MukFlapDataViewModel(_notifier);
 			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModel(_notifier);
 			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
+			MukAirExhausterDataVm = new MukAirExhausterDataViewModel(_notifier);
 			MukFlapReturnAirDataVm = new MukFlapReturnAirViewModel(_notifier);
 			MukFlapWinterSummerDataVm = new MukFlapWinterSummerViewModel(_notifier);
 
@@ -105,9 +107,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			MukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			MukVaporizerFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			MukFridgeFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			MukAirExhausterDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			MukFlapReturnAirDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			MukFlapWinterSummerDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-
+			
 			BsSmDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 
 			BvsDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
@@ -192,11 +195,17 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		public MukFridgeFanDataViewModel MukFridgeFanDataVm { get; }
 
+		public MukAirExhausterDataViewModel MukAirExhausterDataVm { get; }
+
 		public MukFlapReturnAirViewModel MukFlapReturnAirDataVm { get; }
 
 		public MukFlapWinterSummerViewModel MukFlapWinterSummerDataVm { get; }
 		
 		public BsSmDataViewModel BsSmDataVm { get; }
+		public BvsDataViewModel BvsDataVm { get; }
+		public BvsDataViewModel BvsDataVm2 { get; }
+
+		public KsmDataViewModel KsmDataVm { get; }
 
 		public bool IsPortOpened {
 			get { return _isPortOpened; }
@@ -208,9 +217,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			}
 		}
 
-		public BvsDataViewModel BvsDataVm { get; }
-		public BvsDataViewModel BvsDataVm2 { get; }
-
-		public KsmDataViewModel KsmDataVm { get; }
+		
 	}
 }
