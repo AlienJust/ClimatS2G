@@ -347,6 +347,13 @@
     <Compile Include="MukFlapOuterAir\DataModel\SimpleRelease\EmersonDiagnosticCircuit2.cs" />
     <Compile Include="MukFlapOuterAir\DataModel\SimpleRelease\MukFlapReply03Telemetry.cs" />
     <Compile Include="MukFlapOuterAir\DataModel\Build\MukFlapReply03TelemetryBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\IKsmCommandWorkmode.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\IRequest16Data.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmode.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeExtensions.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeSimple.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\Request16Data.cs" />
     <Compile Include="MukFlapOuterAir\View\EmersionDiagnosticCircuit2View.xaml.cs">
       <DependentUpon>EmersionDiagnosticCircuit2View.xaml</DependentUpon>
     </Compile>
