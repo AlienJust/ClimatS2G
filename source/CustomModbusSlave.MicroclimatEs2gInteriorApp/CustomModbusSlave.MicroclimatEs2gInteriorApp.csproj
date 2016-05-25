@@ -316,6 +316,8 @@
     </Compile>
     <Compile Include="Ksm\KsmReadonlyBitViewModel.cs" />
     <Compile Include="MukAirExhauster\BuildAndConvert\EnumAutomaticStageModeConverter.cs" />
+    <Compile Include="MukAirExhauster\Data\Contracts\AutomaticWorkmodeStage.cs" />
+    <Compile Include="MukAirExhauster\Data\Contracts\IAutomaticWorkmodeStage.cs" />
     <Compile Include="MukAirExhauster\Data\Contracts\IReply03Data.cs" />
     <Compile Include="MukAirExhauster\View\AirExhausterDataView.xaml.cs">
       <DependentUpon>AirExhausterDataView.xaml</DependentUpon>

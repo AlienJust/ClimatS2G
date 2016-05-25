@@ -52,13 +52,69 @@
 			<TextBlock Grid.Column="1" Text="{Binding Path=AnalogInputCo2, Mode=OneTime}" TextAlignment="Right"/>
 		</Grid>
 
+		<Border BorderThickness="1" BorderBrush="Black">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<TextBlock Text="Этап работы в автоматическом режиме:"/>
+				<view:AutomaticWorkmodeStageView Grid.Row="1" DataContext="{Binding Path=WorkmodeStage, Mode=OneTime}"/>
+			</Grid>
+		</Border>
+
 		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
-			<TextBlock Text="Этап работы в автоматическом режиме:"/>
-			<view:AutomaticWorkmodeStageView Grid.Row="1" DataContext="{Binding Path=WorkmodeStage, Mode=OneTime}"/>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Диагностика 1"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Diagnostic1, Mode=OneTime}" TextAlignment="Right"/>
+		</Grid>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Диагностика 2 (вентилятор)"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Diagnostic2Fan, Mode=OneTime}" TextAlignment="Right"/>
+		</Grid>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Диагностика 3 (1w)"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Diagnostic3OneWire, Mode=OneTime}" TextAlignment="Right"/>
+		</Grid>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Номер версии ПО"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=FirmwareBuildNumber, Mode=OneTime}" TextAlignment="Right"/>
+		</Grid>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Резерв"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve11, Mode=OneTime}" TextAlignment="Right"/>
+		</Grid>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Резерв"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve12, Mode=OneTime}" TextAlignment="Right"/>
 		</Grid>
 	</StackPanel>
 </UserControl>

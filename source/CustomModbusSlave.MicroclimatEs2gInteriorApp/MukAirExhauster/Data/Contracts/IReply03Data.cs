@@ -16,18 +16,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data.Contracts {
 		int Reserve12 { get; }
 	}
 
-	internal interface IAutomaticWorkmodeStage {
-		AutomaticWorkmodeStage ValueParsed { get; }
-		ushort ValueRaw { get; }
-	}
-
-	internal enum AutomaticWorkmodeStage {
-		ControllerInitialization, // 0
-		WaitingForPowerOnCommand, // 1
-		WorkingWithFanOnByTable, // 2
-		Unknown
-	}
-
 	static class AutomaticStageModeExtensions {
 		public static string ToText(this AutomaticWorkmodeStage value) {
 			switch (value) {
