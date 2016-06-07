@@ -28,7 +28,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 			var diagnostic4 = new MukFlapDiagnosticOneWireSensorBuilder(_data[24] + _data[23] * 256).Build();
 
 			var emersonDiagnostic = new EmersonDiagnosticCircuit1Builder(_data[26] + _data[25]*256).Build();
-
 			var emersonTemperature = (_data[28] + _data[27] * 256) * 0.01;
 			var emersonPressure = (_data[30] + _data[29] * 256) * 0.1;
 			var emersonValveSetting = _data[32] + _data[31] * 256;
@@ -38,7 +37,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 			var emersonTemperature2 = (_data[36] + _data[35] * 256) * 0.01;
 			var emersonPressure2 = (_data[38] + _data[37] * 256) * 0.1;
 			var emersonValveSetting2 = _data[40] + _data[39] * 256;
-
 
 			var firmwareBuildNumber = _data[42] + _data[41] * 256;
 
@@ -62,6 +60,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 				emersonTemperature2,
 				emersonPressure2,
 				emersonValveSetting2,
+
 				firmwareBuildNumber
 				);
 		}

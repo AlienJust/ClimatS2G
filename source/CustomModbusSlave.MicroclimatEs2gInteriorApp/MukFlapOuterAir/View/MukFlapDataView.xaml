@@ -13,9 +13,12 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			<TextBlock Text="Ответ на команду 3"></TextBlock>
+			<TextBlock Text="Ответ на команду 3:" FontWeight="Bold" TextDecorations="Underline"></TextBlock>
 			<view1:MukFlapReply03TelemetryView Grid.Row="1" DataContext="{Binding Path=Reply03Telemetry, Mode=OneWay}"/>
 		</Grid>
 		<common:AnyCommandPartView DataContext="{Binding Path=Reply03TelemetryText, Mode=OneTime}"/>
+		
+		<TextBlock Text="Запрос, код команды 16 dec:" FontWeight="Bold" TextDecorations="Underline"></TextBlock>
+		<common:AnyCommandPartView DataContext="{Binding Path=Request16TelemetryText, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>
