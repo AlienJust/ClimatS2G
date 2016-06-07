@@ -28,7 +28,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build {
 			
 			var temperatureInterior = _commandPartDataBytes[2] - 60;
 			var temperatureOutdoor = _commandPartDataBytes[3] - 60;
-			var temperatureDelta = _commandPartDataBytes[4];
+			var temperatureDelta = _commandPartDataBytes[4] - 60;
 			var workMode = new WorkModeBuilderFromByte(_commandPartDataBytes[5]).Build();
 			var workMode2= new WorkMode2BuilderFromByte(_commandPartDataBytes[6]).Build();
 
