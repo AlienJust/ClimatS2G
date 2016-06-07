@@ -87,7 +87,7 @@
 				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Неисправность 1"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Fault1, Mode=OneTime}"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Fault1, Mode=OneTime, StringFormat='0x{0:X4}'}" FontFamily="Courier New" FontWeight="Bold"/>
 		</Grid>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -96,7 +96,7 @@
 				<ColumnDefinition Width="30*"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Неисправность 2" Grid.ColumnSpan="2"/>
-			<TextBlock Grid.Column="2" Text="{Binding Path=Fault2, Mode=OneTime}"/>
+			<TextBlock Grid.Column="2" Text="{Binding Path=Fault2, Mode=OneTime, StringFormat='0x{0:X4}'}" FontFamily="Courier New" FontWeight="Bold"/>
 		</Grid>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -104,7 +104,7 @@
 				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Неисправность 3"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Fault3, Mode=OneTime}"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Fault3, Mode=OneTime, StringFormat='0x{0:X4}'}" FontFamily="Courier New" FontWeight="Bold"/>
 		</Grid>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -112,7 +112,7 @@
 				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Неисправность 4"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Fault4, Mode=OneTime}"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Fault4, Mode=OneTime, StringFormat='0x{0:X4}'}" FontFamily="Courier New" FontWeight="Bold"/>
 		</Grid>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -120,7 +120,7 @@
 				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Неисправность 5"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Fault5, Mode=OneTime}"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Fault5, Mode=OneTime, StringFormat='0x{0:X4}'}" FontFamily="Courier New" FontWeight="Bold"/>
 		</Grid>
 
 		<Grid>
