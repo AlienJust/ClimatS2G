@@ -353,7 +353,15 @@
     <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeBuilder.cs" />
     <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeExtensions.cs" />
     <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeSimple.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeView.xaml.cs">
+      <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukFlapOuterAir\Request16\Request16Data.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\Request16DataBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\Request16DataView.xaml.cs">
+      <DependentUpon>Request16DataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeToStringConverter.cs" />
     <Compile Include="MukFlapOuterAir\View\EmersionDiagnosticCircuit2View.xaml.cs">
       <DependentUpon>EmersionDiagnosticCircuit2View.xaml</DependentUpon>
     </Compile>
@@ -423,6 +431,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MukAirExhauster\View\AutomaticWorkmodeStageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\Request16\Request16DataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
