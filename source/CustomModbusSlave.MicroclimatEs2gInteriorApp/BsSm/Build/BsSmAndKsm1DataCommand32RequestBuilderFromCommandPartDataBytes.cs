@@ -10,20 +10,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build {
 		}
 
 		public IBsSmAndKsm1DataCommand32Request Build() {
-			// int TemperatureInsideTheCabin
-			// int TemperatureOutdoor
-			// int FanSpeed
-			// bool IsTunelModeOn
-			// bool IsWarmFloorOn
-			// ClimaticSystemWorkMode CurrentClimaticWorkMode
-			// uint Fault1 { get; }
-			// uint Fault2 { get; }
-			// uint Fault3 { get; }
-			// uint Fault4 { get; }
-			// uint Fault5 { get; }
-
-			// first byte is bytes count
-
 			var maximumPower = _commandPartDataBytes[1];
 			
 			var temperatureInterior = _commandPartDataBytes[2] - 60;
