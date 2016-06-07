@@ -4,6 +4,7 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 	class BsSmRequestDataViewModel : ViewModelBase, ICommandListener, IBsSmDataCommand32Request {

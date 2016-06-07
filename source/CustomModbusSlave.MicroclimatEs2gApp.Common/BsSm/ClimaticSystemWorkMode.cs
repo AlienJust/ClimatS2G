@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+namespace CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm {
 	public enum ClimaticSystemWorkMode {
 		Off,
 		On,
@@ -8,6 +8,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 		Washing,
 		EmergencyVenting,
 		EmergencyHeating,
-		Test
+		Test,
+		Unknown
 	}
 }

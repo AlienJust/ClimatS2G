@@ -1,3 +1,5 @@
+using CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm;
+
 namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 	class WorkMode2Simple : IWorkMode2 {
 		public WorkMode2Simple(ClimaticSystemWorkMode climaticSystemWorkmode, bool slaveRegulatorOnByMaster) {

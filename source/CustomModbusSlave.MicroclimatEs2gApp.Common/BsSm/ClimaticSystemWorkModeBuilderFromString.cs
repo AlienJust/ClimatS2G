@@ -1,6 +1,6 @@
 using System;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+namespace CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm {
 	public class ClimaticSystemWorkModeBuilderFromString : IBuilder<ClimaticSystemWorkMode> {
 		private readonly string _textValue;
 
@@ -28,6 +28,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 					return ClimaticSystemWorkMode.EmergencyHeating;
 				case "Тестирование (запуск системы)":
 					return ClimaticSystemWorkMode.Test;
+				case "Неизваестно":
+					return ClimaticSystemWorkMode.Unknown;
 				default:
 					throw new Exception("Cannot convert text " + _textValue + " to " + typeof(ClimaticSystemWorkMode).FullName);
 			}

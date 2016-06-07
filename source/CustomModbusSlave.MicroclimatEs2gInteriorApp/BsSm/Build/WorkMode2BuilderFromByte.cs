@@ -1,3 +1,5 @@
+using CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm;
+
 namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 	class WorkMode2BuilderFromByte : IBuilder<IWorkMode2> {
 		private readonly byte _absoluteValue;

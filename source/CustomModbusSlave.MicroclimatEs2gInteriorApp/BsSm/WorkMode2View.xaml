@@ -16,7 +16,7 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Текущий режим работы климатической системы"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=CurrentClimaticWorkMode, Mode=OneWay, Converter={StaticResource ClimaticSystemWorkModeConverter}}"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=ClimaticSystemWorkmode, Mode=OneWay, Converter={StaticResource ClimaticSystemWorkModeConverter}}" TextAlignment="Right"/>
 		</Grid>
 		<CheckBox Content="Включение регулятора у ведомого устройства ведущим" IsChecked="{Binding Path=SlaveRegulatorOnByMaster, Mode=OneTime}"/>
 	</StackPanel>

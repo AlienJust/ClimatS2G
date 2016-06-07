@@ -1,4 +1,6 @@
-﻿namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+﻿using CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm;
+
+namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 	class BsSmDataCommand32RequestSimple : IBsSmDataCommand32Request {
 		private readonly int _temperatureInsideTheCabin;
 		private readonly int _temperatureOutdoor;

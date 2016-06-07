@@ -279,7 +279,7 @@
       <DependentUpon>BvsReply65TelemetryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
-    <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
+    <Compile Include="BsSm\ThrowableClimaticSystemWorkModeToStringConverter.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
     <Compile Include="Ksm\DoubleUshortConverterSimple.cs" />
     <Compile Include="Ksm\TextFormatters\TextFormatterBits.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Data;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 	[ValueConversion(typeof(double), typeof(int))]

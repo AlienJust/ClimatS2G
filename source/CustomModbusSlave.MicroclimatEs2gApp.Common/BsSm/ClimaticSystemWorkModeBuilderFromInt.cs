@@ -1,6 +1,4 @@
-using System;
-
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+namespace CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm {
 	public class ClimaticSystemWorkModeBuilderFromInt : IBuilder<ClimaticSystemWorkMode> {
 		private readonly int _integerValue;
 
@@ -29,7 +27,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 				case 8:
 					return ClimaticSystemWorkMode.Test;
 				default:
-					throw new Exception("Cannot convert int " + _integerValue + " to " + typeof(ClimaticSystemWorkMode).FullName);
+					return ClimaticSystemWorkMode.Unknown; // фигня какая-то
+					//throw new Exception("Cannot convert int " + _integerValue + " to " + typeof(ClimaticSystemWorkMode).FullName);
 			}
 		}
 	}

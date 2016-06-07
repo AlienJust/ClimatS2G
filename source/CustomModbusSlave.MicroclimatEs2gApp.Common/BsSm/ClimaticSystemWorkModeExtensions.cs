@@ -1,6 +1,6 @@
 using System;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+namespace CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm {
 	public static class ClimaticSystemWorkModeExtensions {
 		public static string ToText(this ClimaticSystemWorkMode value) {
 			switch (value) {
@@ -22,6 +22,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 					return "Аварийное отопление";
 				case ClimaticSystemWorkMode.Test:
 					return "Тестирование (запуск системы)";
+				case ClimaticSystemWorkMode.Unknown:
+					return "Неизвестно";
 				default:
 					throw new Exception("Cannot cast such " + typeof(ClimaticSystemWorkMode).FullName + " to string");
 			}
