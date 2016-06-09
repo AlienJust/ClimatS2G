@@ -13,6 +13,7 @@
     xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
     xmlns:views="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.Views"
     xmlns:view2="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.View"
+    xmlns:bvs2="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs2"
     Title="Технический абонент, салон" Height="600" Width="900" ResizeMode="CanResizeWithGrip">
 	<Window.Resources>
 		<ResourceDictionary>
@@ -172,7 +173,7 @@
 			</TabItem>
 			<TabItem Header="БВС2" Style="{StaticResource AzureTabItem}" BorderBrush="Green">
 				<ScrollViewer>
-					<bvs:Bvs2DataView DataContext="{Binding Path=BvsDataVm2, Mode=OneTime}"/>
+					<bvs2:Bvs2DataView DataContext="{Binding Path=BvsDataVm2, Mode=OneTime}"/>
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="КСМ" Style="{StaticResource AzureTabItem}" BorderBrush="Red">

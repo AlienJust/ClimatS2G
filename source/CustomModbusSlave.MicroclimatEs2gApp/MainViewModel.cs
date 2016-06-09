@@ -73,7 +73,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
 			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier);
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
-			BvsDataVm = new BvsDataViewModel(_notifier);
+			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
 
 			KsmDataVm = new KsmDataViewModel(_notifier); // TODO:
 
@@ -188,22 +188,13 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		public MukFlapDataViewModel MukFlapDataVm => _mukFlapDataVm;
 
-		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm
-		{
-			get { return _mukVaporizerDataVm; }
-		}
+		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm => _mukVaporizerDataVm;
 
-		public MukFridgeFanDataViewModel MukFridgeFanDataVm {
-			get { return _mukFridgeFanDataVm; }
-		}
+		public MukFridgeFanDataViewModel MukFridgeFanDataVm => _mukFridgeFanDataVm;
 
-		public MukWarmFloorDataViewModel MukWarmFloorDataVm {
-			get { return _mukWarmFloorDataVm; }
-		}
+		public MukWarmFloorDataViewModel MukWarmFloorDataVm => _mukWarmFloorDataVm;
 
-		public BsSmDataViewModel BsSmDataVm {
-			get { return _bsSmDataVm; }
-		}
+		public BsSmDataViewModel BsSmDataVm => _bsSmDataVm;
 
 		public bool IsPortOpened {
 			get { return _isPortOpened; }
