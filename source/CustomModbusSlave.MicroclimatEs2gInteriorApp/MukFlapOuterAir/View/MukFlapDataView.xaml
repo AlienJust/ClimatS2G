@@ -19,7 +19,7 @@
 		</Grid>
 		<common:AnyCommandPartView DataContext="{Binding Path=Reply03TelemetryText, Mode=OneTime}"/>
 		
-		<TextBlock Text="Запрос, код команды 16 dec:" FontWeight="Bold" TextDecorations="Underline"></TextBlock>
+		<TextBlock Text="Запрос, код команды 16 dec:" FontWeight="Bold" TextDecorations="Underline"/>
 		<request16:Request16DataView DataContext="{Binding Path=Request16Telemetry, Mode=OneWay}"/>
 		<common:AnyCommandPartView DataContext="{Binding Path=Request16TelemetryText, Mode=OneTime}"/>
 	</StackPanel>
