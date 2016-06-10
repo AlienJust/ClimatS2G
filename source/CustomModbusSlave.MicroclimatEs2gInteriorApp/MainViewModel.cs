@@ -88,6 +88,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			if (commandPart.Address == 20) {
 				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
 					sendAbility.Send(commandPart.ReplyBytes.ToArray()); // send back, no real writing yet
+					// TODO: 1. check queue
+					// TODO: 2. if queue has params => send first param and remember current item
+
+
 					Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
 					_notifier.Notify(() => _logger.Log("Reply sended"));
 				}

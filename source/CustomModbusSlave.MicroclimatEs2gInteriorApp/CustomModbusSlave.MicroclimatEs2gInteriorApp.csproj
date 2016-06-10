@@ -74,6 +74,10 @@
     <Reference Include="AlienJust.Support.ModelViewViewModel">
       <HintPath>..\..\reference\AlienJust.Support.ModelViewViewModel.dll</HintPath>
     </Reference>
+    <Reference Include="AlienJust.Support.Numeric, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Numeric.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.Serial, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Serial.dll</HintPath>
@@ -281,6 +285,7 @@
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
     <Compile Include="BsSm\ThrowableClimaticSystemWorkModeToStringConverter.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
+    <Compile Include="ReplyGeneratorWithQueue.cs" />
     <Compile Include="Ksm\DoubleUshortConverterSimple.cs" />
     <Compile Include="Ksm\TextFormatters\TextFormatterBits.cs" />
     <Compile Include="Ksm\TextFormatters\TextFormatterNcalcDouble.cs" />
