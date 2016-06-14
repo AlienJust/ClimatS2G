@@ -8,7 +8,7 @@ using AlienJust.Support.Numeric;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp {
-	class ReplyGeneratorWithQueue : IParameterSetter IReplyGenerator, IReplyAcceptor {
+	class ReplyGeneratorWithQueue : IParameterSetter, IFastReplyGenerator, IFastReplyAcceptor {
 		private readonly IThreadNotifier _uiNotifier;
 		private readonly BlockingCollection<Tuple<int, ushort, Action<Exception>>> _itemsToWrite;
 		private readonly byte[] _noAnyParamWasChangedReplyToBeFast;
@@ -22,7 +22,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp {
 			_uiNotifier = uiNotifier;
 			_itemsToWrite = new BlockingCollection<Tuple<int, ushort, Action<Exception>>>(new ConcurrentQueue<Tuple<int, ushort, Action<Exception>>>());
 
-			_noAnyParamWasChangedReplyToBeFast = new byte[] {20, 33, 0, 0, 0, 0, 0, 0}; // default reply
+			_noAnyParamWasChangedReplyToBeFast = new byte[] {20, 33, 0, 0, 0, 0, 0x08, 0xBF}; // default reply with precalculated CRC16
 			_fastReply = new byte[] { 20, 33, 0, 0, 0, 0, 0, 0 }; // reply pattern
 
 			_commonExceptionToBeFast = new Exception("В ближайшем ответе получен неверный номер параметра");
@@ -44,9 +44,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp {
 			_fastReply[4] = (byte)((_currentItem.Item1 & 0xFF00) >> 8);
 			_fastReply[5] = (byte)(_currentItem.Item1 & 0xFF);
 
-			AlienJust.Support.Numeric.MathExtensions.
-
-			
+			MathExtensions.FillCrc16AtTheEndOfArrayHighLow(_fastReply);
 			return _fastReply;
 		}
 

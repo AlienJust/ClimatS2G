@@ -41,6 +41,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		private readonly SerialChannel _serialChannel;
 
+		private readonly IParameterSetter _paramSetter;
+		private readonly IFastReplyGenerator _replyGenerator;
+		private readonly IFastReplyAcceptor _replyAcceptor;
+
 		private bool _isPortOpened;
 
 
@@ -78,6 +82,11 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 			KsmDataVm = new KsmDataViewModel(_notifier); // TODO:
 
+			var replyGenerator = new ReplyGeneratorWithQueue(_notifier);
+			_paramSetter = replyGenerator;
+			_replyGenerator = replyGenerator;
+			_replyAcceptor = replyGenerator;
+
 			GetPortsAvailable();
 			_logger.Log("Программа загружена");
 		}
@@ -90,7 +99,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 					sendAbility.Send(commandPart.ReplyBytes.ToArray()); // send back, no real writing yet
 					// TODO: 1. check queue
 					// TODO: 2. if queue has params => send first param and remember current item
+					_replyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray());
+					_replyGenerator.GenerateReply();
 
+					sendAbility.Send(commandPart.ReplyBytes.ToArray());
 
 					Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
 					_notifier.Notify(() => _logger.Log("Reply sended"));
