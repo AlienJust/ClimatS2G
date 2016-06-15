@@ -69,7 +69,12 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
-			MukFlapDataVm = new MukFlapDataViewModel(_notifier);
+			var replyGenerator = new ReplyGeneratorWithQueue(_notifier);
+			_paramSetter = replyGenerator;
+			_replyGenerator = replyGenerator;
+			_replyAcceptor = replyGenerator;
+
+			MukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
 			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModel(_notifier);
 			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
 			MukAirExhausterDataVm = new MukAirExhausterDataViewModel(_notifier);
@@ -81,11 +86,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			BvsDataVm2 = new BvsDataViewModel(_notifier, 0x1D);
 
 			KsmDataVm = new KsmDataViewModel(_notifier); // TODO:
-
-			var replyGenerator = new ReplyGeneratorWithQueue(_notifier);
-			_paramSetter = replyGenerator;
-			_replyGenerator = replyGenerator;
-			_replyAcceptor = replyGenerator;
 
 			GetPortsAvailable();
 			_logger.Log("Программа загружена");

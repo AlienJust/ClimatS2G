@@ -2,9 +2,11 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Request16;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.SetParameters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir
 {
@@ -13,11 +15,13 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir
 		private IMukFlapReply03Telemetry _reply03Telemetry;
 		private IRequest16Data _request16Telemetry;
 
-		public MukFlapDataViewModel(IThreadNotifier notifier) {
+		public MukFlapDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_notifier = notifier;
 			Reply03TelemetryText = new AnyCommandPartViewModel();
 			Request16TelemetryText = new AnyCommandPartViewModel();
-		}
+
+			MukFlapOuterAirSetParamsVm = new MukFlapOuterAirSetParamsViewModel(notifier, parameterSetter);
+	}
 		
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
 			if (addr != 0x02) return;
@@ -58,5 +62,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir
 
 		public AnyCommandPartViewModel Reply03TelemetryText { get; }
 		public AnyCommandPartViewModel Request16TelemetryText { get; }
+
+		public MukFlapOuterAirSetParamsViewModel MukFlapOuterAirSetParamsVm { get; }
 	}
 }

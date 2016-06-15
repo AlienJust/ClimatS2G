@@ -173,6 +173,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsView.xaml.cs">
+      <DependentUpon>MukFlapOuterAirSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsViewModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SetParams\SettableParameterView.xaml.cs">
+      <DependentUpon>SettableParameterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SetParams\SettableParameterViewModel.cs" />
     <Page Include="BsSm\BsSmDataView.xaml">
       <SubType>Designer</SubType>
@@ -448,6 +460,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MukFlapOuterAir\View\EmersionDiagnosticCircuit2View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -512,6 +528,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SetParams\SettableParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MukVaporizer\MukVaporizerFanDataViewModel.cs" />
@@ -536,11 +556,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -548,6 +563,7 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />

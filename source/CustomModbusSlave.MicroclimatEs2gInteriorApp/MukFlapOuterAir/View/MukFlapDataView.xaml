@@ -6,8 +6,9 @@
              xmlns:common="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
              xmlns:view1="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.View"
              xmlns:request16="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Request16"
+             xmlns:setParameters="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.SetParameters"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="300">
+             d:DesignHeight="1200" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
 		<Grid>
 			<Grid.RowDefinitions>
@@ -22,5 +23,8 @@
 		<TextBlock Text="Запрос, код команды 16 dec:" FontWeight="Bold" TextDecorations="Underline"/>
 		<request16:Request16DataView DataContext="{Binding Path=Request16Telemetry, Mode=OneWay}"/>
 		<common:AnyCommandPartView DataContext="{Binding Path=Request16TelemetryText, Mode=OneTime}"/>
+
+		<TextBlock Text="Уставка параметров:" FontWeight="Bold" TextDecorations="Underline"/>
+		<setParameters:MukFlapOuterAirSetParamsView DataContext="{Binding Path=MukFlapOuterAirSetParamsVm, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
+using AlienJust.Adaptation.WindowsPresentation.Converters;
+using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 
@@ -7,11 +9,13 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 	class SettableParameterViewModel : ViewModelBase {
 		private readonly IDoubleUshortConverter _doubleUshortConverter;
 		private readonly IParameterSetter _parameterSetter;
+		private readonly IThreadNotifier _uiNotifier;
 		private double? _doubleValue;
-		private double? _receivedValue;
+		private double? _receivedDoubleValue;
 		private readonly RelayCommand _resetCommand;
 		private readonly RelayCommand _setCommand;
 		private bool _isEnabled;
+		private Colors _lastOperationColor;
 
 
 		public int ParamIndex { get; }
@@ -21,9 +25,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 		
 		public string StringFormat { get; set; }
 
-		public SettableParameterViewModel(int paramIndex, string name, double maxValue, double minValue, double? doubleValue, string stringFormat, IDoubleUshortConverter doubleUshortConverter, IParameterSetter parameterSetter) {
+		public SettableParameterViewModel(int paramIndex, string name, double maxValue, double minValue, double? doubleValue, string stringFormat, IDoubleUshortConverter doubleUshortConverter, IParameterSetter parameterSetter, IThreadNotifier uiNotifier) {
 			_doubleUshortConverter = doubleUshortConverter;
 			_parameterSetter = parameterSetter;
+			_uiNotifier = uiNotifier;
 			ParamIndex = paramIndex;
 			Name = name;
 			MaxValue = maxValue;
@@ -31,29 +36,35 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 			DoubleValue = doubleValue;
 			StringFormat = stringFormat;
 
-			_receivedValue = null;
-			_resetCommand = new RelayCommand(Reset, ()=>_receivedValue.HasValue);
-			_setCommand = new RelayCommand(Set, () => _doubleValue.HasValue);
+			_receivedDoubleValue = null;
+			_isEnabled = true;
+			_lastOperationColor = Colors.Transparent;
+
+			_resetCommand = new RelayCommand(Reset, ()=>_receivedDoubleValue.HasValue);
+			_setCommand = new RelayCommand(Set, () => _doubleValue.HasValue && IsEnabled);
 		}
 
 		private void Set() {
+			if (!UshortValue.HasValue) return;
+
 			IsEnabled = false;
 			_parameterSetter.SetParameterAsync(ParamIndex, UshortValue.Value, exception => {
-				try {
-					if (exception != null) {
-						throw new Exception("Произошла ошибка во время установки параметра", exception);
+				_uiNotifier.Notify(() => {
+					try {
+						if (exception != null) {
+							throw new Exception("Произошла ошибка во время установки параметра", exception);
+						}
+						// if all ok:
+						LastOperationColor = Colors.Green;
 					}
-
-					// TODO: mark last operation has succeed
-				}
-				catch (Exception ex) {
-					// TODO: mark last operation has failed
-					// TODO: log exception to console
-				}
-				finally {
-					// TODO: unlock interface
-					IsEnabled = true;
-				}
+					catch (Exception ex) {
+						// TODO: log exception to console
+						LastOperationColor = Colors.OrangeRed;
+					}
+					finally {
+						IsEnabled = true;
+					}
+				});
 			});
 		}
 
@@ -65,12 +76,13 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 				if (_isEnabled != value) {
 					_isEnabled = value;
 					RaisePropertyChanged(()=>IsEnabled);
+					_setCommand.RaiseCanExecuteChanged();
 				}
 			}
 		}
 
 		private void Reset() {
-			DoubleValue = _receivedValue;
+			DoubleValue = _receivedDoubleValue;
 		}
 
 		public double? DoubleValue
@@ -107,21 +119,44 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 			}
 		}
 
-		public double? ReceivedValue
+		public double? ReceivedDoubleValue
 		{
-			get { return _receivedValue; }
+			get { return _receivedDoubleValue; }
 			set
 			{
-				if (_receivedValue != value) {
-					_receivedValue = value;
-					RaisePropertyChanged(()=> ReceivedValue);
-
+				if (_receivedDoubleValue != value) {
+					_receivedDoubleValue = value;
+					RaisePropertyChanged(()=> ReceivedDoubleValue);
+					RaisePropertyChanged(() => ReceivedUshortValue);
 					_resetCommand.RaiseCanExecuteChanged();
 				}
 			}
 		}
 
+		public ushort? ReceivedUshortValue {
+			get {
+				if (!_receivedDoubleValue.HasValue) return null;
+				return _doubleUshortConverter.ConvertToUshort(_receivedDoubleValue.Value);
+			}
+			set {
+				// used property DoubleValue instead of field _doubleValue to raise property changed event if needed
+				if (!value.HasValue) ReceivedDoubleValue = null;
+				else ReceivedDoubleValue = _doubleUshortConverter.ConvertToDouble(value.Value);
+			}
+		}
+
+		public Colors LastOperationColor {
+			get { return _lastOperationColor; }
+			set
+			{
+				if (_lastOperationColor != value) {
+					_lastOperationColor = value;
+					RaisePropertyChanged(()=> LastOperationColor);
+				}
+			}
+		}
+
 		public ICommand ResetCommand => _resetCommand;
-		public ICommand SetCommand => _resetCommand;
+		public ICommand SetCommand => _setCommand;
 	}
 }
