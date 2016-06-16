@@ -302,7 +302,6 @@
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
     <Compile Include="BsSm\ThrowableClimaticSystemWorkModeToStringConverter.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
-    <Compile Include="ReplyGeneratorWithQueue.cs" />
     <Compile Include="Ksm\DoubleUshortConverterSimple.cs" />
     <Compile Include="Ksm\TextFormatters\TextFormatterBits.cs" />
     <Compile Include="Ksm\TextFormatters\TextFormatterNcalcDouble.cs" />

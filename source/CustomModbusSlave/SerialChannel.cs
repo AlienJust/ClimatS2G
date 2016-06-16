@@ -89,8 +89,6 @@ namespace CustomModbusSlave {
 				while (true) {
 					var waiter = new AutoResetEvent(false);
 
-
-
 					_backgroundWorker.AddWork(() => {
 						try {
 							Logger.Log("Reading bytes from port (8 bytes, timeout 1 second)...");
@@ -101,14 +99,14 @@ namespace CustomModbusSlave {
 
 							AnalyzeIncomingBuffer(); // analyzing in io thread to have possibility to reply
 						}
-						catch (Exception ex) {
-							Logger.Log(ex);
+						catch /*(Exception ex)*/ {
+							//Logger.Log(ex);
+							return;
 						}
 						finally {
 							waiter.Set();
 						}
 					});
-
 					// back to read data scheduler thread:
 					waiter.WaitOne();
 

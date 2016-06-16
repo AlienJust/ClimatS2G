@@ -73,7 +73,6 @@
   <ItemGroup>
     <Compile Include="CommandPartSearcherPsnConfigBasedFast.cs" />
     <Compile Include="Contracts\CommandHearedDelegate.cs" />
-    <Compile Include="CommandPartSearcherPsnConfigBased.cs" />
     <Compile Include="CommandPartSimple.cs" />
     <Compile Include="Contracts\CommandHearedWithReplyPossibilityDelegate.cs" />
     <Compile Include="Contracts\ICommandPart.cs" />

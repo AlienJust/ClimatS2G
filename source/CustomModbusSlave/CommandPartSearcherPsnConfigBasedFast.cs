@@ -13,8 +13,6 @@ namespace CustomModbusSlave {
 		public static readonly ILogger Logger = new RelayActionLogger(Console.WriteLine, new DateTimeFormatter(" > "));
 		private readonly List<IPsnProtocolCommandPartConfiguration> _cmdPartConfigs;
 		private readonly int _cmdPartsCount;
-		//private readonly int _minCmdPartLen;
-		//private readonly int _maxCmdPartLen;
 
 		private const string CommandFoundMessageStart = "COMMAND PART FOUND <<<<<<<<<<<<<<<<<<<<<<<<<< ";
 
@@ -24,9 +22,6 @@ namespace CustomModbusSlave {
 		public CommandPartSearcherPsnConfigBasedFast(IPsnProtocolConfiguration psnProtocolConfiguration) {
 			_cmdPartConfigs = psnProtocolConfiguration.CommandParts.ToList();
 			_cmdPartsCount = _cmdPartConfigs.Count;
-
-			//_minCmdPartLen = _cmdPartConfigs.Min(cmdPart => cmdPart.Length);
-			//_maxCmdPartLen = _cmdPartConfigs.Max(cmdPart => cmdPart.Length);
 
 			_commandPartSearcher = new PsnCommandPartSearcherStandart();
 		}
@@ -51,14 +46,12 @@ namespace CustomModbusSlave {
 
 								Logger.Log($"{CommandFoundMessageStart}{commandPart.PartName}");
 								listener.CommandPartFound(new CommandPartSimple((byte)commandPart.Address.DefinedValue, (byte)commandPart.CommandCode.DefinedValue, commandPartBytes));
+								break;
 							}
 						}
 						catch (Exception ex) {
 							Logger.Log(ex);
 						}
-					}
-					else {
-						break;
 					}
 				}
 			}
