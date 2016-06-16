@@ -16,7 +16,7 @@ namespace CustomModbusSlave {
 		}
 
 
-		public void SearchForCommands(IList<byte> incomingBuffer, ICommandPartFoundListener listener) {
+		public void SearchForCommands(List<byte> incomingBuffer, ICommandPartFoundListener listener) {
 			IPsnCommandPartSearcher commandPartSearcher = new PsnCommandPartSearcherStandart();
 			foreach (var commandPart in _psnProtocolConfiguration.CommandParts)
 			{

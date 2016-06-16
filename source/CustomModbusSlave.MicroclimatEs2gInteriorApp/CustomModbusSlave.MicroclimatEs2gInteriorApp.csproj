@@ -173,6 +173,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IFastReplyAcceptor.cs" />
+    <Compile Include="IFastReplyGenerator.cs" />
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapOuterAirSetParamsView.xaml</DependentUpon>
     </Compile>
@@ -182,6 +184,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="QueueItem.cs" />
+    <Compile Include="ReplyGeneratorWithQueueAttempted.cs" />
     <Compile Include="SetParams\SettableParameterView.xaml.cs">
       <DependentUpon>SettableParameterView.xaml</DependentUpon>
     </Compile>

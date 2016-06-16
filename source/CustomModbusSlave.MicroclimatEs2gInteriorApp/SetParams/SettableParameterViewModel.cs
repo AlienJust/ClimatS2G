@@ -48,6 +48,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 			if (!UshortValue.HasValue) return;
 
 			IsEnabled = false;
+			LastOperationColor = Colors.RoyalBlue;
 			_parameterSetter.SetParameterAsync(ParamIndex, UshortValue.Value, exception => {
 				_uiNotifier.Notify(() => {
 					try {

@@ -69,7 +69,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
-			var replyGenerator = new ReplyGeneratorWithQueue(_notifier);
+			var replyGenerator = new ReplyGeneratorWithQueueAttempted(_notifier);
 			_paramSetter = replyGenerator;
 			_replyGenerator = replyGenerator;
 			_replyAcceptor = replyGenerator;
@@ -96,13 +96,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendAbility) {
 			if (commandPart.Address == 20) {
 				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
-					sendAbility.Send(commandPart.ReplyBytes.ToArray()); // send back, no real writing yet
-					// TODO: 1. check queue
-					// TODO: 2. if queue has params => send first param and remember current item
 					_replyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray());
-					_replyGenerator.GenerateReply();
+					var reply = _replyGenerator.GenerateReply();
 
-					sendAbility.Send(commandPart.ReplyBytes.ToArray());
+					sendAbility.Send(reply);
 
 					Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
 					_notifier.Notify(() => _logger.Log("Reply sended"));

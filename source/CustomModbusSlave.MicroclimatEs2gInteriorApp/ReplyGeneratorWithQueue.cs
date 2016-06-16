@@ -62,13 +62,5 @@ namespace CustomModbusSlave.MicroclimatEs2gApp {
 			}
 		}
 	}
-
-	interface IFastReplyGenerator {
-		byte[] GenerateReply();
-	}
-
-	interface IFastReplyAcceptor {
-		void AcceptReply(byte[] replyBytes);
-	}
-
 }
+

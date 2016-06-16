@@ -13,49 +13,51 @@ namespace CustomModbusSlave {
 		public static readonly ILogger Logger = new RelayActionLogger(Console.WriteLine, new DateTimeFormatter(" > "));
 		private readonly List<IPsnProtocolCommandPartConfiguration> _cmdPartConfigs;
 		private readonly int _cmdPartsCount;
+		//private readonly int _minCmdPartLen;
+		//private readonly int _maxCmdPartLen;
+
+		private const string CommandFoundMessageStart = "COMMAND PART FOUND <<<<<<<<<<<<<<<<<<<<<<<<<< ";
 
 		private readonly IPsnCommandPartSearcher _commandPartSearcher;
+
+
 		public CommandPartSearcherPsnConfigBasedFast(IPsnProtocolConfiguration psnProtocolConfiguration) {
 			_cmdPartConfigs = psnProtocolConfiguration.CommandParts.ToList();
 			_cmdPartsCount = _cmdPartConfigs.Count;
+
+			//_minCmdPartLen = _cmdPartConfigs.Min(cmdPart => cmdPart.Length);
+			//_maxCmdPartLen = _cmdPartConfigs.Max(cmdPart => cmdPart.Length);
+
 			_commandPartSearcher = new PsnCommandPartSearcherStandart();
 		}
 
 
-		public void SearchForCommands(IList<byte> incomingBuffer, ICommandPartFoundListener listener) {
-			for (int x = 0; x <_cmdPartsCount; ++x) {
-				var commandPart = _cmdPartConfigs[x];
-				for (int i = 0; i < incomingBuffer.Count; ++i)
-				{
-					if (incomingBuffer.Count - i >= commandPart.Length)
-					{
-						//Logger.Log("Searching for command part: " + commandPart.PartName);
-						try
-						{
-							//_logger.Log(_incomingBuffer.Skip(i).Take(commandPart.Length).ToList().ToText());
+		public void SearchForCommands(List<byte> incomingBuffer, ICommandPartFoundListener listener) {
+			for (int i = 0; i < incomingBuffer.Count; ++i) {
+				for (int x = 0; x < _cmdPartsCount; ++x) {
+					var commandPart = _cmdPartConfigs[x];
+
+					if (incomingBuffer.Count - i >= commandPart.Length) {
+						try {
 							var confirmation = _commandPartSearcher.IsHereCmdPart(incomingBuffer, i, commandPart);
-							if (confirmation == PsnCommandPartConfirmation.EverythyngIsOk)
-							{
-								//Logger.Log("Command found at i = " + i + ", buffer length = " + incomingBuffer.Count + ", commandPart.Length = " + commandPart.Length);
+							if (confirmation == PsnCommandPartConfirmation.EverythyngIsOk) {
 								var commandPartBytes = new List<byte>();
 								commandPartBytes.AddRange(incomingBuffer.Skip(i).Take(commandPart.Length));
+
+								// clean buffer bytes before command and command's bytes:
 								int removeBytesCount = i + commandPart.Length;
-								for (int j = 0; j < removeBytesCount; ++j) // clearing from zero to remove all the junk bytes
-								{
-									incomingBuffer.RemoveAt(0);
-								}
-								Logger.Log("COMMAND PART FOUND <<<<<<<<<<<<<<<<<<<<<<<<<< " + commandPart.PartName);
+								incomingBuffer.RemoveRange(0, removeBytesCount);
+								i = -1; // because the next cycle iteration will increase i by 1 and "i" will be zero
+
+								Logger.Log($"{CommandFoundMessageStart}{commandPart.PartName}");
 								listener.CommandPartFound(new CommandPartSimple((byte)commandPart.Address.DefinedValue, (byte)commandPart.CommandCode.DefinedValue, commandPartBytes));
-								i = -1; // because next iteration will ++i
 							}
 						}
-						catch (Exception ex)
-						{
-							Console.WriteLine(ex);
+						catch (Exception ex) {
+							Logger.Log(ex);
 						}
 					}
-					else
-					{
+					else {
 						break;
 					}
 				}
