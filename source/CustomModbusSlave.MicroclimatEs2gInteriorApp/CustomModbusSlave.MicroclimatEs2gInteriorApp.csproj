@@ -175,10 +175,30 @@
     </ApplicationDefinition>
     <Compile Include="IFastReplyAcceptor.cs" />
     <Compile Include="IFastReplyGenerator.cs" />
+    <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsView.xaml.cs">
+      <DependentUpon>MukAirExhausterSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsViewModel.cs" />
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapOuterAirSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsViewModel.cs" />
+    <Compile Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsView.xaml.cs">
+      <DependentUpon>MukFlapReturnAirSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsViewModel.cs" />
+    <Compile Include="MukFlapWinterSummer\SetParameters\MukFlapWinterSummerSetParamsView.xaml.cs">
+      <DependentUpon>MukFlapWinterSummerSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapWinterSummer\SetParameters\MukFlapWinterSummerSetParamsViewModel.cs" />
+    <Compile Include="MukFridge\SetParameters\MukFridgeSetParamsView.xaml.cs">
+      <DependentUpon>MukFridgeSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFridge\SetParameters\MukFridgeSetParamsViewModel.cs" />
+    <Compile Include="MukVaporizer\SetParameters\MukVaporizerSetParamsView.xaml.cs">
+      <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukVaporizer\SetParameters\MukVaporizerSetParamsViewModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -443,6 +463,10 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MukAirExhauster\View\AirExhausterDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -495,6 +519,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapWinterSummer\SetParameters\MukFlapWinterSummerSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MukFlapWinterSummer\Views\MukFlapWinterSummerDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -515,6 +547,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MukFridge\SetParameters\MukFridgeSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MukVaporizer\MukVaporizerFanDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -528,6 +564,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukVaporizer\Request16\Request16DataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukVaporizer\SetParameters\MukVaporizerSetParamsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

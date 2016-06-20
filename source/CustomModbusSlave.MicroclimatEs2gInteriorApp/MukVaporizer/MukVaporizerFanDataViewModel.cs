@@ -3,7 +3,9 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16;
+using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.SetParameters;
 using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer
@@ -33,10 +35,11 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer
 
 		private IRequest16Data _request16Telemetry;
 
-		public MukVaporizerFanDataViewModel(IThreadNotifier notifier)
+		public MukVaporizerFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter)
 		{
 			_notifier = notifier;
 			Request16TelemetryText = new AnyCommandPartViewModel();
+			MukVaporizerSetParamsVm = new MukVaporizerSetParamsViewModel(notifier, parameterSetter);
 		}
 		
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
@@ -239,5 +242,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer
 			}
 		}
 		public AnyCommandPartViewModel Request16TelemetryText { get; }
+
+
+		public MukVaporizerSetParamsViewModel MukVaporizerSetParamsVm { get; }
 	}
 }

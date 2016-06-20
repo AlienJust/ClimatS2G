@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.SetParameters.MukVaporizerSetParamsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:setParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SetParams"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+	<StackPanel Orientation="Vertical">
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam324, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam325, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam326, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam327, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam328, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam329, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam330, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam331, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam332, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam333, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam334, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam335, Mode=OneTime}"/>
+	</StackPanel>
+</UserControl>

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:common="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
              xmlns:views="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.Views"
+             xmlns:setParameters="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.SetParameters"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
@@ -17,5 +18,8 @@
 			<views:MukFlapWinterSummerReply03TelemetryView Grid.Row="1" DataContext="{Binding Path=Reply03Telemetry, Mode=OneWay}"/>
 		</Grid>
 		<common:AnyCommandPartView DataContext="{Binding Path=Reply03TelemetryText, Mode=OneTime}"/>
+
+		<TextBlock Text="Уставка параметров:" FontWeight="Bold" TextDecorations="Underline"/>
+		<setParameters:MukFlapWinterSummerSetParamsView DataContext="{Binding Path=MukFlapWinterSummerSetParamsVm, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>

@@ -5,10 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.View"
              xmlns:common="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
+             xmlns:setParameters="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.SetParameters"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="312" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
 		<view:AirExhausterReply03DataView DataContext="{Binding Path=Reply03Telemetry, Mode=OneWay}"/>
 		<common:AnyCommandPartView DataContext="{Binding Path=Reply03TelemetryText, Mode=OneTime}"/>
+		<TextBlock Text="Уставка параметров:" FontWeight="Bold" TextDecorations="Underline"/>
+		<setParameters:MukAirExhausterSetParamsView DataContext="{Binding Path=MukAirExhausterSetParamsVm, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>

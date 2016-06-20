@@ -75,11 +75,11 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_replyAcceptor = replyGenerator;
 
 			MukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
-			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModel(_notifier);
-			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
-			MukAirExhausterDataVm = new MukAirExhausterDataViewModel(_notifier);
-			MukFlapReturnAirDataVm = new MukFlapReturnAirViewModel(_notifier);
-			MukFlapWinterSummerDataVm = new MukFlapWinterSummerViewModel(_notifier);
+			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModel(_notifier, _paramSetter);
+			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter);
+			MukAirExhausterDataVm = new MukAirExhausterDataViewModel(_notifier, _paramSetter);
+			MukFlapReturnAirDataVm = new MukFlapReturnAirViewModel(_notifier, _paramSetter);
+			MukFlapWinterSummerDataVm = new MukFlapWinterSummerViewModel(_notifier, _paramSetter);
 
 			BsSmDataVm = new BsSmDataViewModel(_notifier);
 			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);

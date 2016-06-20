@@ -2,8 +2,10 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.DataModel.Builders;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.DataModel.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.SetParameters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer
 {
@@ -11,9 +13,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer
 		private readonly IThreadNotifier _notifier;
 		private IMukFlapWinterSummerReply03Telemetry _reply03Telemetry;
 
-		public MukFlapWinterSummerViewModel(IThreadNotifier notifier) {
+		public MukFlapWinterSummerViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_notifier = notifier;
 			Reply03TelemetryText = new AnyCommandPartViewModel();
+			MukFlapWinterSummerSetParamsVm = new MukFlapWinterSummerSetParamsViewModel(notifier, parameterSetter);
 		}
 		
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
@@ -38,5 +41,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer
 		}
 
 		public AnyCommandPartViewModel Reply03TelemetryText { get; }
+
+		public MukFlapWinterSummerSetParamsViewModel MukFlapWinterSummerSetParamsVm { get; }
 	}
 }

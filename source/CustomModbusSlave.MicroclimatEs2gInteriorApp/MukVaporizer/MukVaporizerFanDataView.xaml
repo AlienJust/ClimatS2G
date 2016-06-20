@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:request16="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16"
              xmlns:common="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
+             xmlns:setParameters="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.SetParameters"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="300">
+             d:DesignHeight="660" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
 		<TextBlock Text="Ответ, код команды 03 dec:" FontWeight="Bold" TextDecorations="Underline"/>
 		<Grid>
@@ -90,6 +91,9 @@
 		<TextBlock Text="Запрос, код команды 16 dec:" FontWeight="Bold" TextDecorations="Underline"/>
 		<request16:Request16DataView DataContext="{Binding Path=Request16Telemetry, Mode=OneWay}"/>
 		<common:AnyCommandPartView DataContext="{Binding Path=Request16TelemetryText, Mode=OneTime}"/>
-		
+
+
+		<TextBlock Text="Уставка параметров:" FontWeight="Bold" TextDecorations="Underline"/>
+		<setParameters:MukVaporizerSetParamsView DataContext="{Binding Path=MukVaporizerSetParamsVm, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>

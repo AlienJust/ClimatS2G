@@ -3,6 +3,8 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFridge.SetParameters;
 using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
@@ -10,7 +12,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
 	class MukFridgeFanDataViewModel : ViewModelBase, ICommandListener
 	{
 		private readonly IThreadNotifier _notifier;
-		private readonly string _header = "МУК вентилятора конденсатора";
+		//private readonly string _header = "МУК вентилятора конденсатора";
 		private string _fanPwm;
 		private string _condensingPressure;
 		private string _incomingSignals;
@@ -25,9 +27,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
 
 		private string _reply;
 
-		public MukFridgeFanDataViewModel(IThreadNotifier notifier)
+		public MukFridgeFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter)
 		{
 			_notifier = notifier;
+			MukFridgeSetParamsVm = new MukFridgeSetParamsViewModel(notifier, parameterSetter);
 		}
 
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data)
@@ -172,5 +175,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
 				}
 			}
 		}
+
+
+		public MukFridgeSetParamsViewModel MukFridgeSetParamsVm { get; }
 	}
 }

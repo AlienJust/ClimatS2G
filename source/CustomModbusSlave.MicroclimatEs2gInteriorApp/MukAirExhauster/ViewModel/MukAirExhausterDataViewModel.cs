@@ -2,7 +2,9 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.SetParameters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.ViewModel
 {
@@ -10,9 +12,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.ViewModel
 		private readonly IThreadNotifier _notifier;
 		private IReply03Data _reply03Telemetry;
 
-		public MukAirExhausterDataViewModel(IThreadNotifier notifier) {
+		public MukAirExhausterDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_notifier = notifier;
 			Reply03TelemetryText = new AnyCommandPartViewModel();
+			MukAirExhausterSetParamsVm = new MukAirExhausterSetParamsViewModel(notifier, parameterSetter);
 		}
 		
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
@@ -37,5 +40,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.ViewModel
 		}
 
 		public AnyCommandPartViewModel Reply03TelemetryText { get; }
+
+		public MukAirExhausterSetParamsViewModel MukAirExhausterSetParamsVm { get; }
 	}
 }
