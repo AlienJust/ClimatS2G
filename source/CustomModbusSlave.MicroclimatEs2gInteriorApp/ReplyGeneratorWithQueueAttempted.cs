@@ -59,10 +59,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp {
 		// called from UI by user:
 		public void SetParameterAsync(int zeroBasedParameterNumber, ushort value, Action<Exception> callback) {
 			lock (_currentItemSyncLockObject) {
-				if (_currentItem != null) {
+				/*if (_currentItem != null) {
 					_currentItem.OnCompleteCallback.Invoke(new Exception("Не удалось записать параметр, т.к. поступил запрос на запись нового параметра"));
 					_currentItem = null;
-				}
+				}*/
 
 				_itemsToWrite.Add(new QueueItem {ParameterIndex = zeroBasedParameterNumber, ParameterValue = value, OnCompleteCallback = callback, AttemptsCount = MaxAttemptsCount});
 			}
