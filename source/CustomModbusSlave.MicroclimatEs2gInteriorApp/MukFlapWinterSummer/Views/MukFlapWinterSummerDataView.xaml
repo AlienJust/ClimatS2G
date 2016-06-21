@@ -7,7 +7,7 @@
              xmlns:views="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.Views"
              xmlns:setParameters="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.SetParameters"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="300">
+             d:DesignHeight="984" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
 		<Grid>
 			<Grid.RowDefinitions>

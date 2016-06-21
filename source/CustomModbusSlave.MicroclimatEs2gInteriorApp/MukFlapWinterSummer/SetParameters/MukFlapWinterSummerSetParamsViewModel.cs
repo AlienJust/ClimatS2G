@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AlienJust.Support.Concurrent.Contracts;
+﻿using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
@@ -29,7 +25,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.SetParameters
 			SettableParam833 = new SettableParameterViewModel(833, "E – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
 			SettableParam834 = new SettableParameterViewModel(834, "C – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
 			SettableParam835 = new SettableParameterViewModel(835, "D – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
-
 		}
 	}
 }

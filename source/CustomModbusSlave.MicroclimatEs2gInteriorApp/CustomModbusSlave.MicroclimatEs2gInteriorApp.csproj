@@ -206,6 +206,10 @@
     </Compile>
     <Compile Include="QueueItem.cs" />
     <Compile Include="ReplyGeneratorWithQueueAttempted.cs" />
+    <Compile Include="SetParams\AnyParameter\SettableAnyParameterView.xaml.cs">
+      <DependentUpon>SettableAnyParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetParams\AnyParameter\SettableAnyParameterViewModel.cs" />
     <Compile Include="SetParams\SettableParameterView.xaml.cs">
       <DependentUpon>SettableParameterView.xaml</DependentUpon>
     </Compile>
@@ -568,6 +572,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukVaporizer\SetParameters\MukVaporizerSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SetParams\AnyParameter\SettableAnyParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

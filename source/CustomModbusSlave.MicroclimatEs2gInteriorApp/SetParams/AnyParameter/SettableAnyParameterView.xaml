@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.SetParams.AnyParameter.SettableAnyParameterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="300">
+	<UserControl.Resources>
+		<converters:ColorsEnumToColorConverter x:Key="ColorsEnumToColorConverter"/>
+	</UserControl.Resources>
+	<Grid Margin="2">
+		<Grid.Background>
+			<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+				<GradientStop Offset="1" Color="Transparent"/>
+				<GradientStop Offset="0" Color="{Binding Path=LastOperationColor, Mode=OneWay, Converter={StaticResource ColorsEnumToColorConverter}}"/>
+			</LinearGradientBrush>
+		</Grid.Background>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="4*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="1*"/>
+		</Grid.ColumnDefinitions>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Text="Параметр №" Margin="2" VerticalAlignment="Center"/>
+			<xctk:IntegerUpDown Grid.Column="1" Margin="2,0,2,0" ></xctk:IntegerUpDown>
+			<TextBlock Grid.Column="2" Text="{Binding Path=ReceivedDoubleValue, Mode=OneWay}" TextAlignment="Right" Margin="2" VerticalAlignment="Center"/>
+		</Grid>
+		<xctk:DoubleUpDown Grid.Column="1" Value="{Binding Path=DoubleValue, Mode=TwoWay}" Maximum="{Binding Path=MaxValue, Mode=OneTime}" Minimum="{Binding Path=MinValue, Mode=OneTime}" FormatString="{Binding Path=StringFormat, Mode=OneTime}"/>
+		<Button Grid.Column="2" Content="Set" Command="{Binding Path=SetCommand, Mode=OneTime}"/>
+		<Button Grid.Column="3" Content="Reset" Command="{Binding Path=ResetCommand, Mode=OneTime}"/>
+	</Grid>
+</UserControl>
