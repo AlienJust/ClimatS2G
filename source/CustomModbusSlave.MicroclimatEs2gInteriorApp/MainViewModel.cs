@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using AlienJust.Adaptation.WindowsPresentation.Converters;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
@@ -13,6 +14,7 @@ using CustomModbusSlave.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.BsSm;
 using CustomModbusSlave.MicroclimatEs2gApp.Bvs;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.CommandHearedTimer;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.ViewModel;
@@ -47,6 +49,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		private bool _isPortOpened;
 
+		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
+		private Colors _linkBackColor;
 
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem) {
 			_notifier = notifier;
@@ -87,11 +91,23 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 			KsmDataVm = new KsmDataViewModel(_notifier); // TODO:
 
+			_commandHearedTimeoutMonitor = new CommandHearedTimerThreadSafe(_serialChannel, TimeSpan.FromSeconds(1), _notifier);
+			_commandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
+			_commandHearedTimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
+			_commandHearedTimeoutMonitor.Start();
+
 			GetPortsAvailable();
 			_logger.Log("Программа загружена");
 		}
 
-		
+		private void CommandHearedTimeoutMonitorOnSomeCommandWasHeared() {
+			LinkBackColor = Colors.LimeGreen;
+		}
+
+		private void CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong() {
+			LinkBackColor = Colors.OrangeRed;
+		}
+
 
 		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendAbility) {
 			if (commandPart.Address == 20) {
@@ -230,6 +246,16 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			}
 		}
 
-		
+		public Colors LinkBackColor
+		{
+			get { return _linkBackColor; }
+			set
+			{
+				if (_linkBackColor != value) {
+					_linkBackColor = value;
+					RaisePropertyChanged(()=>LinkBackColor);
+				}
+			}
+		}
 	}
 }
