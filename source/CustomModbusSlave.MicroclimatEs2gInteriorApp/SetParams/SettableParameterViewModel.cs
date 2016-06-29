@@ -6,7 +6,7 @@ using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
-	class SettableParameterViewModel : ViewModelBase {
+	class SettableParameterViewModel : ViewModelBase, IReceivableParameter {
 		private readonly IDoubleUshortConverter _doubleUshortConverter;
 		private readonly IParameterSetter _parameterSetter;
 		private readonly IThreadNotifier _uiNotifier;

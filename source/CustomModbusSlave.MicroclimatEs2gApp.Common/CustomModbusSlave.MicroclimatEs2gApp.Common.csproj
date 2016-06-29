@@ -58,6 +58,8 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -130,6 +132,11 @@
     <Compile Include="TextPresenters\Contracts\ITextPresenter.cs" />
     <Compile Include="TextPresenters\DataDoubleTextPresenter.cs" />
     <Compile Include="TextPresenters\UshortTextPresenter.cs" />
+    <Compile Include="UniversalParams\IGroup.cs" />
+    <Compile Include="UniversalParams\Wpf\GroupParamTemplateSelector.cs" />
+    <Compile Include="UniversalParams\Wpf\GroupView.xaml.cs">
+      <DependentUpon>GroupView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="AnyCommandPartView.xaml">
@@ -155,6 +162,10 @@
     <Page Include="ProgamLog\ProgramLogView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniversalParams\Wpf\GroupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

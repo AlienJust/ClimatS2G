@@ -89,7 +89,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
 			BvsDataVm2 = new BvsDataViewModel(_notifier, 0x1D);
 
-			KsmDataVm = new KsmDataViewModel(_notifier); // TODO:
+			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter);
 
 			_commandHearedTimeoutMonitor = new CommandHearedTimerThreadSafe(_serialChannel, TimeSpan.FromSeconds(1), _notifier);
 			_commandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;

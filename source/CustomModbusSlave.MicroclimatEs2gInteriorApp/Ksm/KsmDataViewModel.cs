@@ -5,15 +5,17 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel;
+using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 	class KsmDataViewModel : ViewModelBase, IParameterSetter, IAllParametersAccepter {
 		private readonly IThreadNotifier _notifier;
 		private readonly BlockingCollection<Tuple<int, ushort, Action<Exception>>> _itemsToWrite;
 		private readonly List<IKsmParameterViewModel> _parameterVmList;
+		private readonly List<SettableParameterViewModel> _settableParameterVmList;
 		private const string UnknownBits = "xxxx xxxx xxxx xxxx";
 
-		public KsmDataViewModel(IThreadNotifier notifier) {
+		public KsmDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_notifier = notifier;
 			_itemsToWrite = new BlockingCollection<Tuple<int, ushort, Action<Exception>>>();
 			_parameterVmList = new List<IKsmParameterViewModel> {
@@ -122,12 +124,22 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 					, new KsmCommonWritableParameterViewModel(26, "Ручной принудительный режим", new TextFormatterForcedManualMode())
 			};
 
-			for (int i = 27; i < 60; ++i) {
+			for (int i = 27; i < 34; ++i) {
 				_parameterVmList.Add(new KsmCommonWritableParameterViewModel(i, "Параметр " + (i + 1), new TextFormatterSimple("f2", "хз")));
+			}
+			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(34, "Версия ПО", new TextFormatterSimple("f0", "хз")));
+
+
+
+
+			_settableParameterVmList = new List<SettableParameterViewModel>();
+			for (int i = 35; i < 60; ++i) {
+				_settableParameterVmList.Add(new SettableParameterViewModel(i, "Параметр", 65535, 0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, _notifier));
 			}
 		}
 
 		public List<IKsmParameterViewModel> ParameterVmList => _parameterVmList;
+		public List<SettableParameterViewModel> SettableParameterVmList => _settableParameterVmList;
 
 		public void SetParameterAsync(int zeroBasedParameterNumber, ushort value, Action<Exception> callback) {
 			// тут должна быть очередь потокобезопасная
@@ -137,9 +149,12 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 
 		public void AcceptCommandAllParameters(IList<byte> bytes) {
 			// update all parameters
-			for (int i = 0; i < 60; ++i) {
+			for (int i = 0; i < 35; ++i) {
 				_parameterVmList[i].SetCurrentValue((ushort)(bytes[7 + i * 2] * 256.0 + bytes[8 + i * 2]));
 			}
+			for (int i = 35; i < 60; ++i) {
+				_settableParameterVmList[i - 35].ReceivedUshortValue = (ushort)(bytes[7 + i * 2] * 256.0 + bytes[8 + i * 2]);
+		}
 		}
 	}
 }
