@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AlienJust.Support.Collections;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease;
@@ -13,8 +14,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 		public IMukFlapReply03Telemetry Build() {
 			var flapPosition = _data[3] * 256 + _data[4];
 
-			var temperatureAddress1 = (_data[6] + _data[5] * 256) * 0.01;
-			var temperatureAddress2 = (_data[8] + _data[7] * 256) * 0.01;
+			var temperatureAddress1 = new BytesPair(_data[5], _data[6]).HighFirstSignedValue * 0.01;
+			var temperatureAddress2 = new BytesPair(_data[7], _data[8]).HighFirstSignedValue * 0.01;
 
 			var incomingSignals = new IncomingSignalsBuilder(_data[10]).Build();
 			var outgoingSignals = _data[12];
@@ -28,13 +29,13 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 			var diagnostic4 = new MukFlapDiagnosticOneWireSensorBuilder(_data[24] + _data[23] * 256).Build();
 
 			var emersonDiagnostic = new EmersonDiagnosticCircuit1Builder(_data[26] + _data[25]*256).Build();
-			var emersonTemperature = (_data[28] + _data[27] * 256) * 0.01;
+			var emersonTemperature = new BytesPair(_data[27], _data[28]).HighFirstSignedValue * 0.01;
 			var emersonPressure = (_data[30] + _data[29] * 256) * 0.1;
 			var emersonValveSetting = _data[32] + _data[31] * 256;
 
 
 			var emersionDiagnostic2 = new EmersonDiagnosticCircuit2Builder(_data[34] + _data[33] * 256).Build();
-			var emersonTemperature2 = (_data[36] + _data[35] * 256) * 0.01;
+			var emersonTemperature2 = new BytesPair(_data[35], _data[36]).HighFirstSignedValue * 0.01;
 			var emersonPressure2 = (_data[38] + _data[37] * 256) * 0.1;
 			var emersonValveSetting2 = _data[40] + _data[39] * 256;
 

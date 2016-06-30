@@ -1,6 +1,7 @@
-﻿using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters.Contracts;
+﻿using AlienJust.Support.Collections;
+using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters.Contracts;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.TextPresenters {
+namespace CustomModbusSlave.MicroclimatEs2gApp.Common.TextPresenters {
 	public class DataDoubleTextPresenter : ITextPresenter {
 		private readonly byte _lowByte;
 		private readonly byte _highByte;
@@ -17,7 +18,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.TextPresenters {
 
 		public string PresentAsText() {
 			if (_highByte == 0x85 && _lowByte == 0x00) return "Обрыв датчика";
-			return ((_highByte*256.0 + _lowByte)*_modifier).ToString("f" + _digitsAfterDotCount);
+			return (new BytesPair(_highByte, _lowByte).HighFirstSignedValue*_modifier).ToString("f" + _digitsAfterDotCount);
 		}
 	}
 }

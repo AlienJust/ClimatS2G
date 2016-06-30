@@ -10,8 +10,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 
 		public IBsSmDataCommand32Reply Build() {
 			int targetTemperatureInsideTheCabin = (_replyBytes[3] & 0x0F) - 2;
-			int fanSpeedLevel = (_replyBytes[3] & 0x18);
-			bool isWarmFloorOn = ((_replyBytes[3] & 0x20) == 0x20);
+			int fanSpeedLevel = _replyBytes[3] & 0x18;
+			bool isWarmFloorOn = (_replyBytes[3] & 0x20) == 0x20;
 			uint astronomicTime = (uint)(_replyBytes[4] + _replyBytes[5] * 256 + _replyBytes[6] * 65536 + _replyBytes[7] * 16777216); // TODO: improve converting
 			uint delayedStartTime = (uint)(_replyBytes[8] + _replyBytes[9] * 256 + _replyBytes[10] * 65536 + _replyBytes[11] * 16777216); // TODO: improve converting
 
