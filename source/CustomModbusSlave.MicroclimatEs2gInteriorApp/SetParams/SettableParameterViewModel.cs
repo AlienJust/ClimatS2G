@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Windows.Input;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
+using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 	class SettableParameterViewModel : ViewModelBase, IReceivableParameter {
-		private readonly IDoubleUshortConverter _doubleUshortConverter;
+		private readonly IDoubleBytesPairConverter _doubleBytesPairConverter;
 		private readonly IParameterSetter _parameterSetter;
 		private readonly IThreadNotifier _uiNotifier;
 		private double? _doubleValue;
@@ -25,8 +26,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 		
 		public string StringFormat { get; set; }
 
-		public SettableParameterViewModel(int paramIndex, string name, double maxValue, double minValue, double? doubleValue, string stringFormat, IDoubleUshortConverter doubleUshortConverter, IParameterSetter parameterSetter, IThreadNotifier uiNotifier) {
-			_doubleUshortConverter = doubleUshortConverter;
+		public SettableParameterViewModel(int paramIndex, string name, double maxValue, double minValue, double? doubleValue, string stringFormat, IDoubleBytesPairConverter doubleBytesPairConverter, IParameterSetter parameterSetter, IThreadNotifier uiNotifier) {
+			_doubleBytesPairConverter = doubleBytesPairConverter;
 			_parameterSetter = parameterSetter;
 			_uiNotifier = uiNotifier;
 			ParamIndex = paramIndex;
@@ -49,7 +50,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 
 			IsEnabled = false;
 			LastOperationColor = Colors.RoyalBlue;
-			_parameterSetter.SetParameterAsync(ParamIndex, UshortValue.Value, exception => {
+			_parameterSetter.SetParameterAsync(ParamIndex, UshortValue.Value.HighFirstUnsignedValue, exception => {
 				_uiNotifier.Notify(() => {
 					try {
 						if (exception != null) {
@@ -105,18 +106,18 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 			}
 		}
 
-		public ushort? UshortValue
+		public BytesPair? UshortValue
 		{
 			get
 			{
 				if (!_doubleValue.HasValue) return null;
-				return _doubleUshortConverter.ConvertToUshort(_doubleValue.Value);
+				return _doubleBytesPairConverter.ConvertToBytesPairHighFirst(_doubleValue.Value);
 			}
 			set
 			{
 				// used property DoubleValue instead of field _doubleValue to raise property changed event if needed
 				if (!value.HasValue) DoubleValue = null;
-				else DoubleValue = _doubleUshortConverter.ConvertToDouble(value.Value);
+				else DoubleValue = _doubleBytesPairConverter.ConvertToDoubleHighFirst(value.Value);
 			}
 		}
 
@@ -134,15 +135,15 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 			}
 		}
 
-		public ushort? ReceivedUshortValue {
+		public BytesPair? ReceivedUshortValue {
 			get {
 				if (!_receivedDoubleValue.HasValue) return null;
-				return _doubleUshortConverter.ConvertToUshort(_receivedDoubleValue.Value);
+				return _doubleBytesPairConverter.ConvertToBytesPairHighFirst(_receivedDoubleValue.Value);
 			}
 			set {
 				// used property DoubleValue instead of field _doubleValue to raise property changed event if needed
 				if (!value.HasValue) ReceivedDoubleValue = null;
-				else ReceivedDoubleValue = _doubleUshortConverter.ConvertToDouble(value.Value);
+				else ReceivedDoubleValue = _doubleBytesPairConverter.ConvertToDoubleHighFirst(value.Value);
 			}
 		}
 

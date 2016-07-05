@@ -13,10 +13,17 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.Wpf {
 			if (obj != null) {
 				return DataTemplates[obj.ViewName];
 			}
+
+			//var paramObj = item as IParameter;
+			//if (paramObj != null)
+				//new ResourceDictionary()
+				
+				//return new ParameterTemplateSimple();
+
 			return null;
 		}
 
-		public  static void RegisterTemplate(string name, DataTemplate template) {
+		public static void RegisterTemplate(string name, DataTemplate template) {
 			DataTemplates.Add(name, template);
 		}
 	}

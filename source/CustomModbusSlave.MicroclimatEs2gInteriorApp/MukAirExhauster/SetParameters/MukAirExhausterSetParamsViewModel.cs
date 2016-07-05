@@ -9,8 +9,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.SetParameters {
 		public SettableParameterViewModel SettableParam620 { get; }
 
 		public MukAirExhausterSetParamsViewModel(IThreadNotifier uiNotifier, IParameterSetter parameterSetter) {
-			SettableParam619 = new SettableParameterViewModel(619, "Ручной/автоматический режим. 1 = ручной режим", 1.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
-			SettableParam620 = new SettableParameterViewModel(620, "Уставка ШИМ вентилятора в ручном режиме 0 - 255", 255.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
+			SettableParam619 = new SettableParameterViewModel(619, "Ручной/автоматический режим. 1 = ручной режим", 1.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
+			SettableParam620 = new SettableParameterViewModel(620, "Уставка ШИМ вентилятора в ручном режиме 0 - 255", 255.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
 		}
 	}
 }

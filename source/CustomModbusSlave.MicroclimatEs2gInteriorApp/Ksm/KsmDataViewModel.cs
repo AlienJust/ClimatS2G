@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters;
@@ -133,8 +134,26 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 
 
 			_settableParameterVmList = new List<SettableParameterViewModel>();
-			for (int i = 35; i < 60; ++i) {
-				_settableParameterVmList.Add(new SettableParameterViewModel(i, "Параметр", 65535, 0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, _notifier));
+
+			_settableParameterVmList.Add(new SettableParameterViewModel(35, "Максимальный ШИМ (PWMmax_cool)", 255, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+			_settableParameterVmList.Add(new SettableParameterViewModel(36, "Минимальный ШИМ (PWMmin_cool)", 255, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+
+			_settableParameterVmList.Add(new SettableParameterViewModel(37, "Дельта + (plus_cool)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+			_settableParameterVmList.Add(new SettableParameterViewModel(38, "Дельта - (minus_cool)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+
+			_settableParameterVmList.Add(new SettableParameterViewModel(39, "Обеззараживатель, почасовой счетчик работы (CounterCleaner)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+			_settableParameterVmList.Add(new SettableParameterViewModel(40, "Компрессор этого сегмента, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+			_settableParameterVmList.Add(new SettableParameterViewModel(41, "Компрессор, счетчик перевключений", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+			_settableParameterVmList.Add(new SettableParameterViewModel(42, "Вентилятор конденсатора 1, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+			_settableParameterVmList.Add(new SettableParameterViewModel(43, "Вентилятор конденсатора 2, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+			_settableParameterVmList.Add(new SettableParameterViewModel(44, "Отопитель 380 в., почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+			_settableParameterVmList.Add(new SettableParameterViewModel(45, "Отопитель 3000 в., почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+			_settableParameterVmList.Add(new SettableParameterViewModel(46, "Вентилятор приточного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+			_settableParameterVmList.Add(new SettableParameterViewModel(47, "Вентилятор отработанного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
+
+
+			for (int i = 48; i < 60; ++i) {
+				_settableParameterVmList.Add(new SettableParameterViewModel(i, "Параметр", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, _notifier));
 			}
 		}
 
@@ -152,9 +171,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 			for (int i = 0; i < 35; ++i) {
 				_parameterVmList[i].SetCurrentValue((ushort)(bytes[7 + i * 2] * 256.0 + bytes[8 + i * 2]));
 			}
+
 			for (int i = 35; i < 60; ++i) {
-				_settableParameterVmList[i - 35].ReceivedUshortValue = (ushort)(bytes[7 + i * 2] * 256.0 + bytes[8 + i * 2]);
-		}
+				_settableParameterVmList[i - 35].ReceivedUshortValue = new BytesPair(bytes[7 + i*2], bytes[8 + i*2]);
+			}
 		}
 	}
 }

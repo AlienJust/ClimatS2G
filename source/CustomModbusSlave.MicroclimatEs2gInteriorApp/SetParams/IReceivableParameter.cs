@@ -1,6 +1,8 @@
+using AlienJust.Support.Collections;
+
 namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 	interface IReceivableParameter {
-		ushort? ReceivedUshortValue { get; set; }
+		BytesPair? ReceivedUshortValue { get; set; }
 		double? ReceivedDoubleValue { get; set; }
 	}
 }

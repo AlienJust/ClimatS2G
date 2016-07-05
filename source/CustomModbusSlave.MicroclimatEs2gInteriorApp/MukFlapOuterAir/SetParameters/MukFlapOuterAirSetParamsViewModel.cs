@@ -16,16 +16,16 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.SetParameters {
 		public SettableParameterViewModel SettableParam235 { get; }
 
 		public MukFlapOuterAirSetParamsViewModel(IThreadNotifier uiNotifier, IParameterSetter parameterSetter) {
-			SettableParam227 = new SettableParameterViewModel(227, "Ручной/автоматический режим. 1 = ручной режим", 1.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
-			SettableParam228 = new SettableParameterViewModel(228, "Уставка ШИМ на заслонку в ручном режиме 0 - 255", 255.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
+			SettableParam227 = new SettableParameterViewModel(227, "Ручной/автоматический режим. 1 = ручной режим", 1.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
+			SettableParam228 = new SettableParameterViewModel(228, "Уставка ШИМ на заслонку в ручном режиме 0 - 255", 255.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
 
-			SettableParam229 = new SettableParameterViewModel(229, "H – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
-			SettableParam230 = new SettableParameterViewModel(230, "I – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
-			SettableParam231 = new SettableParameterViewModel(231, "J – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
-			SettableParam232 = new SettableParameterViewModel(232, "A – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
-			SettableParam233 = new SettableParameterViewModel(233, "E – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
-			SettableParam234 = new SettableParameterViewModel(234, "C – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
-			SettableParam235 = new SettableParameterViewModel(235, "D – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleUshortConverterSimple(), parameterSetter, uiNotifier);
+			SettableParam229 = new SettableParameterViewModel(229, "H – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
+			SettableParam230 = new SettableParameterViewModel(230, "I – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
+			SettableParam231 = new SettableParameterViewModel(231, "J – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
+			SettableParam232 = new SettableParameterViewModel(232, "A – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
+			SettableParam233 = new SettableParameterViewModel(233, "E – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
+			SettableParam234 = new SettableParameterViewModel(234, "C – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
+			SettableParam235 = new SettableParameterViewModel(235, "D – параметр драйвера 1w", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
 		}
 	}
 }

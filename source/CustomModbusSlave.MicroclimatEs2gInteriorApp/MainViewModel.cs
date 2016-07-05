@@ -16,6 +16,7 @@ using CustomModbusSlave.MicroclimatEs2gApp.Bvs;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.CommandHearedTimer;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.ViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir;
@@ -98,6 +99,12 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 			GetPortsAvailable();
 			_logger.Log("Программа загружена");
+
+
+			var testItems = new List<IGroupItem>();
+			TestGroup = new GroupSimple("Тестовая группа", testItems);
+
+			testItems.Add(new ParameterSimple("Тестовый параметр", TestGroup));
 		}
 
 		private void CommandHearedTimeoutMonitorOnSomeCommandWasHeared() {
@@ -257,5 +264,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 				}
 			}
 		}
+
+		public IGroup TestGroup { get; }
 	}
 }

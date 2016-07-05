@@ -136,13 +136,18 @@
     <Compile Include="TextPresenters\Contracts\ITextPresenter.cs" />
     <Compile Include="TextPresenters\DataDoubleTextPresenter.cs" />
     <Compile Include="TextPresenters\UshortTextPresenter.cs" />
+    <Compile Include="UniversalParams\GroupSimple.cs" />
     <Compile Include="UniversalParams\IGroup.cs" />
+    <Compile Include="UniversalParams\ParameterSimple.cs" />
     <Compile Include="UniversalParams\Wpf\GroupParamTemplateSelector.cs" />
     <Compile Include="UniversalParams\Wpf\GroupView.xaml.cs">
       <DependentUpon>GroupView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UniversalParams\Wpf\IGroupItem.cs" />
-    <Compile Include="UniversalParams\Wpf\IParameter.cs" />
+    <Compile Include="UniversalParams\IGroupItem.cs" />
+    <Compile Include="UniversalParams\IParameter.cs" />
+    <Compile Include="UniversalParams\Wpf\ParameterViewSimple.xaml.cs">
+      <DependentUpon>ParameterViewSimple.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="AnyCommandPartView.xaml">
@@ -169,7 +174,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UniversalParams\Wpf\StandartDataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UniversalParams\Wpf\GroupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UniversalParams\Wpf\ParameterViewSimple.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -213,11 +213,17 @@
       <DependentUpon>SettableAnyParameterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SetParams\AnyParameter\SettableAnyParameterViewModel.cs" />
+    <Compile Include="SetParams\BytesPairToStringConverter.cs" />
     <Compile Include="SetParams\IReceivableParameter.cs" />
+    <Compile Include="SetParams\SettableTemperatureParameterView.xaml.cs">
+      <DependentUpon>SettableTemperatureParameterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SetParams\SettableParameterView.xaml.cs">
       <DependentUpon>SettableParameterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SetParams\SettableParameterViewModel.cs" />
+    <Compile Include="SetParams\BytesPairToTemperatureConverter.cs" />
+    <Compile Include="SetParams\SettableTemperatureParameterViewModel.cs" />
     <Page Include="BsSm\BsSmDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -330,14 +336,14 @@
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
     <Compile Include="BsSm\ThrowableClimaticSystemWorkModeToStringConverter.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
-    <Compile Include="Ksm\DoubleUshortConverterSimple.cs" />
+    <Compile Include="Ksm\DoubleBytesPairConverterSimpleUshort.cs" />
     <Compile Include="Ksm\TextFormatters\TextFormatterBits.cs" />
     <Compile Include="Ksm\TextFormatters\TextFormatterNcalcDouble.cs" />
     <Compile Include="Ksm\TextFormatters\TextFormatterSimple.cs" />
     <Compile Include="Ksm\IAllParametersAccepter.cs" />
     <Compile Include="Ksm\ICurrentValueSettable.cs" />
     <Compile Include="Ksm\TextFormatters\ITextFormatter.cs" />
-    <Compile Include="Ksm\IDoubleUshortConverter.cs" />
+    <Compile Include="Ksm\IDoubleBytesPairConverter.cs" />
     <Compile Include="Ksm\IParameterRoot.cs" />
     <Compile Include="Ksm\IParameterSetter.cs" />
     <Compile Include="Ksm\IUshortToDoubleConverter.cs" />
@@ -580,6 +586,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SetParams\AnyParameter\SettableAnyParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SetParams\SettableTemperatureParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
