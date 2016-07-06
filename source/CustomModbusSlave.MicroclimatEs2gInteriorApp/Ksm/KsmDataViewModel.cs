@@ -169,11 +169,11 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 		public void AcceptCommandAllParameters(IList<byte> bytes) {
 			// update all parameters
 			for (int i = 0; i < 35; ++i) {
-				_parameterVmList[i].SetCurrentValue((ushort)(bytes[7 + i * 2] * 256.0 + bytes[8 + i * 2]));
+				_parameterVmList[i].ReceivedBytesValue = new BytesPair(bytes[7 + i * 2], bytes[8 + i * 2]);//(ushort)(bytes[7 + i * 2] * 256.0 + bytes[8 + i * 2]));
 			}
 
 			for (int i = 35; i < 60; ++i) {
-				_settableParameterVmList[i - 35].ReceivedUshortValue = new BytesPair(bytes[7 + i*2], bytes[8 + i*2]);
+				_settableParameterVmList[i - 35].ReceivedBytesValue = new BytesPair(bytes[7 + i*2], bytes[8 + i*2]);
 			}
 		}
 	}

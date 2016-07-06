@@ -1,14 +1,15 @@
 ﻿using System;
+using AlienJust.Support.Collections;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters {
 	internal interface ITextFormatter<in T> {
 		string Format(T value);
 	}
 
-	class TextFormatterForcedManualMode: ITextFormatter<ushort?> {
-		public string Format(ushort? value) {
+	class TextFormatterForcedManualMode: ITextFormatter<BytesPair?> {
+		public string Format(BytesPair? value) {
 			if (!value.HasValue) return "? - нет данных";
-			return value.Value + " - " + new ManualForcedModeBuilder(value.Value).Build().ToText();
+			return value.Value.HighFirstUnsignedValue + " - " + new ManualForcedModeBuilder(value.Value.HighFirstUnsignedValue).Build().ToText();
 		}
 	}
 

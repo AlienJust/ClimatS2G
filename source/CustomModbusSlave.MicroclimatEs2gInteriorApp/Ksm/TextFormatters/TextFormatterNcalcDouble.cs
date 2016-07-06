@@ -1,5 +1,7 @@
+using AlienJust.Support.Collections;
+
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters {
-	class TextFormatterNcalcDouble : ITextFormatter<ushort?> {
+	class TextFormatterNcalcDouble : ITextFormatter<BytesPair?> {
 		private readonly string _doubleFormat;
 		private readonly string _nullFormat;
 		private readonly UshortToDoubleConverterNcalc _toDoubleConverter;
@@ -10,10 +12,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters {
 			_nullFormat = nullFormat;
 		}
 
-		public string Format(ushort? value) {
+		public string Format(BytesPair? value) {
 			if (!value.HasValue) return _nullFormat;
 
-			var cv = _toDoubleConverter.Convert(value);
+			var cv = _toDoubleConverter.Convert(value.Value.HighFirstUnsignedValue);
 			if (!cv.HasValue) return _nullFormat;
 
 			return cv.Value.ToString(_doubleFormat);

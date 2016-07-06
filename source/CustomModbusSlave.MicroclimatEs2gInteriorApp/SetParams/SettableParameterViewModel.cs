@@ -7,12 +7,12 @@ using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
-	class SettableParameterViewModel : ViewModelBase, IReceivableParameter {
+	class SettableParameterViewModel : ViewModelBase, IReceivableParameter<double?>, ISettableByUserParameter<double?>, ISettableBytesPairtParameter { 
 		private readonly IDoubleBytesPairConverter _doubleBytesPairConverter;
 		private readonly IParameterSetter _parameterSetter;
 		private readonly IThreadNotifier _uiNotifier;
-		private double? _doubleValue;
-		private double? _receivedDoubleValue;
+		private double? _formattedValue;
+		private double? _receivedValueFormatted;
 		private readonly RelayCommand _resetCommand;
 		private readonly RelayCommand _setCommand;
 		private bool _isEnabled;
@@ -26,7 +26,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 		
 		public string StringFormat { get; set; }
 
-		public SettableParameterViewModel(int paramIndex, string name, double maxValue, double minValue, double? doubleValue, string stringFormat, IDoubleBytesPairConverter doubleBytesPairConverter, IParameterSetter parameterSetter, IThreadNotifier uiNotifier) {
+		public SettableParameterViewModel(int paramIndex, string name, double maxValue, double minValue, double? formattedValue, string stringFormat, IDoubleBytesPairConverter doubleBytesPairConverter, IParameterSetter parameterSetter, IThreadNotifier uiNotifier) {
 			_doubleBytesPairConverter = doubleBytesPairConverter;
 			_parameterSetter = parameterSetter;
 			_uiNotifier = uiNotifier;
@@ -34,23 +34,23 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 			Name = name;
 			MaxValue = maxValue;
 			MinValue = minValue;
-			DoubleValue = doubleValue;
+			FormattedValue = formattedValue;
 			StringFormat = stringFormat;
 
-			_receivedDoubleValue = null;
+			_receivedValueFormatted = null;
 			_isEnabled = true;
 			_lastOperationColor = Colors.Transparent;
 
-			_resetCommand = new RelayCommand(Reset, ()=>_receivedDoubleValue.HasValue);
-			_setCommand = new RelayCommand(Set, () => _doubleValue.HasValue && IsEnabled);
+			_resetCommand = new RelayCommand(Reset, ()=>_receivedValueFormatted.HasValue);
+			_setCommand = new RelayCommand(Set, () => _formattedValue.HasValue && IsEnabled);
 		}
 
 		private void Set() {
-			if (!UshortValue.HasValue) return;
+			if (!BytesValue.HasValue) return;
 
 			IsEnabled = false;
 			LastOperationColor = Colors.RoyalBlue;
-			_parameterSetter.SetParameterAsync(ParamIndex, UshortValue.Value.HighFirstUnsignedValue, exception => {
+			_parameterSetter.SetParameterAsync(ParamIndex, BytesValue.Value.HighFirstUnsignedValue, exception => {
 				_uiNotifier.Notify(() => {
 					try {
 						if (exception != null) {
@@ -84,66 +84,66 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 		}
 
 		private void Reset() {
-			DoubleValue = _receivedDoubleValue;
+			FormattedValue = _receivedValueFormatted;
 		}
 
-		public double? DoubleValue
+		public double? FormattedValue
 		{
 			get
 			{
-				return _doubleValue; 
+				return _formattedValue; 
 				
 			}
 			set
 			{
-				if (_doubleValue != value) {
-					_doubleValue = value;
-					RaisePropertyChanged(()=>DoubleValue);
-					RaisePropertyChanged(() => UshortValue);
+				if (_formattedValue != value) {
+					_formattedValue = value;
+					RaisePropertyChanged(()=>FormattedValue);
+					RaisePropertyChanged(() => BytesValue);
 					_setCommand.RaiseCanExecuteChanged();
 				}
 				
 			}
 		}
 
-		public BytesPair? UshortValue
+		public BytesPair? BytesValue
 		{
 			get
 			{
-				if (!_doubleValue.HasValue) return null;
-				return _doubleBytesPairConverter.ConvertToBytesPairHighFirst(_doubleValue.Value);
+				if (!_formattedValue.HasValue) return null;
+				return _doubleBytesPairConverter.ConvertToBytesPairHighFirst(_formattedValue.Value);
 			}
 			set
 			{
-				// used property DoubleValue instead of field _doubleValue to raise property changed event if needed
-				if (!value.HasValue) DoubleValue = null;
-				else DoubleValue = _doubleBytesPairConverter.ConvertToDoubleHighFirst(value.Value);
+				// used property FormattedValue instead of field _formattedValue to raise property changed event if needed
+				if (!value.HasValue) FormattedValue = null;
+				else FormattedValue = _doubleBytesPairConverter.ConvertToDoubleHighFirst(value.Value);
 			}
 		}
 
-		public double? ReceivedDoubleValue
+		public double? ReceivedValueFormatted
 		{
-			get { return _receivedDoubleValue; }
+			get { return _receivedValueFormatted; }
 			set
 			{
-				if (_receivedDoubleValue != value) {
-					_receivedDoubleValue = value;
-					RaisePropertyChanged(()=> ReceivedDoubleValue);
-					RaisePropertyChanged(() => ReceivedUshortValue);
+				if (_receivedValueFormatted != value) {
+					_receivedValueFormatted = value;
+					RaisePropertyChanged(()=> ReceivedValueFormatted);
+					RaisePropertyChanged(() => ReceivedBytesValue);
 					_resetCommand.RaiseCanExecuteChanged();
 				}
 			}
 		}
 
-		public BytesPair? ReceivedUshortValue {
+		public BytesPair? ReceivedBytesValue {
 			get {
-				if (!_receivedDoubleValue.HasValue) return null;
-				return _doubleBytesPairConverter.ConvertToBytesPairHighFirst(_receivedDoubleValue.Value);
+				if (!_receivedValueFormatted.HasValue) return null;
+				return _doubleBytesPairConverter.ConvertToBytesPairHighFirst(_receivedValueFormatted.Value);
 			}
 			set {
-				// used property DoubleValue instead of field _doubleValue to raise property changed event if needed
-				if (!value.HasValue) ReceivedDoubleValue = null;
-				else ReceivedDoubleValue = _doubleBytesPairConverter.ConvertToDoubleHighFirst(value.Value);
+				// used property FormattedValue instead of field _formattedValue to raise property changed event if needed
+				if (!value.HasValue) ReceivedValueFormatted = null;
+				else ReceivedValueFormatted = _doubleBytesPairConverter.ConvertToDoubleHighFirst(value.Value);
 			}
 		}
 

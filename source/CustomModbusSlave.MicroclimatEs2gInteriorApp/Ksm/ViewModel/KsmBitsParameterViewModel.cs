@@ -1,43 +1,20 @@
 ﻿using System.Collections.Generic;
+using AlienJust.Support.Collections;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel {
 	class KsmBitsParameterViewModel : ViewModelBase, IKsmParameterViewModel {
 		private readonly int _zbParameterNumber;
-		//private readonly IUshortToDoubleConverter _toDoubleValueConverter;
-		private readonly ITextFormatter<ushort?> _currentValueFormatter;
-		private ushort? _receivedValue;
+		private readonly ITextFormatter<BytesPair?> _currentValueFormatter;
+		private string _receivedValueFormatted;
 
-		public KsmBitsParameterViewModel(int zbParameterNumber, string name/*, IUshortToDoubleConverter toDoubleValueConverter*/, ITextFormatter<ushort?> currentValueFormatter, IList<IKsmBitParameterViewModel> bits) {
+		public KsmBitsParameterViewModel(int zbParameterNumber, string name, ITextFormatter<BytesPair?> currentValueFormatter, IList<IKsmBitParameterViewModel> bits) {
 			_zbParameterNumber = zbParameterNumber;
 			Name = name;
 			Bits = bits;
-			//_toDoubleValueConverter = toDoubleValueConverter;
 			_currentValueFormatter = currentValueFormatter;
 		}
-
-
-
-		public ushort? ReceivedValue {
-			get {
-				return _receivedValue;
-
-			}
-
-			private set {
-				if (_receivedValue != value) {
-					_receivedValue = value;
-					RaisePropertyChanged(() => ReceivedValue);
-					RaisePropertyChanged(() => ReceivedValueFormatted);
-					//RaisePropertyChanged(() => ReceivedValueDouble);
-				}
-			}
-		}
-
-		//public double? ReceivedValueDouble => _toDoubleValueConverter.Convert(_receivedValue);
-
-		public string ReceivedValueFormatted => _currentValueFormatter.Format(_receivedValue);
 
 		public string Name { get; }
 
@@ -52,12 +29,28 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel {
 			}
 		}
 
-		public void SetCurrentValue(ushort? currentValue) {
-			ReceivedValue = currentValue;
+		public BytesPair? ReceivedBytesValue
+		{
+			set
+			{
 
-			if (Bits == null) return;
-			foreach (var bit in Bits) {
-				bit.SetCurrentValue(currentValue);
+				if (Bits == null) return;
+				foreach (var bit in Bits) {
+					bit.ReceivedBytesValue = value;
+				}
+				ReceivedValueFormatted = _currentValueFormatter.Format(value);
+			}
+		}
+
+		public string ReceivedValueFormatted
+		{
+			get { return _receivedValueFormatted; }
+			private set
+			{
+				if (_receivedValueFormatted != value) {
+					_receivedValueFormatted = value;
+					RaisePropertyChanged(()=> ReceivedValueFormatted);
+				}
 			}
 		}
 	}

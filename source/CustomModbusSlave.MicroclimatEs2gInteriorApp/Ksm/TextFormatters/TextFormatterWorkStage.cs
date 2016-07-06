@@ -1,10 +1,11 @@
 using System;
+using AlienJust.Support.Collections;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters {
-	class TextFormatterWorkStage : ITextFormatter<ushort?> {
-		public string Format(ushort? value) {
+	class TextFormatterWorkStage : ITextFormatter<BytesPair?> {
+		public string Format(BytesPair? value) {
 			if (!value.HasValue) return "--";
-			return value + " - " + new KsmWorkstageBuilder(value.Value).Build().ToText();
+			return value.Value.HighFirstUnsignedValue + " - " + new KsmWorkstageBuilder(value.Value.HighFirstUnsignedValue).Build().ToText();
 		}
 	}
 

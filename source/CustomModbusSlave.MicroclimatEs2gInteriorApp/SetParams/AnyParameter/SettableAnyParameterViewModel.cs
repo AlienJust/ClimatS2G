@@ -115,7 +115,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams.AnyParameter {
 			}
 			set
 			{
-				// used property DoubleValue instead of field _doubleValue to raise property changed event if needed
+				// used property FormattedValue instead of field _doubleValue to raise property changed event if needed
 				if (!value.HasValue) DoubleValue = null;
 				else DoubleValue = _doubleBytesPairConverter.ConvertToDoubleHighFirst(value.Value);
 			}
@@ -141,7 +141,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams.AnyParameter {
 				return _doubleBytesPairConverter.ConvertToBytesPairHighFirst(_receivedDoubleValue.Value);
 			}
 			set {
-				// used property DoubleValue instead of field _doubleValue to raise property changed event if needed
+				// used property FormattedValue instead of field _doubleValue to raise property changed event if needed
 				if (!value.HasValue) ReceivedDoubleValue = null;
 				else ReceivedDoubleValue = _doubleBytesPairConverter.ConvertToDoubleHighFirst(value.Value);
 			}

@@ -1,3 +1,4 @@
+using AlienJust.Support.Collections;
 using AlienJust.Support.ModelViewViewModel;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel {
@@ -13,21 +14,28 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel {
 
 		public string Name { get; }
 
-		public bool? ReceivedBitValue
-		{
+		public bool? ReceivedValueFormatted {
 			get { return _receivedBitValue; }
 			private set
 			{
 				if (_receivedBitValue != value) {
 					_receivedBitValue = value;
-					RaisePropertyChanged(()=>ReceivedBitValue);
+					RaisePropertyChanged(()=> ReceivedValueFormatted);
 				}
 			}
 		}
 
-		public void SetCurrentValue(ushort? value) {
-			if (value == null) ReceivedBitValue = null;
-			ReceivedBitValue = ((value >> _zbBitNumber) & 0x01) == 0x01;
+		public void SetCurrentValue(BytesPair? value) {
+			if (value == null) ReceivedValueFormatted = null;
+			else ReceivedValueFormatted = ((value.Value.HighFirstUnsignedValue >> _zbBitNumber) & 0x01) == 0x01;
+		}
+
+		public BytesPair? ReceivedBytesValue
+		{
+			set
+			{
+				SetCurrentValue(value);
+			}
 		}
 	}
 }

@@ -1,14 +1,16 @@
+using AlienJust.Support.Collections;
+
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters {
-	class TextFormatterBits : ITextFormatter<ushort?> {
+	class TextFormatterBits : ITextFormatter<BytesPair?> {
 		private readonly string _nullFormat;
 
 		public TextFormatterBits(string nullFormat) {
 			_nullFormat = nullFormat;
 		}
 
-		public string Format(ushort? value) {
+		public string Format(BytesPair? value) {
 			if (!value.HasValue) return _nullFormat;
-			return Convert(value.Value);
+			return Convert(value.Value.HighFirstUnsignedValue);
 		}
 
 		string Convert(ushort x) {
