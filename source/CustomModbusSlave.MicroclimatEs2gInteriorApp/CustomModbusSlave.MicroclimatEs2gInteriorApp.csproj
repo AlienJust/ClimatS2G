@@ -214,6 +214,7 @@
     </Compile>
     <Compile Include="SetParams\AnyParameter\SettableAnyParameterViewModel.cs" />
     <Compile Include="SetParams\BytesPairToStringConverter.cs" />
+    <Compile Include="SetParams\IParameter.cs" />
     <Compile Include="SetParams\IReceivableParameter.cs" />
     <Compile Include="SetParams\SettableTemperatureParameterView.xaml.cs">
       <DependentUpon>SettableTemperatureParameterView.xaml</DependentUpon>
@@ -355,7 +356,6 @@
     <Compile Include="Ksm\UshortToDoubleConverterNcalc.cs" />
     <Compile Include="Ksm\ViewModel\IKsmBitParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\IKsmParameterViewModel.cs" />
-    <Compile Include="Ksm\ViewModel\ICurrentSettableKsmParameter.cs" />
     <Compile Include="Ksm\ViewModel\KsmBitParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\KsmBitsParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\KsmCommonWritableParameterViewModel.cs" />

@@ -1,23 +1,28 @@
-﻿using AlienJust.Support.ModelViewViewModel;
+﻿using AlienJust.Support.Concurrent.Contracts;
+using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters;
+using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel {
-	class KsmCommonWritableParameterViewModel : ViewModelBase, IKsmParameterViewModel {
-		private readonly int _zbParameterNumber;
+	class KsmCommonWritableParameterViewModel : SettableParameterViewModel {
+		//private readonly int _zbParameterNumber;
 		//private readonly IUshortToDoubleConverter _toDoubleValueConverter;
-		private readonly ITextFormatter<ushort?> _currentValueFormatter;
-		private ushort? _receivedValue;
+		//private readonly ITextFormatter<ushort?> _currentValueFormatter;
+		//private ushort? _receivedValue;
 
-		public KsmCommonWritableParameterViewModel(int zbParameterNumber, string name/*, IUshortToDoubleConverter toDoubleValueConverter*/, ITextFormatter<ushort?> currentValueFormatter) {
-			_zbParameterNumber = zbParameterNumber;
-			Name = name;
-			//_toDoubleValueConverter = toDoubleValueConverter;
-			_currentValueFormatter = currentValueFormatter;
-		}
+		public KsmCommonWritableParameterViewModel(int paramIndex, string name, double maxValue, double minValue, double? doubleValue, string stringFormat, IDoubleBytesPairConverter doubleBytesPairConverter, IParameterSetter parameterSetter, IThreadNotifier uiNotifier) : base(paramIndex, name, maxValue, minValue, doubleValue, stringFormat, doubleBytesPairConverter, parameterSetter, uiNotifier) { }
+
+		/*
+	public KsmCommonWritableParameterViewModel(int zbParameterNumber, string name, ITextFormatter<ushort?> currentValueFormatter) {
+		_zbParameterNumber = zbParameterNumber;
+		Name = name;
+		//_toDoubleValueConverter = toDoubleValueConverter;
+		_currentValueFormatter = currentValueFormatter;
+	}*/
 
 
 
-		public ushort? ReceivedValue {
+		/*public ushort? ReceivedValue {
 			get {
 				return _receivedValue;
 
@@ -31,16 +36,17 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel {
 					//RaisePropertyChanged(() => ReceivedValueDouble);
 				}
 			}
-		}
+		}*/
 
 		//public double? ReceivedValueDouble => _toDoubleValueConverter.Convert(_receivedValue);
 
-		public string ReceivedValueFormatted => _currentValueFormatter.Format(_receivedValue);
+		public string ReceivedValueFormatted => ReceivedDoubleValue == null ? null : ReceivedDoubleValue.Value.ToString(_receivedValue);
 
-		public string Name { get; }
+		//public string Name { get; }
 
-		public void SetCurrentValue(ushort? currentValue) {
-			ReceivedValue = currentValue;
-		}
+		//public void SetCurrentValue(ushort? currentValue) {
+			//ReceivedValue = currentValue;
+		//}
+		
 	}
 }
