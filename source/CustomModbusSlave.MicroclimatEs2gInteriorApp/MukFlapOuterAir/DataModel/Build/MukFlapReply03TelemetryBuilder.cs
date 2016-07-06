@@ -3,6 +3,7 @@ using AlienJust.Support.Collections;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 	class MukFlapReply03TelemetryBuilder : IBuilder<IMukFlapReply03Telemetry> {

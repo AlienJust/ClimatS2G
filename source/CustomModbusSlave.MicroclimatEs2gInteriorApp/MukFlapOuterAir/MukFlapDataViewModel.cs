@@ -5,6 +5,7 @@ using CustomModbusSlave.MicroclimatEs2gApp.Common;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Request16;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.SetParameters;
 
