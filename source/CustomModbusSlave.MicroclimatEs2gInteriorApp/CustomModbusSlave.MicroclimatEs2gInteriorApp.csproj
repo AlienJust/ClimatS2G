@@ -178,6 +178,7 @@
     </ApplicationDefinition>
     <Compile Include="IFastReplyAcceptor.cs" />
     <Compile Include="IFastReplyGenerator.cs" />
+    <Compile Include="Ksm\TextFormatters\TextFormatterSensor.cs" />
     <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsView.xaml.cs">
       <DependentUpon>MukAirExhausterSetParamsView.xaml</DependentUpon>
     </Compile>
