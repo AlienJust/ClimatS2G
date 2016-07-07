@@ -189,6 +189,7 @@
       <DependentUpon>MukFlapOuterAirSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsViewModel.cs" />
+    <Compile Include="MukFlapOuterAir\View\MukFlapOuterAirWorkmodeStageToStringConverter.cs" />
     <Compile Include="MukFlapOuterAir\View\SensorIndicationDoubleToStringConverter.cs" />
     <Compile Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapReturnAirSetParamsView.xaml</DependentUpon>
@@ -440,8 +441,8 @@
     <Compile Include="MukFlapOuterAir\View\IncomingSignalsView.xaml.cs">
       <DependentUpon>IncomingSignalsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlapOuterAir\View\MukFalpWorkmodeStageView.xaml.cs">
-      <DependentUpon>MukFalpWorkmodeStageView.xaml</DependentUpon>
+    <Compile Include="MukFlapOuterAir\View\MukFlapWorkmodeStageView.xaml.cs">
+      <DependentUpon>MukFlapWorkmodeStageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapOuterAir\View\MukFlapDiagnostic1View.xaml.cs">
       <DependentUpon>MukFlapDiagnostic1View.xaml</DependentUpon>
@@ -521,7 +522,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlapOuterAir\View\MukFalpWorkmodeStageView.xaml">
+    <Page Include="MukFlapOuterAir\View\MukFlapWorkmodeStageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

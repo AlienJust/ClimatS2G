@@ -1,5 +1,6 @@
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts.Enums;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.SimpleRelease {
 	class MukFlapWorkmodeStageSimple : IMukFlapWorkmodeStage {

@@ -15,8 +15,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 		public IMukFlapReply03Telemetry Build() {
 			var flapPosition = _data[3] * 256 + _data[4];
 
-			var temperatureAddress1 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 0.01, 0.0, new BytesPair(0x00, 0x85));
-			var temperatureAddress2 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[7], _data[8]), 0.01, 0.0, new BytesPair(0x00, 0x85));
+			var temperatureAddress1 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 0.01, 0.0, new BytesPair(0x85, 0x00));
+			var temperatureAddress2 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[7], _data[8]), 0.01, 0.0, new BytesPair(0x85, 0x00));
 
 			var incomingSignals = new IncomingSignalsBuilder(_data[10]).Build();
 			var outgoingSignals = _data[12];
