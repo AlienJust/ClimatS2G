@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.SimpleRelease;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 	class MukFlapReply03TelemetryBuilder : IBuilder<IMukFlapReply03Telemetry> {
@@ -15,8 +15,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 		public IMukFlapReply03Telemetry Build() {
 			var flapPosition = _data[3] * 256 + _data[4];
 
-			var temperatureAddress1 = new BytesPair(_data[5], _data[6]).HighFirstSignedValue * 0.01;
-			var temperatureAddress2 = new BytesPair(_data[7], _data[8]).HighFirstSignedValue * 0.01;
+			var temperatureAddress1 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 0.01, 0.0, new BytesPair(0x00, 0x85));
+			var temperatureAddress2 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[7], _data[8]), 0.01, 0.0, new BytesPair(0x00, 0x85));
 
 			var incomingSignals = new IncomingSignalsBuilder(_data[10]).Build();
 			var outgoingSignals = _data[12];

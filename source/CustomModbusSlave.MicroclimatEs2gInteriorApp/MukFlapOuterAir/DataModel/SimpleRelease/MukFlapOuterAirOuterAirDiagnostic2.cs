@@ -1,6 +1,6 @@
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease {
+namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.SimpleRelease {
 	class MukFlapOuterAirOuterAirDiagnostic2 : IMukFlapOuterAirDiagnostic2 {
 		public MukFlapOuterAirOuterAirDiagnostic2(bool innormalPressureValueCircuit1, bool innormalTemperatureValueCircuit1, bool innormalPressureValueCircuit2, bool innormalTemperatureValueCircuit2, bool osShowsFlapDoesNotReachLimitPositions, bool osShowsFlapDoesNotReach50Percent) {
 			

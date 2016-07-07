@@ -1,6 +1,7 @@
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts.Enums;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts {
+namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.SimpleRelease {
 	class MukFlapWorkmodeStageSimple : IMukFlapWorkmodeStage {
 		public MukFlapWorkmodeStageSimple(int absoluteValue) {
 			AbsoluteValue = absoluteValue;

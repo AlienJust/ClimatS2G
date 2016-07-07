@@ -5,7 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap.View"
              xmlns:views="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.Views;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
+             xmlns:view1="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.View"
              mc:Ignorable="d" d:DesignWidth="400">
+	<UserControl.Resources>
+		<view1:SensorIndicationDoubleToStringConverter x:Key="TemperatureConverter" Format="f2"/>
+	</UserControl.Resources>
 	<StackPanel>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -22,7 +26,7 @@
 				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Температура 1"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureAddress1, Mode=OneTime}"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureAddress1, Mode=OneTime, Converter={StaticResource TemperatureConverter}}"/>
 		</Grid>
 
 		<Grid>
@@ -31,7 +35,7 @@
 				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Температура 2"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneTime}"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureAddress2, Mode=OneTime, Converter={StaticResource TemperatureConverter}}"/>
 		</Grid>
 
 		<Border BorderThickness="1" BorderBrush="LightGray">

@@ -1,5 +1,5 @@
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.SimpleRelease;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build {
 	class IncomingSignalsBuilder : IBuilder<IIncomingSignals> {

@@ -1,6 +1,6 @@
 ﻿using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease {
+namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.SimpleRelease {
 	class EmersonDiagnosticCircuit1 : IEmersonDiagnosticCircuit1 {
 		public EmersonDiagnosticCircuit1(bool notAvailable, bool lowPressure, bool highOverheat, bool lowOverheat, bool freeze, bool maximumTemperature, bool minimumTemperature) {
 			NotAvailable = notAvailable;

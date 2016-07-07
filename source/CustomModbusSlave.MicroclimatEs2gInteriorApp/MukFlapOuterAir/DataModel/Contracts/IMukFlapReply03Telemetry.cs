@@ -4,8 +4,8 @@ using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts {
 	internal interface IMukFlapReply03Telemetry {
 		int FlapPosition { get; }
-		double TemperatureAddress1 { get; }
-		double TemperatureAddress2 { get; }
+		ISensorIndication<double> TemperatureAddress1 { get; }
+		ISensorIndication<double> TemperatureAddress2 { get; }
 		IIncomingSignals IncomingSignals { get; }
 		byte OutgoingSignals { get; }
 		double AnalogInput { get; }
