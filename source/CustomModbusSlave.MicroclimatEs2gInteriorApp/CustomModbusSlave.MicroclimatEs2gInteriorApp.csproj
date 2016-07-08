@@ -191,7 +191,7 @@
     </Compile>
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsViewModel.cs" />
     <Compile Include="MukFlapOuterAir\View\MukFlapOuterAirWorkmodeStageToStringConverter.cs" />
-    <Compile Include="MukFlapOuterAir\View\SensorIndicationDoubleToStringConverter.cs" />
+    <Compile Include="SensorIndicationDoubleToStringConverter.cs" />
     <Compile Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapReturnAirSetParamsView.xaml</DependentUpon>
     </Compile>
@@ -222,6 +222,8 @@
     <Compile Include="SetParams\BytesPairToStringConverter.cs" />
     <Compile Include="SetParams\IDisplayableParameter.cs" />
     <Compile Include="SetParams\IParameter.cs" />
+    <Compile Include="SetParams\IReceivableModbusCustomParameter.cs" />
+    <Compile Include="SetParams\IReceivableModbusRtuParameter.cs" />
     <Compile Include="SetParams\IReceivableParameter.cs" />
     <Compile Include="SetParams\ISettableBytesPairtParameter.cs" />
     <Compile Include="SetParams\ISettableByUserParameter.cs" />

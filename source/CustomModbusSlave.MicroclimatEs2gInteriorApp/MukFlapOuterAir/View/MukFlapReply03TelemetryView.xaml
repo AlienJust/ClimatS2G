@@ -6,9 +6,10 @@
              xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap.View"
              xmlns:views="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.Views;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
              xmlns:view1="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.View"
+             xmlns:microclimatEs2GApp="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp"
              mc:Ignorable="d" d:DesignWidth="400">
 	<UserControl.Resources>
-		<view1:SensorIndicationDoubleToStringConverter x:Key="TemperatureConverter" Format="f2"/>
+		<microclimatEs2GApp:SensorIndicationDoubleToStringConverter x:Key="TemperatureConverter" Format="f2"/>
 	</UserControl.Resources>
 	<StackPanel>
 		<Grid>
