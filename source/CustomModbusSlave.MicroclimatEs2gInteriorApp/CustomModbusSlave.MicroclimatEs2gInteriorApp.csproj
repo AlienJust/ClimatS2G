@@ -220,8 +220,11 @@
     </Compile>
     <Compile Include="SetParams\AnyParameter\SettableAnyParameterViewModel.cs" />
     <Compile Include="SetParams\BytesPairToStringConverter.cs" />
+    <Compile Include="SetParams\IDisplayableParameter.cs" />
     <Compile Include="SetParams\IParameter.cs" />
     <Compile Include="SetParams\IReceivableParameter.cs" />
+    <Compile Include="SetParams\ISettableBytesPairtParameter.cs" />
+    <Compile Include="SetParams\ISettableByUserParameter.cs" />
     <Compile Include="SetParams\SettableTemperatureParameterView.xaml.cs">
       <DependentUpon>SettableTemperatureParameterView.xaml</DependentUpon>
     </Compile>
@@ -361,7 +364,6 @@
     <Compile Include="Ksm\TextFormatters\TextFormatterWorkStage.cs" />
     <Compile Include="Ksm\UshortToDoubleConverterNcalc.cs" />
     <Compile Include="Ksm\ViewModel\IKsmBitParameterViewModel.cs" />
-    <Compile Include="Ksm\ViewModel\IKsmParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\KsmBitParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\KsmBitsParameterViewModel.cs" />
     <Compile Include="Ksm\ViewModel\KsmCommonWritableParameterViewModel.cs" />

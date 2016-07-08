@@ -33,9 +33,9 @@
 			</Grid.ColumnDefinitions>
 			<TextBlock Grid.Column="0" Text="{Binding Path=ParamIndex, Mode=OneTime}" Margin="2" VerticalAlignment="Center"/>
 			<TextBlock Grid.Column="1" Text="{Binding Path=Name, Mode=OneTime}" Margin="2" VerticalAlignment="Center"/>
-			<TextBlock Grid.Column="2" Text="{Binding Path=ReceivedDoubleValue, Mode=OneWay}" TextAlignment="Right" Margin="2" VerticalAlignment="Center"/>
+			<TextBlock Grid.Column="2" Text="{Binding Path=ReceivedValueFormatted, Mode=OneWay}" TextAlignment="Right" Margin="2" VerticalAlignment="Center"/>
 		</Grid>
-		<xctk:DoubleUpDown Grid.Column="1" Value="{Binding Path=DoubleValue, Mode=TwoWay}" Maximum="{Binding Path=MaxValue, Mode=OneTime}" Minimum="{Binding Path=MinValue, Mode=OneTime}" FormatString="{Binding Path=StringFormat, Mode=OneTime}"/>
+		<xctk:DoubleUpDown Grid.Column="1" Value="{Binding Path=FormattedValue, Mode=TwoWay}" Maximum="{Binding Path=MaxValue, Mode=OneTime}" Minimum="{Binding Path=MinValue, Mode=OneTime}" FormatString="{Binding Path=StringFormat, Mode=OneTime}"/>
 		<Button Grid.Column="2" Content="Set" Command="{Binding Path=SetCommand, Mode=OneTime}"/>
 		<Button Grid.Column="3" Content="Reset" Command="{Binding Path=ResetCommand, Mode=OneTime}"/>
 	</Grid>

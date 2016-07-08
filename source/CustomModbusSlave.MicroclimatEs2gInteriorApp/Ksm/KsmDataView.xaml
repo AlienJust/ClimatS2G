@@ -9,13 +9,6 @@
              xmlns:setParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SetParams"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-	<UserControl.Resources>
-
-		<!--<templateSelector:KsmParameterViewSelector
-            KsmCommonWritableParameterDataTemplate="{StaticResource addTemplate}"
-            KsmBitsParameterDataTemplate="{StaticResource editTemplate}"
-            x:Key="ksmParameterViewSelector" />-->
-	</UserControl.Resources>
 	<ScrollViewer>
 		<StackPanel Orientation="Vertical">
 			<ListBox ItemsSource="{Binding Path=ParameterVmList, Mode=OneTime}">
@@ -26,15 +19,11 @@
 					<DataTemplate DataType="{x:Type vm:KsmBitsParameterViewModel}">
 						<local:KsmReadonlyBitsParameterView />
 					</DataTemplate>
-				</ListBox.Resources>
-			</ListBox>
-			<ListBox ItemsSource="{Binding Path=SettableParameterVmList, Mode=OneTime}">
-				<ListBox.Resources>
 					<DataTemplate DataType="{x:Type setParams:SettableTemperatureParameterViewModel}">
 						<setParams:SettableTemperatureParameterView />
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type setParams:SettableParameterViewModel}">
-						<setParams:SettableParameterView/>
+						<setParams:SettableParameterView />
 					</DataTemplate>
 				</ListBox.Resources>
 			</ListBox>

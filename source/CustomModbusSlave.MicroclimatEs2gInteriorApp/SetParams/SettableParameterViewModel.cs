@@ -7,23 +7,23 @@ using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
-	class SettableParameterViewModel : ViewModelBase, IReceivableParameter<double?>, ISettableByUserParameter<double?>, ISettableBytesPairtParameter { 
+	class SettableParameterViewModel : ViewModelBase, IReceivableParameter, IDisplayableParameter<double?>, ISettableByUserParameter<double?>, ISettableBytesPairtParameter {
 		private readonly IDoubleBytesPairConverter _doubleBytesPairConverter;
 		private readonly IParameterSetter _parameterSetter;
 		private readonly IThreadNotifier _uiNotifier;
 		private double? _formattedValue;
-		private double? _receivedValueFormatted;
 		private readonly RelayCommand _resetCommand;
 		private readonly RelayCommand _setCommand;
 		private bool _isEnabled;
 		private Colors _lastOperationColor;
+		private BytesPair? _receivedBytesValue;
 
 
 		public int ParamIndex { get; }
 		public string Name { get; }
 		public double MaxValue { get; }
 		public double MinValue { get; }
-		
+
 		public string StringFormat { get; set; }
 
 		public SettableParameterViewModel(int paramIndex, string name, double maxValue, double minValue, double? formattedValue, string stringFormat, IDoubleBytesPairConverter doubleBytesPairConverter, IParameterSetter parameterSetter, IThreadNotifier uiNotifier) {
@@ -37,11 +37,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 			FormattedValue = formattedValue;
 			StringFormat = stringFormat;
 
-			_receivedValueFormatted = null;
 			_isEnabled = true;
 			_lastOperationColor = Colors.Transparent;
 
-			_resetCommand = new RelayCommand(Reset, ()=>_receivedValueFormatted.HasValue);
+			_resetCommand = new RelayCommand(Reset, () => ReceivedValueFormatted.HasValue);
 			_setCommand = new RelayCommand(Set, () => _formattedValue.HasValue && IsEnabled);
 		}
 
@@ -70,90 +69,74 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 			});
 		}
 
-		public bool IsEnabled
-		{
+		public bool IsEnabled {
 			get { return _isEnabled; }
-			set
-			{
+			set {
 				if (_isEnabled != value) {
 					_isEnabled = value;
-					RaisePropertyChanged(()=>IsEnabled);
+					RaisePropertyChanged(() => IsEnabled);
 					_setCommand.RaiseCanExecuteChanged();
 				}
 			}
 		}
 
 		private void Reset() {
-			FormattedValue = _receivedValueFormatted;
+			FormattedValue = ReceivedValueFormatted;
 		}
 
-		public double? FormattedValue
-		{
-			get
-			{
-				return _formattedValue; 
-				
+		public double? FormattedValue {
+			get {
+				return _formattedValue;
+
 			}
-			set
-			{
+			set {
 				if (_formattedValue != value) {
 					_formattedValue = value;
-					RaisePropertyChanged(()=>FormattedValue);
+					RaisePropertyChanged(() => FormattedValue);
 					RaisePropertyChanged(() => BytesValue);
 					_setCommand.RaiseCanExecuteChanged();
 				}
-				
+
 			}
 		}
 
-		public BytesPair? BytesValue
-		{
-			get
-			{
+		public BytesPair? BytesValue {
+			get {
 				if (!_formattedValue.HasValue) return null;
 				return _doubleBytesPairConverter.ConvertToBytesPairHighFirst(_formattedValue.Value);
 			}
-			set
-			{
+			set {
 				// used property FormattedValue instead of field _formattedValue to raise property changed event if needed
 				if (!value.HasValue) FormattedValue = null;
 				else FormattedValue = _doubleBytesPairConverter.ConvertToDoubleHighFirst(value.Value);
 			}
 		}
 
-		public double? ReceivedValueFormatted
-		{
-			get { return _receivedValueFormatted; }
-			set
-			{
-				if (_receivedValueFormatted != value) {
-					_receivedValueFormatted = value;
-					RaisePropertyChanged(()=> ReceivedValueFormatted);
-					RaisePropertyChanged(() => ReceivedBytesValue);
-					_resetCommand.RaiseCanExecuteChanged();
-				}
+		public double? ReceivedValueFormatted {
+			get {
+				if (!_receivedBytesValue.HasValue) return null;
+				return _doubleBytesPairConverter.ConvertToDoubleHighFirst(_receivedBytesValue.Value);
 			}
 		}
 
 		public BytesPair? ReceivedBytesValue {
-			get {
-				if (!_receivedValueFormatted.HasValue) return null;
-				return _doubleBytesPairConverter.ConvertToBytesPairHighFirst(_receivedValueFormatted.Value);
-			}
 			set {
-				// used property FormattedValue instead of field _formattedValue to raise property changed event if needed
-				if (!value.HasValue) ReceivedValueFormatted = null;
-				else ReceivedValueFormatted = _doubleBytesPairConverter.ConvertToDoubleHighFirst(value.Value);
+				if (_receivedBytesValue != value) {
+					_receivedBytesValue = value;
+
+					RaisePropertyChanged(() => ReceivedValueFormatted);
+					_resetCommand.RaiseCanExecuteChanged();
+					//_setCommand.RaiseCanExecuteChanged();
+				}
 			}
 		}
 
 		public Colors LastOperationColor {
 			get { return _lastOperationColor; }
-			set
-			{
+			set {
 				if (_lastOperationColor != value) {
 					_lastOperationColor = value;
-					RaisePropertyChanged(()=> LastOperationColor);
+					RaisePropertyChanged(() => LastOperationColor);
 				}
 			}
 		}

@@ -1,9 +1,10 @@
 ﻿using AlienJust.Support.Collections;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters;
+using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel {
-	class KsmCommonWritableParameterViewModel : ViewModelBase, IKsmParameterViewModel {
+	class KsmCommonWritableParameterViewModel : ViewModelBase, IReceivableParameter, IDisplayableParameter<string> {
 		private readonly int _zbParameterNumber;
 		private readonly ITextFormatter<BytesPair?> _currentValueFormatter;
 		private BytesPair? _receivedValue;

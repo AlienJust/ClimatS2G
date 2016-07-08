@@ -11,13 +11,13 @@ using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 	class KsmDataViewModel : ViewModelBase, IParameterSetter, IAllParametersAccepter {
 		private readonly BlockingCollection<Tuple<int, ushort, Action<Exception>>> _itemsToWrite;
-		private readonly List<IKsmParameterViewModel> _parameterVmList;
-		private readonly List<SettableParameterViewModel> _settableParameterVmList;
+		private readonly List<IReceivableParameter> _parameterVmList;
+		//private readonly List<SettableParameterViewModel> _settableParameterVmList;
 		private const string UnknownBits = "xxxx xxxx xxxx xxxx";
 
 		public KsmDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_itemsToWrite = new BlockingCollection<Tuple<int, ushort, Action<Exception>>>();
-			_parameterVmList = new List<IKsmParameterViewModel> {
+			_parameterVmList = new List<IReceivableParameter> {
 				new KsmCommonWritableParameterViewModel(0, "Датчик 1wire №1", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85,0x00), "f2", "хз", "обрыв"))
 				, new KsmCommonWritableParameterViewModel(1, "Датчик 1wire №2 ", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85,0x00), "f2", "хз", "обрыв"))
 				, new KsmCommonWritableParameterViewModel(2, "Резерв", new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
@@ -131,32 +131,32 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 
 
 
-			_settableParameterVmList = new List<SettableParameterViewModel>();
+			//_settableParameterVmList = new List<SettableParameterViewModel>();
 
-			_settableParameterVmList.Add(new SettableParameterViewModel(35, "Максимальный ШИМ (PWMmax_cool)", 255, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_settableParameterVmList.Add(new SettableParameterViewModel(36, "Минимальный ШИМ (PWMmin_cool)", 255, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(35, "Максимальный ШИМ (PWMmax_cool)", 255, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(36, "Минимальный ШИМ (PWMmin_cool)", 255, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
 
-			_settableParameterVmList.Add(new SettableParameterViewModel(37, "Дельта + (plus_cool)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_settableParameterVmList.Add(new SettableParameterViewModel(38, "Дельта - (minus_cool)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(37, "Дельта + (plus_cool)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(38, "Дельта - (minus_cool)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
 
-			_settableParameterVmList.Add(new SettableParameterViewModel(39, "Обеззараживатель, почасовой счетчик работы (CounterCleaner)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_settableParameterVmList.Add(new SettableParameterViewModel(40, "Компрессор этого сегмента, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_settableParameterVmList.Add(new SettableParameterViewModel(41, "Компрессор, счетчик перевключений", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_settableParameterVmList.Add(new SettableParameterViewModel(42, "Вентилятор конденсатора 1, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_settableParameterVmList.Add(new SettableParameterViewModel(43, "Вентилятор конденсатора 2, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_settableParameterVmList.Add(new SettableParameterViewModel(44, "Отопитель 380 в., почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_settableParameterVmList.Add(new SettableParameterViewModel(45, "Отопитель 3000 в., почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_settableParameterVmList.Add(new SettableParameterViewModel(46, "Вентилятор приточного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_settableParameterVmList.Add(new SettableParameterViewModel(47, "Вентилятор отработанного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(39, "Обеззараживатель, почасовой счетчик работы (CounterCleaner)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(40, "Компрессор этого сегмента, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(41, "Компрессор, счетчик перевключений", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(42, "Вентилятор конденсатора 1, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(43, "Вентилятор конденсатора 2, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(44, "Отопитель 380 в., почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(45, "Отопитель 3000 в., почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(46, "Вентилятор приточного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(47, "Вентилятор отработанного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
 
 
 			for (int i = 48; i < 60; ++i) {
-				_settableParameterVmList.Add(new SettableParameterViewModel(i, "Параметр", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+				_parameterVmList.Add(new SettableParameterViewModel(i, "Параметр", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
 			}
 		}
 
-		public List<IKsmParameterViewModel> ParameterVmList => _parameterVmList;
-		public List<SettableParameterViewModel> SettableParameterVmList => _settableParameterVmList;
+		public List<IReceivableParameter> ParameterVmList => _parameterVmList;
+		//public List<SettableParameterViewModel> SettableParameterVmList => _settableParameterVmList;
 
 		public void SetParameterAsync(int zeroBasedParameterNumber, ushort value, Action<Exception> callback) {
 			// тут должна быть очередь потокобезопасная
@@ -166,13 +166,13 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 
 		public void AcceptCommandAllParameters(IList<byte> bytes) {
 			// update all parameters
-			for (int i = 0; i < 35; ++i) {
+			for (int i = 0; i < 60; ++i) {
 				_parameterVmList[i].ReceivedBytesValue = new BytesPair(bytes[7 + i * 2], bytes[8 + i * 2]);//(ushort)(bytes[7 + i * 2] * 256.0 + bytes[8 + i * 2]));
 			}
 
-			for (int i = 35; i < 60; ++i) {
-				_settableParameterVmList[i - 35].ReceivedBytesValue = new BytesPair(bytes[7 + i*2], bytes[8 + i*2]);
-			}
+			//for (int i = 35; i < 60; ++i) {
+				//_settableParameterVmList[i - 35].ReceivedBytesValue = new BytesPair(bytes[7 + i*2], bytes[8 + i*2]);
+			//}
 		}
 	}
 }
