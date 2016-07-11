@@ -1,6 +1,7 @@
 using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.SensorIndications;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.SimpleRelease {
 	class MukFlapReply03Telemetry : IMukFlapReply03Telemetry {

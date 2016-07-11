@@ -1,6 +1,6 @@
 using System;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts {
+namespace CustomModbusSlave.MicroclimatEs2gApp.SensorIndications {
 	class SensorIndicationBase<T> : ISensorIndication<T> {
 		private T _indication;
 		public bool NoLinkWithSensor { get; set; }

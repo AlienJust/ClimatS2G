@@ -183,15 +183,15 @@
       <DependentUpon>MukAirExhausterSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsViewModel.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\ISensorIndication.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\SensorIndicationBase.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\SensorIndicationDoubleBasedOnBytesPair.cs" />
+    <Compile Include="SensorIndications\ISensorIndication.cs" />
+    <Compile Include="SensorIndications\SensorIndicationBase.cs" />
+    <Compile Include="SensorIndications\SensorIndicationDoubleBasedOnBytesPair.cs" />
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapOuterAirSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsViewModel.cs" />
     <Compile Include="MukFlapOuterAir\View\MukFlapOuterAirWorkmodeStageToStringConverter.cs" />
-    <Compile Include="SensorIndicationDoubleToStringConverter.cs" />
+    <Compile Include="SensorIndications\SensorIndicationDoubleToStringConverter.cs" />
     <Compile Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapReturnAirSetParamsView.xaml</DependentUpon>
     </Compile>

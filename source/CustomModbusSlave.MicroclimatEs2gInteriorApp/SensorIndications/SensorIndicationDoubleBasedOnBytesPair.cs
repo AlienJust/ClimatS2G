@@ -1,7 +1,8 @@
 using System;
 using AlienJust.Support.Collections;
+using CustomModbusSlave.MicroclimatEs2gApp.SensorIndications;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts {
+namespace CustomModbusSlave.MicroclimatEs2gApp {
 	class SensorIndicationDoubleBasedOnBytesPair : ISensorIndication<double> {
 		private readonly BytesPair _valueFirstHi;
 		private readonly double _modifier;

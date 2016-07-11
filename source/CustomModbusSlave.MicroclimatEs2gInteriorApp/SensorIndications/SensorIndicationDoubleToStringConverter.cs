@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp {
+namespace CustomModbusSlave.MicroclimatEs2gApp.SensorIndications {
 	[ValueConversion(typeof(double), typeof(int))]
 	class SensorIndicationDoubleToStringConverter : IValueConverter {
 		#region IValueConverter Members

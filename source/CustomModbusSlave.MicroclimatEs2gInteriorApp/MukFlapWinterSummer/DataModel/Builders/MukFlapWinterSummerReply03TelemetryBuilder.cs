@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AlienJust.Support.Collections;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DataModel.Builders;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build;
@@ -15,8 +16,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.DataModel.Bui
 		public IMukFlapWinterSummerReply03Telemetry Build() {
 			var flapPwmSetting = _data[3] * 256 + _data[4];
 
-			var temperatureAddress1 = (_data[6] + _data[5] * 256) * 0.01;
-			var temperatureAddress2 = (_data[8] + _data[7] * 256) * 0.01;
+			var temperatureAddress1 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 0.01, 0.0, new BytesPair(0x85,0x00));
+			var temperatureAddress2 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[7], _data[8]), 0.01, 0.0, new BytesPair(0x85, 0x00));
 
 			var incomingSignals = new IncomingSignalsBuilder(_data[10]).Build();
 			var outgoingSignals = _data[12];

@@ -3,10 +3,11 @@ using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.DataModel.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.SensorIndications;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.DataModel.SimpleReleases {
 	class MukFlapWinterSummerReply03Telemetry : IMukFlapWinterSummerReply03Telemetry {
-		public MukFlapWinterSummerReply03Telemetry(int flapPwmSetting, double temperatureAddress1, double temperatureAddress2, IIncomingSignals incomingSignals, byte outgoingSignals, double analogInput, IMukFlapWorkmodeStage automaticModeStage, IMukFlapDiagnostic1 diagnostic1, IMukFlapDiagnostic2 diagnostic2, IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1, IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2, int reserve11, int reserve12, int reserve13, int reserve14, int reserve15, int reserve16, int reserve17, int reserve18, int firmwareBuildNumber, int reserve20) {
+		public MukFlapWinterSummerReply03Telemetry(int flapPwmSetting, ISensorIndication<double> temperatureAddress1, ISensorIndication<double> temperatureAddress2, IIncomingSignals incomingSignals, byte outgoingSignals, double analogInput, IMukFlapWorkmodeStage automaticModeStage, IMukFlapDiagnostic1 diagnostic1, IMukFlapDiagnostic2 diagnostic2, IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1, IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2, int reserve11, int reserve12, int reserve13, int reserve14, int reserve15, int reserve16, int reserve17, int reserve18, int firmwareBuildNumber, int reserve20) {
 			FlapPwmSetting = flapPwmSetting;
 			TemperatureAddress1 = temperatureAddress1;
 			TemperatureAddress2 = temperatureAddress2;
@@ -31,8 +32,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.DataModel.Sim
 		}
 
 		public int FlapPwmSetting { get; }
-		public double TemperatureAddress1 { get; }
-		public double TemperatureAddress2 { get; }
+		public ISensorIndication<double> TemperatureAddress1 { get; }
+		public ISensorIndication<double> TemperatureAddress2 { get; }
 		public IIncomingSignals IncomingSignals { get; }
 		public byte OutgoingSignals { get; }
 		public double AnalogInput { get; }

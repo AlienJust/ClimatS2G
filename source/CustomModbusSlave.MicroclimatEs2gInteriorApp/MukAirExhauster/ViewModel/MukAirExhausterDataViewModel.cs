@@ -3,6 +3,7 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
+using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data;
 using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.SetParameters;
 

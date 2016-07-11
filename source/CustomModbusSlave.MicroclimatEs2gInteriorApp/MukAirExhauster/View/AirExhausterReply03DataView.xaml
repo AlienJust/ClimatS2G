@@ -4,8 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.View"
+             xmlns:microclimatEs2GApp="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp"
+             xmlns:sensorIndications="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SensorIndications"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+	<UserControl.Resources>
+		<sensorIndications:SensorIndicationDoubleToStringConverter x:Key="TemperatureConverter" Format="f2"/>
+	</UserControl.Resources>
 	<StackPanel Orientation="Vertical">
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -22,7 +27,7 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Температура 1W"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureOneWire, Mode=OneTime}" TextAlignment="Right"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureOneWire, Mode=OneTime, Converter={StaticResource TemperatureConverter}}" TextAlignment="Right"/>
 		</Grid>
 
 		<Grid>
