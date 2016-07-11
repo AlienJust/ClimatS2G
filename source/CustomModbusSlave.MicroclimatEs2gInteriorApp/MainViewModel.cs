@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
+using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
@@ -24,6 +25,8 @@ using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFridge;
 using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer;
+using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizerFan;
+using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using DataAbstractionLevel.Low.PsnConfig;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp
@@ -48,6 +51,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private readonly IFastReplyGenerator _replyGenerator;
 		private readonly IFastReplyAcceptor _replyAcceptor;
 
+		private readonly ModbusRtuParamReceiver _rtuParamReceiver;
+
 		private bool _isPortOpened;
 
 		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
@@ -56,6 +61,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem) {
 			_notifier = notifier;
 			_windowSystem = windowSystem;
+
+			_rtuParamReceiver = new ModbusRtuParamReceiver();
 
 			_openPortCommand = new RelayCommand(OpenPort, () => !_isPortOpened);
 			_closePortCommand = new RelayCommand(ClosePort, () => _isPortOpened);
@@ -71,8 +78,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 				new CommandPartSearcherPsnConfigBasedFast(psnConfig),
 				portConatiner, portConatiner);
 
-			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
-			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
+			
 
 			var replyGenerator = new ReplyGeneratorWithQueueAttempted(_notifier);
 			_paramSetter = replyGenerator;
@@ -80,7 +86,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_replyAcceptor = replyGenerator;
 
 			MukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
-			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModel(_notifier, _paramSetter);
+			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModelParamcentric(_notifier, _paramSetter, null, _rtuParamReceiver);
 			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter);
 			MukAirExhausterDataVm = new MukAirExhausterDataViewModel(_notifier, _paramSetter);
 			MukFlapReturnAirDataVm = new MukFlapReturnAirViewModel(_notifier, _paramSetter);
@@ -91,6 +97,9 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			BvsDataVm2 = new BvsDataViewModel(_notifier, 0x1D);
 
 			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter);
+
+			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
+			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
 			_commandHearedTimeoutMonitor = new CommandHearedTimerThreadSafe(_serialChannel, TimeSpan.FromSeconds(1), _notifier);
 			_commandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
@@ -103,8 +112,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 			var testItems = new List<IGroupItem>();
 			TestGroup = new GroupSimple("Тестовая группа", testItems);
-
-			testItems.Add(new ParameterSimple("Тестовый параметр", TestGroup));
 		}
 
 		private void CommandHearedTimeoutMonitorOnSomeCommandWasHeared() {
@@ -139,6 +146,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
 			_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
+
+			_rtuParamReceiver.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 
 			MukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			MukVaporizerFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
@@ -227,7 +236,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 		public MukFlapDataViewModel MukFlapDataVm { get; }
 
-		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm { get; }
+		public MukVaporizerFanDataViewModelParamcentric MukVaporizerFanDataVm { get; }
 
 		public MukFridgeFanDataViewModel MukFridgeFanDataVm { get; }
 
@@ -266,5 +275,31 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		}
 
 		public IGroup TestGroup { get; }
+	}
+
+	class ModbusRtuParamReceiver : IReceiverModbusRtu, ICommandListener {
+		private readonly List<IReceivableModbusRtuParameter> _params;
+		public ModbusRtuParamReceiver() {
+			_params = new List<IReceivableModbusRtuParameter>();
+		}
+
+		public void RegisterParamToReceive(IReceivableModbusRtuParameter parameter) {
+			_params.Add(parameter);
+		}
+
+		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
+			if (data.Count%2 != 0) { // ответ ModbusRTU всегда нечетный! (запрос чётный)
+				foreach (var parameter in _params) {
+					if (parameter.Address == addr && parameter.CommandCode == code) {
+						try {
+							parameter.ReceivedBytesValue = new BytesPair(data[3 + parameter.ZeroBasedParameterNumber*2], data[4 + parameter.ZeroBasedParameterNumber*2]);
+						}
+						catch {
+							// ignored
+						}
+					}
+				}
+			}
+		}
 	}
 }

@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-	xmlns:setParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SetParams"
+	xmlns:setParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SetParams;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
 	mc:Ignorable="d" 
 	d:DesignHeight="264" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
@@ -15,6 +15,6 @@
 		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam232, Mode=OneTime}"/>
 		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam233, Mode=OneTime}"/>
 		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam234, Mode=OneTime}"/>
-		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam235, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding SettableParam235, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>

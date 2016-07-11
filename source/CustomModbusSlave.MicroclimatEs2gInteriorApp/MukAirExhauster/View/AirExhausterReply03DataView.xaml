@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.View"
-             xmlns:microclimatEs2GApp="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp"
-             xmlns:sensorIndications="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SensorIndications"
+             xmlns:sensorIndications="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SensorIndications;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<UserControl.Resources>

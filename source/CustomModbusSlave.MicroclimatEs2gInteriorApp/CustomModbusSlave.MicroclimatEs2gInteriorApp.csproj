@@ -178,20 +178,16 @@
     </ApplicationDefinition>
     <Compile Include="IFastReplyAcceptor.cs" />
     <Compile Include="IFastReplyGenerator.cs" />
-    <Compile Include="Ksm\TextFormatters\TextFormatterSensor.cs" />
     <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsView.xaml.cs">
       <DependentUpon>MukAirExhausterSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsViewModel.cs" />
-    <Compile Include="SensorIndications\ISensorIndication.cs" />
-    <Compile Include="SensorIndications\SensorIndicationBase.cs" />
-    <Compile Include="SensorIndications\SensorIndicationDoubleBasedOnBytesPair.cs" />
+    <Compile Include="MukVaporizerFan\MukVaporizerFanDataViewModelParamcentric.cs" />
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapOuterAirSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsViewModel.cs" />
     <Compile Include="MukFlapOuterAir\View\MukFlapOuterAirWorkmodeStageToStringConverter.cs" />
-    <Compile Include="SensorIndications\SensorIndicationDoubleToStringConverter.cs" />
     <Compile Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapReturnAirSetParamsView.xaml</DependentUpon>
     </Compile>
@@ -204,10 +200,10 @@
       <DependentUpon>MukFridgeSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFridge\SetParameters\MukFridgeSetParamsViewModel.cs" />
-    <Compile Include="MukVaporizer\SetParameters\MukVaporizerSetParamsView.xaml.cs">
+    <Compile Include="MukVaporizerFan\SetParameters\MukVaporizerSetParamsView.xaml.cs">
       <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukVaporizer\SetParameters\MukVaporizerSetParamsViewModel.cs" />
+    <Compile Include="MukVaporizerFan\SetParameters\MukVaporizerSetParamsViewModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -215,27 +211,6 @@
     </Compile>
     <Compile Include="QueueItem.cs" />
     <Compile Include="ReplyGeneratorWithQueueAttempted.cs" />
-    <Compile Include="SetParams\AnyParameter\SettableAnyParameterView.xaml.cs">
-      <DependentUpon>SettableAnyParameterView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SetParams\AnyParameter\SettableAnyParameterViewModel.cs" />
-    <Compile Include="SetParams\BytesPairToStringConverter.cs" />
-    <Compile Include="SetParams\IDisplayableParameter.cs" />
-    <Compile Include="SetParams\IParameter.cs" />
-    <Compile Include="SetParams\IReceivableModbusCustomParameter.cs" />
-    <Compile Include="SetParams\IReceivableModbusRtuParameter.cs" />
-    <Compile Include="SetParams\IReceivableParameter.cs" />
-    <Compile Include="SetParams\ISettableBytesPairtParameter.cs" />
-    <Compile Include="SetParams\ISettableByUserParameter.cs" />
-    <Compile Include="SetParams\SettableTemperatureParameterView.xaml.cs">
-      <DependentUpon>SettableTemperatureParameterView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SetParams\SettableParameterView.xaml.cs">
-      <DependentUpon>SettableParameterView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SetParams\SettableParameterViewModel.cs" />
-    <Compile Include="SetParams\BytesPairToTemperatureConverter.cs" />
-    <Compile Include="SetParams\SettableTemperatureParameterViewModel.cs" />
     <Page Include="BsSm\BsSmDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,21 +251,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ksm\KsmReadonlyBitsParameterView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Ksm\KsmDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Ksm\KsmReadonlyCommonParameterView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Ksm\KsmReadonlyBitView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -348,38 +311,10 @@
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
     <Compile Include="BsSm\ThrowableClimaticSystemWorkModeToStringConverter.cs" />
     <Compile Include="BsSm\TelemetryIsNullException.cs" />
-    <Compile Include="Ksm\DoubleBytesPairConverterSimpleUshort.cs" />
-    <Compile Include="Ksm\TextFormatters\TextFormatterBits.cs" />
-    <Compile Include="Ksm\TextFormatters\TextFormatterNcalcDouble.cs" />
-    <Compile Include="Ksm\TextFormatters\TextFormatterSimple.cs" />
-    <Compile Include="Ksm\IAllParametersAccepter.cs" />
-    <Compile Include="Ksm\ICurrentValueSettable.cs" />
-    <Compile Include="Ksm\TextFormatters\ITextFormatter.cs" />
-    <Compile Include="Ksm\IDoubleBytesPairConverter.cs" />
-    <Compile Include="Ksm\IParameterRoot.cs" />
-    <Compile Include="Ksm\IParameterSetter.cs" />
-    <Compile Include="Ksm\IUshortToDoubleConverter.cs" />
-    <Compile Include="Ksm\KsmReadonlyBitsParameterView.xaml.cs">
-      <DependentUpon>KsmReadonlyBitsParameterView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Ksm\TemplateSelector\KsmParameterViewSelector.cs" />
-    <Compile Include="Ksm\TextFormatters\TextFormatterWorkStage.cs" />
-    <Compile Include="Ksm\UshortToDoubleConverterNcalc.cs" />
-    <Compile Include="Ksm\ViewModel\IKsmBitParameterViewModel.cs" />
-    <Compile Include="Ksm\ViewModel\KsmBitParameterViewModel.cs" />
-    <Compile Include="Ksm\ViewModel\KsmBitsParameterViewModel.cs" />
-    <Compile Include="Ksm\ViewModel\KsmCommonWritableParameterViewModel.cs" />
     <Compile Include="Ksm\KsmDataView.xaml.cs">
       <DependentUpon>KsmDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ksm\KsmDataViewModel.cs" />
-    <Compile Include="Ksm\KsmReadonlyCommonParameterView.xaml.cs">
-      <DependentUpon>KsmReadonlyCommonParameterView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Ksm\KsmReadonlyBitView.xaml.cs">
-      <DependentUpon>KsmReadonlyBitView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Ksm\KsmReadonlyBitViewModel.cs" />
     <Compile Include="MukAirExhauster\BuildAndConvert\EnumAutomaticStageModeConverter.cs" />
     <Compile Include="MukAirExhauster\Data\AutomaticStageModeBuilder.cs" />
     <Compile Include="MukAirExhauster\Data\AutomaticStageModeExtensions.cs" />
@@ -575,7 +510,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukVaporizer\MukVaporizerFanDataView.xaml">
+    <Page Include="MukVaporizerFan\MukVaporizerFanDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -583,49 +518,37 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukVaporizer\Request16\KsmCommandWorkmodeView.xaml">
+    <Page Include="MukVaporizerFan\Request16\KsmCommandWorkmodeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukVaporizer\Request16\Request16DataView.xaml">
+    <Page Include="MukVaporizerFan\Request16\Request16DataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukVaporizer\SetParameters\MukVaporizerSetParamsView.xaml">
+    <Page Include="MukVaporizerFan\SetParameters\MukVaporizerSetParamsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SetParams\AnyParameter\SettableAnyParameterView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SetParams\SettableTemperatureParameterView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SetParams\SettableParameterView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MukVaporizer\MukVaporizerFanDataViewModel.cs" />
-    <Compile Include="MukVaporizer\MukVaporizerFanDataView.xaml.cs">
+    <Compile Include="MukVaporizerFan\MukVaporizerFanDataViewModel.cs" />
+    <Compile Include="MukVaporizerFan\MukVaporizerFanDataView.xaml.cs">
       <DependentUpon>MukVaporizerFanDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapOuterAir\MukFlapDataViewModel.cs" />
     <Compile Include="MukFlapOuterAir\View\MukFlapDataView.xaml.cs">
       <DependentUpon>MukFlapDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukVaporizer\Request16\IKsmCommandWorkmode.cs" />
-    <Compile Include="MukVaporizer\Request16\IRequest16Data.cs" />
-    <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeSimple.cs" />
-    <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeView.xaml.cs">
+    <Compile Include="MukVaporizerFan\Request16\IKsmCommandWorkmode.cs" />
+    <Compile Include="MukVaporizerFan\Request16\IRequest16Data.cs" />
+    <Compile Include="MukVaporizerFan\Request16\KsmCommandWorkmodeSimple.cs" />
+    <Compile Include="MukVaporizerFan\Request16\KsmCommandWorkmodeView.xaml.cs">
       <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukVaporizer\Request16\Request16Data.cs" />
-    <Compile Include="MukVaporizer\Request16\Request16DataBuilder.cs" />
-    <Compile Include="MukVaporizer\Request16\Request16DataView.xaml.cs">
+    <Compile Include="MukVaporizerFan\Request16\Request16Data.cs" />
+    <Compile Include="MukVaporizerFan\Request16\Request16DataBuilder.cs" />
+    <Compile Include="MukVaporizerFan\Request16\Request16DataView.xaml.cs">
       <DependentUpon>Request16DataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -658,7 +581,9 @@
       <Name>CustomModbusSlave</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MukVaporizerFan\Reply03\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="intelecon x gray.ico" />
   </ItemGroup>

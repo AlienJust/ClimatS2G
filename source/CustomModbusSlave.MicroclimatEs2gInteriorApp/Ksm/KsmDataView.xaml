@@ -3,27 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
-             xmlns:vm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel"
-             xmlns:templateSelector="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm.TemplateSelector"
-             xmlns:setParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SetParams"
+             xmlns:viewModel="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
+             xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
+             xmlns:setParams1="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SetParams;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<ScrollViewer>
 		<StackPanel Orientation="Vertical">
 			<ListBox ItemsSource="{Binding Path=ParameterVmList, Mode=OneTime}">
 				<ListBox.Resources>
-					<DataTemplate DataType="{x:Type vm:KsmCommonWritableParameterViewModel}">
-						<local:KsmReadonlyCommonParameterView />
+					<DataTemplate DataType="{x:Type viewModel:KsmCommonWritableParameterViewModel}">
+						<ksm:KsmReadonlyCommonParameterView />
 					</DataTemplate>
-					<DataTemplate DataType="{x:Type vm:KsmBitsParameterViewModel}">
-						<local:KsmReadonlyBitsParameterView />
+					<DataTemplate DataType="{x:Type viewModel:KsmBitsParameterViewModel}">
+						<ksm:KsmReadonlyBitsParameterView />
 					</DataTemplate>
-					<DataTemplate DataType="{x:Type setParams:SettableTemperatureParameterViewModel}">
-						<setParams:SettableTemperatureParameterView />
+					<DataTemplate DataType="{x:Type setParams1:SettableTemperatureParameterViewModel}">
+						<setParams1:SettableTemperatureParameterView />
 					</DataTemplate>
-					<DataTemplate DataType="{x:Type setParams:SettableParameterViewModel}">
-						<setParams:SettableParameterView />
+					<DataTemplate DataType="{x:Type setParams1:SettableParameterViewModel}">
+						<setParams1:SettableParameterView />
 					</DataTemplate>
 				</ListBox.Resources>
 			</ListBox>

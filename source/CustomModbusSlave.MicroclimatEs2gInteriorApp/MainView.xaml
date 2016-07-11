@@ -142,7 +142,8 @@
 			</TabItem>
 			<TabItem Header="МУК вентилятора испарителя" Style="{StaticResource AzureTabItem}">
 				<ScrollViewer>
-					<mukVaporizer:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
+					<!--<mukVaporizer:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>-->
+					<wpf:GroupSimpleView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="МУК вентилятора конденсатора" Style="{StaticResource AzureTabItem}">
