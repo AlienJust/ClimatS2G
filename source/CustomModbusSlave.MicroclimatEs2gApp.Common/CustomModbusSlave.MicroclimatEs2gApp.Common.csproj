@@ -207,11 +207,12 @@
     <Compile Include="TextPresenters\Contracts\ITextPresenter.cs" />
     <Compile Include="TextPresenters\DataDoubleTextPresenter.cs" />
     <Compile Include="TextPresenters\UshortTextPresenter.cs" />
-    <Compile Include="UniversalParams\BytesPairConverters\BytesPairNullableToStringThroughDoubleConverter.cs" />
-    <Compile Include="UniversalParams\BytesPairConverters\BytesPairToStringConverter.cs" />
-    <Compile Include="UniversalParams\BytesPairConverters\BytesPairToTemperatureConverter.cs" />
-    <Compile Include="UniversalParams\BytesPairConverters\IBytesPairNullableSomethingConverter.cs" />
-    <Compile Include="UniversalParams\BytesPairConverters\IBytesPairSomethingConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\Nullable\BytesPairNullableToStringThroughDoubleConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\Nullable\BytesPairNullableToStringThroughOneWireConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\BytesPairToStringConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\BytesPairToTemperatureConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairNullableSomethingConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairSomethingConverter.cs" />
     <Compile Include="UniversalParams\GroupSimple.cs" />
     <Compile Include="UniversalParams\IGroup.cs" />
     <Compile Include="UniversalParams\Wpf\KsmReadonlyBitsParameterView.xaml.cs">

@@ -51,14 +51,27 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizerFan {
 			var pwmParameter = new ReceivableModbusRtuParameterSimpleViewModel("Уставка ШИМ на вентилятор", 3, 3, 0, new BytesPairNullableToStringThroughDoubleConverter(1.0, 0.0, false, true, "f0"));
 			var t1Parameter = new ReceivableModbusRtuParameterSimpleViewModel("Температура 1wire адрес 1", 3, 3, 1, new BytesPairNullableToStringThroughOneWireConverter(0.01, 0.0, "f2", new BytesPair(0x85, 0x00)));
 			var t2Parameter = new ReceivableModbusRtuParameterSimpleViewModel("Температура 1wire адрес 2", 3, 3, 2, new BytesPairNullableToStringThroughOneWireConverter(0.01, 0.0, "f2", new BytesPair(0x85, 0x00)));
+			var inputSignals = new ReceivableModbusRtuParameterSimpleViewModel("Байт входных сигналов (резерв)", 3, 3, 3, new BytesPairNullableToStringThroughDoubleConverter(1.0, 0.0, false, true, "f0"));
+			var outputSignals = new ReceivableModbusRtuParameterSimpleViewModel("Байт выходных сигналов (резерв)", 3, 3, 4, new BytesPairNullableToStringThroughDoubleConverter(1.0, 0.0, false, true, "f0"));
+			var pwmCalorifer = new ReceivableModbusRtuParameterSimpleViewModel("ШИМ на калорифер", 3, 3, 5, new BytesPairNullableToStringThroughDoubleConverter(1.0, 0.0, false, true, "f0"));
+			var workStage = new ReceivableModbusRtuParameterSimpleViewModel("Этап работы", 3, 3, 6, new BytesPairNullableToStringThroughVaporizerFanWorkstageConverter());
 			//var pwmParameter 
 			rtuReceiver.RegisterParamToReceive(pwmParameter);
 			rtuReceiver.RegisterParamToReceive(t1Parameter);
 			rtuReceiver.RegisterParamToReceive(t2Parameter);
+			rtuReceiver.RegisterParamToReceive(inputSignals);
+			rtuReceiver.RegisterParamToReceive(outputSignals);
+			rtuReceiver.RegisterParamToReceive(pwmCalorifer);
+			rtuReceiver.RegisterParamToReceive(workStage);
 
 			_children.Add(pwmParameter);
 			_children.Add(t1Parameter);
 			_children.Add(t2Parameter);
+
+			_children.Add(inputSignals);
+			_children.Add(outputSignals);
+			_children.Add(pwmCalorifer);
+			_children.Add(workStage);
 
 			Request16TelemetryText = new AnyCommandPartViewModel();
 			MukVaporizerSetParamsVm = new MukVaporizerSetParamsViewModel(notifier, parameterSetter);

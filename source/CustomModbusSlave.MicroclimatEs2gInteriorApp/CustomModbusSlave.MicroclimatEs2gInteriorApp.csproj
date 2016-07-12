@@ -182,6 +182,7 @@
       <DependentUpon>MukAirExhausterSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsViewModel.cs" />
+    <Compile Include="MukVaporizerFan\BytesPairNullableToStringThroughOneWireConverter.cs" />
     <Compile Include="MukVaporizerFan\MukVaporizerFanDataViewModelParamcentric.cs" />
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapOuterAirSetParamsView.xaml</DependentUpon>
