@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Microclim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.MicroclimatEs2gApp.Common", "CustomModbusSlave.MicroclimatEs2gApp.Common\CustomModbusSlave.MicroclimatEs2gApp.Common.csproj", "{B20B54D7-E4ED-4B62-9308-9C975339F965}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamCentric.Common.Contracts", "ParamCentric.Common.Contracts\ParamCentric.Common.Contracts.csproj", "{08B70D5B-732F-4EF5-9DDC-56B3561B9B83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamCentric.Modbus.Contracts", "ParamCentric.Modbus.Contracts\ParamCentric.Modbus.Contracts.csproj", "{04A51B7C-BCA2-496F-94A5-DFC4119B7B44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamCentric.UserInterface.Contracts", "ParamCentric.UserInterface.Contracts\ParamCentric.UserInterface.Contracts.csproj", "{4CCE9E04-36B8-4B75-AA47-3126E801A406}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +45,18 @@ Global
 		{B20B54D7-E4ED-4B62-9308-9C975339F965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B20B54D7-E4ED-4B62-9308-9C975339F965}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B20B54D7-E4ED-4B62-9308-9C975339F965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B70D5B-732F-4EF5-9DDC-56B3561B9B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08B70D5B-732F-4EF5-9DDC-56B3561B9B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08B70D5B-732F-4EF5-9DDC-56B3561B9B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08B70D5B-732F-4EF5-9DDC-56B3561B9B83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04A51B7C-BCA2-496F-94A5-DFC4119B7B44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04A51B7C-BCA2-496F-94A5-DFC4119B7B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04A51B7C-BCA2-496F-94A5-DFC4119B7B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04A51B7C-BCA2-496F-94A5-DFC4119B7B44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CCE9E04-36B8-4B75-AA47-3126E801A406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CCE9E04-36B8-4B75-AA47-3126E801A406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CCE9E04-36B8-4B75-AA47-3126E801A406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CCE9E04-36B8-4B75-AA47-3126E801A406}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

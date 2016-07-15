@@ -135,25 +135,24 @@
     <Compile Include="IBuilder.cs" />
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
-    <Compile Include="Ksm\DoubleBytesPairConverterSimpleUshort.cs" />
-    <Compile Include="Ksm\IAllParametersAccepter.cs" />
-    <Compile Include="Ksm\ICurrentValueSettable.cs" />
-    <Compile Include="Ksm\IDoubleBytesPairConverter.cs" />
-    <Compile Include="Ksm\IParameterRoot.cs" />
-    <Compile Include="Ksm\IParameterSetter.cs" />
-    <Compile Include="Ksm\IUshortToDoubleConverter.cs" />
-    <Compile Include="Ksm\KsmReadonlyBitViewModel.cs" />
-    <Compile Include="Ksm\TextFormatters\ITextFormatter.cs" />
-    <Compile Include="Ksm\TextFormatters\TextFormatterBits.cs" />
-    <Compile Include="Ksm\TextFormatters\TextFormatterNcalcDouble.cs" />
-    <Compile Include="Ksm\TextFormatters\TextFormatterSensor.cs" />
-    <Compile Include="Ksm\TextFormatters\TextFormatterSimple.cs" />
-    <Compile Include="Ksm\TextFormatters\TextFormatterWorkStage.cs" />
-    <Compile Include="Ksm\UshortToDoubleConverterNcalc.cs" />
-    <Compile Include="Ksm\ViewModel\IKsmBitParameterViewModel.cs" />
-    <Compile Include="Ksm\ViewModel\KsmBitParameterViewModel.cs" />
-    <Compile Include="Ksm\ViewModel\KsmBitsParameterViewModel.cs" />
-    <Compile Include="Ksm\ViewModel\KsmCommonWritableParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterSimpleUshort.cs" />
+    <Compile Include="SetParamsAndKsm\Contracts\IAllParametersAccepter.cs" />
+    <Compile Include="SetParamsAndKsm\Contracts\ICurrentValueSettable.cs" />
+    <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\IDoubleBytesPairConverter.cs" />
+    <Compile Include="SetParamsAndKsm\Contracts\IParameterRoot.cs" />
+    <Compile Include="SetParamsAndKsm\Contracts\IParameterSetter.cs" />
+    <Compile Include="SetParamsAndKsm\UshortToDoubleConverter\IUshortToDoubleConverter.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\ITextFormatter.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterBits.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterNcalcDouble.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterSensor.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterSimple.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterWorkStage.cs" />
+    <Compile Include="SetParamsAndKsm\UshortToDoubleConverter\UshortToDoubleConverterNcalc.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\IKsmBitParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\KsmBitParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\KsmBitsParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\KsmCommonWritableParameterViewModel.cs" />
     <Compile Include="MukFlap\Diagnostic2\Builders\MukFlapDiagnostic2Builder.cs" />
     <Compile Include="MukFlap\Diagnostic2\Contracts\IMukFlapDiagnostic2.cs" />
     <Compile Include="MukFlap\Diagnostic2\SimpleReleases\MukFlapDiagnostic2.cs" />
@@ -186,22 +185,13 @@
     <Compile Include="SensorIndications\SensorIndicationBase.cs" />
     <Compile Include="SensorIndications\SensorIndicationDoubleBasedOnBytesPair.cs" />
     <Compile Include="SensorIndications\SensorIndicationDoubleToStringConverter.cs" />
-    <Compile Include="SetParams\AnyParameter\SettableAnyParameterView.xaml.cs">
+    <Compile Include="SetParamsAndKsm\AnyParameter\SettableAnyParameterView.xaml.cs">
       <DependentUpon>SettableAnyParameterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SetParams\AnyParameter\SettableAnyParameterViewModel.cs" />
-    <Compile Include="SetParams\IDisplayableParameter.cs" />
-    <Compile Include="SetParams\IParameter.cs" />
-    <Compile Include="SetParams\IReceivableModbusCustomParameter.cs" />
-    <Compile Include="SetParams\IReceivableModbusRtuParameter.cs" />
-    <Compile Include="SetParams\IReceivableParameter.cs" />
-    <Compile Include="SetParams\IReceiverModbusCustom.cs" />
-    <Compile Include="SetParams\IReceiverModbusRtu.cs" />
-    <Compile Include="SetParams\ISettableBytesPairtParameter.cs" />
-    <Compile Include="SetParams\ISettableByUserParameter.cs" />
-    <Compile Include="SetParams\ReceivableModbusRtuParameterSimpleViewModel.cs" />
-    <Compile Include="SetParams\SettableParameterViewModel.cs" />
-    <Compile Include="SetParams\SettableTemperatureParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\AnyParameter\SettableAnyParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\ReceivableModbusRtuParameterSimpleViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\SettableParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\SettableTemperatureParameterViewModel.cs" />
     <Compile Include="TelemetryIsNullException.cs" />
     <Compile Include="TextPresenters\ByteTextPresenter.cs" />
     <Compile Include="TextPresenters\Contracts\ITextPresenter.cs" />
@@ -214,21 +204,15 @@
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairNullableSomethingConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairSomethingConverter.cs" />
     <Compile Include="UniversalParams\GroupSimple.cs" />
-    <Compile Include="UniversalParams\IGroup.cs" />
     <Compile Include="UniversalParams\Wpf\KsmReadonlyBitsParameterView.xaml.cs">
       <DependentUpon>KsmReadonlyBitsParameterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UniversalParams\Wpf\KsmReadonlyBitView.xaml.cs">
       <DependentUpon>KsmReadonlyBitView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UniversalParams\Wpf\GroupParamTemplateSelector.cs" />
     <Compile Include="UniversalParams\Wpf\GroupSimpleView.xaml.cs">
       <DependentUpon>GroupSimpleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UniversalParams\Wpf\GroupView.xaml.cs">
-      <DependentUpon>GroupView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UniversalParams\IGroupItem.cs" />
     <Compile Include="UniversalParams\Wpf\KsmReadonlyCommonParameterView.xaml.cs">
       <DependentUpon>KsmReadonlyCommonParameterView.xaml</DependentUpon>
     </Compile>
@@ -267,7 +251,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SetParams\AnyParameter\SettableAnyParameterView.xaml">
+    <Page Include="SetParamsAndKsm\AnyParameter\SettableAnyParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -299,10 +283,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UniversalParams\Wpf\GroupView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UniversalParams\Wpf\ParameterViewSimple.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -310,11 +290,24 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EvaporatorFan\" />
+    <Folder Include="Ksm\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomModbusSlave\CustomModbusSlave.csproj">
       <Project>{9244d783-9410-4026-b3ef-49435f79a74a}</Project>
       <Name>CustomModbusSlave</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.Common.Contracts\ParamCentric.Common.Contracts.csproj">
+      <Project>{08b70d5b-732f-4ef5-9ddc-56b3561b9b83}</Project>
+      <Name>ParamCentric.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.Modbus.Contracts\ParamCentric.Modbus.Contracts.csproj">
+      <Project>{04a51b7c-bca2-496f-94a5-dfc4119b7b44}</Project>
+      <Name>ParamCentric.Modbus.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.UserInterface.Contracts\ParamCentric.UserInterface.Contracts.csproj">
+      <Project>{4cce9e04-36b8-4b75-aa47-3126e801a406}</Project>
+      <Name>ParamCentric.UserInterface.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

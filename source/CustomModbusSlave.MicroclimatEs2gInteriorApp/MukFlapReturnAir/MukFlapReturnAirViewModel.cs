@@ -2,6 +2,8 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.DataModel.Builders;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.DataModel.Contracts;

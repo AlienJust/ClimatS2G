@@ -581,6 +581,18 @@
       <Project>{9244d783-9410-4026-b3ef-49435f79a74a}</Project>
       <Name>CustomModbusSlave</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.Common.Contracts\ParamCentric.Common.Contracts.csproj">
+      <Project>{08b70d5b-732f-4ef5-9ddc-56b3561b9b83}</Project>
+      <Name>ParamCentric.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.Modbus.Contracts\ParamCentric.Modbus.Contracts.csproj">
+      <Project>{04a51b7c-bca2-496f-94a5-dfc4119b7b44}</Project>
+      <Name>ParamCentric.Modbus.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.UserInterface.Contracts\ParamCentric.UserInterface.Contracts.csproj">
+      <Project>{4cce9e04-36b8-4b75-aa47-3126e801a406}</Project>
+      <Name>ParamCentric.UserInterface.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MukVaporizerFan\Reply03\" />

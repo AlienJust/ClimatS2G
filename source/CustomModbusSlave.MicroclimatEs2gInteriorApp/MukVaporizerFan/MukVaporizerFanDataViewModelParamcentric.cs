@@ -5,6 +5,8 @@ using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParams;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.TextPresenters;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.BytesPairConverters;

@@ -184,9 +184,6 @@
 			<TabItem Header="КСМ" Style="{StaticResource AzureTabItem}" BorderBrush="Red">
 				<ksm:KsmDataView DataContext="{Binding Path=KsmDataVm, Mode=OneTime}"/>
 			</TabItem>
-			<TabItem Header="TEST" Style="{StaticResource AzureTabItem}" BorderBrush="Teal">
-				<wpf:GroupView DataContext="{Binding Path=TestGroup}"/>
-			</TabItem>
 		</TabControl>
 		<GridSplitter Grid.Row="1" Height="4" BorderBrush="DeepSkyBlue" BorderThickness="1" VerticalAlignment="Top" Background="DeepSkyBlue" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
 		<progamLog:ProgramLogView Grid.Row="1" DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}" Margin="4,8,6,4"/>

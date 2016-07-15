@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.Wpf"
              xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
              xmlns:setParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SetParams"
-             xmlns:vm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel"
-             xmlns:universalParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams"
              xmlns:setParams1="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.SetParams"
+             xmlns:universalParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;assembly=ParamCentric.Common.Contracts"
+             xmlns:viewModel="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
@@ -18,13 +18,13 @@
 				<DataTemplate DataType="{x:Type universalParams:IGroup}">
 					<local:GroupSimpleView />
 				</DataTemplate>
-				<DataTemplate DataType="{x:Type vm:KsmCommonWritableParameterViewModel}">
+				<DataTemplate DataType="{x:Type viewModel:KsmCommonWritableParameterViewModel}">
 					<ksm:KsmReadonlyCommonParameterView />
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type setParams1:ReceivableModbusRtuParameterSimpleViewModel}">
 					<ksm:KsmReadonlyCommonParameterView />
 				</DataTemplate>
-				<DataTemplate DataType="{x:Type vm:KsmBitsParameterViewModel}">
+				<DataTemplate DataType="{x:Type viewModel:KsmBitsParameterViewModel}">
 					<ksm:KsmReadonlyBitsParameterView />
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type setParams:SettableTemperatureParameterViewModel}">

@@ -17,6 +17,8 @@ using CustomModbusSlave.MicroclimatEs2gApp.Bvs;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.CommandHearedTimer;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.ViewModel;

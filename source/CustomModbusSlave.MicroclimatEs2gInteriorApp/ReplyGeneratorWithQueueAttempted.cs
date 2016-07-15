@@ -2,6 +2,8 @@ using System;
 using System.Collections.Concurrent;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Numeric;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp {

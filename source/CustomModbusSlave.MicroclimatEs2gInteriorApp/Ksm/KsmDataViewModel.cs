@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.MicroclimatEs2gApp.Ksm.TextFormatters;
-using CustomModbusSlave.MicroclimatEs2gApp.Ksm.ViewModel;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.DoubleBytesPairConverter;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.TextFormatters;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.ViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
