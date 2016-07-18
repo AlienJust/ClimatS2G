@@ -290,7 +290,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EvaporatorFan\" />
-    <Folder Include="Ksm\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomModbusSlave\CustomModbusSlave.csproj">

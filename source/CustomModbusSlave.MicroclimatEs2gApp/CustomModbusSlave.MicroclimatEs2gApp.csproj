@@ -43,6 +43,10 @@
     <Reference Include="AlienJust.Adaptation.WindowsPresentation">
       <HintPath>..\..\reference\AlienJust.Adaptation.WindowsPresentation.dll</HintPath>
     </Reference>
+    <Reference Include="AlienJust.Support.Collections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.Concurrent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Concurrent.dll</HintPath>
@@ -186,12 +190,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ksm\KsmDataView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Ksm\KsmWritableParameterView.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -227,19 +227,10 @@
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
     <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
-    <Compile Include="Ksm\IAllParametersAccepter.cs" />
-    <Compile Include="Ksm\ICurrentValueSettable.cs" />
-    <Compile Include="Ksm\IDoubleUshortConverter.cs" />
-    <Compile Include="Ksm\IKsmWritableParameterViewModel.cs" />
-    <Compile Include="Ksm\IParameterSetter.cs" />
     <Compile Include="Ksm\KsmDataView.xaml.cs">
       <DependentUpon>KsmDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ksm\KsmDataViewModel.cs" />
-    <Compile Include="Ksm\KsmWritableParameterView.xaml.cs">
-      <DependentUpon>KsmWritableParameterView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Ksm\KsmWritableParameterViewModel.cs" />
     <Compile Include="MukFlap\Converters\EnumMukFlapWorkmodeStageToStringConverter.cs" />
     <Compile Include="MukFlap\DataModel\Build\EmersonDiagnosticBuilder.cs" />
     <Compile Include="MukFlap\DataModel\Build\IncomingSignalsBuilder.cs" />
@@ -370,6 +361,18 @@
     <ProjectReference Include="..\CustomModbusSlave\CustomModbusSlave.csproj">
       <Project>{9244d783-9410-4026-b3ef-49435f79a74a}</Project>
       <Name>CustomModbusSlave</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.Common.Contracts\ParamCentric.Common.Contracts.csproj">
+      <Project>{08b70d5b-732f-4ef5-9ddc-56b3561b9b83}</Project>
+      <Name>ParamCentric.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.Modbus.Contracts\ParamCentric.Modbus.Contracts.csproj">
+      <Project>{04a51b7c-bca2-496f-94a5-dfc4119b7b44}</Project>
+      <Name>ParamCentric.Modbus.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.UserInterface.Contracts\ParamCentric.UserInterface.Contracts.csproj">
+      <Project>{4cce9e04-36b8-4b75-aa47-3126e801a406}</Project>
+      <Name>ParamCentric.UserInterface.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
