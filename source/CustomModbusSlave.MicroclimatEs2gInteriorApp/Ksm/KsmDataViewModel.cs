@@ -21,10 +21,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 		public KsmDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_itemsToWrite = new BlockingCollection<Tuple<int, ushort, Action<Exception>>>();
 			_parameterVmList = new List<IReceivableParameter> {
-				new KsmCommonWritableParameterViewModel(0, "Датчик 1wire №1", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85,0x00), "f2", "хз", "обрыв"))
-				, new KsmCommonWritableParameterViewModel(1, "Датчик 1wire №2 ", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85,0x00), "f2", "хз", "обрыв"))
-				, new KsmCommonWritableParameterViewModel(2, "Резерв", new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
-				, new KsmCommonWritableParameterViewModel(3, "Резерв", new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
+				new KsmReadonlyParamViewModel(0, "Датчик 1wire №1", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85,0x00), "f2", "хз", "обрыв"))
+				, new KsmReadonlyParamViewModel(1, "Датчик 1wire №2 ", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85,0x00), "f2", "хз", "обрыв"))
+				, new KsmReadonlyParamViewModel(2, "Резерв", new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
+				, new KsmReadonlyParamViewModel(3, "Резерв", new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
 				, new KsmBitsParameterViewModel(4, "PIC порт B", new TextFormatterBits(UnknownBits)
 					, new List<IKsmBitParameterViewModel> {
 						new KsmBitParameterViewModel(0, "PB.0 = 0: сегмент — мастер, иначе слейв"),
@@ -46,7 +46,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 						new KsmBitParameterViewModel(7, "PC.7 = 0: Включение обеззараживателя"),
 					})
 				, new KsmBitsParameterViewModel(7, "Диагностика контроллера (ErrorsFlags)", new TextFormatterBits(UnknownBits), null)
-				, new KsmCommonWritableParameterViewModel(8, "Этап работы", new TextFormatterWorkStage())
+				, new KsmReadonlyParamViewModel(8, "Этап работы", new TextFormatterWorkStage())
 
 				, new KsmBitsParameterViewModel(9, "Регистр аварий 1 в режиме включено", new TextFormatterBits(UnknownBits)
 					, new List<IKsmBitParameterViewModel> {
@@ -122,14 +122,14 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
 						new KsmBitParameterViewModel(1, "b.1 - отсылка текущих данных техническому абоненту")
 					})
 
-					, new KsmCommonWritableParameterViewModel(25, "Уставка ШИМ на клапан разгрузки", new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
-					, new KsmCommonWritableParameterViewModel(26, "Ручной принудительный режим", new TextFormatterForcedManualMode())
+					, new KsmReadonlyParamViewModel(25, "Уставка ШИМ на клапан разгрузки", new TextFormatterNcalcDouble("UshRv * 1.0", "f0", "хз"))
+					, new KsmReadonlyParamViewModel(26, "Ручной принудительный режим", new TextFormatterForcedManualMode())
 			};
 
 			for (int i = 27; i < 34; ++i) {
-				_parameterVmList.Add(new KsmCommonWritableParameterViewModel(i, "Параметр " + (i + 1), new TextFormatterSimple("f2", "хз")));
+				_parameterVmList.Add(new KsmReadonlyParamViewModel(i, "Параметр " + (i + 1), new TextFormatterSimple("f2", "хз")));
 			}
-			_parameterVmList.Add(new KsmCommonWritableParameterViewModel(34, "Версия ПО", new TextFormatterSimple("f0", "хз")));
+			_parameterVmList.Add(new KsmReadonlyParamViewModel(34, "Версия ПО", new TextFormatterSimple("f0", "хз")));
 
 
 

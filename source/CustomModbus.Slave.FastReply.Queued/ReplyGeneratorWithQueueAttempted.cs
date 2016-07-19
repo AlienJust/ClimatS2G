@@ -2,12 +2,10 @@ using System;
 using System.Collections.Concurrent;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Numeric;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp {
-	class ReplyGeneratorWithQueueAttempted : IParameterSetter, IFastReplyGenerator, IFastReplyAcceptor {
+namespace CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm {
+	public class ReplyGeneratorWithQueueAttempted : IParameterSetter, IFastReplyGenerator, IFastReplyAcceptor {
 		private readonly IThreadNotifier _uiNotifier;
 		// адрес, значение, callback, число попыток
 		private readonly BlockingCollection<QueueItem> _itemsToWrite;

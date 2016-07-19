@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using AlienJust.Adaptation.WindowsPresentation.Converters;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
@@ -13,7 +14,10 @@ using CustomModbusSlave.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.BsSm;
 using CustomModbusSlave.MicroclimatEs2gApp.Bvs;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.CommandHearedTimer;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFridge;
@@ -45,7 +49,12 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 		private readonly MukFridgeFanDataViewModel _mukFridgeFanDataVm;
 		private readonly MukWarmFloorDataViewModel _mukWarmFloorDataVm;
 		private readonly BsSmDataViewModel _bsSmDataVm;
+		private readonly IParameterSetter _paramSetter;
+		private readonly IFastReplyGenerator _replyGenerator;
+		private readonly IFastReplyAcceptor _replyAcceptor;
 
+		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
+		private Colors _linkBackColor;
 
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem) {
 			_notifier = notifier;
@@ -75,17 +84,38 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
 			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
 
-			KsmDataVm = new KsmDataViewModel(_notifier); // TODO:
+			var replyGenerator = new ReplyGeneratorWithQueueAttempted(_notifier);
+			_paramSetter = replyGenerator;
+			_replyGenerator = replyGenerator;
+			_replyAcceptor = replyGenerator;
+
+			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter);
+
+			_commandHearedTimeoutMonitor = new CommandHearedTimerThreadSafe(_serialChannel, TimeSpan.FromSeconds(1), _notifier);
+			_commandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
+			_commandHearedTimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
+			_commandHearedTimeoutMonitor.Start();
 
 			GetPortsAvailable();
 			_logger.Log("Программа загружена");
 		}
 
+		private void CommandHearedTimeoutMonitorOnSomeCommandWasHeared() {
+			LinkBackColor = Colors.LimeGreen;
+		}
+
+		private void CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong() {
+			LinkBackColor = Colors.OrangeRed;
+		}
+
 		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendAbility) {
 			if (commandPart.Address == 20) {
 				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
-					sendAbility.Send(commandPart.ReplyBytes.ToArray()); // send back, no real writing yet
-					//Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
+					_replyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray());
+					var reply = _replyGenerator.GenerateReply();
+
+					sendAbility.Send(reply);
+					Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
 					_notifier.Notify(() => _logger.Log("Reply sended"));
 				}
 				else if (commandPart.CommandCode == 16 && commandPart.ReplyBytes.Count == 109) {
@@ -202,6 +232,16 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 				if (_isPortOpened != value) {
 					_isPortOpened = value;
 					RaisePropertyChanged(() => IsPortOpened);
+				}
+			}
+		}
+
+		public Colors LinkBackColor {
+			get { return _linkBackColor; }
+			set {
+				if (_linkBackColor != value) {
+					_linkBackColor = value;
+					RaisePropertyChanged(() => LinkBackColor);
 				}
 			}
 		}

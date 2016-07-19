@@ -26,7 +26,6 @@ using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFridge;
-using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer;
 using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizerFan;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using DataAbstractionLevel.Low.PsnConfig;

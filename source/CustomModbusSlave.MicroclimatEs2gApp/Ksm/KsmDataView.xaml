@@ -12,7 +12,7 @@
 		<StackPanel Orientation="Vertical">
 			<ListBox ItemsSource="{Binding Path=ParameterVmList, Mode=OneTime}">
 				<ListBox.Resources>
-					<DataTemplate DataType="{x:Type viewModel1:KsmCommonWritableParameterViewModel}">
+					<DataTemplate DataType="{x:Type viewModel1:KsmReadonlyParamViewModel}">
 						<ksm:KsmReadonlyCommonParameterView />
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type viewModel1:KsmBitsParameterViewModel}">

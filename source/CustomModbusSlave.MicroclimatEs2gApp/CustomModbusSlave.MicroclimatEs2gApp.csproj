@@ -354,6 +354,14 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CustomModbus.Slave.FastReply.Contracts\CustomModbus.Slave.FastReply.Contracts.csproj">
+      <Project>{53393428-c7af-4431-b3e4-2de72ce78108}</Project>
+      <Name>CustomModbus.Slave.FastReply.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomModbus.Slave.FastReply.Queued\CustomModbus.Slave.FastReply.Queued.csproj">
+      <Project>{19373346-e61b-42d4-9a4c-7923dce6e3fb}</Project>
+      <Name>CustomModbus.Slave.FastReply.Queued</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomModbusSlave.MicroclimatEs2gApp.Common\CustomModbusSlave.MicroclimatEs2gApp.Common.csproj">
       <Project>{b20b54d7-e4ed-4b62-9308-9c975339f965}</Project>
       <Name>CustomModbusSlave.MicroclimatEs2gApp.Common</Name>

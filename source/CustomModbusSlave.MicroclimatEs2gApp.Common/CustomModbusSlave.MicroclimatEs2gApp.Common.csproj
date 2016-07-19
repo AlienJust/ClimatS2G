@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.ModelViewViewModel.dll</HintPath>
     </Reference>
+    <Reference Include="AlienJust.Support.Numeric, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Numeric.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.Text, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Text.dll</HintPath>
@@ -140,7 +144,6 @@
     <Compile Include="SetParamsAndKsm\Contracts\ICurrentValueSettable.cs" />
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\IDoubleBytesPairConverter.cs" />
     <Compile Include="SetParamsAndKsm\Contracts\IParameterRoot.cs" />
-    <Compile Include="SetParamsAndKsm\Contracts\IParameterSetter.cs" />
     <Compile Include="SetParamsAndKsm\UshortToDoubleConverter\IUshortToDoubleConverter.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\ITextFormatter.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterBits.cs" />
@@ -152,7 +155,7 @@
     <Compile Include="SetParamsAndKsm\ViewModel\IKsmBitParameterViewModel.cs" />
     <Compile Include="SetParamsAndKsm\ViewModel\KsmBitParameterViewModel.cs" />
     <Compile Include="SetParamsAndKsm\ViewModel\KsmBitsParameterViewModel.cs" />
-    <Compile Include="SetParamsAndKsm\ViewModel\KsmCommonWritableParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\KsmReadonlyParamViewModel.cs" />
     <Compile Include="MukFlap\Diagnostic2\Builders\MukFlapDiagnostic2Builder.cs" />
     <Compile Include="MukFlap\Diagnostic2\Contracts\IMukFlapDiagnostic2.cs" />
     <Compile Include="MukFlap\Diagnostic2\SimpleReleases\MukFlapDiagnostic2.cs" />
@@ -292,6 +295,10 @@
     <Folder Include="EvaporatorFan\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CustomModbus.Slave.FastReply.Contracts\CustomModbus.Slave.FastReply.Contracts.csproj">
+      <Project>{53393428-c7af-4431-b3e4-2de72ce78108}</Project>
+      <Name>CustomModbus.Slave.FastReply.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomModbusSlave\CustomModbusSlave.csproj">
       <Project>{9244d783-9410-4026-b3ef-49435f79a74a}</Project>
       <Name>CustomModbusSlave</Name>
