@@ -3,7 +3,10 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.TextPresenters;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFridge.Request16;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFridge.SetParameters;
 using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
@@ -25,10 +28,11 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
 		private string _firmwareBuildNumber;
 
 		private string _reply;
-
-		public MukFridgeFanDataViewModel(IThreadNotifier notifier)
-		{
+		private IRequest16Data _request16Telemetry;
+		public MukFridgeFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_notifier = notifier;
+			Request16TelemetryText = new AnyCommandPartViewModel();
+			MukFridgeSetParamsVm = new MukFridgeSetParamsViewModel(notifier, parameterSetter);
 		}
 
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data)
@@ -55,6 +59,12 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
 					FirmwareBuildNumber = (new DataDoubleTextPresenter(data[24], data[23], 1.0, 0)).PresentAsText();
 
 					Reply = data.ToText();
+				});
+			}
+			else if (code == 0x10 && data.Count == 15) {
+				_notifier.Notify(() => {
+					Request16TelemetryText.Update(data);
+					Request16Telemetry = new Request16DataBuilder(data).Build();
 				});
 			}
 		}
@@ -173,5 +183,19 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
 				}
 			}
 		}
+
+
+		public IRequest16Data Request16Telemetry {
+			get { return _request16Telemetry; }
+			set {
+				if (_request16Telemetry != value) {
+					_request16Telemetry = value;
+					RaisePropertyChanged(() => Request16Telemetry);
+				}
+			}
+		}
+		public AnyCommandPartViewModel Request16TelemetryText { get; }
+
+		public MukFridgeSetParamsViewModel MukFridgeSetParamsVm { get; }
 	}
 }
