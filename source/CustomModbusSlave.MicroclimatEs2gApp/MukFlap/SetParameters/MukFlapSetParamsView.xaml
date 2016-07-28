@@ -7,14 +7,14 @@
 	mc:Ignorable="d" 
 	d:DesignHeight="264" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam223, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam224, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam225, Mode=OneTime}"/>
+		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam226, Mode=OneTime}"/>
 		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam227, Mode=OneTime}"/>
 		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam228, Mode=OneTime}"/>
 		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam229, Mode=OneTime}"/>
 		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam230, Mode=OneTime}"/>
 		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam231, Mode=OneTime}"/>
-		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam232, Mode=OneTime}"/>
-		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam233, Mode=OneTime}"/>
-		<setParams:SettableParameterView DataContext="{Binding Path=SettableParam234, Mode=OneTime}"/>
-		<setParams:SettableParameterView DataContext="{Binding SettableParam235, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>

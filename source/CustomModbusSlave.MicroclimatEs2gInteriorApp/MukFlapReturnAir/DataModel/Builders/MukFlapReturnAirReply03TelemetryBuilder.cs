@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DataModel.Builders;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Reply03.DataModel.Build;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.DataModel.SimpleReleases;
 

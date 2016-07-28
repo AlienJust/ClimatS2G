@@ -129,7 +129,7 @@
       <DependentUpon>MukFlapOuterAirSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsViewModel.cs" />
-    <Compile Include="MukFlapOuterAir\View\MukFlapOuterAirWorkmodeStageToStringConverter.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapOuterAirWorkmodeStageToStringConverter.cs" />
     <Compile Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapReturnAirSetParamsView.xaml</DependentUpon>
     </Compile>
@@ -274,19 +274,19 @@
     <Compile Include="MukAirExhauster\View\AutomaticWorkmodeStageView.xaml.cs">
       <DependentUpon>AutomaticWorkmodeStageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlapOuterAir\Converters\EnumMukFlapOuterAirWorkmodeStageToStringConverter.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Build\EmersonDiagnosticCircuit1Builder.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Build\EmersonDiagnosticCircuit2Builder.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Build\IncomingSignalsBuilder.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Build\MukFlapDiagnostic1Builder.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Build\MukFlapOuterAirDiagnostic2Builder.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Build\MukFlapWorkmodeStageBuilder.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\IEmersonDiagnosticCircuit2.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\IMukFlapWorkmodeStage.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\SimpleRelease\MukFlapWorkmodeStageSimple.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\SimpleRelease\EmersonDiagnosticCircuit2.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\SimpleRelease\MukFlapReply03Telemetry.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Build\MukFlapReply03TelemetryBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\Converters\EnumMukFlapOuterAirWorkmodeStageToStringConverter.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\EmersonDiagnosticCircuit1Builder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\EmersonDiagnosticCircuit2Builder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\IncomingSignalsBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\MukFlapDiagnostic1Builder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\MukFlapOuterAirDiagnostic2Builder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\MukFlapWorkmodeStageBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IEmersonDiagnosticCircuit2.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IMukFlapWorkmodeStage.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\MukFlapWorkmodeStageSimple.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\EmersonDiagnosticCircuit2.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\MukFlapReply03Telemetry.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\MukFlapReply03TelemetryBuilder.cs" />
     <Compile Include="MukFlapOuterAir\Request16\IKsmCommandWorkmode.cs" />
     <Compile Include="MukFlapOuterAir\Request16\IRequest16Data.cs" />
     <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmode.cs" />
@@ -302,35 +302,35 @@
       <DependentUpon>Request16DataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeToStringConverter.cs" />
-    <Compile Include="MukFlapOuterAir\View\EmersionDiagnosticCircuit2View.xaml.cs">
+    <Compile Include="MukFlapOuterAir\Reply03\EmersionDiagnosticCircuit2View.xaml.cs">
       <DependentUpon>EmersionDiagnosticCircuit2View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlapOuterAir\View\EmersionDiagnosticCircuit1View.xaml.cs">
+    <Compile Include="MukFlapOuterAir\Reply03\EmersionDiagnosticCircuit1View.xaml.cs">
       <DependentUpon>EmersionDiagnosticCircuit1View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlapOuterAir\DataModel\SimpleRelease\MukFlapOuterAirOuterAirDiagnostic2.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\SimpleRelease\MukFlapDiagnostic1.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\SimpleRelease\IncomingSignals.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\SimpleRelease\EmersonDiagnosticCircuit1.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\IEmersonDiagnosticCircuit1.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\IIncomingSignals.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\IMukFlapDiagnostic1.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\IMukFlapOuterAirDiagnostic2.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\IMukFlapReply03Telemetry.cs" />
-    <Compile Include="MukFlapOuterAir\DataModel\Contracts\Enums\MukFlapOuterAirWorkmodeStage.cs" />
-    <Compile Include="MukFlapOuterAir\View\IncomingSignalsView.xaml.cs">
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\MukFlapOuterAirOuterAirDiagnostic2.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\MukFlapDiagnostic1.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\IncomingSignals.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\EmersonDiagnosticCircuit1.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IEmersonDiagnosticCircuit1.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IIncomingSignals.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IMukFlapDiagnostic1.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IMukFlapOuterAirDiagnostic2.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IMukFlapReply03Telemetry.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\Enums\MukFlapOuterAirWorkmodeStage.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\IncomingSignalsView.xaml.cs">
       <DependentUpon>IncomingSignalsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlapOuterAir\View\MukFlapWorkmodeStageView.xaml.cs">
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapWorkmodeStageView.xaml.cs">
       <DependentUpon>MukFlapWorkmodeStageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlapOuterAir\View\MukFlapDiagnostic1View.xaml.cs">
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapDiagnostic1View.xaml.cs">
       <DependentUpon>MukFlapDiagnostic1View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlapOuterAir\View\MukFlapDiagnostic2View.xaml.cs">
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapDiagnostic2View.xaml.cs">
       <DependentUpon>MukFlapDiagnostic2View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlapOuterAir\View\MukFlapReply03TelemetryView.xaml.cs">
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapReply03TelemetryView.xaml.cs">
       <DependentUpon>MukFlapReply03TelemetryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapWinterSummer\DataModel\Builders\MukFlapWinterSummerReply03TelemetryBuilder.cs" />
@@ -390,31 +390,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlapOuterAir\View\EmersionDiagnosticCircuit2View.xaml">
+    <Page Include="MukFlapOuterAir\Reply03\EmersionDiagnosticCircuit2View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFlapOuterAir\View\EmersionDiagnosticCircuit1View.xaml">
+    <Page Include="MukFlapOuterAir\Reply03\EmersionDiagnosticCircuit1View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlapOuterAir\View\IncomingSignalsView.xaml">
+    <Page Include="MukFlapOuterAir\Reply03\IncomingSignalsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlapOuterAir\View\MukFlapWorkmodeStageView.xaml">
+    <Page Include="MukFlapOuterAir\Reply03\MukFlapWorkmodeStageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlapOuterAir\View\MukFlapDiagnostic1View.xaml">
+    <Page Include="MukFlapOuterAir\Reply03\MukFlapDiagnostic1View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlapOuterAir\View\MukFlapDiagnostic2View.xaml">
+    <Page Include="MukFlapOuterAir\Reply03\MukFlapDiagnostic2View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukFlapOuterAir\View\MukFlapReply03TelemetryView.xaml">
+    <Page Include="MukFlapOuterAir\Reply03\MukFlapReply03TelemetryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -454,7 +454,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFlapOuterAir\View\MukFlapDataView.xaml">
+    <Page Include="MukFlapOuterAir\Reply03\MukFlapDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -477,7 +477,7 @@
       <DependentUpon>MukVaporizerFanDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapOuterAir\MukFlapDataViewModel.cs" />
-    <Compile Include="MukFlapOuterAir\View\MukFlapDataView.xaml.cs">
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapDataView.xaml.cs">
       <DependentUpon>MukFlapDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukVaporizerFan\Request16\IKsmCommandWorkmode.cs" />

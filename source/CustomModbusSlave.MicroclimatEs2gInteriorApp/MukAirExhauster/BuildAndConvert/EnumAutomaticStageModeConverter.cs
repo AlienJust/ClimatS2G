@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Data;
 using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts.Enums;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Converters {
 	[ValueConversion(typeof(double), typeof(int))]

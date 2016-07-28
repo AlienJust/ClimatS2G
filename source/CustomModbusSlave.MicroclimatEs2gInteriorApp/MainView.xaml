@@ -7,14 +7,14 @@
     xmlns:mukFridge="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFridge"
     xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
     xmlns:bvs="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
-    xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap.View"
-    xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
+                       xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
     xmlns:view1="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.View"
     xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
     xmlns:views="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.Views"
     xmlns:view2="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.View"
     xmlns:bvs2="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs2"
     xmlns:wpf="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.Wpf;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
+    xmlns:reply03="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Reply03"
     Title="Технический абонент, салон" Height="600" Width="900" ResizeMode="CanResizeWithGrip">
 	<Window.Resources>
 		<ResourceDictionary>
@@ -137,13 +137,15 @@
 		<TabControl Grid.Row="0" TabStripPlacement="Left">
 			<TabItem Header="МУК заслонки наружного возудха" Style="{StaticResource AzureTabItem}">
 				<ScrollViewer>
-					<view:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}"/>
+					<reply03:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}"/>
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="МУК вентилятора испарителя" Style="{StaticResource AzureTabItem}">
 				<ScrollViewer>
-					<!--<mukVaporizer:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>-->
-					<wpf:GroupSimpleView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
+					<StackPanel Orientation="Vertical">
+						<mukVaporizer:MukVaporizerFanDataView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
+						<wpf:GroupSimpleView DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}"/>
+					</StackPanel>
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="МУК вентилятора конденсатора" Style="{StaticResource AzureTabItem}">

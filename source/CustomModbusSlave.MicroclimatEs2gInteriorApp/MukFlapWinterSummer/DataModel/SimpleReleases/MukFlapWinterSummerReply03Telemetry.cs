@@ -1,7 +1,6 @@
 using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.DataModel.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.SensorIndications;
 

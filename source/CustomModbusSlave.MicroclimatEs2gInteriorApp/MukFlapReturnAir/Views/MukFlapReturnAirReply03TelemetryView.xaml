@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap.View"
              xmlns:views="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.Views;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
-             xmlns:view1="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.View"
              xmlns:sensorIndications="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SensorIndications;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
+             xmlns:reply03="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Reply03"
              mc:Ignorable="d" d:DesignWidth="400">
 	<UserControl.Resources>
 		<sensorIndications:SensorIndicationDoubleToStringConverter x:Key="TemperatureConverter" Format="f2"/>
@@ -46,7 +45,7 @@
 					<RowDefinition/>
 				</Grid.RowDefinitions>
 				<TextBlock Text="Входные сигналы"/>
-				<view:IncomingSignalsView Grid.Row="1" DataContext="{Binding Path=IncomingSignals, Mode=OneTime}"/>
+				<reply03:IncomingSignalsView Grid.Row="1" DataContext="{Binding Path=IncomingSignals, Mode=OneTime}"/>
 			</Grid>
 		</Border>
 
@@ -76,7 +75,7 @@
 					<RowDefinition/>
 				</Grid.RowDefinitions>
 				<TextBlock Text="Режим работы"/>
-				<view1:MukFlapWorkmodeStageView Grid.Row="1" DataContext="{Binding Path=AutomaticModeStage, Mode=OneTime}"/>
+				<reply03:MukFlapWorkmodeStageView Grid.Row="1" DataContext="{Binding Path=AutomaticModeStage, Mode=OneTime}"/>
 			</Grid>
 		</Border>
 
@@ -87,7 +86,7 @@
 					<RowDefinition/>
 				</Grid.RowDefinitions>
 				<TextBlock Text="Диагностика 1"/>
-				<view:MukFlapDiagnostic1View Grid.Row="1" DataContext="{Binding Path=Diagnostic1, Mode=OneTime}"/>
+				<reply03:MukFlapDiagnostic1View Grid.Row="1" DataContext="{Binding Path=Diagnostic1, Mode=OneTime}"/>
 			</Grid>
 		</Border>
 
@@ -98,7 +97,7 @@
 					<RowDefinition/>
 				</Grid.RowDefinitions>
 				<TextBlock Text="Диагностика 2"/>
-				<view:MukFlapDiagnostic2View Grid.Row="1" DataContext="{Binding Path=Diagnostic2, Mode=OneTime}"/>
+				<reply03:MukFlapDiagnostic2View Grid.Row="1" DataContext="{Binding Path=Diagnostic2, Mode=OneTime}"/>
 			</Grid>
 		</Border>
 
