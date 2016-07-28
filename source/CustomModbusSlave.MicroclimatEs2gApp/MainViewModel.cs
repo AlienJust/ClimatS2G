@@ -78,17 +78,19 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
-			_mukFlapDataVm = new MukFlapDataViewModel(_notifier);
-			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier);
-			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
-			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier);
-			_bsSmDataVm = new BsSmDataViewModel(_notifier);
-			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
+			
 
 			var replyGenerator = new ReplyGeneratorWithQueueAttempted(_notifier);
 			_paramSetter = replyGenerator;
 			_replyGenerator = replyGenerator;
 			_replyAcceptor = replyGenerator;
+
+			_mukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
+			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier);
+			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier);
+			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier);
+			_bsSmDataVm = new BsSmDataViewModel(_notifier);
+			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
 
 			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter);
 

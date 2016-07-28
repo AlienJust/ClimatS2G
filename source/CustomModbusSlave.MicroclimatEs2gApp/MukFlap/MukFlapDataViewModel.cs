@@ -3,8 +3,11 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Build;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Build;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Contracts;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Request16;
+using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.SetParameters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap
 {
@@ -13,9 +16,15 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap
 		private string _reply;
 
 		private IMukFlapReply03Telemetry _reply03Telemetry;
+		private IRequest16Data _request16Telemetry;
 
-		public MukFlapDataViewModel(IThreadNotifier notifier) {
+
+		public MukFlapDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_notifier = notifier;
+
+			Reply03TelemetryText = new AnyCommandPartViewModel();
+			Request16TelemetryText = new AnyCommandPartViewModel();
+			MukFlapSetParamsVm = new MukFlapSetParamsViewModel(_notifier, parameterSetter);
 		}
 		
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
@@ -24,6 +33,12 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap
 				_notifier.Notify(() => {
 					Reply = data.ToText();
 					Reply03Telemetry = new MukFlapReply03TelemetryBuilder(data).Build();
+				});
+			}
+			else if (code == 0x10 && data.Count == 21) {
+				_notifier.Notify(() => {
+					Request16TelemetryText.Update(data);
+					Request16Telemetry = new Request16DataBuilder(data).Build();
 				});
 			}
 		}
@@ -39,6 +54,19 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap
 			}
 		}
 
+		public IRequest16Data Request16Telemetry
+		{
+			get { return _request16Telemetry; }
+			set
+			{
+				if (_request16Telemetry != value) {
+					_request16Telemetry = value;
+					RaisePropertyChanged(() => Request16Telemetry);
+				}
+			}
+		}
+
+
 		public string Reply
 		{
 			get { return _reply; }
@@ -51,5 +79,10 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap
 				}
 			}
 		}
+
+		public AnyCommandPartViewModel Reply03TelemetryText { get; }
+		public AnyCommandPartViewModel Request16TelemetryText { get; }
+
+		public MukFlapSetParamsViewModel MukFlapSetParamsVm { get; }
 	}
 }

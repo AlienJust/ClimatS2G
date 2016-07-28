@@ -8,9 +8,9 @@
     xmlns:mukWarmFloor="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor"
     xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
     xmlns:bvs="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
-    xmlns:view="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap.View"
-    xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
+                       xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
     xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
+    xmlns:mukFlap="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap"
     Title="Технический абонент" Height="480" Width="640" ResizeMode="CanResizeWithGrip">
 	<Window.Resources>
 		<ResourceDictionary>
@@ -131,7 +131,7 @@
 		<TabControl Grid.Row="0" TabStripPlacement="Left">
 			<TabItem Header="МУК Заслонки" Style="{StaticResource AzureTabItem}">
 				<ScrollViewer>
-					<view:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}"/>
+					<mukFlap:MukFlapDataView DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}"/>
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="МУК вентилятора испарителя" Style="{StaticResource AzureTabItem}">
