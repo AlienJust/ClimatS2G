@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 
 			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-кабина.xml")).LoadConfiguration();
 
-			var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest());
+			var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest(File.ReadAllText("CabinIoSample.txt").Split(' ').Select(t=>byte.Parse(t, NumberStyles.HexNumber)).ToList()));
 			_serialChannel = new SerialChannel(
 				new CommandPartSearcherPsnConfigBasedFast(psnConfig),
 				portConatiner, portConatiner);
@@ -136,6 +137,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp
 			_mukFridgeFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_mukWarmFloorDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_bsSmDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+
+			BvsDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 		}
 
 		private void GetPortsAvailable() {

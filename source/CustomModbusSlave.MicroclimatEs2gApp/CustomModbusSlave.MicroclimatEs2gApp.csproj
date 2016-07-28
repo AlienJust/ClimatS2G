@@ -177,7 +177,6 @@
     </Compile>
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
     <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
-    <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
     <Compile Include="Ksm\KsmDataView.xaml.cs">
       <DependentUpon>KsmDataView.xaml</DependentUpon>
     </Compile>
@@ -335,7 +334,11 @@
       <Name>ParamCentric.UserInterface.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="CabinIoSample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="intelecon x gray.ico" />
   </ItemGroup>

@@ -5,24 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
              mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="300">
+             d:DesignHeight="400" d:DesignWidth="600">
 	<StackPanel>
-		<CheckBox Content="Вход №1" IsChecked="{Binding Path=BvsInput1, Mode=OneTime}" />
-		<CheckBox Content="Вход №2" IsChecked="{Binding Path=BvsInput2, Mode=OneTime}" />
-		<CheckBox Content="Вход №3" IsChecked="{Binding Path=BvsInput3, Mode=OneTime}" />
-		<CheckBox Content="Вход №4" IsChecked="{Binding Path=BvsInput4, Mode=OneTime}" />
-		<CheckBox Content="Вход №5" IsChecked="{Binding Path=BvsInput5, Mode=OneTime}" />
-		<CheckBox Content="Вход №6" IsChecked="{Binding Path=BvsInput6, Mode=OneTime}" />
-		<CheckBox Content="Вход №7" IsChecked="{Binding Path=BvsInput7, Mode=OneTime}" />
-		<CheckBox Content="Вход №8" IsChecked="{Binding Path=BvsInput8, Mode=OneTime}" />
-		<CheckBox Content="Вход №9" IsChecked="{Binding Path=BvsInput9, Mode=OneTime}" />
-		<CheckBox Content="Вход №10" IsChecked="{Binding Path=BvsInput10, Mode=OneTime}" />
-		<CheckBox Content="Вход №11" IsChecked="{Binding Path=BvsInput11, Mode=OneTime}" />
-		<CheckBox Content="Вход №12" IsChecked="{Binding Path=BvsInput12, Mode=OneTime}" />
-		<CheckBox Content="Вход №13" IsChecked="{Binding Path=BvsInput13, Mode=OneTime}" />
-		<CheckBox Content="Вход №14" IsChecked="{Binding Path=BvsInput14, Mode=OneTime}" />
-		<CheckBox Content="Вход №15" IsChecked="{Binding Path=BvsInput15, Mode=OneTime}" />
-		<CheckBox Content="Вход №16" IsChecked="{Binding Path=BvsInput16, Mode=OneTime}" />
+		<CheckBox Content="Вход №1: Контроль наличия напряжения 380В, чередования фаз, перекос фаз" IsChecked="{Binding Path=BvsInput1, Mode=OneTime}" />
+		<CheckBox Content="Вход №2: Контроль аварийного реле максимального давления компрессора" IsChecked="{Binding Path=BvsInput2, Mode=OneTime}" />
+		<CheckBox Content="Вход №3: Контроль аварийного реле минимального давления компрессора" IsChecked="{Binding Path=BvsInput3, Mode=OneTime}" />
+		<CheckBox Content="Вход №4: Контроль термостата предельной температуры в нагнетательной линии компрессора" IsChecked="{Binding Path=BvsInput4, Mode=OneTime}" />
+		<CheckBox Content="Вход №5: Контроль реле разрешения работы компрессора" IsChecked="{Binding Path=BvsInput5, Mode=OneTime}" />
+		<CheckBox Content="Вход №6: Контроль срабатывания пускового контактора" IsChecked="{Binding Path=BvsInput6, Mode=OneTime}" />
+		<CheckBox Content="Вход №7: Контроль включения управляющего контактора подачи напряжения 380В на калорифер" IsChecked="{Binding Path=BvsInput7, Mode=OneTime}" />
+		<CheckBox Content="Вход №8: Контроль срабатывания контактора подачи 380В на обогрев пола" IsChecked="{Binding Path=BvsInput8, Mode=OneTime}" />
+
+		<CheckBox Content="Вход №9: Контроль включения автомата компрессора к сети 380В" IsChecked="{Binding Path=BvsInput9, Mode=OneTime}" />
+		<CheckBox Content="Вход №10: Конроль включения автомата питания вентилятора конденсатора 110В" IsChecked="{Binding Path=BvsInput10, Mode=OneTime}" />
+		<CheckBox Content="Вход №11: Контроль включения автомата питания калорифера к сети 380В" IsChecked="{Binding Path=BvsInput11, Mode=OneTime}" />
+		<CheckBox Content="Вход №12: Контроль включения автомата питания пола к сети 380В" IsChecked="{Binding Path=BvsInput12, Mode=OneTime}" />
+		<CheckBox Content="Вход №13: Контроль включения автомата питания вентилятора испарителя к сети 110В" IsChecked="{Binding Path=BvsInput13, Mode=OneTime}" />
+		<CheckBox Content="Вход №14: Контроль срабатывания термостата предельной температуры 120°С калорифера" IsChecked="{Binding Path=BvsInput14, Mode=OneTime}" />
+		<CheckBox Content="Вход №15: Резерв" IsChecked="{Binding Path=BvsInput15, Mode=OneTime}" />
+		<CheckBox Content="Вход №16: Резерв" IsChecked="{Binding Path=BvsInput16, Mode=OneTime}" />
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition/>
