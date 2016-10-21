@@ -6,6 +6,6 @@
 		int FanSpeed { get; }
 		int DeltaT { get; }
 
-		int Reserve23 { get; }
+		int DeltaTSetting { get; }
 	}
 }

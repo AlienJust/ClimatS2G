@@ -1,57 +1,50 @@
-﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16.Request16DataView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16"
-             mc:Ignorable="d" 
-             d:DesignHeight="220" d:DesignWidth="400">
+﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16.Request16DataView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16" mc:Ignorable="d" d:DesignHeight="220" d:DesignWidth="400">
 	<StackPanel Orientation="Vertical">
 		<TextBlock Text="КСМ: режим работы:"></TextBlock>
-		<local:KsmCommandWorkmodeView DataContext="{Binding Path=CurrentKsmCommandWorkmode, Mode=OneTime}"/>
+		<local:KsmCommandWorkmodeView DataContext="{Binding Path=CurrentKsmCommandWorkmode, Mode=OneTime}" />
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition/>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="КСМ: наружная температура"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=OuterTemperature}" TextAlignment="Right"/>
+			<TextBlock Text="КСМ: наружная температура" />
+			<TextBlock Grid.Column="1" Text="{Binding Path=OuterTemperature}" TextAlignment="Right" />
 		</Grid>
 
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition/>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="КСМ: температура в кабине"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=InnerTemperature, StringFormat='0x{0:f2}'}" TextAlignment="Right"/>
+			<TextBlock Text="КСМ: температура в кабине" />
+			<TextBlock Grid.Column="1" Text="{Binding Path=InnerTemperature, StringFormat='0x{0:f2}'}" TextAlignment="Right" />
 		</Grid>
 
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition/>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="КСМ: уровень вентилирования"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=FanSpeed, Mode=OneTime}" TextAlignment="Right"/>
+			<TextBlock Text="КСМ: уровень вентилирования" />
+			<TextBlock Grid.Column="1" Text="{Binding Path=FanSpeed, Mode=OneTime}" TextAlignment="Right" />
 		</Grid>
 
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition/>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="КСМ: дельта Т"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=DeltaT, Mode=OneTime}" TextAlignment="Right"/>
+			<TextBlock Text="КСМ: дельта Т" />
+			<TextBlock Grid.Column="1" Text="{Binding Path=DeltaT, Mode=OneTime}" TextAlignment="Right" />
 		</Grid>
 
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="Резерв"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve23, Mode=OneTime}" TextAlignment="Right"/>
+			<TextBlock Text="КСМ: дельта Т уставки, настройка" />
+			<TextBlock Grid.Column="1" Text="{Binding Path=DeltaTSetting, Mode=OneTime}" TextAlignment="Right"/>
 		</Grid>
 	</StackPanel>
 </UserControl>

@@ -27,7 +27,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16 {
 
 				DeltaT = _bytes[15] * 256 + _bytes[16], // word #4, bit 01
 
-				Reserve23 = _bytes[17] * 256 + _bytes[18] // word #5
+				DeltaTSetting = _bytes[17] * 256 + _bytes[18] // word #5
 																									// 19 & 20 is CRC
 			};
 		}

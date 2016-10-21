@@ -5,6 +5,6 @@
 		public double InnerTemperature { get; set; }
 		public int FanSpeed { get; set; }
 		public int DeltaT { get; set; }
-		public int Reserve23 { get; set; }
+		public int DeltaTSetting { get; set; }
 	}
 }
