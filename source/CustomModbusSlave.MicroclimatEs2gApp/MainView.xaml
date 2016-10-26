@@ -9,9 +9,7 @@
     xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
     xmlns:bvs="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
                        xmlns:ksm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Ksm"
-    xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common"
-    xmlns:mukFlap="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap"
-    Title="Технический абонент" Height="480" Width="640" ResizeMode="CanResizeWithGrip">
+    xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;assembly=CustomModbusSlave.MicroclimatEs2gApp.Common" xmlns:mukFlap="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlap" Title="Технический абонент" Height="480" Width="640" ResizeMode="CanResizeWithGrip" SaveWindowPosition="True" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" WindowTransitionsEnabled="False" GlowBrush="Black">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -21,7 +19,7 @@
 				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
 				<!-- Accent and AppTheme setting -->
-				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Teal.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 			<Style x:Key="AzureTabItem" TargetType="{x:Type TabItem}">
