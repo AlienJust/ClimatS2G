@@ -32,7 +32,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Build {
 			var emersonDiagnostic = new EmersonDiagnosticBuilder(_data[26] + _data[25]*256).Build();
 
 			var emersonTemperature = (_data[28] + _data[27] * 256) * 0.01;
-			var emersonPressure = (_data[30] + _data[29] * 256) * 0.1;
+			var emersonPressure = (_data[30] + _data[29] * 256) * 0.01;
 			var emersonValveSetting = _data[32] + _data[31] * 256;
 
 

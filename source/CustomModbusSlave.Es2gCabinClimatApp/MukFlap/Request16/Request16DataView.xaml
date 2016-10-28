@@ -29,8 +29,8 @@
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="Уставка поддерживаемой температуры"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=TargetTemperature}" TextAlignment="Right"/>
+			<TextBlock Text="КСМ: температура в помещении"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=InnerTemperature}" TextAlignment="Right"/>
 		</Grid>
 
 		<Grid>

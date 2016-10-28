@@ -2,7 +2,7 @@
 	interface IRequest16Data {
 		IKsmCommandWorkmode CurrentKsmCommandWorkmode { get; }
 		int OuterTemperature { get; }
-		int TargetTemperature { get; }
+		double InnerTemperature { get; }
 		int FanSpeed { get; }
 		int Reserve21 { get; }
 		int Reserve22 { get; }

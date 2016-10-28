@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25029.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.25807.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave", "CustomModbusSlave\CustomModbusSlave.csproj", "{9244D783-9410-4026-B3EF-49435F79A74A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlaveConsoleApp", "CustomModbusSlaveConsoleApp\CustomModbusSlaveConsoleApp.csproj", "{EB3B372F-234C-43F2-B80A-776A01A24BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.MicroclimatEs2gApp", "CustomModbusSlave.MicroclimatEs2gApp\CustomModbusSlave.MicroclimatEs2gApp.csproj", "{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gCabinClimatApp", "CustomModbusSlave.Es2gCabinClimatApp\CustomModbusSlave.Es2gCabinClimatApp.csproj", "{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.MicroclimatEs2gInteriorApp", "CustomModbusSlave.MicroclimatEs2gInteriorApp\CustomModbusSlave.MicroclimatEs2gInteriorApp.csproj", "{446DBE4B-6AFB-4784-AFAC-B99E66A6634E}"
 EndProject
