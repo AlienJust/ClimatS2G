@@ -1,0 +1,563 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{446DBE4B-6AFB-4784-AFAC-B99E66A6634E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CustomModbusSlave.Es2gClimatic.InteriorApp</RootNamespace>
+    <AssemblyName>CustomModbusSlave.Es2gClimatic.InteriorApp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>intelecon x gray.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AlienJust.Adaptation.WindowsPresentation">
+      <HintPath>..\..\reference\AlienJust.Adaptation.WindowsPresentation.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Collections">
+      <HintPath>..\..\reference\AlienJust.Support.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Concurrent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Concurrent.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Concurrent.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Concurrent.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Identy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Identy.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Identy.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Identy.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.IO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Loggers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Loggers.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Loggers.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Loggers.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.ModelViewViewModel">
+      <HintPath>..\..\reference\AlienJust.Support.ModelViewViewModel.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Numeric, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Numeric.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Serial, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Serial.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Text, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Text.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Text.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.UserInterface.Contracts">
+      <HintPath>..\..\reference\AlienJust.Support.UserInterface.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAbstractionLevel.Low, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\DataAbstractionLevel.Low.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.3.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.3.0\lib\net40\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.3.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsView.xaml.cs">
+      <DependentUpon>MukAirExhausterSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsViewModel.cs" />
+    <Compile Include="MukVaporizerFan\BytesPairNullableToStringThroughOneWireConverter.cs" />
+    <Compile Include="MukVaporizerFan\MukVaporizerFanDataViewModelParamcentric.cs" />
+    <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsView.xaml.cs">
+      <DependentUpon>MukFlapOuterAirSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsViewModel.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapOuterAirWorkmodeStageToStringConverter.cs" />
+    <Compile Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsView.xaml.cs">
+      <DependentUpon>MukFlapReturnAirSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsViewModel.cs" />
+    <Compile Include="MukFlapWinterSummer\SetParameters\MukFlapWinterSummerSetParamsView.xaml.cs">
+      <DependentUpon>MukFlapWinterSummerSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapWinterSummer\SetParameters\MukFlapWinterSummerSetParamsViewModel.cs" />
+    <Compile Include="MukFridge\SetParameters\MukFridgeSetParamsView.xaml.cs">
+      <DependentUpon>MukFridgeSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFridge\SetParameters\MukFridgeSetParamsViewModel.cs" />
+    <Compile Include="MukVaporizerFan\SetParameters\MukVaporizerSetParamsView.xaml.cs">
+      <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukVaporizerFan\SetParameters\MukVaporizerSetParamsViewModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Page Include="BsSm\BsSmDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BsSm\BsSmAndKsm1ReplyDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BsSm\BsSmAndKsm1RequestDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BsSm\WorkMode2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BsSm\WorkModeReplyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BsSm\WorkModeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Bvs2\BvsDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Bvs2\BvsReply65TelemetryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Bvs\BvsDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Bvs\BvsReply65TelemetryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ksm\KsmDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BsSm\Build\BsSmAndKsm1DataCommand32ReplyBuilderFromCommandPartDataBytes.cs" />
+    <Compile Include="BsSm\Build\WorkModeReplyBuilderFromByte.cs" />
+    <Compile Include="BsSm\Contracts\IWorkModeReply.cs" />
+    <Compile Include="BsSm\SimpleRelease\WorkModeReplySimple.cs" />
+    <Compile Include="BsSm\SimpleRelease\BsSmAndKsm1DataCommand32ReplySimple.cs" />
+    <Compile Include="BsSm\SimpleRelease\BsSmAndKsm1DataCommand32RequestSimple.cs" />
+    <Compile Include="BsSm\BsSmDataView.xaml.cs">
+      <DependentUpon>BsSmDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\BsSmAndKsm1ReplyDataView.xaml.cs">
+      <DependentUpon>BsSmAndKsm1ReplyDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\BsSmAndKsm1RequestDataView.xaml.cs">
+      <DependentUpon>BsSmAndKsm1RequestDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\Build\WorkMode2BuilderFromByte.cs" />
+    <Compile Include="BsSm\Contracts\IWorkMode2.cs" />
+    <Compile Include="BsSm\SimpleRelease\WorkMode2Simple.cs" />
+    <Compile Include="BsSm\Build\BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes.cs" />
+    <Compile Include="BsSm\Contracts\IWorkMode.cs" />
+    <Compile Include="BsSm\Build\WorkModeBuilderFromByte.cs" />
+    <Compile Include="BsSm\Contracts\IBsSmAndKsm1DataCommand32Reply.cs" />
+    <Compile Include="BsSm\Contracts\IBsSmAndKsm1DataCommand32Request.cs" />
+    <Compile Include="BsSm\SimpleRelease\WorkModeSimple.cs" />
+    <Compile Include="BsSm\WorkMode2View.xaml.cs">
+      <DependentUpon>WorkMode2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\WorkModeReplyView.xaml.cs">
+      <DependentUpon>WorkModeReplyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\WorkModeView.xaml.cs">
+      <DependentUpon>WorkModeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bvs2\BvsDataView.xaml.cs">
+      <DependentUpon>BvsDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bvs2\BvsReply65TelemetryView.xaml.cs">
+      <DependentUpon>BvsReply65TelemetryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bvs\BvsDataView.xaml.cs">
+      <DependentUpon>BvsDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bvs\BvsReply65TelemetryView.xaml.cs">
+      <DependentUpon>BvsReply65TelemetryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\BsSmDataViewModel.cs" />
+    <Compile Include="BsSm\ThrowableClimaticSystemWorkModeToStringConverter.cs" />
+    <Compile Include="BsSm\TelemetryIsNullException.cs" />
+    <Compile Include="Ksm\KsmDataView.xaml.cs">
+      <DependentUpon>KsmDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ksm\KsmDataViewModel.cs" />
+    <Compile Include="MukAirExhauster\BuildAndConvert\EnumAutomaticStageModeConverter.cs" />
+    <Compile Include="MukAirExhauster\Data\AutomaticStageModeBuilder.cs" />
+    <Compile Include="MukAirExhauster\Data\AutomaticStageModeExtensions.cs" />
+    <Compile Include="MukAirExhauster\Data\Contracts\AutomaticWorkmodeStage.cs" />
+    <Compile Include="MukAirExhauster\Data\AutomaticWorkmodeStageSimple.cs" />
+    <Compile Include="MukAirExhauster\Data\Contracts\IAutomaticWorkmodeStage.cs" />
+    <Compile Include="MukAirExhauster\Data\Contracts\IReply03Data.cs" />
+    <Compile Include="MukAirExhauster\Data\Reply03DataBuilder.cs" />
+    <Compile Include="MukAirExhauster\Data\Reply03DataSimple.cs" />
+    <Compile Include="MukAirExhauster\ViewModel\MukAirExhausterDataViewModel.cs" />
+    <Compile Include="MukAirExhauster\View\AirExhausterDataView.xaml.cs">
+      <DependentUpon>AirExhausterDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukAirExhauster\View\AirExhausterReply03DataView.xaml.cs">
+      <DependentUpon>AirExhausterReply03DataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukAirExhauster\View\AutomaticWorkmodeStageView.xaml.cs">
+      <DependentUpon>AutomaticWorkmodeStageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\Reply03\Converters\EnumMukFlapOuterAirWorkmodeStageToStringConverter.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\EmersonDiagnosticCircuit1Builder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\EmersonDiagnosticCircuit2Builder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\IncomingSignalsBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\MukFlapDiagnostic1Builder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\MukFlapOuterAirDiagnostic2Builder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\MukFlapWorkmodeStageBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IEmersonDiagnosticCircuit2.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IMukFlapWorkmodeStage.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\MukFlapWorkmodeStageSimple.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\EmersonDiagnosticCircuit2.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\MukFlapReply03Telemetry.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\MukFlapReply03TelemetryBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\IKsmCommandWorkmode.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\IRequest16Data.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmode.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeExtensions.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeSimple.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeView.xaml.cs">
+      <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\Request16\Request16Data.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\Request16DataBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\Request16DataView.xaml.cs">
+      <DependentUpon>Request16DataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeToStringConverter.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\EmersionDiagnosticCircuit2View.xaml.cs">
+      <DependentUpon>EmersionDiagnosticCircuit2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\Reply03\EmersionDiagnosticCircuit1View.xaml.cs">
+      <DependentUpon>EmersionDiagnosticCircuit1View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\MukFlapOuterAirOuterAirDiagnostic2.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\MukFlapDiagnostic1.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\IncomingSignals.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\EmersonDiagnosticCircuit1.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IEmersonDiagnosticCircuit1.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IIncomingSignals.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IMukFlapDiagnostic1.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IMukFlapOuterAirDiagnostic2.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\IMukFlapReply03Telemetry.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\DataModel\Contracts\Enums\MukFlapOuterAirWorkmodeStage.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\IncomingSignalsView.xaml.cs">
+      <DependentUpon>IncomingSignalsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapWorkmodeStageView.xaml.cs">
+      <DependentUpon>MukFlapWorkmodeStageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapDiagnostic1View.xaml.cs">
+      <DependentUpon>MukFlapDiagnostic1View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapDiagnostic2View.xaml.cs">
+      <DependentUpon>MukFlapDiagnostic2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapReply03TelemetryView.xaml.cs">
+      <DependentUpon>MukFlapReply03TelemetryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapWinterSummer\DataModel\Builders\MukFlapWinterSummerReply03TelemetryBuilder.cs" />
+    <Compile Include="MukFlapWinterSummer\DataModel\Contracts\IMukFlapWinterSummerReply03Telemetry.cs" />
+    <Compile Include="MukFlapWinterSummer\DataModel\SimpleReleases\MukFlapWinterSummerReply03Telemetry.cs" />
+    <Compile Include="MukFlapWinterSummer\MukFlapWinterSummerViewModel.cs" />
+    <Compile Include="MukFlapWinterSummer\Views\MukFlapWinterSummerDataView.xaml.cs">
+      <DependentUpon>MukFlapWinterSummerDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapWinterSummer\Views\MukFlapWinterSummerReply03TelemetryView.xaml.cs">
+      <DependentUpon>MukFlapWinterSummerReply03TelemetryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapReturnAir\DataModel\Builders\MukFlapReturnAirReply03TelemetryBuilder.cs" />
+    <Compile Include="MukFlapReturnAir\DataModel\Contracts\IMukFlapReturnAirReply03Telemetry.cs" />
+    <Compile Include="MukFlapReturnAir\DataModel\SimpleReleases\MukFlapReturnAirReply03Telemetry.cs" />
+    <Compile Include="MukFlapReturnAir\MukFlapReturnAirViewModel.cs" />
+    <Compile Include="MukFlapReturnAir\Views\MukFlapReturnAirDataView.xaml.cs">
+      <DependentUpon>MukFlapReturnAirDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapReturnAir\Views\MukFlapReturnAirReply03TelemetryView.xaml.cs">
+      <DependentUpon>MukFlapReturnAirReply03TelemetryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFridge\MukFridgeFanDataView.xaml.cs">
+      <DependentUpon>MukFridgeFanDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFridge\MukFridgeFanDataViewModel.cs" />
+    <Compile Include="MainViewModel.cs" />
+    <Compile Include="MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukAirExhauster\View\AirExhausterDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukAirExhauster\View\AirExhausterReply03DataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukAirExhauster\View\AutomaticWorkmodeStageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\Request16\Request16DataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\SetParameters\MukFlapOuterAirSetParamsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\Reply03\EmersionDiagnosticCircuit2View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapOuterAir\Reply03\EmersionDiagnosticCircuit1View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\Reply03\IncomingSignalsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\Reply03\MukFlapWorkmodeStageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\Reply03\MukFlapDiagnostic1View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\Reply03\MukFlapDiagnostic2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapOuterAir\Reply03\MukFlapReply03TelemetryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapReturnAir\SetParameters\MukFlapReturnAirSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapWinterSummer\SetParameters\MukFlapWinterSummerSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapWinterSummer\Views\MukFlapWinterSummerDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapWinterSummer\Views\MukFlapWinterSummerReply03TelemetryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapReturnAir\Views\MukFlapReturnAirDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapReturnAir\Views\MukFlapReturnAirReply03TelemetryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFridge\MukFridgeFanDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFridge\SetParameters\MukFridgeSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukVaporizerFan\MukVaporizerFanDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapOuterAir\Reply03\MukFlapDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukVaporizerFan\Request16\KsmCommandWorkmodeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukVaporizerFan\Request16\Request16DataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukVaporizerFan\SetParameters\MukVaporizerSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MukVaporizerFan\MukVaporizerFanDataViewModel.cs" />
+    <Compile Include="MukVaporizerFan\MukVaporizerFanDataView.xaml.cs">
+      <DependentUpon>MukVaporizerFanDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapOuterAir\MukFlapDataViewModel.cs" />
+    <Compile Include="MukFlapOuterAir\Reply03\MukFlapDataView.xaml.cs">
+      <DependentUpon>MukFlapDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukVaporizerFan\Request16\IKsmCommandWorkmode.cs" />
+    <Compile Include="MukVaporizerFan\Request16\IRequest16Data.cs" />
+    <Compile Include="MukVaporizerFan\Request16\KsmCommandWorkmodeSimple.cs" />
+    <Compile Include="MukVaporizerFan\Request16\KsmCommandWorkmodeView.xaml.cs">
+      <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukVaporizerFan\Request16\Request16Data.cs" />
+    <Compile Include="MukVaporizerFan\Request16\Request16DataBuilder.cs" />
+    <Compile Include="MukVaporizerFan\Request16\Request16DataView.xaml.cs">
+      <DependentUpon>Request16DataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomModbus.Slave.FastReply.Contracts\CustomModbus.Slave.FastReply.Contracts.csproj">
+      <Project>{53393428-c7af-4431-b3e4-2de72ce78108}</Project>
+      <Name>CustomModbus.Slave.FastReply.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomModbus.Slave.FastReply.Queued\CustomModbus.Slave.FastReply.Queued.csproj">
+      <Project>{19373346-e61b-42d4-9a4c-7923dce6e3fb}</Project>
+      <Name>CustomModbus.Slave.FastReply.Queued</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomModbusSlave.Es2gClimatic\CustomModbusSlave.Es2gClimatic.csproj">
+      <Project>{b20b54d7-e4ed-4b62-9308-9c975339f965}</Project>
+      <Name>CustomModbusSlave.Es2gClimatic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomModbusSlave\CustomModbusSlave.csproj">
+      <Project>{9244d783-9410-4026-b3ef-49435f79a74a}</Project>
+      <Name>CustomModbusSlave</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.Common.Contracts\ParamCentric.Common.Contracts.csproj">
+      <Project>{08b70d5b-732f-4ef5-9ddc-56b3561b9b83}</Project>
+      <Name>ParamCentric.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.Modbus.Contracts\ParamCentric.Modbus.Contracts.csproj">
+      <Project>{04a51b7c-bca2-496f-94a5-dfc4119b7b44}</Project>
+      <Name>ParamCentric.Modbus.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.UserInterface.Contracts\ParamCentric.UserInterface.Contracts.csproj">
+      <Project>{4cce9e04-36b8-4b75-aa47-3126e801a406}</Project>
+      <Name>ParamCentric.UserInterface.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MukVaporizerFan\Reply03\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="intelecon x gray.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

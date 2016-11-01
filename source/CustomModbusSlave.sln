@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave", "Custom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlaveConsoleApp", "CustomModbusSlaveConsoleApp\CustomModbusSlaveConsoleApp.csproj", "{EB3B372F-234C-43F2-B80A-776A01A24BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gCabinClimatApp", "CustomModbusSlave.Es2gCabinClimatApp\CustomModbusSlave.Es2gCabinClimatApp.csproj", "{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClimatic.CabinApp", "CustomModbusSlave.Es2gClimatic.CabinApp\CustomModbusSlave.Es2gClimatic.CabinApp.csproj", "{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.MicroclimatEs2gInteriorApp", "CustomModbusSlave.MicroclimatEs2gInteriorApp\CustomModbusSlave.MicroclimatEs2gInteriorApp.csproj", "{446DBE4B-6AFB-4784-AFAC-B99E66A6634E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClimatic.InteriorApp", "CustomModbusSlave.Es2gClimatic.InteriorApp\CustomModbusSlave.Es2gClimatic.InteriorApp.csproj", "{446DBE4B-6AFB-4784-AFAC-B99E66A6634E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.MicroclimatEs2gApp.Common", "CustomModbusSlave.MicroclimatEs2gApp.Common\CustomModbusSlave.MicroclimatEs2gApp.Common.csproj", "{B20B54D7-E4ED-4B62-9308-9C975339F965}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClimatic", "CustomModbusSlave.Es2gClimatic\CustomModbusSlave.Es2gClimatic.csproj", "{B20B54D7-E4ED-4B62-9308-9C975339F965}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamCentric.Common.Contracts", "ParamCentric.Common.Contracts\ParamCentric.Common.Contracts.csproj", "{08B70D5B-732F-4EF5-9DDC-56B3561B9B83}"
 EndProject

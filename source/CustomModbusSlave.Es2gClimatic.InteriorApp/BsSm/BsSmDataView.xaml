@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.BsSm.BsSmDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:bsSm="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.BsSm"
+             xmlns:es2GClimatic="clr-namespace:CustomModbusSlave.Es2gClimatic;assembly=CustomModbusSlave.Es2gClimatic"
+             mc:Ignorable="d" 
+             d:DesignHeight="1100" d:DesignWidth="400">
+	<StackPanel Orientation="Vertical">
+		<bsSm:BsSmAndKsm1RequestDataView DataContext="{Binding Path=BsSmAndKsm1RequestDataVm, Mode=OneWay}"/>
+		<es2GClimatic:AnyCommandPartView DataContext="{Binding Path=BsSmAndKsm1RequestDataTextVm, Mode=OneTime}"/>
+		<bsSm:BsSmAndKsm1ReplyDataView DataContext="{Binding Path=BsSmAndKsm1ReplyDataVm, Mode=OneWay}"/>
+		<es2GClimatic:AnyCommandPartView DataContext="{Binding Path=BsSmAndKsm1ReplyDataTextVm, Mode=OneTime}"/>
+	</StackPanel>
+</UserControl>

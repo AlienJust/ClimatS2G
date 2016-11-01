@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.SetParameters.MukFlapWinterSummerSetParamsView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:wpf="clr-namespace:CustomModbusSlave.Es2gClimatic.UniversalParams.Wpf;assembly=CustomModbusSlave.Es2gClimatic"
+	mc:Ignorable="d" 
+	d:DesignHeight="264" d:DesignWidth="300">
+	<StackPanel Orientation="Vertical">
+		<wpf:SettableParameterView DataContext="{Binding Path=SettableParam827, Mode=OneTime}"/>
+		<wpf:SettableParameterView DataContext="{Binding Path=SettableParam828, Mode=OneTime}"/>
+		<wpf:SettableParameterView DataContext="{Binding Path=SettableParam829, Mode=OneTime}"/>
+		<wpf:SettableParameterView DataContext="{Binding Path=SettableParam830, Mode=OneTime}"/>
+		<wpf:SettableParameterView DataContext="{Binding Path=SettableParam831, Mode=OneTime}"/>
+		<wpf:SettableParameterView DataContext="{Binding Path=SettableParam832, Mode=OneTime}"/>
+		<wpf:SettableParameterView DataContext="{Binding Path=SettableParam833, Mode=OneTime}"/>
+		<wpf:SettableParameterView DataContext="{Binding Path=SettableParam834, Mode=OneTime}"/>
+		<wpf:SettableParameterView DataContext="{Binding Path=SettableParam835, Mode=OneTime}"/>
+	</StackPanel>
+</UserControl>

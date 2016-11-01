@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.UniversalParams.Wpf.GroupSimpleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:setParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SetParams"
+             xmlns:setParams1="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.SetParams"
+             xmlns:universalParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;assembly=ParamCentric.Common.Contracts"
+             xmlns:viewModel="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.ViewModel"
+             xmlns:wpf="clr-namespace:CustomModbusSlave.Es2gClimatic.UniversalParams.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+	<StackPanel Orientation="Vertical">
+		<TextBlock Text="{Binding Path=Name, Mode=OneTime}"/>
+		<ListBox ItemsSource="{Binding Path=Children, Mode=OneTime}">
+			<ListBox.Resources>
+				<DataTemplate DataType="{x:Type universalParams:IGroup}">
+					<wpf:GroupSimpleView />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type viewModel:KsmReadonlyParamViewModel}">
+					<wpf:KsmReadonlyCommonParameterView />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type setParams1:ReceivableModbusRtuParameterSimpleViewModel}">
+					<wpf:KsmReadonlyCommonParameterView />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type viewModel:KsmBitsParameterViewModel}">
+					<wpf:KsmReadonlyBitsParameterView />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type setParams:SettableTemperatureParameterViewModel}">
+					<wpf:SettableTemperatureParameterView />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type setParams:SettableParameterViewModel}">
+					<wpf:SettableParameterView />
+				</DataTemplate>
+			</ListBox.Resources>
+		</ListBox>
+	</StackPanel>
+</UserControl>
