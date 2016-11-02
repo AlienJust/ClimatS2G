@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build;
+using CustomModbusSlave.Es2gClimatic;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build;
 using CustomModbusSlave.MicroclimatEs2gApp.BsSm.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.BsSm.SimpleRelease;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
+namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build {
 	class BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes : IBuilder<IBsSmAndKsm1DataCommand32Request> {
 		private readonly IList<byte> _commandPartDataBytes;
 		public BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes(IList<byte> commandPartDataBytes) {

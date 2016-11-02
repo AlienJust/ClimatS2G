@@ -1,25 +1,22 @@
-﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.BsSm.State.BsSmStateView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="300">
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.BsSm.State.BsSmStateView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="300">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
-		<TextBlock Text="Состояние БС-СМ:" FontWeight="SemiBold"/>
+		<TextBlock Text="Состояние БС-СМ:" FontWeight="SemiBold" />
 		<StackPanel Grid.Row="1" Orientation="Vertical" Margin="4,0,0,0">
-			<CheckBox Content="D0 — Нет связи МК1 с МПСУиД1" IsChecked="{Binding Path=NoLinkMk1AndMspuD1, Mode=OneWay}"/>
-			<CheckBox Content="D1 — Нет связи МК2 с МПСУиД2" IsChecked="{Binding Path=NoLinkMk2AndMspuD2, Mode=OneWay}"/>
-			<CheckBox Content="D2 — Бит достоверности от МПСУиД1" IsChecked="{Binding Path=ReliabilityBitFromMspuD1, Mode=OneWay}"/>
-			<CheckBox Content="D3 — Бит достоверности от МПСУиД2" IsChecked="{Binding Path=ReliabilityBitFromMspuD2, Mode=OneWay}"/>
-			<CheckBox Content="D4 — Сбой номера квитанции МПСУиД1" IsChecked="{Binding Path=MspuD1ReceiptNumberFail, Mode=OneWay}"/>
-			<CheckBox Content="D5 — Сбой номера квитанции МПСУиД2" IsChecked="{Binding Path=MspuD2ReceiptNumberFail, Mode=OneWay}"/>
-			<CheckBox Content="D6 — Нет связи в МК1 по SPI" IsChecked="{Binding Path=NoLinkMk1BySpi, Mode=OneWay}"/>
-			<CheckBox Content="D7 — резерв " IsChecked="{Binding Path=Reserved, Mode=OneWay}"/>
+			<CheckBox Content="D0 — Нет связи МК1 с МПСУиД1" IsChecked="{Binding Path=NoLinkMk1AndMspuD1, Mode=OneWay}" />
+			<CheckBox Content="D1 — Нет связи МК2 с МПСУиД2" IsChecked="{Binding Path=NoLinkMk2AndMspuD2, Mode=OneWay}" />
+			<CheckBox Content="D2 — Бит достоверности от МПСУиД1" IsChecked="{Binding Path=ReliabilityBitFromMspuD1, Mode=OneWay}" />
+			<CheckBox Content="D3 — Бит достоверности от МПСУиД2" IsChecked="{Binding Path=ReliabilityBitFromMspuD2, Mode=OneWay}" />
+			<CheckBox Content="D4 — Сбой номера квитанции МПСУиД1" IsChecked="{Binding Path=MspuD1ReceiptNumberFail, Mode=OneWay}" />
+			<CheckBox Content="D5 — Сбой номера квитанции МПСУиД2" IsChecked="{Binding Path=MspuD2ReceiptNumberFail, Mode=OneWay}" />
+			<CheckBox Content="D6 — Нет связи в МК1 по SPI" IsChecked="{Binding Path=NoLinkMk1BySpi, Mode=OneWay}" />
+			<CheckBox Content="D7 — резерв " IsChecked="{Binding Path=Reserved, Mode=OneWay}" />
 		</StackPanel>
 	</Grid>
 </UserControl>
+	

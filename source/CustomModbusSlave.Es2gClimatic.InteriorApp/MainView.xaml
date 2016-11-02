@@ -10,6 +10,7 @@
 		xmlns:reply03="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Reply03"
 		xmlns:wpf="clr-namespace:CustomModbusSlave.Es2gClimatic.UniversalParams.Wpf;assembly=CustomModbusSlave.Es2gClimatic"
 		xmlns:progamLog="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;assembly=CustomModbusSlave.Es2gClimatic"
+		xmlns:bsSm1="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm"
 		Title="Технический абонент, салон"
 		Height="600" Width="900" ResizeMode="CanResizeWithGrip">
 	<Window.Resources>
@@ -169,7 +170,7 @@
 			</TabItem>
 			<TabItem Header="БС-СМ" Style="{StaticResource AzureTabItem}" BorderBrush="Blue">
 				<ScrollViewer>
-					<bsSm:BsSmDataView DataContext="{Binding Path=BsSmDataVm, Mode=OneTime}" />
+					<bsSm1:BsSmDataView DataContext="{Binding Path=BsSmDataVm, Mode=OneTime}" />
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="БВС1" Style="{StaticResource AzureTabItem}" BorderBrush="Green">
