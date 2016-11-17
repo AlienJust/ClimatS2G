@@ -2,16 +2,16 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.TextPresenters;
-using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16;
-using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.SetParameters;
-using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Request16;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.SetParameters;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer
-{
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
+	/// <summary>
+	/// View model вентилятора испарителя
+	/// </summary>
 	class MukVaporizerFanDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;
 		private readonly string _header = "МУК вентилятора испарителя";
@@ -36,37 +36,35 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer
 		private string _automaticModeStage;
 
 		private IRequest16Data _request16Telemetry;
-		public MukVaporizerFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter)
-		{
+		public MukVaporizerFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_notifier = notifier;
 			Request16TelemetryText = new AnyCommandPartViewModel();
 			MukVaporizerSetParamsVm = new MukVaporizerSetParamsViewModel(notifier, parameterSetter);
 		}
-		
+
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (addr != 0x03) return; 
-			if (code == 0x03 && data.Count == 41)
-			{
+			if (addr != 0x03) return;
+			if (code == 0x03 && data.Count == 41) {
 				_notifier.Notify(() => {
-					FanPwm = (data[3] * 256.0 + data[4]).ToString("f2");
+					FanPwm = (data[3] * 256.0 + data[4]).ToString("f0");
 
-					TemperatureAddress1 = (new DataDoubleTextPresenter(data[6], data[5], 0.01, 2)).PresentAsText();
-					TemperatureAddress2 = (new DataDoubleTextPresenter(data[8], data[7], 0.01, 2)).PresentAsText();
+					TemperatureAddress1 = new DataDoubleTextPresenter(data[6], data[5], 0.01, 2).PresentAsText();
+					TemperatureAddress2 = new DataDoubleTextPresenter(data[8], data[7], 0.01, 2).PresentAsText();
 
-					IncomingSignals = (new ByteTextPresenter(data[10], true)).PresentAsText();
-					OutgoingSignals = (new ByteTextPresenter(data[12], true)).PresentAsText();
+					IncomingSignals = new ByteTextPresenter(data[10], false).PresentAsText();
+					OutgoingSignals = new ByteTextPresenter(data[12], false).PresentAsText();
+					AnalogInput = new UshortTextPresenter(data[14], data[13], false).PresentAsText();
 
-					AnalogInput = (new UshortTextPresenter(data[14], data[13], true)).PresentAsText();
-					HeatingPwm = (new UshortTextPresenter(data[16], data[15], false)).PresentAsText();
-					AutomaticModeStage = (new UshortTextPresenter(data[18], data[17], false)).PresentAsText();
-					TemperatureRegulatorWorkMode = (new DataDoubleTextPresenter(data[20], data[19], 0.01, 2)).PresentAsText();
-					CalculatedTemperatureSetting = (new DataDoubleTextPresenter(data[22], data[21], 0.01, 2)).PresentAsText();
-					FanSpeed = (new UshortTextPresenter(data[24], data[23], false)).PresentAsText();
-					Diagnostic1 = (new UshortTextPresenter(data[26], data[25], true)).PresentAsText();
-					Diagnostic2 = (new UshortTextPresenter(data[28], data[27], true)).PresentAsText();
-					Diagnostic3 = (new UshortTextPresenter(data[30], data[29], true)).PresentAsText();
-					Diagnostic4 = (new UshortTextPresenter(data[32], data[31], true)).PresentAsText();
-					Diagnostic5 = (new UshortTextPresenter(data[34], data[33], false)).PresentAsText();
+					HeatingPwm = new UshortTextPresenter(data[16], data[15], false).PresentAsText(); // 3.6
+					AutomaticModeStage = new UshortTextPresenter(data[18], data[17], false).PresentAsText();
+					TemperatureRegulatorWorkMode = new DataDoubleTextPresenter(data[20], data[19], 0.01, 2).PresentAsText(); // TODO: 3.8 present as bits
+					CalculatedTemperatureSetting = new DataDoubleTextPresenter(data[22], data[21], 0.01, 2).PresentAsText();
+					FanSpeed = new UshortTextPresenter(data[24], data[23], false).PresentAsText();
+					Diagnostic1 = new UshortTextPresenter(data[26], data[25], true).PresentAsText(); // TODO: present as bits
+					Diagnostic2 = new UshortTextPresenter(data[28], data[27], true).PresentAsText(); // TODO: present as bits
+					Diagnostic3 = new UshortTextPresenter(data[30], data[29], true).PresentAsText(); // TODO: present as bits
+					Diagnostic4 = new UshortTextPresenter(data[32], data[31], true).PresentAsText(); // TODO: present as bits
+					Diagnostic5 = new UshortTextPresenter(data[34], data[33], false).PresentAsText(); // TODO: present as bits
 
 					FirmwareBuildNumber = (new DataDoubleTextPresenter(data[36], data[35], 1.0, 0)).PresentAsText();
 
@@ -83,27 +81,27 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer
 
 		public string AutomaticModeStage {
 			get { return _automaticModeStage; }
-			set { if (_automaticModeStage != value){_automaticModeStage = value;RaisePropertyChanged(()=>AutomaticModeStage);} }
+			set { if (_automaticModeStage != value) { _automaticModeStage = value; RaisePropertyChanged(() => AutomaticModeStage); } }
 		}
 
 		public string TemperatureRegulatorWorkMode {
 			get { return _temperatureRegulatorWorkMode; }
-			set { if (_temperatureRegulatorWorkMode != value) { _temperatureRegulatorWorkMode = value; RaisePropertyChanged(()=>TemperatureRegulatorWorkMode);} }
+			set { if (_temperatureRegulatorWorkMode != value) { _temperatureRegulatorWorkMode = value; RaisePropertyChanged(() => TemperatureRegulatorWorkMode); } }
 		}
 
 		public string CalculatedTemperatureSetting {
 			get { return _calculatedTemperatureSetting; }
-			set { if (_calculatedTemperatureSetting != value){_calculatedTemperatureSetting = value;RaisePropertyChanged(()=>CalculatedTemperatureSetting);} }
+			set { if (_calculatedTemperatureSetting != value) { _calculatedTemperatureSetting = value; RaisePropertyChanged(() => CalculatedTemperatureSetting); } }
 		}
 
 		public string FanSpeed {
 			get { return _fanSpeed; }
-			set { if (_fanSpeed != value){_fanSpeed = value;RaisePropertyChanged(()=>FanSpeed);} }
+			set { if (_fanSpeed != value) { _fanSpeed = value; RaisePropertyChanged(() => FanSpeed); } }
 		}
 
 		public string Diagnostic1 {
 			get { return _diagnostic1; }
-			set { if (_diagnostic1 != value){_diagnostic1 = value;RaisePropertyChanged(()=>Diagnostic1);} }
+			set { if (_diagnostic1 != value) { _diagnostic1 = value; RaisePropertyChanged(() => Diagnostic1); } }
 		}
 
 		public string Diagnostic2 {
@@ -146,85 +144,66 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer
 			}
 		}
 
-		public string TemperatureAddress2
-		{
+		public string TemperatureAddress2 {
 			get { return _temperatureAddress2; }
-			set
-			{
-				if (_temperatureAddress2 != value)
-				{
+			set {
+				if (_temperatureAddress2 != value) {
 					_temperatureAddress2 = value;
 					RaisePropertyChanged(() => TemperatureAddress2);
 				}
 			}
 		}
 
-		public string IncomingSignals
-		{
+		public string IncomingSignals {
 			get { return _incomingSignals; }
-			set
-			{
-				if (_incomingSignals != value)
-				{
+			set {
+				if (_incomingSignals != value) {
 					_incomingSignals = value;
 					RaisePropertyChanged(() => IncomingSignals);
 				}
 			}
 		}
 
-		public string OutgoingSignals
-		{
+		public string OutgoingSignals {
 			get { return _outgoingSignals; }
-			set
-			{
-				if (_outgoingSignals != value)
-				{
+			set {
+				if (_outgoingSignals != value) {
 					_outgoingSignals = value;
 					RaisePropertyChanged(() => OutgoingSignals);
 				}
 			}
 		}
 
-		public string AnalogInput
-		{
+		public string AnalogInput {
 			get { return _analogInput; }
-			set
-			{
-				if (_analogInput != value)
-				{
+			set {
+				if (_analogInput != value) {
 					_analogInput = value;
 					RaisePropertyChanged(() => AnalogInput);
 				}
 			}
 		}
 
-		public string HeatingPwm
-		{
+		public string HeatingPwm {
 			get { return _heatingPwm; }
 			set { if (_heatingPwm != value) { _heatingPwm = value; RaisePropertyChanged(() => HeatingPwm); } }
 		}
 
 
-		public string FirmwareBuildNumber
-		{
+		public string FirmwareBuildNumber {
 			get { return _firmwareBuildNumber; }
-			set
-			{
-				if (_firmwareBuildNumber != value)
-				{
+			set {
+				if (_firmwareBuildNumber != value) {
 					_firmwareBuildNumber = value;
 					RaisePropertyChanged(() => FirmwareBuildNumber);
 				}
 			}
 		}
 
-		public string Reply
-		{
+		public string Reply {
 			get { return _reply; }
-			set
-			{
-				if (_reply != value)
-				{
+			set {
+				if (_reply != value) {
 					_reply = value;
 					RaisePropertyChanged(() => Reply);
 				}
@@ -241,7 +220,6 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer
 			}
 		}
 		public AnyCommandPartViewModel Request16TelemetryText { get; }
-
 
 		public MukVaporizerSetParamsViewModel MukVaporizerSetParamsVm { get; }
 	}

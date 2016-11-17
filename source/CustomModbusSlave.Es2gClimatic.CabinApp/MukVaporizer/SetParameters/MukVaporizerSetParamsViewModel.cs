@@ -1,10 +1,10 @@
 ﻿using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.DoubleBytesPairConverter;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.SetParameters {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.SetParameters {
 	class MukVaporizerSetParamsViewModel : ViewModelBase {
 		public SettableParameterViewModel SettableParam324 { get; }
 		public SettableParameterViewModel SettableParam325 { get; }

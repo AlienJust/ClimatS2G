@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm
 {
 	class BsSmDataViewModel : ViewModelBase, ICommandListener {
 		private readonly BsSmRequestDataViewModel _bsSmRequestDataVm;
@@ -19,12 +19,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm
 			_bsSmReplyDataVm.ReceiveCommand(addr, code, data);
 		}
 
-		public BsSmRequestDataViewModel BsSmRequestDataVm {
-			get { return _bsSmRequestDataVm; }
-		}
+		public BsSmRequestDataViewModel BsSmRequestDataVm => _bsSmRequestDataVm;
 
-		public BsSmReplyDataViewModel BsSmReplyDataVm {
-			get { return _bsSmReplyDataVm; }
-		}
+		public BsSmReplyDataViewModel BsSmReplyDataVm => _bsSmReplyDataVm;
 	}
 }

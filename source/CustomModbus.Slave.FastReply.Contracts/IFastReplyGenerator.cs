@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm {
+namespace CustomModbus.Slave.FastReply.Contracts {
 	public interface IFastReplyGenerator {
 		byte[] GenerateReply();
 	}

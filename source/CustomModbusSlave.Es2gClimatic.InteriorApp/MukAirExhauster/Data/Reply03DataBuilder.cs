@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.Collections;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data {
 	class Reply03DataBuilder : IBuilder<IReply03Data> {
 		private readonly IList<byte> _bytes;
 		public Reply03DataBuilder(IList<byte> bytes) {

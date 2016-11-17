@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Request16 {
 	internal class KsmCommandWorkmodeSimple : IKsmCommandWorkmode {
 		public KsmCommandWorkmodeSimple(int rawValue) {
 			RawValue = rawValue;

@@ -1,7 +1,7 @@
-using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
-using CustomModbusSlave.MicroclimatEs2gApp.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
+using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Reply03.DataModel.Contracts {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts {
 	internal interface IMukFlapReply03Telemetry {
 		int FlapPosition { get; }
 		ISensorIndication<double> TemperatureAddress1 { get; }

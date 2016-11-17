@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03 {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03 {
 	public partial class MukFlapWorkmodeStageView : UserControl {
 		public MukFlapWorkmodeStageView() {
 			InitializeComponent();

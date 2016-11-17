@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
-using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data;
-using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.SetParameters;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.SetParameters;
+using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.ViewModel
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.ViewModel
 {
 	class MukAirExhausterDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;

@@ -3,21 +3,17 @@ using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParams;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.TextPresenters;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.Request16;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.SetParameters;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
+using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.BytesPairConverters;
-using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
-using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16;
-using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.SetParameters;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
-using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizerFan {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 	class MukVaporizerFanDataViewModelParamcentric : ViewModelBase, ICommandListener, IGroup {
 		private readonly IThreadNotifier _notifier;
 		//private readonly IReceiverModbusCustom _customReceiver;
@@ -86,25 +82,25 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizerFan {
 				_notifier.Notify(() => {
 					FanPwm = (data[3] * 256.0 + data[4]).ToString("f2");
 
-					TemperatureAddress1 = (new DataDoubleTextPresenter(data[6], data[5], 0.01, 2)).PresentAsText();
-					TemperatureAddress2 = (new DataDoubleTextPresenter(data[8], data[7], 0.01, 2)).PresentAsText();
+					TemperatureAddress1 = new DataDoubleTextPresenter(data[6], data[5], 0.01, 2).PresentAsText();
+					TemperatureAddress2 = new DataDoubleTextPresenter(data[8], data[7], 0.01, 2).PresentAsText();
 
-					IncomingSignals = (new ByteTextPresenter(data[10], true)).PresentAsText();
-					OutgoingSignals = (new ByteTextPresenter(data[12], true)).PresentAsText();
+					IncomingSignals = new ByteTextPresenter(data[10], true).PresentAsText();
+					OutgoingSignals = new ByteTextPresenter(data[12], true).PresentAsText();
 
-					AnalogInput = (new UshortTextPresenter(data[14], data[13], true)).PresentAsText();
-					HeatingPwm = (new UshortTextPresenter(data[16], data[15], false)).PresentAsText();
-					AutomaticModeStage = (new UshortTextPresenter(data[18], data[17], false)).PresentAsText();
-					TemperatureRegulatorWorkMode = (new DataDoubleTextPresenter(data[20], data[19], 0.01, 2)).PresentAsText();
-					CalculatedTemperatureSetting = (new DataDoubleTextPresenter(data[22], data[21], 0.01, 2)).PresentAsText();
-					FanSpeed = (new UshortTextPresenter(data[24], data[23], false)).PresentAsText();
-					Diagnostic1 = (new UshortTextPresenter(data[26], data[25], true)).PresentAsText();
-					Diagnostic2 = (new UshortTextPresenter(data[28], data[27], true)).PresentAsText();
-					Diagnostic3 = (new UshortTextPresenter(data[30], data[29], true)).PresentAsText();
-					Diagnostic4 = (new UshortTextPresenter(data[32], data[31], true)).PresentAsText();
-					Diagnostic5 = (new UshortTextPresenter(data[34], data[33], false)).PresentAsText();
+					AnalogInput = new UshortTextPresenter(data[14], data[13], true).PresentAsText();
+					HeatingPwm = new UshortTextPresenter(data[16], data[15], false).PresentAsText();
+					AutomaticModeStage = new UshortTextPresenter(data[18], data[17], false).PresentAsText();
+					TemperatureRegulatorWorkMode = new DataDoubleTextPresenter(data[20], data[19], 0.01, 2).PresentAsText();
+					CalculatedTemperatureSetting = new DataDoubleTextPresenter(data[22], data[21], 0.01, 2).PresentAsText();
+					FanSpeed = new UshortTextPresenter(data[24], data[23], false).PresentAsText();
+					Diagnostic1 = new UshortTextPresenter(data[26], data[25], true).PresentAsText();
+					Diagnostic2 = new UshortTextPresenter(data[28], data[27], true).PresentAsText();
+					Diagnostic3 = new UshortTextPresenter(data[30], data[29], true).PresentAsText();
+					Diagnostic4 = new UshortTextPresenter(data[32], data[31], true).PresentAsText();
+					Diagnostic5 = new UshortTextPresenter(data[34], data[33], false).PresentAsText();
 
-					FirmwareBuildNumber = (new DataDoubleTextPresenter(data[36], data[35], 1.0, 0)).PresentAsText();
+					FirmwareBuildNumber = new DataDoubleTextPresenter(data[36], data[35], 1.0, 0).PresentAsText();
 
 					Reply = data.ToText();
 				});

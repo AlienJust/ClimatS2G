@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm {
+namespace CustomModbus.Slave.FastReply.Queued {
 	public class QueueItem {
 		public int ParameterIndex { get; set; }
 		public ushort ParameterValue { get; set; }

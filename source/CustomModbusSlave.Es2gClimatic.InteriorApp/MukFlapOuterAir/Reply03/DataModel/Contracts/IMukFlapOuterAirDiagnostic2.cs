@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Reply03.DataModel.Contracts {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts {
 	interface IMukFlapOuterAirDiagnostic2 {
 		bool InnormalPressureValueCircuit1 { get; }
 		bool InnormalTemperatureValueCircuit1 { get; }

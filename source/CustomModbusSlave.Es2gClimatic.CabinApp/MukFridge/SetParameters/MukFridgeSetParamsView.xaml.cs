@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge.SetParameters {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFridge.SetParameters {
 	public partial class MukFridgeSetParamsView : UserControl {
 		public MukFridgeSetParamsView() {
 			InitializeComponent();

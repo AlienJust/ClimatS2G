@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Reply03.DataModel.Contracts.Enums;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts.Enums;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Reply03 {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03 {
 	[ValueConversion(typeof(double), typeof(int))]
 	class MukFlapOuterAirWorkmodeStageToStringConverter : IValueConverter {
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {

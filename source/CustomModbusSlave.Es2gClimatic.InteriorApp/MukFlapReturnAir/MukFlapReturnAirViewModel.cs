@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.DataModel.Builders;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.DataModel.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.SetParameters;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.DataModel.Builders;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.DataModel.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.SetParameters;
+using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir
 {
 	class MukFlapReturnAirViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;

@@ -11,28 +11,27 @@ using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using AlienJust.Support.UserInterface.Contracts;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbus.Slave.FastReply.Queued;
 using CustomModbusSlave.Contracts;
-using CustomModbusSlave.Es2gClimatic;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.ViewModel;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
+using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
+using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using CustomModbusSlave.Es2gClimatic.UniversalParams;
-using CustomModbusSlave.MicroclimatEs2gApp.BsSm;
-using CustomModbusSlave.MicroclimatEs2gApp.Bvs;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.CommandHearedTimer;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
-using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
-using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.ViewModel;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFridge;
-using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizerFan;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using DataAbstractionLevel.Low.PsnConfig;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 {
 	class MainViewModel : ViewModelBase, IUserInterfaceRoot {
 		private const string TestPortName = "ТЕСТ";

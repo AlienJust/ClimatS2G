@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.Request16 {
 	internal class KsmCommandWorkmodeSimple : IKsmCommandWorkmode {
 		public bool AutomaticMode { get; set; }
 		public bool ForceHeatRegulator { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.View {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.View {
 	/// <summary>
 	/// Interaction logic for AutomaticWorkmodeStageView.xaml
 	/// </summary>

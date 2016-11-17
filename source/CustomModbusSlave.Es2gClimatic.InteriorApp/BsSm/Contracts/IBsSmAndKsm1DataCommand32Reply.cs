@@ -1,6 +1,4 @@
-﻿using CustomModbusSlave.Es2gClimatic.BsSm.State;
-
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Contracts {
+﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts {
 	internal interface IBsSmAndKsm1DataCommand32Reply {
 		uint AstronomicTime { get; }
 		uint DelayedStartTime { get; }
@@ -27,7 +25,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Contracts {
 		IBsSmAndKsm1DataCommand32Request Ksm2Request { get; }
 
 
-		IBsSmState BsSmState { get; }
+		Shared.BsSm.State.IContract Contract { get; }
 		int BsSmVersionNumber { get; }
 
 		int Reserve43 { get; }

@@ -2,15 +2,13 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.TextPresenters;
-using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16;
-using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.SetParameters;
-using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.Request16;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.SetParameters;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizerFan
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan
 {
 	class MukVaporizerFanDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;

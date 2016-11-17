@@ -3,12 +3,10 @@ using System.Linq;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.Es2gClimatic.BsSm;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 	class BsSmRequestDataViewModel : ViewModelBase, ICommandListener, IBsSmDataCommand32Request {
 		private readonly IThreadNotifier _notifier;
 

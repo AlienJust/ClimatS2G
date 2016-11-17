@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Request16 {
 	/// <summary>
 	/// Interaction logic for Request16DataView.xaml
 	/// </summary>

@@ -2,11 +2,10 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.TextPresenters;
-using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 	internal class MukWarmFloorDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;
 		private readonly string _header = "МУК вентилятора испарителя";
@@ -32,21 +31,21 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor {
 			if (addr != 0x05) return;
 			if (code == 0x03 && data.Count == 31) {
 				_notifier.Notify(() => {
-					HeatingPwm = (data[3]*256.0 + data[4]).ToString("f2");
+					HeatingPwm = (data[3]*256.0 + data[4]).ToString("f0");
 
-					AnalogInput = (new UshortTextPresenter(data[6], data[5], true)).PresentAsText();
-					TemperatureRegulatorWorkMode = (new DataDoubleTextPresenter(data[8], data[7], 0.01, 2)).PresentAsText();
+					AnalogInput = new UshortTextPresenter(data[6], data[5], false).PresentAsText();
+					TemperatureRegulatorWorkMode = new DataDoubleTextPresenter(data[8], data[7], 0.01, 0).PresentAsText();
 
-					IncomingSignals = (new ByteTextPresenter(data[10], true)).PresentAsText();
-					OutgoingSignals = (new ByteTextPresenter(data[12], true)).PresentAsText();
+					IncomingSignals = new ByteTextPresenter(data[10], false).PresentAsText();
+					OutgoingSignals = new ByteTextPresenter(data[12], false).PresentAsText();
 
-					AutomaticModeStage = (new UshortTextPresenter(data[14], data[13], false)).PresentAsText();
-					CalculatedTemperatureSetting = (new DataDoubleTextPresenter(data[16], data[15], 0.01, 2)).PresentAsText();
+					AutomaticModeStage = new UshortTextPresenter(data[14], data[13], false).PresentAsText();
+					CalculatedTemperatureSetting = new DataDoubleTextPresenter(data[16], data[15], 0.01, 2).PresentAsText();
 
-					Diagnostic1 = (new UshortTextPresenter(data[18], data[17], true)).PresentAsText();
-					Diagnostic2 = (new UshortTextPresenter(data[20], data[19], true)).PresentAsText();
+					Diagnostic1 = new UshortTextPresenter(data[18], data[17], true).PresentAsText(); // TODO: show as bits
+					Diagnostic2 = new UshortTextPresenter(data[20], data[19], true).PresentAsText(); // TODO: show as bits
 
-					FirmwareBuildNumber = (new DataDoubleTextPresenter(data[22], data[21], 1.0, 0)).PresentAsText();
+					FirmwareBuildNumber = new DataDoubleTextPresenter(data[22], data[21], 1.0, 0).PresentAsText();
 
 					Reply = data.ToText();
 				});

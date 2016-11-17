@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.Bvs.BvsDataView"
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs.BvsDataView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Bvs"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:bvs="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs"
              mc:Ignorable="d" d:DesignWidth="600" Height="400">
 	<Grid>
-		<local:BvsReply65TelemetryView DataContext="{Binding Path=Reply65Telemetry}"/>
+		<bvs:BvsReply65TelemetryView DataContext="{Binding Path=Reply65Telemetry}"/>
 	</Grid>
 </UserControl>

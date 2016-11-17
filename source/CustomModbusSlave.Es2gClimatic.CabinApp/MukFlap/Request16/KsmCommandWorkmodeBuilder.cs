@@ -1,6 +1,6 @@
-using CustomModbusSlave.Es2gClimatic;
+using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16 {
 	class KsmCommandWorkmodeBuilder : IBuilder<KsmCommandWorkmode> {
 		private readonly int _value;
 		public KsmCommandWorkmodeBuilder(int value) {

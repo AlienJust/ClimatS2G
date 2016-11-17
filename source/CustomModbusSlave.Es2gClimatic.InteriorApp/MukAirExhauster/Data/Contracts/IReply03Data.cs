@@ -1,6 +1,6 @@
-﻿using CustomModbusSlave.MicroclimatEs2gApp.SensorIndications;
+﻿using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data.Contracts {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts {
 	interface IReply03Data {
 		int HeatPwm { get; }
 		ISensorIndication<double> TemperatureOneWire { get; }

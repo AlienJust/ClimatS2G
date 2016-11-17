@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClima
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClimatic.InteriorApp", "CustomModbusSlave.Es2gClimatic.InteriorApp\CustomModbusSlave.Es2gClimatic.InteriorApp.csproj", "{446DBE4B-6AFB-4784-AFAC-B99E66A6634E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClimatic", "CustomModbusSlave.Es2gClimatic\CustomModbusSlave.Es2gClimatic.csproj", "{B20B54D7-E4ED-4B62-9308-9C975339F965}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClimatic.Shared", "CustomModbusSlave.Es2gClimatic.Shared\CustomModbusSlave.Es2gClimatic.Shared.csproj", "{B20B54D7-E4ED-4B62-9308-9C975339F965}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamCentric.Common.Contracts", "ParamCentric.Common.Contracts\ParamCentric.Common.Contracts.csproj", "{08B70D5B-732F-4EF5-9DDC-56B3561B9B83}"
 EndProject

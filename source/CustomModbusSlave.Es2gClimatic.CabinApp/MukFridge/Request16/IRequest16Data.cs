@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge.Request16 {
+﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFridge.Request16 {
 	interface IRequest16Data {
 		IKsmCommandWorkmode CurrentKsmCommandWorkmode { get; }
 		int PressureSetting { get; }

@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using AlienJust.Support.Collections;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DataModel.Builders;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.SimpleRelease;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
+using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Build {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Build {
 	class MukFlapReply03TelemetryBuilder : IBuilder<IMukFlapReply03Telemetry> {
 		private readonly IList<byte> _data;
 		public MukFlapReply03TelemetryBuilder(IList<byte> data) {

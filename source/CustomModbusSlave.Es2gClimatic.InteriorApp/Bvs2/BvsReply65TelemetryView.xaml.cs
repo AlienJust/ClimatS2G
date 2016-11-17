@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.Bvs2 {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs2 {
 	/// <summary>
 	/// Логика взаимодействия для BvsReply65TelemetryView.xaml
 	/// </summary>

@@ -26,7 +26,7 @@
 		<TextBlock Grid.Row="0" Grid.Column="0" Text="ШИМ обогрев"/>
 		<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=HeatingPwm, Mode=OneWay}"/>
 
-		<TextBlock Grid.Row="1" Grid.Column="0" Text="Аналоговый вход"/>
+		<TextBlock Grid.Row="1" Grid.Column="0" Text="Аналоговый вход (Температура ЦМР = 1 градус)"/>
 		<TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=AnalogInput, Mode=OneWay}"/>
 
 		<TextBlock Grid.Row="2" Grid.Column="0" Text="Режим работы регулятора температры"/>

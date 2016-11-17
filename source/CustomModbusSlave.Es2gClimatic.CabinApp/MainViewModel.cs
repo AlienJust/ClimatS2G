@@ -11,23 +11,22 @@ using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using AlienJust.Support.UserInterface.Contracts;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbus.Slave.FastReply.Queued;
 using CustomModbusSlave.Contracts;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.BsSm;
-using CustomModbusSlave.MicroclimatEs2gApp.Bvs;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.CommandHearedTimer;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.ProgamLog;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Ksm;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFridge;
-using CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer;
-using CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor;
+using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm;
+using CustomModbusSlave.Es2gClimatic.CabinApp.Ksm;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFridge;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
+using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
+using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using DataAbstractionLevel.Low.PsnConfig;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp
+namespace CustomModbusSlave.Es2gClimatic.CabinApp
 {
 	class MainViewModel : ViewModelBase, IUserInterfaceRoot {
 		private const string TestPortName = "ТЕСТ";

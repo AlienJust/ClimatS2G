@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.Es2gClimatic.BsSm.State;
+//using CustomModbusSlave.Es2gClimatic.Shared;
+//using CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
-	class BsSmDataCommand32ReplyBuilderFromReplyDataBytes : IBuilder<IBsSmDataCommand32Reply> {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
+	class BsSmDataCommand32ReplyBuilderFromReplyDataBytes : Shared.IBuilder<IBsSmDataCommand32Reply> {
 		private readonly IList<byte> _replyBytes;
 		public BsSmDataCommand32ReplyBuilderFromReplyDataBytes(IList<byte> replyBytes) {
 			_replyBytes = replyBytes;
@@ -18,7 +18,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 
 			int temperatureOutdoor = _replyBytes[12];
 			// TODO: byte 13 and 14
-			IBsSmState bsSmState = new BsSmStateBuilderFromByte(_replyBytes[15]).Build();
+			Shared.BsSm.State.IContract contract = new Shared.BsSm.State.BuilderFromByte(_replyBytes[15]).Build();
 			int bsSmVersionNumber = _replyBytes[16];
 
 			return new BsSmDataCommand32ReplySimple(
@@ -28,7 +28,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 				astronomicTime,
 				delayedStartTime,
 				temperatureOutdoor,
-				bsSmState,
+				contract,
 				bsSmVersionNumber
 				);
 		}

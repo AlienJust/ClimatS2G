@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using AlienJust.Support.Collections;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DataModel.Builders;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.MukFlap.DiagnosticOneWire;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Reply03.DataModel.Build;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.DataModel.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.DataModel.SimpleReleases;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Build;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.DataModel.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.DataModel.SimpleReleases;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
+using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.DataModel.Builders {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.DataModel.Builders {
 	class MukFlapReturnAirReply03TelemetryBuilder : IBuilder<IMukFlapReturnAirReply03Telemetry> {
 		private readonly IList<byte> _data;
 		public MukFlapReturnAirReply03TelemetryBuilder(IList<byte> data) {

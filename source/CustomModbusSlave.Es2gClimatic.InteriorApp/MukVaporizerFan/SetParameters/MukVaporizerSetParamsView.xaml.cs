@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.SetParameters {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.SetParameters {
 	/// <summary>
 	/// Interaction logic for MukVaporizerSetParamsView.xaml
 	/// </summary>

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapReturnAir.SetParameters {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.SetParameters {
 	/// <summary>
 	/// Interaction logic for MukFlapReturnAirSetParamsView.xaml
 	/// </summary>

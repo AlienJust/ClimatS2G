@@ -1,6 +1,6 @@
-﻿using CustomModbusSlave.MicroclimatEs2gApp.BsSm.Contracts;
+﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.SimpleRelease {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
 	class BsSmAndKsm1DataCommand32RequestSimple : IBsSmAndKsm1DataCommand32Request {
 		public BsSmAndKsm1DataCommand32RequestSimple(int maximumPower, int temperatureInterior, int temperatureOutdoor, int temperatureDelta, IWorkMode currentClimaticWorkMode, IWorkMode2 currentClimaticWorkMode2, int powerValueStage1, int powerValueStage2, int powerValueStage3, int fault1, int fault2, int fault3, int fault4, int fault5, int reserveOrTemperatureAverageValue, int co2LevelInCurrentSegment, int reserve25) {
 			MaximumPower = maximumPower;

@@ -2,22 +2,21 @@ using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.Es2gClimatic.BsSm.State;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 	class BsSmReplyDataViewModel : ViewModelBase, ICommandListener, IBsSmDataCommand32Reply {
 		private readonly IThreadNotifier _notifier;
 
-		private readonly BsSmStateViewModel _bsSmStateVm;
+		private readonly ViewModel _vm;
 		
 		private IBsSmDataCommand32Reply _reply;
 		private string _replyText;
 
 		public BsSmReplyDataViewModel(IThreadNotifier notifier) {
 			_notifier = notifier;
-			_bsSmStateVm = new BsSmStateViewModel();
+			_vm = new ViewModel();
 		}
 
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
@@ -26,7 +25,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 				_notifier.Notify(() => {
 					ReplyText = data.ToText();
 					Reply = new BsSmDataCommand32ReplyBuilderFromReplyDataBytes(data).Build(); // TODO try, if catch - null, and request too
-					_bsSmStateVm.Update(_reply.BsSmState);
+					_vm.Update(_reply.Contract);
 				});
 			}
 		}
@@ -107,7 +106,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
 			}
 		}
 
-		public IBsSmState BsSmState => _bsSmStateVm;
+		public IContract Contract => _vm;
 
 		public int BsSmVersionNumber {
 			get {

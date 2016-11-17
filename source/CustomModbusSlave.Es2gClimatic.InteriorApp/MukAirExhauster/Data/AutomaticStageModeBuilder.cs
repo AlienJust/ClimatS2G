@@ -1,6 +1,7 @@
-﻿using CustomModbusSlave.Es2gClimatic;
+﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
+using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data.Contracts {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data {
 	class AutomaticStageModeBuilder : IBuilder<AutomaticWorkmodeStage> {
 		private readonly ushort _value;
 		public AutomaticStageModeBuilder(ushort value) {

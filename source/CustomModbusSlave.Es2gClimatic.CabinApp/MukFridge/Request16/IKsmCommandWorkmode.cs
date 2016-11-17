@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge.Request16 {
+﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFridge.Request16 {
 	internal interface IKsmCommandWorkmode {
 		bool RegulatorIsWorking { get; }
 		// zb bit #2 is skipped

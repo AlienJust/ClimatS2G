@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlapWinterSummer.SetParameters {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.SetParameters {
 	/// <summary>
 	/// Interaction logic for MukFlapWinterSummerSetParamsView.xaml
 	/// </summary>

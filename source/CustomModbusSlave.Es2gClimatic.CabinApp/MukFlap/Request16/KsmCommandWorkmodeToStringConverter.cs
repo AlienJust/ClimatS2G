@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16 {
 	[ValueConversion(typeof(double), typeof(int))]
 	class KsmCommandWorkmodeToStringConverter : IValueConverter {
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 {
 	/// <summary>
 	/// Interaction logic for App.xaml

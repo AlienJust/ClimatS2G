@@ -2,15 +2,14 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Build;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Request16;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.SetParameters;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Build;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.SetParameters;
+using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap
 {
 	class MukFlapDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;

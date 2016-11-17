@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Data;
-using CustomModbusSlave.MicroclimatEs2gApp.MukAirExhauster.Data.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Converters {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.BuildAndConvert {
 	[ValueConversion(typeof(double), typeof(int))]
 	class EnumAutomaticStageModeConverter : IValueConverter {
 		#region IValueConverter Members

@@ -1,13 +1,13 @@
-﻿<UserControl x:Class="CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Request16.KsmCommandWorkmodeView"
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Request16.KsmCommandWorkmodeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukFlapOuterAir.Request16"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Request16"
              mc:Ignorable="d" 
              d:DesignHeight="25" d:DesignWidth="300">
 	<UserControl.Resources>
-		<local:KsmCommandWorkmodeToStringConverter x:Key="KsmCommandWorkmodeToStringConverter"/>
+		<request16:KsmCommandWorkmodeToStringConverter x:Key="KsmCommandWorkmodeToStringConverter"/>
 	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>

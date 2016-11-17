@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.Es2gClimatic.BsSm.State;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build;
-using CustomModbusSlave.MicroclimatEs2gApp.BsSm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.BsSm.SimpleRelease;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 	class BsSmAndKsm1DataCommand32ReplyBuilderFromCommandPartDataBytes : IBuilder<IBsSmAndKsm1DataCommand32Reply> {
 		private readonly IList<byte> _replyBytes;
 		public BsSmAndKsm1DataCommand32ReplyBuilderFromCommandPartDataBytes(IList<byte> replyBytes) {
@@ -33,7 +32,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build {
 
 			var ksm2Request = new BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes(_replyBytes.Skip(15).ToList()).Build();
 
-			IBsSmState bsSmState = new BsSmStateBuilderFromByte(_replyBytes[40]).Build();
+			IContract contract = new BuilderFromByte(_replyBytes[40]).Build();
 			int bsSmVersionNumber = _replyBytes[41];
 
 			int reserve43 = _replyBytes[42];
@@ -53,7 +52,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build {
 				reserve17,
 				reserve18,
 				ksm2Request,
-				bsSmState,
+				contract,
 				bsSmVersionNumber,
 				reserve43,
 				reserve44,

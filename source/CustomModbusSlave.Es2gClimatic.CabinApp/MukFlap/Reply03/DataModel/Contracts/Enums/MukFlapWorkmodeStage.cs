@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Contracts.Enums {
+﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts.Enums {
 	enum MukFlapWorkmodeStage {
 		ControllerInitialization, // 0
 		FlapTesting, // 1

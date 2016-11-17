@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Contracts {
+﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts {
 	interface IEmersonDiagnostic {
 		bool ErrorValve1 { get; }
 		bool ErrorValve2 { get; }

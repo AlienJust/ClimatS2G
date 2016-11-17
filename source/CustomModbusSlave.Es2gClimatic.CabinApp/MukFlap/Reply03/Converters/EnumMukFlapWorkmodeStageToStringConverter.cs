@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Data;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Contracts.Enums;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts.Enums;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.Converters {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.Converters {
 	[ValueConversion(typeof(double), typeof(int))]
 	class EnumMukFlapWorkmodeStageToStringConverter : IValueConverter {
 		#region IValueConverter Members

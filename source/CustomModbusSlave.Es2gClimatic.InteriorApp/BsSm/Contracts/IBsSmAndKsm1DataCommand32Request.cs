@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Contracts {
+﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts {
 	interface IBsSmAndKsm1DataCommand32Request {
 		int MaximumPower { get; }
 		int TemperatureInterior { get; }

@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B20B54D7-E4ED-4B62-9308-9C975339F965}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CustomModbusSlave.Es2gClimatic.Shared</RootNamespace>
+    <AssemblyName>CustomModbusSlave.Es2gClimatic.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AlienJust.Adaptation.WindowsPresentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Adaptation.WindowsPresentation.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Collections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Concurrent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Concurrent.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Concurrent.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Concurrent.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Loggers.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Loggers.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.ModelViewViewModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.ModelViewViewModel.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Numeric, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Numeric.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Text, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Text.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Text.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="NCalc, Version=1.3.8.0, Culture=neutral, PublicKeyToken=973cde3f1cafed03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\NCalc.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnyCommandPartView.xaml.cs">
+      <DependentUpon>AnyCommandPartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AnyCommandPartViewModel.cs" />
+    <Compile Include="BsSm\State\BuilderFromByte.cs" />
+    <Compile Include="BsSm\State\Simple.cs" />
+    <Compile Include="BsSm\State\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BsSm\State\ViewModel.cs" />
+    <Compile Include="BsSm\State\IContract.cs" />
+    <Compile Include="Bvs\BvsDataViewModel.cs" />
+    <Compile Include="Bvs\BvsReply65TelemetryBuilder.cs" />
+    <Compile Include="Bvs\BvsReply65TelemetrySimple.cs" />
+    <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
+    <Compile Include="CommandHearedTimer\CommandHearedTimerThreadSafe.cs" />
+    <Compile Include="CommandHearedTimer\Contracts\ICommandHearedTimer.cs" />
+    <Compile Include="CommandHearedTimer\Contracts\IStartStoppable.cs" />
+    <Compile Include="CommandHearedTimer\SimplestDelegateEver.cs" />
+    <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticSimple.cs" />
+    <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticBuilder.cs" />
+    <Compile Include="ICommandListener.cs" />
+    <Compile Include="IUpdateable.cs" />
+    <Compile Include="BsSm\ClimaticSystemWorkMode.cs" />
+    <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromInt.cs" />
+    <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromString.cs" />
+    <Compile Include="BsSm\ClimaticSystemWorkModeExtensions.cs" />
+    <Compile Include="IBuilder.cs" />
+    <Compile Include="IUserInterfaceRoot.cs" />
+    <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
+    <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterSimpleUshort.cs" />
+    <Compile Include="SetParamsAndKsm\Contracts\IAllParametersAccepter.cs" />
+    <Compile Include="SetParamsAndKsm\Contracts\ICurrentValueSettable.cs" />
+    <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\IDoubleBytesPairConverter.cs" />
+    <Compile Include="SetParamsAndKsm\Contracts\IParameterRoot.cs" />
+    <Compile Include="SetParamsAndKsm\UshortToDoubleConverter\IUshortToDoubleConverter.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\ITextFormatter.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterBits.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterNcalcDouble.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterSensor.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterSimple.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterWorkStage.cs" />
+    <Compile Include="SetParamsAndKsm\UshortToDoubleConverter\UshortToDoubleConverterNcalc.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\IKsmBitParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\KsmBitParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\KsmBitsParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\KsmReadonlyParamViewModel.cs" />
+    <Compile Include="MukFlap\Diagnostic2\MukFlapDiagnostic2Builder.cs" />
+    <Compile Include="MukFlap\Diagnostic2\IMukFlapDiagnostic2.cs" />
+    <Compile Include="MukFlap\Diagnostic2\MukFlapDiagnostic2.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\EnumOneWireSensorErrorCodeToStringConverter.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\IMukFlapDiagnosticOneWireSensor.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\IOneWireSensorErrorCode.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\MukFlapDiagnosticOneWireSensor.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\MukFlapDiagnosticOneWireSensorBuilder.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\OneWireSensorErrorCode.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\OneWireSensorErrorCodeBuilder.cs" />
+    <Compile Include="MukFlap\DiagnosticOneWire\OneWireSensorErrorCodeSimple.cs" />
+    <Compile Include="MukFlap\Views\MukFlapDiagnostic2View.xaml.cs">
+      <DependentUpon>MukFlapDiagnostic2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlap\Views\MukFlapDiagnosticOneWireSensorView.xaml.cs">
+      <DependentUpon>MukFlapDiagnosticOneWireSensorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlap\Views\OneWireErrorCodeView.xaml.cs">
+      <DependentUpon>OneWireErrorCodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProgamLog\ILogLine.cs" />
+    <Compile Include="ProgamLog\ListBoxBehavior.cs" />
+    <Compile Include="ProgamLog\LogLineSimple.cs" />
+    <Compile Include="ProgamLog\ProgramLogView.xaml.cs">
+      <DependentUpon>ProgramLogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProgamLog\ProgramLogViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SensorIndications\ISensorIndication.cs" />
+    <Compile Include="SensorIndications\SensorIndicationBase.cs" />
+    <Compile Include="SensorIndications\SensorIndicationDoubleBasedOnBytesPair.cs" />
+    <Compile Include="SensorIndications\SensorIndicationDoubleToStringConverter.cs" />
+    <Compile Include="SetParamsAndKsm\AnyParameter\SettableAnyParameterView.xaml.cs">
+      <DependentUpon>SettableAnyParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetParamsAndKsm\AnyParameter\SettableAnyParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\ReceivableModbusRtuParameterSimpleViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\SettableParameterViewModel.cs" />
+    <Compile Include="SetParamsAndKsm\ViewModel\SettableTemperatureParameterViewModel.cs" />
+    <Compile Include="TelemetryIsNullException.cs" />
+    <Compile Include="TextPresenters\ByteTextPresenter.cs" />
+    <Compile Include="TextPresenters\Contracts\ITextPresenter.cs" />
+    <Compile Include="TextPresenters\DataDoubleTextPresenter.cs" />
+    <Compile Include="TextPresenters\UshortTextPresenter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\Nullable\BytesPairNullableToStringThroughDoubleConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\Nullable\BytesPairNullableToStringThroughOneWireConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\BytesPairToStringConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\BytesPairToTemperatureConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairNullableSomethingConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairSomethingConverter.cs" />
+    <Compile Include="UniversalParams\GroupSimple.cs" />
+    <Compile Include="UniversalParams\Wpf\KsmReadonlyBitsParameterView.xaml.cs">
+      <DependentUpon>KsmReadonlyBitsParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UniversalParams\Wpf\KsmReadonlyBitView.xaml.cs">
+      <DependentUpon>KsmReadonlyBitView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UniversalParams\Wpf\GroupSimpleView.xaml.cs">
+      <DependentUpon>GroupSimpleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UniversalParams\Wpf\KsmReadonlyCommonParameterView.xaml.cs">
+      <DependentUpon>KsmReadonlyCommonParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UniversalParams\Wpf\ParameterViewSimple.xaml.cs">
+      <DependentUpon>ParameterViewSimple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UniversalParams\Wpf\SettableParameterView.xaml.cs">
+      <DependentUpon>SettableParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UniversalParams\Wpf\SettableTemperatureParameterView.xaml.cs">
+      <DependentUpon>SettableTemperatureParameterView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="AnyCommandPartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BsSm\State\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlap\Views\MukFlapDiagnostic2View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlap\Views\MukFlapDiagnosticOneWireSensorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlap\Views\OneWireErrorCodeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProgamLog\ProgramLogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SetParamsAndKsm\AnyParameter\SettableAnyParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniversalParams\Wpf\KsmReadonlyBitsParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniversalParams\Wpf\KsmReadonlyBitView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniversalParams\Wpf\GroupSimpleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniversalParams\Wpf\KsmReadonlyCommonParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniversalParams\Wpf\SettableParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniversalParams\Wpf\SettableTemperatureParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniversalParams\Wpf\StandartDataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniversalParams\Wpf\ParameterViewSimple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EvaporatorFan\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomModbus.Slave.FastReply.Contracts\CustomModbus.Slave.FastReply.Contracts.csproj">
+      <Project>{53393428-c7af-4431-b3e4-2de72ce78108}</Project>
+      <Name>CustomModbus.Slave.FastReply.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomModbusSlave\CustomModbusSlave.csproj">
+      <Project>{9244d783-9410-4026-b3ef-49435f79a74a}</Project>
+      <Name>CustomModbusSlave</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.Common.Contracts\ParamCentric.Common.Contracts.csproj">
+      <Project>{08b70d5b-732f-4ef5-9ddc-56b3561b9b83}</Project>
+      <Name>ParamCentric.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.Modbus.Contracts\ParamCentric.Modbus.Contracts.csproj">
+      <Project>{04a51b7c-bca2-496f-94a5-dfc4119b7b44}</Project>
+      <Name>ParamCentric.Modbus.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamCentric.UserInterface.Contracts\ParamCentric.UserInterface.Contracts.csproj">
+      <Project>{4cce9e04-36b8-4b75-aa47-3126e801a406}</Project>
+      <Name>ParamCentric.UserInterface.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

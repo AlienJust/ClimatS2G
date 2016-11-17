@@ -395,9 +395,9 @@
       <Project>{19373346-e61b-42d4-9a4c-7923dce6e3fb}</Project>
       <Name>CustomModbus.Slave.FastReply.Queued</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CustomModbusSlave.Es2gClimatic\CustomModbusSlave.Es2gClimatic.csproj">
+    <ProjectReference Include="..\CustomModbusSlave.Es2gClimatic.Shared\CustomModbusSlave.Es2gClimatic.Shared.csproj">
       <Project>{b20b54d7-e4ed-4b62-9308-9c975339f965}</Project>
-      <Name>CustomModbusSlave.Es2gClimatic</Name>
+      <Name>CustomModbusSlave.Es2gClimatic.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomModbusSlave\CustomModbusSlave.csproj">
       <Project>{9244d783-9410-4026-b3ef-49435f79a74a}</Project>

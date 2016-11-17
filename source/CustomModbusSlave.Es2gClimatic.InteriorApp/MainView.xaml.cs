@@ -1,7 +1,8 @@
 ﻿using AlienJust.Adaptation.WindowsPresentation;
+using CustomModbusSlave.MicroclimatEs2gApp;
 using MahApps.Metro.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 {
 	/// <summary>
 	/// Interaction logic for MainView.xaml

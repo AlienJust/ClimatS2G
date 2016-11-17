@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts {
+namespace CustomModbus.Slave.FastReply.Contracts {
 	public interface IParameterSetter {
 		void SetParameterAsync(int zeroBasedParameterNumber, ushort value, Action<Exception> callback);
 	}

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using CustomModbusSlave.Es2gClimatic;
+using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFridge.Request16 {
 	class Request16DataBuilder : IBuilder<IRequest16Data> {
 		private readonly IList<byte> _bytes;
 		public Request16DataBuilder(IList<byte> bytes) {

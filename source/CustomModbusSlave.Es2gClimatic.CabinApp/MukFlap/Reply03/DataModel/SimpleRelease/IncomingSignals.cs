@@ -1,6 +1,6 @@
-﻿using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.Reply03.DataModel.Contracts;
+﻿using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.SimpleRelease {
 	class IncomingSignals : IIncomingSignals {
 		public IncomingSignals(bool signalToTurnOnEmersion1, bool signalToTurnOnEmersion2) {
 			SignalToTurnOnEmersion1 = signalToTurnOnEmersion1;

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.Es2gClimatic.BsSm;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 	class BuilderBsSmDataCommand32RequestFromCommandPartDataBytes : IBuilder<IBsSmDataCommand32Request> {
 		private readonly IList<byte> _commandPartDataBytes;
 		public BuilderBsSmDataCommand32RequestFromCommandPartDataBytes(IList<byte> commandPartDataBytes) {

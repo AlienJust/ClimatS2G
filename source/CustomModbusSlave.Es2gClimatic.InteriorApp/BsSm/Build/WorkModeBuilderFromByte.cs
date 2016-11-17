@@ -1,7 +1,8 @@
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.BsSm.SimpleRelease;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease;
+using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 	class WorkModeBuilderFromByte : IBuilder<IWorkMode> {
 		private readonly byte _absoluteValue;
 

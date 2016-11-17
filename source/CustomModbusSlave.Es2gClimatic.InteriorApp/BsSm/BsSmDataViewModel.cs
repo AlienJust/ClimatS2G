@@ -2,13 +2,11 @@
 using System.Linq;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.Es2gClimatic;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build;
-using CustomModbusSlave.MicroclimatEs2gApp.BsSm.Build;
-using CustomModbusSlave.MicroclimatEs2gApp.BsSm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
+using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm
 {
 	class BsSmDataViewModel : ViewModelBase, ICommandListener {
 		private IBsSmAndKsm1DataCommand32Request _bsSmAndKsm1RequestDataVm;

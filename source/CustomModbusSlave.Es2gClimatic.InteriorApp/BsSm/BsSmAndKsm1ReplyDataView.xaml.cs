@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm {
 	/// <summary>
 	/// Interaction logic for BsSmAndKsm1ReplyDataView.xaml
 	/// </summary>

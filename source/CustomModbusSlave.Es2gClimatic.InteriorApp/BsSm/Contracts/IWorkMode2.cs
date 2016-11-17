@@ -1,7 +1,6 @@
-using CustomModbusSlave.Es2gClimatic.BsSm;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.BsSm;
+using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts {
 	internal interface IWorkMode2 {
 		ClimaticSystemWorkMode ClimaticSystemWorkmode { get; }
 		bool SlaveRegulatorOnByMaster { get; }

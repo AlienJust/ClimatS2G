@@ -2,15 +2,13 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
-using CustomModbusSlave.Es2gClimatic;
-using CustomModbusSlave.MicroclimatEs2gApp.Common;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.TextPresenters;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFridge.Request16;
-using CustomModbusSlave.MicroclimatEs2gApp.MukFridge.SetParameters;
-using CustomModbusSlave.MicroclimatEs2gApp.TextPresenters;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFridge.Request16;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFridge.SetParameters;
+using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFridge
 {
 	class MukFridgeFanDataViewModel : ViewModelBase, ICommandListener
 	{
@@ -43,19 +41,19 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.MukFridge
 			{
 				_notifier.Notify(() =>
 				{
-					FanPwm = (data[3] * 256.0 + data[4]).ToString("f2");
+					FanPwm = (data[3] * 256.0 + data[4]).ToString("f0");
 
-					CondensingPressure = (new DataDoubleTextPresenter(data[6], data[5], 0.1, 2)).PresentAsText();
+					CondensingPressure = new DataDoubleTextPresenter(data[6], data[5], 1.0, 0).PresentAsText();
 
-					IncomingSignals = (new ByteTextPresenter(data[8], true)).PresentAsText();
-					OutgoingSignals = (new ByteTextPresenter(data[10], true)).PresentAsText();
+					IncomingSignals = new ByteTextPresenter(data[8], false).PresentAsText();
+					OutgoingSignals = new ByteTextPresenter(data[10], false).PresentAsText();
+					AnalogInput = new UshortTextPresenter(data[12], data[11], false).PresentAsText();
 
-					AnalogInput = (new UshortTextPresenter(data[12], data[11], true)).PresentAsText();
-					AutomaticModeStage = (new UshortTextPresenter(data[14], data[13], false)).PresentAsText();
-					WorkMode = (new UshortTextPresenter(data[16], data[15], false)).PresentAsText();
-					Diagnostic1 = (new UshortTextPresenter(data[18], data[17], true)).PresentAsText();
-					Diagnostic2 = (new UshortTextPresenter(data[20], data[19], true)).PresentAsText();
-					FanSpeed = (new UshortTextPresenter(data[22], data[21], false)).PresentAsText();
+					AutomaticModeStage = new UshortTextPresenter(data[14], data[13], false).PresentAsText();
+					WorkMode = new UshortTextPresenter(data[16], data[15], false).PresentAsText(); // TODO: present as bits
+					Diagnostic1 = new UshortTextPresenter(data[18], data[17], true).PresentAsText(); // TODO: present as bits
+					Diagnostic2 = new UshortTextPresenter(data[20], data[19], true).PresentAsText(); // TODO: present as bits
+					FanSpeed = new UshortTextPresenter(data[22], data[21], false).PresentAsText();
 
 					FirmwareBuildNumber = (new DataDoubleTextPresenter(data[24], data[23], 1.0, 0)).PresentAsText();
 

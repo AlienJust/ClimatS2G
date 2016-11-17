@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.DoubleBytesPairConverter;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.TextFormatters;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.SetParamsAndKsm.ViewModel;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.Contracts;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.Ksm {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm {
 	class KsmDataViewModel : ViewModelBase, IParameterSetter, IAllParametersAccepter {
 		private readonly BlockingCollection<Tuple<int, ushort, Action<Exception>>> _itemsToWrite;
 		private readonly List<IReceivableParameter> _parameterVmList;

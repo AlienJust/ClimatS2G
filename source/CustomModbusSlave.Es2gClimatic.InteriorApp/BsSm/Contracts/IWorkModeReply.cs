@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.MicroclimatEs2gApp.BsSm.Contracts {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts {
 	internal interface IWorkModeReply {
 		bool RelabilityFlag { get; }
 		bool PowerLimitation { get; }
