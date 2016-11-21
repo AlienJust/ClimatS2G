@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-//using CustomModbusSlave.Es2gClimatic.Shared;
-//using CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 	class BsSmDataCommand32ReplyBuilderFromReplyDataBytes : Shared.IBuilder<IBsSmDataCommand32Reply> {
