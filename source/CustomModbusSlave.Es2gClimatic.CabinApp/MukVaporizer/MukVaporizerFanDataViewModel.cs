@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Reply03;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
@@ -32,7 +34,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 		private string _diagnostic1;
 		private string _fanSpeed;
 		private string _calculatedTemperatureSetting;
-		private string _temperatureRegulatorWorkMode;
+		private ITemperatureRegulatorWorkMode _temperatureRegulatorWorkMode;
 		private string _automaticModeStage;
 
 		private IRequest16Data _request16Telemetry;
@@ -57,7 +59,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 
 					HeatingPwm = new UshortTextPresenter(data[16], data[15], false).PresentAsText(); // 3.6
 					AutomaticModeStage = new UshortTextPresenter(data[18], data[17], false).PresentAsText();
-					TemperatureRegulatorWorkMode = new DataDoubleTextPresenter(data[20], data[19], 0.01, 2).PresentAsText(); // TODO: 3.8 present as bits
+
+					//TemperatureRegulatorWorkMode = new DataDoubleTextPresenter(data[20], data[19], 0.01, 2).PresentAsText(); // TODO: 3.8 present as bits
+					TemperatureRegulatorWorkMode = new TemperatureRegulatorWorkModeBuilderReplied(new BytesPair(data[19], data[20])).Build();
+
 					CalculatedTemperatureSetting = new DataDoubleTextPresenter(data[22], data[21], 0.01, 2).PresentAsText();
 					FanSpeed = new UshortTextPresenter(data[24], data[23], false).PresentAsText();
 					Diagnostic1 = new UshortTextPresenter(data[26], data[25], true).PresentAsText(); // TODO: present as bits
@@ -84,7 +89,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 			set { if (_automaticModeStage != value) { _automaticModeStage = value; RaisePropertyChanged(() => AutomaticModeStage); } }
 		}
 
-		public string TemperatureRegulatorWorkMode {
+		public ITemperatureRegulatorWorkMode TemperatureRegulatorWorkMode {
 			get { return _temperatureRegulatorWorkMode; }
 			set { if (_temperatureRegulatorWorkMode != value) { _temperatureRegulatorWorkMode = value; RaisePropertyChanged(() => TemperatureRegulatorWorkMode); } }
 		}

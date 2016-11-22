@@ -255,6 +255,10 @@
       <DependentUpon>MukFridgeSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFridge\SetParameters\MukFridgeSetParamsViewModel.cs" />
+    <Compile Include="MukVaporizer\Reply03\ITemperatureRegulatorWorkMode.cs" />
+    <Compile Include="MukVaporizer\Reply03\TemperatureRegulatorWorkModeView.xaml.cs">
+      <DependentUpon>TemperatureRegulatorWorkModeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukVaporizer\Request16\IKsmCommandWorkmode.cs" />
     <Compile Include="MukVaporizer\Request16\IRequest16Data.cs" />
     <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeSimple.cs" />
@@ -270,6 +274,8 @@
       <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukVaporizer\SetParameters\MukVaporizerSetParamsViewModel.cs" />
+    <Compile Include="MukVaporizer\Reply03\TemperatureRegulatorWorkModeBuilderReplied.cs" />
+    <Compile Include="MukVaporizer\Reply03\TemperatureRegulatorWorkModeSimple.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataViewModel.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataView.xaml.cs">
       <DependentUpon>MukWarmFloorDataView.xaml</DependentUpon>
@@ -326,6 +332,10 @@
     <Page Include="MukFridge\SetParameters\MukFridgeSetParamsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukVaporizer\Reply03\TemperatureRegulatorWorkModeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MukVaporizer\Request16\KsmCommandWorkmodeView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -424,9 +434,7 @@
   <ItemGroup>
     <Resource Include="icon2.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MukVaporizer\Reply03\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
