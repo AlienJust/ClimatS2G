@@ -118,12 +118,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 					var reply = _replyGenerator.GenerateReply();
 
 					sendAbility.Send(reply);
-					Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
+					Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------");
 					_notifier.Notify(() => _logger.Log("Reply sended"));
 				}
 				else if (commandPart.CommandCode == 16 && commandPart.ReplyBytes.Count == 109) {
 					// todo: send back
-					Console.WriteLine("Accepted 50 params command --------------------------------------------------------------------------------------------------------------------------------");
+					Console.WriteLine("Accepted 50 params command -----------------------------------------------------------------------------------");
 					_notifier.Notify(() => {
 						KsmDataVm.AcceptCommandAllParameters(commandPart.ReplyBytes.ToList());
 					});
@@ -207,15 +207,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 			}
 		}
 
-		public RelayCommand OpenPortCommand
-		{
-			get { return _openPortCommand; }
-		}
+		public RelayCommand OpenPortCommand => _openPortCommand;
 
-		public RelayCommand ClosePortCommand
-		{
-			get { return _closePortCommand; }
-		}
+		public RelayCommand ClosePortCommand => _closePortCommand;
 
 		public RelayCommand GetPortsAvailableCommand { get; }
 

@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:bvs="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.Bvs"
+             xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              mc:Ignorable="d" d:DesignWidth="300" Height="400">
-	<Grid>
+	<StackPanel Orientation="Vertical">
 		<bvs:BvsReply65TelemetryView DataContext="{Binding Path=Reply65Telemetry}"/>
-	</Grid>
+		<shared:AnyCommandPartView DataContext="{Binding Path=BvsReply41TextVm, Mode=OneTime}" />
+	</StackPanel>
 </UserControl>
