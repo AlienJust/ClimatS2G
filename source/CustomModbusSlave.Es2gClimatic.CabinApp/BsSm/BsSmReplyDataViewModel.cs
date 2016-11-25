@@ -3,20 +3,19 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbusSlave.Es2gClimatic.Shared;
-using CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 	class BsSmReplyDataViewModel : ViewModelBase, ICommandListener, IBsSmDataCommand32Reply {
 		private readonly IThreadNotifier _notifier;
 
-		private readonly ViewModel _vm;
+		private readonly Shared.BsSm.State.ViewModel _bsSmState;
 		
 		private IBsSmDataCommand32Reply _reply;
 		private string _replyText;
 
 		public BsSmReplyDataViewModel(IThreadNotifier notifier) {
 			_notifier = notifier;
-			_vm = new ViewModel();
+			_bsSmState = new Shared.BsSm.State.ViewModel();
 		}
 
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
@@ -25,7 +24,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 				_notifier.Notify(() => {
 					ReplyText = data.ToText();
 					Reply = new BsSmDataCommand32ReplyBuilderFromReplyDataBytes(data).Build(); // TODO try, if catch - null, and request too
-					_vm.Update(_reply.Contract);
+					_bsSmState.Update(_reply.BsSmState);
 				});
 			}
 		}
@@ -106,7 +105,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 			}
 		}
 
-		public IContract Contract => _vm;
+		public Shared.BsSm.State.IContract BsSmState => _bsSmState;
 
 		public int BsSmVersionNumber {
 			get {

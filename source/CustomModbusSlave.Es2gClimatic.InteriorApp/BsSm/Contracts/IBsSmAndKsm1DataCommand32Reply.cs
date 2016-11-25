@@ -12,7 +12,7 @@
 		int ClimaticSystemWorkmode14D4D7 { get; }
 
 		//byte 15:
-		IWorkModeReply WorkModeAndCompressorSwitch { get; }
+		IWorkMode WorkModeAndCompressorSwitch { get; }
 		
 		int AllowedPowerConsuptionBy380Vline { get; }
 		int Reserve17 { get; }

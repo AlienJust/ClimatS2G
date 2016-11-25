@@ -134,5 +134,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 				return _request.Fault5;
 			}
 		}
+
+		public IWorkMode WorkMode {
+			get {
+				if (_request == null) throw new TelemetryIsNullException();
+				return _request.WorkMode;
+			}
+		}
 	}
 }

@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:bsSm1="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.BsSm"
+             xmlns:cabinBssm="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.BsSm"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400">
 	<StackPanel Orientation="Vertical">
-		<bsSm1:BsSmRequestDataView DataContext="{Binding Path=BsSmRequestDataVm, Mode=OneTime}"/>
-		<bsSm1:BsSmReplyDataView DataContext="{Binding Path=BsSmReplyDataVm, Mode=OneTime}"/>
+		<cabinBssm:BsSmRequestDataView DataContext="{Binding Path=BsSmRequestDataVm, Mode=OneTime}"/>
+		<cabinBssm:BsSmReplyDataView DataContext="{Binding Path=BsSmReplyDataVm, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>

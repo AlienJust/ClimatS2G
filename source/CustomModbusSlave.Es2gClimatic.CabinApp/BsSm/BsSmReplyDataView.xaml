@@ -49,6 +49,22 @@
 			<TextBlock Text="Температура наружного воздуха"/>
 			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureOutdoor, Mode=OneWay}"/>
 		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*" />
+				<ColumnDefinition Width="1*" />
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Температура наружного воздуха" />
+			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureOutdoor, Mode=OneWay}" />
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="4*" />
+				<ColumnDefinition Width="1*" />
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Температура наружного воздуха" />
+			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureOutdoor, Mode=OneWay}" />
+		</Grid>
 		<sharedBssmState:View DataContext="{Binding Path=BsSmState, Mode=OneTime}"/>
 		<Grid>
 			<Grid.ColumnDefinitions>

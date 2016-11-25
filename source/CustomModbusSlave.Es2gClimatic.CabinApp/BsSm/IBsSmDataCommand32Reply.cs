@@ -1,6 +1,4 @@
-﻿using CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;
-
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
+﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 	internal interface IBsSmDataCommand32Reply {
 		int TargetTemperatureInsideTheCabin { get; }
 		int FanSpeedLevel { get; }
@@ -10,7 +8,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 
 		int TemperatureOutdoor { get; }
 		// TODO: byte 14 and 15
-		IContract Contract { get; }
+		Shared.BsSm.State.IContract BsSmState { get; }
 		int BsSmVersionNumber { get; }
 	}
 }

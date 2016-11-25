@@ -173,6 +173,7 @@
     <Compile Include="BsSm\BuilderBsSmDataCommand32RequestFromCommandPartDataBytes.cs" />
     <Compile Include="BsSm\IBsSmDataCommand32Reply.cs" />
     <Compile Include="BsSm\IBsSmDataCommand32Request.cs" />
+    <Compile Include="BsSm\IWorkmode1.cs" />
     <Compile Include="Bvs\BvsDataView.xaml.cs">
       <DependentUpon>BvsDataView.xaml</DependentUpon>
     </Compile>

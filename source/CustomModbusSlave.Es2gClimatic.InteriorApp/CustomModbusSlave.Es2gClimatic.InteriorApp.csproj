@@ -208,9 +208,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BsSm\Build\BsSmAndKsm1DataCommand32ReplyBuilderFromCommandPartDataBytes.cs" />
-    <Compile Include="BsSm\Build\WorkModeReplyBuilderFromByte.cs" />
-    <Compile Include="BsSm\Contracts\IWorkModeReply.cs" />
-    <Compile Include="BsSm\SimpleRelease\WorkModeReplySimple.cs" />
     <Compile Include="BsSm\SimpleRelease\BsSmAndKsm1DataCommand32ReplySimple.cs" />
     <Compile Include="BsSm\SimpleRelease\BsSmAndKsm1DataCommand32RequestSimple.cs" />
     <Compile Include="BsSm\BsSmDataView.xaml.cs">

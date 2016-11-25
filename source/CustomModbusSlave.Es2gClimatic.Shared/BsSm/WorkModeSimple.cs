@@ -1,8 +1,6 @@
-using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
-
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
-	class WorkModeReplySimple : IWorkModeReply {
-		public WorkModeReplySimple(bool relabilityFlag, bool powerLimitation, bool station, bool tunnel, bool longDistanceJourney, bool hasVoltage3000V, bool hasVoltage380V, bool isCompressorSwitchOnPermitted) {
+namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
+	public class WorkModeSimple : IWorkMode {
+		public WorkModeSimple(bool relabilityFlag, bool powerLimitation, bool station, bool tunnel, bool longDistanceJourney, bool hasVoltage3000V, bool hasVoltage380V, bool isCompressorSwitchOnPermitted) {
 			RelabilityFlag = relabilityFlag;
 			PowerLimitation = powerLimitation;
 			Station = station;

@@ -16,7 +16,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 
 			int temperatureOutdoor = _replyBytes[12];
 			// TODO: byte 13 and 14
-			Shared.BsSm.State.IContract contract = new Shared.BsSm.State.BuilderFromByte(_replyBytes[15]).Build();
+			Shared.BsSm.State.IContract bsSmState = new Shared.BsSm.State.BuilderFromByte(_replyBytes[15]).Build();
 			int bsSmVersionNumber = _replyBytes[16];
 
 			return new BsSmDataCommand32ReplySimple(
@@ -26,7 +26,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 				astronomicTime,
 				delayedStartTime,
 				temperatureOutdoor,
-				contract,
+				bsSmState,
 				bsSmVersionNumber
 				);
 		}
