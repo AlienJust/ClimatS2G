@@ -1,5 +1,5 @@
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts {
-	internal interface IWorkMode {
+	internal interface IWorkModeInRequest {
 		bool IsHeater3kWOn { get; }
 		bool InquiryComprtessorOn { get; }
 		bool Heating { get; }

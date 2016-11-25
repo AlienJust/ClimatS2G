@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using CustomModbusSlave.Es2gClimatic.Shared;
-using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
+//using CustomModbusSlave.Es2gClimatic.Shared;
+//using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
-	class BuilderBsSmDataCommand32RequestFromCommandPartDataBytes : IBuilder<IBsSmDataCommand32Request> {
+	class BuilderBsSmDataCommand32RequestFromCommandPartDataBytes : Shared.IBuilder<IBsSmDataCommand32Request> {
 		private readonly IList<byte> _commandPartDataBytes;
 		public BuilderBsSmDataCommand32RequestFromCommandPartDataBytes(IList<byte> commandPartDataBytes) {
 			_commandPartDataBytes = commandPartDataBytes;
@@ -29,8 +29,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 			var fanSpeed = (_commandPartDataBytes[3] & 0x03);
 			var isTunelModeOn = (_commandPartDataBytes[3] & 0x04) == 0x04;
 			var isWarmfloorOn = (_commandPartDataBytes[3] & 0x08) == 0x08;
-			var currentClimaticWorkMode = new ClimaticSystemWorkModeBuilderFromInt((_commandPartDataBytes[3] & 0xF0) >> 4).Build();
-
+			var currentClimaticWorkMode = new Shared.BsSm.ClimaticSystemWorkModeBuilderFromInt((_commandPartDataBytes[3] & 0xF0) >> 4).Build();
+			//var wm = new Shared.BsSm.WorkModeReplyBuilderFromByte(_commandPartDataBytes[12])
+			//var climaticSystemWorkmode = new Shared.BsSm.ClimaticSystemWorkModeBuilderFromInt();
 			var fault1 = _commandPartDataBytes[4] + _commandPartDataBytes[5] * 256;
 			var fault2 = _commandPartDataBytes[6] + _commandPartDataBytes[7] * 256;
 			var fault3 = _commandPartDataBytes[8] + _commandPartDataBytes[9] * 256;

@@ -1,8 +1,8 @@
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
-	class WorkModeSimple : IWorkMode {
-		public WorkModeSimple(bool isHeater3kWOn, bool inquiryComprtessorOn, bool heating, bool cooling, bool station, bool tunnel, bool longDistanceJourney, bool reserve) {
+	class WorkModeInRequestSimple : IWorkModeInRequest {
+		public WorkModeInRequestSimple(bool isHeater3kWOn, bool inquiryComprtessorOn, bool heating, bool cooling, bool station, bool tunnel, bool longDistanceJourney, bool reserve) {
 			IsHeater3kWOn = isHeater3kWOn;
 			InquiryComprtessorOn = inquiryComprtessorOn;
 			Heating = heating;

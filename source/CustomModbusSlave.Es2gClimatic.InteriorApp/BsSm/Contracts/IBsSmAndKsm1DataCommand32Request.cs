@@ -5,8 +5,8 @@
 		int TemperatureOutdoor { get; }
 		int TemperatureDelta { get; }
 
-		IWorkMode CurrentClimaticWorkMode { get; }
-		IWorkMode2 CurrentClimaticWorkMode2 { get; }
+		IWorkModeInRequest CurrentClimaticWorkMode { get; }
+		IWorkModeInRequest2 CurrentClimaticWorkMode2 { get; }
 
 		int PowerValueStage1 { get; }
 		int PowerValueStage2 { get; }

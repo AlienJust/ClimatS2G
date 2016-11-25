@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Windows.Data;
-using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm {
+namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 	[ValueConversion(typeof(double), typeof(int))]
-	class ThrowableClimaticSystemWorkModeToStringConverter : IValueConverter {
+	public class ClimaticSystemWorkModeToStringThrowableConverter : IValueConverter {
 		#region IValueConverter Members
 
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {

@@ -8,7 +8,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 		bool IsTunelModeOn { get; }
 		bool IsWarmFloorOn { get; }
 		ClimaticSystemWorkMode CurrentClimaticWorkMode { get; }
-		IWorkMode WorkMode { get; }
 		int Fault1 { get; }
 		int Fault2 { get; }
 		int Fault3 { get; }

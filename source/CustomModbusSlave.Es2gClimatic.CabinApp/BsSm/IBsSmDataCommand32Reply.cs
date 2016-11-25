@@ -7,7 +7,11 @@
 		uint DelayedStartTime { get; }
 
 		int TemperatureOutdoor { get; }
-		// TODO: byte 14 and 15
+
+		int TemperatureIndoor { get; }
+		Shared.BsSm.ClimaticSystemWorkMode ClimaticWorkmode { get; }
+		Shared.BsSm.IWorkMode WorkMode { get; }
+
 		Shared.BsSm.State.IContract BsSmState { get; }
 		int BsSmVersionNumber { get; }
 	}

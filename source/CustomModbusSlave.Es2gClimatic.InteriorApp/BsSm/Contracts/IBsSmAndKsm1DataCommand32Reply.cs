@@ -9,10 +9,10 @@
 
 		//byte 14:
 		int TargetTemperatureInterior { get; }
-		int ClimaticSystemWorkmode14D4D7 { get; }
+		int ClimaticSystemWorkmode14D4D7 { get; } // TODO: parse (see cabin app)
 
 		//byte 15:
-		IWorkMode WorkModeAndCompressorSwitch { get; }
+		Shared.BsSm.IWorkMode WorkModeAndCompressorSwitch { get; }
 		
 		int AllowedPowerConsuptionBy380Vline { get; }
 		int Reserve17 { get; }

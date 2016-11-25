@@ -3,15 +3,15 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
-	class WorkModeBuilderFromByte : IBuilder<IWorkMode> {
+	class WorkModeInRequestBuilderFromByte : IBuilder<IWorkModeInRequest> {
 		private readonly byte _absoluteValue;
 
-		public WorkModeBuilderFromByte(byte absoluteValue) {
+		public WorkModeInRequestBuilderFromByte(byte absoluteValue) {
 			_absoluteValue = absoluteValue;
 		}
 
-		public IWorkMode Build() {
-			return new WorkModeSimple(
+		public IWorkModeInRequest Build() {
+			return new WorkModeInRequestSimple(
 				(_absoluteValue & 0x01) == 0x01, // zb bit 0
 				(_absoluteValue & 0x02) == 0x02, // zb bit 1
 				(_absoluteValue & 0x04) == 0x04, // zb bit 2

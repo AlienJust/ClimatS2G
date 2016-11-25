@@ -3,6 +3,7 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 	class BsSmReplyDataViewModel : ViewModelBase, ICommandListener, IBsSmDataCommand32Reply {
@@ -105,6 +106,26 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 			}
 		}
 
+
+		public int TemperatureIndoor {
+			get {
+				if (_reply == null) throw new TelemetryIsNullException();
+				return _reply.TemperatureIndoor;
+			}
+		}
+		public ClimaticSystemWorkMode ClimaticWorkmode {
+			get {
+				if (_reply == null) throw new TelemetryIsNullException();
+				return _reply.ClimaticWorkmode;
+			}
+		}
+		public IWorkMode WorkMode {
+			get {
+				if (_reply == null) throw new TelemetryIsNullException();
+				return _reply.WorkMode;
+			}
+		}
+
 		public Shared.BsSm.State.IContract BsSmState => _bsSmState;
 
 		public int BsSmVersionNumber {
@@ -113,5 +134,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 				return _reply.BsSmVersionNumber;
 			}
 		}
+
 	}
 }

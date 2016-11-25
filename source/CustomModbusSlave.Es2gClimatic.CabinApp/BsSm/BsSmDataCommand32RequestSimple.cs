@@ -2,14 +2,13 @@
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 	class BsSmDataCommand32RequestSimple : IBsSmDataCommand32Request {
-		public BsSmDataCommand32RequestSimple(int temperatureInsideTheCabin, int temperatureOutdoor, int fanSpeed, bool isTunelModeOn, bool isWarmFloorOn, ClimaticSystemWorkMode currentClimaticWorkMode, IWorkMode workMode, int fault1, int fault2, int fault3, int fault4, int fault5) {
+		public BsSmDataCommand32RequestSimple(int temperatureInsideTheCabin, int temperatureOutdoor, int fanSpeed, bool isTunelModeOn, bool isWarmFloorOn, ClimaticSystemWorkMode currentClimaticWorkMode, int fault1, int fault2, int fault3, int fault4, int fault5) {
 			TemperatureInsideTheCabin = temperatureInsideTheCabin;
 			TemperatureOutdoor = temperatureOutdoor;
 			FanSpeed = fanSpeed;
 			IsTunelModeOn = isTunelModeOn;
 			IsWarmFloorOn = isWarmFloorOn;
 			CurrentClimaticWorkMode = currentClimaticWorkMode;
-			WorkMode = workMode;
 
 			Fault1 = fault1;
 			Fault2 = fault2;
@@ -32,8 +31,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 		public bool IsWarmFloorOn { get; }
 
 		public ClimaticSystemWorkMode CurrentClimaticWorkMode { get; }
-
-		public IWorkMode WorkMode { get; }
 
 		public int Fault1 { get; }
 

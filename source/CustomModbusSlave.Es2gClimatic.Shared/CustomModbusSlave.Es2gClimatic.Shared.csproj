@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="BsSm\State\ViewModel.cs" />
     <Compile Include="BsSm\State\IContract.cs" />
+    <Compile Include="BsSm\ClimaticSystemWorkModeToStringThrowableConverter.cs" />
     <Compile Include="BsSm\WorkModeReplyBuilderFromByte.cs" />
     <Compile Include="BsSm\WorkModeSimple.cs" />
     <Compile Include="Bvs\BvsDataViewModel.cs" />

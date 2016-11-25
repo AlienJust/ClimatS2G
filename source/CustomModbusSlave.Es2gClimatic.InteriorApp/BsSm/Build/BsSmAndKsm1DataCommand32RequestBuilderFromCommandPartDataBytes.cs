@@ -16,8 +16,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 			var temperatureInterior = _commandPartDataBytes[2] - 60;
 			var temperatureOutdoor = _commandPartDataBytes[3] - 60;
 			var temperatureDelta = _commandPartDataBytes[4] - 60;
-			var workMode = new WorkModeBuilderFromByte(_commandPartDataBytes[5]).Build();
-			var workMode2= new WorkMode2BuilderFromByte(_commandPartDataBytes[6]).Build();
+			var workMode = new WorkModeInRequestBuilderFromByte(_commandPartDataBytes[5]).Build();
+			var workMode2= new WorkModeInRequest2BuilderFromByte(_commandPartDataBytes[6]).Build();
 
 			var powerStage1 = _commandPartDataBytes[7];
 			var powerStage2 = _commandPartDataBytes[8];

@@ -3,6 +3,7 @@ using System.Linq;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease;
 using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 using CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {

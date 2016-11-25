@@ -1,11 +1,8 @@
-using System;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
-using CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;
-using IWorkMode = CustomModbusSlave.Es2gClimatic.Shared.BsSm.IWorkMode;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
 	class BsSmAndKsm1DataCommand32ReplySimple : IBsSmAndKsm1DataCommand32Reply {
-		public BsSmAndKsm1DataCommand32ReplySimple(uint astronomicTime, uint delayedStartTime, int temperatureOutdoor, int carType, int reserve13D4D7, int targetTemperatureInterior, int climaticSystemWorkmode14D4D7, IWorkMode workModeAndCompressorSwitch, int allowedPowerConsuptionBy380Vline, int reserve17, int reserve18, IBsSmAndKsm1DataCommand32Request ksm2Request, IContract contract, int bsSmVersionNumber, int reserve43, int reserve44, int reserve45) {
+		public BsSmAndKsm1DataCommand32ReplySimple(uint astronomicTime, uint delayedStartTime, int temperatureOutdoor, int carType, int reserve13D4D7, int targetTemperatureInterior, int climaticSystemWorkmode14D4D7, Shared.BsSm.IWorkMode workModeAndCompressorSwitch, int allowedPowerConsuptionBy380Vline, int reserve17, int reserve18, IBsSmAndKsm1DataCommand32Request ksm2Request, Shared.BsSm.State.IContract contract, int bsSmVersionNumber, int reserve43, int reserve44, int reserve45) {
 			AstronomicTime = astronomicTime;
 			DelayedStartTime = delayedStartTime;
 			TemperatureOutdoor = temperatureOutdoor;
@@ -34,14 +31,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
 		public int Reserve13D4D7 { get; }
 		public int TargetTemperatureInterior { get; }
 		public int ClimaticSystemWorkmode14D4D7 { get; }
-		public IWorkMode WorkModeAndCompressorSwitch { get; }
+		public Shared.BsSm.IWorkMode WorkModeAndCompressorSwitch { get; }
 		public int AllowedPowerConsuptionBy380Vline { get; }
 		public int Reserve17 { get; }
 		public int Reserve18 { get; }
 		//public int Segment2CurentCalculatedPowerConsumptionBy380Vline { get; }
 		//public int Segment2InteriorTemperature { get; }
 		public IBsSmAndKsm1DataCommand32Request Ksm2Request { get; }
-		public IContract Contract { get; }
+		public Shared.BsSm.State.IContract Contract { get; }
 		public int BsSmVersionNumber { get; }
 		public int Reserve43 { get; }
 		public int Reserve44 { get; }

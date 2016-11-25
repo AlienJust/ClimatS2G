@@ -16,7 +16,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 				(_absoluteValue & 0x10) == 0x10, // zb bit 4
 				(_absoluteValue & 0x20) == 0x20, // zb bit 5
 				(_absoluteValue & 0x40) == 0x40, // zb bit 6
-				(_absoluteValue & 0x80) == 0x80 // zb bit 7
+				(_absoluteValue & 0x80) == 0x80 //  zb bit 7
 				);
 		}
 	}
