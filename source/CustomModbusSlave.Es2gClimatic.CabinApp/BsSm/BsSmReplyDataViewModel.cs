@@ -44,6 +44,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 					RaisePropertyChanged(() => DelayedStartTime);
 					
 					RaisePropertyChanged(() => TemperatureOutdoor);
+					RaisePropertyChanged(() => TemperatureIndoor);
+					RaisePropertyChanged(() => ClimaticWorkmode);
+					// TODO: dont forget to add raise
 
 					RaisePropertyChanged(() => DelayedStartTime);
 					RaisePropertyChanged(() => BsSmVersionNumber);
