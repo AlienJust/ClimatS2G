@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
+﻿using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 	/// <summary>

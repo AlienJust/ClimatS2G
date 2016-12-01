@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.Shared.BsSm.WorkModeView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm" mc:Ignorable="d"
+		d:DesignHeight="300" d:DesignWidth="300">
+	<StackPanel Orientation="Vertical">
+		<CheckBox IsChecked="{Binding Path=RelabilityFlag, Mode=OneTime}" Content="D0 - Признак достоверности" />
+		<CheckBox IsChecked="{Binding Path=PowerLimitation, Mode=OneTime}" Content="D1 - Режим ограниченной мощности" />
+		<CheckBox IsChecked="{Binding Path=Station, Mode=OneTime}" Content="D2 - Режим станция" />
+		<CheckBox IsChecked="{Binding Path=Tunnel, Mode=OneTime}" Content="D3 - Режим тоннель" />
+		<CheckBox IsChecked="{Binding Path=LongDistanceJourney, Mode=OneTime}" Content="D4 - Режим дальнее сообщение" />
+		<CheckBox IsChecked="{Binding Path=HasVoltage3000V, Mode=OneTime}" Content="D5 - Наличие 3 кВ" />
+		<CheckBox IsChecked="{Binding Path=HasVoltage380V, Mode=OneTime}" Content="D6 - Наличие 380 В" />
+		<CheckBox IsChecked="{Binding Path=IsCompressorSwitchOnPermitted, Mode=OneTime}" Content="D7 - Разрешение на включение компрессора" />
+	</StackPanel>
+</UserControl>

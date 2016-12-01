@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:sharedBssmState="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;assembly=CustomModbusSlave.Es2gClimatic.Shared"
-             xmlns:bsSm="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+             xmlns:sharedBsSm="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              mc:Ignorable="d" 
              d:DesignHeight="320" d:DesignWidth="400">
 	<UserControl.Resources>
-		<bsSm:ClimaticSystemWorkModeToStringThrowableConverter x:Key="ClimaticSystemWorkModeConverter" />
+		<sharedBsSm:ClimaticSystemWorkModeToStringThrowableConverter x:Key="ClimaticSystemWorkModeConverter" />
 	</UserControl.Resources>
 	<StackPanel Orientation="Vertical">
 		<Grid>
@@ -70,7 +70,8 @@
 			<TextBlock Grid.Column="1" Text="{Binding Path=ClimaticWorkmode, Mode=OneWay, Converter={StaticResource ClimaticSystemWorkModeConverter}}"
 					TextAlignment="Right" />
 		</Grid>
-		<sharedBssmState:View DataContext="{Binding Path=BsSmState, Mode=OneTime}"/>
+		<sharedBsSm:WorkModeView DataContext="{Binding Path=WorkMode, Mode=OneWay}"/>
+		<sharedBssmState:View DataContext="{Binding Path=BsSmState, Mode=OneWay}"/>
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="4*"/>
