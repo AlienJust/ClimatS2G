@@ -277,6 +277,7 @@
     <Compile Include="MukVaporizer\SetParameters\MukVaporizerSetParamsViewModel.cs" />
     <Compile Include="MukVaporizer\Reply03\TemperatureRegulatorWorkModeBuilderReplied.cs" />
     <Compile Include="MukVaporizer\Reply03\TemperatureRegulatorWorkModeSimple.cs" />
+    <Compile Include="MukWarmFloor\IRequest16.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataViewModel.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataView.xaml.cs">
       <DependentUpon>MukWarmFloorDataView.xaml</DependentUpon>
@@ -362,6 +363,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MukWarmFloor\Request16View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MukVaporizer\MukVaporizerFanDataViewModel.cs" />
@@ -371,6 +376,11 @@
     <Compile Include="MukFlap\MukFlapDataViewModel.cs" />
     <Compile Include="MukFlap\MukFlapDataView.xaml.cs">
       <DependentUpon>MukFlapDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukWarmFloor\Request16BuilderFromBytes.cs" />
+    <Compile Include="MukWarmFloor\Request16Simple.cs" />
+    <Compile Include="MukWarmFloor\Request16View.xaml.cs">
+      <DependentUpon>Request16View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -8,7 +8,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 	internal class MukWarmFloorDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;
-		private readonly string _header = "МУК вентилятора испарителя";
+		private readonly string _header = "МУК тёплого пола";
 
 		private string _heatingPwm;
 		private string _analogInput;
@@ -22,16 +22,22 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		private string _reply;
 		private string _diagnostic1;
 		private string _diagnostic2;
+		private IRequest16 _request16;
+
+		public AnyCommandPartViewModel Request16BytesTextVm { get; set; }
 
 		public MukWarmFloorDataViewModel(IThreadNotifier notifier) {
 			_notifier = notifier;
+			Request16BytesTextVm = new AnyCommandPartViewModel();
 		}
+
+
 
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
 			if (addr != 0x05) return;
 			if (code == 0x03 && data.Count == 31) {
 				_notifier.Notify(() => {
-					HeatingPwm = (data[3]*256.0 + data[4]).ToString("f0");
+					HeatingPwm = (data[3] * 256.0 + data[4]).ToString("f0");
 
 					AnalogInput = new UshortTextPresenter(data[6], data[5], false).PresentAsText();
 					TemperatureRegulatorWorkMode = new DataDoubleTextPresenter(data[8], data[7], 0.01, 0).PresentAsText();
@@ -47,8 +53,27 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 
 					FirmwareBuildNumber = new DataDoubleTextPresenter(data[22], data[21], 1.0, 0).PresentAsText();
 
+
 					Reply = data.ToText();
 				});
+			}
+			// запрос 0x10 (16 dec):
+			if (code == 0x10 && data.Count == 21) {
+				_notifier.Notify(() => {
+					var request16 = new Request16BuilderFromBytes(data).Build();
+					Request16 = request16;
+					Request16BytesTextVm.Update(data);
+				});
+			}
+		}
+
+		public IRequest16 Request16 {
+			get { return _request16; }
+			set {
+				if (_request16 != value) {
+					_request16 = value;
+					RaisePropertyChanged("Request16");
+				}
 			}
 		}
 

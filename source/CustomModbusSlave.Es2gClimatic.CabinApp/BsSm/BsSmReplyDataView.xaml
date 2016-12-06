@@ -6,7 +6,7 @@
              xmlns:sharedBssmState="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              xmlns:sharedBsSm="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              mc:Ignorable="d" 
-             d:DesignHeight="320" d:DesignWidth="400">
+             d:DesignHeight="520" d:DesignWidth="400">
 	<UserControl.Resources>
 		<sharedBsSm:ClimaticSystemWorkModeToStringThrowableConverter x:Key="ClimaticSystemWorkModeConverter" />
 	</UserControl.Resources>
