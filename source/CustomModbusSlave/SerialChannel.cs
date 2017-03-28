@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using AlienJust.Support.Concurrent;
@@ -15,7 +14,7 @@ namespace CustomModbusSlave {
 		public event CommandHearedDelegate CommandHeared;
 		public event CommandHearedWithReplyPossibilityDelegate CommandHearedWithReplyPossibility;
 
-		private readonly SingleThreadedRelayQueueWorker<Action> _backgroundWorker;
+		private readonly SingleThreadedRelayQueueWorkerProceedAllItemsBeforeStopNoLog<Action> _backgroundWorker;
 		private readonly IWorker<Action> _readDataScheduler;
 		private readonly IWorker<Action> _notifyWorker;
 		private readonly List<byte> _incomingBuffer;
@@ -38,9 +37,9 @@ namespace CustomModbusSlave {
 			_incomingBuffer = new List<byte>();
 
 
-			_backgroundWorker = new SingleThreadedRelayQueueWorker<Action>("SerialBackWorker", a => a(), ThreadPriority.BelowNormal, true, null, new RelayActionLogger(Console.WriteLine, new DateTimeFormatter(" > ")));
-			_readDataScheduler = new SingleThreadedRelayQueueWorker<Action>("SerialDataReadScheduler", a => a(), ThreadPriority.BelowNormal, true, null, new RelayActionLogger(Console.WriteLine, new DateTimeFormatter(" > ")));
-			_notifyWorker = new SingleThreadedRelayQueueWorker<Action>("NotifyWorker", a => a(), ThreadPriority.BelowNormal, true, null, new RelayActionLogger(Console.WriteLine, new DateTimeFormatter(" > ")));
+			_backgroundWorker = new SingleThreadedRelayQueueWorkerProceedAllItemsBeforeStopNoLog<Action>("SerialBackWorker", a => a(), ThreadPriority.BelowNormal, true, null);
+			_readDataScheduler = new SingleThreadedRelayQueueWorkerProceedAllItemsBeforeStopNoLog<Action>("SerialDataReadScheduler", a => a(), ThreadPriority.BelowNormal, true, null);
+			_notifyWorker = new SingleThreadedRelayQueueWorkerProceedAllItemsBeforeStopNoLog<Action>("NotifyWorker", a => a(), ThreadPriority.BelowNormal, true, null);
 
 			ScheduleReadDataInBackground();
 		}
@@ -63,7 +62,6 @@ namespace CustomModbusSlave {
 		}
 
 		public void CloseCurrentPortAsync(Action<Exception> comPortClosedCallbackAction) {
-			Logger.Log("Closing port async");
 			_backgroundWorker.AddWork(() => {
 				Exception exception;
 				try {
@@ -91,11 +89,11 @@ namespace CustomModbusSlave {
 
 					_backgroundWorker.AddWork(() => {
 						try {
-							Logger.Log("Reading bytes from port (8 bytes, timeout 1 second)...");
+							//Logger.Log("Reading bytes from port (8 bytes, timeout 1 second)...");
 							var bytes = _portContainer.ReadBytes(8, TimeSpan.FromSeconds(1));
-							Logger.Log("Readed bytes from port: " + bytes.ToText());
+							//Logger.Log("Readed bytes from port: " + bytes.ToText());
 							_incomingBuffer.AddRange(bytes);
-							Logger.Log("INCOMING BUFFER BYTES COUNT AFTER READ = " + _incomingBuffer.Count);
+							//Logger.Log("INCOMING BUFFER BYTES COUNT AFTER READ = " + _incomingBuffer.Count);
 
 							AnalyzeIncomingBuffer(); // analyzing in io thread to have possibility to reply
 						}

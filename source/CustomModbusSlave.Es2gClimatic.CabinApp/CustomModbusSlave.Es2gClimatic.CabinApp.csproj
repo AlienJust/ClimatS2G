@@ -40,6 +40,9 @@
     <ApplicationIcon>icon2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AlienJust.Adaptation.ConsoleLogger">
+      <HintPath>..\..\reference\AlienJust.Adaptation.ConsoleLogger.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Adaptation.WindowsPresentation">
       <HintPath>..\..\reference\AlienJust.Adaptation.WindowsPresentation.dll</HintPath>
     </Reference>

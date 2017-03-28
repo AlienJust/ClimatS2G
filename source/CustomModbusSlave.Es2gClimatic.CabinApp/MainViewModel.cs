@@ -35,6 +35,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 
 		private readonly IThreadNotifier _notifier;
 		private readonly IWindowSystem _windowSystem;
+		private readonly IMultiLoggerWithStackTrace<int> _debugLogger;
 
 		private readonly RelayCommand _openPortCommand;
 		private readonly RelayCommand _closePortCommand;
@@ -57,9 +58,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
 
-		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem) {
+		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger) {
 			_notifier = notifier;
 			_windowSystem = windowSystem;
+			_debugLogger = debugLogger;
 
 			_openPortCommand = new RelayCommand(OpenPort, () => !_isPortOpened);
 			_closePortCommand = new RelayCommand(ClosePort, () => _isPortOpened);
