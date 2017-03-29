@@ -78,7 +78,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 			var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest());
 			_serialChannel = new SerialChannel(
 				new CommandPartSearcherPsnConfigBasedFast(psnConfig),
-				portConatiner, portConatiner);
+				portConatiner, portConatiner, new RelayLoggerWithStackTrace(new RelayActionLogger(Console.WriteLine), new StackTraceFormatterNothing()));
 
 			
 

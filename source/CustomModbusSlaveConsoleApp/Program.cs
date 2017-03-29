@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AlienJust.Adaptation.ConsoleLogger;
+using AlienJust.Support.Loggers;
+using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.Text;
+using AlienJust.Support.Text.Contracts;
 using CustomModbusSlave;
 using CustomModbusSlave.Contracts;
 using DataAbstractionLevel.Low.PsnConfig;
@@ -9,9 +14,18 @@ using DataAbstractionLevel.Low.PsnConfig;
 namespace CustomModbusSlaveConsoleApp
 {
 	class Program {
+		private static ILoggerWithStackTrace _logConsoleYellow;
+		private const string NoStackInfoText = "[NO STACK INFO]";
+		private const string LogSeporator = " > ";
+
 		private const string ArgStartPortName = "-portname:";
 		private const string ArgStartBaudRate = "-baudrate:";
 		static void Main(string[] args) {
+			_logConsoleYellow = new RelayLoggerWithStackTrace(
+				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.Yellow, ConsoleColor.Black),
+				new ChainedFormatter(new List<ITextFormatter> { new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator) })),
+				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
+
 			var argPortName = args.First(a => a.StartsWith(ArgStartPortName)).Split(':')[1];
 			var argBaudRate = int.Parse(args.First(a => a.StartsWith(ArgStartBaudRate)).Split(':')[1]);
 
@@ -20,7 +34,7 @@ namespace CustomModbusSlaveConsoleApp
 			var serialPortContainer = new SerialPortContainerReal();
 			var sch = new SerialChannel(
 				new CommandPartSearcherPsnConfigBasedFast(psnConfig),
-				serialPortContainer, serialPortContainer);
+				serialPortContainer, serialPortContainer, _logConsoleYellow);
 			sch.CommandHeared += SchOnCommandHeared;
 			sch.SelectPortAsync(argPortName, argBaudRate, null);
 			//Thread.Sleep(5000);

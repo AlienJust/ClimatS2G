@@ -32,13 +32,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AlienJust.Adaptation.ConsoleLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Adaptation.ConsoleLogger.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.Identy.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Identy.Contracts.dll</HintPath>
     </Reference>
+    <Reference Include="AlienJust.Support.Loggers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Loggers.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Loggers.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Loggers.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.Text, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Text.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Text.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="DataAbstractionLevel.Low, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

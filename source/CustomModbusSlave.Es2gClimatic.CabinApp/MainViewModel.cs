@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
@@ -24,7 +22,6 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
-using DataAbstractionLevel.Low.PsnConfig;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp
 {
@@ -83,7 +80,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 			_mukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
 			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier, _paramSetter);
 			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter);
-			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier);
+			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier, _paramSetter);
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
 			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
 
@@ -113,12 +110,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 					var reply = _replyGenerator.GenerateReply();
 
 					sendAbility.Send(reply);
-					Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------");
-					_notifier.Notify(() => _logger.Log("Reply sended"));
+					//Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------");
+					//_notifier.Notify(() => _logger.Log("Reply sended"));
 				}
 				else if (commandPart.CommandCode == 16 && commandPart.ReplyBytes.Count == 109) {
 					// todo: send back
-					Console.WriteLine("Accepted 50 params command -----------------------------------------------------------------------------------");
+					//Console.WriteLine("Accepted 50 params command -----------------------------------------------------------------------------------");
 					_notifier.Notify(() => {
 						KsmDataVm.AcceptCommandAllParameters(commandPart.ReplyBytes.ToList());
 					});
@@ -128,7 +125,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 	
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
-			_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
+			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
 			_mukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_mukVaporizerDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_mukFridgeFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
@@ -143,6 +140,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 			ports.AddRange(SerialPort.GetPortNames());
 			ComPortsAvailable = ports;
 			if (ComPortsAvailable.Count > 0) SelectedComName = ComPortsAvailable[0];
+			_logger.Log("Список COM-портов получен");
 		}
 
 		private void ClosePort() {

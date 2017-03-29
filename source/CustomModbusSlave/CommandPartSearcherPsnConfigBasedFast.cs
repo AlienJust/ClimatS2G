@@ -11,7 +11,7 @@ using DataAbstractionLevel.Low.PsnData.Contracts;
 
 namespace CustomModbusSlave {
 	public class CommandPartSearcherPsnConfigBasedFast : ICommandPartSearcher {
-		//public static readonly ILogger Logger = new RelayActionLogger(Console.WriteLine, new DateTimeFormatter(" > "));
+		//public static readonly ILogger _logger = new RelayActionLogger(Console.WriteLine, new DateTimeFormatter(" > "));
 		private readonly List<IPsnProtocolCommandPartConfiguration> _cmdPartConfigs;
 		private readonly int _cmdPartsCount;
 
@@ -45,13 +45,13 @@ namespace CustomModbusSlave {
 								incomingBuffer.RemoveRange(0, removeBytesCount);
 								i = -1; // because the next cycle iteration will increase i by 1 and "i" will be zero
 
-								//Logger.Log($"{CommandFoundMessageStart}{commandPart.PartName}");
+								//_logger.Log($"{CommandFoundMessageStart}{commandPart.PartName}");
 								listener.CommandPartFound(new CommandPartSimple((byte)commandPart.Address.DefinedValue, (byte)commandPart.CommandCode.DefinedValue, commandPartBytes));
 								break;
 							}
 						}
 						catch (Exception ex) {
-							//Logger.Log(ex);
+							//_logger.Log(ex);
 						}
 					}
 				}

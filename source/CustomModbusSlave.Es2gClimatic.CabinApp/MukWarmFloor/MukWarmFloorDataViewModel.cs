@@ -2,6 +2,8 @@
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
+using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 
@@ -25,14 +27,14 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		private IRequest16 _request16;
 
 		public AnyCommandPartViewModel Request16BytesTextVm { get; set; }
+		public MukWarmFloorSetParamsViewModel MukWarmFloorSetParamsVm { get; }
 
-		public MukWarmFloorDataViewModel(IThreadNotifier notifier) {
+		public MukWarmFloorDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_notifier = notifier;
 			Request16BytesTextVm = new AnyCommandPartViewModel();
+			MukWarmFloorSetParamsVm = new MukWarmFloorSetParamsViewModel(notifier, parameterSetter);
 		}
-
-
-
+		
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
 			if (addr != 0x05) return;
 			if (code == 0x03 && data.Count == 31) {

@@ -103,7 +103,7 @@ namespace CustomModbusSlave {
 
 		public void Send(byte[] bytes) {
 			// do nothing;
-			Console.WriteLine("TEST SENDER SEND: " + bytes.ToText());
+			//Console.WriteLine("TEST SENDER SEND: " + bytes.ToText());
 		}
 	}
 }

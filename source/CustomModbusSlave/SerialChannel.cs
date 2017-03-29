@@ -5,12 +5,11 @@ using AlienJust.Support.Concurrent;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
-using AlienJust.Support.Text;
 using CustomModbusSlave.Contracts;
 
 namespace CustomModbusSlave {
 	public class SerialChannel : ISerialChannel, ICommandPartFoundListener {
-		public static readonly ILogger Logger = new RelayActionLogger(Console.WriteLine, new DateTimeFormatter(" > "));
+		public readonly ILoggerWithStackTrace _logger;
 		public event CommandHearedDelegate CommandHeared;
 		public event CommandHearedWithReplyPossibilityDelegate CommandHearedWithReplyPossibility;
 
@@ -26,10 +25,11 @@ namespace CustomModbusSlave {
 		private bool _dontStop;
 		private readonly object _dontStopSync;
 
-		public SerialChannel(ICommandPartSearcher commandPartSearcher, ISerialPortContainer portContainer, ISendAbility sendAbility) {
+		public SerialChannel(ICommandPartSearcher commandPartSearcher, ISerialPortContainer portContainer, ISendAbility sendAbility, ILoggerWithStackTrace logger) {
 			_commandPartSearcher = commandPartSearcher;
 			_portContainer = portContainer;
 			_sendAbility = sendAbility;
+			_logger = logger;
 
 			_dontStop = true;
 			_dontStopSync = new object();
@@ -45,7 +45,7 @@ namespace CustomModbusSlave {
 		}
 
 		public void SelectPortAsync(string portName, int baudRate, Action<Exception> comPortOpenedCallbackAction) {
-			Logger.Log("Closing port and opening new port async, args: portName=" + portName + ", baudRate=" + baudRate);
+			_logger.Log("Закрытие ранее открытого порта (если был открыт) и открытие нового, название порта: " + portName + ", скорость обмена: " + baudRate + " б/с", null);
 			_backgroundWorker.AddWork(() => {
 				Exception exception;
 				try {
@@ -89,16 +89,16 @@ namespace CustomModbusSlave {
 
 					_backgroundWorker.AddWork(() => {
 						try {
-							//Logger.Log("Reading bytes from port (8 bytes, timeout 1 second)...");
+							//_logger.Log("Reading bytes from port (8 bytes, timeout 1 second)...");
 							var bytes = _portContainer.ReadBytes(8, TimeSpan.FromSeconds(1));
-							//Logger.Log("Readed bytes from port: " + bytes.ToText());
+							//_logger.Log("Readed bytes from port: " + bytes.ToText());
 							_incomingBuffer.AddRange(bytes);
-							//Logger.Log("INCOMING BUFFER BYTES COUNT AFTER READ = " + _incomingBuffer.Count);
+							//_logger.Log("INCOMING BUFFER BYTES COUNT AFTER READ = " + _incomingBuffer.Count);
 
 							AnalyzeIncomingBuffer(); // analyzing in io thread to have possibility to reply
 						}
 						catch /*(Exception ex)*/ {
-							//Logger.Log(ex);
+							//_logger.Log(ex);
 							return;
 						}
 						finally {
@@ -133,7 +133,7 @@ namespace CustomModbusSlave {
 					}
 				}
 				catch (Exception ex) {
-					Logger.Log(ex);
+					_logger.Log(ex, null);
 				}
 			});
 		}
@@ -151,7 +151,7 @@ namespace CustomModbusSlave {
 				else if (i % 4 == 0) result += "  ";
 			}
 
-			Logger.Log(result);
+			_logger.Log(result, null);
 			lock (_dontStopSync)
 				_dontStop = true;
 		}
