@@ -29,7 +29,6 @@ using DataAbstractionLevel.Low.PsnConfig;
 namespace CustomModbusSlave.Es2gClimatic.CabinApp
 {
 	class MainViewModel : ViewModelBase, IUserInterfaceRoot {
-		private const string TestPortName = "ТЕСТ";
 		private List<string> _comPortsAvailable;
 		private string _selectedComName;
 
@@ -44,6 +43,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 		private readonly ILogger _logger;
 
 		private readonly SerialChannel _serialChannel;
+		private readonly string _testPortName;
 
 		private bool _isPortOpened;
 		private readonly MukFlapDataViewModel _mukFlapDataVm;
@@ -58,10 +58,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
 
-		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger) {
+		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string testPortName) {
 			_notifier = notifier;
 			_windowSystem = windowSystem;
 			_debugLogger = debugLogger;
+			_serialChannel = serialChannel;
+			_testPortName = testPortName;
 
 			_openPortCommand = new RelayCommand(OpenPort, () => !_isPortOpened);
 			_closePortCommand = new RelayCommand(ClosePort, () => _isPortOpened);
@@ -70,17 +72,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 			_programLogVm = new ProgramLogViewModel(this);
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
 
-			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-кабина.xml")).LoadConfiguration();
-
-			var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest(File.ReadAllText("CabinIoSample.txt").Split(' ').Select(t=>byte.Parse(t, NumberStyles.HexNumber)).ToList()));
-			_serialChannel = new SerialChannel(
-				new CommandPartSearcherPsnConfigBasedFast(psnConfig),
-				portConatiner, portConatiner);
-
 			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
-
-			
 
 			var replyGenerator = new ReplyGeneratorWithQueueAttempted(_notifier);
 			_paramSetter = replyGenerator;
@@ -146,7 +139,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 		}
 
 		private void GetPortsAvailable() {
-			var ports = new List<string> { TestPortName };
+			var ports = new List<string> { _testPortName };
 			ports.AddRange(SerialPort.GetPortNames());
 			ComPortsAvailable = ports;
 			if (ComPortsAvailable.Count > 0) SelectedComName = ComPortsAvailable[0];

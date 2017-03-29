@@ -368,6 +368,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MukWarmFloor\SetParameters\MukWarmFloorSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MukVaporizer\MukVaporizerFanDataViewModel.cs" />
@@ -383,6 +387,10 @@
     <Compile Include="MukWarmFloor\Request16View.xaml.cs">
       <DependentUpon>Request16View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MukWarmFloor\SetParameters\MukWarmFloorSetParamsView.xaml.cs">
+      <DependentUpon>MukWarmFloorSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukWarmFloor\SetParameters\MukWarmFloorSetParamsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
