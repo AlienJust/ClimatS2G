@@ -11,6 +11,10 @@
 	d:DesignWidth="300">
 	<StackPanel
 		Orientation="Vertical">
+		<TextBlock
+			Text="Ответ на команду 3:"
+			FontWeight="Bold"
+			TextDecorations="Underline"></TextBlock>
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition

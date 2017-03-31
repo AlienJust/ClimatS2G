@@ -11,7 +11,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Buil
 
 		public IMukFlapWorkmodeStage Build() {
 			return new MukFlapWorkmodeStageSimple(_absoluteValue);
-
 		}
 	}
 }

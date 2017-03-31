@@ -4,8 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:request161="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16"
+             xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+	<UserControl.Resources>
+		<converters:BooleanToTextConverter
+			x:Key="BitRegistryBit0Converter"
+			TrueText="Салон" FalseText="Кабина"/>
+	</UserControl.Resources>
 	<StackPanel Orientation="Vertical">
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -39,7 +45,7 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="КСМ: уровень вентилирования"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=FanSpeed, Mode=OneTime}" TextAlignment="Right"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=FanSpeedLevel, Mode=OneTime}" TextAlignment="Right"/>
 		</Grid>
 
 		<Grid>
@@ -47,8 +53,23 @@
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="Резерв"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve21, Mode=OneTime}" TextAlignment="Right"/>
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<TextBlock Text="Битовый регистр"/>
+			<TextBlock
+				Grid.Row="0" Grid.Column="1"
+				Text="{Binding Path=BitRegistry, Mode=OneTime}" TextAlignment="Right"/>
+			<TextBlock
+				Grid.Row="1"
+				Grid.Column="0"
+				Text="b0 – если 1 то салон, иначе кабина" />
+			<TextBlock
+				Grid.Row="1"
+				Grid.Column="1"
+				Text="{Binding Path=InteriorOrCabin, Mode=OneTime, Converter={StaticResource BitRegistryBit0Converter}}"
+				TextAlignment="Right" />
 		</Grid>
 		<Grid>
 			<Grid.ColumnDefinitions>

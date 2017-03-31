@@ -12,7 +12,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 		public IBsSmDataCommand32Request Build() {
 			// int TemperatureInsideTheCabin
 			// int TemperatureOutdoor
-			// int FanSpeed
+			// int FanSpeedLevel
 			// bool IsTunelModeOn
 			// bool IsWarmFloorOn
 			// ClimaticSystemWorkMode CurrentClimaticWorkMode

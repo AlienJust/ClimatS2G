@@ -75,7 +75,7 @@
 					<RowDefinition/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<TextBlock Text="Режим работы"/>
+				<TextBlock Text="Этап работы:"/>
 				<reply03:MukFlapWorkmodeStageView Grid.Row="1" DataContext="{Binding Path=AutomaticModeStage, Mode=OneTime}"/>
 			</Grid>
 		</Border>

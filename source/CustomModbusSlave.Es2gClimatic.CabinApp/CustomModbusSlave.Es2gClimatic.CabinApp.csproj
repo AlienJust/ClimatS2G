@@ -81,6 +81,10 @@
     <Reference Include="AlienJust.Support.ModelViewViewModel">
       <HintPath>..\..\reference\AlienJust.Support.ModelViewViewModel.dll</HintPath>
     </Reference>
+    <Reference Include="AlienJust.Support.Numeric, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Numeric.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.Serial, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Serial.dll</HintPath>
@@ -196,12 +200,12 @@
     <Compile Include="MukFlap\Reply03\DataModel\Contracts\MukFlapWorkmodeStageSimple.cs" />
     <Compile Include="MukFlap\Reply03\DataModel\SimpleRelease\MukFlapReply03Telemetry.cs" />
     <Compile Include="MukFlap\Reply03\DataModel\Build\MukFlapReply03TelemetryBuilder.cs" />
-    <Compile Include="MukFlap\Request16\IKsmCommandWorkmode.cs" />
+    <Compile Include="MukFlap\Request16\IKsmCommandWorkmodeAndUnparsedValue.cs" />
     <Compile Include="MukFlap\Request16\IRequest16Data.cs" />
     <Compile Include="MukFlap\Request16\KsmCommandWorkmode.cs" />
     <Compile Include="MukFlap\Request16\KsmCommandWorkmodeBuilder.cs" />
     <Compile Include="MukFlap\Request16\KsmCommandWorkmodeExtensions.cs" />
-    <Compile Include="MukFlap\Request16\KsmCommandWorkmodeSimple.cs" />
+    <Compile Include="MukFlap\Request16\KsmCommandWorkmodeAndUnparsedValueSimple.cs" />
     <Compile Include="MukFlap\Request16\KsmCommandWorkmodeToStringConverter.cs" />
     <Compile Include="MukFlap\Request16\KsmCommandWorkmodeView.xaml.cs">
       <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>

@@ -25,6 +25,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Cont
 						return MukFlapWorkmodeStage.WorkModePwmCorrectionBack;
 					case 5:
 						return MukFlapWorkmodeStage.NoKsm;
+					case 6:
+						return MukFlapWorkmodeStage.RemoteControlSettig;
+					case 7:
+						return MukFlapWorkmodeStage.FlapCloseWhileWashing;
 					default:
 						return MukFlapWorkmodeStage.Unknown;
 				}

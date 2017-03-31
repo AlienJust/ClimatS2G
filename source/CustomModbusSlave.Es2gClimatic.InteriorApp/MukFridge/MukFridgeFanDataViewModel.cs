@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
+using AlienJust.Support.Numeric.Bits;
 using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge.SetParameters;
@@ -161,11 +162,5 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 
 
 		public MukFridgeSetParamsViewModel MukFridgeSetParamsVm { get; }
-	}
-
-	static class ByteExtensions {
-		public static bool GetBit(this byte b, int bitNumber) {
-			return (b & (1 << bitNumber)) != 0;
-		}
 	}
 }

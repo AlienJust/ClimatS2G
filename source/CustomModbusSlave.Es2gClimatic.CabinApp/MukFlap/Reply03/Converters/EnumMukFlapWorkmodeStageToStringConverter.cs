@@ -23,6 +23,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.Converters {
 					return "Корректировка ШИМ на заслонку по обратной связи, рабочий режим";
 				case MukFlapWorkmodeStage.NoKsm:
 					return "Режим работы при отсутсвии КСМ";
+				case MukFlapWorkmodeStage.RemoteControlSettig:
+					return "Режим работы по уставке с пульта";
+				case MukFlapWorkmodeStage.FlapCloseWhileWashing:
+					return "Закрытие заслонки в режиме мойки";
+
 				case MukFlapWorkmodeStage.Unknown:
 					return "Неизвестное значение";
 				default:
