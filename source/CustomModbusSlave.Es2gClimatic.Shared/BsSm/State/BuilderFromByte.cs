@@ -12,7 +12,7 @@
 			bool reliabilityBitFromMspuD2 = (_b & 0x08) == 0x08;
 			bool mspuD1ReceiptNumberFail = (_b & 0x10) == 0x10;
 			bool mspuD2ReceiptNumberFail = (_b & 0x20) == 0x20;
-			bool noLinkNk1BySpi = ((_b & 0x20) == 0x20);
+			bool noLinkNk1BySpi = (_b & 0x40) == 0x40;
 			bool reserved = (_b & 0x80) == 0x80;
 
 			return new Simple(
