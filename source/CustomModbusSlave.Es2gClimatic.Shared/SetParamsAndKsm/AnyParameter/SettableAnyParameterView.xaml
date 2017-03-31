@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
 	<UserControl.Resources>
@@ -31,11 +32,17 @@
 			</Grid.ColumnDefinitions>
 
 			<TextBlock Text="Параметр №" Margin="2" VerticalAlignment="Center"/>
-			<xctk:IntegerUpDown Grid.Column="1" Margin="2,0,2,0" ></xctk:IntegerUpDown>
+			<controls:NumericUpDown Grid.Column="1" Margin="2,0,2,0" ></controls:NumericUpDown>
 			<TextBlock Grid.Column="2" Text="{Binding Path=ReceivedDoubleValue, Mode=OneWay}" TextAlignment="Right" Margin="2" VerticalAlignment="Center"/>
 		</Grid>
-		<xctk:DoubleUpDown Grid.Column="1" Value="{Binding Path=DoubleValue, Mode=TwoWay}" Maximum="{Binding Path=MaxValue, Mode=OneTime}" Minimum="{Binding Path=MinValue, Mode=OneTime}" FormatString="{Binding Path=StringFormat, Mode=OneTime}"/>
+		<controls:NumericUpDown
+			Grid.Column="1"
+			Value="{Binding Path=DoubleValue, Mode=TwoWay}"
+			Maximum="{Binding Path=MaxValue, Mode=OneTime}"
+			Minimum="{Binding Path=MinValue, Mode=OneTime}"
+			StringFormat="{Binding Path=StringFormat, Mode=OneTime}"/>
 		<Button Grid.Column="2" Content="Set" Command="{Binding Path=SetCommand, Mode=OneTime}"/>
 		<Button Grid.Column="3" Content="Reset" Command="{Binding Path=ResetCommand, Mode=OneTime}"/>
 	</Grid>
 </UserControl>
+
