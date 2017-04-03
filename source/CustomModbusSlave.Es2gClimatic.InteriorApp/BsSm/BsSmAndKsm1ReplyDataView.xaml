@@ -6,7 +6,7 @@
              xmlns:bsSm="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm"
              xmlns:state="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              mc:Ignorable="d" 
-             d:DesignHeight="620" d:DesignWidth="400">
+             d:DesignHeight="1050" d:DesignWidth="400">
 	<StackPanel Orientation="Vertical">
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -96,8 +96,11 @@
 				<RowDefinition />
 				<RowDefinition />
 			</Grid.RowDefinitions>
-			<TextBlock Text="Запрос от КСМ2 к БС-СМ:"/>
-			<TextBlock Grid.Row="1" Text="/* TODO */"/>
+			<TextBlock Text="Запрос от КСМ2 к БС-СМ:" FontWeight="Bold"/>
+			<!--<TextBlock Grid.Row="1" Text="/* TODO */"/>-->
+			<bsSm:BsSmAndKsm1RequestDataView
+				Grid.Row="1"
+				DataContext="Ksm2Request, Mode=OneTime"/>
 		</Grid>
 		<state:View DataContext="{Binding Path=BsSmState, Mode=OneTime}"/>
 		<Grid>

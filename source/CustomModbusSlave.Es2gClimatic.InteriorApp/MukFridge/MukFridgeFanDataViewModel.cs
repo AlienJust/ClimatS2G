@@ -92,8 +92,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 		}
 
 
-		public bool Stage1IsOn => _data[10].GetBit(0);
-		public bool Stage2IsOn => _data[10].GetBit(1);
+		public bool? Stage1IsOn => _data?[10].GetBit(0);
+		public bool? Stage2IsOn => _data?[10].GetBit(1);
 
 		public string OutgoingSignals {
 			get { return _outgoingSignals; }
