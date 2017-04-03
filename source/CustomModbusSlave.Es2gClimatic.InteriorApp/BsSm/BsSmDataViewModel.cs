@@ -6,8 +6,7 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm
-{
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm {
 	class BsSmDataViewModel : ViewModelBase, ICommandListener {
 		private IBsSmAndKsm1DataCommand32Request _bsSmAndKsm1RequestDataVm;
 		private IBsSmAndKsm1DataCommand32Reply _bsSmAndKsm1ReplyDataVm;
@@ -19,7 +18,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm
 			BsSmAndKsm1RequestDataTextVm = new AnyCommandPartViewModel();
 			BsSmAndKsm1ReplyDataTextVm = new AnyCommandPartViewModel();
 		}
-		
+
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
 			if (addr != 0x0A) return;
 			if (code == 0x20 && data.Count == 27) { // request KSM1
@@ -37,17 +36,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm
 			}
 		}
 
-		public IBsSmAndKsm1DataCommand32Request BsSmAndKsm1RequestDataVm
-		{
-			get
-			{
+		public IBsSmAndKsm1DataCommand32Request BsSmAndKsm1RequestDataVm {
+			get {
 				return _bsSmAndKsm1RequestDataVm;
 			}
-			set
-			{
+			set {
 				if (_bsSmAndKsm1RequestDataVm != value) {
 					_bsSmAndKsm1RequestDataVm = value;
-					RaisePropertyChanged(()=>BsSmAndKsm1RequestDataVm);
+					RaisePropertyChanged(() => BsSmAndKsm1RequestDataVm);
 				}
 			}
 		}
