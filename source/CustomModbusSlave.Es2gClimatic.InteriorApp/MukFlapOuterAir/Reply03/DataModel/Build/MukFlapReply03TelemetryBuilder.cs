@@ -38,7 +38,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.Dat
 
 			var emersionDiagnostic2 = new EmersonDiagnosticCircuit2Builder(_data[34] + _data[33] * 256).Build();
 			var emersonTemperature2 = new BytesPair(_data[35], _data[36]).HighFirstSignedValue * 0.01;
-			var emersonPressure2 = (_data[38] + _data[37] * 256) * 0.1;
+			var emersonPressure2 = (_data[38] + _data[37] * 256) * 0.01;
 			var emersonValveSetting2 = _data[40] + _data[39] * 256;
 
 			var firmwareBuildNumber = _data[42] + _data[41] * 256;
