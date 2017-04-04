@@ -17,7 +17,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
 			//Segment2CurentCalculatedPowerConsumptionBy380Vline = segment2CurentCalculatedPowerConsumptionBy380Vline;
 			//Segment2InteriorTemperature = segment2InteriorTemperature;
 			Ksm2Request = ksm2Request;
-			Contract = contract;
+			BsSmState = contract;
 			BsSmVersionNumber = bsSmVersionNumber;
 			Reserve43 = reserve43;
 			Reserve44 = reserve44;
@@ -38,7 +38,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
 		//public int Segment2CurentCalculatedPowerConsumptionBy380Vline { get; }
 		//public int Segment2InteriorTemperature { get; }
 		public IBsSmAndKsm1DataCommand32Request Ksm2Request { get; }
-		public Shared.BsSm.State.IContract Contract { get; }
+		public Shared.BsSm.State.IContract BsSmState { get; }
 		public int BsSmVersionNumber { get; }
 		public int Reserve43 { get; }
 		public int Reserve44 { get; }

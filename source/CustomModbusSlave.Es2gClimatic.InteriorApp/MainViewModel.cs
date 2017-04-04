@@ -133,12 +133,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 
 					sendAbility.Send(reply);
 
-					Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
-					_notifier.Notify(() => _logger.Log("Reply sended"));
+					//Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
+					//_notifier.Notify(() => _logger.Log("Reply sended"));
 				}
 				else if (commandPart.CommandCode == 16 && commandPart.ReplyBytes.Count == 129) {
 					// todo: send back
-					Console.WriteLine("Accepted 60 params command =============================================================================================================================================");
+					//Console.WriteLine("Accepted 60 params command =============================================================================================================================================");
 					_notifier.Notify(() => {
 						KsmDataVm.AcceptCommandAllParameters(commandPart.ReplyBytes.ToList());
 					});
@@ -147,7 +147,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 		}
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
-			_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
+			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
 
 			_rtuParamReceiver.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 

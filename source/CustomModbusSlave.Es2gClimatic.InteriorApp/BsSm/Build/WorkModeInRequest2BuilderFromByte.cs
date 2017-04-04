@@ -12,7 +12,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 		}
 
 		public IWorkModeInRequest2 Build() {
-			return new WorkModeInRequest2Simple(new ClimaticSystemWorkModeBuilderFromInt((_absoluteValue & 0x0F)).Build(), 
+			return new WorkModeInRequest2Simple(new ClimaticSystemWorkModeBuilderFromInt(_absoluteValue & 0x0F).Build(), 
 				(_absoluteValue & 0x10) == 0x10);
 		}
 	}

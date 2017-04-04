@@ -100,7 +100,7 @@
 			<!--<TextBlock Grid.Row="1" Text="/* TODO */"/>-->
 			<bsSm:BsSmAndKsm1RequestDataView
 				Grid.Row="1"
-				DataContext="Ksm2Request, Mode=OneTime"/>
+				DataContext="{Binding Path=Ksm2Request, Mode=OneTime}"/>
 		</Grid>
 		<state:View DataContext="{Binding Path=BsSmState, Mode=OneTime}"/>
 		<Grid>

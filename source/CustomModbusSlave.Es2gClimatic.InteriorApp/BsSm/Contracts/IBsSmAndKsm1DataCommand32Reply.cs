@@ -25,7 +25,7 @@
 		IBsSmAndKsm1DataCommand32Request Ksm2Request { get; }
 
 
-		Shared.BsSm.State.IContract Contract { get; }
+		Shared.BsSm.State.IContract BsSmState { get; }
 		int BsSmVersionNumber { get; }
 
 		int Reserve43 { get; }
