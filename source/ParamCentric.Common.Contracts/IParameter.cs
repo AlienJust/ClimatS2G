@@ -1,6 +1,4 @@
-using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
-
-namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
+namespace ParamCentric.Common.Contracts {
 	public interface IParameter : IGroupItem {
 	}
 }

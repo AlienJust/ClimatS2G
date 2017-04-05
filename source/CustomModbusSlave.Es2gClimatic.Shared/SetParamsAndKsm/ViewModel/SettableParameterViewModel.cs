@@ -7,6 +7,8 @@ using AlienJust.Support.ModelViewViewModel;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
+using ParamCentric.Modbus.Contracts;
+using ParamCentric.UserInterface.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 	public class SettableParameterViewModel : ViewModelBase, IReceivableParameter, IDisplayableParameter<double?>, ISettableByUserParameter<double?>, ISettableBytesPairtParameter {

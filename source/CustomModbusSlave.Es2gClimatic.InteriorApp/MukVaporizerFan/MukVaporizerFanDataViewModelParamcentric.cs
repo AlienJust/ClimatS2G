@@ -12,6 +12,8 @@ using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.BytesPairConverters;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
+using ParamCentric.Common.Contracts;
+using ParamCentric.Modbus.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 	class MukVaporizerFanDataViewModelParamcentric : ViewModelBase, ICommandListener, IGroup {

@@ -2,6 +2,8 @@ using AlienJust.Support.Collections;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters;
+using ParamCentric.Modbus.Contracts;
+using ParamCentric.UserInterface.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 	public class ReceivableModbusRtuParameterSimpleViewModel : ViewModelBase, IReceivableModbusRtuParameter, IDisplayableParameter<string> {

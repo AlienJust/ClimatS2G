@@ -6,6 +6,7 @@
              xmlns:universalParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;assembly=ParamCentric.Common.Contracts"
              xmlns:wpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf"
              xmlns:setParamsAndKsmViewModel="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel"
+             xmlns:contracts="clr-namespace:ParamCentric.Common.Contracts;assembly=ParamCentric.Common.Contracts"
 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -13,7 +14,7 @@
 		<TextBlock Text="{Binding Path=Name, Mode=OneTime}"/>
 		<ListBox ItemsSource="{Binding Path=Children, Mode=OneTime}">
 			<ListBox.Resources>
-				<DataTemplate DataType="{x:Type universalParams:IGroup}">
+				<DataTemplate DataType="{x:Type contracts:IGroup}">
 					<wpf:GroupSimpleView />
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type setParamsAndKsmViewModel:KsmReadonlyParamViewModel}">

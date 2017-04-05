@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams {
+namespace ParamCentric.Common.Contracts {
 	public interface IGroup : IGroupItem {
 		IList<IGroupItem> Children { get; }
 	}

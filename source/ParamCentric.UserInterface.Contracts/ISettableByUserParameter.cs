@@ -1,4 +1,6 @@
-namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
+using ParamCentric.Common.Contracts;
+
+namespace ParamCentric.UserInterface.Contracts {
 	public interface ISettableByUserParameter<T> : IParameter {
 		T FormattedValue { get; set; }
 	}

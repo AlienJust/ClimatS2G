@@ -30,6 +30,8 @@ using CustomModbusSlave.Es2gClimatic.UniversalParams;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using DataAbstractionLevel.Low.PsnConfig;
+using ParamCentric.Common.Contracts;
+using ParamCentric.Modbus.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 {
