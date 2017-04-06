@@ -18,7 +18,7 @@
 		int Fault5 { get; }
 
 		int ReserveOrTemperatureAverageValue { get; }
-		int Co2LevelInCurrentSegment { get; }
+		double Co2LevelInCurrentSegment { get; }
 		int Reserve25 { get; }
 	}
 }

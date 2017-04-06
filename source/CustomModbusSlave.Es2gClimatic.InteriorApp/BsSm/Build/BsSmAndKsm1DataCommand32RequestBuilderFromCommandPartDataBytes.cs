@@ -29,7 +29,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 			var fault5 = _commandPartDataBytes[18] + _commandPartDataBytes[19] * 256;
 
 			var reserve23OrAvgTemperature = _commandPartDataBytes[20];
-			var reserve24 = _commandPartDataBytes[21];
+			var сo2LevelInCurrentSegment = _commandPartDataBytes[21] * 10.0;
 			var reserve25 = _commandPartDataBytes[22];
 
 			return new BsSmAndKsm1DataCommand32RequestSimple(
@@ -48,7 +48,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 				fault4,
 				fault5,
 				reserve23OrAvgTemperature,
-				reserve24,
+				сo2LevelInCurrentSegment,
 				reserve25);
 		}
 	}
