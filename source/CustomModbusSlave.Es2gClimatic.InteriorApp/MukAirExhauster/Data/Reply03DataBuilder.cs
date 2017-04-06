@@ -19,7 +19,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data {
 				new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_bytes[5], _bytes[6]), 1.0, 0.0, new BytesPair(0x85,0x00)),
 				_bytes[7]*256 + _bytes[8],
 				_bytes[9]*256 + _bytes[10],
-				(_bytes[11]*256 + _bytes[12])*0.1,
+				(_bytes[11]*256 + _bytes[12]) * 1.0,
 				new AutomaticWorkmodeStageSimple((ushort) (_bytes[13]*256 + _bytes[14])),
 				_bytes[15]*256 + _bytes[16],
 				_bytes[17]*256 + _bytes[18],
