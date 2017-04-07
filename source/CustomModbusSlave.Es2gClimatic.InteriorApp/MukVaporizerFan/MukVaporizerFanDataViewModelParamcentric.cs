@@ -7,11 +7,10 @@ using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
 using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.BytesPairConverters;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using ParamCentric.Common.Contracts;
 using ParamCentric.Modbus.Contracts;
 
@@ -38,7 +37,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 		private string _diagnostic1;
 		private string _fanSpeed;
 		private string _calculatedTemperatureSetting;
-		private string _temperatureRegulatorWorkMode;
+		private ITemperatureRegulatorWorkMode _temperatureRegulatorWorkMode;
 		private string _automaticModeStage;
 
 		private IRequest16Data _request16Telemetry;
@@ -93,7 +92,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 					AnalogInput = new UshortTextPresenter(data[14], data[13], true).PresentAsText();
 					HeatingPwm = new UshortTextPresenter(data[16], data[15], false).PresentAsText();
 					AutomaticModeStage = new UshortTextPresenter(data[18], data[17], false).PresentAsText();
-					TemperatureRegulatorWorkMode = new DataDoubleTextPresenter(data[20], data[19], 0.01, 2).PresentAsText();
+					TemperatureRegulatorWorkMode = new TemperatureRegulatorWorkModeBuilderReplied(new BytesPair(data[19], data[20])).Build();
 					CalculatedTemperatureSetting = new DataDoubleTextPresenter(data[22], data[21], 0.01, 2).PresentAsText();
 					FanSpeed = new UshortTextPresenter(data[24], data[23], false).PresentAsText();
 					Diagnostic1 = new UshortTextPresenter(data[26], data[25], true).PresentAsText();
@@ -121,11 +120,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 			set { if (_automaticModeStage != value) { _automaticModeStage = value; RaisePropertyChanged(() => AutomaticModeStage); } }
 		}
 
-		public string TemperatureRegulatorWorkMode {
+		public ITemperatureRegulatorWorkMode TemperatureRegulatorWorkMode {
 			get { return _temperatureRegulatorWorkMode; }
-			set { if (_temperatureRegulatorWorkMode != value) { _temperatureRegulatorWorkMode = value; RaisePropertyChanged(() => TemperatureRegulatorWorkMode); } }
+			set {
+				if (_temperatureRegulatorWorkMode != value) {
+					_temperatureRegulatorWorkMode = value;
+					RaisePropertyChanged(() => TemperatureRegulatorWorkMode);
+				}
+			}
 		}
-
+		
 		public string CalculatedTemperatureSetting {
 			get { return _calculatedTemperatureSetting; }
 			set { if (_calculatedTemperatureSetting != value) { _calculatedTemperatureSetting = value; RaisePropertyChanged(() => CalculatedTemperatureSetting); } }

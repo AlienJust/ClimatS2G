@@ -8,8 +8,7 @@
 	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Request16"
 	xmlns:universalParamsWpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared;assembly=CustomModbusSlave.Es2gClimatic.Shared"
-	xmlns:mukVaporizer="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer"
-	xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Reply03"
+	xmlns:temperatureRegulatorWorkMode="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	mc:Ignorable="d"
 	d:DesignHeight="1300"
 	d:DesignWidth="300">
@@ -154,7 +153,7 @@
 
 			<!--<TextBlock Grid.Row="8" Grid.Column="0" Text="Режим работы регулятора температуры"/>
 			<TextBlock Grid.Row="8" Grid.Column="1" Text="" TextAlignment="Right"/>-->
-			<reply03:TemperatureRegulatorWorkModeView
+			<temperatureRegulatorWorkMode:TemperatureRegulatorWorkModeView
 				Grid.Row="8"
 				Grid.ColumnSpan="2"
 				Grid.Column="0"

@@ -1,9 +1,9 @@
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Reply03
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode
 {
 	/// <summary>
 	/// Режим работы регулятора температуры
 	/// </summary>
-	interface ITemperatureRegulatorWorkMode {
+	public interface ITemperatureRegulatorWorkMode {
 		/// <summary>
 		/// Полное значение (пара байт)
 		/// </summary>

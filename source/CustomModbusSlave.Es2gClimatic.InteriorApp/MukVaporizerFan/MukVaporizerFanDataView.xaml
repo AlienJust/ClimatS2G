@@ -7,6 +7,7 @@
              xmlns:sharedUniversalParamsWpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.Request16"
              xmlns:setParameters1="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.SetParameters"
+             xmlns:temperatureRegulatorWorkMode="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              mc:Ignorable="d" 
              d:DesignHeight="1200" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
@@ -69,8 +70,13 @@
 			<TextBlock Grid.Row="7" Grid.Column="0" Text="Этап работы в автоматическом режиме" TextAlignment="Right"/>
 			<TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Path=AutomaticModeStage, Mode=OneWay}" TextAlignment="Right"/>
 
-			<TextBlock Grid.Row="8" Grid.Column="0" Text="Режим работы регулятора температуры"/>
-			<TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Path=TemperatureRegulatorWorkMode, Mode=OneWay}" TextAlignment="Right"/>
+			<!--<TextBlock Grid.Row="8" Grid.Column="0" Text="Режим работы регулятора температуры"/>
+			<TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Path=TemperatureRegulatorWorkMode, Mode=OneWay}" TextAlignment="Right"/>-->
+			<temperatureRegulatorWorkMode:TemperatureRegulatorWorkModeView
+				Grid.Row="8"
+				Grid.ColumnSpan="2"
+				Grid.Column="0"
+				DataContext="{Binding Path=TemperatureRegulatorWorkMode, Mode=OneWay}" />
 
 			<TextBlock Grid.Row="9" Grid.Column="0" Text="Рассчитанная уставка температуры"/>
 			<TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Path=CalculatedTemperatureSetting, Mode=OneWay}"/>

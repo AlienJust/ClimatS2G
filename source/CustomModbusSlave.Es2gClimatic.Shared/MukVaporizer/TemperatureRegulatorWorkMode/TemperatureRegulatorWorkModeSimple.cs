@@ -1,7 +1,5 @@
-﻿using CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Reply03;
-
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
-	class TemperatureRegulatorWorkModeSimple : ITemperatureRegulatorWorkMode {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode {
+	public class TemperatureRegulatorWorkModeSimple : ITemperatureRegulatorWorkMode {
 		public TemperatureRegulatorWorkModeSimple(int fullValue, bool cool, bool restrict) {
 			FullValue = fullValue;
 			Cool = cool;

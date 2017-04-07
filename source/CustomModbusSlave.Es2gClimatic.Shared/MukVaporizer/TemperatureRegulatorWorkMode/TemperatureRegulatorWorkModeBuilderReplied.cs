@@ -1,10 +1,8 @@
 using AlienJust.Support.Collections;
-using CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode
 {
-	class TemperatureRegulatorWorkModeBuilderReplied : IBuilder<ITemperatureRegulatorWorkMode>
+	public class TemperatureRegulatorWorkModeBuilderReplied : IBuilder<ITemperatureRegulatorWorkMode>
 	{
 		private readonly BytesPair _dataBytes;
 

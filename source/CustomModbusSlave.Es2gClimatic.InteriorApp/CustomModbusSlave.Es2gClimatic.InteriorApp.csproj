@@ -474,7 +474,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MukVaporizerFan\MukVaporizerFanDataViewModel.cs" />
     <Compile Include="MukVaporizerFan\MukVaporizerFanDataView.xaml.cs">
       <DependentUpon>MukVaporizerFanDataView.xaml</DependentUpon>
     </Compile>
@@ -544,9 +543,7 @@
       <Name>ParamCentric.UserInterface.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MukVaporizerFan\Reply03\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="intelecon x gray.ico" />
   </ItemGroup>

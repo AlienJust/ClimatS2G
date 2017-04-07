@@ -1,6 +1,5 @@
 using AlienJust.Support.Collections;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters;
 using ParamCentric.Modbus.Contracts;
 using ParamCentric.UserInterface.Contracts;
@@ -22,11 +21,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 		public string Name { get; }
 
 		public BytesPair? ReceivedBytesValue {
-			set
-			{
+			set {
 				if (_receivedBytesValue != value) {
 					_receivedBytesValue = value;
-					RaisePropertyChanged(()=> ReceivedValueFormatted);
+					RaisePropertyChanged(() => ReceivedValueFormatted);
 				}
 			}
 		}
@@ -37,6 +35,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 
 		public int ZeroBasedParameterNumber { get; }
 
-		public string ReceivedValueFormatted => _toDisplayConverter.ConvertToSomething(_receivedBytesValue); // TODO: fix nulable case
+		public string ReceivedValueFormatted => _toDisplayConverter.ConvertToSomething(_receivedBytesValue); // TODO: fix nullable case
 	}
 }

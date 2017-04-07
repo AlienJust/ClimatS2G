@@ -123,6 +123,12 @@
     <Compile Include="IBuilder.cs" />
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
+    <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\ITemperatureRegulatorWorkMode.cs" />
+    <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeBuilderReplied.cs" />
+    <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeSimple.cs" />
+    <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml.cs">
+      <DependentUpon>TemperatureRegulatorWorkModeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterSimpleUshort.cs" />
     <Compile Include="SetParamsAndKsm\Contracts\IAllParametersAccepter.cs" />
     <Compile Include="SetParamsAndKsm\Contracts\ICurrentValueSettable.cs" />
@@ -235,6 +241,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFlap\Views\OneWireErrorCodeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
