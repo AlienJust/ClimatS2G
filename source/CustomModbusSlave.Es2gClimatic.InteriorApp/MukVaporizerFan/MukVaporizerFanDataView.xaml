@@ -8,7 +8,7 @@
              xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.Request16"
              xmlns:setParameters1="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.SetParameters"
              mc:Ignorable="d" 
-             d:DesignHeight="660" d:DesignWidth="300">
+             d:DesignHeight="1200" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
 		<ListBox ItemsSource="{Binding Path=Parameters, Mode=OneTime}">
 			<!--TODO: dataTemplate selecting based on param type-->

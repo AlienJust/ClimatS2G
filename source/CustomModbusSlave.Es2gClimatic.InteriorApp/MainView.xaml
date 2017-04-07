@@ -275,8 +275,8 @@
 						Orientation="Vertical">
 						<mukVaporizerFan:MukVaporizerFanDataView
 							DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}" />
-						<sharedUniversalParamsWpf:GroupSimpleView
-							DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}" />
+						<!--<sharedUniversalParamsWpf:GroupSimpleView
+							DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}" />-->
 					</StackPanel>
 				</ScrollViewer>
 			</TabItem>
