@@ -4,9 +4,9 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
-using CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode;
 using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 

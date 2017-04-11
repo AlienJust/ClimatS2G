@@ -87,7 +87,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm {
 			for (int i = 19; i < 27; ++i) {
 				_parameterVmList.Add(new KsmReadonlyParamViewModel(i, "Параметр " + (i + 1), new TextFormatterSimple("f2", "хз")));
 			}
-			_parameterVmList.Add(new KsmReadonlyParamViewModel(27, "Версия ПО", new TextFormatterSimple("f0", "хз")));
+			_parameterVmList.Add(new KsmReadonlyParamViewModel(27, "Версия ПО", new TextFormatterDotted("f0", "хз")));
 
 			
 			//_settableParameterVmList = new List<SettableParameterViewModel>();

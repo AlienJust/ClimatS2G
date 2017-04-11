@@ -17,12 +17,15 @@
 	xmlns:progamLog="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:sharedUniversalParamsWpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+	xmlns:systemDiagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic"
 	Title="Технический абонент, салон"
 	Height="480"
 	Width="640"
 	ResizeMode="CanResizeWithGrip"
 	SaveWindowPosition="True"
-	GlowBrush="{DynamicResource AccentColorBrush}">
+	GlowBrush="{DynamicResource AccentColorBrush}"
+	Closing="MetroWindow_Closing"
+	Closed="MetroWindow_Closed">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -259,6 +262,11 @@
 		<TabControl
 			Grid.Row="0"
 			TabStripPlacement="Left">
+			<TabItem
+				Header="Диагностика системы"
+				Style="{StaticResource AzureTabItem}">
+				<systemDiagnostic:SystemDiagnosticView />
+			</TabItem>
 			<TabItem
 				Header="МУК заслонки наружного возудха"
 				Style="{StaticResource AzureTabItem}">

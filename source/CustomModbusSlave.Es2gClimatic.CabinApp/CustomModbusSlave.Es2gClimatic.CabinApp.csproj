@@ -261,17 +261,6 @@
       <DependentUpon>MukFridgeSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFridge\SetParameters\MukFridgeSetParamsViewModel.cs" />
-    <Compile Include="MukVaporizer\Request16\IKsmCommandWorkmode.cs" />
-    <Compile Include="MukVaporizer\Request16\IRequest16Data.cs" />
-    <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeSimple.cs" />
-    <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeView.xaml.cs">
-      <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukVaporizer\Request16\Request16Data.cs" />
-    <Compile Include="MukVaporizer\Request16\Request16DataBuilder.cs" />
-    <Compile Include="MukVaporizer\Request16\Request16DataView.xaml.cs">
-      <DependentUpon>Request16DataView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MukVaporizer\SetParameters\MukVaporizerSetParamsView.xaml.cs">
       <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
     </Compile>
@@ -331,14 +320,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFridge\SetParameters\MukFridgeSetParamsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukVaporizer\Request16\KsmCommandWorkmodeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukVaporizer\Request16\Request16DataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

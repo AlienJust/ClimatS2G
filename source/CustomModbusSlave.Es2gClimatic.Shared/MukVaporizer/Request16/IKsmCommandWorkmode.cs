@@ -1,5 +1,5 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.Request16 {
-	internal interface IKsmCommandWorkmode {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
+	public interface IKsmCommandWorkmode {
 		bool AutomaticMode { get; }
 		// zb bit #2 is skipped
 		bool ForceHeatRegulator { get; }

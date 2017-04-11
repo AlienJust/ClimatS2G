@@ -40,6 +40,13 @@
     <ApplicationIcon>intelecon x gray.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AlienJust.Adaptation.Console">
+      <HintPath>..\..\reference\AlienJust.Adaptation.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Adaptation.ConsoleLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Adaptation.ConsoleLogger.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Adaptation.WindowsPresentation">
       <HintPath>..\..\reference\AlienJust.Adaptation.WindowsPresentation.dll</HintPath>
     </Reference>
@@ -157,6 +164,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SystemDiagnostic\SystemDiagnosticView.xaml.cs">
+      <DependentUpon>SystemDiagnosticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SystemDiagnostic\SummaryViewModel.cs" />
     <Page Include="BsSm\BsSmDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -460,17 +471,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukVaporizerFan\Request16\KsmCommandWorkmodeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukVaporizerFan\Request16\Request16DataView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MukVaporizerFan\SetParameters\MukVaporizerSetParamsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SystemDiagnostic\SystemDiagnosticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -480,17 +487,6 @@
     <Compile Include="MukFlapOuterAir\MukFlapDataViewModel.cs" />
     <Compile Include="MukFlapOuterAir\Reply03\MukFlapDataView.xaml.cs">
       <DependentUpon>MukFlapDataView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukVaporizerFan\Request16\IKsmCommandWorkmode.cs" />
-    <Compile Include="MukVaporizerFan\Request16\IRequest16Data.cs" />
-    <Compile Include="MukVaporizerFan\Request16\KsmCommandWorkmodeSimple.cs" />
-    <Compile Include="MukVaporizerFan\Request16\KsmCommandWorkmodeView.xaml.cs">
-      <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukVaporizerFan\Request16\Request16Data.cs" />
-    <Compile Include="MukVaporizerFan\Request16\Request16DataBuilder.cs" />
-    <Compile Include="MukVaporizerFan\Request16\Request16DataView.xaml.cs">
-      <DependentUpon>Request16DataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

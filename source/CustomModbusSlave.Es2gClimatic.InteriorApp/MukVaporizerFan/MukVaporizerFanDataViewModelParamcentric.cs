@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
 using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
@@ -17,6 +18,7 @@ using ParamCentric.Modbus.Contracts;
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 	class MukVaporizerFanDataViewModelParamcentric : ViewModelBase, ICommandListener, IGroup {
 		private readonly IThreadNotifier _notifier;
+		private readonly CmdListenerMukVaporizerRequest16 _cmdListenerMukVaporizerRequest16;
 		//private readonly IReceiverModbusCustom _customReceiver;
 		//private readonly IReceiverModbusRtu _rtuReceiver;
 		private const string Header = "МУК вентилятора испарителя";
@@ -43,9 +45,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 		private IRequest16Data _request16Telemetry;
 		private readonly List<IGroupItem> _children;
 
-		public MukVaporizerFanDataViewModelParamcentric(IThreadNotifier notifier, IParameterSetter parameterSetter, IReceiverModbusCustom customReceiver, IReceiverModbusRtu rtuReceiver) {
+		public MukVaporizerFanDataViewModelParamcentric(IThreadNotifier notifier, IParameterSetter parameterSetter, IReceiverModbusCustom customReceiver, IReceiverModbusRtu rtuReceiver, CmdListenerMukVaporizerRequest16 cmdListenerMukVaporizerRequest16) {
 			_notifier = notifier;
 			//_customReceiver = customReceiver;
+
+			_cmdListenerMukVaporizerRequest16 = cmdListenerMukVaporizerRequest16;
+			_cmdListenerMukVaporizerRequest16.DataReceived += CmdListenerMukVaporizerRequest16OnDataReceived;
 
 			_children = new List<IGroupItem>();
 			var pwmParameter = new ReceivableModbusRtuParameterSimpleViewModel("Уставка ШИМ на вентилятор", 3, 3, 0, new BytesPairNullableToStringThroughDoubleConverter(1.0, 0.0, false, true, "f0"));
@@ -77,6 +82,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 			MukVaporizerSetParamsVm = new MukVaporizerSetParamsViewModel(notifier, parameterSetter);
 		}
 
+		private void CmdListenerMukVaporizerRequest16OnDataReceived(IList<byte> bytes, IRequest16Data data) {
+			_notifier.Notify(() => {
+				Request16TelemetryText.Update(bytes);
+				Request16Telemetry = data;
+			});
+		}
+
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
 			if (addr != 0x03) return;
 			if (code == 0x03 && data.Count == 41) {
@@ -106,13 +118,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 					Reply = data.ToText();
 				});
 			}
-			else if (code == 0x10 && data.Count == 21) {
-				_notifier.Notify(() => {
-					Request16TelemetryText.Update(data);
-					Request16Telemetry = new Request16DataBuilder(data).Build();
-				});
-			}
-
 		}
 
 		public string AutomaticModeStage {

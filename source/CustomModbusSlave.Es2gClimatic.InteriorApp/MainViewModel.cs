@@ -25,6 +25,7 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
+using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using CustomModbusSlave.Es2gClimatic.UniversalParams;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
@@ -42,6 +43,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 
 		private readonly IThreadNotifier _notifier;
 		private readonly IWindowSystem _windowSystem;
+		private readonly IMultiLoggerWithStackTrace<int> _debugLogger;
+		private readonly SerialChannel _serialChannel;
+		private readonly string _testPortName;
 
 		private readonly RelayCommand _openPortCommand;
 		private readonly RelayCommand _closePortCommand;
@@ -49,22 +53,25 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 		private readonly ProgramLogViewModel _programLogVm;
 		private readonly ILogger _logger;
 
-		private readonly SerialChannel _serialChannel;
-
 		private readonly IParameterSetter _paramSetter;
 		private readonly IFastReplyGenerator _replyGenerator;
 		private readonly IFastReplyAcceptor _replyAcceptor;
 
 		private readonly ModbusRtuParamReceiver _rtuParamReceiver;
 
+		private readonly CmdListenerMukVaporizerRequest16 _cmdListenerMukVaporizerRequest16;
+
 		private bool _isPortOpened;
 
 		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
 
-		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem) {
+		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string testPortName) {
 			_notifier = notifier;
 			_windowSystem = windowSystem;
+			_debugLogger = debugLogger;
+			_serialChannel = serialChannel;
+			_testPortName = testPortName;
 
 			_rtuParamReceiver = new ModbusRtuParamReceiver();
 
@@ -78,19 +85,18 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-салон.xml")).LoadConfiguration();
 
 			var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest());
-			_serialChannel = new SerialChannel(
-				new CommandPartSearcherPsnConfigBasedFast(psnConfig),
-				portConatiner, portConatiner, new RelayLoggerWithStackTrace(new RelayActionLogger(Console.WriteLine), new StackTraceFormatterNothing()));
 
-			
-
-			var replyGenerator = new ReplyGeneratorWithQueueAttempted(_notifier);
+			var replyGenerator = new ReplyGeneratorWithQueueAttempted();
 			_paramSetter = replyGenerator;
 			_replyGenerator = replyGenerator;
 			_replyAcceptor = replyGenerator;
 
 			MukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
-			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModelParamcentric(_notifier, _paramSetter, null, _rtuParamReceiver);
+
+			_cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
+			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModelParamcentric(_notifier, _paramSetter, null, _rtuParamReceiver, _cmdListenerMukVaporizerRequest16);
+
+
 			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter);
 			MukAirExhausterDataVm = new MukAirExhausterDataViewModel(_notifier, _paramSetter);
 			MukFlapReturnAirDataVm = new MukFlapReturnAirViewModel(_notifier, _paramSetter);
@@ -101,6 +107,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 			BvsDataVm2 = new BvsDataViewModel(_notifier, 0x1D);
 
 			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter);
+
+			
+
 
 			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
@@ -132,9 +141,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
 					_replyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray());
 					var reply = _replyGenerator.GenerateReply();
-
 					sendAbility.Send(reply);
-
 					//Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------------------------------------");
 					//_notifier.Notify(() => _logger.Log("Reply sended"));
 				}
@@ -150,6 +157,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
 			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
+			_cmdListenerMukVaporizerRequest16.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 
 			_rtuParamReceiver.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 
@@ -167,10 +175,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 		}
 
 		private void GetPortsAvailable() {
-			var ports = new List<string> { TestPortName };
+			var ports = new List<string> { _testPortName };
 			ports.AddRange(SerialPort.GetPortNames());
 			ComPortsAvailable = ports;
 			if (ComPortsAvailable.Count > 0) SelectedComName = ComPortsAvailable[0];
+			_logger.Log("Список COM-портов получен");
 		}
 
 		private void ClosePort() {

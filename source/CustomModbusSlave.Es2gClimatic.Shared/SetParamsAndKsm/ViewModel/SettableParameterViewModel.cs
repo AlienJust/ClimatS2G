@@ -62,8 +62,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 						// if all ok:
 						LastOperationColor = Colors.Green;
 					}
-					catch (Exception ex) {
+					catch //(Exception ex) {
+					{
 						// TODO: log exception to console
+						//Console.WriteLine(ex);
 						LastOperationColor = Colors.OrangeRed;
 					}
 					finally {

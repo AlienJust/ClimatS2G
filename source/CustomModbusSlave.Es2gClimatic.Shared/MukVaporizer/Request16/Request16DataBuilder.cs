@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Request16 {
-	class Request16DataBuilder : IBuilder<IRequest16Data> {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
+	public class Request16DataBuilder : IBuilder<IRequest16Data> {
 		private readonly IList<byte> _bytes;
 		public Request16DataBuilder(IList<byte> bytes) {
 			_bytes = bytes;
@@ -28,7 +27,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Request16 {
 
 				DeltaT = _bytes[15] * 256 + _bytes[16], // word #4, bit 01
 
-				DeltaTSetting = _bytes[17] * 256 + _bytes[18] // word #5
+				Reserve23 = _bytes[17] * 256 + _bytes[18] // word #5
 																									// 19 & 20 is CRC
 			};
 		}

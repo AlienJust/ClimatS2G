@@ -5,10 +5,10 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:setParameters="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.MukVaporizer.SetParameters"
-	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Request16"
 	xmlns:universalParamsWpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:temperatureRegulatorWorkMode="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	mc:Ignorable="d"
 	d:DesignHeight="1300"
 	d:DesignWidth="300">

@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Concurrent;
-using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Numeric;
 using CustomModbus.Slave.FastReply.Contracts;
 
 namespace CustomModbus.Slave.FastReply.Queued {
 	public class ReplyGeneratorWithQueueAttempted : IParameterSetter, IFastReplyGenerator, IFastReplyAcceptor {
-		private readonly IThreadNotifier _uiNotifier;
 		// адрес, значение, callback, число попыток
 		private readonly BlockingCollection<QueueItem> _itemsToWrite;
 		private readonly byte[] _noAnyParamWasChangedReplyToBeFast;
@@ -19,8 +17,7 @@ namespace CustomModbus.Slave.FastReply.Queued {
 		private QueueItem _currentItem;
 		private readonly object _currentItemSyncLockObject;
 
-		public ReplyGeneratorWithQueueAttempted(IThreadNotifier uiNotifier) {
-			_uiNotifier = uiNotifier;
+		public ReplyGeneratorWithQueueAttempted() {
 			_itemsToWrite = new BlockingCollection<QueueItem>(new ConcurrentQueue<QueueItem>());
 
 			_noAnyParamWasChangedReplyToBeFast = new byte[] { 20, 33, 0, 0, 0, 0, 0x08, 0xBF }; // default reply with precalculated CRC16

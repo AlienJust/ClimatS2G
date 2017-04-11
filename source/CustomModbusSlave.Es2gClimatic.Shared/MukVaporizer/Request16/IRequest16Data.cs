@@ -1,11 +1,11 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer.Request16 {
-	interface IRequest16Data {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
+	public interface IRequest16Data {
 		IKsmCommandWorkmode CurrentKsmCommandWorkmode { get; }
 		int OuterTemperature { get; }
 		double InnerTemperature { get; }
 		int FanSpeed { get; }
 		int DeltaT { get; }
 
-		int DeltaTSetting { get; }
+		int Reserve23 { get; }
 	}
 }

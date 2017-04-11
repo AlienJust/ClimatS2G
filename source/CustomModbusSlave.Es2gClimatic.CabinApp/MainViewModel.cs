@@ -72,7 +72,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
-			var replyGenerator = new ReplyGeneratorWithQueueAttempted(_notifier);
+			var replyGenerator = new ReplyGeneratorWithQueueAttempted();
 			_paramSetter = replyGenerator;
 			_replyGenerator = replyGenerator;
 			_replyAcceptor = replyGenerator;

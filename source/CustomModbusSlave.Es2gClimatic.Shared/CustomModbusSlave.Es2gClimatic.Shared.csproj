@@ -123,6 +123,21 @@
     <Compile Include="IBuilder.cs" />
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
+    <Compile Include="CmdListenerBase.cs" />
+    <Compile Include="MukVaporizer\Request16\CmdListenerMukVaporizerRequest16.cs" />
+    <Compile Include="ICmdListener.cs" />
+    <Compile Include="DataReceivedDelegate.cs" />
+    <Compile Include="MukVaporizer\Request16\IKsmCommandWorkmode.cs" />
+    <Compile Include="MukVaporizer\Request16\IRequest16Data.cs" />
+    <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeSimple.cs" />
+    <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeView.xaml.cs">
+      <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukVaporizer\Request16\Request16Data.cs" />
+    <Compile Include="MukVaporizer\Request16\Request16DataBuilder.cs" />
+    <Compile Include="MukVaporizer\Request16\Request16DataView.xaml.cs">
+      <DependentUpon>Request16DataView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\ITemperatureRegulatorWorkMode.cs" />
     <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeBuilderReplied.cs" />
     <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeSimple.cs" />
@@ -241,6 +256,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFlap\Views\OneWireErrorCodeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukVaporizer\Request16\KsmCommandWorkmodeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukVaporizer\Request16\Request16DataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
