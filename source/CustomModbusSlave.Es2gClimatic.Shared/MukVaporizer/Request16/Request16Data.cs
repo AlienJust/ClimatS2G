@@ -6,5 +6,6 @@
 		public int FanSpeed { get; set; }
 		public int DeltaT { get; set; }
 		public int Reserve23 { get; set; }
+		public bool IsSlave { get; set; }
 	}
 }

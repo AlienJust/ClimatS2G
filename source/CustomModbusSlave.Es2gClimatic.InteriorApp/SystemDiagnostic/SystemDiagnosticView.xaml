@@ -7,14 +7,26 @@
 	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 	mc:Ignorable="d"
 	d:DesignHeight="200"
-	d:DesignWidth="200">
+	d:DesignWidth="300">
 	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
 		<controls:ToggleSwitch
 			Header="Секция:"
-			OnLabel="Master"
-			OffLabel="Slave"
-			Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}">
-
-		</controls:ToggleSwitch>
-    </Grid>
+			OnLabel="Slave"
+			OffLabel="Master"
+			Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
+			IsChecked="{Binding Path=IsSlave, Mode=TwoWay}"
+			IsHitTestVisible="False"/>
+		<StackPanel Grid.Column="1" Orientation="Vertical">
+			<Label
+				Grid.Column="1"
+				Content="Версия ПО:" />
+			<Label Content="{Binding Path=FirmwareVersion}"/>
+		</StackPanel>
+		
+	</Grid>
 </UserControl>

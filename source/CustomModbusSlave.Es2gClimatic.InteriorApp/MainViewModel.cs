@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
@@ -22,15 +21,13 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using CustomModbusSlave.Es2gClimatic.UniversalParams;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
-using DataAbstractionLevel.Low.PsnConfig;
 using ParamCentric.Common.Contracts;
 using ParamCentric.Modbus.Contracts;
 
@@ -60,6 +57,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 		private readonly ModbusRtuParamReceiver _rtuParamReceiver;
 
 		private readonly CmdListenerMukVaporizerRequest16 _cmdListenerMukVaporizerRequest16;
+		private readonly CmdListenerKsm60Params _cmdListenerKsm60Params;
+		private readonly SystemDiagnosticViewModel _systemDiagnosticVm;
 
 		private bool _isPortOpened;
 
@@ -81,11 +80,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 
 			_programLogVm = new ProgramLogViewModel(this);
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
-
-			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-салон.xml")).LoadConfiguration();
-
-			var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest());
-
+			
 			var replyGenerator = new ReplyGeneratorWithQueueAttempted();
 			_paramSetter = replyGenerator;
 			_replyGenerator = replyGenerator;
@@ -94,6 +89,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 			MukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
 
 			_cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
+			_systemDiagnosticVm = new SystemDiagnosticViewModel(_notifier, _cmdListenerMukVaporizerRequest16);
 			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModelParamcentric(_notifier, _paramSetter, null, _rtuParamReceiver, _cmdListenerMukVaporizerRequest16);
 
 
@@ -152,26 +148,28 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 						KsmDataVm.AcceptCommandAllParameters(commandPart.ReplyBytes.ToList());
 					});
 				}
+
+				_cmdListenerKsm60Params.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			}
 		}
 
-		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
-			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
-			_cmdListenerMukVaporizerRequest16.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+		private void SerialChannelOnCommandHeared(ICommandPart commandPart) {
+			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandPart.Address.ToString("X2") + ", code=0x" + commandPart.CommandCode.ToString("X2") + ", data.Count=" + commandPart.ReplyBytes.Count));
+			_cmdListenerMukVaporizerRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
-			_rtuParamReceiver.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			_rtuParamReceiver.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
-			MukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-			MukVaporizerFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-			MukFridgeFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-			MukAirExhausterDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-			MukFlapReturnAirDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-			MukFlapWinterSummerDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			MukFlapDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			MukVaporizerFanDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			MukFridgeFanDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			MukAirExhausterDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			MukFlapReturnAirDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			MukFlapWinterSummerDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			
-			BsSmDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			BsSmDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
-			BvsDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
-			BvsDataVm2.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+			BvsDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			BvsDataVm2.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 		}
 
 		private void GetPortsAvailable() {
@@ -288,6 +286,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 		}
 
 		public IGroup TestGroup { get; }
+
+		public SystemDiagnosticViewModel SystemDiagnosticVm => _systemDiagnosticVm;
 	}
 
 	class ModbusRtuParamReceiver : IReceiverModbusRtu, ICommandListener {

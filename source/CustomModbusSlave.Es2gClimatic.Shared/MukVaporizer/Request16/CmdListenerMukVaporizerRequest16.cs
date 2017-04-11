@@ -11,4 +11,13 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
 	}
 
 	// IMukVaporizerReply16InteriorData
+
+	public class CmdListenerKsm60Params : CmdListenerBase<IRequest16Data> {
+		public CmdListenerKsm60Params(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
+		}
+
+		public override IRequest16Data BuildData(IList<byte> bytes) {
+			return new Request16DataBuilder(bytes).Build();
+		}
+	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
@@ -16,6 +17,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 	/// </summary>
 	class MukVaporizerFanDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;
+		private readonly CmdListenerMukVaporizerRequest16 _cmdListenerMukVaporizerRequest16;
 		private readonly string _header = "МУК вентилятора испарителя";
 		private string _fanPwm;
 		private string _temperatureAddress1;
@@ -38,10 +40,19 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 		private string _automaticModeStage;
 
 		private IRequest16Data _request16Telemetry;
-		public MukVaporizerFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
+		public MukVaporizerFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter, CmdListenerMukVaporizerRequest16 cmdListenerMukVaporizerRequest16) {
 			_notifier = notifier;
+			_cmdListenerMukVaporizerRequest16 = cmdListenerMukVaporizerRequest16;
+			_cmdListenerMukVaporizerRequest16.DataReceived += CmdListenerMukVaporizerRequest16OnDataReceived;
 			Request16TelemetryText = new AnyCommandPartViewModel();
 			MukVaporizerSetParamsVm = new MukVaporizerSetParamsViewModel(notifier, parameterSetter);
+		}
+
+		private void CmdListenerMukVaporizerRequest16OnDataReceived(IList<byte> bytes, IRequest16Data data) {
+			_notifier.Notify(() => {
+				Request16TelemetryText.Update(bytes);
+				Request16Telemetry = data;
+			});
 		}
 
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
@@ -74,12 +85,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 					FirmwareBuildNumber = (new DataDoubleTextPresenter(data[36], data[35], 1.0, 0)).PresentAsText();
 
 					Reply = data.ToText();
-				});
-			}
-			else if (code == 0x10 && data.Count == 21) {
-				_notifier.Notify(() => {
-					Request16TelemetryText.Update(data);
-					Request16Telemetry = new Request16DataBuilder(data).Build();
 				});
 			}
 		}

@@ -21,6 +21,7 @@ using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
+using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp
@@ -52,6 +53,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 		private readonly IFastReplyGenerator _replyGenerator;
 		private readonly IFastReplyAcceptor _replyAcceptor;
 
+		private readonly CmdListenerMukVaporizerRequest16 _cmdListenerMukVaporizerRequest16;
+
 		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
 
@@ -78,7 +81,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 			_replyAcceptor = replyGenerator;
 
 			_mukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
-			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier, _paramSetter);
+
+			_cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
+			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukVaporizerRequest16);
+
 			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter);
 			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier, _paramSetter);
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
@@ -126,6 +132,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
 			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
+			_cmdListenerMukVaporizerRequest16.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
+
 			_mukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_mukVaporizerDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_mukFridgeFanDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);

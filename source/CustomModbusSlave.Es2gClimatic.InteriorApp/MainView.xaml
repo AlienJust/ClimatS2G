@@ -265,7 +265,8 @@
 			<TabItem
 				Header="Диагностика системы"
 				Style="{StaticResource AzureTabItem}">
-				<systemDiagnostic:SystemDiagnosticView />
+				<systemDiagnostic:SystemDiagnosticView
+					DataContext="{Binding Path=SystemDiagnosticVm, Mode=OneTime}"/>
 			</TabItem>
 			<TabItem
 				Header="МУК заслонки наружного возудха"

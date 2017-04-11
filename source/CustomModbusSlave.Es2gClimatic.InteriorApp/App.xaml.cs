@@ -65,7 +65,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 				new ChainedFormatter(new List<ITextFormatter> { new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator) })),
 				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
 
-			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-кабина.xml")).LoadConfiguration();
+			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-салон.xml")).LoadConfiguration();
 			var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest(File.ReadAllText("CabinIoSample.txt").Split(' ').Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToList()));
 			_serialChannel = new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(psnConfig), portConatiner, portConatiner, _logConsoleYellow);
 

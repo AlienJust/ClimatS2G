@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.Shared {
 	public abstract class CmdListenerBase<T> : ICmdListener<T> {
 		private readonly byte _addrToCheck;
 		private readonly byte _codeToCheck;
@@ -14,7 +14,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
 		public event DataReceivedDelegate<T> DataReceived;
 
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (addr == _addrToCheck && code == _codeToCheck && _length == _codeToCheck) {
+			if (addr == _addrToCheck && code == _codeToCheck && _length == data.Count) {
 				OnDataReceived(data, BuildData(data));
 			}
 		}

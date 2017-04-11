@@ -9,7 +9,6 @@ using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using ParamCentric.Modbus.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm {

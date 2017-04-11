@@ -167,7 +167,7 @@
     <Compile Include="SystemDiagnostic\SystemDiagnosticView.xaml.cs">
       <DependentUpon>SystemDiagnosticView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SystemDiagnostic\SummaryViewModel.cs" />
+    <Compile Include="SystemDiagnostic\SystemDiagnosticViewModel.cs" />
     <Page Include="BsSm\BsSmDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
