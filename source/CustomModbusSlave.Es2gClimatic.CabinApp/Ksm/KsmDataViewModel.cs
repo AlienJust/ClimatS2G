@@ -5,6 +5,7 @@ using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
@@ -18,6 +19,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm {
 		private readonly List<IReceivableParameter> _parameterVmList;
 		//private readonly List<SettableParameterViewModel> _settableParameterVmList;
 		private const string UnknownBits = "xxxx xxxx xxxx xxxx";
+		public AnyCommandPartViewModel DataAsText { get; }
 
 		public KsmDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_itemsToWrite = new BlockingCollection<Tuple<int, ushort, Action<Exception>>>();
@@ -107,6 +109,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm {
 			for (int i = 37; i < 50; ++i) {
 				_parameterVmList.Add(new SettableParameterViewModel(i, "Параметр", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
 			}
+
+			DataAsText = new AnyCommandPartViewModel();
 		}
 
 		public List<IReceivableParameter> ParameterVmList => _parameterVmList;
@@ -120,6 +124,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm {
 			for (int i = 0; i < _parameterVmList.Count; ++i) {
 				_parameterVmList[i].ReceivedBytesValue = new BytesPair(bytes[7 + i * 2], bytes[8 + i * 2]);//(ushort)(bytes[7 + i * 2] * 256.0 + bytes[8 + i * 2]));
 			}
+			DataAsText.Update(bytes);
 		}
 	}
 }

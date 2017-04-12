@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              xmlns:sharedUniversalParamsWpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+             xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<ScrollViewer>
@@ -25,6 +26,8 @@
 					</DataTemplate>
 				</ListBox.Resources>
 			</ListBox>
+			<shared:AnyCommandPartView
+				DataContext="{Binding Path=DataAsText, Mode=OneTime}" />
 		</StackPanel>
 	</ScrollViewer>
 </UserControl>

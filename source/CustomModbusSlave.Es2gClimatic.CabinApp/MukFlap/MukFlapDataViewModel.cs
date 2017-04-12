@@ -18,6 +18,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap
 		private IMukFlapReply03Telemetry _reply03Telemetry;
 		private IRequest16Data _request16Telemetry;
 
+		public AnyCommandPartViewModel Reply03TelemetryText { get; }
+		public AnyCommandPartViewModel Request16TelemetryText { get; }
+		public MukFlapSetParamsViewModel MukFlapSetParamsVm { get; }
 
 		public MukFlapDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
 			_notifier = notifier;
@@ -79,10 +82,5 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap
 				}
 			}
 		}
-
-		public AnyCommandPartViewModel Reply03TelemetryText { get; }
-		public AnyCommandPartViewModel Request16TelemetryText { get; }
-
-		public MukFlapSetParamsViewModel MukFlapSetParamsVm { get; }
 	}
 }
