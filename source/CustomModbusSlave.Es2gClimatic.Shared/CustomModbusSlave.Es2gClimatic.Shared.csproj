@@ -115,6 +115,7 @@
     <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticSimple.cs" />
     <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticBuilder.cs" />
     <Compile Include="ICommandListener.cs" />
+    <Compile Include="IStdCheckableCmdListener.cs" />
     <Compile Include="IUpdateable.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkMode.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromInt.cs" />
@@ -124,11 +125,12 @@
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
     <Compile Include="CmdListenerBase.cs" />
+    <Compile Include="SetParamsAndKsm\CmdListenerKsmParams.cs" />
     <Compile Include="MukVaporizer\Request16\CmdListenerMukVaporizerRequest16.cs" />
     <Compile Include="ICmdListener.cs" />
     <Compile Include="DataReceivedDelegate.cs" />
     <Compile Include="MukVaporizer\Request16\IKsmCommandWorkmode.cs" />
-    <Compile Include="MukVaporizer\Request16\IRequest16Data.cs" />
+    <Compile Include="MukVaporizer\Request16\IMukVaporizerRequest16InteriorData.cs" />
     <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeSimple.cs" />
     <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeView.xaml.cs">
       <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
@@ -145,10 +147,10 @@
       <DependentUpon>TemperatureRegulatorWorkModeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterSimpleUshort.cs" />
-    <Compile Include="SetParamsAndKsm\Contracts\IAllParametersAccepter.cs" />
     <Compile Include="SetParamsAndKsm\Contracts\ICurrentValueSettable.cs" />
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\IDoubleBytesPairConverter.cs" />
     <Compile Include="SetParamsAndKsm\Contracts\IParameterRoot.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterDotted.cs" />
     <Compile Include="SetParamsAndKsm\UshortToDoubleConverter\IUshortToDoubleConverter.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\ITextFormatter.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterBits.cs" />

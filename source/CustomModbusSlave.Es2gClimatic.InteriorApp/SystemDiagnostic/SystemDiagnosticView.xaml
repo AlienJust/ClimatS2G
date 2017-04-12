@@ -4,29 +4,38 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 	mc:Ignorable="d"
 	d:DesignHeight="200"
 	d:DesignWidth="300">
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
+			<ColumnDefinition />
 			<ColumnDefinition />
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
-		<controls:ToggleSwitch
-			Header="Секция:"
-			OnLabel="Slave"
-			OffLabel="Master"
-			Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
-			IsChecked="{Binding Path=IsSlave, Mode=TwoWay}"
-			IsHitTestVisible="False"/>
-		<StackPanel Grid.Column="1" Orientation="Vertical">
-			<Label
-				Grid.Column="1"
-				Content="Версия ПО:" />
-			<Label Content="{Binding Path=FirmwareVersion}"/>
+		<StackPanel
+			Grid.Column="0"
+			Orientation="Horizontal">
+			<TextBlock
+				Text="Сегмент: " />
+			<TextBlock
+				Text="{Binding Path=SegmentType, Mode=OneWay}" />
 		</StackPanel>
-		
+		<StackPanel
+			Grid.Column="1"
+			Orientation="Horizontal">
+			<TextBlock
+				Text="Версия ПО: " />
+			<TextBlock
+				Text="{Binding Path=Version, Mode=OneWay}" />
+		</StackPanel>
+		<StackPanel
+			Grid.Column="2"
+			Orientation="Horizontal">
+			<TextBlock
+				Text="Этап работы: " />
+			<TextBlock
+				Text="{Binding Path=WorkStage, Mode=OneWay}" />
+		</StackPanel>
 	</Grid>
 </UserControl>

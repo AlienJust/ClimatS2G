@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using AlienJust.Support.Numeric.Bits;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
-	public class Request16DataBuilder : IBuilder<IRequest16Data> {
+	public class Request16DataBuilder : IBuilder<IMukVaporizerRequest16InteriorData> {
 		private readonly IList<byte> _bytes;
 		public Request16DataBuilder(IList<byte> bytes) {
 			_bytes = bytes;
 		}
 
-		public IRequest16Data Build() {
+		public IMukVaporizerRequest16InteriorData Build() {
 			return new Request16Data {
 				CurrentKsmCommandWorkmode =
 					new KsmCommandWorkmodeSimple {

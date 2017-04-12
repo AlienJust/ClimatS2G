@@ -132,6 +132,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ModbusRtuParamReceiver.cs" />
     <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsView.xaml.cs">
       <DependentUpon>MukAirExhausterSetParamsView.xaml</DependentUpon>
     </Compile>

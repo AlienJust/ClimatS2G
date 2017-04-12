@@ -6,21 +6,26 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
-using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
 using ParamCentric.Modbus.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm {
-	class KsmDataViewModel : ViewModelBase, IParameterSetter, IAllParametersAccepter {
+	class KsmDataViewModel : ViewModelBase, IParameterSetter {
+		private readonly IThreadNotifier _notifier;
+		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsmParams;
 		private readonly BlockingCollection<Tuple<int, ushort, Action<Exception>>> _itemsToWrite;
 		private readonly List<IReceivableParameter> _parameterVmList;
+		
 		//private readonly List<SettableParameterViewModel> _settableParameterVmList;
 		private const string UnknownBits = "xxxx xxxx xxxx xxxx";
 		public AnyCommandPartViewModel DataAsText { get; }
 
-		public KsmDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
+		public KsmDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter, ICmdListener<IList<BytesPair>> cmdListenerKsmParams) {
+			_notifier = notifier;
+			_cmdListenerKsmParams = cmdListenerKsmParams;
+
 			_itemsToWrite = new BlockingCollection<Tuple<int, ushort, Action<Exception>>>();
 			_parameterVmList = new List<IReceivableParameter> {
 				new KsmReadonlyParamViewModel(0, "Датчик 1wire №1", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85,0x00), "f2", "хз", "обрыв"))
@@ -160,23 +165,24 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm {
 			}
 
 			DataAsText = new AnyCommandPartViewModel();
+			_cmdListenerKsmParams.DataReceived += CmdListenerKsmParamsOnDataReceived;
+		}
+
+		private void CmdListenerKsmParamsOnDataReceived(IList<byte> bytes, IList<BytesPair> data) {
+			_notifier.Notify(() => {
+				for (int i = 0; i < 60; ++i) {
+					_parameterVmList[i].ReceivedBytesValue = data[i];
+				}
+				DataAsText.Update(bytes);
+			});
 		}
 
 		public List<IReceivableParameter> ParameterVmList => _parameterVmList;
-		//public List<SettableParameterViewModel> SettableParameterVmList => _settableParameterVmList;
-
+		
 		public void SetParameterAsync(int zeroBasedParameterNumber, ushort value, Action<Exception> callback) {
 			// тут должна быть очередь потокобезопасная
 			// нужен поток для обработки ответов - сразу использовать UiNotifier
 			_itemsToWrite.Add(new Tuple<int, ushort, Action<Exception>>(zeroBasedParameterNumber, value, callback));
-		}
-
-		public void AcceptCommandAllParameters(IList<byte> bytes) {
-			// update all parameters
-			for (int i = 0; i < 60; ++i) {
-				_parameterVmList[i].ReceivedBytesValue = new BytesPair(bytes[7 + i * 2], bytes[8 + i * 2]);//(ushort)(bytes[7 + i * 2] * 256.0 + bytes[8 + i * 2]));
-			}
-			DataAsText.Update(bytes);
 		}
 	}
 }

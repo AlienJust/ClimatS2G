@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared {
-	public abstract class CmdListenerBase<T> : ICmdListener<T> {
+	public abstract class CmdListenerBase<T> : IStdCheckableCmdListener, ICmdListener<T> {
 		private readonly byte _addrToCheck;
 		private readonly byte _codeToCheck;
 		private readonly int _length;
@@ -24,5 +24,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared {
 		protected virtual void OnDataReceived(IList<byte> bytes, T data) {
 			DataReceived?.Invoke(bytes, data);
 		}
+
+		public byte AddrToCheck => _addrToCheck;
+		public byte CodeToCheck => _codeToCheck;
+		public int Length => _length;
 	}
 }

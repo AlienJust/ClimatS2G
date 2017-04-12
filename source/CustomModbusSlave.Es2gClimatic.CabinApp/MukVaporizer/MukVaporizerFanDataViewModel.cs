@@ -39,7 +39,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 		private ITemperatureRegulatorWorkMode _temperatureRegulatorWorkMode;
 		private string _automaticModeStage;
 
-		private IRequest16Data _request16Telemetry;
+		private IMukVaporizerRequest16InteriorData _request16Telemetry;
 		public MukVaporizerFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter, CmdListenerMukVaporizerRequest16 cmdListenerMukVaporizerRequest16) {
 			_notifier = notifier;
 			_cmdListenerMukVaporizerRequest16 = cmdListenerMukVaporizerRequest16;
@@ -48,7 +48,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 			MukVaporizerSetParamsVm = new MukVaporizerSetParamsViewModel(notifier, parameterSetter);
 		}
 
-		private void CmdListenerMukVaporizerRequest16OnDataReceived(IList<byte> bytes, IRequest16Data data) {
+		private void CmdListenerMukVaporizerRequest16OnDataReceived(IList<byte> bytes, IMukVaporizerRequest16InteriorData data) {
 			_notifier.Notify(() => {
 				Request16TelemetryText.Update(bytes);
 				Request16Telemetry = data;
@@ -220,7 +220,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 			}
 		}
 
-		public IRequest16Data Request16Telemetry {
+		public IMukVaporizerRequest16InteriorData Request16Telemetry {
 			get { return _request16Telemetry; }
 			set {
 				if (_request16Telemetry != value) {

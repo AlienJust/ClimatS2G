@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
+using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
@@ -23,9 +24,9 @@ using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp
-{
+namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 	class MainViewModel : ViewModelBase, IUserInterfaceRoot {
 		private List<string> _comPortsAvailable;
 		private string _selectedComName;
@@ -54,9 +55,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 		private readonly IFastReplyAcceptor _replyAcceptor;
 
 		private readonly CmdListenerMukVaporizerRequest16 _cmdListenerMukVaporizerRequest16;
+		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm50Params;
 
 		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
+
 
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string testPortName) {
 			_notifier = notifier;
@@ -83,6 +86,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 			_mukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
 
 			_cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
+			_cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
+
 			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukVaporizerRequest16);
 
 			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter);
@@ -90,7 +95,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
 			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
 
-			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter);
+			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter, _cmdListenerKsm50Params);
 
 			_commandHearedTimeoutMonitor = new CommandHearedTimerThreadSafe(_serialChannel, TimeSpan.FromSeconds(1), _notifier);
 			_commandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
@@ -116,19 +121,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 					var reply = _replyGenerator.GenerateReply();
 
 					sendAbility.Send(reply);
-					//Console.WriteLine("Reply sended--------------------------------------------------------------------------------------------------");
-					//_notifier.Notify(() => _logger.Log("Reply sended"));
-				}
-				else if (commandPart.CommandCode == 16 && commandPart.ReplyBytes.Count == 109) {
-					// todo: send back
-					//Console.WriteLine("Accepted 50 params command -----------------------------------------------------------------------------------");
-					_notifier.Notify(() => {
-						KsmDataVm.AcceptCommandAllParameters(commandPart.ReplyBytes.ToList());
-					});
 				}
 			}
+			_cmdListenerKsm50Params.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 		}
-	
+
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
 			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
@@ -166,15 +163,14 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 		}
 
 		private void OpenPort() {
-			_serialChannel.SelectPortAsync(_selectedComName, 57600,ex => _notifier.Notify(() => {
+			_serialChannel.SelectPortAsync(_selectedComName, 57600, ex => _notifier.Notify(() => {
 				if (ex == null) {
 					IsPortOpened = true;
 					_logger.Log("Порт " + _selectedComName + " открыт");
 					_closePortCommand.RaiseCanExecuteChanged();
 					_openPortCommand.RaiseCanExecuteChanged();
 				}
-				else
-				{
+				else {
 					_logger.Log("Ошибка во время открытия порта: " + ex);
 				}
 			}));
@@ -182,49 +178,27 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 
 		public IThreadNotifier Notifier => _notifier;
 
-		public List<string> ComPortsAvailable
-		{
+		public List<string> ComPortsAvailable {
 			get { return _comPortsAvailable; }
-			set
-			{
-				if (_comPortsAvailable != value)
-				{
+			set {
+				if (_comPortsAvailable != value) {
 					_comPortsAvailable = value;
 					RaisePropertyChanged(() => ComPortsAvailable);
 				}
 			}
 		}
 
-		public string SelectedComName
-		{
+		public string SelectedComName {
 			get { return _selectedComName; }
-			set
-			{
-				if (value != _selectedComName)
-				{
+			set {
+				if (value != _selectedComName) {
 					_selectedComName = value;
 					RaisePropertyChanged(() => SelectedComName);
 				}
 			}
 		}
 
-		public RelayCommand OpenPortCommand => _openPortCommand;
 
-		public RelayCommand ClosePortCommand => _closePortCommand;
-
-		public RelayCommand GetPortsAvailableCommand { get; }
-
-		public ProgramLogViewModel ProgramLogVm => _programLogVm;
-
-		public MukFlapDataViewModel MukFlapDataVm => _mukFlapDataVm;
-
-		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm => _mukVaporizerDataVm;
-
-		public MukFridgeFanDataViewModel MukFridgeFanDataVm => _mukFridgeFanDataVm;
-
-		public MukWarmFloorDataViewModel MukWarmFloorDataVm => _mukWarmFloorDataVm;
-
-		public BsSmDataViewModel BsSmDataVm => _bsSmDataVm;
 
 		public bool IsPortOpened {
 			get { return _isPortOpened; }
@@ -246,8 +220,16 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
 			}
 		}
 
+		public RelayCommand OpenPortCommand => _openPortCommand;
+		public RelayCommand ClosePortCommand => _closePortCommand;
+		public RelayCommand GetPortsAvailableCommand { get; }
+		public ProgramLogViewModel ProgramLogVm => _programLogVm;
+		public MukFlapDataViewModel MukFlapDataVm => _mukFlapDataVm;
+		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm => _mukVaporizerDataVm;
+		public MukFridgeFanDataViewModel MukFridgeFanDataVm => _mukFridgeFanDataVm;
+		public MukWarmFloorDataViewModel MukWarmFloorDataVm => _mukWarmFloorDataVm;
+		public BsSmDataViewModel BsSmDataVm => _bsSmDataVm;
 		public BvsDataViewModel BvsDataVm { get; }
-
 		public KsmDataViewModel KsmDataVm { get; }
 	}
 }
