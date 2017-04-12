@@ -17,7 +17,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 			int reserve13D4D7 = (_replyBytes[12] & 0xF0) >> 8;
 
 			int targetTemperatureInsideTheCabin = (_replyBytes[13] & 0x0F) - 2;
-			int climaticSystemWorkmode14D4D7 = (_replyBytes[13] & 0xF0) >> 8;
+			int climaticSystemWorkmode14D4D7 = (_replyBytes[13] & 0xF0) >> 4;
 
 			var workModeAndCompressorSwitch = new Shared.BsSm.WorkModeReplyBuilderFromByte(_replyBytes[14]).Build();
 
