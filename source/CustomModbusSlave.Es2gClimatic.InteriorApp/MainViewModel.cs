@@ -17,6 +17,8 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.ViewModel;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
@@ -56,7 +58,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 		private readonly ModbusRtuParamReceiver _rtuParamReceiver;
 
-		private readonly CmdListenerMukVaporizerRequest16 _cmdListenerMukVaporizerRequest16;
+		private readonly ICmdListener<IMukFlapReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
+		private readonly ICmdListener<IMukVaporizerFanReply03Telemetry> _cmdListenerMukVaporizerReply03;
+		private readonly ICmdListener<IMukVaporizerRequest16InteriorData> _cmdListenerMukVaporizerRequest16;
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsmParams;
 
 		public SystemDiagnosticViewModel SystemDiagnosticVm { get; }
@@ -98,13 +102,24 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_replyGenerator = replyGenerator;
 			_replyAcceptor = replyGenerator;
 
-			MukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
-
-
+			_cmdListenerMukFlapOuterAirReply03 = new CmdListenerMukFlapOuterAirReply03(2, 3, 47);
+			_cmdListenerMukVaporizerReply03 = new CmdListenerMukVaporizerReply03(3,3, 41);
 			_cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
 			_cmdListenerKsmParams = new CmdListenerKsmParams(20, 16, 129);
-			SystemDiagnosticVm = new SystemDiagnosticViewModel(_notifier, _cmdListenerMukVaporizerRequest16, _cmdListenerKsmParams);
-			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModelParamcentric(_notifier, _paramSetter, null, _rtuParamReceiver, _cmdListenerMukVaporizerRequest16);
+
+			
+			SystemDiagnosticVm = new SystemDiagnosticViewModel(
+				_notifier,
+				_cmdListenerMukFlapOuterAirReply03,
+				_cmdListenerMukVaporizerRequest16, 
+				_cmdListenerKsmParams);
+			MukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter, _cmdListenerMukFlapOuterAirReply03);
+			MukVaporizerFanDataVm = new MukVaporizerFanDataViewModelParamcentric(
+				notifier, 
+				_paramSetter, 
+				_rtuParamReceiver,
+				_cmdListenerMukVaporizerReply03,
+				_cmdListenerMukVaporizerRequest16);
 
 
 			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter);
@@ -157,11 +172,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandPart) {
 			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandPart.Address.ToString("X2") + ", code=0x" + commandPart.CommandCode.ToString("X2") + ", data.Count=" + commandPart.ReplyBytes.Count));
+
+			_cmdListenerMukFlapOuterAirReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			_cmdListenerMukVaporizerReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerMukVaporizerRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_rtuParamReceiver.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
 			MukFlapDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			MukVaporizerFanDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			MukFridgeFanDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			MukAirExhausterDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			MukFlapReturnAirDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);

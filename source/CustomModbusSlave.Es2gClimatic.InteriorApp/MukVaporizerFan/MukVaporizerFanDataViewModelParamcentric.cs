@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
@@ -9,19 +8,21 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
-using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.BytesPairConverters;
 using ParamCentric.Common.Contracts;
 using ParamCentric.Modbus.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
-	class MukVaporizerFanDataViewModelParamcentric : ViewModelBase, ICommandListener, IGroup {
+	class MukVaporizerFanDataViewModelParamcentric : ViewModelBase, IGroup {
 		private readonly IThreadNotifier _notifier;
-		private readonly CmdListenerMukVaporizerRequest16 _cmdListenerMukVaporizerRequest16;
+		private readonly ICmdListener<IMukVaporizerFanReply03Telemetry> _cmdListenerMukVaporizerReply03;
+		private readonly ICmdListener<IMukVaporizerRequest16InteriorData> _cmdListenerMukVaporizerRequest16;
 		//private readonly IReceiverModbusCustom _customReceiver;
 		//private readonly IReceiverModbusRtu _rtuReceiver;
 		private const string Header = "МУК вентилятора испарителя";
+		private const string NoSensor = "Обрыв датчика";
 		private string _fanPwm;
 		private string _temperatureAddress1;
 		private string _temperatureAddress2;
@@ -45,9 +46,18 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 		private IMukVaporizerRequest16InteriorData _request16Telemetry;
 		private readonly List<IGroupItem> _children;
 
-		public MukVaporizerFanDataViewModelParamcentric(IThreadNotifier notifier, IParameterSetter parameterSetter, IReceiverModbusCustom customReceiver, IReceiverModbusRtu rtuReceiver, CmdListenerMukVaporizerRequest16 cmdListenerMukVaporizerRequest16) {
+		public AnyCommandPartViewModel Request16TelemetryText { get; }
+		public MukVaporizerSetParamsViewModel MukVaporizerSetParamsVm { get; }
+
+		public MukVaporizerFanDataViewModelParamcentric(IThreadNotifier notifier, 
+			IParameterSetter parameterSetter, IReceiverModbusRtu rtuReceiver,
+			ICmdListener<IMukVaporizerFanReply03Telemetry> cmdListenerMukVaporizerReply03,
+			ICmdListener<IMukVaporizerRequest16InteriorData> cmdListenerMukVaporizerRequest16) {
+
 			_notifier = notifier;
-			//_customReceiver = customReceiver;
+
+			_cmdListenerMukVaporizerReply03 = cmdListenerMukVaporizerReply03;
+			_cmdListenerMukVaporizerReply03.DataReceived += CmdListenerMukVaporizerReply03OnDataReceived;
 
 			_cmdListenerMukVaporizerRequest16 = cmdListenerMukVaporizerRequest16;
 			_cmdListenerMukVaporizerRequest16.DataReceived += CmdListenerMukVaporizerRequest16OnDataReceived;
@@ -82,6 +92,34 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 			MukVaporizerSetParamsVm = new MukVaporizerSetParamsViewModel(notifier, parameterSetter);
 		}
 
+		private void CmdListenerMukVaporizerReply03OnDataReceived(IList<byte> bytes, IMukVaporizerFanReply03Telemetry data) {
+			_notifier.Notify(() => {
+				FanPwm = data.FanPwm.ToString("f2");
+
+				TemperatureAddress1 = data.TemperatureAddress1.NoLinkWithSensor ? NoSensor : data.TemperatureAddress1.Indication.ToString("f2");
+				TemperatureAddress2 = data.TemperatureAddress1.NoLinkWithSensor ? NoSensor : data.TemperatureAddress2.Indication.ToString("f2");
+
+				IncomingSignals = "0x" + data.IncomingSignals.ToString("X2");
+				OutgoingSignals = "0x" + data.OutgoingSignals.ToString("X2");
+
+				AnalogInput = "0x" + data.AnalogInput.ToString("X4");
+				HeatingPwm = data.HeatingPwm.ToString();
+				AutomaticModeStage = data.AutomaticModeStage.ToString();
+				TemperatureRegulatorWorkMode = data.TemperatureRegulatorWorkMode;
+				CalculatedTemperatureSetting = data.CalculatedTemperatureSetting.ToString("f2");
+				FanSpeed = data.FanSpeed.ToString();
+				Diagnostic1 = "0x" + data.Diagnostic1.ToString("X4");
+				Diagnostic2 = "0x" + data.Diagnostic2.ToString("X4");
+				Diagnostic3 = "0x" + data.Diagnostic3.ToString("X4");
+				Diagnostic4 = "0x" + data.Diagnostic4.ToString("X4");
+				Diagnostic5 = data.Diagnostic5.ToString();
+
+				FirmwareBuildNumber = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+
+				Reply = bytes.ToText();
+			});
+		}
+
 		private void CmdListenerMukVaporizerRequest16OnDataReceived(IList<byte> bytes, IMukVaporizerRequest16InteriorData data) {
 			_notifier.Notify(() => {
 				Request16TelemetryText.Update(bytes);
@@ -89,36 +127,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 			});
 		}
 
-		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (addr != 0x03) return;
-			if (code == 0x03 && data.Count == 41) {
-				_notifier.Notify(() => {
-					FanPwm = (data[3] * 256.0 + data[4]).ToString("f2");
-
-					TemperatureAddress1 = new DataDoubleTextPresenter(data[6], data[5], 0.01, 2).PresentAsText();
-					TemperatureAddress2 = new DataDoubleTextPresenter(data[8], data[7], 0.01, 2).PresentAsText();
-
-					IncomingSignals = new ByteTextPresenter(data[10], true).PresentAsText();
-					OutgoingSignals = new ByteTextPresenter(data[12], true).PresentAsText();
-
-					AnalogInput = new UshortTextPresenter(data[14], data[13], true).PresentAsText();
-					HeatingPwm = new UshortTextPresenter(data[16], data[15], false).PresentAsText();
-					AutomaticModeStage = new UshortTextPresenter(data[18], data[17], false).PresentAsText();
-					TemperatureRegulatorWorkMode = new TemperatureRegulatorWorkModeBuilderReplied(new BytesPair(data[19], data[20])).Build();
-					CalculatedTemperatureSetting = new DataDoubleTextPresenter(data[22], data[21], 0.01, 2).PresentAsText();
-					FanSpeed = new UshortTextPresenter(data[24], data[23], false).PresentAsText();
-					Diagnostic1 = new UshortTextPresenter(data[26], data[25], true).PresentAsText();
-					Diagnostic2 = new UshortTextPresenter(data[28], data[27], true).PresentAsText();
-					Diagnostic3 = new UshortTextPresenter(data[30], data[29], true).PresentAsText();
-					Diagnostic4 = new UshortTextPresenter(data[32], data[31], true).PresentAsText();
-					Diagnostic5 = new UshortTextPresenter(data[34], data[33], false).PresentAsText();
-
-					FirmwareBuildNumber = new DataDoubleTextPresenter(data[36], data[35], 1.0, 0).PresentAsText();
-
-					Reply = data.ToText();
-				});
-			}
-		}
 
 		public string AutomaticModeStage {
 			get { return _automaticModeStage; }
@@ -266,10 +274,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 				}
 			}
 		}
-		public AnyCommandPartViewModel Request16TelemetryText { get; }
-
-
-		public MukVaporizerSetParamsViewModel MukVaporizerSetParamsVm { get; }
+		
 		public string Name => Header;
 		public IList<IGroupItem> Children => _children;
 	}

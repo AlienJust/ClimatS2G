@@ -151,6 +151,7 @@
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\IDoubleBytesPairConverter.cs" />
     <Compile Include="SetParamsAndKsm\Contracts\IParameterRoot.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterDotted.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterIntegerDotted.cs" />
     <Compile Include="SetParamsAndKsm\UshortToDoubleConverter\IUshortToDoubleConverter.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\ITextFormatter.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterBits.cs" />

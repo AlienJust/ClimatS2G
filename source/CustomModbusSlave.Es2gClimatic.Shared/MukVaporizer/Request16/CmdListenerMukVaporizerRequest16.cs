@@ -9,6 +9,4 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
 			return new Request16DataBuilder(bytes).Build();
 		}
 	}
-
-	// IMukVaporizerReply16InteriorData
 }

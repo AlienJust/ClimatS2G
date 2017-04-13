@@ -2,20 +2,22 @@ using AlienJust.Support.Collections;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters {
 	public class TextFormatterDotted : ITextFormatter<BytesPair?> {
-		private readonly string _format;
 		private readonly string _nullFormat;
 
-		public TextFormatterDotted(string format, string nullFormat) {
-			_format = format;
+		public TextFormatterDotted(string nullFormat) {
 			_nullFormat = nullFormat;
 		}
 
 		public string Format(BytesPair? value) {
 			if (!value.HasValue) return _nullFormat;
-			var frmt = value.Value.HighFirstUnsignedValue.ToString(_format);
+			var frmt = value.Value.HighFirstUnsignedValue.ToString("D");
+
 			var result = string.Empty;
-			for (int i = 0; i < frmt.Length - 1; ++i) {
-				result += frmt[i] + ".";
+			if (frmt == string.Empty) return result;
+
+			result += frmt[0];
+			for (int i = 1; i < frmt.Length; ++i) {
+				result += "." + frmt[i];
 			}
 			return result;
 		}
