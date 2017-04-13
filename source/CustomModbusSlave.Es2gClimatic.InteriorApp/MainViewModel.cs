@@ -111,6 +111,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			SystemDiagnosticVm = new SystemDiagnosticViewModel(
 				_notifier,
 				_cmdListenerMukFlapOuterAirReply03,
+				_cmdListenerMukVaporizerReply03,
 				_cmdListenerMukVaporizerRequest16, 
 				_cmdListenerKsmParams);
 			MukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter, _cmdListenerMukFlapOuterAirReply03);
