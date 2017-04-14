@@ -6,7 +6,6 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using ParamCentric.Modbus.Contracts;
 using ParamCentric.UserInterface.Contracts;
 
@@ -29,8 +28,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 		public double MinValue { get; }
 
 		public string StringFormat { get; set; }
+		public string ToolTipText { get; }
 
-		public SettableParameterViewModel(int paramIndex, string name, double maxValue, double minValue, double? formattedValue, string stringFormat, IDoubleBytesPairConverter doubleBytesPairConverter, IParameterSetter parameterSetter, IThreadNotifier uiNotifier) {
+		public SettableParameterViewModel(int paramIndex, string name, double maxValue, double minValue, double? formattedValue, string stringFormat, IDoubleBytesPairConverter doubleBytesPairConverter, IParameterSetter parameterSetter, IThreadNotifier uiNotifier, string toolTipText) {
 			_doubleBytesPairConverter = doubleBytesPairConverter;
 			_parameterSetter = parameterSetter;
 			_uiNotifier = uiNotifier;
@@ -40,12 +40,15 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 			MinValue = minValue;
 			FormattedValue = formattedValue;
 			StringFormat = stringFormat;
+			ToolTipText = toolTipText;
 
 			_isEnabled = true;
 			_lastOperationColor = Colors.Transparent;
 
 			_resetCommand = new RelayCommand(Reset, () => ReceivedValueFormatted.HasValue);
 			_setCommand = new RelayCommand(Set, () => _formattedValue.HasValue && IsEnabled);
+
+
 		}
 
 		private void Set() {
@@ -146,6 +149,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 				}
 			}
 		}
+
+		public bool ShowToolTip => !String.IsNullOrWhiteSpace(ToolTipText);
 
 		public ICommand ResetCommand => _resetCommand;
 		public ICommand SetCommand => _setCommand;

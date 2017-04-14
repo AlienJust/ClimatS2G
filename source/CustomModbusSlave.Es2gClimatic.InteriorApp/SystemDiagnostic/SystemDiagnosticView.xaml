@@ -20,6 +20,8 @@
 				Height="Auto" />
 			<RowDefinition
 				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
 		</Grid.RowDefinitions>
 		<StackPanel
 			Grid.Column="0"
@@ -38,9 +40,11 @@
 			<TextBlock
 				Text="{Binding Path=Version, Mode=OneWay}" />
 		</StackPanel>
+		
 		<StackPanel
-			Grid.Row="0"
-			Grid.Column="2"
+			Grid.Row="1"
+			Grid.Column="0"
+			Grid.ColumnSpan="3"
 			Orientation="Horizontal">
 			<TextBlock
 				Text="Этап работы: " />
@@ -49,7 +53,7 @@
 		</StackPanel>
 		
 		<StackPanel
-			Grid.Row="1"
+			Grid.Row="2"
 			Grid.Column="0"
 			Orientation="Horizontal">
 			<TextBlock
@@ -58,7 +62,7 @@
 				Text="{Binding Path=MukInfo2, Mode=OneWay}" />
 		</StackPanel>
 		<StackPanel
-			Grid.Row="1"
+			Grid.Row="2"
 			Grid.Column="1"
 			Orientation="Horizontal">
 			<TextBlock
@@ -67,7 +71,7 @@
 				Text="{Binding Path=MukInfo3, Mode=OneWay}" />
 		</StackPanel>
 		<StackPanel
-			Grid.Row="1"
+			Grid.Row="2"
 			Grid.Column="2"
 			Orientation="Horizontal">
 			<TextBlock
@@ -75,18 +79,10 @@
 			<TextBlock
 				Text="{Binding Path=MukInfo4, Mode=OneWay}" />
 		</StackPanel>
+		
 		<StackPanel
-			Grid.Row="2"
+			Grid.Row="3"
 			Grid.Column="0"
-			Orientation="Horizontal">
-			<TextBlock
-				Text="МУК №5: " />
-			<TextBlock
-				Text="{Binding Path=MukInfo5, Mode=OneWay}" />
-		</StackPanel>
-		<StackPanel
-			Grid.Row="2"
-			Grid.Column="1"
 			Orientation="Horizontal">
 			<TextBlock
 				Text="МУК №6: " />
@@ -94,13 +90,22 @@
 				Text="{Binding Path=MukInfo6, Mode=OneWay}" />
 		</StackPanel>
 		<StackPanel
-			Grid.Row="2"
-			Grid.Column="2"
+			Grid.Row="3"
+			Grid.Column="1"
 			Orientation="Horizontal">
 			<TextBlock
 				Text="МУК №7: " />
 			<TextBlock
 				Text="{Binding Path=MukInfo7, Mode=OneWay}" />
+		</StackPanel>
+		<StackPanel
+			Grid.Row="3"
+			Grid.Column="2"
+			Orientation="Horizontal">
+			<TextBlock
+				Text="МУК №8: " />
+			<TextBlock
+				Text="{Binding Path=MukInfo8, Mode=OneWay}" />
 		</StackPanel>
 	</Grid>
 </UserControl>

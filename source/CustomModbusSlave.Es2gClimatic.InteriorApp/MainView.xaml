@@ -306,7 +306,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Header="МУК заслонки рециркуляционного воздуха"
+				Header="МУК заслонки рециркуляц. воздуха"
 				Style="{StaticResource AzureTabItem}">
 				<ScrollViewer>
 					<mukFlapReturnAirViews:MukFlapReturnAirDataView

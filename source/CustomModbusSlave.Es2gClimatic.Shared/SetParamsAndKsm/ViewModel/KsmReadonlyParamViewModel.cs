@@ -1,7 +1,6 @@
 ﻿using AlienJust.Support.Collections;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using ParamCentric.Modbus.Contracts;
 using ParamCentric.UserInterface.Contracts;
 

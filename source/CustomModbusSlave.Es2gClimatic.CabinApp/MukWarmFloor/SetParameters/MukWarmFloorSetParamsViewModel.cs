@@ -12,10 +12,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.SetParameters {
 		public SettableParameterViewModel SettableParam522 { get; }
 
 		public MukWarmFloorSetParamsViewModel(IThreadNotifier uiNotifier, IParameterSetter parameterSetter) {
-			SettableParam519 = new SettableParameterViewModel(519, "5.19 Резерв", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
-			SettableParam520 = new SettableParameterViewModel(520, "5.20 Резерв", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
-			SettableParam521 = new SettableParameterViewModel(521, "5.21 Резерв", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
-			SettableParam522 = new SettableParameterViewModel(522, "5.22 Резерв", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier);
+			SettableParam519 = new SettableParameterViewModel(519, "5.19 Резерв", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier, null);
+			SettableParam520 = new SettableParameterViewModel(520, "5.20 Резерв", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier, null);
+			SettableParam521 = new SettableParameterViewModel(521, "5.21 Резерв", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier, null);
+			SettableParam522 = new SettableParameterViewModel(522, "5.22 Резерв", 65535.0, 0.0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, uiNotifier, null);
 		}
 	}
 }

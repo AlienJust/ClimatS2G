@@ -143,25 +143,26 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm {
 
 			//_settableParameterVmList = new List<SettableParameterViewModel>();
 
-			_parameterVmList.Add(new SettableParameterViewModel(35, "Максимальный ШИМ (PWMmax_cool)", 255, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_parameterVmList.Add(new SettableParameterViewModel(36, "Минимальный ШИМ (PWMmin_cool)", 255, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(35, "Максимальный ШИМ (PWMmax_cool)", 255, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
+			_parameterVmList.Add(new SettableParameterViewModel(36, "Минимальный ШИМ (PWMmin_cool)", 255, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
 
-			_parameterVmList.Add(new SettableParameterViewModel(37, "Дельта + (plus_cool)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_parameterVmList.Add(new SettableParameterViewModel(38, "Дельта - (minus_cool)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(37, "Дельта + (plus_cool)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
+			_parameterVmList.Add(new SettableParameterViewModel(38, "Дельта - (minus_cool)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
 
-			_parameterVmList.Add(new SettableParameterViewModel(39, "Обеззараживатель, почасовой счетчик работы (CounterCleaner)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_parameterVmList.Add(new SettableParameterViewModel(40, "Компрессор этого сегмента, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_parameterVmList.Add(new SettableParameterViewModel(41, "Компрессор, счетчик перевключений", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_parameterVmList.Add(new SettableParameterViewModel(42, "Вентилятор конденсатора 1, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_parameterVmList.Add(new SettableParameterViewModel(43, "Вентилятор конденсатора 2, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_parameterVmList.Add(new SettableParameterViewModel(44, "Отопитель 380 в., почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_parameterVmList.Add(new SettableParameterViewModel(45, "Отопитель 3000 в., почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_parameterVmList.Add(new SettableParameterViewModel(46, "Вентилятор приточного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
-			_parameterVmList.Add(new SettableParameterViewModel(47, "Вентилятор отработанного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			_parameterVmList.Add(new SettableParameterViewModel(39, "Обеззараживатель, почасовой счетчик работы (CounterCleaner)", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
+			_parameterVmList.Add(new SettableParameterViewModel(40, "Компрессор этого сегмента, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
+			_parameterVmList.Add(new SettableParameterViewModel(41, "Компрессор, счетчик перевключений", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
+			_parameterVmList.Add(new SettableParameterViewModel(42, "Вентилятор конденсатора 1, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
+			_parameterVmList.Add(new SettableParameterViewModel(43, "Вентилятор конденсатора 2, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
+			_parameterVmList.Add(new SettableParameterViewModel(44, "Отопитель 380 в., почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
+			_parameterVmList.Add(new SettableParameterViewModel(45, "Отопитель 3000 в., почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
+			_parameterVmList.Add(new SettableParameterViewModel(46, "Вентилятор приточного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
+			_parameterVmList.Add(new SettableParameterViewModel(47, "Вентилятор отработанного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
 
+			_parameterVmList.Add(new SettableParameterViewModel(48, "Ручное управление режимом КУ", 8, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, "1 - Охлаждение 100%\n2 - Охлаждение 50%\n3 - Вентиляция\n4 - Нагрев 100%\n5 - Нагрев 50%"));
 
-			for (int i = 48; i < 60; ++i) {
-				_parameterVmList.Add(new SettableParameterViewModel(i, "Параметр", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier));
+			for (int i = 49; i < 60; ++i) {
+				_parameterVmList.Add(new SettableParameterViewModel(i, "Параметр", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
 			}
 
 			DataAsText = new AnyCommandPartViewModel();
