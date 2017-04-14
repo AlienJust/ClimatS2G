@@ -2,7 +2,7 @@
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
 	class BsSmAndKsm1DataCommand32RequestSimple : IBsSmAndKsm1DataCommand32Request {
-		public BsSmAndKsm1DataCommand32RequestSimple(int maximumPower, int temperatureInterior, int temperatureOutdoor, int temperatureDelta, IWorkModeInRequest currentClimaticWorkMode, IWorkModeInRequest2 currentClimaticWorkMode2, int powerValueStage1, int powerValueStage2, int powerValueStage3, int fault1, int fault2, int fault3, int fault4, int fault5, int reserveOrTemperatureAverageValue, double co2LevelInCurrentSegment, int reserve25) {
+		public BsSmAndKsm1DataCommand32RequestSimple(int maximumPower, int temperatureInterior, int temperatureOutdoor, int temperatureDelta, IWorkModeInRequest currentClimaticWorkMode, IWorkModeInRequest2 currentClimaticWorkMode2, int powerValueStage1, int powerValueStage2, int powerValueStage3, int fault1, int fault2, int fault3, int fault4, int fault5, int reserveOrTemperatureAverageValue, double co2LevelInCurrentSegment, int reserve25, bool channelTwoEmersonCompressorPressureIsLow) {
 			MaximumPower = maximumPower;
 			TemperatureInterior = temperatureInterior;
 			TemperatureOutdoor = temperatureOutdoor;
@@ -20,6 +20,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
 			ReserveOrTemperatureAverageValue = reserveOrTemperatureAverageValue;
 			Co2LevelInCurrentSegment = co2LevelInCurrentSegment;
 			Reserve25 = reserve25;
+			ChannelTwoEmersonCompressorPressureIsLow = channelTwoEmersonCompressorPressureIsLow;
 		}
 
 		public int MaximumPower { get; }
@@ -39,5 +40,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
 		public int ReserveOrTemperatureAverageValue { get; }
 		public double Co2LevelInCurrentSegment { get; }
 		public int Reserve25 { get; }
+		public bool ChannelTwoEmersonCompressorPressureIsLow { get; }
 	}
 }

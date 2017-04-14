@@ -19,6 +19,12 @@
 
 		int ReserveOrTemperatureAverageValue { get; }
 		double Co2LevelInCurrentSegment { get; }
+
+		/// <summary>
+		/// в канале 2 Emerson низкое давление в компрессоре
+		/// </summary>
+		bool ChannelTwoEmersonCompressorPressureIsLow { get; }
+
 		int Reserve25 { get; }
 	}
 }

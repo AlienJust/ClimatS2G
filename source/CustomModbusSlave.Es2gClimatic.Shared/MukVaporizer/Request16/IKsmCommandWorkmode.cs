@@ -8,5 +8,15 @@
 		bool HeatModeAndCoolModeAreOff { get; }
 		bool ManualMode { get; }
 		bool ForceHeatModePwm50 { get; }
+
+		/// <summary>
+		/// Принудительное отключение Emerson по низкому давлению
+		/// </summary>
+		bool ForceEmersonOffByLowPressure { get; }
+
+		/// <summary>
+		/// конфигурация работы
+		/// </summary>
+		int WorkConfiguration { get; }
 	}
 }

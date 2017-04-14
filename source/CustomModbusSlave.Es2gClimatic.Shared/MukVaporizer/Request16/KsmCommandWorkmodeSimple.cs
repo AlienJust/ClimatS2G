@@ -7,5 +7,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
 		public bool HeatModeAndCoolModeAreOff { get; set; }
 		public bool ManualMode { get; set; }
 		public bool ForceHeatModePwm50 { get; set; }
+
+		public bool ForceEmersonOffByLowPressure { get; set; }
+		public int WorkConfiguration { get; set; }
 	}
 }

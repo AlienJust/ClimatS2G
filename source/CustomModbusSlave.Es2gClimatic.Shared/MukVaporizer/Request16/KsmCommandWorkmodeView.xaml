@@ -5,7 +5,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	mc:Ignorable="d"
-	d:DesignHeight="150"
+	d:DesignHeight="200"
 	d:DesignWidth="400">
 	<UserControl.Resources>
 	</UserControl.Resources>
@@ -24,5 +24,12 @@
 			IsChecked="{Binding Path=ManualMode, Mode=OneTime}">БИТ №6: ручной режим</CheckBox>
 		<CheckBox
 			IsChecked="{Binding Path=ForceHeatModePwm50, Mode=OneTime}">БИТ №7: режим обогрева принудительно, ШИМ обогрева=50%</CheckBox>
+		<StackPanel Orientation="Horizontal">
+			<TextBlock Text="Конфигурация работы: "/>
+			<TextBlock
+				Text="{Binding WorkConfiguration, Mode=OneTime}" />
+		</StackPanel>
+		<CheckBox
+			IsChecked="{Binding Path=ForceEmersonOffByLowPressure, Mode=OneTime}">БИТ №12: Принудительное отключение Emerson по низкому давлению</CheckBox>
 	</StackPanel>
 </UserControl>

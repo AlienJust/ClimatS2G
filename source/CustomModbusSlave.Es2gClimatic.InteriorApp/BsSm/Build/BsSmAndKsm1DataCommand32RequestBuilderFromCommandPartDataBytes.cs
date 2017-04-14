@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AlienJust.Support.Numeric.Bits;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease;
 using CustomModbusSlave.Es2gClimatic.Shared;
@@ -30,6 +31,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 
 			var reserve23OrAvgTemperature = _commandPartDataBytes[20];
 			var сo2LevelInCurrentSegment = _commandPartDataBytes[21] * 10.0;
+
+			var ch2EmersonCompressorPressureIsLow = _commandPartDataBytes[22].GetBit(3);
 			var reserve25 = _commandPartDataBytes[22];
 
 			return new BsSmAndKsm1DataCommand32RequestSimple(
@@ -49,7 +52,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 				fault5,
 				reserve23OrAvgTemperature,
 				сo2LevelInCurrentSegment,
-				reserve25);
+				reserve25,
+				ch2EmersonCompressorPressureIsLow);
 		}
 	}
 }

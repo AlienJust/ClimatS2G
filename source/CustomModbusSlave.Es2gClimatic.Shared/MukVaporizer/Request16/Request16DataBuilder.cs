@@ -12,6 +12,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
 			return new Request16Data {
 				CurrentKsmCommandWorkmode =
 					new KsmCommandWorkmodeSimple {
+						WorkConfiguration = _bytes[7] & 0x0F,
+						ForceEmersonOffByLowPressure = _bytes[7] .GetBit(4),
+
 						AutomaticMode = (_bytes[8] & 0x01) == 0x01, // zb bit 0
 						ForceHeatRegulator = (_bytes[8] & 0x02) == 0x02, // zb bit 1, zb bit 2 skipped
 						ForceHeatModePwm100 = (_bytes[8] & 0x08) == 0x08, // zb bit 3
