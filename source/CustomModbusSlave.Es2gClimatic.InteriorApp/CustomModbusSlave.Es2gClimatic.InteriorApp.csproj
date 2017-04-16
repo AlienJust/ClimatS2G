@@ -133,11 +133,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ModbusRtuParamReceiver.cs" />
+    <Compile Include="MukAirExhauster\CmdListenerMukAirExhausterReply03.cs" />
     <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsView.xaml.cs">
       <DependentUpon>MukAirExhausterSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsViewModel.cs" />
     <Compile Include="MukFlapOuterAir\Reply03\CmdListenerMukFlapOuterAirReply03.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\CmdListenerMukFlapOuterAirRequest16.cs" />
+    <Compile Include="MukFlapReturnAir\CmdListenerMukFlapReturnAirReply03.cs" />
+    <Compile Include="MukFlapWinterSummer\CmdListenerMukFlapReturnAirReply03.cs" />
+    <Compile Include="MukFridge\CmdListenerMukFridgeFanReply03.cs" />
+    <Compile Include="MukFridge\IMukFridgeFanReply03Data.cs" />
+    <Compile Include="MukFridge\MukFridgeFanReply03DataBuilder.cs" />
     <Compile Include="MukVaporizerFan\BytesPairNullableToStringThroughOneWireConverter.cs" />
     <Compile Include="MukVaporizerFan\CmdListenerMukVaporizerReply03.cs" />
     <Compile Include="MukVaporizerFan\IMukVaporizerFanReply03Telemetry.cs" />
@@ -278,9 +285,9 @@
     <Compile Include="MukAirExhauster\Data\Contracts\AutomaticWorkmodeStage.cs" />
     <Compile Include="MukAirExhauster\Data\AutomaticWorkmodeStageSimple.cs" />
     <Compile Include="MukAirExhauster\Data\Contracts\IAutomaticWorkmodeStage.cs" />
-    <Compile Include="MukAirExhauster\Data\Contracts\IReply03Data.cs" />
-    <Compile Include="MukAirExhauster\Data\Reply03DataBuilder.cs" />
-    <Compile Include="MukAirExhauster\Data\Reply03DataSimple.cs" />
+    <Compile Include="MukAirExhauster\Data\Contracts\IMukAirExhausterReply03Data.cs" />
+    <Compile Include="MukAirExhauster\Data\MukAirExhausterReply03DataBuilder.cs" />
+    <Compile Include="MukAirExhauster\Data\MukAirExhausterReply03DataSimple.cs" />
     <Compile Include="MukAirExhauster\ViewModel\MukAirExhausterDataViewModel.cs" />
     <Compile Include="MukAirExhauster\View\AirExhausterDataView.xaml.cs">
       <DependentUpon>AirExhausterDataView.xaml</DependentUpon>
@@ -305,7 +312,7 @@
     <Compile Include="MukFlapOuterAir\Reply03\DataModel\SimpleRelease\MukFlapReply03Telemetry.cs" />
     <Compile Include="MukFlapOuterAir\Reply03\DataModel\Build\MukFlapReply03TelemetryBuilder.cs" />
     <Compile Include="MukFlapOuterAir\Request16\IKsmCommandWorkmode.cs" />
-    <Compile Include="MukFlapOuterAir\Request16\IRequest16Data.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\IMukFlapOuterAirRequest16Data.cs" />
     <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmode.cs" />
     <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeBuilder.cs" />
     <Compile Include="MukFlapOuterAir\Request16\KsmCommandWorkmodeExtensions.cs" />
@@ -314,7 +321,7 @@
       <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapOuterAir\Request16\Request16Data.cs" />
-    <Compile Include="MukFlapOuterAir\Request16\Request16DataBuilder.cs" />
+    <Compile Include="MukFlapOuterAir\Request16\MukFlapOuterAirRequest16DataBuilder.cs" />
     <Compile Include="MukFlapOuterAir\Request16\Request16DataView.xaml.cs">
       <DependentUpon>Request16DataView.xaml</DependentUpon>
     </Compile>

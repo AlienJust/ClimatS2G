@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Request16 {
-	class Request16DataBuilder : IBuilder<IRequest16Data> {
+	class MukFlapOuterAirRequest16DataBuilder : IBuilder<IMukFlapOuterAirRequest16Data> {
 		private readonly IList<byte> _bytes;
-		public Request16DataBuilder(IList<byte> bytes) {
+		public MukFlapOuterAirRequest16DataBuilder(IList<byte> bytes) {
 			_bytes = bytes;
 		}
 
-		public IRequest16Data Build() {
+		public IMukFlapOuterAirRequest16Data Build() {
 			return new Request16Data(
 				new KsmCommandWorkmodeSimple(_bytes[7] * 256 + _bytes[8]), // word #0
 				_bytes[9] * 256 + _bytes[10], // word #1

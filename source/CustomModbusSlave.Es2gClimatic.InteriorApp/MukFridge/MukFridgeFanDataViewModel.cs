@@ -6,11 +6,14 @@ using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
-using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
+using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
-	class MukFridgeFanDataViewModel : ViewModelBase, ICommandListener {
+	class MukFridgeFanDataViewModel : ViewModelBase {
+		
 		private readonly IThreadNotifier _notifier;
+		private readonly ICmdListener<IMukFridgeFanReply03Data> _cmdListenerMukFridgeFanReply03;
 		//private readonly string _header = "МУК вентилятора конденсатора";
 		private string _fanPwm;
 		private string _condensingPressure;
@@ -23,44 +26,48 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 		private string _diagnostic2;
 		private string _fanSpeed;
 		private string _firmwareBuildNumber;
+		private bool _stage1IsOn;
+		private bool _stage2IsOn;
 
 		private string _reply;
-		private IList<byte> _data;
+		private IMukFridgeFanReply03Data _data;
+		public MukFridgeSetParamsViewModel MukFridgeSetParamsVm { get; }
 
-		public MukFridgeFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
+		public MukFridgeFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter, ICmdListener<IMukFridgeFanReply03Data> cmdListenerMukFridgeFanReply03) {
 			_notifier = notifier;
+			_cmdListenerMukFridgeFanReply03 = cmdListenerMukFridgeFanReply03;
 			MukFridgeSetParamsVm = new MukFridgeSetParamsViewModel(notifier, parameterSetter);
+			
+			_cmdListenerMukFridgeFanReply03.DataReceived += CmdListenerMukFridgeFanReply03OnDataReceived;
 		}
 
-		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (addr != 0x04) return;
-			if (code == 0x03 && data.Count == 29) {
-				_notifier.Notify(() => {
-					_data = data;
+		private void CmdListenerMukFridgeFanReply03OnDataReceived(IList<byte> bytes, IMukFridgeFanReply03Data data) {
+			_notifier.Notify(() => {
+				_data = data;
+				FanPwm = data.FanPwm.ToString("f2");
 
-					FanPwm = (data[3] * 256.0 + data[4]).ToString("f2");
+				CondensingPressure = data.CondensingPressure.NoLinkWithSensor ? SensorIndicationExt.NoLinkText: data.CondensingPressure.Indication.ToString("f2");
 
-					CondensingPressure = new DataDoubleTextPresenter(data[6], data[5], 0.1, 2).PresentAsText();
+				IncomingSignals = data.IncomingSignals.ToString("X2");
+				OutgoingSignals = data.OutgoingSignals.ToString("X2");
 
-					IncomingSignals = new ByteTextPresenter(data[8], true).PresentAsText();
-					OutgoingSignals = new ByteTextPresenter(data[10], true).PresentAsText();
+				AnalogInput = data.AnalogInput.ToString("X4");
+				AutomaticModeStage = data.AutomaticModeStage.ToString();
+				WorkMode = data.WorkMode.ToString();
+				Diagnostic1 = data.Diagnostic1.ToString("X4");
+				Diagnostic2 = data.Diagnostic2.ToString("X4");
+				FanSpeed = data.FanSpeed.ToString();
 
-					AnalogInput = new UshortTextPresenter(data[12], data[11], true).PresentAsText();
-					AutomaticModeStage = new UshortTextPresenter(data[14], data[13], false).PresentAsText();
-					WorkMode = new UshortTextPresenter(data[16], data[15], false).PresentAsText();
-					Diagnostic1 = new UshortTextPresenter(data[18], data[17], true).PresentAsText();
-					Diagnostic2 = new UshortTextPresenter(data[20], data[19], true).PresentAsText();
-					FanSpeed = new UshortTextPresenter(data[22], data[21], false).PresentAsText();
+				FirmwareBuildNumber = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
 
-					FirmwareBuildNumber = new DataDoubleTextPresenter(data[24], data[23], 1.0, 0).PresentAsText();
+				RaisePropertyChanged(() => Stage1IsOn); // TODO: redo
+				RaisePropertyChanged(() => Stage2IsOn); // TODO: redo
 
-					Reply = data.ToText();
-					RaisePropertyChanged(() => Stage1IsOn);
-					RaisePropertyChanged(() => Stage2IsOn);
-				});
-			}
+				Reply = bytes.ToText();
+			});
 		}
 
+		
 		public string FanPwm {
 			get { return _fanPwm; }
 			set {
@@ -92,8 +99,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 		}
 
 
-		public bool? Stage1IsOn => _data?[10].GetBit(0);
-		public bool? Stage2IsOn => _data?[10].GetBit(1);
+		public bool? Stage1IsOn => _data?.Stage1IsOn;
+		public bool? Stage2IsOn => _data?.Stage2IsOn;
 
 		public string OutgoingSignals {
 			get { return _outgoingSignals; }
@@ -159,8 +166,5 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 				}
 			}
 		}
-
-
-		public MukFridgeSetParamsViewModel MukFridgeSetParamsVm { get; }
 	}
 }

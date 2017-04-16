@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbus.Slave.FastReply.Contracts;
@@ -9,28 +10,28 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.ViewModel
 {
-	class MukAirExhausterDataViewModel : ViewModelBase, ICommandListener {
+	class MukAirExhausterDataViewModel : ViewModelBase {
 		private readonly IThreadNotifier _notifier;
-		private IReply03Data _reply03Telemetry;
+		private readonly ICmdListener<IMukAirExhausterReply03Data> _cmdListenerMukAirExhausterReply03;
+		private IMukAirExhausterReply03Data _reply03Telemetry;
 
-		public MukAirExhausterDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
+		public MukAirExhausterDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter, ICmdListener<IMukAirExhausterReply03Data> cmdListenerMukAirExhausterReply03) {
 			_notifier = notifier;
+			_cmdListenerMukAirExhausterReply03 = cmdListenerMukAirExhausterReply03;
 			Reply03TelemetryText = new AnyCommandPartViewModel();
 			MukAirExhausterSetParamsVm = new MukAirExhausterSetParamsViewModel(notifier, parameterSetter);
-		}
-		
-		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (addr != 0x06) return;
-			if (code == 0x03 && data.Count == 31) {
-				_notifier.Notify(() => {
-					Reply03TelemetryText.Update(data);
-					Reply03Telemetry = new Reply03DataBuilder(data).Build();
-				});
-			}
+
+			_cmdListenerMukAirExhausterReply03.DataReceived += CmdListenerMukAirExhausterReply03OnDataReceived;
 		}
 
+		private void CmdListenerMukAirExhausterReply03OnDataReceived(IList<byte> bytes, IMukAirExhausterReply03Data data) {
+			_notifier.Notify(() => {
+				Reply03TelemetryText.Update(bytes);
+				Reply03Telemetry = new MukAirExhausterReply03DataBuilder(bytes).Build();
+			});
+		}
 
-		public IReply03Data Reply03Telemetry {
+		public IMukAirExhausterReply03Data Reply03Telemetry {
 			get { return _reply03Telemetry; }
 			set {
 				if (_reply03Telemetry != value) {

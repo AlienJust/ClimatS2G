@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.DataModel.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.DataModel.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
@@ -17,6 +21,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private readonly ICmdListener<IMukFlapReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
 		private readonly ICmdListener<IMukVaporizerFanReply03Telemetry> _cmdListenerMukVaporizerReply03;
 		private readonly ICmdListener<IMukVaporizerRequest16InteriorData> _cmdListenerMukVaporizerRequest16;
+		private readonly ICmdListener<IMukFridgeFanReply03Data> _cmdListenerMukFridgeFanReply03;
+		private readonly ICmdListener<IMukAirExhausterReply03Data> _cmdListenerMukAirExhausterReply03;
+		private readonly ICmdListener<IMukFlapReturnAirReply03Telemetry> _cmdListenerMukFlapReturnAirReply03;
+		private readonly ICmdListener<IMukFlapWinterSummerReply03Telemetry> _cmdListenerMukFlapWinterSummerReply03;
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm;
 
 		private string _segmentType;
@@ -24,11 +32,19 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private string _workStage;
 		private string _mukInfo2;
 		private string _mukInfo3;
+		private string _mukInfo4;
+		private string _mukInfo6;
+		private string _mukInfo7;
+		private string _mukInfo8;
 
 		public SystemDiagnosticViewModel(IThreadNotifier uiNotifier,
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
 			ICmdListener<IMukVaporizerFanReply03Telemetry> cmdListenerMukVaporizerReply03,
-			ICmdListener<IMukVaporizerRequest16InteriorData> cmdListenerMukVaporizerRequest16, 
+			ICmdListener<IMukVaporizerRequest16InteriorData> cmdListenerMukVaporizerRequest16,
+			ICmdListener<IMukFridgeFanReply03Data> cmdListenerMukFridgeFanReply03,
+			ICmdListener<IMukAirExhausterReply03Data> cmdListenerMukAirExhausterReply03,
+			ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03,
+			ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03,
 			ICmdListener<IList<BytesPair>> cmdListenerKsm) {
 
 			_uiNotifier = uiNotifier;
@@ -36,6 +52,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_cmdListenerMukFlapOuterAirReply03 = cmdListenerMukFlapOuterAirReply03;
 			_cmdListenerMukVaporizerReply03 = cmdListenerMukVaporizerReply03;
 			_cmdListenerMukVaporizerRequest16 = cmdListenerMukVaporizerRequest16;
+			_cmdListenerMukFridgeFanReply03 = cmdListenerMukFridgeFanReply03;
+			_cmdListenerMukAirExhausterReply03 = cmdListenerMukAirExhausterReply03;
+			_cmdListenerMukFlapReturnAirReply03 = cmdListenerMukFlapReturnAirReply03;
+			_cmdListenerMukFlapWinterSummerReply03 = cmdListenerMukFlapWinterSummerReply03;
 			_cmdListenerKsm = cmdListenerKsm;
 
 			_cmdListenerMukFlapOuterAirReply03.DataReceived += CmdListenerMukFlapOuterAirReply03OnDataReceived;
@@ -116,6 +136,45 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 
+		public string MukInfo4 {
+			get { return _mukInfo4; }
+			set {
+				if (_mukInfo4 != value) {
+					_mukInfo4 = value;
+					RaisePropertyChanged(() => MukInfo4);
+				}
+			}
+		}
+
+		public string MukInfo6 {
+			get { return _mukInfo6; }
+			set {
+				if (_mukInfo6 != value) {
+					_mukInfo6 = value;
+					RaisePropertyChanged(() => MukInfo6);
+				}
+			}
+		}
+
+		public string MukInfo7 {
+			get { return _mukInfo3; }
+			set {
+				if (_mukInfo7 != value) {
+					_mukInfo7 = value;
+					RaisePropertyChanged(() => MukInfo7);
+				}
+			}
+		}
+		public string MukInfo8 {
+			get { return _mukInfo8; }
+			set {
+				if (_mukInfo8 != value) {
+					_mukInfo8 = value;
+					RaisePropertyChanged(() => MukInfo8);
+				}
+			}
+		}
+
 
 		void ResetVmPropsToDefaultValues() {
 			SegmentType = UnknownText;
@@ -123,6 +182,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			WorkStage = UnknownText;
 			MukInfo2 = NoLinkText;
 			MukInfo3 = NoLinkText;
+			MukInfo4 = NoLinkText;
+			MukInfo6 = NoLinkText;
+			MukInfo7 = NoLinkText;
+			MukInfo8 = NoLinkText;
 		}
 	}
 }

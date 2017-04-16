@@ -125,6 +125,7 @@
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
     <Compile Include="CmdListenerBase.cs" />
+    <Compile Include="SensorIndications\SensorIndicationExt.cs" />
     <Compile Include="SetParamsAndKsm\CmdListenerKsmParams.cs" />
     <Compile Include="MukVaporizer\Request16\CmdListenerMukVaporizerRequest16.cs" />
     <Compile Include="ICmdListener.cs" />

@@ -1,7 +1,7 @@
 ﻿using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts {
-	interface IReply03Data {
+	interface IMukAirExhausterReply03Data {
 		int HeatPwm { get; }
 		ISensorIndication<double> TemperatureOneWire { get; }
 		int InputSignals { get; }

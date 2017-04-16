@@ -48,7 +48,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 	}
 
 	class MukVaporizerFanReply03TelemetryBuilder : IBuilder<IMukVaporizerFanReply03Telemetry> {
-		private static readonly BytesPair _noSensor= new BytesPair(0x85, 0x00); 
+		private static readonly BytesPair NoSensor= new BytesPair(0x85, 0x00); 
 		private readonly IList<byte> _data;
 		public MukVaporizerFanReply03TelemetryBuilder(IList<byte> bytes) {
 			_data = bytes;
@@ -57,8 +57,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 			return new MukVaporizerFanReply03TelemetrySimple {
 				FanPwm = new BytesPair(_data[3], _data[4]).HighFirstUnsignedValue,
 
-				TemperatureAddress1 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 0.01, 0.0, _noSensor),
-				TemperatureAddress2 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[7], _data[8]), 0.01, 0.0, _noSensor),
+				TemperatureAddress1 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 0.01, 0.0, NoSensor),
+				TemperatureAddress2 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[7], _data[8]), 0.01, 0.0, NoSensor),
 
 				IncomingSignals = _data[10],
 				OutgoingSignals = _data[12],
