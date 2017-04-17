@@ -61,11 +61,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_cmdListenerMukFlapOuterAirReply03.DataReceived += CmdListenerMukFlapOuterAirReply03OnDataReceived;
 			_cmdListenerMukVaporizerReply03.DataReceived += CmdListenerMukVaporizerReply03OnDataReceived;
 			_cmdListenerMukVaporizerRequest16.DataReceived += CmdListenerMukVaporizerRequest16DataReceived;
+			_cmdListenerMukFridgeFanReply03.DataReceived += CmdListenerMukFridgeFanReply03OnDataReceived;
+			_cmdListenerMukAirExhausterReply03.DataReceived += CmdListenerMukAirExhausterReply03OnDataReceived;
+			_cmdListenerMukFlapReturnAirReply03.DataReceived += CmdListenerMukFlapReturnAirReply03OnDataReceived;
+			_cmdListenerMukFlapWinterSummerReply03.DataReceived += CmdListenerMukFlapWinterSummerReply03OnDataReceived;
 			_cmdListenerKsm.DataReceived += CmdListenerKsmOnDataReceived;
 
 			ResetVmPropsToDefaultValues();
 		}
-		
+
 		private void CmdListenerMukFlapOuterAirReply03OnDataReceived(IList<byte> bytes, IMukFlapReply03Telemetry data) {
 			MukInfo2 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
 		}
@@ -73,6 +77,23 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private void CmdListenerMukVaporizerReply03OnDataReceived(IList<byte> bytes, IMukVaporizerFanReply03Telemetry data) {
 			MukInfo3 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
 		}
+
+		private void CmdListenerMukFridgeFanReply03OnDataReceived(IList<byte> bytes, IMukFridgeFanReply03Data data) {
+			MukInfo4 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+		}
+
+		private void CmdListenerMukAirExhausterReply03OnDataReceived(IList<byte> bytes, IMukAirExhausterReply03Data data) {
+			MukInfo6 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+		}
+
+		private void CmdListenerMukFlapReturnAirReply03OnDataReceived(IList<byte> bytes, IMukFlapReturnAirReply03Telemetry data) {
+			MukInfo7 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+		}
+
+		private void CmdListenerMukFlapWinterSummerReply03OnDataReceived(IList<byte> bytes, IMukFlapWinterSummerReply03Telemetry data) {
+			MukInfo8 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+		}
+
 
 		private void CmdListenerKsmOnDataReceived(IList<byte> bytes, IList<BytesPair> data) {
 			Version = new TextFormatterDotted(UnknownText).Format(data[34]);
