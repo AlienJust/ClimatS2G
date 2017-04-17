@@ -4,7 +4,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.Dat
 		bool InnormalTemperatureValueCircuit1 { get; }
 		bool InnormalPressureValueCircuit2 { get; }
 		bool InnormalTemperatureValueCircuit2 { get; }
-
+		/// <summary>
+		/// Инверсная работа привода заслонки
+		/// </summary>
+		bool FlapMotorWorkInversed { get; }
 		bool OsShowsFlapDoesNotReachLimitPositions { get; }
 		bool OsShowsFlapDoesNotReach50Percent { get; }
 	}

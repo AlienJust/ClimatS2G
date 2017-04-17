@@ -35,7 +35,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm {
 				, new KsmBitsParameterViewModel(4, "PIC порт B", new TextFormatterBits(UnknownBits)
 					, new List<IKsmBitParameterViewModel> {
 						new KsmBitParameterViewModel(0, "PB.0 = 0: сегмент — мастер, иначе слейв"),
-						new KsmBitParameterViewModel(1, "PB.1 = 0: пожар"),
+						new KsmBitParameterViewModel(1, "PB.1 = 1: пожар"),
 						new KsmBitParameterViewModel(2, "PB.2 = 0: 100% нагрев калорифера 380 в и калорифера 3кВ с включением вентилятора испарителя"),
 						new KsmBitParameterViewModel(3, "PB.3 = 0: 50 % нагрев 3 кВ калорифера"),
 						new KsmBitParameterViewModel(4, "PB.4 = 0: 100% расход вентилятора испарителя"),
