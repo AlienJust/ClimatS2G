@@ -174,7 +174,7 @@
 				<ColumnDefinition Width="3*"/>
 				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="Вер. ПО МУК заслонки наружного воздуха"/>
+			<TextBlock Text="Вер. ПО МУК заслонки рециркуляционного воздуха"/>
 			<TextBlock Grid.Column="1" Text="{Binding Path=FirmwareBuildNumber, Mode=OneTime}"/>
 		</Grid>
 

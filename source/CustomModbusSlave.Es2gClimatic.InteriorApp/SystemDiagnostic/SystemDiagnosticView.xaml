@@ -4,9 +4,13 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
 	mc:Ignorable="d"
 	d:DesignHeight="200"
 	d:DesignWidth="300">
+	<UserControl.Resources>
+		<converters:ColorsEnumToColorConverter x:Key="ColorConverter"/>
+	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
@@ -40,7 +44,7 @@
 			<TextBlock
 				Text="{Binding Path=Version, Mode=OneWay}" />
 		</StackPanel>
-		
+
 		<StackPanel
 			Grid.Row="1"
 			Grid.Column="0"
@@ -51,11 +55,23 @@
 			<TextBlock
 				Text="{Binding Path=WorkStage, Mode=OneWay}" />
 		</StackPanel>
-		
+
 		<StackPanel
 			Grid.Row="2"
 			Grid.Column="0"
 			Orientation="Horizontal">
+			<StackPanel.Background>
+				<LinearGradientBrush
+					StartPoint="0,0"
+					EndPoint="1,0">
+					<GradientStop
+						Offset="1"
+						Color="Transparent" />
+					<GradientStop
+						Offset="0"
+						Color="{Binding Path=MukInfoColor2, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+				</LinearGradientBrush>
+			</StackPanel.Background>
 			<TextBlock
 				Text="МУК №2: " />
 			<TextBlock
@@ -65,6 +81,18 @@
 			Grid.Row="2"
 			Grid.Column="1"
 			Orientation="Horizontal">
+			<StackPanel.Background>
+				<LinearGradientBrush
+					StartPoint="0,0"
+					EndPoint="1,0">
+					<GradientStop
+						Offset="1"
+						Color="Transparent" />
+					<GradientStop
+						Offset="0"
+						Color="{Binding Path=MukInfoColor3, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+				</LinearGradientBrush>
+			</StackPanel.Background>
 			<TextBlock
 				Text="МУК №3: " />
 			<TextBlock
@@ -74,16 +102,40 @@
 			Grid.Row="2"
 			Grid.Column="2"
 			Orientation="Horizontal">
+			<StackPanel.Background>
+				<LinearGradientBrush
+					StartPoint="0,0"
+					EndPoint="1,0">
+					<GradientStop
+						Offset="1"
+						Color="Transparent" />
+					<GradientStop
+						Offset="0"
+						Color="{Binding Path=MukInfoColor4, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+				</LinearGradientBrush>
+			</StackPanel.Background>
 			<TextBlock
 				Text="МУК №4: " />
 			<TextBlock
 				Text="{Binding Path=MukInfo4, Mode=OneWay}" />
 		</StackPanel>
-		
+
 		<StackPanel
 			Grid.Row="3"
 			Grid.Column="0"
 			Orientation="Horizontal">
+			<StackPanel.Background>
+				<LinearGradientBrush
+					StartPoint="0,0"
+					EndPoint="1,0">
+					<GradientStop
+						Offset="1"
+						Color="Transparent" />
+					<GradientStop
+						Offset="0"
+						Color="{Binding Path=MukInfoColor6, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+				</LinearGradientBrush>
+			</StackPanel.Background>
 			<TextBlock
 				Text="МУК №6: " />
 			<TextBlock
@@ -93,6 +145,18 @@
 			Grid.Row="3"
 			Grid.Column="1"
 			Orientation="Horizontal">
+			<StackPanel.Background>
+				<LinearGradientBrush
+					StartPoint="0,0"
+					EndPoint="1,0">
+					<GradientStop
+						Offset="1"
+						Color="Transparent" />
+					<GradientStop
+						Offset="0"
+						Color="{Binding Path=MukInfoColor7, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+				</LinearGradientBrush>
+			</StackPanel.Background>
 			<TextBlock
 				Text="МУК №7: " />
 			<TextBlock
@@ -102,6 +166,18 @@
 			Grid.Row="3"
 			Grid.Column="2"
 			Orientation="Horizontal">
+			<StackPanel.Background>
+				<LinearGradientBrush
+					StartPoint="0,0"
+					EndPoint="1,0">
+					<GradientStop
+						Offset="1"
+						Color="Transparent" />
+					<GradientStop
+						Offset="0"
+						Color="{Binding Path=MukInfoColor8, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+				</LinearGradientBrush>
+			</StackPanel.Background>
 			<TextBlock
 				Text="МУК №8: " />
 			<TextBlock

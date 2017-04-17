@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using AlienJust.Adaptation.WindowsPresentation.Converters;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
+using AlienJust.Support.Numeric.Bits;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.DataModel.Contracts;
@@ -17,6 +19,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 	class SystemDiagnosticViewModel : ViewModelBase {
 		private const string UnknownText = "Неизвестно";
 		private const string NoLinkText = "Нет связи";
+
+		private const Colors DefaultColor = Colors.Transparent;
+		private const Colors NoLinkColor = Colors.Firebrick;
+		private const Colors OkLinkColor = Colors.LimeGreen;
+
 		private readonly IThreadNotifier _uiNotifier;
 		private readonly ICmdListener<IMukFlapReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
 		private readonly ICmdListener<IMukVaporizerFanReply03Telemetry> _cmdListenerMukVaporizerReply03;
@@ -30,12 +37,24 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private string _segmentType;
 		private string _version;
 		private string _workStage;
+
 		private string _mukInfo2;
+		private Colors _mukInfoColor2;
+
 		private string _mukInfo3;
+		private Colors _mukInfoColor3;
+
 		private string _mukInfo4;
+		private Colors _mukInfoColor4;
+
 		private string _mukInfo6;
+		private Colors _mukInfoColor6;
+
 		private string _mukInfo7;
+		private Colors _mukInfoColor7;
+
 		private string _mukInfo8;
+		private Colors _mukInfoColor8;
 
 		public SystemDiagnosticViewModel(IThreadNotifier uiNotifier,
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
@@ -71,33 +90,83 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		}
 
 		private void CmdListenerMukFlapOuterAirReply03OnDataReceived(IList<byte> bytes, IMukFlapReply03Telemetry data) {
-			MukInfo2 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+			_uiNotifier.Notify(() => {
+				MukInfo2 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfoColor2 = OkLinkColor;
+			});
 		}
 
 		private void CmdListenerMukVaporizerReply03OnDataReceived(IList<byte> bytes, IMukVaporizerFanReply03Telemetry data) {
-			MukInfo3 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+			_uiNotifier.Notify(() => {
+				MukInfo3 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfoColor3 = OkLinkColor;
+			});
 		}
 
 		private void CmdListenerMukFridgeFanReply03OnDataReceived(IList<byte> bytes, IMukFridgeFanReply03Data data) {
-			MukInfo4 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+			_uiNotifier.Notify(() => {
+				MukInfo4 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfoColor4 = OkLinkColor;
+			});
 		}
 
 		private void CmdListenerMukAirExhausterReply03OnDataReceived(IList<byte> bytes, IMukAirExhausterReply03Data data) {
-			MukInfo6 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+			_uiNotifier.Notify(() => {
+				MukInfo6 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfoColor6 = OkLinkColor;
+			});
 		}
 
 		private void CmdListenerMukFlapReturnAirReply03OnDataReceived(IList<byte> bytes, IMukFlapReturnAirReply03Telemetry data) {
-			MukInfo7 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+			_uiNotifier.Notify(() => {
+				MukInfo7 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfoColor7 = OkLinkColor;
+			});
 		}
 
 		private void CmdListenerMukFlapWinterSummerReply03OnDataReceived(IList<byte> bytes, IMukFlapWinterSummerReply03Telemetry data) {
-			MukInfo8 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+			_uiNotifier.Notify(() => {
+				MukInfo8 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfoColor8 = OkLinkColor;
+			});
 		}
 
 
 		private void CmdListenerKsmOnDataReceived(IList<byte> bytes, IList<BytesPair> data) {
+			_uiNotifier.Notify(()=>{
 			Version = new TextFormatterDotted(UnknownText).Format(data[34]);
 			WorkStage = new TextFormatterWorkStage().Format(data[8]);
+
+			if (data[22].HighFirstUnsignedValue.GetBit(0)) {
+				MukInfo2 = NoLinkText;
+				MukInfoColor2 = NoLinkColor;
+			}
+
+			if (data[22].HighFirstUnsignedValue.GetBit(2)) {
+				MukInfo3 = NoLinkText;
+				MukInfoColor3 = NoLinkColor;
+			}
+
+			if (data[22].HighFirstUnsignedValue.GetBit(4)) {
+				MukInfo4 = NoLinkText;
+				MukInfoColor4 = NoLinkColor;
+			}
+
+			if (data[22].HighFirstUnsignedValue.GetBit(6)) {
+				MukInfo6 = NoLinkText;
+				MukInfoColor6 = NoLinkColor;
+			}
+
+			if (data[23].HighFirstUnsignedValue.GetBit(0)) {
+				MukInfo7 = NoLinkText;
+				MukInfoColor7 = NoLinkColor;
+			}
+
+			if (data[23].HighFirstUnsignedValue.GetBit(2)) {
+				MukInfo8 = NoLinkText;
+				MukInfoColor8 = NoLinkColor;
+			}
+			});
 		}
 
 		private void CmdListenerMukVaporizerRequest16DataReceived(IList<byte> bytes, IMukVaporizerRequest16InteriorData data) {
@@ -146,6 +215,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		public Colors MukInfoColor2 {
+			get { return _mukInfoColor2; }
+			set {
+				if (_mukInfoColor2 != value) {
+					_mukInfoColor2 = value;
+					RaisePropertyChanged(() => MukInfoColor2);
+				}
+			}
+		}
+
 
 		public string MukInfo3 {
 			get { return _mukInfo3; }
@@ -156,6 +235,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		public Colors MukInfoColor3 {
+			get { return _mukInfoColor3; }
+			set {
+				if (_mukInfoColor3 != value) {
+					_mukInfoColor3 = value;
+					RaisePropertyChanged(() => MukInfoColor3);
+				}
+			}
+		}
+
 
 		public string MukInfo4 {
 			get { return _mukInfo4; }
@@ -166,6 +255,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		public Colors MukInfoColor4 {
+			get { return _mukInfoColor4; }
+			set {
+				if (_mukInfoColor4 != value) {
+					_mukInfoColor4 = value;
+					RaisePropertyChanged(() => MukInfoColor4);
+				}
+			}
+		}
+
 
 		public string MukInfo6 {
 			get { return _mukInfo6; }
@@ -176,9 +275,19 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		public Colors MukInfoColor6 {
+			get { return _mukInfoColor6; }
+			set {
+				if (_mukInfoColor6 != value) {
+					_mukInfoColor6 = value;
+					RaisePropertyChanged(() => MukInfoColor6);
+				}
+			}
+		}
+
 
 		public string MukInfo7 {
-			get { return _mukInfo3; }
+			get { return _mukInfo7; }
 			set {
 				if (_mukInfo7 != value) {
 					_mukInfo7 = value;
@@ -186,6 +295,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		public Colors MukInfoColor7 {
+			get { return _mukInfoColor7; }
+			set {
+				if (_mukInfoColor7 != value) {
+					_mukInfoColor7 = value;
+					RaisePropertyChanged(() => MukInfoColor7);
+				}
+			}
+		}
+
 		public string MukInfo8 {
 			get { return _mukInfo8; }
 			set {
@@ -195,18 +314,40 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		public Colors MukInfoColor8 {
+			get { return _mukInfoColor8; }
+			set {
+				if (_mukInfoColor8 != value) {
+					_mukInfoColor8 = value;
+					RaisePropertyChanged(() => MukInfoColor8);
+				}
+			}
+		}
+
 
 
 		void ResetVmPropsToDefaultValues() {
 			SegmentType = UnknownText;
 			Version = UnknownText;
 			WorkStage = UnknownText;
+
 			MukInfo2 = NoLinkText;
+			MukInfoColor2 = DefaultColor;
+
 			MukInfo3 = NoLinkText;
+			MukInfoColor3 = DefaultColor;
+
 			MukInfo4 = NoLinkText;
+			MukInfoColor4 = DefaultColor;
+
 			MukInfo6 = NoLinkText;
+			MukInfoColor6 = DefaultColor;
+
 			MukInfo7 = NoLinkText;
+			MukInfoColor7 = DefaultColor;
+
 			MukInfo8 = NoLinkText;
+			MukInfoColor8 = DefaultColor;
 		}
 	}
 }
