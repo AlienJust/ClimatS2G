@@ -1,6 +1,5 @@
 using AlienJust.Support.Collections;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
-using CustomModbusSlave.MicroclimatEs2gApp;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters {
 	public class TextFormatterSensor : ITextFormatter<BytesPair?> {
@@ -27,6 +26,5 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters {
 				return _noLinkFormat;
 			return sensorIndication.Indication.ToString(_format);
 		}
-		//SensorIndicationDoubleBasedOnBytesPair
 	}
 }

@@ -6,7 +6,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {
 		
 		private readonly BytesPair _noLinkCode;
 		private readonly BytesPair _value;
-		private T _indication;
 
 		protected SensorIndicationBytesPairCheck(BytesPair value, BytesPair noLinkCode) {
 			_value = value;
@@ -19,9 +18,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {
 			get {
 				if (NoLinkWithSensor)
 					throw new Exception(SensorIndicationExt.NoLinkText);
-				return _indication;
+				return GetIndiction();
 			}
-			set { _indication = value; }
 		}
 
 		protected abstract T GetIndiction();
@@ -29,7 +27,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {
 		public string ToString(Func<T, string> formatter) {
 			if (NoLinkWithSensor)
 				return SensorIndicationExt.NoLinkText;
-			return formatter(_indication);
+			return formatter(GetIndiction());
 		}
 	}
 }
