@@ -16,7 +16,7 @@
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="ШИМ обогрев"/>
+			<TextBlock Text="ШИМ вентилятор"/>
 			<TextBlock Grid.Column="1" Text="{Binding Path=HeatPwm, Mode=OneTime}" TextAlignment="Right"/>
 		</Grid>
 

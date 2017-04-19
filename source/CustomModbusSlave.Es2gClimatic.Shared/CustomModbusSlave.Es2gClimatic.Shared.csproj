@@ -125,6 +125,29 @@
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
     <Compile Include="CmdListenerBase.cs" />
+    <Compile Include="MukFanCondenser\Request16\CmdListenerMukCondenserFanRequest16.cs" />
+    <Compile Include="MukFanCondenser\Request16\IMukCondenserWorkmodeCommandFromKsm.cs" />
+    <Compile Include="MukFanCondenser\Request16\IMukCondenserRequest16Data.cs" />
+    <Compile Include="MukFanCondenser\Request16\MukCondenserWorkmodeCommandFromKsmSimple.cs" />
+    <Compile Include="MukFanCondenser\Request16\MukCondenserWorkmodeCommandFromKsmView.xaml.cs">
+      <DependentUpon>MukCondenserWorkmodeCommandFromKsmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFanCondenser\Request16\MukCondenserMukCondenserRequest16DataSimple.cs" />
+    <Compile Include="MukFanCondenser\Request16\MukCondenserRequest16DataBuilder.cs" />
+    <Compile Include="MukFanCondenser\Request16\MukCondenserRequest16DataView.xaml.cs">
+      <DependentUpon>MukCondenserRequest16DataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFanCondenser\CmdListenerMukCondenserFanReply03.cs" />
+    <Compile Include="MukFanCondenser\IMukCondensorFanReply03Data.cs" />
+    <Compile Include="MukFanCondenser\MukFridgeFanDataView.xaml.cs">
+      <DependentUpon>MukFridgeFanDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFanCondenser\MukFridgeFanDataViewModel.cs" />
+    <Compile Include="MukFanCondenser\MukFridgeFanReply03DataBuilder.cs" />
+    <Compile Include="MukFanCondenser\SetParameters\MukFridgeSetParamsView.xaml.cs">
+      <DependentUpon>MukFridgeSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFanCondenser\SetParameters\MukFridgeSetParamsViewModel.cs" />
     <Compile Include="SensorIndications\SensorIndicationExt.cs" />
     <Compile Include="SetParamsAndKsm\CmdListenerKsmParams.cs" />
     <Compile Include="MukVaporizer\Request16\CmdListenerMukVaporizerRequest16.cs" />
@@ -251,6 +274,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MukFanCondenser\Request16\MukCondenserWorkmodeCommandFromKsmView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFanCondenser\Request16\MukCondenserRequest16DataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MukFlap\Views\MukFlapDiagnostic2View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -260,6 +291,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFlap\Views\OneWireErrorCodeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFanCondenser\MukFridgeFanDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFanCondenser\SetParameters\MukFridgeSetParamsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -318,6 +357,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EvaporatorFan\" />
+    <Folder Include="Muk\Fan\" />
+    <Folder Include="Muk\Flap\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomModbus.Slave.FastReply.Contracts\CustomModbus.Slave.FastReply.Contracts.csproj">

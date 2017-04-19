@@ -1,7 +1,7 @@
 ﻿using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
-	interface IMukFridgeFanReply03Data {
+	public interface IMukCondensorFanReply03Data {
 		ushort FanPwm { get; }
 
 		ISensorIndication<double> CondensingPressure { get; }
@@ -21,7 +21,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 		bool Stage2IsOn { get; }
 	}
 
-	class MukFridgeFanReply03DataSimple : IMukFridgeFanReply03Data {
+	class MukCondensorFanReply03DataSimple : IMukCondensorFanReply03Data {
 		public ushort FanPwm { get; set; }
 		public ISensorIndication<double> CondensingPressure { get; set; }
 		public byte IncomingSignals { get; set; }

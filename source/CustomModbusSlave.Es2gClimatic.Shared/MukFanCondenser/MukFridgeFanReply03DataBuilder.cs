@@ -5,17 +5,17 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
-	class MukFridgeFanReply03DataBuilder : IBuilder<IMukFridgeFanReply03Data> {
+	class MukFridgeFanReply03DataBuilder : IBuilder<IMukCondensorFanReply03Data> {
 		private static readonly BytesPair NoSensor = new BytesPair(0x85, 0x00);
 		private readonly IList<byte> _data;
 		public MukFridgeFanReply03DataBuilder(IList<byte> bytes) {
 			_data = bytes;
 		}
 
-		public IMukFridgeFanReply03Data Build() {
-			return new MukFridgeFanReply03DataSimple {
+		public IMukCondensorFanReply03Data Build() {
+			return new MukCondensorFanReply03DataSimple {
 				FanPwm = new BytesPair(_data[3], _data[4]).HighFirstUnsignedValue,
-				CondensingPressure = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 0.1, 0.0, NoSensor),
+				CondensingPressure = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 1.0, 0.0, NoSensor),
 				IncomingSignals = _data[8],
 				OutgoingSignals = _data[10],
 				AnalogInput = new BytesPair(_data[11], _data[12]).HighFirstUnsignedValue,

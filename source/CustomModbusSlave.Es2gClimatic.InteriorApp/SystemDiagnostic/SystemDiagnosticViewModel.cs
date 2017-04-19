@@ -28,7 +28,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private readonly ICmdListener<IMukFlapReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
 		private readonly ICmdListener<IMukVaporizerFanReply03Telemetry> _cmdListenerMukVaporizerReply03;
 		private readonly ICmdListener<IMukVaporizerRequest16InteriorData> _cmdListenerMukVaporizerRequest16;
-		private readonly ICmdListener<IMukFridgeFanReply03Data> _cmdListenerMukFridgeFanReply03;
+		private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukFridgeFanReply03;
 		private readonly ICmdListener<IMukAirExhausterReply03Data> _cmdListenerMukAirExhausterReply03;
 		private readonly ICmdListener<IMukFlapReturnAirReply03Telemetry> _cmdListenerMukFlapReturnAirReply03;
 		private readonly ICmdListener<IMukFlapWinterSummerReply03Telemetry> _cmdListenerMukFlapWinterSummerReply03;
@@ -60,7 +60,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
 			ICmdListener<IMukVaporizerFanReply03Telemetry> cmdListenerMukVaporizerReply03,
 			ICmdListener<IMukVaporizerRequest16InteriorData> cmdListenerMukVaporizerRequest16,
-			ICmdListener<IMukFridgeFanReply03Data> cmdListenerMukFridgeFanReply03,
+			ICmdListener<IMukCondensorFanReply03Data> cmdListenerMukFridgeFanReply03,
 			ICmdListener<IMukAirExhausterReply03Data> cmdListenerMukAirExhausterReply03,
 			ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03,
 			ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03,
@@ -103,7 +103,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			});
 		}
 
-		private void CmdListenerMukFridgeFanReply03OnDataReceived(IList<byte> bytes, IMukFridgeFanReply03Data data) {
+		private void CmdListenerMukFridgeFanReply03OnDataReceived(IList<byte> bytes, IMukCondensorFanReply03Data data) {
 			_uiNotifier.Notify(() => {
 				MukInfo4 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
 				MukInfoColor4 = OkLinkColor;

@@ -10,7 +10,6 @@ using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 	internal class MukWarmFloorDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;
-		private readonly string _header = "МУК тёплого пола";
 
 		private string _heatingPwm;
 		private string _analogInput;

@@ -1,0 +1,28 @@
+﻿<UserControl
+	x:Class="CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16.MukCondenserWorkmodeCommandFromKsmView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	mc:Ignorable="d"
+	d:DesignHeight="150"
+	d:DesignWidth="400">
+	<UserControl.Resources>
+	</UserControl.Resources>
+	<StackPanel>
+		<CheckBox
+			IsChecked="{Binding Path=RegulatorIsWorking, Mode=OneTime}">БИТ №0: работа (регулятор работает)</CheckBox>
+		<CheckBox
+			IsChecked="{Binding Path=RegulatorIsWorkingParking, Mode=OneTime}">БИТ №1: стоянка (регулятор работает с ограничением D2 ШИМ мах стоянка)</CheckBox>
+		<CheckBox
+			IsChecked="{Binding Path=Washing, Mode=OneTime}">БИТ №3: мойка (ШИМ =0)</CheckBox>
+		<CheckBox
+			IsChecked="{Binding Path=FanSpeedIsMax, Mode=OneTime}">БИТ №4: вент вкл мах (ШИМ мах)</CheckBox>
+		<CheckBox
+			IsChecked="{Binding Path=FanIsOff, Mode=OneTime}">БИТ №5: вент выкл (ШИМ =0)</CheckBox>
+		<CheckBox
+			IsChecked="{Binding Path=ManualMode, Mode=OneTime}">БИТ №6: ручной режим</CheckBox>
+		<CheckBox
+			IsChecked="{Binding Path=ForceTurnOnSecondStageOnly, Mode=OneTime}">БИТ №7: включение только второй ступени принудительно</CheckBox>
+	</StackPanel>
+</UserControl>

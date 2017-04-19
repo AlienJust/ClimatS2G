@@ -32,6 +32,7 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
+using CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
@@ -69,7 +70,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		private readonly ICmdListener<IMukVaporizerFanReply03Telemetry> _cmdListenerMukVaporizerReply03;
 		private readonly ICmdListener<IMukVaporizerRequest16InteriorData> _cmdListenerMukVaporizerRequest16;
 
-		private readonly ICmdListener<IMukFridgeFanReply03Data> _cmdListenerMukFridgeFanReply03;
+		private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukCondenserFanReply03;
+		private readonly ICmdListener<IMukCondenserRequest16Data> _cmdListenerMukCondenserRequest16;
+
 		private readonly ICmdListener<IMukAirExhausterReply03Data> _cmdListenerMukAirExhausterReply03;
 		private readonly ICmdListener<IMukFlapReturnAirReply03Telemetry> _cmdListenerMukFlapReturnAirReply03;
 		private readonly ICmdListener<IMukFlapWinterSummerReply03Telemetry> _cmdListenerMukFlapWinterSummerReply03;
@@ -116,22 +119,28 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_replyGenerator = replyGenerator;
 			_replyAcceptor = replyGenerator;
 
+
 			_cmdListenerMukFlapOuterAirReply03 = new CmdListenerMukFlapOuterAirReply03(2, 3, 47);
 			_cmdListenerMukFlapOuterAirRequest16 = new CmdListenerMukFlapOuterAirRequest16(2, 16, 21);
+
 			_cmdListenerMukVaporizerReply03 = new CmdListenerMukVaporizerReply03(3, 3, 41);
 			_cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
-			_cmdListenerMukFridgeFanReply03 = new CmdListenerMukFridgeFanReply03(4, 3, 29);
+
+			_cmdListenerMukCondenserFanReply03 = new CmdListenerMukCondenserFanReply03(4, 3, 29);
+			_cmdListenerMukCondenserRequest16 = new CmdListenerMukCondenserFanRequest16(4, 16, 15);
+
 			_cmdListenerMukAirExhausterReply03 = new CmdListenerMukAirExhausterReply03(6, 3, 31);
 			_cmdListenerMukFlapReturnAirReply03 = new CmdListenerMukFlapReturnAirReply03(7, 3, 43);
 			_cmdListenerMukFlapWinterSummerReply03 = new CmdListenerMukFlapWinterSummerReply03(8, 3, 47);
 			_cmdListenerKsmParams = new CmdListenerKsmParams(20, 16, 129);
+
 
 			SystemDiagnosticVm = new SystemDiagnosticViewModel(
 				_notifier,
 				_cmdListenerMukFlapOuterAirReply03,
 				_cmdListenerMukVaporizerReply03,
 				_cmdListenerMukVaporizerRequest16,
-				_cmdListenerMukFridgeFanReply03,
+				_cmdListenerMukCondenserFanReply03,
 				_cmdListenerMukAirExhausterReply03,
 				_cmdListenerMukFlapReturnAirReply03,
 				_cmdListenerMukFlapWinterSummerReply03,
@@ -151,7 +160,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 				_cmdListenerMukVaporizerRequest16
 				);
 
-			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukFridgeFanReply03);
+			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukCondenserFanReply03, _cmdListenerMukCondenserRequest16);
 			MukAirExhausterDataVm = new MukAirExhausterDataViewModel(_notifier, _paramSetter, _cmdListenerMukAirExhausterReply03);
 			MukFlapReturnAirDataVm = new MukFlapReturnAirViewModel(_notifier, _paramSetter, _cmdListenerMukFlapReturnAirReply03);
 			MukFlapWinterSummerDataVm = new MukFlapWinterSummerViewModel(_notifier, _paramSetter, _cmdListenerMukFlapWinterSummerReply03);
@@ -194,7 +203,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					var reply = _replyGenerator.GenerateReply();
 					sendAbility.Send(reply);
 				}
-
 				_cmdListenerKsmParams.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes); // TODO: or move it to SerialChannelOnCommandHeared
 			}
 		}
@@ -204,9 +212,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			// TODO: can be indexed for speeding up
 			_cmdListenerMukFlapOuterAirReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerMukFlapOuterAirRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+
 			_cmdListenerMukVaporizerReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerMukVaporizerRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			_cmdListenerMukFridgeFanReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+
+			_cmdListenerMukCondenserFanReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			_cmdListenerMukCondenserRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+
 			_cmdListenerMukAirExhausterReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerMukFlapReturnAirReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerMukFlapWinterSummerReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);

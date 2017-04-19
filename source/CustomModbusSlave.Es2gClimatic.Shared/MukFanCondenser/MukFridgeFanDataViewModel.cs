@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using AlienJust.Support.Numeric.Bits;
 using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
+using CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
-	class MukFridgeFanDataViewModel : ViewModelBase {
+	public class MukFridgeFanDataViewModel : ViewModelBase {
 		
 		private readonly IThreadNotifier _notifier;
-		private readonly ICmdListener<IMukFridgeFanReply03Data> _cmdListenerMukFridgeFanReply03;
-		//private readonly string _header = "МУК вентилятора конденсатора";
+		private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukFridgeFanReply03;
+		private readonly ICmdListener<IMukCondenserRequest16Data> _cmdListenerMukCondenserRequest16;
+
 		private string _fanPwm;
 		private string _condensingPressure;
 		private string _incomingSignals;
@@ -26,22 +27,36 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 		private string _diagnostic2;
 		private string _fanSpeed;
 		private string _firmwareBuildNumber;
-		private bool _stage1IsOn;
-		private bool _stage2IsOn;
 
+		// 03
 		private string _reply;
-		private IMukFridgeFanReply03Data _data;
+		private IMukCondensorFanReply03Data _data;
+		
+		// 16
+		private IMukCondenserRequest16Data _request16Data;
+		public AnyCommandPartViewModel Request16DataText { get; }
+
+		// set params
 		public MukFridgeSetParamsViewModel MukFridgeSetParamsVm { get; }
 
-		public MukFridgeFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter, ICmdListener<IMukFridgeFanReply03Data> cmdListenerMukFridgeFanReply03) {
+		public MukFridgeFanDataViewModel(
+			IThreadNotifier notifier, 
+			IParameterSetter parameterSetter, 
+			ICmdListener<IMukCondensorFanReply03Data> cmdListenerMukFridgeFanReply03,
+			ICmdListener<IMukCondenserRequest16Data> cmdListenerMukCondenserRequest16) {
+
 			_notifier = notifier;
 			_cmdListenerMukFridgeFanReply03 = cmdListenerMukFridgeFanReply03;
+			_cmdListenerMukCondenserRequest16 = cmdListenerMukCondenserRequest16;
+
+			Request16DataText = new AnyCommandPartViewModel();
 			MukFridgeSetParamsVm = new MukFridgeSetParamsViewModel(notifier, parameterSetter);
 			
 			_cmdListenerMukFridgeFanReply03.DataReceived += CmdListenerMukFridgeFanReply03OnDataReceived;
+			_cmdListenerMukCondenserRequest16.DataReceived += CmdListenerMukCondenserRequest16OnDataReceived;
 		}
 
-		private void CmdListenerMukFridgeFanReply03OnDataReceived(IList<byte> bytes, IMukFridgeFanReply03Data data) {
+		private void CmdListenerMukFridgeFanReply03OnDataReceived(IList<byte> bytes, IMukCondensorFanReply03Data data) {
 			_notifier.Notify(() => {
 				_data = data;
 				FanPwm = data.FanPwm.ToString("f2");
@@ -51,7 +66,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 				IncomingSignals = data.IncomingSignals.ToString("X2");
 				OutgoingSignals = data.OutgoingSignals.ToString("X2");
 
-				AnalogInput = data.AnalogInput.ToString("X4");
+				AnalogInput = data.AnalogInput.ToString();
 				AutomaticModeStage = data.AutomaticModeStage.ToString();
 				WorkMode = data.WorkMode.ToString();
 				Diagnostic1 = data.Diagnostic1.ToString("X4");
@@ -67,7 +82,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 			});
 		}
 
-		
+		private void CmdListenerMukCondenserRequest16OnDataReceived(IList<byte> bytes, IMukCondenserRequest16Data data) {
+			_notifier.Notify(() => {
+				Request16DataText.Update(bytes);
+				Request16Data = data;
+			});
+		}
+
 		public string FanPwm {
 			get { return _fanPwm; }
 			set {
@@ -163,6 +184,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 				if (_reply != value) {
 					_reply = value;
 					RaisePropertyChanged(() => Reply);
+				}
+			}
+		}
+
+		public IMukCondenserRequest16Data Request16Data {
+			get { return _request16Data; }
+			set {
+				if (_request16Data != value) {
+					_request16Data = value;
+					RaisePropertyChanged(() => Request16Data);
 				}
 			}
 		}

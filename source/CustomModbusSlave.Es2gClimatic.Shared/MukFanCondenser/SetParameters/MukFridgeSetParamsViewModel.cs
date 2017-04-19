@@ -4,8 +4,8 @@ using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFridge.SetParameters {
-	class MukFridgeSetParamsViewModel : ViewModelBase {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge.SetParameters {
+	public class MukFridgeSetParamsViewModel : ViewModelBase {
 		public SettableParameterViewModel SettableParam415 { get; }
 		public SettableParameterViewModel SettableParam416 { get; }
 		public SettableParameterViewModel SettableParam417 { get; }

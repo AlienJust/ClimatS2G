@@ -142,9 +142,6 @@
     <Compile Include="MukFlapOuterAir\Request16\CmdListenerMukFlapOuterAirRequest16.cs" />
     <Compile Include="MukFlapReturnAir\CmdListenerMukFlapReturnAirReply03.cs" />
     <Compile Include="MukFlapWinterSummer\CmdListenerMukFlapReturnAirReply03.cs" />
-    <Compile Include="MukFridge\CmdListenerMukFridgeFanReply03.cs" />
-    <Compile Include="MukFridge\IMukFridgeFanReply03Data.cs" />
-    <Compile Include="MukFridge\MukFridgeFanReply03DataBuilder.cs" />
     <Compile Include="MukVaporizerFan\BytesPairNullableToStringThroughOneWireConverter.cs" />
     <Compile Include="MukVaporizerFan\CmdListenerMukVaporizerReply03.cs" />
     <Compile Include="MukVaporizerFan\IMukVaporizerFanReply03Telemetry.cs" />
@@ -162,10 +159,6 @@
       <DependentUpon>MukFlapWinterSummerSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapWinterSummer\SetParameters\MukFlapWinterSummerSetParamsViewModel.cs" />
-    <Compile Include="MukFridge\SetParameters\MukFridgeSetParamsView.xaml.cs">
-      <DependentUpon>MukFridgeSetParamsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFridge\SetParameters\MukFridgeSetParamsViewModel.cs" />
     <Compile Include="MukVaporizerFan\SetParameters\MukVaporizerSetParamsView.xaml.cs">
       <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
     </Compile>
@@ -377,10 +370,6 @@
     <Compile Include="MukFlapReturnAir\Views\MukFlapReturnAirReply03TelemetryView.xaml.cs">
       <DependentUpon>MukFlapReturnAirReply03TelemetryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFridge\MukFridgeFanDataView.xaml.cs">
-      <DependentUpon>MukFridgeFanDataView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFridge\MukFridgeFanDataViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -463,14 +452,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFlapReturnAir\Views\MukFlapReturnAirReply03TelemetryView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukFridge\MukFridgeFanDataView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukFridge\SetParameters\MukFridgeSetParamsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

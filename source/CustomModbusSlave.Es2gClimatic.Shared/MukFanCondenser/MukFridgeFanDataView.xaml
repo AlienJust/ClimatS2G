@@ -5,9 +5,10 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:setParameters="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge.SetParameters"
-	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+	xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16"
 	mc:Ignorable="d"
-	d:DesignHeight="480"
+	d:DesignHeight="880"
 	d:DesignWidth="300">
 	<StackPanel
 		Orientation="Vertical">
@@ -65,7 +66,7 @@
 			<TextBlock
 				Grid.Row="1"
 				Grid.Column="0"
-				Text="Давление конденсации " />
+				Text="Давление конденсации, атм" />
 			<TextBlock
 				Grid.Row="1"
 				Grid.Column="1"
@@ -108,7 +109,7 @@
 			<TextBlock
 				Grid.Row="6"
 				Grid.Column="0"
-				Text="Аналоговый вход" />
+				Text="Аналоговый вход, дискрет" />
 			<TextBlock
 				Grid.Row="6"
 				Grid.Column="1"
@@ -175,6 +176,14 @@
 				Text="{Binding Path=Reply, Mode=OneWay}"
 				IsReadOnly="True" />
 		</Grid>
+		<TextBlock
+			Text="Запрос, код команды 16 dec:"
+			FontWeight="Bold"
+			TextDecorations="Underline" />
+		<request16:MukCondenserRequest16DataView
+			DataContext="{Binding Path=Request16Data, Mode=OneWay}" />
+		<shared:AnyCommandPartView
+			DataContext="{Binding Path=Request16DataText, Mode=OneTime}" />
 		<TextBlock
 			Text="Уставка параметров:"
 			FontWeight="Bold"

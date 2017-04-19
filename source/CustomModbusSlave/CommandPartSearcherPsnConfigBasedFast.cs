@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AlienJust.Support.Loggers;
-using AlienJust.Support.Loggers.Contracts;
-using AlienJust.Support.Text;
 using CustomModbusSlave.Contracts;
 using DataAbstractionLevel.Low.PsnConfig.Contracts;
 using DataAbstractionLevel.Low.PsnData;

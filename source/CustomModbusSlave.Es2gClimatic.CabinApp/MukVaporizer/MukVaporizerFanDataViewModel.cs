@@ -17,8 +17,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 	/// </summary>
 	class MukVaporizerFanDataViewModel : ViewModelBase, ICommandListener {
 		private readonly IThreadNotifier _notifier;
-		private readonly CmdListenerMukVaporizerRequest16 _cmdListenerMukVaporizerRequest16;
-		private readonly string _header = "МУК вентилятора испарителя";
+		private readonly ICmdListener<IMukVaporizerRequest16InteriorData> _cmdListenerMukVaporizerRequest16;
 		private string _fanPwm;
 		private string _temperatureAddress1;
 		private string _temperatureAddress2;
@@ -40,12 +39,13 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukVaporizer {
 		private string _automaticModeStage;
 
 		private IMukVaporizerRequest16InteriorData _request16Telemetry;
-		public MukVaporizerFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter, CmdListenerMukVaporizerRequest16 cmdListenerMukVaporizerRequest16) {
+		public MukVaporizerFanDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter, ICmdListener<IMukVaporizerRequest16InteriorData> cmdListenerMukVaporizerRequest16) {
 			_notifier = notifier;
 			_cmdListenerMukVaporizerRequest16 = cmdListenerMukVaporizerRequest16;
-			_cmdListenerMukVaporizerRequest16.DataReceived += CmdListenerMukVaporizerRequest16OnDataReceived;
 			Request16TelemetryText = new AnyCommandPartViewModel();
 			MukVaporizerSetParamsVm = new MukVaporizerSetParamsViewModel(notifier, parameterSetter);
+
+			_cmdListenerMukVaporizerRequest16.DataReceived += CmdListenerMukVaporizerRequest16OnDataReceived;
 		}
 
 		private void CmdListenerMukVaporizerRequest16OnDataReceived(IList<byte> bytes, IMukVaporizerRequest16InteriorData data) {
