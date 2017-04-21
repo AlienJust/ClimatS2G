@@ -2,7 +2,7 @@
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.View {
 	/// <summary>
-	/// Interaction logic for AirExhausterReply03DataView.xaml
+	/// Interaction logic for AirExhausterRequest16DataView.xaml
 	/// </summary>
 	public partial class AirExhausterReply03DataView : UserControl {
 		public AirExhausterReply03DataView() {

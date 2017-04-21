@@ -134,6 +134,17 @@
     </ApplicationDefinition>
     <Compile Include="ModbusRtuParamReceiver.cs" />
     <Compile Include="MukAirExhauster\CmdListenerMukAirExhausterReply03.cs" />
+    <Compile Include="MukAirExhauster\Request16\AirExhausterRequest16DataView.xaml.cs">
+      <DependentUpon>AirExhausterRequest16DataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukAirExhauster\Request16\AttributesRegistryByteSimple.cs" />
+    <Compile Include="MukAirExhauster\Request16\CmdListenerMukAirExhausterRequest16.cs" />
+    <Compile Include="MukAirExhauster\Request16\MukFanAirExhausterRequest16DataBuilder.cs" />
+    <Compile Include="MukAirExhauster\Request16\IAttributesRegistryByte.cs" />
+    <Compile Include="MukAirExhauster\Request16\IMukFanAirExhausterRequest16Data.cs" />
+    <Compile Include="MukAirExhauster\Request16\IMukFanAirExhausterWorkmodeCommandFromKsm.cs" />
+    <Compile Include="MukAirExhauster\Request16\MukFanAirExhausterRequest16DataSimple.cs" />
+    <Compile Include="MukAirExhauster\Request16\MukFanAirExhausterWorkmodeCommandFromKsmSimple.cs" />
     <Compile Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsView.xaml.cs">
       <DependentUpon>MukAirExhausterSetParamsView.xaml</DependentUpon>
     </Compile>
@@ -375,6 +386,10 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MukAirExhauster\Request16\AirExhausterRequest16DataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MukAirExhauster\SetParameters\MukAirExhausterSetParamsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
