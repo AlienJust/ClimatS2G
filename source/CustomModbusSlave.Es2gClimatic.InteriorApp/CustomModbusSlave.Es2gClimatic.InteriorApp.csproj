@@ -152,6 +152,7 @@
     <Compile Include="MukFlapOuterAir\Reply03\CmdListenerMukFlapOuterAirReply03.cs" />
     <Compile Include="MukFlapOuterAir\Request16\CmdListenerMukFlapOuterAirRequest16.cs" />
     <Compile Include="MukFlapReturnAir\CmdListenerMukFlapReturnAirReply03.cs" />
+    <Compile Include="MukFlapReturnAir\Request16\IMukFanAirExhausterRequest16Data.cs" />
     <Compile Include="MukFlapWinterSummer\CmdListenerMukFlapReturnAirReply03.cs" />
     <Compile Include="MukVaporizerFan\BytesPairNullableToStringThroughOneWireConverter.cs" />
     <Compile Include="MukVaporizerFan\CmdListenerMukVaporizerReply03.cs" />

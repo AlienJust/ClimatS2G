@@ -16,8 +16,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
 			return new MukCondensorFanReply03DataSimple {
 				FanPwm = new BytesPair(_data[3], _data[4]).HighFirstUnsignedValue,
 				CondensingPressure = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 1.0, 0.0, NoSensor),
-				IncomingSignals = _data[8],
-				OutgoingSignals = _data[10],
+				IncomingSignals = _data[8], // low byte
+				OutgoingSignals = _data[10], // low byte
 				AnalogInput = new BytesPair(_data[11], _data[12]).HighFirstUnsignedValue,
 				AutomaticModeStage = new BytesPair(_data[13], _data[14]).HighFirstUnsignedValue,
 				WorkMode = new BytesPair(_data[15], _data[16]).HighFirstUnsignedValue,

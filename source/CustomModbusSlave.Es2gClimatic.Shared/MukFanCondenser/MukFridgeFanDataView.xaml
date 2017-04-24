@@ -50,7 +50,8 @@
 					Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="2*"/>
+				<ColumnDefinition
+					Width="2*" />
 				<ColumnDefinition
 					Width="1*" />
 			</Grid.ColumnDefinitions>
@@ -96,7 +97,9 @@
 			<CheckBox
 				Grid.Row="4"
 				Grid.Column="1"
-				IsChecked="{Binding Path=Stage1IsOn, Mode=OneWay}" />
+				IsChecked="{Binding Path=Stage1IsOn, Mode=OneWay}"
+				IsHitTestVisible="False" />
+
 			<TextBlock
 				Grid.Row="5"
 				Grid.Column="0"
@@ -104,8 +107,9 @@
 			<CheckBox
 				Grid.Row="5"
 				Grid.Column="1"
-				IsChecked="{Binding Path=Stage1IsOn, Mode=OneWay}" />
-			
+				IsChecked="{Binding Path=Stage2IsOn, Mode=OneWay}"
+				IsHitTestVisible="False" />
+
 			<TextBlock
 				Grid.Row="6"
 				Grid.Column="0"
