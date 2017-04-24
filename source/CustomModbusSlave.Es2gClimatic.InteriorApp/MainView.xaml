@@ -10,7 +10,6 @@
 	xmlns:ksm1="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm"
 	xmlns:mukAirExhausterView="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.View"
 	xmlns:mukFlapOuterAirReply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03"
-	xmlns:mukFlapReturnAirViews="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.Views"
 	xmlns:mukFlapWinterSummerViews="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.Views"
 	xmlns:mukVaporizerFan="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan"
 	xmlns:progamLog="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;assembly=CustomModbusSlave.Es2gClimatic.Shared"
@@ -18,6 +17,7 @@
 	xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 	xmlns:systemDiagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic"
 	xmlns:mukFridge="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:mukFlapAirRecycle="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle"
 	Title="Технический абонент, салон"
 	Height="480"
 	Width="640"
@@ -309,7 +309,7 @@
 				Header="МУК заслонки рециркуляц. воздуха"
 				Style="{StaticResource AzureTabItem}">
 				<ScrollViewer>
-					<mukFlapReturnAirViews:MukFlapReturnAirDataView
+					<mukFlapAirRecycle:MukFlapReturnAirDataView
 						DataContext="{Binding Path=MukFlapReturnAirDataVm, Mode=OneTime}" />
 				</ScrollViewer>
 			</TabItem>

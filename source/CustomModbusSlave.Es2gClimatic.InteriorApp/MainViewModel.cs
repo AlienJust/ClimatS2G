@@ -19,12 +19,14 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.ViewModel;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Request16;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Request16;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapReturnAir.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
@@ -39,6 +41,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.UniversalParams;
 using ParamCentric.Common.Contracts;
+using CmdListenerMukAirExhausterRequest16 = CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Request16.CmdListenerMukAirExhausterRequest16;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 	class MainViewModel : ViewModelBase, IUserInterfaceRoot {
@@ -78,7 +81,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		private readonly ICmdListener<IMukFanAirExhausterRequest16Data> _cmdListenerMukAirExhausterRequest16;
 
 		private readonly ICmdListener<IMukFlapReturnAirReply03Telemetry> _cmdListenerMukFlapReturnAirReply03;
+		private readonly ICmdListener<IMukFlapAirRecycleRequest16Data> _cmdListenerMukFlapAirRecycleRequest16;
+
 		private readonly ICmdListener<IMukFlapWinterSummerReply03Telemetry> _cmdListenerMukFlapWinterSummerReply03;
+		private readonly ICmdListener<IMukFlapAirWinterSummerRequest16Data> _cmdListenerMukAirFlapWinterSummerRequest16;
 
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsmParams;
 
@@ -136,7 +142,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_cmdListenerMukAirExhausterRequest16 = new CmdListenerMukAirExhausterRequest16(6, 16, 21);
 
 			_cmdListenerMukFlapReturnAirReply03 = new CmdListenerMukFlapReturnAirReply03(7, 3, 43);
+			_cmdListenerMukFlapAirRecycleRequest16 = new CmdListenerMukFlapAirRecycleRequest16(7, 16, 21);
+
 			_cmdListenerMukFlapWinterSummerReply03 = new CmdListenerMukFlapWinterSummerReply03(8, 3, 47);
+			_cmdListenerMukAirFlapWinterSummerRequest16 = new CmdListenerMukFlapAirWinterSummerRequest16(8, 16, 21);
+
 			_cmdListenerKsmParams = new CmdListenerKsmParams(20, 16, 129);
 
 
@@ -167,8 +177,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukCondenserFanReply03, _cmdListenerMukCondenserRequest16);
 			MukAirExhausterDataVm = new MukAirExhausterDataViewModel(_notifier, _paramSetter, _cmdListenerMukAirExhausterReply03, _cmdListenerMukAirExhausterRequest16);
-			MukFlapReturnAirDataVm = new MukFlapReturnAirViewModel(_notifier, _paramSetter, _cmdListenerMukFlapReturnAirReply03);
-			MukFlapWinterSummerDataVm = new MukFlapWinterSummerViewModel(_notifier, _paramSetter, _cmdListenerMukFlapWinterSummerReply03);
+			MukFlapReturnAirDataVm = new MukFlapReturnAirViewModel(_notifier, _paramSetter, _cmdListenerMukFlapReturnAirReply03, _cmdListenerMukFlapAirRecycleRequest16);
+			MukFlapWinterSummerDataVm = new MukFlapWinterSummerViewModel(_notifier, _paramSetter, _cmdListenerMukFlapWinterSummerReply03, _cmdListenerMukAirFlapWinterSummerRequest16);
 
 			BsSmDataVm = new BsSmDataViewModel(_notifier);
 			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
@@ -228,7 +238,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_cmdListenerMukAirExhausterRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
 			_cmdListenerMukFlapReturnAirReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			_cmdListenerMukFlapAirRecycleRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+
 			_cmdListenerMukFlapWinterSummerReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			_cmdListenerMukAirFlapWinterSummerRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
 			_rtuParamReceiver.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 

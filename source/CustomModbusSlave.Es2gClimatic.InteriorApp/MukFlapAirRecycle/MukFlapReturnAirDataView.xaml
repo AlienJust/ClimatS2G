@@ -1,0 +1,46 @@
+﻿<UserControl
+	x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.MukFlapReturnAirDataView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03"
+	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Request16"
+	xmlns:setParameters="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.SetParameters"
+	mc:Ignorable="d"
+	d:DesignHeight="1000"
+	d:DesignWidth="300">
+	<StackPanel
+		Orientation="Vertical">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Text="Ответ на команду 3"></TextBlock>
+			<reply03:MukFlapReturnAirReply03TelemetryView
+				Grid.Row="1"
+				DataContext="{Binding Path=Reply03Telemetry, Mode=OneWay}" />
+		</Grid>
+		<shared:AnyCommandPartView
+			DataContext="{Binding Path=Reply03TelemetryText, Mode=OneTime}" />
+		<TextBlock
+			Text="Запрос от КСМ 16 dec:"
+			FontWeight="Bold"
+			TextDecorations="Underline" />
+		<request16:MukFlapAirRecycleRequest16DataView
+			DataContext="{Binding Path=Request16Data, Mode=OneWay}"/>
+			<shared:AnyCommandPartView
+			DataContext="{Binding Path=Request16DataText, Mode=OneTime}" />
+		<TextBlock
+			Text="Уставка параметров:"
+			FontWeight="Bold"
+			TextDecorations="Underline" />
+		<setParameters:MukFlapReturnAirSetParamsView
+			DataContext="{Binding Path=MukFlapReturnAirSetParamsVm, Mode=OneTime}" />
+	</StackPanel>
+</UserControl>
