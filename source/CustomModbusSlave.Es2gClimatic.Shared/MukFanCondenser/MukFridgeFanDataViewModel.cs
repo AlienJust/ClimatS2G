@@ -3,13 +3,14 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge.SetParameters;
-using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
-using CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser {
 	public class MukFridgeFanDataViewModel : ViewModelBase {
 		
 		private readonly IThreadNotifier _notifier;

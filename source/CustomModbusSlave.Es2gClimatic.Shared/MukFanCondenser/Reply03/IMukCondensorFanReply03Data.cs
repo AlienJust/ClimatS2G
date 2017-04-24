@@ -1,6 +1,6 @@
 ﻿using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03 {
 	public interface IMukCondensorFanReply03Data {
 		ushort FanPwm { get; }
 

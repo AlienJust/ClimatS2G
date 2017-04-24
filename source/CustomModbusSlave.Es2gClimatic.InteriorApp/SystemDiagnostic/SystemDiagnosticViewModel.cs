@@ -12,6 +12,7 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.DataModel.C
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan;
 using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 

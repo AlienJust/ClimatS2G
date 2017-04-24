@@ -137,13 +137,13 @@
     <Compile Include="MukFanCondenser\Request16\MukCondenserRequest16DataView.xaml.cs">
       <DependentUpon>MukCondenserRequest16DataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFanCondenser\CmdListenerMukCondenserFanReply03.cs" />
-    <Compile Include="MukFanCondenser\IMukCondensorFanReply03Data.cs" />
+    <Compile Include="MukFanCondenser\Reply03\CmdListenerMukCondenserFanReply03.cs" />
+    <Compile Include="MukFanCondenser\Reply03\IMukCondensorFanReply03Data.cs" />
     <Compile Include="MukFanCondenser\MukFridgeFanDataView.xaml.cs">
       <DependentUpon>MukFridgeFanDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFanCondenser\MukFridgeFanDataViewModel.cs" />
-    <Compile Include="MukFanCondenser\MukFridgeFanReply03DataBuilder.cs" />
+    <Compile Include="MukFanCondenser\Reply03\MukFanCondenserReply03DataBuilder.cs" />
     <Compile Include="MukFanCondenser\SetParameters\MukFridgeSetParamsView.xaml.cs">
       <DependentUpon>MukFridgeSetParamsView.xaml</DependentUpon>
     </Compile>

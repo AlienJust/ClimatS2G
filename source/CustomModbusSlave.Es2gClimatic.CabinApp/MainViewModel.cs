@@ -23,6 +23,8 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
 using CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Numeric.Bits;
-using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge {
-	class MukFridgeFanReply03DataBuilder : IBuilder<IMukCondensorFanReply03Data> {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser {
+	class MukFanCondenserReply03DataBuilder : IBuilder<IMukCondensorFanReply03Data> {
 		private static readonly BytesPair NoSensor = new BytesPair(0x85, 0x00);
 		private readonly IList<byte> _data;
-		public MukFridgeFanReply03DataBuilder(IList<byte> bytes) {
+		public MukFanCondenserReply03DataBuilder(IList<byte> bytes) {
 			_data = bytes;
 		}
 
