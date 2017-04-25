@@ -19,10 +19,12 @@
 	xmlns:mukFridge="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:mukFlapAirRecycle="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle"
 	Title="Технический абонент, салон"
+	TitleCharacterCasing="Normal"
 	Height="480"
 	Width="640"
 	ResizeMode="CanResizeWithGrip"
 	SaveWindowPosition="True"
+	NonActiveWindowTitleBrush="{DynamicResource AccentColorBrush3}"
 	GlowBrush="{DynamicResource AccentColorBrush}"
 	Closing="MetroWindow_Closing"
 	Closed="MetroWindow_Closed">
@@ -212,6 +214,22 @@
 	</controls:MetroWindow.WindowButtonCommands>
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
+			<Button
+				Margin="2,2,2,2"
+				Command="{Binding GetPortsAvailableCommand}"
+				FontWeight="SemiBold"
+				BorderThickness="0"
+				Style="{DynamicResource AccentedSquareButtonStyle}">
+				<Button.ToolTip>
+					<ToolTip>
+						Запись обмена
+					</ToolTip>
+				</Button.ToolTip>
+				<iconPacks:PackIconMaterial
+					Width="Auto"
+					Height="Auto"
+					Kind="Record" />
+			</Button>
 			<StackPanel
 				Orientation="Horizontal">
 				<TextBlock
@@ -266,7 +284,7 @@
 				Header="Диагностика системы"
 				Style="{StaticResource AzureTabItem}">
 				<systemDiagnostic:SystemDiagnosticView
-					DataContext="{Binding Path=SystemDiagnosticVm, Mode=OneTime}"/>
+					DataContext="{Binding Path=SystemDiagnosticVm, Mode=OneTime}" />
 			</TabItem>
 			<TabItem
 				Header="МУК заслонки наружного возудха"
