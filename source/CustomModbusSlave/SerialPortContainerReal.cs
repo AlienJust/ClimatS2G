@@ -20,7 +20,7 @@ namespace CustomModbusSlave {
 			if (_port == null) throw new NullReferenceException("Serial port is null");
 			if (!_port.IsOpen) throw new Exception("Serial port is not opened");
 
-			var extender = new SerialPortExtender(_port, Console.WriteLine);
+			var extender = new SerialPortExtenderNoLog(_port);
 			return extender.ReadBytes(count, timeout, false);
 		}
 
