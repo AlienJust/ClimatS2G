@@ -1,3 +1,4 @@
+using AlienJust.Support.Numeric.Bits;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.SimpleRelease;
 using CustomModbusSlave.Es2gClimatic.Shared;
@@ -10,11 +11,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.Dat
 		}
 
 		public IMukFlapDiagnostic1 Build() {
-			return new MukFlapDiagnostic1(
-				(_absoluteValue & 0x40) == 0x10,
-				(_absoluteValue & 0x40) == 0x40, 
-				(_absoluteValue & 0x80) == 0x80
-				);
+			return new MukFlapDiagnostic1 {
+				NoEmersionControllerAnswer = _absoluteValue.GetBit(4),
+				SensorOneWire1Error = _absoluteValue.GetBit(6),
+				SensorOneWire2Error = _absoluteValue.GetBit(7)
+			};
 		}
 	}
 }
