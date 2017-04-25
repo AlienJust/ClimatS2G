@@ -3,7 +3,7 @@ using CustomModbusSlave.Contracts;
 
 namespace CustomModbusSlave {
 	
-	public class SerialPortContainerRealWithTest : ISerialPortContainer {
+	/*public class SerialPortContainerRealWithTest : ISerialPortContainer {
 		private readonly string _testPortName;
 		private readonly ISerialPortContainer _realPortContainer;
 		private readonly ISerialPortContainer _testContainer;
@@ -18,17 +18,17 @@ namespace CustomModbusSlave {
 			_currentPortConatiner = null;
 		}
 
-		public byte[] ReadBytes(int count, TimeSpan timeout) {
+		public byte[] Read(int count, TimeSpan timeout) {
 			if (_currentPortConatiner == null) throw new NullReferenceException("_currentPortConatiner is null");
-			return _currentPortConatiner.ReadBytes(count, timeout);
+			return _currentPortConatiner.Read(count, timeout);
 		}
 
-		public void CloseCurrentPort() {
-			_currentPortConatiner?.CloseCurrentPort();
+		public void Close() {
+			_currentPortConatiner?.Close();
 		}
 
 		public void SelectPort(string portName, int baudRate) {
-			CloseCurrentPort();
+			Close();
 			_currentPortConatiner = portName != _testPortName ? _realPortContainer : _testContainer;
 			_currentPortConatiner.SelectPort(portName, baudRate);
 		}
@@ -37,5 +37,5 @@ namespace CustomModbusSlave {
 			if (_currentPortConatiner == null) throw new NullReferenceException("_currentPortConatiner is null");
 			_currentPortConatiner.Send(bytes);
 		}
-	}
+	}*/
 }

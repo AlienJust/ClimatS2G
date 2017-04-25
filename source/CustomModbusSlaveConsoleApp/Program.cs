@@ -31,12 +31,11 @@ namespace CustomModbusSlaveConsoleApp
 
 			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-салон.xml")).LoadConfiguration();
 
-			var serialPortContainer = new SerialPortContainerReal();
+			var serialPortContainer = new SerialPortContainerReal(argPortName, argBaudRate);
 			var sch = new SerialChannel(
-				new CommandPartSearcherPsnConfigBasedFast(psnConfig),
-				serialPortContainer, serialPortContainer, _logConsoleYellow);
+				new CommandPartSearcherPsnConfigBasedFast(psnConfig), _logConsoleYellow);
 			sch.CommandHeared += SchOnCommandHeared;
-			sch.SelectPortAsync(argPortName, argBaudRate, null);
+			sch.SelectPortAsync(serialPortContainer, null);
 			//Thread.Sleep(5000);
 			//sch.SelectPortAsync("COM2");
 			//Thread.Sleep(5000);

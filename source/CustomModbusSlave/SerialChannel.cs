@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using AlienJust.Support.Concurrent;
 using AlienJust.Support.Concurrent.Contracts;
-using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
 using CustomModbusSlave.Contracts;
 
@@ -18,17 +17,18 @@ namespace CustomModbusSlave {
 		private readonly IWorker<Action> _notifyWorker;
 		private readonly List<byte> _incomingBuffer;
 
-		private readonly ISerialPortContainer _portContainer;
-		private readonly ISendAbility _sendAbility;
+		//private readonly ISerialPortContainer _portContainer;
+		private ISerialPortContainer _portContainer;
+		private ISendAbility _sendAbility;
 		private readonly ICommandPartSearcher _commandPartSearcher;
 
 		private bool _dontStop;
 		private readonly object _dontStopSync;
 
-		public SerialChannel(ICommandPartSearcher commandPartSearcher, ISerialPortContainer portContainer, ISendAbility sendAbility, ILoggerWithStackTrace logger) {
+		public SerialChannel(ICommandPartSearcher commandPartSearcher,/* ISendAbility sendAbility,*/ ILoggerWithStackTrace logger) {
 			_commandPartSearcher = commandPartSearcher;
-			_portContainer = portContainer;
-			_sendAbility = sendAbility;
+			//_portContainer = portContainer;
+			//_sendAbility = sendAbility;
 			_logger = logger;
 
 			_dontStop = true;
@@ -44,12 +44,18 @@ namespace CustomModbusSlave {
 			ScheduleReadDataInBackground();
 		}
 
-		public void SelectPortAsync(string portName, int baudRate, Action<Exception> comPortOpenedCallbackAction) {
-			_logger.Log("Закрытие ранее открытого порта (если был открыт) и открытие нового, название порта: " + portName + ", скорость обмена: " + baudRate + " б/с", null);
+		public void SelectPortAsync(/*string portName, int baudRate*/ISerialPortContainer portContainer, Action<Exception> comPortOpenedCallbackAction) {
+			_logger.Log("Закрытие ранее открытого порта (если был открыт) и открытие нового: " + portContainer, null);
 			_backgroundWorker.AddWork(() => {
 				Exception exception;
 				try {
-					_portContainer.SelectPort(portName, baudRate);
+					if (_portContainer != null && _portContainer.IsOpen)
+						ClosePortSyncUnsafe();
+
+					_portContainer = portContainer;
+					_portContainer.Open();
+					_sendAbility = portContainer;
+
 					exception = null;
 				}
 				catch (Exception ex) {
@@ -78,7 +84,7 @@ namespace CustomModbusSlave {
 		}
 
 		private void ClosePortSyncUnsafe() {
-			_portContainer.CloseCurrentPort();
+			_portContainer.Close();
 			_incomingBuffer.Clear();
 		}
 
@@ -90,7 +96,7 @@ namespace CustomModbusSlave {
 					_backgroundWorker.AddWork(() => {
 						try {
 							//_logger.Log("Reading bytes from port (8 bytes, timeout 1 second)...");
-							var bytes = _portContainer.ReadBytes(8, TimeSpan.FromSeconds(1));
+							var bytes = _portContainer.Read(8, TimeSpan.FromSeconds(1));
 							//_logger.Log("Readed bytes from port: " + bytes.ToText());
 							_incomingBuffer.AddRange(bytes);
 							//_logger.Log("INCOMING BUFFER BYTES COUNT AFTER READ = " + _incomingBuffer.Count);

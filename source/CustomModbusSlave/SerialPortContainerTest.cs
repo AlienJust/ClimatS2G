@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using AlienJust.Support.Text;
 using CustomModbusSlave.Contracts;
 
 namespace CustomModbusSlave {
 	public class SerialPortContainerTest : ISerialPortContainer {
 		private readonly List<byte> _bytes;
 
-		private bool _isPortOpen;
+		private bool _isOpen;
 		private int _currrentPosition;
+		
 
 		public SerialPortContainerTest() {
-			_isPortOpen = false;
+			_isOpen = false;
 			_currrentPosition = 0;
 
 			_bytes = new List<byte> {
@@ -75,8 +75,8 @@ namespace CustomModbusSlave {
 		}
 
 
-		public byte[] ReadBytes(int count, TimeSpan timeout) {
-			if (!_isPortOpen) throw new Exception("Serial port is not opened");
+		public byte[] Read(int count, TimeSpan timeout) {
+			if (!_isOpen) throw new Exception("Test port is not opened");
 			var resultBytes = new byte[count];
 
 			for (int i = 0; i < count; ++i) {
@@ -90,17 +90,17 @@ namespace CustomModbusSlave {
 			return resultBytes;
 		}
 
-		public void CloseCurrentPort() {
-			//if (!_isPortOpen) throw new Exception("Port allready closed");
-			_isPortOpen = false;
+		public void Close() {
+			//if (!_isOpen) throw new Exception("Port allready closed");
+			_isOpen = false;
 		}
 
-		public void SelectPort(string portName, int baudRate) {
-			CloseCurrentPort();
-
-			_isPortOpen = true;
+		public void Open() {
+			_isOpen = true;
 		}
 
+		public bool IsOpen => _isOpen;
+		
 		public void Send(byte[] bytes) {
 			// do nothing;
 			//Console.WriteLine("TEST SENDER SEND: " + bytes.ToText());

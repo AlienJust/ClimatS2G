@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Windows.Input;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
@@ -60,6 +63,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		private readonly RelayCommand _openPortCommand;
 		private readonly RelayCommand _closePortCommand;
 		public RelayCommand GetPortsAvailableCommand { get; }
+
+		private readonly DependedCommand _startRecordCommand;
+		private readonly DependedCommand _stopRecordCommand;
+		private bool _isRecording;
+		private readonly List<IList<byte>> _recordedData;
 
 		private readonly ProgramLogViewModel _programLogVm;
 		private readonly ILogger _logger;
@@ -121,6 +129,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_openPortCommand = new RelayCommand(OpenPort, () => !_isPortOpened);
 			_closePortCommand = new RelayCommand(ClosePort, () => _isPortOpened);
 			GetPortsAvailableCommand = new RelayCommand(GetPortsAvailable);
+
+			_isRecording = false;
+			_recordedData = new List<IList<byte>>();
+			_startRecordCommand = new DependedCommand(StartRecord, () => !IsRecording);
+			_stopRecordCommand = new DependedCommand(StopRecord, () => IsRecording);
+			_startRecordCommand.AddDependOnProp(this, () => IsRecording);
+			_stopRecordCommand.AddDependOnProp(this, () => IsRecording);
 
 			_programLogVm = new ProgramLogViewModel(this);
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
@@ -204,6 +219,29 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			TestGroup = new GroupSimple("Тестовая группа", testItems);
 		}
 
+		private void StartRecord() {
+			IsRecording = true;
+			//_recordedData.Clear();
+		}
+
+		private void StopRecord() {
+			IsRecording = false;
+			if (_recordedData.Count > 0) {
+				var filename = _windowSystem.ShowSaveFileDialog("Сохранение данных в виде текста", "Текстовые файлы|*.txt|Все файлы|*.*");
+				if (!string.IsNullOrEmpty(filename)) {
+					string result = string.Empty;
+					foreach (var cmd in _recordedData) {
+						foreach (var b in cmd) {
+							result += b.ToString("X2") + " ";
+						}
+						result += Environment.NewLine;
+					}
+					File.WriteAllText(filename, result);
+				}
+				_recordedData.Clear();
+			}
+		}
+
 		private void CommandHearedTimeoutMonitorOnSomeCommandWasHeared() {
 			LinkBackColor = Colors.LimeGreen;
 		}
@@ -215,6 +253,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendAbility) {
 			if (commandPart.Address == 20) {
+				//_notifier.Notify(() => _recordedData.Add(commandPart.ReplyBytes));
+
 				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
 					_replyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray()); // TODO: bad perfomance (.ToArray)
 					var reply = _replyGenerator.GenerateReply();
@@ -225,7 +265,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		}
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandPart) {
-			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandPart.Address.ToString("X2") + ", code=0x" + commandPart.CommandCode.ToString("X2") + ", data.Count=" + commandPart.ReplyBytes.Count));
+			_notifier.Notify(()=>_recordedData.Add(commandPart.ReplyBytes));
 			// TODO: can be indexed for speeding up
 			_cmdListenerMukFlapOuterAirReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerMukFlapOuterAirRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
@@ -275,7 +315,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		}
 
 		private void OpenPort() {
-			_serialChannel.SelectPortAsync(_selectedComName, 57600, ex => _notifier.Notify(() => {
+			ISerialPortContainer portContainer;
+			if (_selectedComName == _testPortName) {
+				var filename = _windowSystem.ShowOpenFileDialog("Текстовый файл с данными", "Текстовые файлы|*.txt|Все файлы|*.*");
+				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] { " ", Environment.NewLine, "\t" }, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
+			}
+			else {
+				portContainer = new SerialPortContainerReal(_selectedComName, 57600);
+			}
+
+			_serialChannel.SelectPortAsync(portContainer, ex => _notifier.Notify(() => {
 				if (ex == null) {
 					IsPortOpened = true;
 					_logger.Log("Порт " + _selectedComName + " открыт");
@@ -334,5 +383,18 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		public RelayCommand ClosePortCommand => _closePortCommand;
 		public ProgramLogViewModel ProgramLogVm => _programLogVm;
 		public IThreadNotifier Notifier => _notifier;
+
+		public bool IsRecording {
+			get { return _isRecording; }
+			set {
+				if (_isRecording != value) {
+					_isRecording = value;
+					RaisePropertyChanged(() => IsRecording);
+				}
+			}
+		}
+
+		public ICommand StartRecordCommand => _startRecordCommand;
+		public ICommand StopRecordCommand => _stopRecordCommand;
 	}
 }

@@ -11,6 +11,7 @@ using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.Text;
 using AlienJust.Support.Text.Contracts;
+using AlienJust.Support.UserInterface.Contracts;
 using DataAbstractionLevel.Low.PsnConfig;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp
@@ -34,6 +35,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 		private ILoggerWithStackTrace _logConsoleCyan;
 		private ILoggerWithStackTrace _logConsoleGreen;
 		private ILoggerWithStackTrace _logConsoleWhite;
+
 
 		private void App_OnStartup(object sender, StartupEventArgs e) {
 			_logConsoleDarkRed = new RelayLoggerWithStackTrace(
@@ -66,12 +68,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
 
 			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-салон.xml")).LoadConfiguration();
-			var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest(File.ReadAllText("CabinIoSample.txt").Split(' ').Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToList()));
-			_serialChannel = new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(psnConfig), portConatiner, portConatiner, _logConsoleYellow);
+			//var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest(File.ReadAllText("CabinIoSample.txt").Split(' ').Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToList()));
+			_serialChannel = new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(psnConfig), _logConsoleYellow);
 
 
 			List<Action> closeChildWindowsActions = new List<Action>(); // TODO: here to add close child windows
 			var appThreadNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
+
 
 			_mainWindowCreationCompleteWaiter = new ManualResetEvent(false);
 			var mainWindowThread = new Thread(() => {

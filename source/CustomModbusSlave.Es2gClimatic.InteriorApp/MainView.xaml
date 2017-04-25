@@ -214,22 +214,40 @@
 	</controls:MetroWindow.WindowButtonCommands>
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
-			<Button
-				Margin="2,2,2,2"
-				Command="{Binding GetPortsAvailableCommand}"
-				FontWeight="SemiBold"
-				BorderThickness="0"
-				Style="{DynamicResource AccentedSquareButtonStyle}">
-				<Button.ToolTip>
-					<ToolTip>
-						Запись обмена
-					</ToolTip>
-				</Button.ToolTip>
-				<iconPacks:PackIconMaterial
-					Width="Auto"
-					Height="Auto"
-					Kind="Record" />
-			</Button>
+			<StackPanel Orientation="Horizontal">
+				<Button
+					Margin="2,2,2,2"
+					Command="{Binding StartRecordCommand}"
+					FontWeight="SemiBold"
+					BorderThickness="0"
+					Style="{DynamicResource AccentedSquareButtonStyle}">
+					<Button.ToolTip>
+						<ToolTip>
+							Запись обмена
+						</ToolTip>
+					</Button.ToolTip>
+					<iconPacks:PackIconMaterial
+						Width="Auto"
+						Height="Auto"
+						Kind="Record" />
+				</Button>
+				<Button
+					Margin="2,2,2,2"
+					Command="{Binding StopRecordCommand}"
+					FontWeight="SemiBold"
+					BorderThickness="0"
+					Style="{DynamicResource AccentedSquareButtonStyle}">
+					<Button.ToolTip>
+						<ToolTip>
+							Остановка записи и сохрание данных в файл
+						</ToolTip>
+					</Button.ToolTip>
+					<iconPacks:PackIconMaterial
+						Width="Auto"
+						Height="Auto"
+						Kind="Stop" />
+				</Button>
+			</StackPanel>
 			<StackPanel
 				Orientation="Horizontal">
 				<TextBlock

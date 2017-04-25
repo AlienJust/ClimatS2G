@@ -50,7 +50,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		private bool _isPortOpened;
 		private readonly MukFlapDataViewModel _mukFlapDataVm;
 		private readonly MukVaporizerFanDataViewModel _mukVaporizerDataVm;
-		private readonly MukFridgeFanDataViewModel _mukFridgeFanDataVm;
 		private readonly MukWarmFloorDataViewModel _mukWarmFloorDataVm;
 		private readonly BsSmDataViewModel _bsSmDataVm;
 		private readonly IParameterSetter _paramSetter;
@@ -95,7 +94,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 
 			_mukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
 			_mukVaporizerDataVm = new MukVaporizerFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukVaporizerRequest16);
-			_mukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukCondenserFanReply03, _cmdListenerMukCondenserRequest16);
+			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukCondenserFanReply03, _cmdListenerMukCondenserRequest16);
 			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier, _paramSetter);
 
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
@@ -169,7 +168,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		}
 
 		private void OpenPort() {
-			_serialChannel.SelectPortAsync(_selectedComName, 57600, ex => _notifier.Notify(() => {
+			var portContainer = _selectedComName == _testPortName ? (ISerialPortContainer) new SerialPortContainerTest() : new SerialPortContainerReal(_selectedComName, 57600);
+
+			_serialChannel.SelectPortAsync(portContainer, ex => _notifier.Notify(() => {
 				if (ex == null) {
 					IsPortOpened = true;
 					_logger.Log("Порт " + _selectedComName + " открыт");
@@ -232,7 +233,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		public ProgramLogViewModel ProgramLogVm => _programLogVm;
 		public MukFlapDataViewModel MukFlapDataVm => _mukFlapDataVm;
 		public MukVaporizerFanDataViewModel MukVaporizerFanDataVm => _mukVaporizerDataVm;
-		public MukFridgeFanDataViewModel MukFridgeFanDataVm => _mukFridgeFanDataVm;
+		public MukFridgeFanDataViewModel MukFridgeFanDataVm { get; }
+
 		public MukWarmFloorDataViewModel MukWarmFloorDataVm => _mukWarmFloorDataVm;
 		public BsSmDataViewModel BsSmDataVm => _bsSmDataVm;
 		public BvsDataViewModel BvsDataVm { get; }
