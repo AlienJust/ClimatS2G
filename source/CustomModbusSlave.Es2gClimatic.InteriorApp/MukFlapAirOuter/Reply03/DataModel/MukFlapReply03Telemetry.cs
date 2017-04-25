@@ -4,10 +4,16 @@ using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.SimpleRelease {
 	class MukFlapReply03Telemetry : IMukFlapReply03Telemetry {
-		public MukFlapReply03Telemetry(int flapPosition, ISensorIndication<double> temperatureAddress1, ISensorIndication<double> temperatureAddress2, IIncomingSignals incomingSignals, byte outgoingSignals, double analogInput, IMukFlapWorkmodeStage automaticModeStage
-			, IMukFlapDiagnostic1 diagnostic1, IMukFlapOuterAirDiagnostic2 diagnostic2, IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1, IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2
-			, IEmersonDiagnosticCircuit1 emersonDiagnosticCircuit1, double emersonTemperatureCircuit1, double emersonPressureCircuit1, int emersonValveSettingCircuit1
-			, IEmersonDiagnosticCircuit2 emersonDiagnosticCircuit2, double emersonTemperatureCircuit2, double emersonPressureCircuit2, int emersonValveSettingCircuit2, int firmwareBuildNumber) {
+		public MukFlapReply03Telemetry(int flapPosition, ISensorIndication<double> temperatureAddress1
+			, ISensorIndication<double> temperatureAddress2, IIncomingSignals incomingSignals, byte outgoingSignals
+			, double analogInput, IMukFlapWorkmodeStage automaticModeStage
+			, IMukFlapDiagnostic1 diagnostic1, IMukFlapOuterAirDiagnostic2 diagnostic2, IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1
+			, IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2
+			, IEmersonDiagnosticCircuit1 emersonDiagnosticCircuit1, ISensorIndication<double> emersonTemperatureCircuit1, ISensorIndication<double> emersonPressureCircuit1
+			, int emersonValveSettingCircuit1
+			, IEmersonDiagnosticCircuit2 emersonDiagnosticCircuit2, ISensorIndication<double> emersonTemperatureCircuit2, ISensorIndication<double> emersonPressureCircuit2
+			, int emersonValveSettingCircuit2
+			, int firmwareBuildNumber) {
 			FlapPosition = flapPosition;
 			TemperatureAddress1 = temperatureAddress1;
 			TemperatureAddress2 = temperatureAddress2;
@@ -45,13 +51,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.Dat
 		public IMukFlapDiagnosticOneWireSensor Diagnostic4OneWire2 { get; }
 
 		public IEmersonDiagnosticCircuit1 EmersonDiagnosticCircuit1 { get; }
-		public double EmersonTemperatureCircuit1 { get; }
-		public double EmersonPressureCircuit1 { get; }
+		public ISensorIndication<double> EmersonTemperatureCircuit1 { get; }
+		public ISensorIndication<double> EmersonPressureCircuit1 { get; }
 		public int EmersonValveSettingCircuit1 { get; }
 
 		public IEmersonDiagnosticCircuit2 EmersonDiagnosticCircuit2 { get; }
-		public double EmersonTemperatureCircuit2 { get; }
-		public double EmersonPressureCircuit2 { get; }
+		public ISensorIndication<double> EmersonTemperatureCircuit2 { get; }
+		public ISensorIndication<double> EmersonPressureCircuit2 { get; }
 		public int EmersonValveSettingCircuit2 { get; }
 
 		public int FirmwareBuildNumber { get; }

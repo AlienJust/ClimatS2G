@@ -31,14 +31,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.Dat
 			var diagnostic4 = new MukFlapDiagnosticOneWireSensorBuilder(_data[24] + _data[23] * 256).Build();
 
 			var emersonDiagnostic = new EmersonDiagnosticCircuit1Builder(_data[26] + _data[25]*256).Build();
-			var emersonTemperature = new BytesPair(_data[27], _data[28]).HighFirstSignedValue * 0.01;
-			var emersonPressure = (_data[30] + _data[29] * 256) * 0.01;
+			var emersonTemperature = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[27], _data[28]), 0.01, 0.0, new BytesPair(0x7F, 0xFF));
+			var emersonPressure = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[29], _data[30]), 0.01, 0.0, new BytesPair(0x7F, 0xFF));
 			var emersonValveSetting = _data[32] + _data[31] * 256;
 
 
 			var emersionDiagnostic2 = new EmersonDiagnosticCircuit2Builder(_data[34] + _data[33] * 256).Build();
-			var emersonTemperature2 = new BytesPair(_data[35], _data[36]).HighFirstSignedValue * 0.01;
-			var emersonPressure2 = (_data[38] + _data[37] * 256) * 0.01;
+			var emersonTemperature2 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[35], _data[36]), 0.01, 0.0, new BytesPair(0x7F, 0xFF));
+			var emersonPressure2 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[37], _data[38]), 0.01, 0.0, new BytesPair(0x7F, 0xFF));
 			var emersonValveSetting2 = _data[40] + _data[39] * 256;
 
 			var firmwareBuildNumber = _data[42] + _data[41] * 256;

@@ -16,13 +16,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.Dat
 		IMukFlapDiagnosticOneWireSensor Diagnostic4OneWire2 { get; }
 
 		IEmersonDiagnosticCircuit1 EmersonDiagnosticCircuit1 { get; }
-		double EmersonTemperatureCircuit1 { get; }
-		double EmersonPressureCircuit1 { get; }
+		ISensorIndication<double> EmersonTemperatureCircuit1 { get; }
+		ISensorIndication<double> EmersonPressureCircuit1 { get; }
 		int EmersonValveSettingCircuit1 { get; }
 
 		IEmersonDiagnosticCircuit2 EmersonDiagnosticCircuit2 { get; }
-		double EmersonTemperatureCircuit2 { get; }
-		double EmersonPressureCircuit2 { get; }
+		ISensorIndication<double> EmersonTemperatureCircuit2 { get; }
+		ISensorIndication<double> EmersonPressureCircuit2 { get; }
 		int EmersonValveSettingCircuit2 { get; }
 
 		int FirmwareBuildNumber { get; }
