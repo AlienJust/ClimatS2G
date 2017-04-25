@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
@@ -27,6 +29,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
+using CustomModbusSlave.Es2gClimatic.Shared.Record;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp {
@@ -60,6 +63,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukCondenserFanReply03;
 		private readonly ICmdListener<IMukCondenserRequest16Data> _cmdListenerMukCondenserRequest16;
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm50Params;
+
+		public RecordViewModel RecordVm { get; }
 
 		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
@@ -101,6 +106,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
 			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter, _cmdListenerKsm50Params);
 
+			RecordVm = new RecordViewModel(_notifier, _windowSystem);
+
 			_commandHearedTimeoutMonitor = new CommandHearedTimerThreadSafe(_serialChannel, TimeSpan.FromSeconds(1), _notifier);
 			_commandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
 			_commandHearedTimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
@@ -132,6 +139,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandpart) {
+			RecordVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandpart.Address.ToString("X2") + ", code=0x" + commandpart.CommandCode.ToString("X2") + ", data.Count=" + commandpart.ReplyBytes.Count));
 			_mukFlapDataVm.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
 			_cmdListenerMukVaporizerRequest16.ReceiveCommand(commandpart.Address, commandpart.CommandCode, commandpart.ReplyBytes);
@@ -168,7 +176,14 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		}
 
 		private void OpenPort() {
-			var portContainer = _selectedComName == _testPortName ? (ISerialPortContainer) new SerialPortContainerTest() : new SerialPortContainerReal(_selectedComName, 57600);
+			ISerialPortContainer portContainer;
+			if (_selectedComName == _testPortName) {
+				var filename = _windowSystem.ShowOpenFileDialog("Текстовый файл с данными", "Текстовые файлы|*.txt|Все файлы|*.*");
+				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] { " ", Environment.NewLine, "\t" }, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
+			}
+			else {
+				portContainer = new SerialPortContainerReal(_selectedComName, 57600);
+			}
 
 			_serialChannel.SelectPortAsync(portContainer, ex => _notifier.Notify(() => {
 				if (ex == null) {

@@ -18,6 +18,7 @@
 	xmlns:systemDiagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic"
 	xmlns:mukFridge="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:mukFlapAirRecycle="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle"
+	xmlns:record="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.Record;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	Title="Технический абонент, салон"
 	TitleCharacterCasing="Normal"
 	Height="480"
@@ -214,40 +215,7 @@
 	</controls:MetroWindow.WindowButtonCommands>
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
-			<StackPanel Orientation="Horizontal">
-				<Button
-					Margin="2,2,2,2"
-					Command="{Binding StartRecordCommand}"
-					FontWeight="SemiBold"
-					BorderThickness="0"
-					Style="{DynamicResource AccentedSquareButtonStyle}">
-					<Button.ToolTip>
-						<ToolTip>
-							Запись обмена
-						</ToolTip>
-					</Button.ToolTip>
-					<iconPacks:PackIconMaterial
-						Width="Auto"
-						Height="Auto"
-						Kind="Record" />
-				</Button>
-				<Button
-					Margin="2,2,2,2"
-					Command="{Binding StopRecordCommand}"
-					FontWeight="SemiBold"
-					BorderThickness="0"
-					Style="{DynamicResource AccentedSquareButtonStyle}">
-					<Button.ToolTip>
-						<ToolTip>
-							Остановка записи и сохрание данных в файл
-						</ToolTip>
-					</Button.ToolTip>
-					<iconPacks:PackIconMaterial
-						Width="Auto"
-						Height="Auto"
-						Kind="Stop" />
-				</Button>
-			</StackPanel>
+			<record:RecordView DataContext="{Binding Path=RecordVm, Mode=OneTime}"/>
 			<StackPanel
 				Orientation="Horizontal">
 				<TextBlock

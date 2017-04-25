@@ -43,6 +43,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
+using CustomModbusSlave.Es2gClimatic.Shared.Record;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.UniversalParams;
 using ParamCentric.Common.Contracts;
@@ -63,11 +64,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		private readonly RelayCommand _openPortCommand;
 		private readonly RelayCommand _closePortCommand;
 		public RelayCommand GetPortsAvailableCommand { get; }
-
-		private readonly DependedCommand _startRecordCommand;
-		private readonly DependedCommand _stopRecordCommand;
-		private bool _isRecording;
-		private readonly List<IList<byte>> _recordedData;
 
 		private readonly ProgramLogViewModel _programLogVm;
 		private readonly ILogger _logger;
@@ -110,6 +106,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		public BvsDataViewModel BvsDataVm2 { get; }
 		public KsmDataViewModel KsmDataVm { get; }
 		public IGroup TestGroup { get; }
+		public RecordViewModel RecordVm { get; }
 
 		private bool _isPortOpened;
 
@@ -129,13 +126,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_openPortCommand = new RelayCommand(OpenPort, () => !_isPortOpened);
 			_closePortCommand = new RelayCommand(ClosePort, () => _isPortOpened);
 			GetPortsAvailableCommand = new RelayCommand(GetPortsAvailable);
-
-			_isRecording = false;
-			_recordedData = new List<IList<byte>>();
-			_startRecordCommand = new DependedCommand(StartRecord, () => !IsRecording);
-			_stopRecordCommand = new DependedCommand(StopRecord, () => IsRecording);
-			_startRecordCommand.AddDependOnProp(this, () => IsRecording);
-			_stopRecordCommand.AddDependOnProp(this, () => IsRecording);
 
 			_programLogVm = new ProgramLogViewModel(this);
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
@@ -166,6 +156,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 			_cmdListenerKsmParams = new CmdListenerKsmParams(20, 16, 129);
 
+			RecordVm = new RecordViewModel(_notifier, _windowSystem);
 
 			SystemDiagnosticVm = new SystemDiagnosticViewModel(
 				_notifier,
@@ -218,30 +209,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			var testItems = new List<IGroupItem>();
 			TestGroup = new GroupSimple("Тестовая группа", testItems);
 		}
-
-		private void StartRecord() {
-			IsRecording = true;
-			//_recordedData.Clear();
-		}
-
-		private void StopRecord() {
-			IsRecording = false;
-			if (_recordedData.Count > 0) {
-				var filename = _windowSystem.ShowSaveFileDialog("Сохранение данных в виде текста", "Текстовые файлы|*.txt|Все файлы|*.*");
-				if (!string.IsNullOrEmpty(filename)) {
-					string result = string.Empty;
-					foreach (var cmd in _recordedData) {
-						foreach (var b in cmd) {
-							result += b.ToString("X2") + " ";
-						}
-						result += Environment.NewLine;
-					}
-					File.WriteAllText(filename, result);
-				}
-				_recordedData.Clear();
-			}
-		}
-
+		
 		private void CommandHearedTimeoutMonitorOnSomeCommandWasHeared() {
 			LinkBackColor = Colors.LimeGreen;
 		}
@@ -265,7 +233,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		}
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandPart) {
-			_notifier.Notify(()=>_recordedData.Add(commandPart.ReplyBytes));
+			RecordVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			// TODO: can be indexed for speeding up
 			_cmdListenerMukFlapOuterAirReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerMukFlapOuterAirRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
@@ -383,18 +351,5 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		public RelayCommand ClosePortCommand => _closePortCommand;
 		public ProgramLogViewModel ProgramLogVm => _programLogVm;
 		public IThreadNotifier Notifier => _notifier;
-
-		public bool IsRecording {
-			get { return _isRecording; }
-			set {
-				if (_isRecording != value) {
-					_isRecording = value;
-					RaisePropertyChanged(() => IsRecording);
-				}
-			}
-		}
-
-		public ICommand StartRecordCommand => _startRecordCommand;
-		public ICommand StopRecordCommand => _stopRecordCommand;
 	}
 }

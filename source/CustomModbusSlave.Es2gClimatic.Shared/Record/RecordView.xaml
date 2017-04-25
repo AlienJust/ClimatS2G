@@ -1,0 +1,61 @@
+﻿<UserControl
+	x:Class="CustomModbusSlave.Es2gClimatic.Shared.Record.RecordView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.Record"
+	xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+	mc:Ignorable="d"
+	d:DesignHeight="30"
+	d:DesignWidth="120">
+	<StackPanel
+		Orientation="Horizontal">
+		<Button
+			Margin="2,2,2,2"
+			Command="{Binding StartRecordCommand, Mode=OneTime}"
+			FontWeight="SemiBold"
+			BorderThickness="0"
+			Style="{DynamicResource AccentedSquareButtonStyle}">
+			<Button.ToolTip>
+				<ToolTip>
+					Запись обмена
+				</ToolTip>
+			</Button.ToolTip>
+			<StackPanel
+				Orientation="Horizontal">
+				<iconPacks:PackIconMaterial
+					Width="Auto"
+					Height="Auto"
+					Kind="Record" />
+				<TextBlock
+					Margin="2,0,0,0"
+					Text="Rec"
+					VerticalAlignment="Center" />
+			</StackPanel>
+		</Button>
+		<Button
+			Margin="2,2,2,2"
+			Command="{Binding StopRecordCommand, Mode=OneTime}"
+			FontWeight="SemiBold"
+			BorderThickness="0"
+			Style="{DynamicResource AccentedSquareButtonStyle}">
+			<Button.ToolTip>
+				<ToolTip>
+					Остановка записи и сохрание данных в файл
+				</ToolTip>
+			</Button.ToolTip>
+			<iconPacks:PackIconMaterial
+				Width="Auto"
+				Height="Auto"
+				Kind="Stop" />
+		</Button>
+		<TextBlock
+			Text="{Binding Path=RecordsCount, Mode=OneWay}"
+			VerticalAlignment="Center">
+			<TextBlock.ToolTip>
+				Число записанных команд
+			</TextBlock.ToolTip>
+		</TextBlock>
+	</StackPanel>
+</UserControl>
