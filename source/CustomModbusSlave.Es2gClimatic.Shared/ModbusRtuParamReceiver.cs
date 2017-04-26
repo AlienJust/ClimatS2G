@@ -4,7 +4,7 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 using ParamCentric.Modbus.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
-	class ModbusRtuParamReceiver : IReceiverModbusRtu, ICommandListener {
+	public class ModbusRtuParamReceiver : IReceiverModbusRtu, ICommandListener {
 		private readonly List<IReceivableModbusRtuParameter> _params;
 		public ModbusRtuParamReceiver() {
 			_params = new List<IReceivableModbusRtuParameter>();

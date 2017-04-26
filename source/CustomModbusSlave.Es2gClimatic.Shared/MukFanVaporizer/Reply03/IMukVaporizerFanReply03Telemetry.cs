@@ -5,7 +5,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWor
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
-	interface IMukVaporizerFanReply03Telemetry {
+	public interface IMukVaporizerFanReply03Telemetry {
 		ushort FanPwm { get; }
 		ISensorIndication<double> TemperatureAddress1 { get; }
 		ISensorIndication<double> TemperatureAddress2 { get; }
@@ -27,7 +27,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 		ushort FirmwareBuildNumber { get; }
 	}
 
-	class MukVaporizerFanReply03TelemetrySimple : IMukVaporizerFanReply03Telemetry {
+	internal class MukVaporizerFanReply03TelemetrySimple : IMukVaporizerFanReply03Telemetry {
 		public ushort FanPwm { get; set; }
 		public ISensorIndication<double> TemperatureAddress1 { get; set; }
 		public ISensorIndication<double> TemperatureAddress2 { get; set; }
@@ -47,7 +47,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
 		public ushort FirmwareBuildNumber { get; set; }
 	}
 
-	class MukVaporizerFanReply03TelemetryBuilder : IBuilder<IMukVaporizerFanReply03Telemetry> {
+	internal class MukVaporizerFanReply03TelemetryBuilder : IBuilder<IMukVaporizerFanReply03Telemetry> {
 		private static readonly BytesPair NoSensor= new BytesPair(0x85, 0x00); 
 		private readonly IList<byte> _data;
 		public MukVaporizerFanReply03TelemetryBuilder(IList<byte> bytes) {

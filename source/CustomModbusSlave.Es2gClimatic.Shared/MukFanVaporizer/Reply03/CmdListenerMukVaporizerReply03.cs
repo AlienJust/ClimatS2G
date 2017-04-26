@@ -2,7 +2,7 @@
 using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
-	internal class CmdListenerMukVaporizerReply03 : CmdListenerBase<IMukVaporizerFanReply03Telemetry> {
+	public class CmdListenerMukVaporizerReply03 : CmdListenerBase<IMukVaporizerFanReply03Telemetry> {
 		public CmdListenerMukVaporizerReply03(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
 

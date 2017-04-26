@@ -5,7 +5,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConve
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.SetParameters {
-	class MukVaporizerSetParamsViewModel : ViewModelBase {
+	public class MukVaporizerSetParamsViewModel : ViewModelBase {
 		public SettableParameterViewModel SettableParam324 { get; }
 		public SettableParameterViewModel SettableParam325 { get; }
 		public SettableParameterViewModel SettableParam326 { get; }

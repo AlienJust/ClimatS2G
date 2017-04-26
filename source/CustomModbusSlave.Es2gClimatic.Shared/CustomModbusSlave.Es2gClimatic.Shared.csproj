@@ -131,6 +131,7 @@
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
     <Compile Include="CmdListenerBase.cs" />
+    <Compile Include="ModbusRtuParamReceiver.cs" />
     <Compile Include="MukFanCondenser\Request16\CmdListenerMukCondenserFanRequest16.cs" />
     <Compile Include="MukFanCondenser\Request16\IMukCondenserWorkmodeCommandFromKsm.cs" />
     <Compile Include="MukFanCondenser\Request16\IMukCondenserRequest16Data.cs" />
@@ -154,30 +155,41 @@
       <DependentUpon>MukFridgeSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFanCondenser\SetParameters\MukFridgeSetParamsViewModel.cs" />
+    <Compile Include="MukFanVaporizer\Reply03\BytesPairNullableToStringThroughOneWireConverter.cs" />
+    <Compile Include="MukFanVaporizer\Reply03\CmdListenerMukVaporizerReply03.cs" />
+    <Compile Include="MukFanVaporizer\Reply03\IMukVaporizerFanReply03Telemetry.cs" />
+    <Compile Include="MukFanVaporizer\MukVaporizerFanDataView.xaml.cs">
+      <DependentUpon>MukVaporizerFanDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFanVaporizer\MukVaporizerFanDataViewModelParamcentric.cs" />
+    <Compile Include="MukFanVaporizer\SetParameters\MukVaporizerSetParamsView.xaml.cs">
+      <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFanVaporizer\SetParameters\MukVaporizerSetParamsViewModel.cs" />
     <Compile Include="Record\RecordView.xaml.cs">
       <DependentUpon>RecordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Record\RecordViewModel.cs" />
     <Compile Include="SensorIndications\SensorIndicationExt.cs" />
     <Compile Include="SetParamsAndKsm\CmdListenerKsmParams.cs" />
-    <Compile Include="MukVaporizer\Request16\CmdListenerMukVaporizerRequest16.cs" />
+    <Compile Include="MukFanVaporizer\Request16\CmdListenerMukVaporizerRequest16.cs" />
     <Compile Include="ICmdListener.cs" />
     <Compile Include="DataReceivedDelegate.cs" />
-    <Compile Include="MukVaporizer\Request16\IKsmCommandWorkmode.cs" />
-    <Compile Include="MukVaporizer\Request16\IMukVaporizerRequest16InteriorData.cs" />
-    <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeSimple.cs" />
-    <Compile Include="MukVaporizer\Request16\KsmCommandWorkmodeView.xaml.cs">
+    <Compile Include="MukFanVaporizer\Request16\IKsmCommandWorkmode.cs" />
+    <Compile Include="MukFanVaporizer\Request16\IMukVaporizerRequest16InteriorData.cs" />
+    <Compile Include="MukFanVaporizer\Request16\KsmCommandWorkmodeSimple.cs" />
+    <Compile Include="MukFanVaporizer\Request16\KsmCommandWorkmodeView.xaml.cs">
       <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukVaporizer\Request16\Request16Data.cs" />
-    <Compile Include="MukVaporizer\Request16\Request16DataBuilder.cs" />
-    <Compile Include="MukVaporizer\Request16\Request16DataView.xaml.cs">
+    <Compile Include="MukFanVaporizer\Request16\Request16Data.cs" />
+    <Compile Include="MukFanVaporizer\Request16\Request16DataBuilder.cs" />
+    <Compile Include="MukFanVaporizer\Request16\Request16DataView.xaml.cs">
       <DependentUpon>Request16DataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\ITemperatureRegulatorWorkMode.cs" />
-    <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeBuilderReplied.cs" />
-    <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeSimple.cs" />
-    <Compile Include="MukVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml.cs">
+    <Compile Include="MukFanVaporizer\TemperatureRegulatorWorkMode\ITemperatureRegulatorWorkMode.cs" />
+    <Compile Include="MukFanVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeBuilderReplied.cs" />
+    <Compile Include="MukFanVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeSimple.cs" />
+    <Compile Include="MukFanVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml.cs">
       <DependentUpon>TemperatureRegulatorWorkModeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterSimpleUshort.cs" />
@@ -312,15 +324,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukVaporizer\Request16\KsmCommandWorkmodeView.xaml">
+    <Page Include="MukFanVaporizer\MukVaporizerFanDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukVaporizer\Request16\Request16DataView.xaml">
+    <Page Include="MukFanVaporizer\Request16\KsmCommandWorkmodeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml">
+    <Page Include="MukFanVaporizer\Request16\Request16DataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFanVaporizer\SetParameters\MukVaporizerSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFanVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

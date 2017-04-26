@@ -11,7 +11,6 @@
 	xmlns:mukAirExhausterView="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.View"
 	xmlns:mukFlapOuterAirReply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03"
 	xmlns:mukFlapWinterSummerViews="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.Views"
-	xmlns:mukVaporizerFan="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan"
 	xmlns:progamLog="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:sharedUniversalParamsWpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
@@ -19,6 +18,7 @@
 	xmlns:mukFridge="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:mukFlapAirRecycle="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle"
 	xmlns:record="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.Record;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:mukVaporizerFan1="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	Title="Технический абонент, салон"
 	TitleCharacterCasing="Normal"
 	Height="480"
@@ -286,7 +286,7 @@
 				<ScrollViewer>
 					<StackPanel
 						Orientation="Vertical">
-						<mukVaporizerFan:MukVaporizerFanDataView
+						<mukVaporizerFan1:MukVaporizerFanDataView
 							DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}" />
 						<sharedUniversalParamsWpf:GroupSimpleView
 							DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}" />

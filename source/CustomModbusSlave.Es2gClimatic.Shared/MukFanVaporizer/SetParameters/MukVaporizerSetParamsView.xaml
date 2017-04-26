@@ -1,0 +1,39 @@
+﻿<UserControl
+	x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan.SetParameters.MukVaporizerSetParamsView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:wpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf"
+	mc:Ignorable="d"
+	d:DesignHeight="360"
+	d:DesignWidth="300">
+	<StackPanel
+		Orientation="Vertical">
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam324, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam325, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam326, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam327, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam328, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam329, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam330, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam331, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam332, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam333, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam334, Mode=OneTime}" />
+		<wpf:SettableParameterView
+			DataContext="{Binding Path=SettableParam335, Mode=OneTime}" />
+	</StackPanel>
+</UserControl>
+
