@@ -18,7 +18,7 @@
 	xmlns:mukFridge="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:mukFlapAirRecycle="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle"
 	xmlns:record="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.Record;assembly=CustomModbusSlave.Es2gClimatic.Shared"
-	xmlns:mukVaporizerFan1="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:mukFanVaporizer="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	Title="Технический абонент, салон"
 	TitleCharacterCasing="Normal"
 	Height="480"
@@ -286,7 +286,7 @@
 				<ScrollViewer>
 					<StackPanel
 						Orientation="Vertical">
-						<mukVaporizerFan1:MukVaporizerFanDataView
+						<mukFanVaporizer:MukVaporizerFanDataView
 							DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}" />
 						<sharedUniversalParamsWpf:GroupSimpleView
 							DataContext="{Binding Path=MukVaporizerFanDataVm, Mode=OneTime}" />

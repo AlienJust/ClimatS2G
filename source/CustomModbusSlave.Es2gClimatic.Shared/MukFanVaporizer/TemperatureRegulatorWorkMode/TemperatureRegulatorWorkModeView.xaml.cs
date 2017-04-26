@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode {
 	/// <summary>
 	/// Логика взаимодействия для TemperatureRegulatorWorkModeViewModel.xaml
 	/// </summary>

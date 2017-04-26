@@ -162,6 +162,8 @@
       <DependentUpon>MukVaporizerFanDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFanVaporizer\MukVaporizerFanDataViewModelParamcentric.cs" />
+    <Compile Include="MukFanVaporizer\Reply03\MukVaporizerFanReply03TelemetryBuilder.cs" />
+    <Compile Include="MukFanVaporizer\Reply03\MukVaporizerFanReply03TelemetrySimple.cs" />
     <Compile Include="MukFanVaporizer\SetParameters\MukVaporizerSetParamsView.xaml.cs">
       <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
     </Compile>

@@ -13,7 +13,7 @@
 	xmlns:progamLog="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:mukFridge="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:record="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.Record;assembly=CustomModbusSlave.Es2gClimatic.Shared"
-	xmlns:mukVaporizerFan="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:mukFanVaporizer="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	Title="Технический абонент, кабина"
 	TitleCharacterCasing="Normal"
 	Height="480"
@@ -270,7 +270,7 @@
 				Header="МУК вентилятора испарителя"
 				Style="{StaticResource AzureTabItem}">
 				<ScrollViewer>
-					<mukVaporizerFan:MukVaporizerFanDataView
+					<mukFanVaporizer:MukVaporizerFanDataView
 						DataContext="{Binding Path=MukFanVaporizerDataVm, Mode=OneTime}" />
 				</ScrollViewer>
 			</TabItem>

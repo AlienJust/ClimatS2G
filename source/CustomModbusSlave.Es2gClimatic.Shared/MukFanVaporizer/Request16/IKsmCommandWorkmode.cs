@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16 {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16 {
 	public interface IKsmCommandWorkmode {
 		bool AutomaticMode { get; }
 		// zb bit #2 is skipped

@@ -1,10 +1,8 @@
 using AlienJust.Support.Collections;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Reply03 {
 	public class BytesPairNullableToStringThroughVaporizerFanWorkstageConverter : IBytesPairNullableSomethingConverter<string> {
-
-
 		public string ConvertToSomething(BytesPair? value) {
 			if (!value.HasValue) return "?";
 

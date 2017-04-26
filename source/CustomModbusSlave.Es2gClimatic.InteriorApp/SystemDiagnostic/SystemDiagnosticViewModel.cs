@@ -10,10 +10,10 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Reply03;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {

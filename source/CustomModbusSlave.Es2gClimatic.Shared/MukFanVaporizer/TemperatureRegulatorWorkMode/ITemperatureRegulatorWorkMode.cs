@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukVaporizer.TemperatureRegulatorWorkMode
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode
 {
 	/// <summary>
 	/// Режим работы регулятора температуры

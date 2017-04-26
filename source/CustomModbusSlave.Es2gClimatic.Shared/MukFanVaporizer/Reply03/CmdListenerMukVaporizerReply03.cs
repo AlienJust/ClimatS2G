@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukVaporizerFan {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Reply03 {
 	public class CmdListenerMukVaporizerReply03 : CmdListenerBase<IMukVaporizerFanReply03Telemetry> {
 		public CmdListenerMukVaporizerReply03(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
