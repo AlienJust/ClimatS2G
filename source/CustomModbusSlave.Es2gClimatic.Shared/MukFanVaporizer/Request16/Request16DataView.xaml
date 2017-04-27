@@ -6,7 +6,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16"
 	mc:Ignorable="d"
-	d:DesignHeight="220"
+	d:DesignHeight="320"
 	d:DesignWidth="400">
 	<StackPanel
 		Orientation="Vertical">
@@ -77,10 +77,10 @@
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
 			<TextBlock
-				Text="Резерв" />
+				Text="КСМ: дельта Т в отладочном режиме" />
 			<TextBlock
 				Grid.Column="1"
-				Text="{Binding Path=Reserve23, Mode=OneTime}"
+				Text="{Binding Path=DeltaTSetting, Mode=OneTime}"
 				TextAlignment="Right" />
 		</Grid>
 	</StackPanel>

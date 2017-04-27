@@ -64,7 +64,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		private readonly IFastReplyAcceptor _replyAcceptor;
 
 		private readonly ICmdListener<IMukVaporizerFanReply03Telemetry> _cmdListenerMukVaporizerReply03;
-		private readonly ICmdListener<IMukVaporizerRequest16InteriorData> _cmdListenerMukVaporizerRequest16;
+		private readonly ICmdListener<IMukFanVaporizerRequest16Data> _cmdListenerMukVaporizerRequest16;
 
 		private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukCondenserFanReply03;
 		private readonly ICmdListener<IMukCondenserRequest16Data> _cmdListenerMukCondenserRequest16;

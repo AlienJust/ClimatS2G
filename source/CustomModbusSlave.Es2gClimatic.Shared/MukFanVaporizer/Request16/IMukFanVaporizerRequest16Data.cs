@@ -1,11 +1,11 @@
 ﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16 {
-	public interface IMukVaporizerRequest16InteriorData {
+	public interface IMukFanVaporizerRequest16Data {
 		IKsmCommandWorkmode CurrentKsmCommandWorkmode { get; }
 		int OuterTemperature { get; }
 		double InnerTemperature { get; }
 		int FanSpeed { get; }
 		int DeltaT { get; }
-		int Reserve23 { get; }
+		double DeltaTSetting { get; }
 
 		/// <summary>
 		/// Секция: мастер или слейв

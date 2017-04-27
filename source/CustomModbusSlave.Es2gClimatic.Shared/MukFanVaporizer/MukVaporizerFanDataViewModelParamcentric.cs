@@ -18,7 +18,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer {
 	public class MukVaporizerFanDataViewModelParamcentric : ViewModelBase, IGroup {
 		private readonly IThreadNotifier _notifier;
 		private readonly ICmdListener<IMukVaporizerFanReply03Telemetry> _cmdListenerMukVaporizerReply03;
-		private readonly ICmdListener<IMukVaporizerRequest16InteriorData> _cmdListenerMukVaporizerRequest16;
+		private readonly ICmdListener<IMukFanVaporizerRequest16Data> _cmdListenerMukVaporizerRequest16;
 		//private readonly IReceiverModbusCustom _customReceiver;
 		//private readonly IReceiverModbusRtu _rtuReceiver;
 		private const string Header = "МУК вентилятора испарителя";
@@ -43,7 +43,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer {
 		private ITemperatureRegulatorWorkMode _temperatureRegulatorWorkMode;
 		private string _automaticModeStage;
 
-		private IMukVaporizerRequest16InteriorData _request16Telemetry;
+		private IMukFanVaporizerRequest16Data _request16Telemetry;
 		private readonly List<IGroupItem> _children;
 
 		public AnyCommandPartViewModel Request16TelemetryText { get; }
@@ -52,7 +52,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer {
 		public MukVaporizerFanDataViewModelParamcentric(IThreadNotifier notifier, 
 			IParameterSetter parameterSetter, IReceiverModbusRtu rtuReceiver,
 			ICmdListener<IMukVaporizerFanReply03Telemetry> cmdListenerMukVaporizerReply03,
-			ICmdListener<IMukVaporizerRequest16InteriorData> cmdListenerMukVaporizerRequest16) {
+			ICmdListener<IMukFanVaporizerRequest16Data> cmdListenerMukVaporizerRequest16) {
 
 			_notifier = notifier;
 
@@ -120,7 +120,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer {
 			});
 		}
 
-		private void CmdListenerMukVaporizerRequest16OnDataReceived(IList<byte> bytes, IMukVaporizerRequest16InteriorData data) {
+		private void CmdListenerMukVaporizerRequest16OnDataReceived(IList<byte> bytes, IMukFanVaporizerRequest16Data data) {
 			_notifier.Notify(() => {
 				Request16TelemetryText.Update(bytes);
 				Request16Telemetry = data;
@@ -265,7 +265,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer {
 		}
 
 
-		public IMukVaporizerRequest16InteriorData Request16Telemetry {
+		public IMukFanVaporizerRequest16Data Request16Telemetry {
 			get { return _request16Telemetry; }
 			set {
 				if (_request16Telemetry != value) {

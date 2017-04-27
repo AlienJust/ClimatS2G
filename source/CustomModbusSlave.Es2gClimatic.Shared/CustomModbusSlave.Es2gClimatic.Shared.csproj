@@ -178,7 +178,7 @@
     <Compile Include="ICmdListener.cs" />
     <Compile Include="DataReceivedDelegate.cs" />
     <Compile Include="MukFanVaporizer\Request16\IKsmCommandWorkmode.cs" />
-    <Compile Include="MukFanVaporizer\Request16\IMukVaporizerRequest16InteriorData.cs" />
+    <Compile Include="MukFanVaporizer\Request16\IMukFanVaporizerRequest16Data.cs" />
     <Compile Include="MukFanVaporizer\Request16\KsmCommandWorkmodeSimple.cs" />
     <Compile Include="MukFanVaporizer\Request16\KsmCommandWorkmodeView.xaml.cs">
       <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
