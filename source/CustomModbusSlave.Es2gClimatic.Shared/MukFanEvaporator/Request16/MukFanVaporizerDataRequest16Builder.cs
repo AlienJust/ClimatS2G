@@ -2,16 +2,16 @@ using System.Collections.Generic;
 using AlienJust.Support.Numeric.Bits;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16 {
-	public class Request16DataBuilder : IBuilder<IMukFanVaporizerRequest16Data> {
+	internal class MukFanVaporizerDataRequest16Builder : IBuilder<IMukFanVaporizerDataRequest16> {
 		private readonly IList<byte> _bytes;
-		public Request16DataBuilder(IList<byte> bytes) {
+		public MukFanVaporizerDataRequest16Builder(IList<byte> bytes) {
 			_bytes = bytes;
 		}
 
-		public IMukFanVaporizerRequest16Data Build() {
+		public IMukFanVaporizerDataRequest16 Build() {
 
 			var deltaTSettingRaw = _bytes[17] * 256 + _bytes[18];
-			return new Request16Data {
+			return new MukFanVaporizerDataRequest16Simple {
 				CurrentKsmCommandWorkmode =
 					new KsmCommandWorkmodeSimple {
 						WorkConfiguration = _bytes[7] & 0x0F,

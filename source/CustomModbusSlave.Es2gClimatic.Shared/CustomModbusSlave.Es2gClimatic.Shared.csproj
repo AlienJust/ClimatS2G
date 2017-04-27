@@ -118,6 +118,9 @@
     <Compile Include="CommandHearedTimer\Contracts\ICommandHearedTimer.cs" />
     <Compile Include="CommandHearedTimer\Contracts\IStartStoppable.cs" />
     <Compile Include="CommandHearedTimer\SimplestDelegateEver.cs" />
+    <Compile Include="EmersionDiagnostic\EmersonDiagnosticView.xaml.cs">
+      <DependentUpon>EmersonDiagnosticView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticSimple.cs" />
     <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticBuilder.cs" />
     <Compile Include="ICommandListener.cs" />
@@ -155,43 +158,58 @@
       <DependentUpon>MukFridgeSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFanCondenser\SetParameters\MukFridgeSetParamsViewModel.cs" />
-    <Compile Include="MukFanVaporizer\Reply03\BytesPairNullableToStringThroughOneWireConverter.cs" />
-    <Compile Include="MukFanVaporizer\Reply03\CmdListenerMukVaporizerReply03.cs" />
-    <Compile Include="MukFanVaporizer\Reply03\IMukVaporizerFanReply03Telemetry.cs" />
-    <Compile Include="MukFanVaporizer\MukVaporizerFanDataView.xaml.cs">
+    <Compile Include="MukFanEvaporator\Reply03\BytesPairNullableToStringThroughVaporizerFanWorkstageConverter.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\CmdListenerMukVaporizerReply03.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\IMukFanVaporizerDataReply03.cs" />
+    <Compile Include="MukFanEvaporator\MukVaporizerFanDataView.xaml.cs">
       <DependentUpon>MukVaporizerFanDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFanVaporizer\MukVaporizerFanDataViewModelParamcentric.cs" />
-    <Compile Include="MukFanVaporizer\Reply03\MukVaporizerFanReply03TelemetryBuilder.cs" />
-    <Compile Include="MukFanVaporizer\Reply03\MukVaporizerFanReply03TelemetrySimple.cs" />
-    <Compile Include="MukFanVaporizer\SetParameters\MukVaporizerSetParamsView.xaml.cs">
+    <Compile Include="MukFanEvaporator\MukVaporizerFanDataViewModelParamcentric.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\IMukFanVaporizerDataReply03Diagnostic1.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\IMukFanVaporizerDataReply03Diagnostic2.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1Builder.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1Simple.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1View.xaml.cs">
+      <DependentUpon>MukFanVaporizerDataReply03Diagnostic1View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic2Builder.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic2Simple.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic2View.xaml.cs">
+      <DependentUpon>MukFanVaporizerDataReply03Diagnostic2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03View.xaml.cs">
+      <DependentUpon>MukFanVaporizerDataReply03View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Builder.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Simple.cs" />
+    <Compile Include="MukFanEvaporator\SetParameters\MukVaporizerSetParamsView.xaml.cs">
       <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFanVaporizer\SetParameters\MukVaporizerSetParamsViewModel.cs" />
+    <Compile Include="MukFanEvaporator\SetParameters\MukVaporizerSetParamsViewModel.cs" />
     <Compile Include="Record\RecordView.xaml.cs">
       <DependentUpon>RecordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Record\RecordViewModel.cs" />
-    <Compile Include="SensorIndications\SensorIndicationExt.cs" />
+    <Compile Include="OneWire\SensorIndicationExt.cs" />
     <Compile Include="SetParamsAndKsm\CmdListenerKsmParams.cs" />
-    <Compile Include="MukFanVaporizer\Request16\CmdListenerMukVaporizerRequest16.cs" />
+    <Compile Include="MukFanEvaporator\Request16\CmdListenerMukVaporizerRequest16.cs" />
     <Compile Include="ICmdListener.cs" />
     <Compile Include="DataReceivedDelegate.cs" />
-    <Compile Include="MukFanVaporizer\Request16\IKsmCommandWorkmode.cs" />
-    <Compile Include="MukFanVaporizer\Request16\IMukFanVaporizerRequest16Data.cs" />
-    <Compile Include="MukFanVaporizer\Request16\KsmCommandWorkmodeSimple.cs" />
-    <Compile Include="MukFanVaporizer\Request16\KsmCommandWorkmodeView.xaml.cs">
+    <Compile Include="MukFanEvaporator\Request16\IKsmCommandWorkmode.cs" />
+    <Compile Include="MukFanEvaporator\Request16\IMukFanVaporizerDataRequest16.cs" />
+    <Compile Include="MukFanEvaporator\Request16\KsmCommandWorkmodeSimple.cs" />
+    <Compile Include="MukFanEvaporator\Request16\KsmCommandWorkmodeView.xaml.cs">
       <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFanVaporizer\Request16\Request16Data.cs" />
-    <Compile Include="MukFanVaporizer\Request16\Request16DataBuilder.cs" />
-    <Compile Include="MukFanVaporizer\Request16\Request16DataView.xaml.cs">
+    <Compile Include="MukFanEvaporator\Request16\MukFanVaporizerDataRequest16Simple.cs" />
+    <Compile Include="MukFanEvaporator\Request16\MukFanVaporizerDataRequest16Builder.cs" />
+    <Compile Include="MukFanEvaporator\Request16\Request16DataView.xaml.cs">
       <DependentUpon>Request16DataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFanVaporizer\TemperatureRegulatorWorkMode\ITemperatureRegulatorWorkMode.cs" />
-    <Compile Include="MukFanVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeBuilderReplied.cs" />
-    <Compile Include="MukFanVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeSimple.cs" />
-    <Compile Include="MukFanVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml.cs">
+    <Compile Include="MukFanEvaporator\TemperatureRegulatorWorkMode\ITemperatureRegulatorWorkMode.cs" />
+    <Compile Include="MukFanEvaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeBuilderReplied.cs" />
+    <Compile Include="MukFanEvaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeSimple.cs" />
+    <Compile Include="MukFanEvaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml.cs">
       <DependentUpon>TemperatureRegulatorWorkModeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterSimpleUshort.cs" />
@@ -215,21 +233,21 @@
     <Compile Include="MukFlap\Diagnostic2\MukFlapDiagnostic2Builder.cs" />
     <Compile Include="MukFlap\Diagnostic2\IMukFlapDiagnostic2.cs" />
     <Compile Include="MukFlap\Diagnostic2\MukFlapDiagnostic2.cs" />
-    <Compile Include="MukFlap\DiagnosticOneWire\EnumOneWireSensorErrorCodeToStringConverter.cs" />
-    <Compile Include="MukFlap\DiagnosticOneWire\IMukFlapDiagnosticOneWireSensor.cs" />
-    <Compile Include="MukFlap\DiagnosticOneWire\IOneWireSensorErrorCode.cs" />
-    <Compile Include="MukFlap\DiagnosticOneWire\MukFlapDiagnosticOneWireSensor.cs" />
-    <Compile Include="MukFlap\DiagnosticOneWire\MukFlapDiagnosticOneWireSensorBuilder.cs" />
-    <Compile Include="MukFlap\DiagnosticOneWire\OneWireSensorErrorCode.cs" />
-    <Compile Include="MukFlap\DiagnosticOneWire\OneWireSensorErrorCodeBuilder.cs" />
-    <Compile Include="MukFlap\DiagnosticOneWire\OneWireSensorErrorCodeSimple.cs" />
-    <Compile Include="MukFlap\Views\MukFlapDiagnostic2View.xaml.cs">
+    <Compile Include="OneWire\Diagnostic\EnumOneWireSensorErrorCodeToStringConverter.cs" />
+    <Compile Include="OneWire\Diagnostic\IMukFlapDiagnosticOneWireSensor.cs" />
+    <Compile Include="OneWire\Diagnostic\IOneWireSensorErrorCode.cs" />
+    <Compile Include="OneWire\Diagnostic\MukFlapDiagnosticOneWireSensor.cs" />
+    <Compile Include="OneWire\Diagnostic\MukFlapDiagnosticOneWireSensorBuilder.cs" />
+    <Compile Include="OneWire\Diagnostic\OneWireSensorErrorCode.cs" />
+    <Compile Include="OneWire\Diagnostic\OneWireSensorErrorCodeBuilder.cs" />
+    <Compile Include="OneWire\Diagnostic\OneWireSensorErrorCodeSimple.cs" />
+    <Compile Include="MukFlap\Diagnostic2\MukFlapDiagnostic2View.xaml.cs">
       <DependentUpon>MukFlapDiagnostic2View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlap\Views\MukFlapDiagnosticOneWireSensorView.xaml.cs">
+    <Compile Include="OneWire\Diagnostic\MukFlapDiagnosticOneWireSensorView.xaml.cs">
       <DependentUpon>MukFlapDiagnosticOneWireSensorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukFlap\Views\OneWireErrorCodeView.xaml.cs">
+    <Compile Include="OneWire\Diagnostic\OneWireErrorCodeView.xaml.cs">
       <DependentUpon>OneWireErrorCodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProgamLog\ILogLine.cs" />
@@ -240,10 +258,10 @@
     </Compile>
     <Compile Include="ProgamLog\ProgramLogViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SensorIndications\ISensorIndication.cs" />
-    <Compile Include="SensorIndications\SensorIndicationBase.cs" />
-    <Compile Include="SensorIndications\SensorIndicationDoubleBasedOnBytesPair.cs" />
-    <Compile Include="SensorIndications\SensorIndicationDoubleToStringConverter.cs" />
+    <Compile Include="OneWire\ISensorIndication.cs" />
+    <Compile Include="OneWire\SensorIndicationBase.cs" />
+    <Compile Include="OneWire\SensorIndicationDoubleBasedOnBytesPair.cs" />
+    <Compile Include="OneWire\SensorIndicationDoubleToStringConverter.cs" />
     <Compile Include="SetParamsAndKsm\AnyParameter\SettableAnyParameterView.xaml.cs">
       <DependentUpon>SettableAnyParameterView.xaml</DependentUpon>
     </Compile>
@@ -298,6 +316,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EmersionDiagnostic\EmersonDiagnosticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MukFanCondenser\Request16\MukCondenserWorkmodeCommandFromKsmView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -306,15 +328,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFlap\Views\MukFlapDiagnostic2View.xaml">
+    <Page Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlap\Diagnostic2\MukFlapDiagnostic2View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFlap\Views\MukFlapDiagnosticOneWireSensorView.xaml">
+    <Page Include="OneWire\Diagnostic\MukFlapDiagnosticOneWireSensorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFlap\Views\OneWireErrorCodeView.xaml">
+    <Page Include="OneWire\Diagnostic\OneWireErrorCodeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -326,23 +360,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFanVaporizer\MukVaporizerFanDataView.xaml">
+    <Page Include="MukFanEvaporator\MukVaporizerFanDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFanVaporizer\Request16\KsmCommandWorkmodeView.xaml">
+    <Page Include="MukFanEvaporator\Request16\KsmCommandWorkmodeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFanVaporizer\Request16\Request16DataView.xaml">
+    <Page Include="MukFanEvaporator\Request16\Request16DataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFanVaporizer\SetParameters\MukVaporizerSetParamsView.xaml">
+    <Page Include="MukFanEvaporator\SetParameters\MukVaporizerSetParamsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MukFanVaporizer\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml">
+    <Page Include="MukFanEvaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -392,7 +426,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="EvaporatorFan\" />
     <Folder Include="Muk\Fan\" />
     <Folder Include="Muk\Flap\" />
   </ItemGroup>

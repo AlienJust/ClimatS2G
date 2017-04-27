@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic.EmersonDiagnosticView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+	<StackPanel
+		Orientation="Vertical">
+		<CheckBox
+			Content="МУК выдает включение на Emerson"
+			IsChecked="{Binding Path=MukIsSwitchingEmersionOn, Mode=OneTime}"
+			IsHitTestVisible="False" />
+		<CheckBox
+			Content="МУК выдерживает таймаут включение Emerson (5 минут после последнего включение)"
+			IsChecked="{Binding Path=MukIsWatingFor5MinutesAfterLastSwitchingEmersionOn, Mode=OneTime}"
+			IsHitTestVisible="False" />
+		<CheckBox
+			Content="МУК выдерживает таймаут выключения Emerson (минимальные 5 минут работы)"
+			IsChecked="{Binding Path=MukIsWaitingFor5MinutesWhileEmersionIsSwithedOn, Mode=OneTime}"
+			IsHitTestVisible="False" />
+	</StackPanel>
+</UserControl>

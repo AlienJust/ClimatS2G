@@ -4,7 +4,7 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Reply03;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode;
@@ -17,42 +17,27 @@ using ParamCentric.Modbus.Contracts;
 namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer {
 	public class MukVaporizerFanDataViewModelParamcentric : ViewModelBase, IGroup {
 		private readonly IThreadNotifier _notifier;
-		private readonly ICmdListener<IMukVaporizerFanReply03Telemetry> _cmdListenerMukVaporizerReply03;
-		private readonly ICmdListener<IMukFanVaporizerRequest16Data> _cmdListenerMukVaporizerRequest16;
+		private readonly ICmdListener<IMukFanVaporizerDataReply03> _cmdListenerMukVaporizerReply03;
+		private readonly ICmdListener<IMukFanVaporizerDataRequest16> _cmdListenerMukVaporizerRequest16;
 		//private readonly IReceiverModbusCustom _customReceiver;
 		//private readonly IReceiverModbusRtu _rtuReceiver;
 		private const string Header = "МУК вентилятора испарителя";
 		private const string NoSensor = "Обрыв датчика";
-		private string _fanPwm;
-		private string _temperatureAddress1;
-		private string _temperatureAddress2;
-		private string _incomingSignals;
-		private string _outgoingSignals;
-		private string _analogInput;
-		private string _heatingPwm;
+		
+		private IMukFanVaporizerDataReply03 _mukFanVaporizerDataReply03;
+		public AnyCommandPartViewModel MukFanVaporizerDataReply03Text { get; }
 
-		private string _firmwareBuildNumber;
-		private string _reply;
-		private string _diagnostic5;
-		private string _diagnostic4;
-		private string _diagnostic3;
-		private string _diagnostic2;
-		private string _diagnostic1;
-		private string _fanSpeed;
-		private string _calculatedTemperatureSetting;
-		private ITemperatureRegulatorWorkMode _temperatureRegulatorWorkMode;
-		private string _automaticModeStage;
-
-		private IMukFanVaporizerRequest16Data _request16Telemetry;
-		private readonly List<IGroupItem> _children;
-
+		private IMukFanVaporizerDataRequest16 _request16Telemetry;
 		public AnyCommandPartViewModel Request16TelemetryText { get; }
+
 		public MukVaporizerSetParamsViewModel MukVaporizerSetParamsVm { get; }
+
+		private readonly List<IGroupItem> _children;
 
 		public MukVaporizerFanDataViewModelParamcentric(IThreadNotifier notifier, 
 			IParameterSetter parameterSetter, IReceiverModbusRtu rtuReceiver,
-			ICmdListener<IMukVaporizerFanReply03Telemetry> cmdListenerMukVaporizerReply03,
-			ICmdListener<IMukFanVaporizerRequest16Data> cmdListenerMukVaporizerRequest16) {
+			ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03,
+			ICmdListener<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16) {
 
 			_notifier = notifier;
 
@@ -88,12 +73,16 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer {
 			_children.Add(pwmCalorifer);
 			_children.Add(workStage);
 
+			MukFanVaporizerDataReply03Text = new AnyCommandPartViewModel();
 			Request16TelemetryText = new AnyCommandPartViewModel();
 			MukVaporizerSetParamsVm = new MukVaporizerSetParamsViewModel(notifier, parameterSetter);
 		}
 
-		private void CmdListenerMukVaporizerReply03OnDataReceived(IList<byte> bytes, IMukVaporizerFanReply03Telemetry data) {
+		private void CmdListenerMukVaporizerReply03OnDataReceived(IList<byte> bytes, IMukFanVaporizerDataReply03 data) {
 			_notifier.Notify(() => {
+				MukFanVaporizerDataReply03Text.Update(bytes);
+				MukFanVaporizerDataReply03 = data;
+				/*
 				FanPwm = data.FanPwm.ToString("f2");
 
 				TemperatureAddress1 = data.TemperatureAddress1.NoLinkWithSensor ? NoSensor : data.TemperatureAddress1.Indication.ToString("f2");
@@ -117,155 +106,30 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer {
 				FirmwareBuildNumber = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
 
 				Reply = bytes.ToText();
+				*/
 			});
 		}
 
-		private void CmdListenerMukVaporizerRequest16OnDataReceived(IList<byte> bytes, IMukFanVaporizerRequest16Data data) {
+		private void CmdListenerMukVaporizerRequest16OnDataReceived(IList<byte> bytes, IMukFanVaporizerDataRequest16 data) {
 			_notifier.Notify(() => {
 				Request16TelemetryText.Update(bytes);
 				Request16Telemetry = data;
 			});
 		}
 
-
-		public string AutomaticModeStage {
-			get { return _automaticModeStage; }
-			set { if (_automaticModeStage != value) { _automaticModeStage = value; RaisePropertyChanged(() => AutomaticModeStage); } }
-		}
-
-		public ITemperatureRegulatorWorkMode TemperatureRegulatorWorkMode {
-			get { return _temperatureRegulatorWorkMode; }
-			set {
-				if (_temperatureRegulatorWorkMode != value) {
-					_temperatureRegulatorWorkMode = value;
-					RaisePropertyChanged(() => TemperatureRegulatorWorkMode);
-				}
-			}
-		}
 		
-		public string CalculatedTemperatureSetting {
-			get { return _calculatedTemperatureSetting; }
-			set { if (_calculatedTemperatureSetting != value) { _calculatedTemperatureSetting = value; RaisePropertyChanged(() => CalculatedTemperatureSetting); } }
-		}
-
-		public string FanSpeed {
-			get { return _fanSpeed; }
-			set { if (_fanSpeed != value) { _fanSpeed = value; RaisePropertyChanged(() => FanSpeed); } }
-		}
-
-		public string Diagnostic1 {
-			get { return _diagnostic1; }
-			set { if (_diagnostic1 != value) { _diagnostic1 = value; RaisePropertyChanged(() => Diagnostic1); } }
-		}
-
-		public string Diagnostic2 {
-			get { return _diagnostic2; }
-			set { if (_diagnostic2 != value) { _diagnostic2 = value; RaisePropertyChanged(() => Diagnostic2); } }
-		}
-
-		public string Diagnostic3 {
-			get { return _diagnostic3; }
-			set { if (_diagnostic3 != value) { _diagnostic3 = value; RaisePropertyChanged(() => Diagnostic3); } }
-		}
-
-		public string Diagnostic4 {
-			get { return _diagnostic4; }
-			set { if (_diagnostic4 != value) { _diagnostic4 = value; RaisePropertyChanged(() => Diagnostic4); } }
-		}
-
-		public string Diagnostic5 {
-			get { return _diagnostic5; }
-			set { if (_diagnostic5 != value) { _diagnostic5 = value; RaisePropertyChanged(() => Diagnostic5); } }
-		}
-
-		public string FanPwm {
-			get { return _fanPwm; }
+		public IMukFanVaporizerDataReply03 MukFanVaporizerDataReply03 {
+			get { return _mukFanVaporizerDataReply03; }
 			set {
-				if (_fanPwm != value) {
-					_fanPwm = value;
-					RaisePropertyChanged(() => FanPwm);
-				}
-			}
-		}
-
-		public string TemperatureAddress1 {
-			get { return _temperatureAddress1; }
-			set {
-				if (_temperatureAddress1 != value) {
-					_temperatureAddress1 = value;
-					RaisePropertyChanged(() => TemperatureAddress1);
-				}
-			}
-		}
-
-		public string TemperatureAddress2 {
-			get { return _temperatureAddress2; }
-			set {
-				if (_temperatureAddress2 != value) {
-					_temperatureAddress2 = value;
-					RaisePropertyChanged(() => TemperatureAddress2);
-				}
-			}
-		}
-
-		public string IncomingSignals {
-			get { return _incomingSignals; }
-			set {
-				if (_incomingSignals != value) {
-					_incomingSignals = value;
-					RaisePropertyChanged(() => IncomingSignals);
-				}
-			}
-		}
-
-		public string OutgoingSignals {
-			get { return _outgoingSignals; }
-			set {
-				if (_outgoingSignals != value) {
-					_outgoingSignals = value;
-					RaisePropertyChanged(() => OutgoingSignals);
-				}
-			}
-		}
-
-		public string AnalogInput {
-			get { return _analogInput; }
-			set {
-				if (_analogInput != value) {
-					_analogInput = value;
-					RaisePropertyChanged(() => AnalogInput);
-				}
-			}
-		}
-
-		public string HeatingPwm {
-			get { return _heatingPwm; }
-			set { if (_heatingPwm != value) { _heatingPwm = value; RaisePropertyChanged(() => HeatingPwm); } }
-		}
-
-
-		public string FirmwareBuildNumber {
-			get { return _firmwareBuildNumber; }
-			set {
-				if (_firmwareBuildNumber != value) {
-					_firmwareBuildNumber = value;
-					RaisePropertyChanged(() => FirmwareBuildNumber);
-				}
-			}
-		}
-
-		public string Reply {
-			get { return _reply; }
-			set {
-				if (_reply != value) {
-					_reply = value;
-					RaisePropertyChanged(() => Reply);
+				if (_mukFanVaporizerDataReply03 != value) {
+					_mukFanVaporizerDataReply03 = value;
+					RaisePropertyChanged(() => MukFanVaporizerDataReply03);
 				}
 			}
 		}
 
 
-		public IMukFanVaporizerRequest16Data Request16Telemetry {
+		public IMukFanVaporizerDataRequest16 Request16Telemetry {
 			get { return _request16Telemetry; }
 			set {
 				if (_request16Telemetry != value) {

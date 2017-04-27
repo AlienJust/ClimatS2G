@@ -17,7 +17,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {
 
 
 				if (ns.NoLinkWithSensor) return "Обрыв датчика";
-				return ns.Indication.ToString(Format);
+				return ns.Indication.ToString(Format, CultureInfo.InvariantCulture);
 			}
 			catch (Exception ex) {
 				return ex.Message;
