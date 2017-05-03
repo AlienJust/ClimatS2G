@@ -184,6 +184,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SelectedItemToContentConverter.cs" />
     <Compile Include="SystemDiagnostic\SystemDiagnosticView.xaml.cs">
       <DependentUpon>SystemDiagnosticView.xaml</DependentUpon>
     </Compile>

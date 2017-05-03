@@ -6,12 +6,11 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:wpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf"
 	xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared"
-	xmlns:temperatureRegulatorWorkMode1="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode"
 	xmlns:setParameters="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.SetParameters"
-	xmlns:request161="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16"
+	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16"
 	xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03"
 	mc:Ignorable="d"
-	d:DesignHeight="1200"
+	d:DesignHeight="1800"
 	d:DesignWidth="300">
 	<StackPanel
 		Orientation="Vertical">
@@ -37,7 +36,7 @@
 			Text="Запрос, код команды 16 dec:"
 			FontWeight="Bold"
 			TextDecorations="Underline" />
-		<request161:Request16DataView
+		<request16:Request16DataView
 			DataContext="{Binding Path=Request16Telemetry, Mode=OneWay}" />
 		<shared:AnyCommandPartView
 			DataContext="{Binding Path=Request16TelemetryText, Mode=OneTime}" />

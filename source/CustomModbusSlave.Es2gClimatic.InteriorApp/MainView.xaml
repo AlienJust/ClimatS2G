@@ -19,6 +19,7 @@
 	xmlns:mukFlapAirRecycle="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle"
 	xmlns:record="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.Record;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:mukFanVaporizer="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:interiorApp="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp"
 	Title="Технический абонент, салон"
 	TitleCharacterCasing="Normal"
 	Height="480"
@@ -207,6 +208,36 @@
 				x:Key="ColorsEnumToBrushConverter" />
 			<converters:ColorsEnumToColorConverter
 				x:Key="ColorsEnumToColorConverter" />
+			<interiorApp:SelectedItemToContentConverter
+				x:Key="SelectedItemToContentConverter" />
+
+			<DataTemplate
+				x:Key="MenuItemTemplate"
+				DataType="{x:Type controls:HamburgerMenuGlyphItem}">
+				<Grid
+					Height="48">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="48" />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.Column="0"
+						FontSize="16"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						FontFamily="Arial"
+						Foreground="White"
+						Text="{Binding Glyph}" />
+					<TextBlock
+						Grid.Column="1"
+						VerticalAlignment="Center"
+						FontSize="16"
+						Foreground="White"
+						Text="{Binding Label}" />
+				</Grid>
+			</DataTemplate>
+
 		</ResourceDictionary>
 	</Window.Resources>
 	<controls:MetroWindow.WindowButtonCommands>
@@ -215,7 +246,8 @@
 	</controls:MetroWindow.WindowButtonCommands>
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
-			<record:RecordView DataContext="{Binding Path=RecordVm, Mode=OneTime}"/>
+			<record:RecordView
+				DataContext="{Binding Path=RecordVm, Mode=OneTime}" />
 			<StackPanel
 				Orientation="Horizontal">
 				<TextBlock
@@ -254,6 +286,102 @@
 				Style="{DynamicResource AccentedSquareButtonStyle}" />
 		</controls:WindowCommands>
 	</controls:MetroWindow.RightWindowCommands>
+	<controls:HamburgerMenu
+		IsPaneOpen="False"
+		DisplayMode="CompactInline"
+		ItemTemplate="{StaticResource MenuItemTemplate}"
+		OptionsItemTemplate="{StaticResource MenuItemTemplate}">
+
+		<controls:HamburgerMenu.Content>
+			<MultiBinding
+				Converter="{StaticResource SelectedItemToContentConverter}">
+				<Binding
+					Mode="OneWay"
+					Path="SelectedItem"
+					RelativeSource="{RelativeSource Self}" />
+				<Binding
+					Mode="OneWay"
+					Path="SelectedOptionsItem"
+					RelativeSource="{RelativeSource Self}" />
+			</MultiBinding>
+		</controls:HamburgerMenu.Content>
+
+		<!--  Items  -->
+		<controls:HamburgerMenu.ItemsSource>
+			<controls:HamburgerMenuItemCollection>
+				<controls:HamburgerMenuGlyphItem
+					Glyph="H"
+					Label="Home">
+					<controls:HamburgerMenuGlyphItem.Tag>
+						<mukFlapOuterAirReply03:MukFlapDataView />
+					</controls:HamburgerMenuGlyphItem.Tag>
+				</controls:HamburgerMenuGlyphItem>
+
+				<controls:HamburgerMenuGlyphItem
+					Glyph="P"
+					Label="Private">
+					<controls:HamburgerMenuGlyphItem.Tag>
+						<mukFanVaporizer:MukVaporizerFanDataView />
+					</controls:HamburgerMenuGlyphItem.Tag>
+				</controls:HamburgerMenuGlyphItem>
+
+				<controls:HamburgerMenuGlyphItem
+					Glyph="S"
+					Label="Settings">
+					<controls:HamburgerMenuGlyphItem.Tag>
+						<systemDiagnostic:SystemDiagnosticView />
+					</controls:HamburgerMenuGlyphItem.Tag>
+				</controls:HamburgerMenuGlyphItem>
+			</controls:HamburgerMenuItemCollection>
+		</controls:HamburgerMenu.ItemsSource>
+
+		<!--  Options  -->
+		<controls:HamburgerMenu.OptionsItemsSource>
+			<controls:HamburgerMenuItemCollection>
+				<controls:HamburgerMenuGlyphItem
+					Glyph="A"
+					Label="About">
+					<controls:HamburgerMenuGlyphItem.Tag>
+						<systemDiagnostic:SystemDiagnosticView
+							DataContext="{Binding Path=SystemDiagnosticVm, Mode=OneTime}" />
+					</controls:HamburgerMenuGlyphItem.Tag>
+				</controls:HamburgerMenuGlyphItem>
+			</controls:HamburgerMenuItemCollection>
+		</controls:HamburgerMenu.OptionsItemsSource>
+
+		<!--  Content  -->
+		<controls:HamburgerMenu.ContentTemplate>
+			<DataTemplate
+				DataType="{x:Type controls:HamburgerMenuItem}">
+				<Grid
+					x:Name="TheContentGrid">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="48" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<Border
+						Grid.Row="0"
+						Background="#FF444444">
+						<TextBlock
+							x:Name="Header"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+							FontSize="24"
+							Foreground="White"
+							Text="{Binding Label}" />
+					</Border>
+					<ContentControl
+						x:Name="TheContent"
+						Grid.Row="1"
+						Content="{Binding Tag}"
+						Focusable="False"
+						Foreground="{DynamicResource BlackBrush}" />
+				</Grid>
+			</DataTemplate>
+		</controls:HamburgerMenu.ContentTemplate>
+	</controls:HamburgerMenu>
+	<!--
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition
@@ -380,5 +508,5 @@
 				Text="Связь"
 				Margin="2,1,2,1" />
 		</Border>
-	</Grid>
+	</Grid>-->
 </controls:MetroWindow>
