@@ -286,6 +286,7 @@
 				Style="{DynamicResource AccentedSquareButtonStyle}" />
 		</controls:WindowCommands>
 	</controls:MetroWindow.RightWindowCommands>
+	<!--
 	<controls:HamburgerMenu
 		IsPaneOpen="False"
 		DisplayMode="CompactInline"
@@ -306,14 +307,14 @@
 			</MultiBinding>
 		</controls:HamburgerMenu.Content>
 
-		<!--  Items  -->
 		<controls:HamburgerMenu.ItemsSource>
 			<controls:HamburgerMenuItemCollection>
 				<controls:HamburgerMenuGlyphItem
 					Glyph="H"
 					Label="Home">
 					<controls:HamburgerMenuGlyphItem.Tag>
-						<mukFlapOuterAirReply03:MukFlapDataView />
+						<mukFlapOuterAirReply03:MukFlapDataView
+							DataContext="{Binding Path=MukFlapDataVm}" />
 					</controls:HamburgerMenuGlyphItem.Tag>
 				</controls:HamburgerMenuGlyphItem>
 
@@ -335,7 +336,6 @@
 			</controls:HamburgerMenuItemCollection>
 		</controls:HamburgerMenu.ItemsSource>
 
-		<!--  Options  -->
 		<controls:HamburgerMenu.OptionsItemsSource>
 			<controls:HamburgerMenuItemCollection>
 				<controls:HamburgerMenuGlyphItem
@@ -343,13 +343,12 @@
 					Label="About">
 					<controls:HamburgerMenuGlyphItem.Tag>
 						<systemDiagnostic:SystemDiagnosticView
-							DataContext="{Binding Path=SystemDiagnosticVm, Mode=OneTime}" />
+							DataContext="{Binding Path=SystemDiagnosticVm}" />
 					</controls:HamburgerMenuGlyphItem.Tag>
 				</controls:HamburgerMenuGlyphItem>
 			</controls:HamburgerMenuItemCollection>
 		</controls:HamburgerMenu.OptionsItemsSource>
 
-		<!--  Content  -->
 		<controls:HamburgerMenu.ContentTemplate>
 			<DataTemplate
 				DataType="{x:Type controls:HamburgerMenuItem}">
@@ -381,7 +380,8 @@
 			</DataTemplate>
 		</controls:HamburgerMenu.ContentTemplate>
 	</controls:HamburgerMenu>
-	<!--
+	-->
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition
@@ -508,5 +508,5 @@
 				Text="Связь"
 				Margin="2,1,2,1" />
 		</Border>
-	</Grid>-->
+	</Grid>
 </controls:MetroWindow>

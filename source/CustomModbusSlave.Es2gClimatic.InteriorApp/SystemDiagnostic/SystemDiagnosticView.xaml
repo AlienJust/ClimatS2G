@@ -26,6 +26,12 @@
 				Height="Auto" />
 			<RowDefinition
 				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
 		</Grid.RowDefinitions>
 		<StackPanel
 			Grid.Column="0"
@@ -183,5 +189,93 @@
 			<TextBlock
 				Text="{Binding Path=MukInfo8, Mode=OneWay}" />
 		</StackPanel>
+		
+		<StackPanel
+				Grid.Row="4"
+				Grid.Column="0"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+						Color="{Binding Path=BsSmInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="БС-СМ: " />
+				<TextBlock
+					Text="{Binding Path=BsSmInfo, Mode=OneWay}" />
+			</StackPanel>
+		
+		<StackPanel
+			Grid.Row="5"
+			Grid.Column="0"
+			Orientation="Horizontal">
+			<StackPanel.Background>
+				<LinearGradientBrush
+					StartPoint="0,0"
+					EndPoint="1,0">
+					<GradientStop
+						Offset="1"
+						Color="Transparent" />
+					<GradientStop
+						Offset="0"
+						Color="{Binding Path=BvsInfoColor1, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+				</LinearGradientBrush>
+			</StackPanel.Background>
+			<TextBlock
+				Text="БВС1: " />
+			<TextBlock
+				Text="{Binding Path=BvsInfo1, Mode=OneWay}" />
+		</StackPanel>
+		<StackPanel
+			Grid.Row="5"
+			Grid.Column="1"
+			Orientation="Horizontal">
+			<StackPanel.Background>
+				<LinearGradientBrush
+					StartPoint="0,0"
+					EndPoint="1,0">
+					<GradientStop
+						Offset="1"
+						Color="Transparent" />
+					<GradientStop
+						Offset="0"
+						Color="{Binding Path=BvsInfoColor2, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+				</LinearGradientBrush>
+			</StackPanel.Background>
+			<TextBlock
+				Text="БВС2: " />
+			<TextBlock
+				Text="{Binding Path=BvsInfo2, Mode=OneWay}" />
+		</StackPanel>
+
+		<StackPanel
+			Grid.Row="5"
+			Grid.Column="2"
+			Orientation="Horizontal">
+			<StackPanel.Background>
+				<LinearGradientBrush
+					StartPoint="0,0"
+					EndPoint="1,0">
+					<GradientStop
+						Offset="1"
+						Color="Transparent" />
+					<GradientStop
+						Offset="0"
+						Color="{Binding Path=EmersonInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+				</LinearGradientBrush>
+			</StackPanel.Background>
+			<TextBlock
+				Text="Emerson: " />
+			<TextBlock
+				Text="{Binding Path=EmersonInfo, Mode=OneWay}" />
+		</StackPanel>
+		
 	</Grid>
 </UserControl>

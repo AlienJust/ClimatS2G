@@ -135,6 +135,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BsSm\CmdListenerBsSmReply32.cs" />
+    <Compile Include="BsSm\CmdListenerBsSmRequest32.cs" />
     <Compile Include="MukFanAirExhauster\CmdListenerMukAirExhausterReply03.cs" />
     <Compile Include="MukFanAirExhauster\Request16\AirExhausterRequest16DataView.xaml.cs">
       <DependentUpon>AirExhausterRequest16DataView.xaml</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AlienJust.Support.Numeric.Bits;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease;
@@ -8,7 +9,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 	class BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes : IBuilder<IBsSmAndKsm1DataCommand32Request> {
 		private readonly IList<byte> _commandPartDataBytes;
 		public BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes(IList<byte> commandPartDataBytes) {
-			_commandPartDataBytes = commandPartDataBytes;
+			_commandPartDataBytes = commandPartDataBytes.Skip(2).Take(commandPartDataBytes.Count - 4).ToList();
 		}
 
 		public IBsSmAndKsm1DataCommand32Request Build() {

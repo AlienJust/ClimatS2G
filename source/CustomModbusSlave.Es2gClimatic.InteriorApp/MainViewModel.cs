@@ -17,6 +17,7 @@ using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbus.Slave.FastReply.Queued;
 using CustomModbusSlave.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
@@ -94,6 +95,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		private readonly ICmdListener<IMukFlapWinterSummerReply03Telemetry> _cmdListenerMukFlapWinterSummerReply03;
 		private readonly ICmdListener<IMukFlapAirWinterSummerRequest16Data> _cmdListenerMukAirFlapWinterSummerRequest16;
 
+		private readonly ICmdListener<IBsSmAndKsm1DataCommand32Request> _cmdListenerBsSmRequest32;
+		private readonly ICmdListener<IBsSmAndKsm1DataCommand32Reply> _cmdListenerBsSmReply32;
+
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsmParams;
 
 		public SystemDiagnosticViewModel SystemDiagnosticVm { get; }
@@ -156,6 +160,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_cmdListenerMukFlapWinterSummerReply03 = new CmdListenerMukFlapWinterSummerReply03(8, 3, 47);
 			_cmdListenerMukAirFlapWinterSummerRequest16 = new CmdListenerMukFlapAirWinterSummerRequest16(8, 16, 21);
 
+			_cmdListenerBsSmReply32 = new CmdListenerBsSmReply32(10, 32, 47);
+			_cmdListenerBsSmRequest32 = new CmdListenerBsSmRequest32(10, 32, 27);
+
 			_cmdListenerKsmParams = new CmdListenerKsmParams(20, 16, 129);
 
 			RecordVm = new RecordViewModel(_notifier, _windowSystem);
@@ -169,7 +176,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 				_cmdListenerMukAirExhausterReply03,
 				_cmdListenerMukFlapReturnAirReply03,
 				_cmdListenerMukFlapWinterSummerReply03,
-
+				_cmdListenerBsSmReply32,
 				_cmdListenerKsmParams);
 			MukFlapDataVm = new MukFlapDataViewModel(
 				_notifier,
@@ -190,7 +197,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			MukFlapReturnAirDataVm = new MukFlapReturnAirViewModel(_notifier, _paramSetter, _cmdListenerMukFlapReturnAirReply03, _cmdListenerMukFlapAirRecycleRequest16);
 			MukFlapWinterSummerDataVm = new MukFlapWinterSummerViewModel(_notifier, _paramSetter, _cmdListenerMukFlapWinterSummerReply03, _cmdListenerMukAirFlapWinterSummerRequest16);
 
-			BsSmDataVm = new BsSmDataViewModel(_notifier);
+			BsSmDataVm = new BsSmDataViewModel(_notifier, _cmdListenerBsSmRequest32, _cmdListenerBsSmReply32);
 			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
 			BvsDataVm2 = new BvsDataViewModel(_notifier, 0x1D);
 
@@ -255,9 +262,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_cmdListenerMukFlapWinterSummerReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerMukAirFlapWinterSummerRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
+			_cmdListenerBsSmReply32.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			_cmdListenerBsSmRequest32.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+
 			_rtuParamReceiver.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
-			BsSmDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			//BsSmDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			BvsDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			BvsDataVm2.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 		}

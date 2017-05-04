@@ -5,15 +5,14 @@ using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Numeric.Bits;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.DataModel.Contracts;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 
@@ -21,9 +20,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 	class SystemDiagnosticViewModel : ViewModelBase {
 		private const string UnknownText = "Неизвестно";
 		private const string NoLinkText = "Нет связи";
+		private const string OkLinkText = "Есть связь";
 
-		private const Colors DefaultColor = Colors.Transparent;
-		private const Colors NoLinkColor = Colors.Firebrick;
+		private const Colors DefaultColor = Colors.Yellow;
+		private const Colors NoLinkColor = Colors.OrangeRed;
 		private const Colors OkLinkColor = Colors.LimeGreen;
 
 		private readonly IThreadNotifier _uiNotifier;
@@ -34,6 +34,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private readonly ICmdListener<IMukAirExhausterReply03Data> _cmdListenerMukAirExhausterReply03;
 		private readonly ICmdListener<IMukFlapReturnAirReply03Telemetry> _cmdListenerMukFlapReturnAirReply03;
 		private readonly ICmdListener<IMukFlapWinterSummerReply03Telemetry> _cmdListenerMukFlapWinterSummerReply03;
+		private readonly ICmdListener<IBsSmAndKsm1DataCommand32Reply> _cmdListenerBsSmReply32;
+
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm;
 
 		private string _segmentType;
@@ -58,6 +60,18 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private string _mukInfo8;
 		private Colors _mukInfoColor8;
 
+		private string _bsSmInfo;
+		private Colors _bsSmInfoColor;
+
+		private string _bvsInfo1;
+		private Colors _bvsInfoColor1;
+
+		private string _bvsInfo2;
+		private Colors _bvsInfoColor2;
+
+		private string _emersonInfo;
+		private Colors _emersonInfoColor;
+
 		public SystemDiagnosticViewModel(IThreadNotifier uiNotifier,
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
 			ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03,
@@ -66,10 +80,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			ICmdListener<IMukAirExhausterReply03Data> cmdListenerMukAirExhausterReply03,
 			ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03,
 			ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03,
+			ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32,
 			ICmdListener<IList<BytesPair>> cmdListenerKsm) {
 
 			_uiNotifier = uiNotifier;
-			
+
 			_cmdListenerMukFlapOuterAirReply03 = cmdListenerMukFlapOuterAirReply03;
 			_cmdListenerMukVaporizerReply03 = cmdListenerMukVaporizerReply03;
 			_cmdListenerMukVaporizerRequest16 = cmdListenerMukVaporizerRequest16;
@@ -77,6 +92,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_cmdListenerMukAirExhausterReply03 = cmdListenerMukAirExhausterReply03;
 			_cmdListenerMukFlapReturnAirReply03 = cmdListenerMukFlapReturnAirReply03;
 			_cmdListenerMukFlapWinterSummerReply03 = cmdListenerMukFlapWinterSummerReply03;
+			_cmdListenerBsSmReply32 = cmdListenerBsSmReply32;
 			_cmdListenerKsm = cmdListenerKsm;
 
 			_cmdListenerMukFlapOuterAirReply03.DataReceived += CmdListenerMukFlapOuterAirReply03OnDataReceived;
@@ -86,7 +102,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_cmdListenerMukAirExhausterReply03.DataReceived += CmdListenerMukAirExhausterReply03OnDataReceived;
 			_cmdListenerMukFlapReturnAirReply03.DataReceived += CmdListenerMukFlapReturnAirReply03OnDataReceived;
 			_cmdListenerMukFlapWinterSummerReply03.DataReceived += CmdListenerMukFlapWinterSummerReply03OnDataReceived;
+			_cmdListenerBsSmReply32.DataReceived += CmdListenerBsSmReply32OnDataReceived;
 			_cmdListenerKsm.DataReceived += CmdListenerKsmOnDataReceived;
+
+
 
 			ResetVmPropsToDefaultValues();
 		}
@@ -95,6 +114,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_uiNotifier.Notify(() => {
 				MukInfo2 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
 				MukInfoColor2 = OkLinkColor;
+
+				if (data.Diagnostic1.NoEmersionControllerAnswer) {
+					EmersonInfo = NoLinkText;
+					EmersonInfoColor = NoLinkColor;
+				}
+				else {
+					EmersonInfo = OkLinkText;
+					EmersonInfoColor = OkLinkColor;
+				}
 			});
 		}
 
@@ -133,41 +161,63 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			});
 		}
 
+		private void CmdListenerBsSmReply32OnDataReceived(IList<byte> bytes, IBsSmAndKsm1DataCommand32Reply data) {
+			_uiNotifier.Notify(() => {
+				BsSmInfo = new TextFormatterIntegerDotted().Format(data.BsSmVersionNumber);
+				BsSmInfoColor = OkLinkColor;
+			});
+		}
 
 		private void CmdListenerKsmOnDataReceived(IList<byte> bytes, IList<BytesPair> data) {
-			_uiNotifier.Notify(()=>{
-			Version = new TextFormatterDotted(UnknownText).Format(data[34]);
-			WorkStage = new TextFormatterWorkStage().Format(data[8]);
+			_uiNotifier.Notify(() => {
+				Version = new TextFormatterDotted(UnknownText).Format(data[34]);
+				WorkStage = new TextFormatterWorkStage().Format(data[8]);
 
-			if (data[22].HighFirstUnsignedValue.GetBit(0)) {
-				MukInfo2 = NoLinkText;
-				MukInfoColor2 = NoLinkColor;
-			}
+				if (data[22].HighFirstUnsignedValue.GetBit(0)) {
+					MukInfo2 = NoLinkText;
+					MukInfoColor2 = NoLinkColor;
+				}
 
-			if (data[22].HighFirstUnsignedValue.GetBit(2)) {
-				MukInfo3 = NoLinkText;
-				MukInfoColor3 = NoLinkColor;
-			}
+				if (data[22].HighFirstUnsignedValue.GetBit(2)) {
+					MukInfo3 = NoLinkText;
+					MukInfoColor3 = NoLinkColor;
+				}
 
-			if (data[22].HighFirstUnsignedValue.GetBit(4)) {
-				MukInfo4 = NoLinkText;
-				MukInfoColor4 = NoLinkColor;
-			}
+				if (data[22].HighFirstUnsignedValue.GetBit(4)) {
+					MukInfo4 = NoLinkText;
+					MukInfoColor4 = NoLinkColor;
+				}
 
-			if (data[22].HighFirstUnsignedValue.GetBit(6)) {
-				MukInfo6 = NoLinkText;
-				MukInfoColor6 = NoLinkColor;
-			}
+				if (data[22].HighFirstUnsignedValue.GetBit(6)) {
+					MukInfo6 = NoLinkText;
+					MukInfoColor6 = NoLinkColor;
+				}
 
-			if (data[23].HighFirstUnsignedValue.GetBit(0)) {
-				MukInfo7 = NoLinkText;
-				MukInfoColor7 = NoLinkColor;
-			}
+				if (data[23].HighFirstUnsignedValue.GetBit(0)) {
+					MukInfo7 = NoLinkText;
+					MukInfoColor7 = NoLinkColor;
+				}
 
-			if (data[23].HighFirstUnsignedValue.GetBit(2)) {
-				MukInfo8 = NoLinkText;
-				MukInfoColor8 = NoLinkColor;
-			}
+				if (data[23].HighFirstUnsignedValue.GetBit(2)) {
+					MukInfo8 = NoLinkText;
+					MukInfoColor8 = NoLinkColor;
+				}
+
+				if (data[23].HighFirstUnsignedValue.GetBit(4)) {
+					BsSmInfo = NoLinkText;
+					BsSmInfoColor = NoLinkColor;
+				}
+
+				if (data[23].HighFirstUnsignedValue.GetBit(5)) {
+					BvsInfo1 = NoLinkText;
+					BvsInfoColor1 = NoLinkColor;
+				}
+
+				if (data[23].HighFirstUnsignedValue.GetBit(6)) {
+					BvsInfo2 = NoLinkText;
+					BvsInfoColor2 = NoLinkColor;
+				}
+
 			});
 		}
 
@@ -182,7 +232,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			set {
 				if (_segmentType != value) {
 					_segmentType = value;
-					RaisePropertyChanged(()=> SegmentType);
+					RaisePropertyChanged(() => SegmentType);
 				}
 			}
 		}
@@ -192,7 +242,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			set {
 				if (_version != value) {
 					_version = value;
-					RaisePropertyChanged(()=>Version);
+					RaisePropertyChanged(() => Version);
 				}
 			}
 		}
@@ -213,7 +263,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			set {
 				if (_mukInfo2 != value) {
 					_mukInfo2 = value;
-					RaisePropertyChanged(()=>MukInfo2);
+					RaisePropertyChanged(() => MukInfo2);
 				}
 			}
 		}
@@ -327,29 +377,120 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		}
 
 
+		public string BsSmInfo {
+			get { return _bsSmInfo; }
+			set {
+				if (_bsSmInfo != value) {
+					_bsSmInfo = value;
+					RaisePropertyChanged(() => BsSmInfo);
+				}
+			}
+		}
+		public Colors BsSmInfoColor {
+			get { return _bsSmInfoColor; }
+			set {
+				if (_bsSmInfoColor != value) {
+					_bsSmInfoColor = value;
+					RaisePropertyChanged(() => BsSmInfoColor);
+				}
+			}
+		}
+
+
+		public string BvsInfo1 {
+			get { return _bvsInfo1; }
+			set {
+				if (_bvsInfo1 != value) {
+					_bvsInfo1 = value;
+					RaisePropertyChanged(() => BvsInfo1);
+				}
+			}
+		}
+		public Colors BvsInfoColor1 {
+			get { return _bvsInfoColor1; }
+			set {
+				if (_bvsInfoColor1 != value) {
+					_bvsInfoColor1 = value;
+					RaisePropertyChanged(() => BvsInfoColor1);
+				}
+			}
+		}
+
+		public string BvsInfo2 {
+			get { return _bvsInfo2; }
+			set {
+				if (_bvsInfo2 != value) {
+					_bvsInfo2 = value;
+					RaisePropertyChanged(() => BvsInfo2);
+				}
+			}
+		}
+		public Colors BvsInfoColor2 {
+			get { return _bvsInfoColor2; }
+			set {
+				if (_bvsInfoColor2 != value) {
+					_bvsInfoColor2 = value;
+					RaisePropertyChanged(() => BvsInfoColor2);
+				}
+			}
+		}
+
+		public string EmersonInfo {
+			get { return _emersonInfo; }
+			set {
+				if (_emersonInfo != value) {
+					_emersonInfo = value;
+					RaisePropertyChanged(() => EmersonInfo);
+				}
+			}
+		}
+		public Colors EmersonInfoColor {
+			get { return _emersonInfoColor; }
+			set {
+				if (_emersonInfoColor != value) {
+					_emersonInfoColor = value;
+					RaisePropertyChanged(() => EmersonInfoColor);
+				}
+			}
+		}
+
+
+
 
 		void ResetVmPropsToDefaultValues() {
 			SegmentType = UnknownText;
 			Version = UnknownText;
 			WorkStage = UnknownText;
 
-			MukInfo2 = NoLinkText;
+			MukInfo2 = UnknownText;
 			MukInfoColor2 = DefaultColor;
 
-			MukInfo3 = NoLinkText;
+			MukInfo3 = UnknownText;
 			MukInfoColor3 = DefaultColor;
 
-			MukInfo4 = NoLinkText;
+			MukInfo4 = UnknownText;
 			MukInfoColor4 = DefaultColor;
 
-			MukInfo6 = NoLinkText;
+			MukInfo6 = UnknownText;
 			MukInfoColor6 = DefaultColor;
 
-			MukInfo7 = NoLinkText;
+			MukInfo7 = UnknownText;
 			MukInfoColor7 = DefaultColor;
 
-			MukInfo8 = NoLinkText;
+			MukInfo8 = UnknownText;
 			MukInfoColor8 = DefaultColor;
+
+			BsSmInfo = UnknownText;
+			BsSmInfoColor = DefaultColor;
+
+			BvsInfo1 = UnknownText;
+			BvsInfoColor1 = DefaultColor;
+
+			BvsInfo2 = UnknownText;
+			BvsInfoColor2 = DefaultColor;
+
+			EmersonInfo = UnknownText;
+			EmersonInfoColor = DefaultColor;
 		}
 	}
 }
