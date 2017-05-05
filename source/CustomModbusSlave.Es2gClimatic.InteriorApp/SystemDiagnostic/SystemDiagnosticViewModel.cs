@@ -21,10 +21,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private const string UnknownText = "Неизвестно";
 		private const string NoLinkText = "Нет связи";
 		private const string OkLinkText = "Есть связь";
+		private const string NoSensorText = "Обрыв";
 
-		private const Colors DefaultColor = Colors.Yellow;
-		private const Colors NoLinkColor = Colors.OrangeRed;
+		private const Colors UnknownColor = Colors.Yellow;
+		private const Colors NoLinkColor = Colors.Red;
+		private const Colors NoSensorColor = Colors.OrangeRed;
+
 		private const Colors OkLinkColor = Colors.LimeGreen;
+		private const Colors OkSensorColor = Colors.LimeGreen;
+
 
 		private readonly IThreadNotifier _uiNotifier;
 		private readonly ICmdListener<IMukFlapReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
@@ -71,6 +76,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		private string _emersonInfo;
 		private Colors _emersonInfoColor;
+
+		private string _evaporatorFanControllerInfo;
+		private Colors _evaporatorFanControllerInfoColor;
+
+		private string _sensorOuterAirInfo;
+		private Colors _sensorOuterAirInfoColor;
+
+		private string _sensorRecycleAirInfo;
+		private Colors _sensorRecycleAirInfoColor;
 
 		public SystemDiagnosticViewModel(IThreadNotifier uiNotifier,
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
@@ -130,6 +144,34 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_uiNotifier.Notify(() => {
 				MukInfo3 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
 				MukInfoColor3 = OkLinkColor;
+
+				if (data.Diagnostic1Parsed.FanControllerLinkLost) {
+					EvaporatorFanControllerInfo = NoLinkText;
+					EvaporatorFanControllerInfoColor = NoLinkColor;
+				}
+				else {
+					EvaporatorFanControllerInfo = OkLinkText;
+					EvaporatorFanControllerInfoColor = OkLinkColor;
+				}
+
+				if (data.TemperatureAddress1.NoLinkWithSensor) {
+					SensorOuterAirInfo = NoSensorText;
+					SensorOuterAirInfoColor = NoSensorColor;
+				}
+				else {
+					SensorOuterAirInfo = data.TemperatureAddress1.Indication.ToString("f2");
+					SensorOuterAirInfoColor = OkSensorColor;
+				}
+
+				if (data.TemperatureAddress2.NoLinkWithSensor) {
+					SensorRecycleAirInfo = NoSensorText;
+					SensorRecycleAirInfoColor = NoSensorColor;
+				}
+				else {
+					SensorRecycleAirInfo = data.TemperatureAddress2.Indication.ToString("f2");
+					SensorRecycleAirInfoColor = OkSensorColor;
+				}
+
 			});
 		}
 
@@ -176,11 +218,23 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				if (data[22].HighFirstUnsignedValue.GetBit(0)) {
 					MukInfo2 = NoLinkText;
 					MukInfoColor2 = NoLinkColor;
+
+					EmersonInfo = NoLinkText;
+					EmersonInfoColor = NoLinkColor;
 				}
 
 				if (data[22].HighFirstUnsignedValue.GetBit(2)) {
 					MukInfo3 = NoLinkText;
 					MukInfoColor3 = NoLinkColor;
+
+					EvaporatorFanControllerInfo = NoLinkText;
+					EvaporatorFanControllerInfoColor = NoLinkColor;
+
+					SensorOuterAirInfo = NoLinkText;
+					SensorOuterAirInfoColor = NoLinkColor;
+
+					SensorRecycleAirInfo = NoLinkText;
+					SensorRecycleAirInfoColor = NoLinkColor;
 				}
 
 				if (data[22].HighFirstUnsignedValue.GetBit(4)) {
@@ -455,6 +509,64 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		}
 
 
+		public string EvaporatorFanControllerInfo {
+			get { return _evaporatorFanControllerInfo; }
+			set {
+				if (_evaporatorFanControllerInfo != value) {
+					_evaporatorFanControllerInfo = value;
+					RaisePropertyChanged(() => EvaporatorFanControllerInfo);
+				}
+			}
+		}
+		public Colors EvaporatorFanControllerInfoColor {
+			get { return _evaporatorFanControllerInfoColor; }
+			set {
+				if (_evaporatorFanControllerInfoColor != value) {
+					_evaporatorFanControllerInfoColor = value;
+					RaisePropertyChanged(() => EvaporatorFanControllerInfoColor);
+				}
+			}
+		}
+
+
+		public string SensorOuterAirInfo {
+			get { return _sensorOuterAirInfo; }
+			set {
+				if (_sensorOuterAirInfo != value) {
+					_sensorOuterAirInfo = value;
+					RaisePropertyChanged(() => SensorOuterAirInfo);
+				}
+			}
+		}
+		public Colors SensorOuterAirInfoColor {
+			get { return _sensorOuterAirInfoColor; }
+			set {
+				if (_sensorOuterAirInfoColor != value) {
+					_sensorOuterAirInfoColor = value;
+					RaisePropertyChanged(() => SensorOuterAirInfoColor);
+				}
+			}
+		}
+
+		public string SensorRecycleAirInfo {
+			get { return _sensorRecycleAirInfo; }
+			set {
+				if (_sensorRecycleAirInfo != value) {
+					_sensorRecycleAirInfo = value;
+					RaisePropertyChanged(() => SensorRecycleAirInfo);
+				}
+			}
+		}
+		public Colors SensorRecycleAirInfoColor {
+			get { return _sensorRecycleAirInfoColor; }
+			set {
+				if (_sensorRecycleAirInfoColor != value) {
+					_sensorRecycleAirInfoColor = value;
+					RaisePropertyChanged(() => SensorRecycleAirInfoColor);
+				}
+			}
+		}
+
 
 
 		void ResetVmPropsToDefaultValues() {
@@ -463,34 +575,43 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			WorkStage = UnknownText;
 
 			MukInfo2 = UnknownText;
-			MukInfoColor2 = DefaultColor;
+			MukInfoColor2 = UnknownColor;
 
 			MukInfo3 = UnknownText;
-			MukInfoColor3 = DefaultColor;
+			MukInfoColor3 = UnknownColor;
 
 			MukInfo4 = UnknownText;
-			MukInfoColor4 = DefaultColor;
+			MukInfoColor4 = UnknownColor;
 
 			MukInfo6 = UnknownText;
-			MukInfoColor6 = DefaultColor;
+			MukInfoColor6 = UnknownColor;
 
 			MukInfo7 = UnknownText;
-			MukInfoColor7 = DefaultColor;
+			MukInfoColor7 = UnknownColor;
 
 			MukInfo8 = UnknownText;
-			MukInfoColor8 = DefaultColor;
+			MukInfoColor8 = UnknownColor;
 
 			BsSmInfo = UnknownText;
-			BsSmInfoColor = DefaultColor;
+			BsSmInfoColor = UnknownColor;
 
 			BvsInfo1 = UnknownText;
-			BvsInfoColor1 = DefaultColor;
+			BvsInfoColor1 = UnknownColor;
 
 			BvsInfo2 = UnknownText;
-			BvsInfoColor2 = DefaultColor;
+			BvsInfoColor2 = UnknownColor;
 
 			EmersonInfo = UnknownText;
-			EmersonInfoColor = DefaultColor;
+			EmersonInfoColor = UnknownColor;
+
+			EvaporatorFanControllerInfo = UnknownText;
+			EvaporatorFanControllerInfoColor = UnknownColor;
+
+			SensorOuterAirInfo = UnknownText;
+			SensorOuterAirInfoColor = UnknownColor;
+
+			SensorRecycleAirInfo = UnknownText;
+			SensorRecycleAirInfoColor = UnknownColor;
 		}
 	}
 }

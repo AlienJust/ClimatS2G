@@ -6,191 +6,194 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
 	mc:Ignorable="d"
-	d:DesignHeight="200"
-	d:DesignWidth="300">
+	d:DesignHeight="400"
+	d:DesignWidth="400">
 	<UserControl.Resources>
-		<converters:ColorsEnumToColorConverter x:Key="ColorConverter"/>
+		<converters:ColorsEnumToColorConverter
+			x:Key="ColorConverter" />
 	</UserControl.Resources>
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition />
-			<ColumnDefinition />
-			<ColumnDefinition />
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition
-				Height="Auto" />
-			<RowDefinition
-				Height="Auto" />
-			<RowDefinition
-				Height="Auto" />
-			<RowDefinition
-				Height="Auto" />
-			<RowDefinition
-				Height="Auto" />
-			<RowDefinition
-				Height="Auto" />
-			<RowDefinition
-				Height="Auto" />
-		</Grid.RowDefinitions>
-		<StackPanel
-			Grid.Column="0"
-			Orientation="Horizontal">
-			<TextBlock
-				Text="Сегмент: " />
-			<TextBlock
-				Text="{Binding Path=SegmentType, Mode=OneWay}" />
-		</StackPanel>
-		<StackPanel
-			Grid.Row="0"
-			Grid.Column="1"
-			Orientation="Horizontal">
-			<TextBlock
-				Text="Версия ПО: " />
-			<TextBlock
-				Text="{Binding Path=Version, Mode=OneWay}" />
-		</StackPanel>
+	<StackPanel
+		Orientation="Vertical">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+			</Grid.RowDefinitions>
+			<StackPanel
+				Grid.Column="0"
+				Orientation="Horizontal">
+				<TextBlock
+					Text="Сегмент: " />
+				<TextBlock
+					Text="{Binding Path=SegmentType, Mode=OneWay}" />
+			</StackPanel>
+			<StackPanel
+				Grid.Row="0"
+				Grid.Column="1"
+				Orientation="Horizontal">
+				<TextBlock
+					Text="Версия ПО: " />
+				<TextBlock
+					Text="{Binding Path=Version, Mode=OneWay}" />
+			</StackPanel>
 
-		<StackPanel
-			Grid.Row="1"
-			Grid.Column="0"
-			Grid.ColumnSpan="3"
-			Orientation="Horizontal">
-			<TextBlock
-				Text="Этап работы: " />
-			<TextBlock
-				Text="{Binding Path=WorkStage, Mode=OneWay}" />
-		</StackPanel>
+			<StackPanel
+				Grid.Row="1"
+				Grid.Column="0"
+				Grid.ColumnSpan="3"
+				Orientation="Horizontal">
+				<TextBlock
+					Text="Этап работы: " />
+				<TextBlock
+					Text="{Binding Path=WorkStage, Mode=OneWay}" />
+			</StackPanel>
 
-		<StackPanel
-			Grid.Row="2"
-			Grid.Column="0"
-			Orientation="Horizontal">
-			<StackPanel.Background>
-				<LinearGradientBrush
-					StartPoint="0,0"
-					EndPoint="1,0">
-					<GradientStop
-						Offset="1"
-						Color="Transparent" />
-					<GradientStop
-						Offset="0"
-						Color="{Binding Path=MukInfoColor2, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-				</LinearGradientBrush>
-			</StackPanel.Background>
-			<TextBlock
-				Text="МУК №2: " />
-			<TextBlock
-				Text="{Binding Path=MukInfo2, Mode=OneWay}" />
-		</StackPanel>
-		<StackPanel
-			Grid.Row="2"
-			Grid.Column="1"
-			Orientation="Horizontal">
-			<StackPanel.Background>
-				<LinearGradientBrush
-					StartPoint="0,0"
-					EndPoint="1,0">
-					<GradientStop
-						Offset="1"
-						Color="Transparent" />
-					<GradientStop
-						Offset="0"
-						Color="{Binding Path=MukInfoColor3, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-				</LinearGradientBrush>
-			</StackPanel.Background>
-			<TextBlock
-				Text="МУК №3: " />
-			<TextBlock
-				Text="{Binding Path=MukInfo3, Mode=OneWay}" />
-		</StackPanel>
-		<StackPanel
-			Grid.Row="2"
-			Grid.Column="2"
-			Orientation="Horizontal">
-			<StackPanel.Background>
-				<LinearGradientBrush
-					StartPoint="0,0"
-					EndPoint="1,0">
-					<GradientStop
-						Offset="1"
-						Color="Transparent" />
-					<GradientStop
-						Offset="0"
-						Color="{Binding Path=MukInfoColor4, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-				</LinearGradientBrush>
-			</StackPanel.Background>
-			<TextBlock
-				Text="МУК №4: " />
-			<TextBlock
-				Text="{Binding Path=MukInfo4, Mode=OneWay}" />
-		</StackPanel>
+			<StackPanel
+				Grid.Row="2"
+				Grid.Column="0"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=MukInfoColor2, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="МУК №2: " />
+				<TextBlock
+					Text="{Binding Path=MukInfo2, Mode=OneWay}" />
+			</StackPanel>
+			<StackPanel
+				Grid.Row="2"
+				Grid.Column="1"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=MukInfoColor3, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="МУК №3: " />
+				<TextBlock
+					Text="{Binding Path=MukInfo3, Mode=OneWay}" />
+			</StackPanel>
+			<StackPanel
+				Grid.Row="2"
+				Grid.Column="2"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=MukInfoColor4, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="МУК №4: " />
+				<TextBlock
+					Text="{Binding Path=MukInfo4, Mode=OneWay}" />
+			</StackPanel>
 
-		<StackPanel
-			Grid.Row="3"
-			Grid.Column="0"
-			Orientation="Horizontal">
-			<StackPanel.Background>
-				<LinearGradientBrush
-					StartPoint="0,0"
-					EndPoint="1,0">
-					<GradientStop
-						Offset="1"
-						Color="Transparent" />
-					<GradientStop
-						Offset="0"
-						Color="{Binding Path=MukInfoColor6, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-				</LinearGradientBrush>
-			</StackPanel.Background>
-			<TextBlock
-				Text="МУК №6: " />
-			<TextBlock
-				Text="{Binding Path=MukInfo6, Mode=OneWay}" />
-		</StackPanel>
-		<StackPanel
-			Grid.Row="3"
-			Grid.Column="1"
-			Orientation="Horizontal">
-			<StackPanel.Background>
-				<LinearGradientBrush
-					StartPoint="0,0"
-					EndPoint="1,0">
-					<GradientStop
-						Offset="1"
-						Color="Transparent" />
-					<GradientStop
-						Offset="0"
-						Color="{Binding Path=MukInfoColor7, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-				</LinearGradientBrush>
-			</StackPanel.Background>
-			<TextBlock
-				Text="МУК №7: " />
-			<TextBlock
-				Text="{Binding Path=MukInfo7, Mode=OneWay}" />
-		</StackPanel>
-		<StackPanel
-			Grid.Row="3"
-			Grid.Column="2"
-			Orientation="Horizontal">
-			<StackPanel.Background>
-				<LinearGradientBrush
-					StartPoint="0,0"
-					EndPoint="1,0">
-					<GradientStop
-						Offset="1"
-						Color="Transparent" />
-					<GradientStop
-						Offset="0"
-						Color="{Binding Path=MukInfoColor8, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-				</LinearGradientBrush>
-			</StackPanel.Background>
-			<TextBlock
-				Text="МУК №8: " />
-			<TextBlock
-				Text="{Binding Path=MukInfo8, Mode=OneWay}" />
-		</StackPanel>
-		
-		<StackPanel
+			<StackPanel
+				Grid.Row="3"
+				Grid.Column="0"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=MukInfoColor6, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="МУК №6: " />
+				<TextBlock
+					Text="{Binding Path=MukInfo6, Mode=OneWay}" />
+			</StackPanel>
+			<StackPanel
+				Grid.Row="3"
+				Grid.Column="1"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=MukInfoColor7, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="МУК №7: " />
+				<TextBlock
+					Text="{Binding Path=MukInfo7, Mode=OneWay}" />
+			</StackPanel>
+			<StackPanel
+				Grid.Row="3"
+				Grid.Column="2"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=MukInfoColor8, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="МУК №8: " />
+				<TextBlock
+					Text="{Binding Path=MukInfo8, Mode=OneWay}" />
+			</StackPanel>
+
+			<StackPanel
 				Grid.Row="4"
 				Grid.Column="0"
 				Orientation="Horizontal">
@@ -203,7 +206,7 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-						Color="{Binding Path=BsSmInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=BsSmInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
@@ -211,71 +214,153 @@
 				<TextBlock
 					Text="{Binding Path=BsSmInfo, Mode=OneWay}" />
 			</StackPanel>
-		
-		<StackPanel
-			Grid.Row="5"
-			Grid.Column="0"
-			Orientation="Horizontal">
-			<StackPanel.Background>
-				<LinearGradientBrush
-					StartPoint="0,0"
-					EndPoint="1,0">
-					<GradientStop
-						Offset="1"
-						Color="Transparent" />
-					<GradientStop
-						Offset="0"
-						Color="{Binding Path=BvsInfoColor1, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-				</LinearGradientBrush>
-			</StackPanel.Background>
-			<TextBlock
-				Text="БВС1: " />
-			<TextBlock
-				Text="{Binding Path=BvsInfo1, Mode=OneWay}" />
-		</StackPanel>
-		<StackPanel
-			Grid.Row="5"
-			Grid.Column="1"
-			Orientation="Horizontal">
-			<StackPanel.Background>
-				<LinearGradientBrush
-					StartPoint="0,0"
-					EndPoint="1,0">
-					<GradientStop
-						Offset="1"
-						Color="Transparent" />
-					<GradientStop
-						Offset="0"
-						Color="{Binding Path=BvsInfoColor2, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-				</LinearGradientBrush>
-			</StackPanel.Background>
-			<TextBlock
-				Text="БВС2: " />
-			<TextBlock
-				Text="{Binding Path=BvsInfo2, Mode=OneWay}" />
-		</StackPanel>
 
-		<StackPanel
-			Grid.Row="5"
-			Grid.Column="2"
-			Orientation="Horizontal">
-			<StackPanel.Background>
-				<LinearGradientBrush
-					StartPoint="0,0"
-					EndPoint="1,0">
-					<GradientStop
-						Offset="1"
-						Color="Transparent" />
-					<GradientStop
-						Offset="0"
-						Color="{Binding Path=EmersonInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-				</LinearGradientBrush>
-			</StackPanel.Background>
+			<StackPanel
+				Grid.Row="5"
+				Grid.Column="0"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=BvsInfoColor1, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="БВС1: " />
+				<TextBlock
+					Text="{Binding Path=BvsInfo1, Mode=OneWay}" />
+			</StackPanel>
+			<StackPanel
+				Grid.Row="5"
+				Grid.Column="1"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=BvsInfoColor2, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="БВС2: " />
+				<TextBlock
+					Text="{Binding Path=BvsInfo2, Mode=OneWay}" />
+			</StackPanel>
+
+			<StackPanel
+				Grid.Row="5"
+				Grid.Column="2"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=EmersonInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="Emerson: " />
+				<TextBlock
+					Text="{Binding Path=EmersonInfo, Mode=OneWay}" />
+			</StackPanel>
+
+			<StackPanel
+				Grid.Row="6"
+				Grid.Column="0"
+				Grid.ColumnSpan="3"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=EvaporatorFanControllerInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="Контролер вентилятора испарителя: " />
+				<TextBlock
+					Text="{Binding Path=EvaporatorFanControllerInfo, Mode=OneWay}" />
+			</StackPanel>
+
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+			</Grid.RowDefinitions>
 			<TextBlock
-				Text="Emerson: " />
-			<TextBlock
-				Text="{Binding Path=EmersonInfo, Mode=OneWay}" />
-		</StackPanel>
-		
-	</Grid>
+				Grid.ColumnSpan="2"
+				Text="Датчики и диагностика устройств:"
+				FontWeight="Bold" />
+			<StackPanel
+				Grid.Row="1"
+				Grid.Column="0"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=SensorOuterAirInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="Датчик наружного воздуха: " />
+				<TextBlock
+					Text="{Binding Path=SensorOuterAirInfo, Mode=OneWay}" />
+			</StackPanel>
+			<StackPanel
+				Grid.Row="1"
+				Grid.Column="1"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=SensorRecycleAirInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="Датчик рецирк. воздуха: " />
+				<TextBlock
+					Text="{Binding Path=SensorRecycleAirInfo, Mode=OneWay}" />
+			</StackPanel>
+		</Grid>
+	</StackPanel>
 </UserControl>
