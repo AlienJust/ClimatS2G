@@ -19,6 +19,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 		IMukFlapDiagnosticOneWireSensor Diagnostic4OneWire2 { get; }
 
 		int ConcentratorStatus { get; }
+		IMukFlapReturnAirConcentratorStatus ConcentratorStatusParsed { get; }
 		int ConcentratorDrivers { get; }
 		int ConcentratorVoltage { get; }
 		int Reserve14 { get; }

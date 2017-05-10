@@ -53,6 +53,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 				diagnostic4,
 
 				concentratorState,
+				new MukFlapReturnAirConcentratorStatusBuilderFromByte(_data[26]).Build(),
+
 				concentratorDrivers,
 				concentratorVoltage,
 				

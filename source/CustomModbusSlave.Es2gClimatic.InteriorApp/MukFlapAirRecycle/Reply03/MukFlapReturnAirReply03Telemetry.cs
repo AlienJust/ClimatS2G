@@ -5,7 +5,26 @@ using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 	class MukFlapReturnAirReply03Telemetry : IMukFlapReturnAirReply03Telemetry {
-		public MukFlapReturnAirReply03Telemetry(int flapPwmSetting, ISensorIndication<double> temperatureAddress1, ISensorIndication<double> temperatureAddress2, IIncomingSignals incomingSignals, byte outgoingSignals, double analogInput, IMukFlapWorkmodeStage automaticModeStage, IMukFlapDiagnostic1 diagnostic1, IMukFlapDiagnostic2 diagnostic2, IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1, IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2, int concentratorStatus, int concentratorDrivers, int concentratorVoltage, int reserve14, int reserve15, int firmwareBuildNumber, int reserve17, int reserve18) {
+		public MukFlapReturnAirReply03Telemetry(int flapPwmSetting, 
+			ISensorIndication<double> temperatureAddress1, 
+			ISensorIndication<double> temperatureAddress2, 
+			IIncomingSignals incomingSignals, 
+			byte outgoingSignals, 
+			double analogInput, 
+			IMukFlapWorkmodeStage automaticModeStage, 
+			IMukFlapDiagnostic1 diagnostic1, 
+			IMukFlapDiagnostic2 diagnostic2, 
+			IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1, 
+			IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2, 
+			int concentratorStatus,
+			IMukFlapReturnAirConcentratorStatus concentratorStatusParsed,
+			int concentratorDrivers, 
+			int concentratorVoltage, 
+			int reserve14, 
+			int reserve15, 
+			int firmwareBuildNumber, 
+			int reserve17, 
+			int reserve18) {
 			FlapPwmSetting = flapPwmSetting;
 			TemperatureAddress1 = temperatureAddress1;
 			TemperatureAddress2 = temperatureAddress2;
@@ -17,7 +36,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 			Diagnostic2 = diagnostic2;
 			Diagnostic3OneWire1 = diagnostic3OneWire1;
 			Diagnostic4OneWire2 = diagnostic4OneWire2;
+
 			ConcentratorStatus = concentratorStatus;
+			ConcentratorStatusParsed = concentratorStatusParsed;
+
 			ConcentratorDrivers = concentratorDrivers;
 			ConcentratorVoltage = concentratorVoltage;
 			Reserve14 = reserve14;
@@ -39,6 +61,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 		public IMukFlapDiagnosticOneWireSensor Diagnostic3OneWire1 { get; }
 		public IMukFlapDiagnosticOneWireSensor Diagnostic4OneWire2 { get; }
 		public int ConcentratorStatus { get; }
+		public IMukFlapReturnAirConcentratorStatus ConcentratorStatusParsed { get; }
 		public int ConcentratorDrivers { get; }
 		public int ConcentratorVoltage { get; }
 		public int Reserve14 { get; }

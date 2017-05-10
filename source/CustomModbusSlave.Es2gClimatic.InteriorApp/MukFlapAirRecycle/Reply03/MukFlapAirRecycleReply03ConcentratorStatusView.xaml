@@ -1,0 +1,46 @@
+﻿<UserControl
+	x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03.MukFlapAirRecycleReply03ConcentratorStatusView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03"
+	mc:Ignorable="d"
+	d:DesignHeight="300"
+	d:DesignWidth="300">
+	<StackPanel
+		Orientation="Vertical">
+		<CheckBox
+			IsHitTestVisible="False"
+			Content="Команда на ПЛМ (1 - «включение»)"
+			IsChecked="{Binding Path=CommandToPal, Mode=OneTime}" />
+		<CheckBox
+			IsHitTestVisible="False"
+			Content="Команда с ПЛМ (1- включение ключа)"
+			IsChecked="{Binding Path=CommandFromPal, Mode=OneTime}" />
+		<CheckBox
+			IsHitTestVisible="False"
+			Content="Работа / неисправность"
+			IsChecked="{Binding Path=WorkOrError, Mode=OneTime}" />
+		<CheckBox
+			IsHitTestVisible="False"
+			Content="Ошибка по неответу драйвера"
+			IsChecked="{Binding Path=ErrorNoAnswerFromDriver, Mode=OneTime}" />
+		<CheckBox
+			IsHitTestVisible="False"
+			Content="Ошибка по току CC"
+			IsChecked="{Binding Path=ErrorByCurrentCc, Mode=OneTime}" />
+		<CheckBox
+			IsHitTestVisible="False"
+			Content="Значение компаратора"
+			IsChecked="{Binding Path=ComparatorValue, Mode=OneTime}" />
+		<CheckBox
+			IsHitTestVisible="False"
+			Content="Резерв"
+			IsChecked="{Binding Path=Reserve, Mode=OneTime}" />
+		<CheckBox
+			IsHitTestVisible="False"
+			Content="Адрес"
+			IsChecked="{Binding Path=Address, Mode=OneTime}" />
+	</StackPanel>
+</UserControl>

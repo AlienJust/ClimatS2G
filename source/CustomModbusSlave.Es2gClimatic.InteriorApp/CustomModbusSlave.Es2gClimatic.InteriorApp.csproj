@@ -156,6 +156,12 @@
     <Compile Include="MukFlapAirOuter\Reply03\CmdListenerMukFlapOuterAirReply03.cs" />
     <Compile Include="MukFlapAirOuter\Request16\CmdListenerMukFlapOuterAirRequest16.cs" />
     <Compile Include="MukFlapAirRecycle\Reply03\CmdListenerMukFlapReturnAirReply03.cs" />
+    <Compile Include="MukFlapAirRecycle\Reply03\MukFlapAirRecycleReply03ConcentratorStatusView.xaml.cs">
+      <DependentUpon>MukFlapAirRecycleReply03ConcentratorStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MukFlapAirRecycle\Reply03\IMukFlapReturnAirConcentratorStatus.cs" />
+    <Compile Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirConcentratorStatusBuilderFromByte.cs" />
+    <Compile Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirConcentratorStatusSimple.cs" />
     <Compile Include="MukFlapAirRecycle\Request16\CmdListenerMukFlapAirRecycleRequest16.cs" />
     <Compile Include="MukFlapAirRecycle\Request16\MukFlapAirRecycleRequest16DataBuilder.cs" />
     <Compile Include="MukFlapAirRecycle\Request16\MukFlapAirRecycleRequest16DataSimple.cs" />
@@ -451,6 +457,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MukFlapAirOuter\Reply03\MukFlapReply03TelemetryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFlapAirRecycle\Reply03\MukFlapAirRecycleReply03ConcentratorStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
