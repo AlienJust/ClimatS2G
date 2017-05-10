@@ -1,21 +1,33 @@
-﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.WorkMode2View" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-		xmlns:sharedBssm="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm;assembly=CustomModbusSlave.Es2gClimatic.Shared" mc:Ignorable="d"
-		d:DesignHeight="300" d:DesignWidth="300">
+﻿<UserControl
+	x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.WorkMode2View"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:sharedBssm="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	mc:Ignorable="d"
+	d:DesignHeight="300"
+	d:DesignWidth="300">
 	<UserControl.Resources>
-		<sharedBssm:ClimaticSystemWorkModeToStringThrowableConverter x:Key="ClimaticSystemWorkModeConverter" />
+		<sharedBssm:ClimaticSystemWorkModeToStringThrowableConverter
+			x:Key="ClimaticSystemWorkModeConverter" />
 	</UserControl.Resources>
 	<StackPanel>
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition
+					Width="Auto" />
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="Текущий режим работы климатической системы" />
-			<TextBlock Grid.Column="1" Text="{Binding Path=ClimaticSystemWorkmode, Mode=OneWay, Converter={StaticResource ClimaticSystemWorkModeConverter}}"
-					TextAlignment="Right" />
+			<TextBlock
+				Text="Текущий режим работы климатической системы" />
+			<TextBlock
+				Grid.Column="1"
+				Text="{Binding Path=ClimaticSystemWorkmode, Mode=OneWay, Converter={StaticResource ClimaticSystemWorkModeConverter}}"
+				TextAlignment="Right" />
 		</Grid>
-		<CheckBox Content="Включение регулятора у ведомого устройства ведущим" IsChecked="{Binding Path=SlaveRegulatorOnByMaster, Mode=OneTime}" />
+		<CheckBox
+			Content="Включение режима обогрева или охлаждения у мастера на 100%"
+			IsChecked="{Binding Path=SlaveRegulatorOnByMaster, Mode=OneTime}" />
 	</StackPanel>
 </UserControl>
