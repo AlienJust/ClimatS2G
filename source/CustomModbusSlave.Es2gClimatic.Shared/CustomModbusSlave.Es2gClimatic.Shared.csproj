@@ -135,6 +135,10 @@
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
     <Compile Include="CmdListenerBase.cs" />
     <Compile Include="ModbusRtuParamReceiver.cs" />
+    <Compile Include="MukFanCondenser\Reply03\MukCondensorFanReply03DataSimple.cs" />
+    <Compile Include="MukFanCondenser\Reply03\MukFanCondencerReply03View.xaml.cs">
+      <DependentUpon>MukFanCondencerReply03View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukFanCondenser\Request16\CmdListenerMukCondenserFanRequest16.cs" />
     <Compile Include="MukFanCondenser\Request16\IMukCondenserWorkmodeCommandFromKsm.cs" />
     <Compile Include="MukFanCondenser\Request16\IMukCondenserRequest16Data.cs" />
@@ -212,6 +216,7 @@
     <Compile Include="MukFanEvaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml.cs">
       <DependentUpon>TemperatureRegulatorWorkModeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SetParamsAndKsm\Converters\UshortToStringConverterDotted.cs" />
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterSimpleUshort.cs" />
     <Compile Include="SetParamsAndKsm\Contracts\ICurrentValueSettable.cs" />
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\IDoubleBytesPairConverter.cs" />
@@ -317,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EmersionDiagnostic\EmersonDiagnosticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukFanCondenser\Reply03\MukFanCondencerReply03View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

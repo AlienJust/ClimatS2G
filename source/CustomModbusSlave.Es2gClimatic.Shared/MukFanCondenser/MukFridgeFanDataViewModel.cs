@@ -17,22 +17,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser {
 		private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukFridgeFanReply03;
 		private readonly ICmdListener<IMukCondenserRequest16Data> _cmdListenerMukCondenserRequest16;
 
-		private string _fanPwm;
-		private string _condensingPressure;
-		private string _incomingSignals;
-		private string _outgoingSignals;
-		private string _analogInput;
-		private string _automaticModeStage;
-		private string _workMode;
-		private string _diagnostic1;
-		private string _diagnostic2;
-		private string _fanSpeed;
-		private string _firmwareBuildNumber;
-
 		// 03
-		private string _reply;
-		private IMukCondensorFanReply03Data _data;
-		
+		private IMukCondensorFanReply03Data _reply03Data;
+		public AnyCommandPartViewModel Reply03DataText { get; }
+
 		// 16
 		private IMukCondenserRequest16Data _request16Data;
 		public AnyCommandPartViewModel Request16DataText { get; }
@@ -50,6 +38,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser {
 			_cmdListenerMukFridgeFanReply03 = cmdListenerMukFridgeFanReply03;
 			_cmdListenerMukCondenserRequest16 = cmdListenerMukCondenserRequest16;
 
+			Reply03DataText = new AnyCommandPartViewModel();
+
 			Request16DataText = new AnyCommandPartViewModel();
 			MukFridgeSetParamsVm = new MukFridgeSetParamsViewModel(notifier, parameterSetter);
 			
@@ -59,27 +49,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser {
 
 		private void CmdListenerMukFridgeFanReply03OnDataReceived(IList<byte> bytes, IMukCondensorFanReply03Data data) {
 			_notifier.Notify(() => {
-				_data = data;
-				FanPwm = data.FanPwm.ToString("f2");
-
-				CondensingPressure = data.CondensingPressure.NoLinkWithSensor ? SensorIndicationExt.NoLinkText: data.CondensingPressure.Indication.ToString("f2");
-
-				IncomingSignals = data.IncomingSignals.ToString("X2");
-				OutgoingSignals = data.OutgoingSignals.ToString("X2");
-
-				AnalogInput = data.AnalogInput.ToString();
-				AutomaticModeStage = data.AutomaticModeStage.ToString();
-				WorkMode = data.WorkMode.ToString();
-				Diagnostic1 = data.Diagnostic1.ToString("X4");
-				Diagnostic2 = data.Diagnostic2.ToString("X4");
-				FanSpeed = data.FanSpeed.ToString();
-
-				FirmwareBuildNumber = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
-
-				RaisePropertyChanged(() => Stage1IsOn); // TODO: redo
-				RaisePropertyChanged(() => Stage2IsOn); // TODO: redo
-
-				Reply = bytes.ToText();
+				Reply03DataText.Update(bytes);
+				Reply03Data = data;
 			});
 		}
 
@@ -90,101 +61,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser {
 			});
 		}
 
-		public string FanPwm {
-			get { return _fanPwm; }
+		public IMukCondensorFanReply03Data Reply03Data {
+			get { return _reply03Data; }
 			set {
-				if (_fanPwm != value) {
-					_fanPwm = value;
-					RaisePropertyChanged(() => FanPwm);
-				}
-			}
-		}
-
-		public string CondensingPressure {
-			get { return _condensingPressure; }
-			set {
-				if (_condensingPressure != value) {
-					_condensingPressure = value;
-					RaisePropertyChanged(() => CondensingPressure);
-				}
-			}
-		}
-
-		public string IncomingSignals {
-			get { return _incomingSignals; }
-			set {
-				if (_incomingSignals != value) {
-					_incomingSignals = value;
-					RaisePropertyChanged(() => IncomingSignals);
-				}
-			}
-		}
-
-
-		public bool? Stage1IsOn => _data?.Stage1IsOn;
-		public bool? Stage2IsOn => _data?.Stage2IsOn;
-
-		public string OutgoingSignals {
-			get { return _outgoingSignals; }
-			set {
-				if (_outgoingSignals != value) {
-					_outgoingSignals = value;
-					RaisePropertyChanged(() => OutgoingSignals);
-				}
-			}
-		}
-
-		public string AnalogInput {
-			get { return _analogInput; }
-			set {
-				if (_analogInput != value) {
-					_analogInput = value;
-					RaisePropertyChanged(() => AnalogInput);
-				}
-			}
-		}
-
-		public string AutomaticModeStage {
-			get { return _automaticModeStage; }
-			set { if (_automaticModeStage != value) { _automaticModeStage = value; RaisePropertyChanged(() => AutomaticModeStage); } }
-		}
-
-		public string WorkMode {
-			get { return _workMode; }
-			set { if (_workMode != value) { _workMode = value; RaisePropertyChanged(() => WorkMode); } }
-		}
-
-		public string Diagnostic1 {
-			get { return _diagnostic1; }
-			set { if (_diagnostic1 != value) { _diagnostic1 = value; RaisePropertyChanged(() => Diagnostic1); } }
-		}
-
-		public string Diagnostic2 {
-			get { return _diagnostic2; }
-			set { if (_diagnostic2 != value) { _diagnostic2 = value; RaisePropertyChanged(() => Diagnostic2); } }
-		}
-
-		public string FanSpeed {
-			get { return _fanSpeed; }
-			set { if (_fanSpeed != value) { _fanSpeed = value; RaisePropertyChanged(() => FanSpeed); } }
-		}
-
-		public string FirmwareBuildNumber {
-			get { return _firmwareBuildNumber; }
-			set {
-				if (_firmwareBuildNumber != value) {
-					_firmwareBuildNumber = value;
-					RaisePropertyChanged(() => FirmwareBuildNumber);
-				}
-			}
-		}
-
-		public string Reply {
-			get { return _reply; }
-			set {
-				if (_reply != value) {
-					_reply = value;
-					RaisePropertyChanged(() => Reply);
+				if (_reply03Data != value) {
+					_reply03Data = value;
+					RaisePropertyChanged(() => Reply03Data);
 				}
 			}
 		}

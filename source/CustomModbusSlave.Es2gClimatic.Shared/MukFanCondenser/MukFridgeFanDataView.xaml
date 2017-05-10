@@ -7,6 +7,7 @@
 	xmlns:setParameters="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge.SetParameters"
 	xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16"
+	xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03"
 	mc:Ignorable="d"
 	d:DesignHeight="880"
 	d:DesignWidth="300">
@@ -15,171 +16,11 @@
 		<TextBlock
 			Text="Ответ на команду 3:"
 			FontWeight="Bold"
-			TextDecorations="Underline"></TextBlock>
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-					Width="2*" />
-				<ColumnDefinition
-					Width="1*" />
-			</Grid.ColumnDefinitions>
-			<TextBlock
-				Grid.Row="0"
-				Grid.Column="0"
-				Text="ШИМ вентилятора" />
-			<TextBlock
-				Grid.Row="0"
-				Grid.Column="1"
-				Text="{Binding Path=FanPwm, Mode=OneWay}" />
-
-			<TextBlock
-				Grid.Row="1"
-				Grid.Column="0"
-				Text="Давление конденсации, атм" />
-			<TextBlock
-				Grid.Row="1"
-				Grid.Column="1"
-				Text="{Binding Path=CondensingPressure, Mode=OneWay}" />
-
-			<TextBlock
-				Grid.Row="2"
-				Grid.Column="0"
-				Text="Байт входных сигналов" />
-			<TextBlock
-				Grid.Row="2"
-				Grid.Column="1"
-				Text="{Binding Path=IncomingSignals, Mode=OneWay}" />
-
-			<TextBlock
-				Grid.Row="3"
-				Grid.Column="0"
-				Text="Байт выходных сигналов" />
-			<TextBlock
-				Grid.Row="3"
-				Grid.Column="1"
-				Text="{Binding Path=OutgoingSignals, Mode=OneWay}" />
-			<TextBlock
-				Grid.Row="4"
-				Grid.Column="0"
-				Text="Включение ступени 1" />
-			<CheckBox
-				Grid.Row="4"
-				Grid.Column="1"
-				IsChecked="{Binding Path=Stage1IsOn, Mode=OneWay}"
-				IsHitTestVisible="False" />
-
-			<TextBlock
-				Grid.Row="5"
-				Grid.Column="0"
-				Text="Включение ступени 2" />
-			<CheckBox
-				Grid.Row="5"
-				Grid.Column="1"
-				IsChecked="{Binding Path=Stage2IsOn, Mode=OneWay}"
-				IsHitTestVisible="False" />
-
-			<TextBlock
-				Grid.Row="6"
-				Grid.Column="0"
-				Text="Аналоговый вход, дискрет" />
-			<TextBlock
-				Grid.Row="6"
-				Grid.Column="1"
-				Text="{Binding Path=AnalogInput, Mode=OneWay}" />
-
-			<TextBlock
-				Grid.Row="7"
-				Grid.Column="0"
-				Text="Этап работы в автоматическом режиме" />
-			<TextBlock
-				Grid.Row="7"
-				Grid.Column="1"
-				Text="{Binding Path=AutomaticModeStage, Mode=OneWay}" />
-
-			<TextBlock
-				Grid.Row="8"
-				Grid.Column="0"
-				Text="Режим работы (режим, байт состояния); " />
-			<TextBlock
-				Grid.Row="8"
-				Grid.Column="1"
-				Text="{Binding Path=WorkMode, Mode=OneWay}" />
-
-			<TextBlock
-				Grid.Row="9"
-				Grid.Column="0"
-				Text="Диагностика 1 (плата МУК, обмен); " />
-			<TextBlock
-				Grid.Row="9"
-				Grid.Column="1"
-				Text="{Binding Path=Diagnostic1, Mode=OneWay}" />
-
-			<TextBlock
-				Grid.Row="10"
-				Grid.Column="0"
-				Text="Диагностика 2 (вентилятор); " />
-			<TextBlock
-				Grid.Row="10"
-				Grid.Column="1"
-				Text="{Binding Path=Diagnostic2, Mode=OneWay}" />
-
-			<TextBlock
-				Grid.Row="11"
-				Grid.Column="0"
-				Text="Обороты вент-ра" />
-			<TextBlock
-				Grid.Row="11"
-				Grid.Column="1"
-				Text="{Binding Path=FanSpeed, Mode=OneWay}" />
-
-			<TextBlock
-				Grid.Row="12"
-				Grid.Column="0"
-				Text="Номер версии ПО" />
-			<TextBlock
-				Grid.Row="12"
-				Grid.Column="1"
-				Text="{Binding Path=FirmwareBuildNumber, Mode=OneWay}" />
-
-			<TextBox
-				Grid.Row="13"
-				Grid.Column="0"
-				Grid.ColumnSpan="2"
-				Text="{Binding Path=Reply, Mode=OneWay}"
-				IsReadOnly="True" />
-		</Grid>
+			TextDecorations="Underline" />
+		<reply03:MukFanCondencerReply03View
+			DataContext="{Binding Path=Reply03Data, Mode=OneWay}" />
+		<shared:AnyCommandPartView
+			DataContext="{Binding Path=Reply03DataText, Mode=OneTime}" />
 		<TextBlock
 			Text="Запрос, код команды 16 dec:"
 			FontWeight="Bold"

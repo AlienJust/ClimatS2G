@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Numeric.Bits;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03 {
 	class MukFanCondenserReply03DataBuilder : IBuilder<IMukCondensorFanReply03Data> {
 		private static readonly BytesPair NoSensor = new BytesPair(0x85, 0x00);
 		private readonly IList<byte> _data;
@@ -25,6 +24,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser {
 				Diagnostic2 = new BytesPair(_data[19], _data[20]).HighFirstUnsignedValue,
 				FanSpeed = new BytesPair(_data[21], _data[22]).HighFirstUnsignedValue,
 				FirmwareBuildNumber = new BytesPair(_data[23], _data[24]).HighFirstUnsignedValue,
+				CondensingPressure2 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[25], _data[26]), 1.0, 0.0, NoSensor),
 				Stage1IsOn = _data[10].GetBit(0),
 				Stage2IsOn = _data[10].GetBit(1)
 			};

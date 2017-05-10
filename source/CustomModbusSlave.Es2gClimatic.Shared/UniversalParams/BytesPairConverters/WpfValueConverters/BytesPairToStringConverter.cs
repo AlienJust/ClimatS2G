@@ -5,7 +5,7 @@ using AlienJust.Support.Collections;
 using NCalc;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
-	[ValueConversion(typeof(double), typeof(int))]
+	[ValueConversion(typeof(BytesPair), typeof(string))]
 	public class BytesPairToStringConverter : IValueConverter {
 		#region IValueConverter Members
 
