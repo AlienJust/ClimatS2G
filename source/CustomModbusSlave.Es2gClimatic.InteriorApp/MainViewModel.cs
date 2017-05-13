@@ -119,6 +119,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
 
+		private bool _tabHeadersAreLong;
 
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string testPortName) {
 			_notifier = notifier;
@@ -355,6 +356,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 				if (_linkBackColor != value) {
 					_linkBackColor = value;
 					RaisePropertyChanged(() => LinkBackColor);
+				}
+			}
+		}
+
+		public bool TabHeadersAreLong {
+			get { return _tabHeadersAreLong; }
+			set {
+				if (_tabHeadersAreLong != value) {
+					_tabHeadersAreLong = value;
+					RaisePropertyChanged(()=> TabHeadersAreLong);
 				}
 			}
 		}

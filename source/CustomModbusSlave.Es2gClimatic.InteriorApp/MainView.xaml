@@ -244,6 +244,20 @@
 		<controls:WindowButtonCommands
 			Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
 	</controls:MetroWindow.WindowButtonCommands>
+	<controls:MetroWindow.LeftWindowCommands>
+		<controls:WindowCommands>
+			<ToggleButton
+				Margin="2,2,2,2"
+				IsChecked="{Binding Path=TabHeadersAreLong}"
+				BorderThickness="0"
+				Style="{DynamicResource AccentedSquareButtonStyle}">
+				<iconPacks:PackIconMaterial
+					Width="Auto"
+					Height="Auto"
+					Kind="Menu" />
+			</ToggleButton>
+		</controls:WindowCommands>
+	</controls:MetroWindow.LeftWindowCommands>
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
 			<record:RecordView
@@ -286,106 +300,10 @@
 				Style="{DynamicResource AccentedSquareButtonStyle}" />
 		</controls:WindowCommands>
 	</controls:MetroWindow.RightWindowCommands>
-	<!--
-	<controls:HamburgerMenu
-		IsPaneOpen="False"
-		DisplayMode="CompactInline"
-		ItemTemplate="{StaticResource MenuItemTemplate}"
-		OptionsItemTemplate="{StaticResource MenuItemTemplate}">
-
-		<controls:HamburgerMenu.Content>
-			<MultiBinding
-				Converter="{StaticResource SelectedItemToContentConverter}">
-				<Binding
-					Mode="OneWay"
-					Path="SelectedItem"
-					RelativeSource="{RelativeSource Self}" />
-				<Binding
-					Mode="OneWay"
-					Path="SelectedOptionsItem"
-					RelativeSource="{RelativeSource Self}" />
-			</MultiBinding>
-		</controls:HamburgerMenu.Content>
-
-		<controls:HamburgerMenu.ItemsSource>
-			<controls:HamburgerMenuItemCollection>
-				<controls:HamburgerMenuGlyphItem
-					Glyph="H"
-					Label="Home">
-					<controls:HamburgerMenuGlyphItem.Tag>
-						<mukFlapOuterAirReply03:MukFlapDataView
-							DataContext="{Binding Path=MukFlapDataVm}" />
-					</controls:HamburgerMenuGlyphItem.Tag>
-				</controls:HamburgerMenuGlyphItem>
-
-				<controls:HamburgerMenuGlyphItem
-					Glyph="P"
-					Label="Private">
-					<controls:HamburgerMenuGlyphItem.Tag>
-						<mukFanVaporizer:MukVaporizerFanDataView />
-					</controls:HamburgerMenuGlyphItem.Tag>
-				</controls:HamburgerMenuGlyphItem>
-
-				<controls:HamburgerMenuGlyphItem
-					Glyph="S"
-					Label="Settings">
-					<controls:HamburgerMenuGlyphItem.Tag>
-						<systemDiagnostic:SystemDiagnosticView />
-					</controls:HamburgerMenuGlyphItem.Tag>
-				</controls:HamburgerMenuGlyphItem>
-			</controls:HamburgerMenuItemCollection>
-		</controls:HamburgerMenu.ItemsSource>
-
-		<controls:HamburgerMenu.OptionsItemsSource>
-			<controls:HamburgerMenuItemCollection>
-				<controls:HamburgerMenuGlyphItem
-					Glyph="A"
-					Label="About">
-					<controls:HamburgerMenuGlyphItem.Tag>
-						<systemDiagnostic:SystemDiagnosticView
-							DataContext="{Binding Path=SystemDiagnosticVm}" />
-					</controls:HamburgerMenuGlyphItem.Tag>
-				</controls:HamburgerMenuGlyphItem>
-			</controls:HamburgerMenuItemCollection>
-		</controls:HamburgerMenu.OptionsItemsSource>
-
-		<controls:HamburgerMenu.ContentTemplate>
-			<DataTemplate
-				DataType="{x:Type controls:HamburgerMenuItem}">
-				<Grid
-					x:Name="TheContentGrid">
-					<Grid.RowDefinitions>
-						<RowDefinition
-							Height="48" />
-						<RowDefinition />
-					</Grid.RowDefinitions>
-					<Border
-						Grid.Row="0"
-						Background="#FF444444">
-						<TextBlock
-							x:Name="Header"
-							HorizontalAlignment="Center"
-							VerticalAlignment="Center"
-							FontSize="24"
-							Foreground="White"
-							Text="{Binding Label}" />
-					</Border>
-					<ContentControl
-						x:Name="TheContent"
-						Grid.Row="1"
-						Content="{Binding Tag}"
-						Focusable="False"
-						Foreground="{DynamicResource BlackBrush}" />
-				</Grid>
-			</DataTemplate>
-		</controls:HamburgerMenu.ContentTemplate>
-	</controls:HamburgerMenu>
-	-->
-
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition
-				Height="2*" />
+				Height="6*" />
 			<RowDefinition
 				Height="1*" />
 			<RowDefinition
@@ -395,22 +313,52 @@
 			Grid.Row="0"
 			TabStripPlacement="Left">
 			<TabItem
-				Header="Диагностика системы"
 				Style="{StaticResource AzureTabItem}">
+				<TabItem.Header>
+					<StackPanel
+						Orientation="Horizontal">
+						<TextBlock
+							Text="ДC"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+						<TextBlock
+							Text="Диагностика системы"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+					</StackPanel>
+				</TabItem.Header>
 				<systemDiagnostic:SystemDiagnosticView
 					DataContext="{Binding Path=SystemDiagnosticVm, Mode=OneTime}" />
 			</TabItem>
 			<TabItem
-				Header="МУК заслонки наружного возудха"
 				Style="{StaticResource AzureTabItem}">
+				<TabItem.Header>
+					<StackPanel
+						Orientation="Horizontal">
+						<TextBlock
+							Text="МУК 2"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+						<TextBlock
+							Text="МУК заслонки наружного возудха"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+					</StackPanel>
+				</TabItem.Header>
 				<ScrollViewer>
 					<mukFlapOuterAirReply03:MukFlapDataView
 						DataContext="{Binding Path=MukFlapDataVm, Mode=OneTime}" />
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Header="МУК вентилятора испарителя"
 				Style="{StaticResource AzureTabItem}">
+				<TabItem.Header>
+					<StackPanel
+						Orientation="Horizontal">
+						<TextBlock
+							Text="МУК 3"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+						<TextBlock
+							Text="МУК вентилятора испарителя"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+					</StackPanel>
+				</TabItem.Header>
 				<ScrollViewer>
 					<StackPanel
 						Orientation="Vertical">
@@ -422,32 +370,72 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Header="МУК вентилятора конденсатора"
 				Style="{StaticResource AzureTabItem}">
+				<TabItem.Header>
+					<StackPanel
+						Orientation="Horizontal">
+						<TextBlock
+							Text="МУК 4"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+						<TextBlock
+							Text="МУК вентилятора конденсатора"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+					</StackPanel>
+				</TabItem.Header>
 				<ScrollViewer>
 					<mukFridge:MukFridgeFanDataView
 						DataContext="{Binding Path=MukFridgeFanDataVm, Mode=OneTime}" />
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Header="МУК вытяжного вентилятора"
 				Style="{StaticResource AzureTabItem}">
+				<TabItem.Header>
+					<StackPanel
+						Orientation="Horizontal">
+						<TextBlock
+							Text="МУК 6"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+						<TextBlock
+							Text="МУК вытяжного вентилятора"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+					</StackPanel>
+				</TabItem.Header>
 				<ScrollViewer>
 					<mukAirExhausterView:AirExhausterDataView
 						DataContext="{Binding Path=MukAirExhausterDataVm, Mode=OneTime}" />
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Header="МУК заслонки рециркуляц. воздуха"
 				Style="{StaticResource AzureTabItem}">
+				<TabItem.Header>
+					<StackPanel
+						Orientation="Horizontal">
+						<TextBlock
+							Text="МУК 7"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+						<TextBlock
+							Text="МУК заслонки рециркуляц. воздуха"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+					</StackPanel>
+				</TabItem.Header>
 				<ScrollViewer>
 					<mukFlapAirRecycle:MukFlapReturnAirDataView
 						DataContext="{Binding Path=MukFlapReturnAirDataVm, Mode=OneTime}" />
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Header="МУК заслонки лето зима"
 				Style="{StaticResource AzureTabItem}">
+				<TabItem.Header>
+					<StackPanel
+						Orientation="Horizontal">
+						<TextBlock
+							Text="МУК 8"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+						<TextBlock
+							Text="МУК заслонки лето зима"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+					</StackPanel>
+				</TabItem.Header>
 				<ScrollViewer>
 					<mukFlapWinterSummerViews:MukFlapWinterSummerDataView
 						DataContext="{Binding Path=MukFlapWinterSummerDataVm, Mode=OneTime}" />
