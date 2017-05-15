@@ -216,8 +216,8 @@
 			</StackPanel>
 
 			<StackPanel
-				Grid.Row="5"
-				Grid.Column="0"
+				Grid.Row="4"
+				Grid.Column="1"
 				Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush
@@ -237,8 +237,8 @@
 					Text="{Binding Path=BvsInfo1, Mode=OneWay}" />
 			</StackPanel>
 			<StackPanel
-				Grid.Row="5"
-				Grid.Column="1"
+				Grid.Row="4"
+				Grid.Column="2"
 				Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush
@@ -260,7 +260,7 @@
 
 			<StackPanel
 				Grid.Row="5"
-				Grid.Column="2"
+				Grid.Column="0"
 				Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush
@@ -281,9 +281,9 @@
 			</StackPanel>
 
 			<StackPanel
-				Grid.Row="6"
-				Grid.Column="0"
-				Grid.ColumnSpan="3"
+				Grid.Row="5"
+				Grid.Column="1"
+				Grid.ColumnSpan="2"
 				Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush
@@ -310,6 +310,8 @@
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="Auto" />
 				<RowDefinition
 					Height="Auto" />
 				<RowDefinition
@@ -360,6 +362,28 @@
 					Text="Датчик рецирк. воздуха: " />
 				<TextBlock
 					Text="{Binding Path=SensorRecycleAirInfo, Mode=OneWay}" />
+			</StackPanel>
+
+			<StackPanel
+				Grid.Row="2"
+				Grid.Column="0"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=SensorSupplyAirInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="Датчик подаваемого воздуха: " />
+				<TextBlock
+					Text="{Binding Path=SensorSupplyAirInfo, Mode=OneWay}" />
 			</StackPanel>
 		</Grid>
 	</StackPanel>

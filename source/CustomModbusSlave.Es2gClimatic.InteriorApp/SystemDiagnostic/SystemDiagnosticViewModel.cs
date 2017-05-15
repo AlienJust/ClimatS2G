@@ -178,12 +178,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					SensorRecycleAirInfoColor = OkSensorColor;
 				}
 
-				if (data.TemperatureAddress1.NoLinkWithSensor) {
+				if (data.TemperatureAddress3.NoLinkWithSensor) {
 					SensorSupplyAirInfo = NoSensorText;
 					SensorSupplyAirInfoColor = NoSensorColor;
 				}
 				else {
-					SensorSupplyAirInfo = data.TemperatureAddress2.Indication.ToString("f2");
+					SensorSupplyAirInfo = data.TemperatureAddress3.Indication.ToString("f2");
 					SensorSupplyAirInfoColor = OkSensorColor;
 				}
 
