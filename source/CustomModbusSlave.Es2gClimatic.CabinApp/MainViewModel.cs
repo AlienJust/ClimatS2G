@@ -29,7 +29,6 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using CustomModbusSlave.Es2gClimatic.Shared.Record;
@@ -70,6 +69,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukCondenserFanReply03;
 		private readonly ICmdListener<IMukCondenserRequest16Data> _cmdListenerMukCondenserRequest16;
 
+		private readonly ICmdListener<IBvsReply65Telemetry> _cmdListenerBvsReply65;
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm50Params;
 
 		public RecordViewModel RecordVm { get; }
@@ -108,6 +108,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			_cmdListenerMukCondenserFanReply03 = new CmdListenerMukCondenserFanReply03(4, 3, 29);
 			_cmdListenerMukCondenserRequest16 = new CmdListenerMukCondenserFanRequest16(4, 16, 15);
 
+			_cmdListenerBvsReply65 = new CmdListenerBvsReply65(0x1E, 65, 7);
 			_cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
 
 			_mukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
@@ -123,7 +124,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier, _paramSetter);
 
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
-			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
+			BvsDataVm = new BvsDataViewModel(_notifier, _cmdListenerBvsReply65);
 			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter, _cmdListenerKsm50Params);
 
 			RecordVm = new RecordViewModel(_notifier, _windowSystem);
@@ -171,7 +172,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 
 			_mukWarmFloorDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_bsSmDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			BvsDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			_cmdListenerBvsReply65.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
 			_rtuParamReceiver.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 		}

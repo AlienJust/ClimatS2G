@@ -30,6 +30,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
 				AutomaticModeStage = automaticModeStage,
 				AutomaticModeStageParsed = new MukFanEvaporatorWorkstageBuilder(automaticModeStage).Build(),
 
+				
 				TemperatureRegulatorWorkMode = new TemperatureRegulatorWorkModeBuilderReplied(new BytesPair(_data[19], _data[20])).Build(),
 
 				CalculatedTemperatureSetting = new BytesPair(_data[21], _data[22]).HighFirstUnsignedValue * 0.01,
@@ -50,7 +51,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
 				Diagnostic5 = new BytesPair(_data[33], _data[34]).HighFirstUnsignedValue,
 				Diagnostic5OneWire2 = new MukFlapDiagnosticOneWireSensorBuilder(new BytesPair(_data[33], _data[34]).HighFirstUnsignedValue).Build(),
 
-				FirmwareBuildNumber = new BytesPair(_data[35], _data[36]).HighFirstUnsignedValue
+				FirmwareBuildNumber = new BytesPair(_data[35], _data[36]).HighFirstUnsignedValue,
+				TemperatureAddress3 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[37], _data[38]), 0.01, 0.0, NoSensor),
 			};
 		}
 

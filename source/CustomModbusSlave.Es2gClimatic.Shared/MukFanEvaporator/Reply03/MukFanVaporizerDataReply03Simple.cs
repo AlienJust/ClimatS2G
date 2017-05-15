@@ -16,6 +16,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
 		public ushort AutomaticModeStage { get; set; }
 		public MukFanEvaporatorWorkstage AutomaticModeStageParsed { get; set; }
 
+		public ISensorIndication<double> TemperatureAddress3 { get; set; }
+
 		public ITemperatureRegulatorWorkMode TemperatureRegulatorWorkMode { get; set; }
 		public double CalculatedTemperatureSetting { get; set; }
 		public ushort FanSpeed { get; set; }

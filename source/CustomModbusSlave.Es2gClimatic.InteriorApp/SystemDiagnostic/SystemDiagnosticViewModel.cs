@@ -86,6 +86,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private string _sensorRecycleAirInfo;
 		private Colors _sensorRecycleAirInfoColor;
 
+		/// <summary>
+		/// Датчик подаваемого воздуха
+		/// </summary>
+		private string _sensorSupplyAirInfo;
+		private Colors _sensorSupplyAirInfoColor;
+
 		public SystemDiagnosticViewModel(IThreadNotifier uiNotifier,
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
 			ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03,
@@ -172,6 +178,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					SensorRecycleAirInfoColor = OkSensorColor;
 				}
 
+				if (data.TemperatureAddress1.NoLinkWithSensor) {
+					SensorSupplyAirInfo = NoSensorText;
+					SensorSupplyAirInfoColor = NoSensorColor;
+				}
+				else {
+					SensorSupplyAirInfo = data.TemperatureAddress2.Indication.ToString("f2");
+					SensorSupplyAirInfoColor = OkSensorColor;
+				}
+
 			});
 		}
 
@@ -235,6 +250,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 					SensorRecycleAirInfo = NoLinkText;
 					SensorRecycleAirInfoColor = NoLinkColor;
+
+					SensorSupplyAirInfo = NoLinkText;
+					SensorSupplyAirInfoColor = NoLinkColor;
 				}
 
 				if (data[22].HighFirstUnsignedValue.GetBit(4)) {
@@ -266,10 +284,18 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					BvsInfo1 = NoLinkText;
 					BvsInfoColor1 = NoLinkColor;
 				}
+				else {
+					BvsInfo1 = OkLinkText;
+					BvsInfoColor1 = OkLinkColor;
+				}
 
 				if (data[23].HighFirstUnsignedValue.GetBit(6)) {
 					BvsInfo2 = NoLinkText;
 					BvsInfoColor2 = NoLinkColor;
+				}
+				else {
+					BvsInfo2 = OkLinkText;
+					BvsInfoColor2 = OkLinkColor;
 				}
 
 			});
@@ -411,6 +437,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 
+
 		public string MukInfo8 {
 			get { return _mukInfo8; }
 			set {
@@ -470,6 +497,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 
+
 		public string BvsInfo2 {
 			get { return _bvsInfo2; }
 			set {
@@ -488,6 +516,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 
 		public string EmersonInfo {
 			get { return _emersonInfo; }
@@ -509,6 +538,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		}
 
 
+
 		public string EvaporatorFanControllerInfo {
 			get { return _evaporatorFanControllerInfo; }
 			set {
@@ -527,6 +557,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 
 
 		public string SensorOuterAirInfo {
@@ -566,8 +597,29 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		
 
-
+		#region Props Датчик подаваемого воздуха
+		public string SensorSupplyAirInfo {
+			get { return _sensorSupplyAirInfo; }
+			set {
+				if (_sensorSupplyAirInfo != value) {
+					_sensorSupplyAirInfo = value;
+					RaisePropertyChanged(() => SensorSupplyAirInfo);
+				}
+			}
+		}
+		public Colors SensorSupplyAirInfoColor {
+			get { return _sensorSupplyAirInfoColor; }
+			set {
+				if (_sensorSupplyAirInfoColor != value) {
+					_sensorSupplyAirInfoColor = value;
+					RaisePropertyChanged(() => SensorSupplyAirInfoColor);
+				}
+			}
+		} 
+		#endregion
+		
 
 		void ResetVmPropsToDefaultValues() {
 			SegmentType = UnknownText;
@@ -612,6 +664,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 			SensorRecycleAirInfo = UnknownText;
 			SensorRecycleAirInfoColor = UnknownColor;
+
+			SensorSupplyAirInfo = UnknownText;
+			SensorSupplyAirInfoColor = UnknownColor;
 		}
 	}
 }

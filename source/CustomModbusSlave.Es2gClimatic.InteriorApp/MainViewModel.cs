@@ -43,7 +43,6 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using CustomModbusSlave.Es2gClimatic.Shared.Record;
@@ -97,6 +96,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 		private readonly ICmdListener<IBsSmAndKsm1DataCommand32Request> _cmdListenerBsSmRequest32;
 		private readonly ICmdListener<IBsSmAndKsm1DataCommand32Reply> _cmdListenerBsSmReply32;
+
+		private readonly ICmdListener<IBvsReply65Telemetry> _cmdListenerBvs1Reply65;
+		private readonly ICmdListener<IBvsReply65Telemetry> _cmdListenerBvs2Reply65;
 
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsmParams;
 
@@ -164,6 +166,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_cmdListenerBsSmReply32 = new CmdListenerBsSmReply32(10, 32, 47);
 			_cmdListenerBsSmRequest32 = new CmdListenerBsSmRequest32(10, 32, 27);
 
+			_cmdListenerBvs1Reply65 = new CmdListenerBvsReply65(0x1E, 65, 7);
+			_cmdListenerBvs2Reply65 = new CmdListenerBvsReply65(0x1D, 65, 7);
+
 			_cmdListenerKsmParams = new CmdListenerKsmParams(20, 16, 129);
 
 			RecordVm = new RecordViewModel(_notifier, _windowSystem);
@@ -199,8 +204,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			MukFlapWinterSummerDataVm = new MukFlapWinterSummerViewModel(_notifier, _paramSetter, _cmdListenerMukFlapWinterSummerReply03, _cmdListenerMukAirFlapWinterSummerRequest16);
 
 			BsSmDataVm = new BsSmDataViewModel(_notifier, _cmdListenerBsSmRequest32, _cmdListenerBsSmReply32);
-			BvsDataVm = new BvsDataViewModel(_notifier, 0x1E);
-			BvsDataVm2 = new BvsDataViewModel(_notifier, 0x1D);
+			BvsDataVm = new BvsDataViewModel(_notifier, _cmdListenerBvs1Reply65);
+			BvsDataVm2 = new BvsDataViewModel(_notifier, _cmdListenerBvs2Reply65);
 
 			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter, _cmdListenerKsmParams);
 
@@ -266,11 +271,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_cmdListenerBsSmReply32.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerBsSmRequest32.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
+			_cmdListenerBvs1Reply65.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			_cmdListenerBvs2Reply65.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+
 			_rtuParamReceiver.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
 			//BsSmDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			BvsDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			BvsDataVm2.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			//BvsDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			//BvsDataVm2.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 		}
 
 		private void GetPortsAvailable() {

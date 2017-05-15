@@ -4,25 +4,23 @@ using AlienJust.Support.ModelViewViewModel;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.Bvs {
 
-	public class BvsDataViewModel : ViewModelBase, ICommandListener {
+	public class BvsDataViewModel : ViewModelBase {
 		private readonly IThreadNotifier _notifier;
-		private readonly byte _addr;
+		private readonly ICmdListener<IBvsReply65Telemetry> _cmdListenerBvsReply65;
 		private IBvsReply65Telemetry _reply65Telemetry;
 		public AnyCommandPartViewModel BvsReply41TextVm { get; }
 
-		public BvsDataViewModel(IThreadNotifier notifier, byte addr) {
+		public BvsDataViewModel(IThreadNotifier notifier, ICmdListener<IBvsReply65Telemetry> cmdListenerBvsReply65) {
 			_notifier = notifier;
-			_addr = addr;
+			_cmdListenerBvsReply65 = cmdListenerBvsReply65;
 			BvsReply41TextVm = new AnyCommandPartViewModel();
+
+			_cmdListenerBvsReply65.DataReceived += CmdListenerBvsReply65OnDataReceived;
 		}
 
-		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (_addr == addr && code == 0x41 && data.Count == 7) {
-				_notifier.Notify(() => {
-					Reply65Telemetry = new BvsReply65TelemetryBuilder(data).Build();
-					BvsReply41TextVm.Update(data);
-				});
-			}
+		private void CmdListenerBvsReply65OnDataReceived(IList<byte> bytes, IBvsReply65Telemetry data) {
+			BvsReply41TextVm.Update(bytes);
+			Reply65Telemetry = data;
 		}
 
 		public IBvsReply65Telemetry Reply65Telemetry {

@@ -113,6 +113,7 @@
     <Compile Include="Bvs\BvsDataViewModel.cs" />
     <Compile Include="Bvs\BvsReply65TelemetryBuilder.cs" />
     <Compile Include="Bvs\BvsReply65TelemetrySimple.cs" />
+    <Compile Include="Bvs\CmdListenerBvsReply65.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
     <Compile Include="CommandHearedTimer\CommandHearedTimerThreadSafe.cs" />
     <Compile Include="CommandHearedTimer\Contracts\ICommandHearedTimer.cs" />

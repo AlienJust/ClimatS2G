@@ -351,5 +351,15 @@
 				Grid.Column="1"
 				Text="{Binding Path=FirmwareBuildNumber, Mode=OneTime}" />
 		</Grid>
+
+		<TextBlock
+			Grid.Row="17"
+			Grid.Column="0"
+			Text="Температура 1w адрес 3" />
+		<TextBlock
+			Grid.Row="17"
+			Grid.Column="1"
+			Text="{Binding Path=TemperatureAddress3, Mode=OneTime, Converter={StaticResource TemperatureConverter}}"
+			TextAlignment="Right" />
 	</Grid>
 </UserControl>
