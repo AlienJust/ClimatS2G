@@ -14,6 +14,7 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
@@ -91,6 +92,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		/// </summary>
 		private string _sensorSupplyAirInfo;
 		private Colors _sensorSupplyAirInfoColor;
+
+		private string _sensorInteriorAirInfo1;
+		private Colors _sensorInteriorAirInfoColor1;
+
+		private string _sensorInteriorAirInfo2;
+		private Colors _sensorInteriorAirInfoColor2;
 
 		public SystemDiagnosticViewModel(IThreadNotifier uiNotifier,
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
@@ -225,6 +232,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			});
 		}
 
+
 		private void CmdListenerKsmOnDataReceived(IList<byte> bytes, IList<BytesPair> data) {
 			_uiNotifier.Notify(() => {
 				Version = new TextFormatterDotted(UnknownText).Format(data[34]);
@@ -298,6 +306,25 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					BvsInfoColor2 = OkLinkColor;
 				}
 
+				var oneWireSensor1 = new SensorIndicationDoubleBasedOnBytesPair(data[0], 0.01, 0.0, new BytesPair(0x85, 0x00));
+				if (oneWireSensor1.NoLinkWithSensor) {
+					SensorInteriorAirInfo1 = NoSensorText;
+					SensorInteriorAirInfoColor1 = NoSensorColor;
+				}
+				else {
+					SensorInteriorAirInfo1 = oneWireSensor1.Indication.ToString("f2");
+					SensorInteriorAirInfoColor1 = OkSensorColor;
+				}
+
+				var oneWireSensor2 = new SensorIndicationDoubleBasedOnBytesPair(data[1], 0.01, 0.0, new BytesPair(0x85, 0x00));
+				if (oneWireSensor2.NoLinkWithSensor) {
+					SensorInteriorAirInfo2 = NoSensorText;
+					SensorInteriorAirInfoColor2 = NoSensorColor;
+				}
+				else {
+					SensorInteriorAirInfo2 = oneWireSensor2.Indication.ToString("f2");
+					SensorInteriorAirInfoColor2 = OkSensorColor;
+				}
 			});
 		}
 
@@ -579,6 +606,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 
+
 		public string SensorRecycleAirInfo {
 			get { return _sensorRecycleAirInfo; }
 			set {
@@ -617,9 +645,49 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					RaisePropertyChanged(() => SensorSupplyAirInfoColor);
 				}
 			}
-		} 
+		}
 		#endregion
-		
+
+
+		public string SensorInteriorAirInfo1 {
+			get { return _sensorInteriorAirInfo1; }
+			set {
+				if (_sensorInteriorAirInfo1 != value) {
+					_sensorInteriorAirInfo1 = value;
+					RaisePropertyChanged(() => SensorInteriorAirInfo1);
+				}
+			}
+		}
+		public Colors SensorInteriorAirInfoColor1 {
+			get { return _sensorInteriorAirInfoColor1; }
+			set {
+				if (_sensorInteriorAirInfoColor1 != value) {
+					_sensorInteriorAirInfoColor1 = value;
+					RaisePropertyChanged(() => SensorInteriorAirInfoColor1);
+				}
+			}
+		}
+
+
+		public string SensorInteriorAirInfo2 {
+			get { return _sensorInteriorAirInfo2; }
+			set {
+				if (_sensorInteriorAirInfo2 != value) {
+					_sensorInteriorAirInfo2 = value;
+					RaisePropertyChanged(() => SensorInteriorAirInfo2);
+				}
+			}
+		}
+		public Colors SensorInteriorAirInfoColor2 {
+			get { return _sensorInteriorAirInfoColor2; }
+			set {
+				if (_sensorInteriorAirInfoColor2 != value) {
+					_sensorInteriorAirInfoColor2 = value;
+					RaisePropertyChanged(() => SensorInteriorAirInfoColor2);
+				}
+			}
+		}
+
 
 		void ResetVmPropsToDefaultValues() {
 			SegmentType = UnknownText;
@@ -667,6 +735,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 			SensorSupplyAirInfo = UnknownText;
 			SensorSupplyAirInfoColor = UnknownColor;
+
+			SensorInteriorAirInfo1 = UnknownText;
+			SensorInteriorAirInfoColor1 = UnknownColor;
+
+			SensorInteriorAirInfo2 = UnknownText;
+			SensorInteriorAirInfoColor2 = UnknownColor;
 		}
 	}
 }

@@ -316,6 +316,8 @@
 					Height="Auto" />
 				<RowDefinition
 					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
 			</Grid.RowDefinitions>
 			<TextBlock
 				Grid.ColumnSpan="2"
@@ -384,6 +386,49 @@
 					Text="Датчик подаваемого воздуха: " />
 				<TextBlock
 					Text="{Binding Path=SensorSupplyAirInfo, Mode=OneWay}" />
+			</StackPanel>
+
+			<StackPanel
+				Grid.Row="3"
+				Grid.Column="0"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=SensorInteriorAirInfoColor1, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="Датчик воздуха в салоне 1: " />
+				<TextBlock
+					Text="{Binding Path=SensorInteriorAirInfo1, Mode=OneWay}" />
+			</StackPanel>
+			<StackPanel
+				Grid.Row="3"
+				Grid.Column="1"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=SensorInteriorAirInfoColor2, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="Датчик воздуха в салоне 2: " />
+				<TextBlock
+					Text="{Binding Path=SensorInteriorAirInfo2, Mode=OneWay}" />
 			</StackPanel>
 		</Grid>
 	</StackPanel>
