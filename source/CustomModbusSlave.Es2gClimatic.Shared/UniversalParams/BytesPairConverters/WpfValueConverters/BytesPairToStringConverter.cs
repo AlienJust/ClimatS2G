@@ -4,12 +4,12 @@ using System.Windows.Data;
 using AlienJust.Support.Collections;
 using NCalc;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.BytesPairConverters.WpfValueConverters {
 	[ValueConversion(typeof(BytesPair), typeof(string))]
 	public class BytesPairToStringConverter : IValueConverter {
 		#region IValueConverter Members
 
-		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
 			try {
 				if (targetType != typeof(BytesPair))
 					throw new Exception($"Wrong type, expected {typeof(BytesPair).FullName}");
@@ -31,12 +31,8 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
 			}
 		}
 
-		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-			var nd = value.ToString();
-
-			var doubleResult = double.Parse(nd, CultureInfo.InvariantCulture);
-
-			throw new Exception("TODO");
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+			throw new NotImplementedException();
 		}
 
 		public string MathExpression { get; set; }

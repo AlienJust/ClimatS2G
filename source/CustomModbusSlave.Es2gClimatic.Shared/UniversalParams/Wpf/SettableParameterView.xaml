@@ -7,13 +7,14 @@
 	xmlns:local="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.SetParams"
 	xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
 	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+	xmlns:wpfValueConverters="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.BytesPairConverters.WpfValueConverters"
 	mc:Ignorable="d"
 	d:DesignHeight="30"
 	d:DesignWidth="300">
 	<UserControl.Resources>
 		<converters:ColorsEnumToColorConverter
 			x:Key="ColorsEnumToColorConverter" />
-		<local:BytesPairToStringConverter
+		<wpfValueConverters:BytesPairToStringConverter
 			x:Key="BytesPairToStringConverter"
 			Format="f2" />
 		<BooleanToVisibilityConverter

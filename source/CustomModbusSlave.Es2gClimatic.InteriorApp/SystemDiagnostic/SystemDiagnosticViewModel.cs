@@ -87,6 +87,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private string _sensorRecycleAirInfo;
 		private Colors _sensorRecycleAirInfoColor;
 
+		private string _emersonPressure1;
+		private string _emersonPressure2;
+		private string _emersonTemperature1;
+		private string _emersonTemperature2;
+
 		/// <summary>
 		/// Датчик подаваемого воздуха
 		/// </summary>
@@ -131,11 +136,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_cmdListenerMukFlapWinterSummerReply03.DataReceived += CmdListenerMukFlapWinterSummerReply03OnDataReceived;
 			_cmdListenerBsSmReply32.DataReceived += CmdListenerBsSmReply32OnDataReceived;
 			_cmdListenerKsm.DataReceived += CmdListenerKsmOnDataReceived;
-
-
+			
 
 			ResetVmPropsToDefaultValues();
 		}
+
 
 		private void CmdListenerMukFlapOuterAirReply03OnDataReceived(IList<byte> bytes, IMukFlapReply03Telemetry data) {
 			_uiNotifier.Notify(() => {
@@ -152,6 +157,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			});
 		}
+
 
 		private void CmdListenerMukVaporizerReply03OnDataReceived(IList<byte> bytes, IMukFanVaporizerDataReply03 data) {
 			_uiNotifier.Notify(() => {
@@ -197,6 +203,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			});
 		}
 
+
 		private void CmdListenerMukFridgeFanReply03OnDataReceived(IList<byte> bytes, IMukCondensorFanReply03Data data) {
 			_uiNotifier.Notify(() => {
 				MukInfo4 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
@@ -204,12 +211,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			});
 		}
 
+
 		private void CmdListenerMukAirExhausterReply03OnDataReceived(IList<byte> bytes, IMukAirExhausterReply03Data data) {
 			_uiNotifier.Notify(() => {
 				MukInfo6 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
 				MukInfoColor6 = OkLinkColor;
 			});
 		}
+
 
 		private void CmdListenerMukFlapReturnAirReply03OnDataReceived(IList<byte> bytes, IMukFlapReturnAirReply03Telemetry data) {
 			_uiNotifier.Notify(() => {
@@ -335,7 +344,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string SegmentType {
-			get { return _segmentType; }
+			get => _segmentType;
 			set {
 				if (_segmentType != value) {
 					_segmentType = value;
@@ -345,7 +354,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		}
 
 		public string Version {
-			get { return _version; }
+			get => _version;
 			set {
 				if (_version != value) {
 					_version = value;
@@ -355,7 +364,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		}
 
 		public string WorkStage {
-			get { return _workStage; }
+			get => _workStage;
 			set {
 				if (_workStage != value) {
 					_workStage = value;
@@ -366,7 +375,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string MukInfo2 {
-			get { return _mukInfo2; }
+			get => _mukInfo2;
 			set {
 				if (_mukInfo2 != value) {
 					_mukInfo2 = value;
@@ -375,7 +384,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors MukInfoColor2 {
-			get { return _mukInfoColor2; }
+			get => _mukInfoColor2;
 			set {
 				if (_mukInfoColor2 != value) {
 					_mukInfoColor2 = value;
@@ -386,7 +395,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string MukInfo3 {
-			get { return _mukInfo3; }
+			get => _mukInfo3;
 			set {
 				if (_mukInfo3 != value) {
 					_mukInfo3 = value;
@@ -395,7 +404,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors MukInfoColor3 {
-			get { return _mukInfoColor3; }
+			get => _mukInfoColor3;
 			set {
 				if (_mukInfoColor3 != value) {
 					_mukInfoColor3 = value;
@@ -406,7 +415,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string MukInfo4 {
-			get { return _mukInfo4; }
+			get => _mukInfo4;
 			set {
 				if (_mukInfo4 != value) {
 					_mukInfo4 = value;
@@ -415,7 +424,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors MukInfoColor4 {
-			get { return _mukInfoColor4; }
+			get => _mukInfoColor4;
 			set {
 				if (_mukInfoColor4 != value) {
 					_mukInfoColor4 = value;
@@ -426,7 +435,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string MukInfo6 {
-			get { return _mukInfo6; }
+			get => _mukInfo6;
 			set {
 				if (_mukInfo6 != value) {
 					_mukInfo6 = value;
@@ -435,7 +444,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors MukInfoColor6 {
-			get { return _mukInfoColor6; }
+			get => _mukInfoColor6;
 			set {
 				if (_mukInfoColor6 != value) {
 					_mukInfoColor6 = value;
@@ -446,7 +455,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string MukInfo7 {
-			get { return _mukInfo7; }
+			get => _mukInfo7;
 			set {
 				if (_mukInfo7 != value) {
 					_mukInfo7 = value;
@@ -455,7 +464,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors MukInfoColor7 {
-			get { return _mukInfoColor7; }
+			get => _mukInfoColor7;
 			set {
 				if (_mukInfoColor7 != value) {
 					_mukInfoColor7 = value;
@@ -466,7 +475,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string MukInfo8 {
-			get { return _mukInfo8; }
+			get => _mukInfo8;
 			set {
 				if (_mukInfo8 != value) {
 					_mukInfo8 = value;
@@ -475,7 +484,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors MukInfoColor8 {
-			get { return _mukInfoColor8; }
+			get => _mukInfoColor8;
 			set {
 				if (_mukInfoColor8 != value) {
 					_mukInfoColor8 = value;
@@ -486,7 +495,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string BsSmInfo {
-			get { return _bsSmInfo; }
+			get => _bsSmInfo;
 			set {
 				if (_bsSmInfo != value) {
 					_bsSmInfo = value;
@@ -495,7 +504,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors BsSmInfoColor {
-			get { return _bsSmInfoColor; }
+			get => _bsSmInfoColor;
 			set {
 				if (_bsSmInfoColor != value) {
 					_bsSmInfoColor = value;
@@ -506,7 +515,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string BvsInfo1 {
-			get { return _bvsInfo1; }
+			get => _bvsInfo1;
 			set {
 				if (_bvsInfo1 != value) {
 					_bvsInfo1 = value;
@@ -515,7 +524,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors BvsInfoColor1 {
-			get { return _bvsInfoColor1; }
+			get => _bvsInfoColor1;
 			set {
 				if (_bvsInfoColor1 != value) {
 					_bvsInfoColor1 = value;
@@ -526,7 +535,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string BvsInfo2 {
-			get { return _bvsInfo2; }
+			get => _bvsInfo2;
 			set {
 				if (_bvsInfo2 != value) {
 					_bvsInfo2 = value;
@@ -535,7 +544,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors BvsInfoColor2 {
-			get { return _bvsInfoColor2; }
+			get => _bvsInfoColor2;
 			set {
 				if (_bvsInfoColor2 != value) {
 					_bvsInfoColor2 = value;
@@ -546,7 +555,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string EmersonInfo {
-			get { return _emersonInfo; }
+			get => _emersonInfo;
 			set {
 				if (_emersonInfo != value) {
 					_emersonInfo = value;
@@ -555,7 +564,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors EmersonInfoColor {
-			get { return _emersonInfoColor; }
+			get => _emersonInfoColor;
 			set {
 				if (_emersonInfoColor != value) {
 					_emersonInfoColor = value;
@@ -567,7 +576,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string EvaporatorFanControllerInfo {
-			get { return _evaporatorFanControllerInfo; }
+			get => _evaporatorFanControllerInfo;
 			set {
 				if (_evaporatorFanControllerInfo != value) {
 					_evaporatorFanControllerInfo = value;
@@ -576,7 +585,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors EvaporatorFanControllerInfoColor {
-			get { return _evaporatorFanControllerInfoColor; }
+			get => _evaporatorFanControllerInfoColor;
 			set {
 				if (_evaporatorFanControllerInfoColor != value) {
 					_evaporatorFanControllerInfoColor = value;
@@ -588,7 +597,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string SensorOuterAirInfo {
-			get { return _sensorOuterAirInfo; }
+			get => _sensorOuterAirInfo;
 			set {
 				if (_sensorOuterAirInfo != value) {
 					_sensorOuterAirInfo = value;
@@ -597,7 +606,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors SensorOuterAirInfoColor {
-			get { return _sensorOuterAirInfoColor; }
+			get => _sensorOuterAirInfoColor;
 			set {
 				if (_sensorOuterAirInfoColor != value) {
 					_sensorOuterAirInfoColor = value;
@@ -608,7 +617,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string SensorRecycleAirInfo {
-			get { return _sensorRecycleAirInfo; }
+			get => _sensorRecycleAirInfo;
 			set {
 				if (_sensorRecycleAirInfo != value) {
 					_sensorRecycleAirInfo = value;
@@ -617,7 +626,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors SensorRecycleAirInfoColor {
-			get { return _sensorRecycleAirInfoColor; }
+			get => _sensorRecycleAirInfoColor;
 			set {
 				if (_sensorRecycleAirInfoColor != value) {
 					_sensorRecycleAirInfoColor = value;
@@ -629,7 +638,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		#region Props Датчик подаваемого воздуха
 		public string SensorSupplyAirInfo {
-			get { return _sensorSupplyAirInfo; }
+			get => _sensorSupplyAirInfo;
 			set {
 				if (_sensorSupplyAirInfo != value) {
 					_sensorSupplyAirInfo = value;
@@ -638,7 +647,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors SensorSupplyAirInfoColor {
-			get { return _sensorSupplyAirInfoColor; }
+			get => _sensorSupplyAirInfoColor;
 			set {
 				if (_sensorSupplyAirInfoColor != value) {
 					_sensorSupplyAirInfoColor = value;
@@ -650,7 +659,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string SensorInteriorAirInfo1 {
-			get { return _sensorInteriorAirInfo1; }
+			get => _sensorInteriorAirInfo1;
 			set {
 				if (_sensorInteriorAirInfo1 != value) {
 					_sensorInteriorAirInfo1 = value;
@@ -659,7 +668,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors SensorInteriorAirInfoColor1 {
-			get { return _sensorInteriorAirInfoColor1; }
+			get => _sensorInteriorAirInfoColor1;
 			set {
 				if (_sensorInteriorAirInfoColor1 != value) {
 					_sensorInteriorAirInfoColor1 = value;
@@ -670,7 +679,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		public string SensorInteriorAirInfo2 {
-			get { return _sensorInteriorAirInfo2; }
+			get => _sensorInteriorAirInfo2;
 			set {
 				if (_sensorInteriorAirInfo2 != value) {
 					_sensorInteriorAirInfo2 = value;
@@ -679,7 +688,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		public Colors SensorInteriorAirInfoColor2 {
-			get { return _sensorInteriorAirInfoColor2; }
+			get => _sensorInteriorAirInfoColor2;
 			set {
 				if (_sensorInteriorAirInfoColor2 != value) {
 					_sensorInteriorAirInfoColor2 = value;
@@ -687,6 +696,48 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
+
+		public string EmersonPressure1 {
+			get => _emersonPressure1;
+			set {
+				if (_emersonPressure1 != value) {
+					_emersonPressure1 = value;
+					RaisePropertyChanged(() => EmersonPressure1);
+				}
+			}
+		}
+
+		public string EmersonPressure2 {
+			get => _emersonPressure2;
+			set {
+				if (_emersonPressure2 != value) {
+					_emersonPressure2 = value;
+					RaisePropertyChanged(() => EmersonPressure2);
+				}
+			}
+		}
+
+		public string EmersonTemperature1 {
+			get => _emersonTemperature1;
+			set {
+				if (_emersonTemperature1 != value) {
+					_emersonTemperature1 = value;
+					RaisePropertyChanged(() => EmersonTemperature1);
+				}
+			}
+		}
+
+		public string EmersonTemperature2 {
+			get => _emersonTemperature2;
+			set {
+				if (_emersonTemperature2 != value) {
+					_emersonTemperature2 = value;
+					RaisePropertyChanged(() => EmersonTemperature2);
+				}
+			}
+		}
+
 
 
 		void ResetVmPropsToDefaultValues() {
@@ -741,6 +792,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 			SensorInteriorAirInfo2 = UnknownText;
 			SensorInteriorAirInfoColor2 = UnknownColor;
+
+			EmersonPressure1 = UnknownText;
+			EmersonPressure2 = UnknownText;
+
+			EmersonTemperature1 = UnknownText;
+			EmersonTemperature2 = UnknownText;
 		}
 	}
 }
