@@ -37,14 +37,16 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.Record {
 			if (_recordedData.Count > 0) {
 				var filename = _windowSystem.ShowSaveFileDialog("Сохранение данных в виде текста", "Текстовые файлы|*.txt|Все файлы|*.*");
 				if (!string.IsNullOrEmpty(filename)) {
-					string result = string.Empty;
-					for (int i = 0; i < _recordedData.Count; ++i) {
-						for (int j = 0; j < _recordedData[i].Count; ++j) {
-							result += _recordedData[i][j].ToString("X2") + " ";
+					using (var sw = new StreamWriter(File.OpenWrite(filename))) { 
+						for (int i = 0; i < _recordedData.Count; ++i) {
+							var result = string.Empty;
+							for (int j = 0; j < _recordedData[i].Count; ++j) {
+								result += _recordedData[i][j].ToString("X2") + " ";
+							}
+							sw.WriteLine(result);
 						}
-						result += Environment.NewLine;
+						sw.Close();
 					}
-					File.WriteAllText(filename, result);
 				}
 				_recordedData.Clear();
 			}
@@ -60,7 +62,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.Record {
 		}
 
 		public bool IsRecording {
-			get { return _isRecording; }
+			get => _isRecording;
 			set {
 				if (_isRecording != value) {
 					_isRecording = value;
