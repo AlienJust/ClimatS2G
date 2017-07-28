@@ -141,7 +141,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			ResetVmPropsToDefaultValues();
 		}
 
-
+		/// <summary>
+		/// МУК заслонки наружного воздуха, MODBUS адрес = 2
+		/// </summary>
+		/// <param name="bytes"></param>
+		/// <param name="data"></param>
 		private void CmdListenerMukFlapOuterAirReply03OnDataReceived(IList<byte> bytes, IMukFlapReply03Telemetry data) {
 			_uiNotifier.Notify(() => {
 				MukInfo2 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
