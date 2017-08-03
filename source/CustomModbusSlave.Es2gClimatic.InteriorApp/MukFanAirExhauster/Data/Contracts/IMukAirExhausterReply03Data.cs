@@ -2,7 +2,7 @@
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts {
 	interface IMukAirExhausterReply03Data {
-		int HeatPwm { get; }
+		int HeatPwm { get; } // TODO: rename to FanPwm
 		ISensorIndication<double> TemperatureOneWire { get; }
 		int InputSignals { get; }
 		int OutputSignals { get; }

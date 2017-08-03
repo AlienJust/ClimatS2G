@@ -7,7 +7,7 @@
 	xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
 	mc:Ignorable="d"
 	d:DesignHeight="400"
-	d:DesignWidth="400">
+	d:DesignWidth="600">
 	<UserControl.Resources>
 		<converters:ColorsEnumToColorConverter
 			x:Key="ColorConverter" />
@@ -546,13 +546,13 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor4, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=CondensorPressure1Color, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
 					Text="Давление конденсатора 1 канал: " />
 				<TextBlock
-					Text="{Binding Path=PressureCondensorInfo1, Mode=OneWay}" />
+					Text="{Binding Path=CondensorPressure1, Mode=OneWay}" />
 			</StackPanel>
 			<StackPanel
 				Grid.Row="6"
@@ -567,13 +567,13 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor4, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=CondensorPressure2Color, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
 					Text="Давление конденсатора 2 канал: " />
 				<TextBlock
-					Text="{Binding Path=PressureCondensorInfo2, Mode=OneWay}" />
+					Text="{Binding Path=CondensorPressure2, Mode=OneWay}" />
 			</StackPanel>
 
 			<StackPanel
@@ -589,11 +589,11 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor2, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=FlapAirOuterDiagInfo5Color, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка наружного воздуха 2.8.5: " />
+					Text="Заслонка наружного воздуха не встает в крайние положения: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirOuterDiagInfo5, Mode=OneWay}" />
 			</StackPanel>
@@ -610,11 +610,11 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor2, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=FlapAirOuterDiagInfo6Color, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка наружного воздуха 2.8.6: " />
+					Text="Заслонка не проходит 50% диапазона: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirOuterDiagInfo6, Mode=OneWay}" />
 			</StackPanel>
@@ -632,11 +632,11 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor6, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=FlapAirRecycleDiagInfo5Color, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка рецирк. воздуха 6.8.5: " />
+					Text="Заслонка рецирк. воздуха не встает в крайние положения: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirRecycleDiagInfo5, Mode=OneWay}" />
 			</StackPanel>
@@ -653,11 +653,11 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor6, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=FlapAirRecycleDiagInfo6Color, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка рецирк. воздуха 6.8.6: " />
+					Text="Заслонка не проходит 50% диапазона: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirRecycleDiagInfo6, Mode=OneWay}" />
 			</StackPanel>
@@ -675,11 +675,11 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor7, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=FlapAirWinterSummerDiagInfo5Color, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка лето-зима 7.8.5: " />
+					Text="Заслонка лето-зима не встает в крайние положения: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirWinterSummerDiagInfo5, Mode=OneWay}" />
 			</StackPanel>
@@ -696,11 +696,11 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor7, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=FlapAirWinterSummerDiagInfo6Color, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка лето-зима 7.8.6: " />
+					Text="Заслонка не проходит 50% диапазона: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirWinterSummerDiagInfo6, Mode=OneWay}" />
 			</StackPanel>
@@ -720,13 +720,13 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor5, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=MukInfoColor6, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
 					Text="Вытяжной вентилятор, уставка ШИМ: " />
 				<TextBlock
-					Text="{Binding Path=MukFanAirExhausterInfoPwm, Mode=OneWay}" />
+					Text="{Binding Path=MukFanAirExhausterPwm, Mode=OneWay}" />
 			</StackPanel>
 			<StackPanel
 				Grid.Row="11"
@@ -748,7 +748,7 @@
 				<TextBlock
 					Text="Вентилятор испарителя, уставка ШИМ: " />
 				<TextBlock
-					Text="{Binding Path=MukFanEvaporatorInfoPwm, Mode=OneWay}" />
+					Text="{Binding Path=MukFanEvaporatorPwm, Mode=OneWay}" />
 			</StackPanel>
 		</Grid>
 	</StackPanel>
