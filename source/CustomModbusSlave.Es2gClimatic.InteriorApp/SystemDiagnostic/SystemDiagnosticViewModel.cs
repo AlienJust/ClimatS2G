@@ -88,9 +88,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private Colors _sensorRecycleAirInfoColor;
 
 		private string _emersonPressure1;
+		private Colors _emersonPressure1Color;
+
 		private string _emersonPressure2;
+		private Colors _emersonPressure2Color;
+
 		private string _emersonTemperature1;
+		private Colors _emersonTemperature1Color;
+
 		private string _emersonTemperature2;
+		private Colors _emersonTemperature2Color;
 
 		/// <summary>
 		/// Датчик подаваемого воздуха
@@ -154,15 +161,65 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				if (data.Diagnostic1.NoEmersionControllerAnswer) {
 					EmersonInfo = NoLinkText;
 					EmersonInfoColor = NoLinkColor;
+
+					EmersonPressure1 = NoLinkText;
+					EmersonPressure1Color = NoLinkColor;
+					EmersonPressure2 = NoLinkText;
+					EmersonPressure2Color = NoLinkColor;
+					EmersonTemperature1 = NoLinkText;
+					EmersonTemperature1Color = NoLinkColor;
+					EmersonTemperature2 = NoLinkText;
+					EmersonTemperature2Color = NoLinkColor;
 				}
 				else {
 					EmersonInfo = OkLinkText;
 					EmersonInfoColor = OkLinkColor;
+
+
+					if (data.EmersonPressureCircuit1.NoLinkWithSensor) {
+						EmersonPressure1 = NoSensorText;
+						EmersonPressure1Color = NoSensorColor;
+					}
+					else {
+						EmersonPressure1 = data.EmersonPressureCircuit1.Indication.ToString("f2");
+						EmersonPressure1Color = OkSensorColor;
+					}
+
+					if (data.EmersonPressureCircuit2.NoLinkWithSensor) {
+						EmersonPressure2 = NoSensorText;
+						EmersonPressure2Color = NoSensorColor;
+					}
+					else {
+						EmersonPressure2 = data.EmersonPressureCircuit2.Indication.ToString("f2");
+						EmersonPressure2Color = OkSensorColor;
+					}
+
+					if (data.EmersonTemperatureCircuit1.NoLinkWithSensor) {
+						EmersonTemperature1 = NoSensorText;
+						EmersonTemperature1Color = NoSensorColor;
+					}
+					else {
+						EmersonTemperature1 = data.EmersonTemperatureCircuit1.Indication.ToString("f2");
+						EmersonTemperature1Color = OkSensorColor;
+					}
+
+					if (data.EmersonTemperatureCircuit2.NoLinkWithSensor) {
+						EmersonTemperature2 = NoSensorText;
+						EmersonTemperature2Color = NoSensorColor;
+					}
+					else {
+						EmersonTemperature2 = data.EmersonTemperatureCircuit2.Indication.ToString("f2");
+						EmersonTemperature2Color = OkSensorColor;
+					}
 				}
 			});
 		}
 
-
+		/// <summary>
+		/// МУК вентилятора испарителя, MODBUS адрес = 
+		/// </summary>
+		/// <param name="bytes"></param>
+		/// <param name="data"></param>
 		private void CmdListenerMukVaporizerReply03OnDataReceived(IList<byte> bytes, IMukFanVaporizerDataReply03 data) {
 			_uiNotifier.Notify(() => {
 				MukInfo3 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
@@ -711,6 +768,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		public Colors EmersonPressure1Color {
+			get => _emersonPressure1Color;
+			set {
+				if (_emersonPressure1Color != value) {
+					_emersonPressure1Color = value;
+					RaisePropertyChanged(() => EmersonPressure1Color);
+				}
+			}
+		}
+
 
 		public string EmersonPressure2 {
 			get => _emersonPressure2;
@@ -721,6 +788,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		public Colors EmersonPressure2Color {
+			get => _emersonPressure2Color;
+			set {
+				if (_emersonPressure2Color != value) {
+					_emersonPressure2Color = value;
+					RaisePropertyChanged(() => EmersonPressure2Color);
+				}
+			}
+		}
+
 
 		public string EmersonTemperature1 {
 			get => _emersonTemperature1;
@@ -731,6 +808,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		public Colors EmersonTemperature1Color {
+			get => _emersonTemperature1Color;
+			set {
+				if (_emersonTemperature1Color != value) {
+					_emersonTemperature1Color = value;
+					RaisePropertyChanged(() => EmersonTemperature1Color);
+				}
+			}
+		}
 
 		public string EmersonTemperature2 {
 			get => _emersonTemperature2;
@@ -738,6 +824,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				if (_emersonTemperature2 != value) {
 					_emersonTemperature2 = value;
 					RaisePropertyChanged(() => EmersonTemperature2);
+				}
+			}
+		}
+		public Colors EmersonTemperature2Color {
+			get => _emersonTemperature2Color;
+			set {
+				if (_emersonTemperature2Color != value) {
+					_emersonTemperature2Color = value;
+					RaisePropertyChanged(() => EmersonTemperature2Color);
 				}
 			}
 		}
@@ -798,10 +893,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			SensorInteriorAirInfoColor2 = UnknownColor;
 
 			EmersonPressure1 = UnknownText;
+			EmersonPressure1Color = UnknownColor;
+
 			EmersonPressure2 = UnknownText;
+			EmersonPressure2Color = UnknownColor;
 
 			EmersonTemperature1 = UnknownText;
+			EmersonTemperature1Color = UnknownColor;
+
 			EmersonTemperature2 = UnknownText;
+			EmersonTemperature2Color = UnknownColor;
 		}
 	}
 }
