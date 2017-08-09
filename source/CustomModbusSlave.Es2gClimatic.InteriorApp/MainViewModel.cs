@@ -312,7 +312,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			ISerialPortContainer portContainer;
 			if (_selectedComName == _testPortName) {
 				var filename = _windowSystem.ShowOpenFileDialog("Текстовый файл с данными", "Текстовые файлы|*.txt|Все файлы|*.*");
-				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] { " ", Environment.NewLine, "\t" }, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
+				/*List<byte> valuesFromFile = new List<byte>();
+				var parts = File.ReadAllText(filename).Split(new[] {" ", Environment.NewLine, "\t", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
+				for (int i = 0; i < parts.Length; ++i)
+				{
+					Console.WriteLine(parts[i]);
+					valuesFromFile.Add(byte.Parse(parts[i], NumberStyles.HexNumber));
+				}*/
+				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] { " ", Environment.NewLine, "\t", "\n", "\r"}, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
 			}
 			else {
 				portContainer = new SerialPortContainerReal(_selectedComName, 57600);
@@ -334,7 +341,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 
 		public List<string> ComPortsAvailable {
-			get { return _comPortsAvailable; }
+			get => _comPortsAvailable;
 			set {
 				if (_comPortsAvailable != value) {
 					_comPortsAvailable = value;
@@ -344,7 +351,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		}
 
 		public string SelectedComName {
-			get { return _selectedComName; }
+			get => _selectedComName;
 			set {
 				if (value != _selectedComName) {
 					_selectedComName = value;
@@ -354,7 +361,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		}
 
 		public bool IsPortOpened {
-			get { return _isPortOpened; }
+			get => _isPortOpened;
 			set {
 				if (_isPortOpened != value) {
 					_isPortOpened = value;
@@ -364,7 +371,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		}
 
 		public Colors LinkBackColor {
-			get { return _linkBackColor; }
+			get => _linkBackColor;
 			set {
 				if (_linkBackColor != value) {
 					_linkBackColor = value;
@@ -374,7 +381,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		}
 
 		public bool TabHeadersAreLong {
-			get { return _tabHeadersAreLong; }
+			get => _tabHeadersAreLong;
 			set {
 				if (_tabHeadersAreLong != value) {
 					_tabHeadersAreLong = value;

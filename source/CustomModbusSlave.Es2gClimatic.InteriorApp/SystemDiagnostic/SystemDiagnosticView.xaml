@@ -262,7 +262,7 @@
 			</StackPanel>
 
 			<StackPanel
-				Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BtwConverter}}"
+				Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}"
 				Grid.Row="5"
 				Grid.Column="0"
 				Orientation="Horizontal">
@@ -734,7 +734,6 @@
 			<StackPanel
 				Grid.Row="10"
 				Grid.Column="0"
-				Grid.ColumnSpan="2"
 				Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush
@@ -745,18 +744,17 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor6, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=FanAirExhausterColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Вытяжной вентилятор, уставка ШИМ: " />
+					Text="Вытяжной вентилятор, ШИМ: " />
 				<TextBlock
-					Text="{Binding Path=MukFanAirExhausterPwm, Mode=OneWay}" />
+					Text="{Binding Path=FanAirExhausterInfo, Mode=OneWay}" />
 			</StackPanel>
 			<StackPanel
-				Grid.Row="11"
-				Grid.Column="0"
-				Grid.ColumnSpan="2"
+				Grid.Row="10"
+				Grid.Column="1"
 				Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush
@@ -767,13 +765,58 @@
 							Color="Transparent" />
 						<GradientStop
 							Offset="0"
-							Color="{Binding Path=MukInfoColor3, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+							Color="{Binding Path=FanEvaporatorColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Вентилятор испарителя, уставка ШИМ: " />
+					Text="Вентилятор испарителя, обороты: " />
 				<TextBlock
-					Text="{Binding Path=MukFanEvaporatorPwm, Mode=OneWay}" />
+					Text="{Binding Path=FanEvaporatorInfo, Mode=OneWay}" />
+			</StackPanel>
+
+			<StackPanel
+				Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}"
+				Grid.Row="11"
+				Grid.Column="0"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=FanCondensorColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="Вентилятор конденсатора: " />
+				<TextBlock
+					Text="{Binding Path=FanCondensorInfo, Mode=OneWay}" />
+			</StackPanel>
+			<StackPanel
+				Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BtwConverter}}"
+				Grid.Row="11"
+				Grid.Column="1"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=ConcentratorAdvancedColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="Концентратор: " />
+				<TextBlock
+					Text="{Binding Path=ConcentratorAdvancedInfo, Mode=OneWay}" />
 			</StackPanel>
 		</Grid>
 	</StackPanel>
