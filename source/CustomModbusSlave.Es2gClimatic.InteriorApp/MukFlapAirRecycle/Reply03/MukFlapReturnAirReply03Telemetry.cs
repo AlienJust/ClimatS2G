@@ -12,7 +12,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 			byte outgoingSignals, 
 			double analogInput, 
 			IMukFlapWorkmodeStage automaticModeStage, 
-			IMukFlapDiagnostic1 diagnostic1, 
+			IMukFlapAirRecycleDiagnostic1 diagnostic1, 
 			IMukFlapDiagnostic2 diagnostic2, 
 			IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1, 
 			IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2, 
@@ -56,7 +56,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 		public byte OutgoingSignals { get; }
 		public double AnalogInput { get; }
 		public IMukFlapWorkmodeStage AutomaticModeStage { get; }
-		public IMukFlapDiagnostic1 Diagnostic1 { get; }
+		public IMukFlapAirRecycleDiagnostic1 Diagnostic1 { get; }
 		public IMukFlapDiagnostic2 Diagnostic2 { get; }
 		public IMukFlapDiagnosticOneWireSensor Diagnostic3OneWire1 { get; }
 		public IMukFlapDiagnosticOneWireSensor Diagnostic4OneWire2 { get; }

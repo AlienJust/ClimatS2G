@@ -130,7 +130,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock
 					Text="Диагностика 1" />
-				<mukFlapOuterAirReply03:MukFlapDiagnostic1View
+				<mukFlapOuterAirReply03:MukFlapAirRecycleDiagnostic1View
 					Grid.Row="1"
 					DataContext="{Binding Path=Diagnostic1, Mode=OneTime}" />
 			</Grid>

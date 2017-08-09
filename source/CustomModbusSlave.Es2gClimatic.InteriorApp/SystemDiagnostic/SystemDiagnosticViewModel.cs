@@ -38,6 +38,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private const Colors OkDiagColor = Colors.YellowGreen;
 		private const Colors ErDiagColor = Colors.PaleVioletRed;
 
+		
 
 		private readonly IThreadNotifier _uiNotifier;
 		private readonly ICmdListener<IMukFlapReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
@@ -52,6 +53,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm;
 
 		private string _segmentType;
+		private bool _isSlave;
+		private bool _isMaster;
+
 		private string _version;
 		private string _workStage;
 
@@ -87,6 +91,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		private string _evaporatorFanControllerInfo;
 		private Colors _evaporatorFanControllerInfoColor;
+
+		private string _concentratorInfo;
+		private Colors _concentratorInfoColor;
 
 		private string _sensorOuterAirInfo;
 		private Colors _sensorOuterAirInfoColor;
@@ -386,6 +393,17 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					FlapAirRecycleDiagInfo6 = OkDiagText;
 					FlapAirRecycleDiagInfo6Color = OkDiagColor;
 				}
+
+				if (data.Diagnostic1.HighVoltageKeyDriverLinkError)
+				{
+					ConcentratorInfo = NoLinkText;
+					ConcentratorInfoColor = NoLinkColor;
+				}
+				else
+				{
+					ConcentratorInfo = OkLinkText;
+					ConcentratorInfoColor = OkLinkColor;
+				}
 			});
 		}
 
@@ -450,6 +468,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 				}
 
+				// КСМ, бит "Нет связи с МУК вентилятора испарителя" взведен
 				if (data[22].HighFirstUnsignedValue.GetBit(2)) {
 					MukInfo3 = NoLinkText;
 					MukInfoColor3 = NoLinkColor;
@@ -467,6 +486,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					SensorSupplyAirInfoColor = NoLinkColor;
 
 					MukFanEvaporatorPwm = NoLinkText;
+
+					IsMaster = true;
+					IsSlave = true;
+					SegmentType = UnknownText;
 				}
 
 				if (data[22].HighFirstUnsignedValue.GetBit(4)) {
@@ -492,6 +515,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 					FlapAirRecycleDiagInfo6Color = NoLinkColor;
 					FlapAirRecycleDiagInfo6 = NoLinkText;
+
+					ConcentratorInfoColor = NoLinkColor;
+					ConcentratorInfo = NoLinkText;
 				}
 
 				// КСМ, бит "Нет связи с МУК заслонки лето-зима" взведен
@@ -552,10 +578,26 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		}
 
 		private void CmdListenerMukVaporizerRequest16DataReceived(IList<byte> bytes, IMukFanVaporizerDataRequest16 data) {
-			_uiNotifier.Notify(() => { SegmentType = data == null ? UnknownText : data.IsSlave ? "Slave" : "Master"; });
+			_uiNotifier.Notify(() => {
+				if (data != null)
+				{
+					if (data.IsSlave)
+					{
+						SegmentType = "Slave";
+						IsSlave = true;
+						IsMaster = false;
+					}
+					else
+					{
+						SegmentType = "Master";
+						IsSlave = false;
+						IsMaster = true;
+					}
+				}
+			});
 		}
 
-
+		
 
 		public string SegmentType {
 			get => _segmentType;
@@ -563,6 +605,25 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				if (_segmentType != value) {
 					_segmentType = value;
 					RaisePropertyChanged(() => SegmentType);
+				}
+			}
+		}
+
+		public bool IsSlave {
+			get => _isSlave;
+			set {
+				if (_isSlave != value) {
+					_isSlave = value;
+					RaisePropertyChanged(() => IsSlave);
+				}
+			}
+		}
+		public bool IsMaster {
+			get => _isMaster;
+			set {
+				if (_isMaster != value) {
+					_isMaster = value;
+					RaisePropertyChanged(() => IsMaster);
 				}
 			}
 		}
@@ -1164,6 +1225,24 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 
+		public string ConcentratorInfo {
+			get => _concentratorInfo;
+			set {
+				if (_concentratorInfo != value) {
+					_concentratorInfo = value;
+					RaisePropertyChanged(() => ConcentratorInfo);
+				}
+			}
+		}
+		public Colors ConcentratorInfoColor {
+			get => _concentratorInfoColor;
+			set {
+				if (_concentratorInfoColor != value) {
+					_concentratorInfoColor = value;
+					RaisePropertyChanged(() => ConcentratorInfoColor);
+				}
+			}
+		}
 
 		void ResetVmPropsToDefaultValues() {
 			SegmentType = UnknownText;
@@ -1202,6 +1281,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 			EvaporatorFanControllerInfo = UnknownText;
 			EvaporatorFanControllerInfoColor = UnknownColor;
+
+			ConcentratorInfo = UnknownText;
+			ConcentratorInfoColor = UnknownColor;
 
 			SensorOuterAirInfo = UnknownText;
 			SensorOuterAirInfoColor = UnknownColor;
@@ -1249,6 +1331,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 			MukFanAirExhausterPwm = UnknownText;
 			MukFanEvaporatorPwm = UnknownText;
+
+			IsMaster = true;
+			IsSlave = true;
 		}
 	}
 }

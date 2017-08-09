@@ -1,3 +1,4 @@
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
@@ -13,7 +14,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 		double AnalogInput { get; }
 
 		IMukFlapWorkmodeStage AutomaticModeStage { get; }
-		IMukFlapDiagnostic1 Diagnostic1 { get; }
+		IMukFlapAirRecycleDiagnostic1 Diagnostic1 { get; }
 		IMukFlapDiagnostic2 Diagnostic2 { get; }
 		IMukFlapDiagnosticOneWireSensor Diagnostic3OneWire1 { get; }
 		IMukFlapDiagnosticOneWireSensor Diagnostic4OneWire2 { get; }

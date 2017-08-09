@@ -11,6 +11,9 @@
 	<UserControl.Resources>
 		<converters:ColorsEnumToColorConverter
 			x:Key="ColorConverter" />
+		<converters:BooleanToVisibilityConverter
+			InvertVisibility="False"
+			x:Key="BtwConverter" />
 	</UserControl.Resources>
 	<StackPanel
 		Orientation="Vertical">
@@ -259,6 +262,7 @@
 			</StackPanel>
 
 			<StackPanel
+				Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BtwConverter}}"
 				Grid.Row="5"
 				Grid.Column="0"
 				Orientation="Horizontal">
@@ -283,7 +287,6 @@
 			<StackPanel
 				Grid.Row="5"
 				Grid.Column="1"
-				Grid.ColumnSpan="2"
 				Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush
@@ -301,6 +304,28 @@
 					Text="Контролер вентилятора испарителя: " />
 				<TextBlock
 					Text="{Binding Path=EvaporatorFanControllerInfo, Mode=OneWay}" />
+			</StackPanel>
+			<StackPanel
+				Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BtwConverter}}"
+				Grid.Row="5"
+				Grid.Column="2"
+				Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush
+						StartPoint="0,0"
+						EndPoint="1,0">
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+						<GradientStop
+							Offset="0"
+							Color="{Binding Path=ConcentratorInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock
+					Text="Концентратор: " />
+				<TextBlock
+					Text="{Binding Path=ConcentratorInfo, Mode=OneWay}" />
 			</StackPanel>
 
 		</Grid>
