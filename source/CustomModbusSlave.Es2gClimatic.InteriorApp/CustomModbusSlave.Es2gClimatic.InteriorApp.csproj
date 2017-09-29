@@ -203,6 +203,10 @@
       <DependentUpon>AutoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SystemDiagnostic\AutoViewModel.cs" />
+    <Compile Include="SystemDiagnostic\BsSmFaultViewModel.cs" />
+    <Compile Include="SystemDiagnostic\BsSmFaultView.xaml.cs">
+      <DependentUpon>BsSmFaultView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SystemDiagnostic\SystemDiagnosticView.xaml.cs">
       <DependentUpon>SystemDiagnosticView.xaml</DependentUpon>
     </Compile>
@@ -515,6 +519,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SystemDiagnostic\AutoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SystemDiagnostic\BsSmFaultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

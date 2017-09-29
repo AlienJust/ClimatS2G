@@ -96,6 +96,7 @@
       <DependentUpon>AnyCommandPartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnyCommandPartViewModel.cs" />
+    <Compile Include="BsSm\Fault\IntegerFaultCodeToTextConverter.cs" />
     <Compile Include="BsSm\IWorkMode.cs" />
     <Compile Include="BsSm\State\BuilderFromByte.cs" />
     <Compile Include="BsSm\State\Simple.cs" />

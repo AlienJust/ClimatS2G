@@ -827,26 +827,41 @@
 			</Grid.ColumnDefinitions>
 			<StackPanel>
 				<systemDiagnostic:AutoView
-					DataContext="{Binding Path=AutoVm1}" />
+					DataContext="{Binding Path=AutoVm1, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
-					DataContext="{Binding Path=AutoVm3}" />
+					DataContext="{Binding Path=AutoVm3, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
-					DataContext="{Binding Path=AutoVm5}" />
+					DataContext="{Binding Path=AutoVm5, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
-					DataContext="{Binding Path=AutoVm7}" />
+					DataContext="{Binding Path=AutoVm7, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
-					DataContext="{Binding Path=AutoVm9}" />
+					DataContext="{Binding Path=AutoVm9, Mode=OneTime}" />
 			</StackPanel>
-			<StackPanel Grid.Column="1">
+			<StackPanel
+				Grid.Column="1">
 				<systemDiagnostic:AutoView
-					DataContext="{Binding Path=AutoVm2}" />
+					DataContext="{Binding Path=AutoVm2, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
-					DataContext="{Binding Path=AutoVm4}" />
+					DataContext="{Binding Path=AutoVm4, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
-					DataContext="{Binding Path=AutoVm6}" />
+					DataContext="{Binding Path=AutoVm6, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
-					DataContext="{Binding Path=AutoVm8}" />
+					DataContext="{Binding Path=AutoVm8, Mode=OneTime}" />
 			</StackPanel>
 		</Grid>
+		<StackPanel>
+			<TextBlock
+				Text="Диагностика МПСУиД:"/>
+			<systemDiagnostic:BsSmFaultView
+				DataContext="{Binding Path=BsSmFaultVm1, Mode=OneTime}" />
+			<systemDiagnostic:BsSmFaultView
+				DataContext="{Binding Path=BsSmFaultVm2, Mode=OneTime}" />
+			<systemDiagnostic:BsSmFaultView
+				DataContext="{Binding Path=BsSmFaultVm3, Mode=OneTime}" />
+			<systemDiagnostic:BsSmFaultView
+				DataContext="{Binding Path=BsSmFaultVm4, Mode=OneTime}" />
+			<systemDiagnostic:BsSmFaultView
+				DataContext="{Binding Path=BsSmFaultVm5, Mode=OneTime}" />
+		</StackPanel>
 	</StackPanel>
 </UserControl>

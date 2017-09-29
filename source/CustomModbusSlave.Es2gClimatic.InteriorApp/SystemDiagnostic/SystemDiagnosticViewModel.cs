@@ -171,6 +171,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		public AutoViewModel AutoVm8 { get; }
 		public AutoViewModel AutoVm9 { get; }
 
+		public BsSmFaultViewModel BsSmFaultVm1 { get; }
+		public BsSmFaultViewModel BsSmFaultVm2 { get; }
+		public BsSmFaultViewModel BsSmFaultVm3 { get; }
+		public BsSmFaultViewModel BsSmFaultVm4 { get; }
+		public BsSmFaultViewModel BsSmFaultVm5 { get; }
 
 		public SystemDiagnosticViewModel(IThreadNotifier uiNotifier,
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
@@ -221,6 +226,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			AutoVm7 = new AutoViewModel("Автоматический выключатель рециркуляционных нагревателей");
 			AutoVm8 = new AutoViewModel("Автоматический выключатель вентилятора конденсатора");
 			AutoVm9 = new AutoViewModel("Автоматический выключатель обеззораживателя");
+
+			BsSmFaultVm1 = new BsSmFaultViewModel();
+			BsSmFaultVm2 = new BsSmFaultViewModel();
+			BsSmFaultVm3 = new BsSmFaultViewModel();
+			BsSmFaultVm4 = new BsSmFaultViewModel();
+			BsSmFaultVm5 = new BsSmFaultViewModel();
 		}
 
 		
@@ -520,6 +531,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_uiNotifier.Notify(() => {
 				BsSmInfo = new TextFormatterIntegerDotted().Format(data.BsSmVersionNumber);
 				BsSmInfoColor = OkLinkColor;
+				BsSmFaultVm1.Code = data.Ksm2Request.Fault1;
+				BsSmFaultVm2.Code = data.Ksm2Request.Fault2;
+				BsSmFaultVm3.Code = data.Ksm2Request.Fault3;
+				BsSmFaultVm4.Code = data.Ksm2Request.Fault4;
+				BsSmFaultVm5.Code = data.Ksm2Request.Fault5;
 			});
 		}
 
