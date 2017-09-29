@@ -5,6 +5,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
+	xmlns:systemDiagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic"
 	mc:Ignorable="d"
 	d:DesignHeight="400"
 	d:DesignWidth="600">
@@ -817,6 +818,34 @@
 					Text="Концентратор: " />
 				<TextBlock
 					Text="{Binding Path=ConcentratorAdvancedInfo, Mode=OneWay}" />
+			</StackPanel>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<StackPanel>
+				<systemDiagnostic:AutoView
+					DataContext="{Binding Path=AutoVm1}" />
+				<systemDiagnostic:AutoView
+					DataContext="{Binding Path=AutoVm3}" />
+				<systemDiagnostic:AutoView
+					DataContext="{Binding Path=AutoVm5}" />
+				<systemDiagnostic:AutoView
+					DataContext="{Binding Path=AutoVm7}" />
+				<systemDiagnostic:AutoView
+					DataContext="{Binding Path=AutoVm9}" />
+			</StackPanel>
+			<StackPanel Grid.Column="1">
+				<systemDiagnostic:AutoView
+					DataContext="{Binding Path=AutoVm2}" />
+				<systemDiagnostic:AutoView
+					DataContext="{Binding Path=AutoVm4}" />
+				<systemDiagnostic:AutoView
+					DataContext="{Binding Path=AutoVm6}" />
+				<systemDiagnostic:AutoView
+					DataContext="{Binding Path=AutoVm8}" />
 			</StackPanel>
 		</Grid>
 	</StackPanel>

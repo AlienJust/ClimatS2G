@@ -188,7 +188,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 				_cmdListenerMukFlapReturnAirReply03,
 				_cmdListenerMukFlapWinterSummerReply03,
 				_cmdListenerBsSmReply32,
-				_cmdListenerKsmParams);
+				_cmdListenerKsmParams,
+				_cmdListenerBvs1Reply65,
+				_cmdListenerBvs2Reply65);
+
 			MukFlapDataVm = new MukFlapDataViewModel(
 				_notifier,
 				_paramSetter,

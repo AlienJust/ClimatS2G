@@ -199,6 +199,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SelectedItemToContentConverter.cs" />
+    <Compile Include="SystemDiagnostic\AutoView.xaml.cs">
+      <DependentUpon>AutoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SystemDiagnostic\AutoViewModel.cs" />
     <Compile Include="SystemDiagnostic\SystemDiagnosticView.xaml.cs">
       <DependentUpon>SystemDiagnosticView.xaml</DependentUpon>
     </Compile>
@@ -507,6 +511,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFlapAirOuter\Reply03\MukFlapDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SystemDiagnostic\AutoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -12,6 +12,7 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
@@ -51,6 +52,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private readonly ICmdListener<IBsSmAndKsm1DataCommand32Reply> _cmdListenerBsSmReply32;
 
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm;
+		private readonly ICmdListener<IBvsReply65Telemetry> _cmdListenerBvs1Reply65;
+		private readonly ICmdListener<IBvsReply65Telemetry> _cmdListenerBvs2Reply65;
 
 		private string _segmentType;
 		private bool _isSlave;
@@ -158,6 +161,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private Colors _сoncentratorAdvancedColor;
 		private string _concentratorAdvancedInfo;
 
+		public AutoViewModel AutoVm1 { get; }
+		public AutoViewModel AutoVm2 { get; }
+		public AutoViewModel AutoVm3 { get; }
+		public AutoViewModel AutoVm4 { get; }
+		public AutoViewModel AutoVm5 { get; }
+		public AutoViewModel AutoVm6 { get; }
+		public AutoViewModel AutoVm7 { get; }
+		public AutoViewModel AutoVm8 { get; }
+		public AutoViewModel AutoVm9 { get; }
+
 
 		public SystemDiagnosticViewModel(IThreadNotifier uiNotifier,
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
@@ -168,7 +181,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03,
 			ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03,
 			ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32,
-			ICmdListener<IList<BytesPair>> cmdListenerKsm) {
+			ICmdListener<IList<BytesPair>> cmdListenerKsm,
+			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65) {
 
 			_uiNotifier = uiNotifier;
 
@@ -181,6 +195,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_cmdListenerMukFlapWinterSummerReply03 = cmdListenerMukFlapWinterSummerReply03;
 			_cmdListenerBsSmReply32 = cmdListenerBsSmReply32;
 			_cmdListenerKsm = cmdListenerKsm;
+			_cmdListenerBvs1Reply65 = cmdListenerBvs1Reply65;
+			_cmdListenerBvs2Reply65 = cmdListenerBvs2Reply65;
 
 			_cmdListenerMukFlapOuterAirReply03.DataReceived += CmdListenerMukFlapOuterAirReply03OnDataReceived;
 			_cmdListenerMukVaporizerReply03.DataReceived += CmdListenerMukVaporizerReply03OnDataReceived;
@@ -192,9 +208,22 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_cmdListenerBsSmReply32.DataReceived += CmdListenerBsSmReply32OnDataReceived;
 			_cmdListenerKsm.DataReceived += CmdListenerKsmOnDataReceived;
 
+			_cmdListenerBvs1Reply65.DataReceived += CmdListenerBvs1Reply65OnDataReceived;
+			_cmdListenerBvs2Reply65.DataReceived += CmdListenerBvs2Reply65OnDataReceived;
 
 			ResetVmPropsToDefaultValues();
+			AutoVm1 = new AutoViewModel("Автоматический выключатель приточного вентилятора 1");
+			AutoVm2 = new AutoViewModel("Автоматический выключатель приточного вентилятора 2");
+			AutoVm3 = new AutoViewModel("Автоматический выключатель вытяжных вентиляторов");
+			AutoVm4 = new AutoViewModel("Автоматический выключатель Компрессора 1");
+			AutoVm5 = new AutoViewModel("Автоматический выключатель Компрессора 2");
+			AutoVm6 = new AutoViewModel("Автоматический выключатель нагревателя 380");
+			AutoVm7 = new AutoViewModel("Автоматический выключатель рециркуляционных нагревателей");
+			AutoVm8 = new AutoViewModel("Автоматический выключатель вентилятора конденсатора");
+			AutoVm9 = new AutoViewModel("Автоматический выключатель обеззораживателя");
 		}
+
+		
 
 		/// <summary>
 		/// МУК заслонки наружного воздуха, MODBUS адрес = 2
@@ -644,7 +673,27 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			});
 		}
 
+		private void CmdListenerBvs1Reply65OnDataReceived(IList<byte> bytes, IBvsReply65Telemetry data)
+		{
+			_uiNotifier.Notify(() =>
+			{
+				AutoVm1.IsOk = data.BvsInput12; // 2.4
+				AutoVm4.IsOk = data.BvsInput8; // 2.0
+				AutoVm6.IsOk = data.BvsInput10; // 2.2
+				AutoVm7.IsOk = data.BvsInput11; // 2.3
+				AutoVm8.IsOk = data.BvsInput9; // 2.1
+			});
+			
+		}
 
+		private void CmdListenerBvs2Reply65OnDataReceived(IList<byte> bytes, IBvsReply65Telemetry data) {
+			_uiNotifier.Notify(() => {
+				AutoVm2.IsOk = data.BvsInput12; // 2.4
+				AutoVm3.IsOk = data.BvsInput9; // 2.1
+				AutoVm5.IsOk = data.BvsInput8; // 2.0
+				AutoVm9.IsOk = data.BvsInput6; // 1.6
+			});
+		}
 
 		public string SegmentType {
 			get => _segmentType;
