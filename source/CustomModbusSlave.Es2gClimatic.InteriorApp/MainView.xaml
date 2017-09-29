@@ -329,6 +329,7 @@
 					DataContext="{Binding Path=SystemDiagnosticVm, Mode=OneTime}" />
 			</TabItem>
 			<TabItem
+				Visibility="Collapsed"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -347,6 +348,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
+				Visibility="Collapsed"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -370,6 +372,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
+				Visibility="Collapsed"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -388,6 +391,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
+				Visibility="Collapsed"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -406,6 +410,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
+				Visibility="Collapsed"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -424,6 +429,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
+				Visibility="Collapsed"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -469,6 +475,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
+				Visibility="Collapsed"
 				Header="КСМ"
 				Style="{StaticResource AzureTabItem}"
 				BorderBrush="Red">
