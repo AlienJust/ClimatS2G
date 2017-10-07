@@ -7,7 +7,7 @@
 	xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
 	xmlns:systemDiagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic"
 	mc:Ignorable="d"
-	d:DesignHeight="400"
+	d:DesignHeight="600"
 	d:DesignWidth="600">
 	<UserControl.Resources>
 		<converters:ColorsEnumToColorConverter
@@ -827,11 +827,18 @@
 			</StackPanel>
 		</Grid>
 		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<StackPanel>
+			<TextBlock
+				Text="Автоматы:"
+				FontWeight="Bold" />
+			<StackPanel Grid.Row="1" Grid.Column="0">
 				<systemDiagnostic:AutoView
 					DataContext="{Binding Path=AutoVm1, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
@@ -844,7 +851,7 @@
 					DataContext="{Binding Path=AutoVm9, Mode=OneTime}" />
 			</StackPanel>
 			<StackPanel
-				Grid.Column="1">
+				Grid.Row="1" Grid.Column="1">
 				<systemDiagnostic:AutoView
 					DataContext="{Binding Path=AutoVm2, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
@@ -857,7 +864,8 @@
 		</Grid>
 		<StackPanel>
 			<TextBlock
-				Text="Диагностика МПСУиД:" />
+				Text="Диагностика МПСУиД:" 
+				FontWeight="Bold"/>
 			<systemDiagnostic:BsSmFaultView
 				DataContext="{Binding Path=BsSmFaultVm1, Mode=OneTime}" />
 			<systemDiagnostic:BsSmFaultView

@@ -10,7 +10,7 @@
 	d:DesignHeight="30"
 	d:DesignWidth="300">
 	<UserControl.Resources>
-		<converters:BooleanToBrushConverter x:Key="BtbConverter" FalseBrush="Red" TrueBrush="Green"/>
+		<converters:BooleanToBrushConverter x:Key="BtbConverter" FalseBrush="Red" TrueBrush="LimeGreen"/>
 		<converters:BooleanToTextConverter x:Key="BttConverter" FalseText="X" TrueText="V"/>
 	</UserControl.Resources>
 	<Grid>
@@ -25,6 +25,7 @@
 		<TextBlock
 			Text="{Binding Path=IsOk, Mode=OneWay, Converter={StaticResource BttConverter}}"
 			Foreground="{Binding Path=IsOk, Mode=OneWay, Converter={StaticResource BtbConverter}}"
+			FontWeight="Bold"
 			Grid.Column="1" />
 	</Grid>
 </UserControl>
