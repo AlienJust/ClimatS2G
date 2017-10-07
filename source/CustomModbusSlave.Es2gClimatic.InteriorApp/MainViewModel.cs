@@ -122,8 +122,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		private Colors _linkBackColor;
 
 		private bool _tabHeadersAreLong;
+		public bool IsFullVersion { get; }
 
-		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string testPortName) {
+		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string testPortName)
+		{
+			IsFullVersion = File.Exists("FullVersion.txt");
+
 			_notifier = notifier;
 			_windowSystem = windowSystem;
 			_debugLogger = debugLogger;
@@ -179,6 +183,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			RecordVm = new RecordViewModel(_notifier, _windowSystem);
 
 			SystemDiagnosticVm = new SystemDiagnosticViewModel(
+				IsFullVersion,
 				_notifier,
 				_cmdListenerMukFlapOuterAirReply03,
 				_cmdListenerMukVaporizerReply03,

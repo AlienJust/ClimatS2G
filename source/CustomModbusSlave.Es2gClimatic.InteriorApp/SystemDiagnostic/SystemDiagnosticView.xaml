@@ -48,7 +48,7 @@
 				<TextBlock
 					Text="{Binding Path=SegmentType, Mode=OneWay}" />
 			</StackPanel>
-			<StackPanel
+			<StackPanel Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
 				Grid.Row="0"
 				Grid.Column="1"
 				Orientation="Horizontal">

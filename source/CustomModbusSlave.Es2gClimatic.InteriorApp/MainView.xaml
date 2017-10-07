@@ -237,7 +237,6 @@
 						Text="{Binding Label}" />
 				</Grid>
 			</DataTemplate>
-
 		</ResourceDictionary>
 	</Window.Resources>
 	<controls:MetroWindow.WindowButtonCommands>
@@ -329,7 +328,7 @@
 					DataContext="{Binding Path=SystemDiagnosticVm, Mode=OneTime}" />
 			</TabItem>
 			<TabItem
-				Visibility="Collapsed"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -348,7 +347,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="Collapsed"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -372,7 +371,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="Collapsed"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -391,7 +390,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="Collapsed"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -410,7 +409,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="Collapsed"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -429,7 +428,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="Collapsed"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -475,7 +474,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="Collapsed"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
 				Header="КСМ"
 				Style="{StaticResource AzureTabItem}"
 				BorderBrush="Red">

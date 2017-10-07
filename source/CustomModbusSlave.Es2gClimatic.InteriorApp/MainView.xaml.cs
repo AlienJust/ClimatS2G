@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows;
-using AlienJust.Adaptation.WindowsPresentation;
 using AlienJust.Support.Concurrent.Contracts;
-using CustomModbusSlave.MicroclimatEs2gApp;
 using MahApps.Metro.Controls;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp

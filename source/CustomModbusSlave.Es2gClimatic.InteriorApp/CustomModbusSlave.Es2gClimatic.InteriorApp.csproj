@@ -587,7 +587,11 @@
       <Name>ParamCentric.UserInterface.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="FullVersion.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="intelecon x gray.ico" />
   </ItemGroup>

@@ -177,7 +177,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		public BsSmFaultViewModel BsSmFaultVm4 { get; }
 		public BsSmFaultViewModel BsSmFaultVm5 { get; }
 
-		public SystemDiagnosticViewModel(IThreadNotifier uiNotifier,
+		public bool IsFullVersion { get; }
+
+		public SystemDiagnosticViewModel(bool isFullVersion,
+			IThreadNotifier uiNotifier,
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
 			ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03,
 			ICmdListener<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16,
@@ -188,9 +191,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32,
 			ICmdListener<IList<BytesPair>> cmdListenerKsm,
 			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65) {
-
+			IsFullVersion = isFullVersion;
 			_uiNotifier = uiNotifier;
-
 			_cmdListenerMukFlapOuterAirReply03 = cmdListenerMukFlapOuterAirReply03;
 			_cmdListenerMukVaporizerReply03 = cmdListenerMukVaporizerReply03;
 			_cmdListenerMukVaporizerRequest16 = cmdListenerMukVaporizerRequest16;
@@ -234,7 +236,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			BsSmFaultVm5 = new BsSmFaultViewModel();
 		}
 
-		
+
 
 		/// <summary>
 		/// МУК заслонки наружного воздуха, MODBUS адрес = 2
@@ -243,7 +245,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		/// <param name="data"></param>
 		private void CmdListenerMukFlapOuterAirReply03OnDataReceived(IList<byte> bytes, IMukFlapReply03Telemetry data) {
 			_uiNotifier.Notify(() => {
-				MukInfo2 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfo2 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber) : OkLinkText;
 				MukInfoColor2 = OkLinkColor;
 
 				if (data.Diagnostic1.NoEmersionControllerAnswer) {
@@ -328,7 +330,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		/// <param name="data"></param>
 		private void CmdListenerMukVaporizerReply03OnDataReceived(IList<byte> bytes, IMukFanVaporizerDataReply03 data) {
 			_uiNotifier.Notify(() => {
-				MukInfo3 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfo3 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber) : OkLinkText;
 				MukInfoColor3 = OkLinkColor;
 
 				if (data.Diagnostic1Parsed.FanControllerLinkLost) {
@@ -386,7 +388,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		/// <param name="data"></param>
 		private void CmdListenerMukCondenserFanReply03OnDataReceived(IList<byte> bytes, IMukCondensorFanReply03Data data) {
 			_uiNotifier.Notify(() => {
-				MukInfo4 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfo4 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber) : OkLinkText;
 				MukInfoColor4 = OkLinkColor;
 
 				if (data.CondensingPressure.NoLinkWithSensor) {
@@ -430,7 +432,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		/// <param name="data"></param>
 		private void CmdListenerMukAirExhausterReply03OnDataReceived(IList<byte> bytes, IMukAirExhausterReply03Data data) {
 			_uiNotifier.Notify(() => {
-				MukInfo6 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfo6 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber) : OkLinkText;
 				MukInfoColor6 = OkLinkColor;
 
 				FanAirExhausterInfo = data.HeatPwm.ToString(CultureInfo.InvariantCulture);
@@ -452,7 +454,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		/// <param name="data"></param>
 		private void CmdListenerMukFlapReturnAirReply03OnDataReceived(IList<byte> bytes, IMukFlapReturnAirReply03Telemetry data) {
 			_uiNotifier.Notify(() => {
-				MukInfo7 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfo7 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber) : OkLinkText;
 				MukInfoColor7 = OkLinkColor;
 
 				if (data.Diagnostic2.OsShowsFlapDoesNotReachLimitPositions) {
@@ -483,13 +485,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 
 				if (data.ConcentratorStatusParsed.WorkOrError || data.ConcentratorStatusParsed.ErrorNoAnswerFromDriver
-						|| data.ConcentratorStatusParsed.ErrorByCurrentCc)
-				{
+						|| data.ConcentratorStatusParsed.ErrorByCurrentCc) {
 					ConcentratorAdvancedInfo = "Неисправность";
 					ConcentratorAdvancedColor = ErDiagColor;
 				}
-				else
-				{
+				else {
 					ConcentratorAdvancedInfo = "Норма";
 					ConcentratorAdvancedColor = OkDiagColor;
 				}
@@ -504,7 +504,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		/// <param name="data"></param>
 		private void CmdListenerMukFlapWinterSummerReply03OnDataReceived(IList<byte> bytes, IMukFlapWinterSummerReply03Telemetry data) {
 			_uiNotifier.Notify(() => {
-				MukInfo8 = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
+				MukInfo8 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber) : OkLinkText;
 				MukInfoColor8 = OkLinkColor;
 
 				if (data.Diagnostic2.OsShowsFlapDoesNotReachLimitPositions) {
@@ -542,7 +542,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		private void CmdListenerKsmOnDataReceived(IList<byte> bytes, IList<BytesPair> data) {
 			_uiNotifier.Notify(() => {
-				Version = new TextFormatterDotted(UnknownText).Format(data[34]);
+				Version = IsFullVersion ? new TextFormatterDotted(UnknownText).Format(data[34]) : OkLinkText;
 				WorkStage = new TextFormatterWorkStage().Format(data[8]);
 
 				// КСМ, бит "Нет связи с МУК заслонки наружного воздуха" взведен
@@ -559,8 +559,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					// TODO: do I need check emerson here?
 					EmersonInfo = NoLinkText;
 					EmersonInfoColor = NoLinkColor;
-
-
 				}
 
 				// КСМ, бит "Нет связи с МУК вентилятора испарителя" взведен
@@ -689,25 +687,23 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			});
 		}
 
-		private void CmdListenerBvs1Reply65OnDataReceived(IList<byte> bytes, IBvsReply65Telemetry data)
-		{
-			_uiNotifier.Notify(() =>
-			{
-				AutoVm1.IsOk = data.BvsInput12; // 2.4
-				AutoVm4.IsOk = data.BvsInput8; // 2.0
-				AutoVm6.IsOk = data.BvsInput10; // 2.2
-				AutoVm7.IsOk = data.BvsInput11; // 2.3
-				AutoVm8.IsOk = data.BvsInput9; // 2.1
+		private void CmdListenerBvs1Reply65OnDataReceived(IList<byte> bytes, IBvsReply65Telemetry data) {
+			_uiNotifier.Notify(() => {
+				AutoVm1.IsOk = data.BvsInput13; // 2.4
+				AutoVm4.IsOk = data.BvsInput9; // 2.0
+				AutoVm6.IsOk = data.BvsInput11; // 2.2
+				AutoVm7.IsOk = data.BvsInput12; // 2.3
+				AutoVm8.IsOk = data.BvsInput10; // 2.1
 			});
-			
+
 		}
 
 		private void CmdListenerBvs2Reply65OnDataReceived(IList<byte> bytes, IBvsReply65Telemetry data) {
 			_uiNotifier.Notify(() => {
-				AutoVm2.IsOk = data.BvsInput12; // 2.4
-				AutoVm3.IsOk = data.BvsInput9; // 2.1
-				AutoVm5.IsOk = data.BvsInput8; // 2.0
-				AutoVm9.IsOk = data.BvsInput6; // 1.6
+				AutoVm2.IsOk = data.BvsInput13; // 2.4
+				AutoVm3.IsOk = data.BvsInput10; // 2.1
+				AutoVm5.IsOk = data.BvsInput9; // 2.0
+				AutoVm9.IsOk = data.BvsInput7; // 1.6
 			});
 		}
 
