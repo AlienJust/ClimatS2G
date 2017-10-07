@@ -28,7 +28,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		private const Colors UnknownColor = Colors.Yellow;
 		private const Colors NoLinkColor = Colors.Red;
-		private const Colors NoSensorColor = Colors.OrangeRed;
+		private const Colors NoSensorColor = Colors.Red;
 
 		private const Colors OkLinkColor = Colors.LimeGreen;
 		private const Colors OkSensorColor = Colors.LimeGreen;
@@ -36,8 +36,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		private const string OkDiagText = "Ok";
 		private const string ErDiagText = "Er";
-		private const Colors OkDiagColor = Colors.YellowGreen;
-		private const Colors ErDiagColor = Colors.PaleVioletRed;
+		private const Colors OkDiagColor = Colors.LimeGreen;
+		private const Colors ErDiagColor = Colors.Red;
 
 
 
