@@ -625,7 +625,7 @@
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка наружного воздуха не встает в крайние положения: " />
+					Text="Заслонка наружного воздуха встает в крайние положения: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirOuterDiagInfo5, Mode=OneWay}" />
 			</StackPanel>
@@ -646,7 +646,7 @@
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка не проходит 50% диапазона: " />
+					Text="Заслонка проходит 50% диапазона: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirOuterDiagInfo6, Mode=OneWay}" />
 			</StackPanel>
@@ -668,7 +668,7 @@
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка рецирк. воздуха не встает в крайние положения: " />
+					Text="Заслонка рецирк. воздуха встает в крайние положения: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirRecycleDiagInfo5, Mode=OneWay}" />
 			</StackPanel>
@@ -689,7 +689,7 @@
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка не проходит 50% диапазона: " />
+					Text="Заслонка проходит 50% диапазона: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirRecycleDiagInfo6, Mode=OneWay}" />
 			</StackPanel>
@@ -711,7 +711,7 @@
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка лето-зима не встает в крайние положения: " />
+					Text="Заслонка лето-зима встает в крайние положения: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirWinterSummerDiagInfo5, Mode=OneWay}" />
 			</StackPanel>
@@ -732,7 +732,7 @@
 					</LinearGradientBrush>
 				</StackPanel.Background>
 				<TextBlock
-					Text="Заслонка не проходит 50% диапазона: " />
+					Text="Заслонка проходит 50% диапазона: " />
 				<TextBlock
 					Text="{Binding Path=FlapAirWinterSummerDiagInfo6, Mode=OneWay}" />
 			</StackPanel>
