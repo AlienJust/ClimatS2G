@@ -48,7 +48,8 @@
 				<TextBlock
 					Text="{Binding Path=SegmentType, Mode=OneWay}" />
 			</StackPanel>
-			<StackPanel Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
+			<StackPanel
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
 				Grid.Row="0"
 				Grid.Column="1"
 				Orientation="Horizontal">
@@ -112,6 +113,7 @@
 					Text="{Binding Path=MukInfo3, Mode=OneWay}" />
 			</StackPanel>
 			<StackPanel
+				Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}"
 				Grid.Row="2"
 				Grid.Column="2"
 				Orientation="Horizontal">
@@ -473,6 +475,7 @@
 					Text="{Binding Path=SensorInteriorAirInfo2, Mode=OneWay}" />
 			</StackPanel>
 			<StackPanel
+				Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}"
 				Grid.Row="4"
 				Grid.Column="0"
 				Orientation="Horizontal">
@@ -494,6 +497,7 @@
 					Text="{Binding Path=EmersonPressure1, Mode=OneWay}" />
 			</StackPanel>
 			<StackPanel
+				Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}"
 				Grid.Row="4"
 				Grid.Column="1"
 				Orientation="Horizontal">
@@ -516,6 +520,7 @@
 			</StackPanel>
 
 			<StackPanel
+				Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}"
 				Grid.Row="5"
 				Grid.Column="0"
 				Orientation="Horizontal">
@@ -538,6 +543,7 @@
 			</StackPanel>
 
 			<StackPanel
+				Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}"
 				Grid.Row="5"
 				Grid.Column="1"
 				Orientation="Horizontal">
@@ -851,7 +857,7 @@
 		</Grid>
 		<StackPanel>
 			<TextBlock
-				Text="Диагностика МПСУиД:"/>
+				Text="Диагностика МПСУиД:" />
 			<systemDiagnostic:BsSmFaultView
 				DataContext="{Binding Path=BsSmFaultVm1, Mode=OneTime}" />
 			<systemDiagnostic:BsSmFaultView
