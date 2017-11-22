@@ -123,10 +123,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 		private bool _tabHeadersAreLong;
 		public bool IsFullVersion { get; }
+		public bool IsHalfOrFullVersion { get; }
 
 		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string testPortName)
 		{
 			IsFullVersion = File.Exists("FullVersion.txt");
+
+			IsHalfOrFullVersion = IsFullVersion; // Если полная версия, то вообще всё ок!
+			if (!IsHalfOrFullVersion) IsHalfOrFullVersion = File.Exists("HalfVersion.txt");
 
 			_notifier = notifier;
 			_windowSystem = windowSystem;

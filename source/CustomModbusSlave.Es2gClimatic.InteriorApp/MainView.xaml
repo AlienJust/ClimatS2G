@@ -200,7 +200,7 @@
 			</Style>
 
 			<BooleanToVisibilityConverter
-				x:Key="BtwConverter" />
+				x:Key="BtvConverter" />
 			<converters:BooleanToVisibilityConverter
 				x:Key="InvertedBtwConverter"
 				InvertVisibility="True" />
@@ -294,7 +294,7 @@
 				Margin="2,2,2,2"
 				Command="{Binding Path=ClosePortCommand, Mode=OneTime}"
 				Content="Откл."
-				Visibility="{Binding Path=IsPortOpened, Mode=OneWay, Converter={StaticResource BtwConverter}}"
+				Visibility="{Binding Path=IsPortOpened, Mode=OneWay, Converter={StaticResource BtvConverter}}"
 				BorderThickness="0"
 				Style="{DynamicResource AccentedSquareButtonStyle}" />
 		</controls:WindowCommands>
@@ -321,14 +321,14 @@
 							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
 						<TextBlock
 							Text="Диагностика системы"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
 					</StackPanel>
 				</TabItem.Header>
 				<systemDiagnostic:SystemDiagnosticView
 					DataContext="{Binding Path=SystemDiagnosticVm, Mode=OneTime}" />
 			</TabItem>
 			<TabItem
-				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtvConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -338,7 +338,7 @@
 							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
 						<TextBlock
 							Text="МУК заслонки наружного возудха"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
 					</StackPanel>
 				</TabItem.Header>
 				<ScrollViewer>
@@ -347,7 +347,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtvConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -357,7 +357,7 @@
 							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
 						<TextBlock
 							Text="МУК вентилятора испарителя"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
 					</StackPanel>
 				</TabItem.Header>
 				<ScrollViewer>
@@ -371,7 +371,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtvConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -381,7 +381,7 @@
 							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
 						<TextBlock
 							Text="МУК вентилятора конденсатора"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
 					</StackPanel>
 				</TabItem.Header>
 				<ScrollViewer>
@@ -390,7 +390,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtvConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -400,7 +400,7 @@
 							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
 						<TextBlock
 							Text="МУК вытяжного вентилятора"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
 					</StackPanel>
 				</TabItem.Header>
 				<ScrollViewer>
@@ -409,7 +409,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtvConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -419,7 +419,7 @@
 							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
 						<TextBlock
 							Text="МУК заслонки рециркуляц. воздуха"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
 					</StackPanel>
 				</TabItem.Header>
 				<ScrollViewer>
@@ -428,7 +428,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtvConverter}}"
 				Style="{StaticResource AzureTabItem}">
 				<TabItem.Header>
 					<StackPanel
@@ -438,7 +438,7 @@
 							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
 						<TextBlock
 							Text="МУК заслонки лето зима"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtwConverter}}" />
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
 					</StackPanel>
 				</TabItem.Header>
 				<ScrollViewer>
@@ -448,6 +448,7 @@
 			</TabItem>
 			<TabItem
 				Header="БС-СМ"
+				Visibility="{Binding Path=IsHalfOrFullVersion, Mode=OneTime, Converter={StaticResource BtvConverter}}"
 				Style="{StaticResource AzureTabItem}"
 				BorderBrush="Blue">
 				<ScrollViewer>
@@ -457,6 +458,7 @@
 			</TabItem>
 			<TabItem
 				Header="БВС1"
+				Visibility="{Binding Path=IsHalfOrFullVersion, Mode=OneTime, Converter={StaticResource BtvConverter}}"
 				Style="{StaticResource AzureTabItem}"
 				BorderBrush="Green">
 				<ScrollViewer>
@@ -466,6 +468,7 @@
 			</TabItem>
 			<TabItem
 				Header="БВС2"
+				Visibility="{Binding Path=IsHalfOrFullVersion, Mode=OneTime, Converter={StaticResource BtvConverter}}"
 				Style="{StaticResource AzureTabItem}"
 				BorderBrush="Green">
 				<ScrollViewer>
@@ -474,7 +477,7 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem
-				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}"
+				Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtvConverter}}"
 				Header="КСМ"
 				Style="{StaticResource AzureTabItem}"
 				BorderBrush="Red">
