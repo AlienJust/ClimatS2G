@@ -188,6 +188,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 			SystemDiagnosticVm = new SystemDiagnosticViewModel(
 				IsFullVersion,
+				IsHalfOrFullVersion,
 				_notifier,
 				_cmdListenerMukFlapOuterAirReply03,
 				_cmdListenerMukVaporizerReply03,

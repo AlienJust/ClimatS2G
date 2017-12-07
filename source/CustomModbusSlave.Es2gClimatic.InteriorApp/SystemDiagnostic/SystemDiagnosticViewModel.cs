@@ -178,8 +178,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		public BsSmFaultViewModel BsSmFaultVm5 { get; }
 
 		public bool IsFullVersion { get; }
+		public bool IsHalfOrFullVersion { get; }
 
-		public SystemDiagnosticViewModel(bool isFullVersion,
+		public SystemDiagnosticViewModel(bool isFullVersion, bool isHalfOrFullVersion,
 			IThreadNotifier uiNotifier,
 			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
 			ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03,
@@ -190,8 +191,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03,
 			ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32,
 			ICmdListener<IList<BytesPair>> cmdListenerKsm,
-			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65) {
+			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65, 
+			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65) {
+
 			IsFullVersion = isFullVersion;
+			IsHalfOrFullVersion = isHalfOrFullVersion;
+
 			_uiNotifier = uiNotifier;
 			_cmdListenerMukFlapOuterAirReply03 = cmdListenerMukFlapOuterAirReply03;
 			_cmdListenerMukVaporizerReply03 = cmdListenerMukVaporizerReply03;
@@ -529,7 +534,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		private void CmdListenerBsSmReply32OnDataReceived(IList<byte> bytes, IBsSmAndKsm1DataCommand32Reply data) {
 			_uiNotifier.Notify(() => {
-				BsSmInfo = new TextFormatterIntegerDotted().Format(data.BsSmVersionNumber);
+				BsSmInfo = IsHalfOrFullVersion ? new TextFormatterIntegerDotted().Format(data.BsSmVersionNumber) : OkLinkText;
+				//BsSmInfo = new TextFormatterIntegerDotted().Format(data.BsSmVersionNumber);
 				BsSmInfoColor = OkLinkColor;
 				BsSmFaultVm1.Code = data.Ksm2Request.Fault1;
 				BsSmFaultVm2.Code = data.Ksm2Request.Fault2;
