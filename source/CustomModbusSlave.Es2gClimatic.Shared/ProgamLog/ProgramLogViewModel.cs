@@ -7,7 +7,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ProgamLog {
 	public class ProgramLogViewModel : ViewModelBase, ILogger {
 		private readonly IUserInterfaceRoot _userInterfaceRoot;
 		private readonly ObservableCollection<ILogLine> _logLines;
-		private readonly ICommand _clearLogCmd;
 
 		private bool _scrollAutomaticly;
 		private bool _isEnabled;
@@ -17,7 +16,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ProgamLog {
 			_userInterfaceRoot = userInterfaceRoot;
 			_logLines = new ObservableCollection<ILogLine>();
 
-			_clearLogCmd = new RelayCommand(ClearLog);
+			ClearLogCmd = new RelayCommand(ClearLog);
 			_scrollAutomaticly = true;
 			_isEnabled = false;
 		}
@@ -26,16 +25,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ProgamLog {
 			_logLines.Clear();
 		}
 
-		public ObservableCollection<ILogLine> LogLines {
-			get { return _logLines; }
-		}
+		public ObservableCollection<ILogLine> LogLines => _logLines;
 
-		public ICommand ClearLogCmd {
-			get { return _clearLogCmd; }
-		}
+		public ICommand ClearLogCmd { get; }
 
 		public bool ScrollAutomaticly {
-			get { return _scrollAutomaticly; }
+			get => _scrollAutomaticly;
 			set {
 				if (_scrollAutomaticly != value) {
 					_scrollAutomaticly = value;
@@ -45,7 +40,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ProgamLog {
 		}
 
 		public bool IsEnabled {
-			get { return _isEnabled; }
+			get => _isEnabled;
 			set {
 				if (_isEnabled != value) {
 					_isEnabled = value;
@@ -70,7 +65,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ProgamLog {
 		}
 
 		public ILogLine SelectedLine {
-			get { return _selectedLine; }
+			get => _selectedLine;
 			set {
 				if (_selectedLine != value) {
 					_selectedLine = value;

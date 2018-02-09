@@ -18,8 +18,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ProgamLog {
 				new UIPropertyMetadata(false, OnScrollSelectedIntoViewChanged));
 
 		private static void OnScrollSelectedIntoViewChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
-			var selector = d as Selector;
-			if (selector == null) return;
+			if (!(d is Selector selector)) return;
 
 			if (e.NewValue is bool == false)
 				return;
@@ -33,10 +32,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ProgamLog {
 		}
 
 		private static void ListBoxSelectionChangedHandler(object sender, RoutedEventArgs e) {
-			if (!(sender is ListBox)) return;
-
-			var listBox = (sender as ListBox);
-			if (listBox.SelectedItem != null) {
+			var listBox = sender as ListBox;
+			if (listBox?.SelectedItem != null) {
 				listBox.Dispatcher.BeginInvoke(
 					(Action)(() => {
 						listBox.UpdateLayout();
