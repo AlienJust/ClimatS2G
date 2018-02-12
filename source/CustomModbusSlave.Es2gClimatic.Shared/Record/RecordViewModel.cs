@@ -7,7 +7,7 @@ using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.UserInterface.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.Record {
-	public class RecordViewModel : ViewModelBase, ICommandListener {
+	public class RecordViewModel : ViewModelBase, ICmdListenerStd {
 		private readonly IThreadNotifier _notifier;
 		private readonly IWindowSystem _windowSystem;
 

@@ -1,32 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using System.Windows;
-using AlienJust.Adaptation.ConsoleLogger;
-using AlienJust.Adaptation.WindowsPresentation;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
+using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using AlienJust.Support.Text.Contracts;
 using CustomModbus.Slave.FastReply.Contracts;
-using CustomModbus.Slave.FastReply.Queued;
-using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap;
-using CustomModbusSlave.Es2gClimatic.Shared;
-using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
-using DataAbstractionLevel.Low.PsnConfig;
-using MahApps.Metro;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
-	public partial class App : Application {
-		private const string TestPortName = "ТЕСТ";
+namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
+	public sealed class TabItemViewModel : ViewModelBase {
+		public string ShortHeader { get; set; }
+		public string FullHeader { get; set; }
+		public FrameworkElement Content { get; set; }
+	}
+
+
+	public sealed class SharedAppAbilities : ISharedAppAbilities {
 		private const string NoStackInfoText = "[NO STACK INFO]";
 		private const string LogSeporator = " > ";
 
-		private ManualResetEvent _mainWindowCreationCompleteWaiter;
+		public string TestPortName => "ТЕСТ";
+		
 		private RelayMultiLoggerWithStackTraceSimple _debugLogger;
 		private SerialChannel _serialChannel;
 
@@ -38,21 +34,20 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		private ILoggerWithStackTrace _logConsoleGreen;
 		private ILoggerWithStackTrace _logConsoleWhite;
 
-		protected override void OnStartup(StartupEventArgs e) {
-			// get the current app style (theme and accent) from the application
-			// you can then use the current theme and custom accent instead set a new theme
-			Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
+		public AppVersion Version { get; }
+		public IFastReplyAcceptor ReplyAcceptor { get; }
+		public IParameterSetter ParamSetter { get; }
+		public ModbusRtuParamReceiver RtuParamReceiver { get; }
+		public RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
 
-			// now set the Green accent and dark theme
-			ThemeManager.ChangeAppStyle(Application.Current,
-				ThemeManager.GetAccent("Green"),
-				//ThemeManager.GetAppTheme("BaseDark")); // or appStyle.Item1
-				ThemeManager.GetAppTheme("BaseLight")); // or appStyle.Item1
+		public SharedAppAbilities(string psnProtocolFileName) {
+			var isFullVersion = File.Exists("FullVersion.txt");
+			var isHalfOrFullVersion = isFullVersion;
+			if (!isHalfOrFullVersion) isHalfOrFullVersion = File.Exists("HalfVersion.txt");
 
-			base.OnStartup(e);
-		}
+			Version = isFullVersion ? AppVersion.Full :
+				isHalfOrFullVersion ? AppVersion.Half : AppVersion.Base;
 
-		private void App_OnStartup(object sender, StartupEventArgs e) {
 			_logConsoleDarkRed = new RelayLoggerWithStackTrace(
 				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.DarkRed, ConsoleColor.Black),
 				new ChainedFormatter(new List<ITextFormatter> { new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator) })),
@@ -81,55 +76,21 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.White, ConsoleColor.Black),
 				new ChainedFormatter(new List<ITextFormatter> { new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator) })),
 				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-
-			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-кабина.xml")).LoadConfiguration();
-			_serialChannel = new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(psnConfig), _logConsoleYellow);
-
-			var replyGenerator = new ReplyGeneratorWithQueueAttempted();
-			IFastReplyAcceptor replyAcceptor = replyGenerator;
-			IParameterSetter paramSetter = replyGenerator;
-			ModbusRtuParamReceiver rtuParamReceiver = new ModbusRtuParamReceiver();
-
-			List<Action> closeChildWindowsActions = new List<Action>(); // TODO: here to add close child windows
-			var appThreadNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
-			_mainWindowCreationCompleteWaiter = new ManualResetEvent(false);
-			var mainWindowThread = new Thread(() => {
-				var mainWindowNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
-				var windowSystem = new WpfWindowSystem();
-
-				var tab1 = new TabItemViewModel {
-					FullHeader = "МУК 123456",
-					ShortHeader = "МУК 1",
-					Content = new MukFlapDataView { DataContext = new MukFlapDataViewModel(_notifier, _paramSetter) }
-				}
-
-
-				var mainViewModel = new SharedMainViewModel(
-					mainWindowNotifier,
-					windowSystem,
-					_debugLogger,
-					_serialChannel,
-					TestPortName,
-					"Технический абонент, кабина");
-
-				var mainWindow = new SharedMainView(appThreadNotifier, () => {
-					foreach (var closingAction in closeChildWindowsActions) {
-						closingAction.Invoke();
-					}
-					closeChildWindowsActions.Clear();
-				}
-				) { DataContext = mainViewModel };
-				mainWindow.Show();
-
-				_mainWindowCreationCompleteWaiter.Set();
-				System.Windows.Threading.Dispatcher.Run();
-			});
-			mainWindowThread.SetApartmentState(ApartmentState.STA);
-			mainWindowThread.Priority = ThreadPriority.AboveNormal;
-			mainWindowThread.IsBackground = true;
-			mainWindowThread.Start();
-
-			_mainWindowCreationCompleteWaiter.WaitOne();
 		}
+	}
+
+	public interface ISharedAppAbilities {
+		AppVersion Version { get; }
+		IFastReplyAcceptor ReplyAcceptor { get; }
+		IParameterSetter ParamSetter { get; }
+		ModbusRtuParamReceiver RtuParamReceiver { get; }
+		string TestPortName { get; }
+		RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
+	}
+
+	public enum AppVersion {
+		Full,
+		Half,
+		Base
 	}
 }

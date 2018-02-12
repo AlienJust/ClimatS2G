@@ -46,6 +46,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Concurrent.Contracts.dll</HintPath>
     </Reference>
+    <Reference Include="AlienJust.Support.Loggers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Loggers.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.Loggers.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Loggers.Contracts.dll</HintPath>
@@ -96,6 +100,11 @@
       <DependentUpon>AnyCommandPartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnyCommandPartViewModel.cs" />
+    <Compile Include="AppWindow\SharedMainView.xaml.cs">
+      <DependentUpon>SharedMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppWindow\SharedMainViewModel.cs" />
+    <Compile Include="AppWindow\TabItemViewModel.cs" />
     <Compile Include="BsSm\Fault\IntegerFaultCodeToTextConverter.cs" />
     <Compile Include="BsSm\IWorkMode.cs" />
     <Compile Include="BsSm\State\BuilderFromByte.cs" />
@@ -125,7 +134,7 @@
     </Compile>
     <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticSimple.cs" />
     <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticBuilder.cs" />
-    <Compile Include="ICommandListener.cs" />
+    <Compile Include="ICmdListenerStd.cs" />
     <Compile Include="IStdCheckableCmdListener.cs" />
     <Compile Include="IUpdateable.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkMode.cs" />
@@ -136,6 +145,7 @@
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
     <Compile Include="CmdListenerBase.cs" />
+    <Compile Include="IWindowContent.cs" />
     <Compile Include="ModbusRtuParamReceiver.cs" />
     <Compile Include="MukFanCondenser\Reply03\MukCondensorFanReply03DataSimple.cs" />
     <Compile Include="MukFanCondenser\Reply03\MukFanCondencerReply03View.xaml.cs">
@@ -315,6 +325,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AppWindow\SharedMainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="BsSm\State\View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -444,6 +458,10 @@
     <ProjectReference Include="..\CustomModbus.Slave.FastReply.Contracts\CustomModbus.Slave.FastReply.Contracts.csproj">
       <Project>{53393428-c7af-4431-b3e4-2de72ce78108}</Project>
       <Name>CustomModbus.Slave.FastReply.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomModbus.Slave.FastReply.Queued\CustomModbus.Slave.FastReply.Queued.csproj">
+      <Project>{19373346-e61b-42d4-9a4c-7923dce6e3fb}</Project>
+      <Name>CustomModbus.Slave.FastReply.Queued</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomModbusSlave\CustomModbusSlave.csproj">
       <Project>{9244d783-9410-4026-b3ef-49435f79a74a}</Project>

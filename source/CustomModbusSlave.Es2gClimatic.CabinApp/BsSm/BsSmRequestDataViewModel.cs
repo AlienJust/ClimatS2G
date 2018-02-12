@@ -7,7 +7,7 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
-	class BsSmRequestDataViewModel : ViewModelBase, ICommandListener, IBsSmDataCommand32Request {
+	class BsSmRequestDataViewModel : ViewModelBase, ICmdListenerStd, IBsSmDataCommand32Request {
 		private readonly IThreadNotifier _notifier;
 
 		private IBsSmDataCommand32Request _request;

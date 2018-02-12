@@ -5,7 +5,7 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm
 {
-	class BsSmDataViewModel : ViewModelBase, ICommandListener {
+	class BsSmDataViewModel : ViewModelBase, ICmdListenerStd {
 		private readonly BsSmRequestDataViewModel _bsSmRequestDataVm;
 		private readonly BsSmReplyDataViewModel _bsSmReplyDataVm;
 		

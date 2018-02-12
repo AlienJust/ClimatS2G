@@ -8,7 +8,7 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
-	internal class MukWarmFloorDataViewModel : ViewModelBase, ICommandListener {
+	internal class MukWarmFloorDataViewModel : ViewModelBase, ICmdListenerStd {
 		private readonly IThreadNotifier _notifier;
 
 		private string _heatingPwm;

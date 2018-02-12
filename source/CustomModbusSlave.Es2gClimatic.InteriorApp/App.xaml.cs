@@ -13,6 +13,7 @@ using AlienJust.Support.Text;
 using AlienJust.Support.Text.Contracts;
 using AlienJust.Support.UserInterface.Contracts;
 using DataAbstractionLevel.Low.PsnConfig;
+using MahApps.Metro;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 {
@@ -36,7 +37,19 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 		private ILoggerWithStackTrace _logConsoleGreen;
 		private ILoggerWithStackTrace _logConsoleWhite;
 
+		protected override void OnStartup(StartupEventArgs e) {
+			// get the current app style (theme and accent) from the application
+			// you can then use the current theme and custom accent instead set a new theme
+			Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
 
+			// now set the Green accent and dark theme
+			ThemeManager.ChangeAppStyle(Application.Current,
+				ThemeManager.GetAccent("Green"),
+				ThemeManager.GetAppTheme("BaseDark")); // or appStyle.Item1
+
+			base.OnStartup(e);
+		}
+		
 		private void App_OnStartup(object sender, StartupEventArgs e) {
 			_logConsoleDarkRed = new RelayLoggerWithStackTrace(
 				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.DarkRed, ConsoleColor.Black), 

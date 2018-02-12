@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.Collections;
-using CustomModbusSlave.Es2gClimatic.Shared;
 using ParamCentric.Modbus.Contracts;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
-	public class ModbusRtuParamReceiver : IReceiverModbusRtu, ICommandListener {
+namespace CustomModbusSlave.Es2gClimatic.Shared {
+	public class ModbusRtuParamReceiver : IReceiverModbusRtu, ICmdListenerStd {
 		private readonly List<IReceivableModbusRtuParameter> _params;
 		public ModbusRtuParamReceiver() {
 			_params = new List<IReceivableModbusRtuParameter>();

@@ -11,7 +11,7 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap
 {
-	class MukFlapDataViewModel : ViewModelBase, ICommandListener {
+	class MukFlapDataViewModel : ViewModelBase, ICmdListenerStd {
 		private readonly IThreadNotifier _notifier;
 		private string _reply;
 

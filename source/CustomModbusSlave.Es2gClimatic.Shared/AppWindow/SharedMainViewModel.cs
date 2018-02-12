@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
@@ -15,76 +16,65 @@ using AlienJust.Support.UserInterface.Contracts;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbus.Slave.FastReply.Queued;
 using CustomModbusSlave.Contracts;
-using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm;
-using CustomModbusSlave.Es2gClimatic.CabinApp.Ksm;
-using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap;
-using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor;
 using CustomModbusSlave.Es2gClimatic.InteriorApp;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
-using CustomModbusSlave.Es2gClimatic.Shared;
-using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
-using CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using CustomModbusSlave.Es2gClimatic.Shared.Record;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp {
-	class MainViewModel : ViewModelBase, IUserInterfaceRoot {
+namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
+	public sealed class SharedMainViewModel : ViewModelBase, IUserInterfaceRoot, IAppAbilities {
 		private List<string> _comPortsAvailable;
 		private string _selectedComName;
 
 		private readonly IThreadNotifier _notifier;
 		private readonly IWindowSystem _windowSystem;
-		private readonly IMultiLoggerWithStackTrace<int> _debugLogger;
+		private readonly SerialChannel _serialChannel;
+		private readonly string _testPortName;
 
 		private readonly RelayCommand _openPortCommand;
 		private readonly RelayCommand _closePortCommand;
+		public RelayCommand GetPortsAvailableCommand { get; }
 
 		private readonly ProgramLogViewModel _programLogVm;
 		private readonly ILogger _logger;
 
-		private readonly SerialChannel _serialChannel;
-		private readonly string _testPortName;
-
-		private readonly ModbusRtuParamReceiver _rtuParamReceiver;
-
-		private bool _isPortOpened;
-		private readonly MukFlapDataViewModel _mukFlapDataVm;
-		public MukVaporizerFanDataViewModelParamcentric MukFanVaporizerDataVm { get; }
-		private readonly MukWarmFloorDataViewModel _mukWarmFloorDataVm;
-		private readonly BsSmDataViewModel _bsSmDataVm;
-
-		private readonly IParameterSetter _paramSetter;
 		private readonly IFastReplyGenerator _replyGenerator;
 		private readonly IFastReplyAcceptor _replyAcceptor;
 
-		private readonly ICmdListener<IMukFanVaporizerDataReply03> _cmdListenerMukVaporizerReply03;
-		private readonly ICmdListener<IMukFanVaporizerDataRequest16> _cmdListenerMukVaporizerRequest16;
+		private readonly ModbusRtuParamReceiver _rtuParamReceiver;
 
-		private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukCondenserFanReply03;
-		private readonly ICmdListener<IMukCondenserRequest16Data> _cmdListenerMukCondenserRequest16;
-
-		private readonly ICmdListener<IBvsReply65Telemetry> _cmdListenerBvsReply65;
-		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm50Params;
+		private readonly List<ICmdListenerStd> _cmdListeners;
 
 		public RecordViewModel RecordVm { get; }
+
+		private bool _isPortOpened;
 
 		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
 
+		private bool _tabHeadersAreLong;
 
-		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string testPortName) {
+		public bool IsHalfOrFullVersion { get; }
+		public bool IsFullVersion { get; }
+		public bool IsHalfVersion => IsHalfOrFullVersion && !IsFullVersion; //easy, does it?
+
+		public string WindowTitle { get; }
+		public ObservableCollection<TabItemViewModel> Tabs { get; }
+
+		public SharedMainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string portName, string windowTitle, ObservableCollection<TabItemViewModel> tabs) {
+			IsFullVersion = File.Exists("FullVersion.txt");
+
+			IsHalfOrFullVersion = IsFullVersion;
+			if (!IsHalfOrFullVersion) IsHalfOrFullVersion = File.Exists("HalfVersion.txt");
+
 			_notifier = notifier;
 			_windowSystem = windowSystem;
-			_debugLogger = debugLogger;
+			DebugLogger = debugLogger;
 			_serialChannel = serialChannel;
-			_testPortName = testPortName;
+			_testPortName = portName;
+			WindowTitle = windowTitle;
+			Tabs = tabs;
 
 			_rtuParamReceiver = new ModbusRtuParamReceiver();
 
@@ -95,40 +85,15 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			_programLogVm = new ProgramLogViewModel(this);
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
 
-			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
-			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
-
 			var replyGenerator = new ReplyGeneratorWithQueueAttempted();
-			_paramSetter = replyGenerator;
+			ParamSetter = replyGenerator;
 			_replyGenerator = replyGenerator;
 			_replyAcceptor = replyGenerator;
 
-			_cmdListenerMukVaporizerReply03 = new CmdListenerMukVaporizerReply03(3, 3, 41);
-			_cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
-
-			_cmdListenerMukCondenserFanReply03 = new CmdListenerMukCondenserFanReply03(4, 3, 29);
-			_cmdListenerMukCondenserRequest16 = new CmdListenerMukCondenserFanRequest16(4, 16, 15);
-
-			_cmdListenerBvsReply65 = new CmdListenerBvsReply65(0x1E, 65, 7);
-			_cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
-
-			_mukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
-			MukFanVaporizerDataVm = new MukVaporizerFanDataViewModelParamcentric(
-				notifier,
-				_paramSetter,
-				_rtuParamReceiver,
-				_cmdListenerMukVaporizerReply03,
-				_cmdListenerMukVaporizerRequest16
-			);
-
-			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukCondenserFanReply03, _cmdListenerMukCondenserRequest16);
-			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier, _paramSetter);
-
-			_bsSmDataVm = new BsSmDataViewModel(_notifier);
-			BvsDataVm = new BvsDataViewModel(_notifier, _cmdListenerBvsReply65);
-			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter, _cmdListenerKsm50Params);
-
 			RecordVm = new RecordViewModel(_notifier, _windowSystem);
+
+			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
+			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
 			_commandHearedTimeoutMonitor = new CommandHearedTimerThreadSafe(_serialChannel, TimeSpan.FromSeconds(1), _notifier);
 			_commandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
@@ -147,34 +112,25 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			LinkBackColor = Colors.OrangeRed;
 		}
 
+
 		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendAbility) {
 			if (commandPart.Address == 20) {
-				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
-					_replyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray());
-					var reply = _replyGenerator.GenerateReply();
+				//_notifier.Notify(() => _recordedData.Add(commandPart.ReplyBytes));
 
+				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
+					_replyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray()); // TODO: bad performance (.ToArray())
+					var reply = _replyGenerator.GenerateReply();
 					sendAbility.Send(reply);
 				}
 			}
-			_cmdListenerKsm50Params.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 		}
-
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandPart) {
 			RecordVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandPart.Address.ToString("X2") + ", code=0x" + commandPart.CommandCode.ToString("X2") + ", data.Count=" + commandPart.ReplyBytes.Count));
-			_mukFlapDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-
-			_cmdListenerMukVaporizerReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			_cmdListenerMukVaporizerRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-
-			_cmdListenerMukCondenserFanReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			_cmdListenerMukCondenserRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-
-			_mukWarmFloorDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			_bsSmDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			_cmdListenerBvsReply65.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-
+			// TODO: can be indexed for speeding up
+			foreach (var cmdListenerStd in _cmdListeners) {
+				cmdListenerStd.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			}
 			_rtuParamReceiver.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 		}
 
@@ -204,6 +160,13 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			ISerialPortContainer portContainer;
 			if (_selectedComName == _testPortName) {
 				var filename = _windowSystem.ShowOpenFileDialog("Текстовый файл с данными", "Текстовые файлы|*.txt|Все файлы|*.*");
+				/*List<byte> valuesFromFile = new List<byte>();
+				var parts = File.ReadAllText(filename).Split(new[] {" ", Environment.NewLine, "\t", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
+				for (int i = 0; i < parts.Length; ++i)
+				{
+					Console.WriteLine(parts[i]);
+					valuesFromFile.Add(byte.Parse(parts[i], NumberStyles.HexNumber));
+				}*/
 				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] { " ", Environment.NewLine, "\t", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
 			}
 			else {
@@ -223,7 +186,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			}));
 		}
 
-		public IThreadNotifier Notifier => _notifier;
+
 
 		public List<string> ComPortsAvailable {
 			get => _comPortsAvailable;
@@ -245,8 +208,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			}
 		}
 
-
-
 		public bool IsPortOpened {
 			get => _isPortOpened;
 			set {
@@ -267,16 +228,26 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			}
 		}
 
+		public bool TabHeadersAreLong {
+			get => _tabHeadersAreLong;
+			set {
+				if (_tabHeadersAreLong != value) {
+					_tabHeadersAreLong = value;
+					RaisePropertyChanged(() => TabHeadersAreLong);
+				}
+			}
+		}
+
 		public RelayCommand OpenPortCommand => _openPortCommand;
 		public RelayCommand ClosePortCommand => _closePortCommand;
-		public RelayCommand GetPortsAvailableCommand { get; }
 		public ProgramLogViewModel ProgramLogVm => _programLogVm;
-		public MukFlapDataViewModel MukFlapDataVm => _mukFlapDataVm;
-		public MukFridgeFanDataViewModel MukFridgeFanDataVm { get; }
 
-		public MukWarmFloorDataViewModel MukWarmFloorDataVm => _mukWarmFloorDataVm;
-		public BsSmDataViewModel BsSmDataVm => _bsSmDataVm;
-		public BvsDataViewModel BvsDataVm { get; }
-		public KsmDataViewModel KsmDataVm { get; }
+		public IThreadNotifier Notifier => _notifier;
+		public IWindowSystem WindowsSystem => _windowSystem;
+		public ILogger Logger => _programLogVm;
+		public IMultiLoggerWithStackTrace<int> DebugLogger { get; }
+		public IParameterSetter ParamSetter { get; }
+		public IFastReplyGenerator ReplyGenerator => _replyGenerator;
+		public IFastReplyAcceptor ReplyAcceptor => _replyAcceptor;
 	}
 }
