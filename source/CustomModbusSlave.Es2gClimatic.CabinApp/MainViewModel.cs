@@ -75,7 +75,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 
 		public RecordViewModel RecordVm { get; }
 
-		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
+		private readonly CommandHearedTimerNotThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
 
 
@@ -130,7 +130,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 
 			RecordVm = new RecordViewModel(_notifier, _windowSystem);
 
-			_commandHearedTimeoutMonitor = new CommandHearedTimerThreadSafe(_serialChannel, TimeSpan.FromSeconds(1), _notifier);
+			_commandHearedTimeoutMonitor = new CommandHearedTimerNotThreadSafe(_serialChannel, TimeSpan.FromSeconds(1));
 			_commandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
 			_commandHearedTimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
 			_commandHearedTimeoutMonitor.Start();
@@ -140,11 +140,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		}
 
 		private void CommandHearedTimeoutMonitorOnSomeCommandWasHeared() {
-			LinkBackColor = Colors.LimeGreen;
+			_notifier.Notify(() => { LinkBackColor = Colors.LimeGreen; });
 		}
 
 		private void CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong() {
-			LinkBackColor = Colors.OrangeRed;
+			_notifier.Notify(() => { LinkBackColor = Colors.OrangeRed; });
 		}
 
 		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendAbility) {

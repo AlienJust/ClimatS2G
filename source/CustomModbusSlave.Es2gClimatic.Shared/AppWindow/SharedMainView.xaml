@@ -293,9 +293,16 @@
 			<RowDefinition
 				Height="Auto" />
 		</Grid.RowDefinitions>
-		<TabControl
+		<TabControl 
 			Grid.Row="0"
-			TabStripPlacement="Left" ItemsSource="{Binding Path=Tabs, Mode=OneWay}" DataContext="{Binding Path=TabControlVm, Mode=OneTime}">
+			TabStripPlacement="Left" ItemsSource="{Binding Path=Tabs}">
+			<TabControl.ItemContainerStyle>
+				<Style BasedOn="{StaticResource AzureTabItem}">
+					<Setter
+					Property="TabItem.BorderBrush"
+					Value="Black" />
+				</Style>
+			</TabControl.ItemContainerStyle>
 			<TabControl.ItemTemplate>
 				<DataTemplate>
 					<StackPanel

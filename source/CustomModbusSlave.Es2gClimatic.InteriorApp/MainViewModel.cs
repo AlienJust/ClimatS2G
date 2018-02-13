@@ -118,15 +118,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 		private bool _isPortOpened;
 
-		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
+		private readonly CommandHearedTimerNotThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
 
 		private bool _tabHeadersAreLong;
 		public bool IsFullVersion { get; }
 		public bool IsHalfOrFullVersion { get; }
 
-		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string testPortName)
-		{
+		public MainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string testPortName) {
 			IsFullVersion = File.Exists("FullVersion.txt");
 
 			IsHalfOrFullVersion = IsFullVersion; // Если полная версия, то вообще всё ок!
@@ -230,7 +229,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
-			_commandHearedTimeoutMonitor = new CommandHearedTimerThreadSafe(_serialChannel, TimeSpan.FromSeconds(1), _notifier);
+			_commandHearedTimeoutMonitor = new CommandHearedTimerNotThreadSafe(_serialChannel, TimeSpan.FromSeconds(1));
 			_commandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
 			_commandHearedTimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
 			_commandHearedTimeoutMonitor.Start();
@@ -242,13 +241,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			var testItems = new List<IGroupItem>();
 			TestGroup = new GroupSimple("Тестовая группа", testItems);
 		}
-		
+
 		private void CommandHearedTimeoutMonitorOnSomeCommandWasHeared() {
-			LinkBackColor = Colors.LimeGreen;
+			_notifier.Notify(() => { LinkBackColor = Colors.LimeGreen; });
 		}
 
 		private void CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong() {
-			LinkBackColor = Colors.OrangeRed;
+			_notifier.Notify(() => { LinkBackColor = Colors.OrangeRed; });
 		}
 
 
@@ -332,7 +331,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					Console.WriteLine(parts[i]);
 					valuesFromFile.Add(byte.Parse(parts[i], NumberStyles.HexNumber));
 				}*/
-				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] { " ", Environment.NewLine, "\t", "\n", "\r"}, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
+				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] { " ", Environment.NewLine, "\t", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
 			}
 			else {
 				portContainer = new SerialPortContainerReal(_selectedComName, 57600);
@@ -398,7 +397,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			set {
 				if (_tabHeadersAreLong != value) {
 					_tabHeadersAreLong = value;
-					RaisePropertyChanged(()=> TabHeadersAreLong);
+					RaisePropertyChanged(() => TabHeadersAreLong);
 				}
 			}
 		}

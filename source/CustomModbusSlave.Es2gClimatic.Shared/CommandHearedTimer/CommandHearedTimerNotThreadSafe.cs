@@ -5,10 +5,9 @@ using CustomModbusSlave.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer {
-	public class CommandHearedTimerThreadSafe : ICommandHearedTimer, IStartStoppable {
+	public class CommandHearedTimerNotThreadSafe : ICommandHearedTimer, IStartStoppable {
 		private readonly ISerialChannel _serialChannel;
 		private readonly TimeSpan _timeout;
-		private readonly IThreadNotifier _eventNotifier;
 
 		private DateTime _lastTimeAnyCommandWasHeared;
 		private readonly object _lastTimeAnyCommandWasHearedSyncObj;
@@ -18,10 +17,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer {
 		private bool _stopCheckThreadNeeded;
 		private readonly object _stopCheckThreadNeededSyncObj;
 
-		public CommandHearedTimerThreadSafe(ISerialChannel serialChannel, TimeSpan timeout, IThreadNotifier eventNotifier) {
+		public CommandHearedTimerNotThreadSafe(ISerialChannel serialChannel, TimeSpan timeout) {
 			_serialChannel = serialChannel;
 			_timeout = timeout;
-			_eventNotifier = eventNotifier;
 
 			_lastTimeAnyCommandWasHearedSyncObj = new object();
 			_stopCheckThreadNeededSyncObj = new object();
@@ -34,10 +32,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer {
 
 		private void CheckTime() {
 			if (DateTime.Now - LastTimeAnyCommandWasHeared > _timeout) {
-				_eventNotifier.Notify(()=>NoAnyCommandWasHearedTooLong?.Invoke());
+				NoAnyCommandWasHearedTooLong?.Invoke();
 			}
 			else {
-				_eventNotifier.Notify(()=>SomeCommandWasHeared?.Invoke());
+				SomeCommandWasHeared?.Invoke();
 			}
 		}
 
@@ -55,7 +53,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer {
 
 		private void PeriodicCheck() {
 			while (true) {
-				Thread.Sleep((int)(_timeout.TotalMilliseconds/4));
+				Thread.Sleep((int)(_timeout.TotalMilliseconds / 4));
 				if (StopCheckThreadNeeded) return;
 
 				CheckTime(); // twice per _timeout check
@@ -82,6 +80,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer {
 				CheckTime();
 			}
 		}
+
 		public bool StopCheckThreadNeeded {
 			get {
 				lock (_stopCheckThreadNeededSyncObj) {

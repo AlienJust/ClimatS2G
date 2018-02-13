@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AlienJust.Adaptation.ConsoleLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Adaptation.ConsoleLogger.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Adaptation.WindowsPresentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Adaptation.WindowsPresentation.dll</HintPath>
@@ -45,6 +49,10 @@
     <Reference Include="AlienJust.Support.Concurrent.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Concurrent.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Identy.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Identy.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="AlienJust.Support.Loggers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -74,6 +82,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.UserInterface.Contracts.dll</HintPath>
     </Reference>
+    <Reference Include="DataAbstractionLevel.Low, Version=0.16.63.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\DataAbstractionLevel.Low.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.4.3.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.4.3\lib\net40\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -100,6 +112,11 @@
       <DependentUpon>AnyCommandPartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnyCommandPartViewModel.cs" />
+    <Compile Include="AppWindow\AppFactory.cs" />
+    <Compile Include="AppWindow\AppVersion.cs" />
+    <Compile Include="AppWindow\ISharedAppAbilities.cs" />
+    <Compile Include="AppWindow\ISharedMainViewModel.cs" />
+    <Compile Include="AppWindow\SharedAppAbilities.cs" />
     <Compile Include="AppWindow\SharedMainView.xaml.cs">
       <DependentUpon>SharedMainView.xaml</DependentUpon>
     </Compile>
@@ -125,7 +142,7 @@
     <Compile Include="Bvs\BvsReply65TelemetrySimple.cs" />
     <Compile Include="Bvs\CmdListenerBvsReply65.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
-    <Compile Include="CommandHearedTimer\CommandHearedTimerThreadSafe.cs" />
+    <Compile Include="CommandHearedTimer\CommandHearedTimerNotThreadSafe.cs" />
     <Compile Include="CommandHearedTimer\Contracts\ICommandHearedTimer.cs" />
     <Compile Include="CommandHearedTimer\Contracts\IStartStoppable.cs" />
     <Compile Include="CommandHearedTimer\SimplestDelegateEver.cs" />

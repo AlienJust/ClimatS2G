@@ -23,14 +23,13 @@ using CustomModbusSlave.Es2gClimatic.Shared.Record;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
-	public sealed class SharedMainViewModel : ViewModelBase, IUserInterfaceRoot, IAppAbilities {
+	sealed class SharedMainViewModel : ViewModelBase, IUserInterfaceRoot, ISharedMainViewModel {
 		private List<string> _comPortsAvailable;
 		private string _selectedComName;
 
 		private readonly IThreadNotifier _notifier;
 		private readonly IWindowSystem _windowSystem;
-		private readonly SerialChannel _serialChannel;
-		private readonly string _testPortName;
+		private readonly ISharedAppAbilities _appAbilities;
 
 		private readonly RelayCommand _openPortCommand;
 		private readonly RelayCommand _closePortCommand;
@@ -39,44 +38,25 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		private readonly ProgramLogViewModel _programLogVm;
 		private readonly ILogger _logger;
 
-		private readonly IFastReplyGenerator _replyGenerator;
-		private readonly IFastReplyAcceptor _replyAcceptor;
-
-		private readonly ModbusRtuParamReceiver _rtuParamReceiver;
-
 		private readonly List<ICmdListenerStd> _cmdListeners;
 
 		public RecordViewModel RecordVm { get; }
 
 		private bool _isPortOpened;
 
-		private readonly CommandHearedTimerThreadSafe _commandHearedTimeoutMonitor;
+		private readonly CommandHearedTimerNotThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
 
 		private bool _tabHeadersAreLong;
 
-		public bool IsHalfOrFullVersion { get; }
-		public bool IsFullVersion { get; }
-		public bool IsHalfVersion => IsHalfOrFullVersion && !IsFullVersion; //easy, does it?
-
 		public string WindowTitle { get; }
-		public ObservableCollection<TabItemViewModel> Tabs { get; }
+		public ObservableCollection<TabItemViewModel> Tabs { get; set; }
 
-		public SharedMainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, IMultiLoggerWithStackTrace<int> debugLogger, SerialChannel serialChannel, string portName, string windowTitle, ObservableCollection<TabItemViewModel> tabs) {
-			IsFullVersion = File.Exists("FullVersion.txt");
-
-			IsHalfOrFullVersion = IsFullVersion;
-			if (!IsHalfOrFullVersion) IsHalfOrFullVersion = File.Exists("HalfVersion.txt");
-
+		public SharedMainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, string windowTitle, ISharedAppAbilities appAbilities) {
 			_notifier = notifier;
 			_windowSystem = windowSystem;
-			DebugLogger = debugLogger;
-			_serialChannel = serialChannel;
-			_testPortName = portName;
+			_appAbilities = appAbilities;
 			WindowTitle = windowTitle;
-			Tabs = tabs;
-
-			_rtuParamReceiver = new ModbusRtuParamReceiver();
 
 			_openPortCommand = new RelayCommand(OpenPort, () => !_isPortOpened);
 			_closePortCommand = new RelayCommand(ClosePort, () => _isPortOpened);
@@ -84,58 +64,39 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 			_programLogVm = new ProgramLogViewModel(this);
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
-
-			var replyGenerator = new ReplyGeneratorWithQueueAttempted();
-			ParamSetter = replyGenerator;
-			_replyGenerator = replyGenerator;
-			_replyAcceptor = replyGenerator;
+			Tabs = new ObservableCollection<TabItemViewModel>();
 
 			RecordVm = new RecordViewModel(_notifier, _windowSystem);
-
-			_serialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
-			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;
-
-			_commandHearedTimeoutMonitor = new CommandHearedTimerThreadSafe(_serialChannel, TimeSpan.FromSeconds(1), _notifier);
-			_commandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
-			_commandHearedTimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
-			_commandHearedTimeoutMonitor.Start();
-
 			GetPortsAvailable();
+
+			_appAbilities.SerialChannel.CommandHeared += SerialChannelOnCommandHeared;
+			_appAbilities.SerialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
+			_appAbilities.CommandHearedTimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
+			_appAbilities.CommandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
+
 			_logger.Log("Программа загружена");
 		}
 
 		private void CommandHearedTimeoutMonitorOnSomeCommandWasHeared() {
-			LinkBackColor = Colors.LimeGreen;
+			_notifier.Notify(() => { LinkBackColor = Colors.LimeGreen; });
 		}
 
 		private void CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong() {
-			LinkBackColor = Colors.OrangeRed;
+			_notifier.Notify(() => { LinkBackColor = Colors.OrangeRed; });
 		}
 
 
 		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendAbility) {
-			if (commandPart.Address == 20) {
-				//_notifier.Notify(() => _recordedData.Add(commandPart.ReplyBytes));
-
-				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
-					_replyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray()); // TODO: bad performance (.ToArray())
-					var reply = _replyGenerator.GenerateReply();
-					sendAbility.Send(reply);
-				}
-			}
+			// TODO: RecordVm or not?
+			//RecordVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 		}
 
 		private void SerialChannelOnCommandHeared(ICommandPart commandPart) {
 			RecordVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			// TODO: can be indexed for speeding up
-			foreach (var cmdListenerStd in _cmdListeners) {
-				cmdListenerStd.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			}
-			_rtuParamReceiver.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 		}
 
 		private void GetPortsAvailable() {
-			var ports = new List<string> { _testPortName };
+			var ports = new List<string> { _appAbilities.TestPortName };
 			ports.AddRange(SerialPort.GetPortNames());
 			ComPortsAvailable = ports;
 			if (ComPortsAvailable.Count > 0) SelectedComName = ComPortsAvailable[0];
@@ -143,7 +104,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		}
 
 		private void ClosePort() {
-			_serialChannel.CloseCurrentPortAsync(ex => _notifier.Notify(() => {
+			_appAbilities.SerialChannel.CloseCurrentPortAsync(ex => _notifier.Notify(() => {
 				if (ex == null) {
 					IsPortOpened = false;
 					_logger.Log("Порт " + _selectedComName + " закрыт");
@@ -158,7 +119,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 		private void OpenPort() {
 			ISerialPortContainer portContainer;
-			if (_selectedComName == _testPortName) {
+			if (_selectedComName == _appAbilities.TestPortName) {
 				var filename = _windowSystem.ShowOpenFileDialog("Текстовый файл с данными", "Текстовые файлы|*.txt|Все файлы|*.*");
 				/*List<byte> valuesFromFile = new List<byte>();
 				var parts = File.ReadAllText(filename).Split(new[] {" ", Environment.NewLine, "\t", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
@@ -173,7 +134,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 				portContainer = new SerialPortContainerReal(_selectedComName, 57600);
 			}
 
-			_serialChannel.SelectPortAsync(portContainer, ex => _notifier.Notify(() => {
+			_appAbilities.SerialChannel.SelectPortAsync(portContainer, ex => _notifier.Notify(() => {
 				if (ex == null) {
 					IsPortOpened = true;
 					_logger.Log("Порт " + _selectedComName + " открыт");
@@ -186,7 +147,11 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			}));
 		}
 
-
+		public void AddTab(TabItemViewModel tabVm) {
+			//TabControlVm.Tabs.Add(tabVm);
+			Tabs.Add(tabVm);
+			Console.WriteLine("Tab added");
+		}
 
 		public List<string> ComPortsAvailable {
 			get => _comPortsAvailable;
@@ -233,6 +198,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			set {
 				if (_tabHeadersAreLong != value) {
 					_tabHeadersAreLong = value;
+					foreach (var tabItemViewModel in Tabs) {
+						tabItemViewModel.TabHeadersAreLong = value;
+					}
 					RaisePropertyChanged(() => TabHeadersAreLong);
 				}
 			}
@@ -244,10 +212,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 		public IThreadNotifier Notifier => _notifier;
 		public IWindowSystem WindowsSystem => _windowSystem;
-		public ILogger Logger => _programLogVm;
-		public IMultiLoggerWithStackTrace<int> DebugLogger { get; }
-		public IParameterSetter ParamSetter { get; }
-		public IFastReplyGenerator ReplyGenerator => _replyGenerator;
-		public IFastReplyAcceptor ReplyAcceptor => _replyAcceptor;
+		public ILogger Logger => _logger;
 	}
 }
