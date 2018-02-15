@@ -190,6 +190,7 @@
       <DependentUpon>KsmDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ksm\KsmDataViewModel.cs" />
+    <Compile Include="MukFlap\Reply03\CmdListenerMukFlapAirReply03.cs" />
     <Compile Include="MukFlap\Reply03\Converters\EnumMukFlapWorkmodeStageToStringConverter.cs" />
     <Compile Include="MukFlap\Reply03\DataModel\Build\EmersonDiagnosticBuilder.cs" />
     <Compile Include="MukFlap\Reply03\DataModel\Build\IncomingSignalsBuilder.cs" />
@@ -199,8 +200,9 @@
     <Compile Include="MukFlap\Reply03\DataModel\Contracts\MukFlapWorkmodeStageSimple.cs" />
     <Compile Include="MukFlap\Reply03\DataModel\SimpleRelease\MukFlapReply03Telemetry.cs" />
     <Compile Include="MukFlap\Reply03\DataModel\Build\MukFlapReply03TelemetryBuilder.cs" />
+    <Compile Include="MukFlap\Request16\CmdListenerMukFlapAirRequest16.cs" />
     <Compile Include="MukFlap\Request16\IKsmCommandWorkmodeAndUnparsedValue.cs" />
-    <Compile Include="MukFlap\Request16\IRequest16Data.cs" />
+    <Compile Include="MukFlap\Request16\IMukFlapAirRequest16Data.cs" />
     <Compile Include="MukFlap\Request16\KsmCommandWorkmode.cs" />
     <Compile Include="MukFlap\Request16\KsmCommandWorkmodeBuilder.cs" />
     <Compile Include="MukFlap\Request16\KsmCommandWorkmodeExtensions.cs" />
@@ -210,7 +212,7 @@
       <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlap\Request16\Request16Data.cs" />
-    <Compile Include="MukFlap\Request16\Request16DataBuilder.cs" />
+    <Compile Include="MukFlap\Request16\MukFlapAirRequest16DataBuilder.cs" />
     <Compile Include="MukFlap\Request16\Request16DataView.xaml.cs">
       <DependentUpon>Request16DataView.xaml</DependentUpon>
     </Compile>
@@ -227,7 +229,7 @@
     <Compile Include="MukFlap\Reply03\DataModel\Contracts\IEmersonDiagnostic.cs" />
     <Compile Include="MukFlap\Reply03\DataModel\Contracts\IIncomingSignals.cs" />
     <Compile Include="MukFlap\Reply03\DataModel\Contracts\IMukFlapDiagnostic1.cs" />
-    <Compile Include="MukFlap\Reply03\DataModel\Contracts\IMukFlapReply03Telemetry.cs" />
+    <Compile Include="MukFlap\Reply03\DataModel\Contracts\IMukFlapAirReply03Telemetry.cs" />
     <Compile Include="MukFlap\Reply03\DataModel\Contracts\Enums\MukFlapWorkmodeStage.cs" />
     <Compile Include="MukFlap\Reply03\IncomingSignalsView.xaml.cs">
       <DependentUpon>IncomingSignalsView.xaml</DependentUpon>
@@ -241,7 +243,7 @@
     <Compile Include="MukFlap\Reply03\MukFlapReply03TelemetryView.xaml.cs">
       <DependentUpon>MukFlapReply03TelemetryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukWarmFloor\IRequest16.cs" />
+    <Compile Include="MukWarmFloor\Request16\IMukWarmFloorRequest16.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataViewModel.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataView.xaml.cs">
       <DependentUpon>MukWarmFloorDataView.xaml</DependentUpon>
@@ -291,7 +293,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MukWarmFloor\Request16View.xaml">
+    <Page Include="MukWarmFloor\Request16\MukWarmFloorRequest16View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -305,10 +307,11 @@
     <Compile Include="MukFlap\MukFlapDataView.xaml.cs">
       <DependentUpon>MukFlapDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukWarmFloor\Request16BuilderFromBytes.cs" />
-    <Compile Include="MukWarmFloor\Request16Simple.cs" />
-    <Compile Include="MukWarmFloor\Request16View.xaml.cs">
-      <DependentUpon>Request16View.xaml</DependentUpon>
+    <Compile Include="MukWarmFloor\Reply03\IMukWarmFloorReply03Data.cs" />
+    <Compile Include="MukWarmFloor\Request16\MukWarmFloorRequest16BuilderFromBytes.cs" />
+    <Compile Include="MukWarmFloor\Request16\MukWarmFloorRequest16Simple.cs" />
+    <Compile Include="MukWarmFloor\Request16\MukWarmFloorRequest16View.xaml.cs">
+      <DependentUpon>MukWarmFloorRequest16View.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukWarmFloor\SetParameters\MukWarmFloorSetParamsView.xaml.cs">
       <DependentUpon>MukWarmFloorSetParamsView.xaml</DependentUpon>

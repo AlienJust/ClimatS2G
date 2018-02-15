@@ -4,7 +4,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.SimpleRelease {
-	class MukFlapReply03Telemetry : IMukFlapReply03Telemetry {
+	class MukFlapReply03Telemetry : IMukFlapOuterAirReply03Telemetry {
 		public MukFlapReply03Telemetry(int flapPosition, ISensorIndication<double> temperatureAddress1
 			, ISensorIndication<double> temperatureAddress2, IIncomingSignals incomingSignals, byte outgoingSignals
 			, double analogInput, IMukFlapWorkmodeStage automaticModeStage

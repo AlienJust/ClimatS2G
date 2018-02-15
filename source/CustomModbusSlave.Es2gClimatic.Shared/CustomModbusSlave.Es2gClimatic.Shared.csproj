@@ -116,11 +116,13 @@
     <Compile Include="AppWindow\AppVersion.cs" />
     <Compile Include="AppWindow\ISharedAppAbilities.cs" />
     <Compile Include="AppWindow\ISharedMainViewModel.cs" />
+    <Compile Include="AppWindow\IStdNotifier.cs" />
     <Compile Include="AppWindow\SharedAppAbilities.cs" />
     <Compile Include="AppWindow\SharedMainView.xaml.cs">
       <DependentUpon>SharedMainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppWindow\SharedMainViewModel.cs" />
+    <Compile Include="AppWindow\StdNotifier.cs" />
     <Compile Include="AppWindow\TabItemViewModel.cs" />
     <Compile Include="BsSm\Fault\IntegerFaultCodeToTextConverter.cs" />
     <Compile Include="BsSm\IWorkMode.cs" />

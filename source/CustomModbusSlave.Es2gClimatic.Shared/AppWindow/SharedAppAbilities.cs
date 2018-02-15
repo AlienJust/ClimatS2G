@@ -25,6 +25,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		public SerialChannel SerialChannel { get; }
 
 		public CommandHearedTimerNotThreadSafe CommandHearedTimeoutMonitor { get; }
+		public IStdNotifier CmdNotifierStd { get; }
 
 		public AppVersion Version { get; }
 		public IFastReplyGenerator ReplyGenerator { get; }
@@ -87,37 +88,20 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			ParamSetter = replyGenerator;
 
 			RtuParamReceiver = new ModbusRtuParamReceiver();
-			_cmdListeners = new List<ICmdListenerStd>{RtuParamReceiver};
-			// TODO: add custom std cmd listeners
-
 
 			SerialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
-			SerialChannel.CommandHeared += SerialChannelOnCommandHeared;
 
 			CommandHearedTimeoutMonitor = new CommandHearedTimerNotThreadSafe(SerialChannel, TimeSpan.FromSeconds(1));
-			CommandHearedTimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
-			CommandHearedTimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
 			CommandHearedTimeoutMonitor.Start();
+
+			CmdNotifierStd = new StdNotifier(SerialChannel);
+			CmdNotifierStd.AddListener(RtuParamReceiver);
 		}
 
-		private void CommandHearedTimeoutMonitorOnSomeCommandWasHeared() {
-			//throw new NotImplementedException();
-		}
 
-		private void CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong() {
-			//throw new NotImplementedException();
-		}
-
-		private void SerialChannelOnCommandHeared(ICommandPart commandPart) {
-			foreach (var cmdListenerStd in _cmdListeners) {
-				cmdListenerStd.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			}
-		}
 
 		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendability) {
 			if (commandPart.Address == 20) {
-				//_notifier.Notify(() => _recordedData.Add(commandPart.ReplyBytes));
-
 				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
 					ReplyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray()); // TODO: bad performance (.ToArray())
 					var reply = ReplyGenerator.GenerateReply();

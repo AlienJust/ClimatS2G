@@ -8,6 +8,7 @@ using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Numeric.Bits;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.DataModel.Contracts;
@@ -42,7 +43,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 
 		private readonly IThreadNotifier _uiNotifier;
-		private readonly ICmdListener<IMukFlapReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
+		private readonly ICmdListener<IMukFlapOuterAirReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
 		private readonly ICmdListener<IMukFanVaporizerDataReply03> _cmdListenerMukVaporizerReply03;
 		private readonly ICmdListener<IMukFanVaporizerDataRequest16> _cmdListenerMukVaporizerRequest16;
 		private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukCondenserFanReply03;
@@ -182,7 +183,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		public SystemDiagnosticViewModel(bool isFullVersion, bool isHalfOrFullVersion,
 			IThreadNotifier uiNotifier,
-			ICmdListener<IMukFlapReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
+			ICmdListener<IMukFlapOuterAirReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
 			ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03,
 			ICmdListener<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16,
 			ICmdListener<IMukCondensorFanReply03Data> cmdListenerMukCondenserFanReply03,
@@ -248,7 +249,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		/// </summary>
 		/// <param name="bytes"></param>
 		/// <param name="data"></param>
-		private void CmdListenerMukFlapOuterAirReply03OnDataReceived(IList<byte> bytes, IMukFlapReply03Telemetry data) {
+		private void CmdListenerMukFlapOuterAirReply03OnDataReceived(IList<byte> bytes, IMukFlapOuterAirReply03Telemetry data) {
 			_uiNotifier.Notify(() => {
 				MukInfo2 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber) : OkLinkText;
 				MukInfoColor2 = OkLinkColor;

@@ -23,7 +23,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		private string _reply;
 		private string _diagnostic1;
 		private string _diagnostic2;
-		private IRequest16 _request16;
+		private IMukWarmFloorRequest16 _request16;
 
 		public AnyCommandPartViewModel Request16BytesTextVm { get; set; }
 		public MukWarmFloorSetParamsViewModel MukWarmFloorSetParamsVm { get; }
@@ -61,14 +61,14 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 			// запрос 0x10 (16 dec):
 			if (code == 0x10 && data.Count == 21) {
 				_notifier.Notify(() => {
-					var request16 = new Request16BuilderFromBytes(data).Build();
+					var request16 = new MukWarmFloorRequest16BuilderFromBytes(data).Build();
 					Request16 = request16;
 					Request16BytesTextVm.Update(data);
 				});
 			}
 		}
 
-		public IRequest16 Request16 {
+		public IMukWarmFloorRequest16 Request16 {
 			get { return _request16; }
 			set {
 				if (_request16 != value) {

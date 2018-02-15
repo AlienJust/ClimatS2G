@@ -146,7 +146,7 @@
 		<TextBlock
 			Text="Запрос от КСМ, код 16 (dec):"
 			FontWeight="Bold" />
-		<mukWarmFloor:Request16View
+		<mukWarmFloor:MukWarmFloorRequest16View
 			DataContext="{Binding Path=Request16, Mode=OneWay}" />
 		
 		<shared:AnyCommandPartView

@@ -1,9 +1,9 @@
-﻿using AlienJust.Support.Loggers;
+﻿using System;
+using AlienJust.Support.Loggers;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
-{
+namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	/// <summary>
 	/// Common abilities of application, available to content
 	/// </summary>
@@ -20,5 +20,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
 		SerialChannel SerialChannel { get; }
 		CommandHearedTimerNotThreadSafe CommandHearedTimeoutMonitor { get; }
+
+		/// <summary>
+		/// To notify std listeners
+		/// </summary>
+		IStdNotifier CmdNotifierStd { get; }
 	}
 }

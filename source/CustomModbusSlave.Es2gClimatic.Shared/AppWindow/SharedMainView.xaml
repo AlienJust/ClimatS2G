@@ -294,15 +294,9 @@
 				Height="Auto" />
 		</Grid.RowDefinitions>
 		<TabControl 
+			ItemContainerStyle="{StaticResource AzureTabItem}"
 			Grid.Row="0"
 			TabStripPlacement="Left" ItemsSource="{Binding Path=Tabs}">
-			<TabControl.ItemContainerStyle>
-				<Style BasedOn="{StaticResource AzureTabItem}">
-					<Setter
-					Property="TabItem.BorderBrush"
-					Value="Black" />
-				</Style>
-			</TabControl.ItemContainerStyle>
 			<TabControl.ItemTemplate>
 				<DataTemplate>
 					<StackPanel
@@ -318,7 +312,9 @@
 			</TabControl.ItemTemplate>
 			<TabControl.ContentTemplate>
 				<DataTemplate>
-					<ContentPresenter Content="{Binding Path=Content, Mode=OneTime}" />
+					<ScrollViewer>
+						<ContentPresenter Content="{Binding Path=Content, Mode=OneTime}" />
+					</ScrollViewer>
 				</DataTemplate>
 			</TabControl.ContentTemplate>
 		</TabControl>

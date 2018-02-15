@@ -1,5 +1,5 @@
 ﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16 {
-	class Request16Data : IRequest16Data {
+	class Request16Data : IMukFlapAirRequest16Data {
 		public Request16Data(IKsmCommandWorkmodeAndUnparsedValue currentKsmCommandWorkmodeAndUnparsedValue, int outerTemperature, double innerTemperature, int fanSpeedLevel, int bitRegistry, bool interiorOrCabin, int reserve22) {
 			CurrentKsmCommandWorkmode = currentKsmCommandWorkmodeAndUnparsedValue;
 			OuterTemperature = outerTemperature;

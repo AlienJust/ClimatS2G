@@ -1,6 +1,6 @@
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor
 {
-	class Request16Simple : IRequest16
+	class MukWarmFloorRequest16Simple : IMukWarmFloorRequest16
 	{
 		public int WorkModeReceivedFromKsm { get; set; }
 		public int TemperatureOutside { get; set; }

@@ -112,7 +112,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			_cmdListenerBvsReply65 = new CmdListenerBvsReply65(0x1E, 65, 7);
 			_cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
 
-			_mukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
+			//_mukFlapDataVm = new MukFlapDataViewModel(_notifier, _paramSetter);
 			MukFanVaporizerDataVm = new MukVaporizerFanDataViewModelParamcentric(
 				notifier,
 				_paramSetter,
@@ -163,7 +163,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		private void SerialChannelOnCommandHeared(ICommandPart commandPart) {
 			RecordVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			//_notifier.Notify(()=>_logger.Log("Подслушана команда addr=0x" + commandPart.Address.ToString("X2") + ", code=0x" + commandPart.CommandCode.ToString("X2") + ", data.Count=" + commandPart.ReplyBytes.Count));
-			_mukFlapDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			//_mukFlapDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
 			_cmdListenerMukVaporizerReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerMukVaporizerRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);

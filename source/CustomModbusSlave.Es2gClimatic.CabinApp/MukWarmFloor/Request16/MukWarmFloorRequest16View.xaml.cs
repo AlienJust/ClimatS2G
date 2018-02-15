@@ -14,10 +14,10 @@ using System.Windows.Shapes;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 	/// <summary>
-	/// Логика взаимодействия для Request16View.xaml
+	/// Логика взаимодействия для MukWarmFloorRequest16View.xaml
 	/// </summary>
-	public partial class Request16View : UserControl {
-		public Request16View() {
+	public partial class MukWarmFloorRequest16View : UserControl {
+		public MukWarmFloorRequest16View() {
 			InitializeComponent();
 		}
 	}

@@ -8,13 +8,13 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Build {
-	class MukFlapReply03TelemetryBuilder : IBuilder<IMukFlapReply03Telemetry> {
+	class MukFlapReply03TelemetryBuilder : IBuilder<IMukFlapAirReply03Telemetry> {
 		private readonly IList<byte> _data;
 		public MukFlapReply03TelemetryBuilder(IList<byte> data) {
 			_data = data;
 		}
 
-		public IMukFlapReply03Telemetry Build() {
+		public IMukFlapAirReply03Telemetry Build() {
 			var flapPosition = _data[3] * 256 + _data[4];
 
 			var temperatureAddress1 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 0.01, 0.0, new BytesPair(0x85, 0x00));

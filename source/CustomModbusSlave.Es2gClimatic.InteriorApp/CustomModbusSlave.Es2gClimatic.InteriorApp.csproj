@@ -372,7 +372,7 @@
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\Contracts\IIncomingSignals.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\Contracts\IMukFlapDiagnostic1.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\Contracts\IMukFlapOuterAirDiagnostic2.cs" />
-    <Compile Include="MukFlapAirOuter\Reply03\DataModel\Contracts\IMukFlapReply03Telemetry.cs" />
+    <Compile Include="MukFlapAirOuter\Reply03\DataModel\Contracts\IMukFlapOuterAirReply03Telemetry.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\Contracts\MukFlapOuterAirWorkmodeStage.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\IncomingSignalsView.xaml.cs">
       <DependentUpon>IncomingSignalsView.xaml</DependentUpon>

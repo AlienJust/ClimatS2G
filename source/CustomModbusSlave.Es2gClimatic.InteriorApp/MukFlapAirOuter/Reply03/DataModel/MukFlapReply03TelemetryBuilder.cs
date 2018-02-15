@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using AlienJust.Support.Collections;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.SimpleRelease;
 using CustomModbusSlave.Es2gClimatic.Shared;
@@ -7,13 +8,13 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Build {
-	class MukFlapReply03TelemetryBuilder : IBuilder<IMukFlapReply03Telemetry> {
+	class MukFlapReply03TelemetryBuilder : IBuilder<IMukFlapOuterAirReply03Telemetry> {
 		private readonly IList<byte> _data;
 		public MukFlapReply03TelemetryBuilder(IList<byte> data) {
 			_data = data;
 		}
 
-		public IMukFlapReply03Telemetry Build() {
+		public IMukFlapOuterAirReply03Telemetry Build() {
 			var flapPosition = _data[3] * 256 + _data[4];
 
 			var temperatureAddress1 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 0.01, 0.0, new BytesPair(0x85, 0x00));

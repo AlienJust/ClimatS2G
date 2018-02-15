@@ -3,7 +3,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts {
-	internal interface IMukFlapReply03Telemetry {
+	internal interface IMukFlapAirReply03Telemetry {
 		int FlapPosition { get; }
 		ISensorIndication<double> TemperatureAddress1 { get; }
 		ISensorIndication<double> TemperatureAddress2 { get; }

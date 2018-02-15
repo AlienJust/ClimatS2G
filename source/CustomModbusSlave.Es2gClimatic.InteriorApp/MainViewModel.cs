@@ -23,6 +23,8 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.ViewModel;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Request16;
@@ -76,7 +78,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 		private readonly ModbusRtuParamReceiver _rtuParamReceiver;
 
-		private readonly ICmdListener<IMukFlapReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
+		private readonly ICmdListener<IMukFlapOuterAirReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
 		private readonly ICmdListener<IMukFlapOuterAirRequest16Data> _cmdListenerMukFlapOuterAirRequest16;
 
 		private readonly ICmdListener<IMukFanVaporizerDataReply03> _cmdListenerMukVaporizerReply03;
