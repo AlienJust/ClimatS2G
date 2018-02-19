@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Request16 {
 	class MukWarmFloorRequest16BuilderFromBytes : IBuilder<IMukWarmFloorRequest16> {
 		private readonly IList<byte> _request;
 
@@ -9,7 +9,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 			_request = request;
 		}
 		public IMukWarmFloorRequest16 Build() {
-			//TODO: Parse request
 			var result = new MukWarmFloorRequest16Simple {
 				WorkModeReceivedFromKsm = _request[8],
 				TemperatureOutside = _request[9] * 256 + _request[10],

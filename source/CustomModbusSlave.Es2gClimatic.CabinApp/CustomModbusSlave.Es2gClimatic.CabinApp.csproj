@@ -58,6 +58,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Concurrent.Contracts.dll</HintPath>
     </Reference>
+    <Reference Include="AlienJust.Support.Conversion">
+      <HintPath>..\..\reference\AlienJust.Support.Conversion.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Conversion.Contracts">
+      <HintPath>..\..\reference\AlienJust.Support.Conversion.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.Identy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Identy.dll</HintPath>
@@ -243,6 +249,7 @@
     <Compile Include="MukFlap\Reply03\MukFlapReply03TelemetryView.xaml.cs">
       <DependentUpon>MukFlapReply03TelemetryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03DataBuilder.cs" />
     <Compile Include="MukWarmFloor\Request16\IMukWarmFloorRequest16.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataViewModel.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataView.xaml.cs">
