@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using AlienJust.Support.Conversion;
 using AlienJust.Support.Conversion.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
@@ -18,15 +20,16 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03 {
 				TemperatureRegulatorWorkMode = (data[7] * 256 + data[8]) * 0.01,
 				ByteOfIncomingSignals = data[10],
 				ByteOfOutgoingSignals = data[12],
-				AutomaticModeStage =
-		}
+				AutomaticModeStage = new RawAndConvertedValues<int, MukWarmFloorAutomaticModeStage>(data[13] * 256 + data[14], new MukWarmFloorAutomaticModeStageBuilder()),
+				CalculatedTemperatureSetting = 
+			};
 
 
 
 
 			AnalogInput = new UshortTextPresenter(data[6], data[5], false).PresentAsText();
 			TemperatureRegulatorWorkMode = new DataDoubleTextPresenter(data[8], data[7], 0.01, 0).PresentAsText();
-
+			по
 			IncomingSignals = new ByteTextPresenter(data[10], false).PresentAsText();
 			OutgoingSignals = new ByteTextPresenter(data[12], false).PresentAsText();
 
@@ -37,6 +40,21 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03 {
 			Diagnostic2 = new UshortTextPresenter(data[20], data[19], true).PresentAsText(); // TODO: show as bits
 
 			FirmwareBuildNumber = new DataDoubleTextPresenter(data[22], data[21], 1.0, 0).PresentAsText();
+		}
+	}
+
+	class MukWarmFloorAutomaticModeStageBuilder : IBuilderOneToOne<int, MukWarmFloorAutomaticModeStage> {
+		public MukWarmFloorAutomaticModeStage Build(int source) {
+			switch (source) {
+				case 0:
+					return MukWarmFloorAutomaticModeStage.ControllerInitialization;
+				case 1:
+					return MukWarmFloorAutomaticModeStage.HeatModeIsOff;
+				case 2:
+					return MukWarmFloorAutomaticModeStage.HeatModeIsOn;
+				default:
+					throw new ArgumentOutOfRangeException("Cannot convert " + source + " to " + typeof(MukWarmFloorAutomaticModeStage).FullName + "'s value");
+			}
 		}
 	}
 }

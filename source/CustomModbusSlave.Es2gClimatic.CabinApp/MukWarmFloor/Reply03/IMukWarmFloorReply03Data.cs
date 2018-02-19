@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using AlienJust.Support.Conversion;
+﻿using AlienJust.Support.Conversion;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03 {
 	interface IMukWarmFloorReply03Data {
@@ -11,7 +8,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03 {
 		int ByteOfIncomingSignals { get; }
 		int ByteOfOutgoingSignals { get; }
 		RawAndConvertedValues<int, MukWarmFloorAutomaticModeStage> AutomaticModeStage { get; }
-		int CalculatedTemperatureSetting { get; }
+		double CalculatedTemperatureSetting { get; }
 		RawAndConvertedValues<int, IMukWarmFloorDiagnostic1> MukWarmFloorDiagnostic1 { get; }
 		RawAndConvertedValues<int, IMukWarmFloorDiagnostic2> MukWarmFloorDiagnostic2 { get; }
 		int FirmwareVersion { get; }
@@ -25,7 +22,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03 {
 		public int ByteOfIncomingSignals { get; set; }
 		public int ByteOfOutgoingSignals { get; set; }
 		public RawAndConvertedValues<int, MukWarmFloorAutomaticModeStage> AutomaticModeStage { get; set; }
-		public int CalculatedTemperatureSetting { get; set; }
+		public double CalculatedTemperatureSetting { get; set; }
 		public RawAndConvertedValues<int, IMukWarmFloorDiagnostic1> MukWarmFloorDiagnostic1 { get; set; }
 		public RawAndConvertedValues<int, IMukWarmFloorDiagnostic2> MukWarmFloorDiagnostic2 { get; set; }
 		public int FirmwareVersion { get; set; }
@@ -48,6 +45,4 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03 {
 		HeatModeIsOff,
 		HeatModeIsOn
 	}
-
-
 }
