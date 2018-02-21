@@ -249,6 +249,14 @@
     <Compile Include="MukFlap\Reply03\MukFlapReply03TelemetryView.xaml.cs">
       <DependentUpon>MukFlapReply03TelemetryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MukWarmFloor\Reply03\IMukWarmFloorDiagnostic1.cs" />
+    <Compile Include="MukWarmFloor\Reply03\IMukWarmFloorDiagnostic2.cs" />
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorAutomaticModeStage.cs" />
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorDiagnostic1Simple.cs" />
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorDiagnostic2Builder.cs" />
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorDiagnostic2Simple.cs" />
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorDiagnostic1Builder.cs" />
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03Data.cs" />
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03DataBuilder.cs" />
     <Compile Include="MukWarmFloor\Request16\IMukWarmFloorRequest16.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataViewModel.cs" />
