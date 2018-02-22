@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.25807.0
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave", "CustomModbusSlave\CustomModbusSlave.csproj", "{9244D783-9410-4026-B3EF-49435F79A74A}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbus.Slave.FastReply.Contracts", "CustomModbus.Slave.FastReply.Contracts\CustomModbus.Slave.FastReply.Contracts.csproj", "{53393428-C7AF-4431-B3E4-2DE72CE78108}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbus.Slave.FastReply.Queued", "CustomModbus.Slave.FastReply.Queued\CustomModbus.Slave.FastReply.Queued.csproj", "{19373346-E61B-42D4-9A4C-7923DCE6E3FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamControls", "ParamControls\ParamControls.csproj", "{6286A75B-9E7D-43D5-A173-1DE721E0E959}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,8 +71,15 @@ Global
 		{19373346-E61B-42D4-9A4C-7923DCE6E3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19373346-E61B-42D4-9A4C-7923DCE6E3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19373346-E61B-42D4-9A4C-7923DCE6E3FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6286A75B-9E7D-43D5-A173-1DE721E0E959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6286A75B-9E7D-43D5-A173-1DE721E0E959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6286A75B-9E7D-43D5-A173-1DE721E0E959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6286A75B-9E7D-43D5-A173-1DE721E0E959}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0BE96D3-1659-4B7C-8104-648F0C2FE375}
 	EndGlobalSection
 EndGlobal

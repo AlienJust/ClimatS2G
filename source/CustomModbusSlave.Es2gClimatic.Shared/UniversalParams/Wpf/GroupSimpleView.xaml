@@ -4,7 +4,6 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:universalParams="clr-namespace:CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;assembly=ParamCentric.Common.Contracts"
 	xmlns:wpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf"
 	xmlns:setParamsAndKsmViewModel="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel"
 	xmlns:contracts="clr-namespace:ParamCentric.Common.Contracts;assembly=ParamCentric.Common.Contracts"

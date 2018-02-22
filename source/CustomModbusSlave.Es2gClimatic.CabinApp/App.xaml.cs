@@ -15,6 +15,7 @@ using CustomModbusSlave.Contracts;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
@@ -25,6 +26,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
+using CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor;
 using DataAbstractionLevel.Low.PsnConfig;
 using MahApps.Metro;
 
@@ -112,12 +114,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК тёплого пола",
 					ShortHeader = "МУК 5",
-					Content = new MukFridgeFanDataView() {
-						DataContext = new MukFridgeFanDataViewModel(
-							mainVm.Notifier, ab.ParamSetter,
-							cmdListenerMukCondenserFanReply03,
-							cmdListenerMukCondenserRequest16
-						)
+					Content = new MukWarmFloorDataView {
+						DataContext = new MukWarmFloorDataViewModel(
+							mainVm.Notifier, ab.ParamSetter)
+							//cmdListenerMukCondenserFanReply03,
+							//cmdListenerMukCondenserRequest16
+						//)
 					}
 				});
 			});

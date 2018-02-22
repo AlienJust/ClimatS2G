@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03.MukWarmFloorReply03View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:paramControls="clr-namespace:ParamControls;assembly=ParamControls"
+
+             mc:Ignorable="d" 
+             d:DesignHeight="90" d:DesignWidth="300">
+	<StackPanel Orientation="Vertical">
+		<paramControls:ParamSimple Text="ШИМ обогрев" Value="123"/>
+		<paramControls:ParamSimple Text="ШИМ обогрев" Value="123"/>
+		<paramControls:ParamSimple Text="ШИМ обогрев" Value="123"/>
+		<paramControls:ParamSimple Text="ШИМ обогрев" Value="123"/>
+		<paramControls:ParamSimple Text="ШИМ обогрев" Value="123"/>
+	</StackPanel>
+</UserControl>

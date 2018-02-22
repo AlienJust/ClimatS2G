@@ -258,6 +258,9 @@
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorDiagnostic1Builder.cs" />
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03Data.cs" />
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03DataBuilder.cs" />
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03DataView.xaml.cs">
+      <DependentUpon>MukWarmFloorReply03DataView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukWarmFloor\Request16\IMukWarmFloorRequest16.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataViewModel.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataView.xaml.cs">
@@ -305,6 +308,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFlap\MukFlapDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MukWarmFloor\Reply03\MukWarmFloorReply03DataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -385,6 +392,10 @@
     <ProjectReference Include="..\ParamCentric.UserInterface.Contracts\ParamCentric.UserInterface.Contracts.csproj">
       <Project>{4cce9e04-36b8-4b75-aa47-3126e801a406}</Project>
       <Name>ParamCentric.UserInterface.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParamControls\ParamControls.csproj">
+      <Project>{6286a75b-9e7d-43d5-a173-1de721e0e959}</Project>
+      <Name>ParamControls</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

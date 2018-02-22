@@ -7,6 +7,7 @@
 	xmlns:mukWarmFloor="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor"
 	xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:setParameters="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.SetParameters"
+	xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03"
 	mc:Ignorable="d"
 	d:DesignHeight="300"
 	d:DesignWidth="300">
@@ -15,6 +16,7 @@
 		<TextBlock
 			Text="Ответ от МУК на команду КСМ с кодом 03:"
 			FontWeight="Bold" />
+		<reply03:MukWarmFloorReply03View/>
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition

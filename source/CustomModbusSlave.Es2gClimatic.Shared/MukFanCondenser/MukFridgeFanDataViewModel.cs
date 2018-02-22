@@ -62,7 +62,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser {
 		}
 
 		public IMukCondensorFanReply03Data Reply03Data {
-			get { return _reply03Data; }
+			get => _reply03Data;
 			set {
 				if (_reply03Data != value) {
 					_reply03Data = value;
@@ -72,7 +72,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser {
 		}
 
 		public IMukCondenserRequest16Data Request16Data {
-			get { return _request16Data; }
+			get => _request16Data;
 			set {
 				if (_request16Data != value) {
 					_request16Data = value;
