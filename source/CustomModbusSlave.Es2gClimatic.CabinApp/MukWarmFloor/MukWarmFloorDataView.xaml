@@ -68,7 +68,7 @@
 			<TextBlock
 				Grid.Row="2"
 				Grid.Column="0"
-				Text="Режим работы регулятора температры" />
+				Text="Режим работы регулятора температуры" />
 			<TextBlock
 				Grid.Row="2"
 				Grid.Column="1"

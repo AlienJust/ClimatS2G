@@ -9,9 +9,12 @@
              d:DesignHeight="90" d:DesignWidth="300">
 	<StackPanel Orientation="Vertical">
 		<paramControls:ParamSimple Text="ШИМ обогрев" Value="123"/>
-		<paramControls:ParamSimple Text="ШИМ обогрев" Value="123"/>
-		<paramControls:ParamSimple Text="ШИМ обогрев" Value="123"/>
-		<paramControls:ParamSimple Text="ШИМ обогрев" Value="123"/>
-		<paramControls:ParamSimple Text="ШИМ обогрев" Value="123"/>
+		<paramControls:ParamSimple Text="Аналоговый вход (Температура ЦМР = 1 градус)" Value="123"/>
+		<paramControls:ParamSimple Text="Режим работы регулятора температуры" Value="123"/>
+		<paramControls:ParamSimple Text="Байт входных сигналов" Value="123"/>
+		<paramControls:ParamSimple Text="Байт выходных сигналов" Value="123"/>
+		<paramControls:ParamSimple Text="Байт выходных сигналов" Value="123"/>
+		<paramControls:ParamSimple Text="Байт выходных сигналов" Value="123"/>
+		<paramControls:ParamSimple Text="Байт выходных сигналов" Value="123"/>
 	</StackPanel>
 </UserControl>
