@@ -1,8 +1,10 @@
 ﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03
 {
-	enum MukWarmFloorAutomaticModeStage {
+	internal enum MukWarmFloorAutomaticModeStage
+	{
 		ControllerInitialization,
 		HeatModeIsOff,
-		HeatModeIsOn
+		HeatModeIsOn,
+		Unknown
 	}
 }

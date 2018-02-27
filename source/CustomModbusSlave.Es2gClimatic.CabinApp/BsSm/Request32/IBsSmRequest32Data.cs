@@ -1,7 +1,7 @@
 ﻿using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
-	interface IBsSmDataCommand32Request {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Request32 {
+	interface IBsSmRequest32Data {
 		int TemperatureInsideTheCabin { get; }
 		int TemperatureOutdoor { get; }
 		int FanSpeed { get; }

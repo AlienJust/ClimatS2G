@@ -1,5 +1,5 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
-	internal interface IBsSmDataCommand32Reply {
+﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
+	internal interface IBsSmReply32Data {
 		int TargetTemperatureInsideTheCabin { get; }
 		int FanSpeedLevel { get; }
 		bool IsWarmFloorOn { get; }
@@ -9,6 +9,7 @@
 		int TemperatureOutdoor { get; }
 
 		int TemperatureIndoor { get; }
+
 		Shared.BsSm.ClimaticSystemWorkMode ClimaticWorkmode { get; }
 		Shared.BsSm.IWorkMode WorkMode { get; }
 

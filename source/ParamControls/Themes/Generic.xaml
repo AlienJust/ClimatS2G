@@ -22,4 +22,50 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style TargetType="{x:Type local:ParamRawAndConverted}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:ParamRawAndConverted}">
+					<Border Background="{TemplateBinding Background}"
+					        BorderBrush="{TemplateBinding BorderBrush}"
+					        BorderThickness="{TemplateBinding BorderThickness}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Text="{TemplateBinding Text}" VerticalAlignment="Center"/>
+							<TextBlock Grid.Column="1" Text="{TemplateBinding RawValue}" VerticalAlignment="Center"/>
+							<TextBlock Grid.Column="2" Text=" - " VerticalAlignment="Center"/>
+							<TextBlock Grid.Column="3" Text="{TemplateBinding ConvertedValue}" VerticalAlignment="Center"/>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type local:ParamBool}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:ParamBool}">
+					<Border Background="{TemplateBinding Background}"
+					        BorderBrush="{TemplateBinding BorderBrush}"
+					        BorderThickness="{TemplateBinding BorderThickness}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Text="{TemplateBinding Text}" VerticalAlignment="Center"/>
+							<CheckBox Grid.Column="1" IsChecked="{TemplateBinding IsChecked}" VerticalAlignment="Center" IsHitTestVisible="False"/>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

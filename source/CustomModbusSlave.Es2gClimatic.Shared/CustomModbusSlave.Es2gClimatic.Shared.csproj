@@ -499,6 +499,10 @@
       <Project>{4cce9e04-36b8-4b75-aa47-3126e801a406}</Project>
       <Name>ParamCentric.UserInterface.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ParamControls\ParamControls.csproj">
+      <Project>{6286a75b-9e7d-43d5-a173-1de721e0e959}</Project>
+      <Name>ParamControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

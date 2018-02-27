@@ -1,6 +1,6 @@
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
-	class BsSmDataCommand32ReplySimple : IBsSmDataCommand32Reply {
-		public BsSmDataCommand32ReplySimple(int targetTemperatureInsideTheCabin, int fanSpeedLevel, bool isWarmFloorOn, uint astronomicTime, uint delayedStartTime, int temperatureOutdoor, int temperatureIndoor, Shared.BsSm.ClimaticSystemWorkMode climaticWorkmode, Shared.BsSm.IWorkMode workMode, Shared.BsSm.State.IContract contract, int bsSmVersionNumber) {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
+	class BsSmReply32DataSimple : IBsSmReply32Data {
+		public BsSmReply32DataSimple(int targetTemperatureInsideTheCabin, int fanSpeedLevel, bool isWarmFloorOn, uint astronomicTime, uint delayedStartTime, int temperatureOutdoor, int temperatureIndoor, Shared.BsSm.ClimaticSystemWorkMode climaticWorkmode, Shared.BsSm.IWorkMode workMode, Shared.BsSm.State.IContract contract, int bsSmVersionNumber) {
 			TargetTemperatureInsideTheCabin = targetTemperatureInsideTheCabin;
 			FanSpeedLevel = fanSpeedLevel;
 			IsWarmFloorOn = isWarmFloorOn;

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
-	class BsSmDataCommand32ReplyBuilderFromReplyDataBytes : Shared.IBuilder<IBsSmDataCommand32Reply> {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
+	class BsSmReply32BuilderFromReplyDataBytes : Shared.IBuilder<IBsSmReply32Data> {
 		private readonly IList<byte> _replyBytes;
-		public BsSmDataCommand32ReplyBuilderFromReplyDataBytes(IList<byte> replyBytes) {
+		public BsSmReply32BuilderFromReplyDataBytes(IList<byte> replyBytes) {
 			_replyBytes = replyBytes;
 		}
 
-		public IBsSmDataCommand32Reply Build() {
+		public IBsSmReply32Data Build() {
 			int targetTemperatureInsideTheCabin = (_replyBytes[3] & 0x0F) - 2;
 			int fanSpeedLevel = _replyBytes[3] & 0x18;
 			bool isWarmFloorOn = (_replyBytes[3] & 0x20) == 0x20;
@@ -21,7 +21,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 			Shared.BsSm.State.IContract bsSmState = new Shared.BsSm.State.BuilderFromByte(_replyBytes[15]).Build();
 			int bsSmVersionNumber = _replyBytes[16];
 
-			return new BsSmDataCommand32ReplySimple(
+			return new BsSmReply32DataSimple(
 				targetTemperatureInsideTheCabin,
 				fanSpeedLevel,
 				isWarmFloorOn,

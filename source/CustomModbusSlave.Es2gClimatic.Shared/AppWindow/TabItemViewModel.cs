@@ -6,6 +6,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		private bool _tabHeadersAreLong;
 		public string ShortHeader { get; set; }
 		public string FullHeader { get; set; }
+
 		public FrameworkElement Content { get; set; }
 
 		public TabItemViewModel() {

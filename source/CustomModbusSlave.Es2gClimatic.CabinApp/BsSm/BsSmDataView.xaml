@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:cabinBssm="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.BsSm"
+             xmlns:reply32="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400">
 	<StackPanel Orientation="Vertical">
 		<cabinBssm:BsSmRequestDataView DataContext="{Binding Path=BsSmRequestDataVm, Mode=OneTime}"/>
-		<cabinBssm:BsSmReplyDataView DataContext="{Binding Path=BsSmReplyDataVm, Mode=OneTime}"/>
+		<reply32:BsSmReply32DataView DataContext="{Binding Path=BsSmReplyDataVm, Mode=OneTime}"/>
 	</StackPanel>
 </UserControl>

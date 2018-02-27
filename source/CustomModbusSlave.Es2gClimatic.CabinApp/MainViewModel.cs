@@ -19,6 +19,8 @@ using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm;
 using CustomModbusSlave.Es2gClimatic.CabinApp.Ksm;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.Shared;
@@ -109,6 +111,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			_cmdListenerMukCondenserFanReply03 = new CmdListenerMukCondenserFanReply03(4, 3, 29);
 			_cmdListenerMukCondenserRequest16 = new CmdListenerMukCondenserFanRequest16(4, 16, 15);
 
+			var cmdListenerMukWarmFloorReply03 = new CmdListenerMukWarmFloorReply03(5, 3, 31);
+			var cmdListenerMukWarmFloorRequest16 = new CmdListenerMukWarmFloorRequest16(5, 16, 21);
+
 			_cmdListenerBvsReply65 = new CmdListenerBvsReply65(0x1E, 65, 7);
 			_cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
 
@@ -122,7 +127,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			);
 
 			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukCondenserFanReply03, _cmdListenerMukCondenserRequest16);
-			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier, _paramSetter);
+			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier, _paramSetter, cmdListenerMukWarmFloorReply03, cmdListenerMukWarmFloorRequest16);
 
 			_bsSmDataVm = new BsSmDataViewModel(_notifier);
 			BvsDataVm = new BvsDataViewModel(_notifier, _cmdListenerBvsReply65);
@@ -171,7 +176,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			_cmdListenerMukCondenserFanReply03.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerMukCondenserRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
-			_mukWarmFloorDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			//_mukWarmFloorDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_bsSmDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerBvsReply65.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 

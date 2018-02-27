@@ -2,19 +2,20 @@ using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
+using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Request32;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
-	class BsSmReplyDataViewModel : ViewModelBase, ICmdListenerStd, IBsSmDataCommand32Reply {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
+	class BsSmReply32DataViewModel : ViewModelBase, ICmdListenerStd, IBsSmReply32Data {
 		private readonly IThreadNotifier _notifier;
 
 		private readonly Shared.BsSm.State.ViewModel _bsSmState;
 		
-		private IBsSmDataCommand32Reply _reply;
+		private IBsSmReply32Data _reply;
 		private string _replyText;
 
-		public BsSmReplyDataViewModel(IThreadNotifier notifier) {
+		public BsSmReply32DataViewModel(IThreadNotifier notifier) {
 			_notifier = notifier;
 			_bsSmState = new Shared.BsSm.State.ViewModel();
 		}
@@ -24,14 +25,14 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 			if (code == 0x20 && data.Count == 20) { // reply
 				_notifier.Notify(() => {
 					ReplyText = data.ToText();
-					Reply = new BsSmDataCommand32ReplyBuilderFromReplyDataBytes(data).Build(); // TODO try, if catch - null, and request too
+					Reply = new BsSmReply32BuilderFromReplyDataBytes(data).Build(); // TODO try, if catch - null, and request too
 					_bsSmState.Update(_reply.BsSmState);
 				});
 			}
 		}
 
-		public IBsSmDataCommand32Reply Reply {
-			get { return _reply; }
+		public IBsSmReply32Data Reply {
+			get => _reply;
 			set {
 				if (_reply != value) {
 					_reply = value;
@@ -55,7 +56,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 		}
 
 		public string ReplyText {
-			get { return _replyText; }
+			get => _replyText;
 			set {
 				if (_replyText != value) {
 					_replyText = value;

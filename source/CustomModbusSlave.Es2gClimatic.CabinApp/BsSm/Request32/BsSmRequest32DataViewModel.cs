@@ -6,14 +6,14 @@ using AlienJust.Support.Text;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
-	class BsSmRequestDataViewModel : ViewModelBase, ICmdListenerStd, IBsSmDataCommand32Request {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Request32 {
+	class BsSmRequest32DataViewModel : ViewModelBase, ICmdListenerStd, IBsSmRequest32Data {
 		private readonly IThreadNotifier _notifier;
 
-		private IBsSmDataCommand32Request _request;
+		private IBsSmRequest32Data _request;
 		private string _requestText;
 
-		public BsSmRequestDataViewModel(IThreadNotifier notifier) {
+		public BsSmRequest32DataViewModel(IThreadNotifier notifier) {
 			_notifier = notifier;
 		}
 
@@ -22,12 +22,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 			if (code == 0x20 && data.Count == 21) { // request
 				_notifier.Notify(() => {
 					RequestText = data.ToText();
-					Request = new BuilderBsSmDataCommand32RequestFromCommandPartDataBytes(data.Skip(2).Take(data.Count - 4).ToList()).Build();
+					Request = new BsSmRequest32DataBuilderFromCommandPartDataBytes(data.Skip(2).Take(data.Count - 4).ToList()).Build();
 				});
 			}
 		}
 
-		public IBsSmDataCommand32Request Request {
+		public IBsSmRequest32Data Request {
 			get { return _request; }
 			set {
 				if (_request != value) {
@@ -49,7 +49,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
 		}
 
 		public string RequestText {
-			get { return _requestText; }
+			get => _requestText;
 			set {
 				if (_requestText != value) {
 					_requestText = value;

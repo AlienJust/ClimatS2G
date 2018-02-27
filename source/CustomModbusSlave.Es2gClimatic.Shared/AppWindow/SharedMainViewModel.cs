@@ -6,21 +6,16 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
-using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using AlienJust.Support.UserInterface.Contracts;
-using CustomModbus.Slave.FastReply.Contracts;
-using CustomModbus.Slave.FastReply.Queued;
 using CustomModbusSlave.Contracts;
-using CustomModbusSlave.Es2gClimatic.InteriorApp;
 using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using CustomModbusSlave.Es2gClimatic.Shared.Record;
-using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	sealed class SharedMainViewModel : ViewModelBase, IUserInterfaceRoot, ISharedMainViewModel {

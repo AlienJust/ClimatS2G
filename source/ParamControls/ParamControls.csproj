@@ -46,10 +46,16 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\AzureTabItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="ParamBool.cs" />
+    <Compile Include="ParamRawAndConverted.cs" />
     <Compile Include="ParamSimple.cs">
       <SubType>Code</SubType>
     </Compile>

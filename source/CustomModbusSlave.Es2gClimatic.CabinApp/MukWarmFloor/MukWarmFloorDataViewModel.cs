@@ -1,16 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Request16;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
-	internal class MukWarmFloorDataViewModel : ViewModelBase, ICmdListenerStd {
+	internal class MukWarmFloorDataViewModel : ViewModelBase {
 		private readonly IThreadNotifier _notifier;
+		private readonly ICmdListener<IMukWarmFloorReply03Data> _reply03Listener;
+		private readonly ICmdListener<IMukWarmFloorRequest16Data> _request16Listener;
 
 		private string _heatingPwm;
 		private string _analogInput;
@@ -19,58 +23,70 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		private string _outgoingSignals;
 		private string _automaticModeStage;
 		private string _calculatedTemperatureSetting;
-
 		private string _firmwareBuildNumber;
 		private string _reply;
 		private string _diagnostic1;
 		private string _diagnostic2;
-		private IMukWarmFloorRequest16 _request16;
+		private IMukWarmFloorRequest16Data _request16;
+		private IMukWarmFloorReply03Data _reply03;
 
+		public AnyCommandPartViewModel Reply03BytesTextVm { get; set; }
 		public AnyCommandPartViewModel Request16BytesTextVm { get; set; }
+		
 		public MukWarmFloorSetParamsViewModel MukWarmFloorSetParamsVm { get; }
 
-		public MukWarmFloorDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter) {
+		public MukWarmFloorDataViewModel(IThreadNotifier notifier, IParameterSetter parameterSetter, ICmdListener<IMukWarmFloorReply03Data> reply03Listener, ICmdListener<IMukWarmFloorRequest16Data> request16Listener) {
 			_notifier = notifier;
+			_reply03Listener = reply03Listener;
+			_request16Listener = request16Listener;
+
+			Reply03BytesTextVm = new AnyCommandPartViewModel();
 			Request16BytesTextVm = new AnyCommandPartViewModel();
+
 			MukWarmFloorSetParamsVm = new MukWarmFloorSetParamsViewModel(notifier, parameterSetter);
-		}
-		
-		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (addr != 0x05) return;
-			if (code == 0x03 && data.Count == 31) {
-				_notifier.Notify(() => {
-					HeatingPwm = (data[3] * 256.0 + data[4]).ToString("f0");
 
-					AnalogInput = new UshortTextPresenter(data[6], data[5], false).PresentAsText();
-					TemperatureRegulatorWorkMode = new DataDoubleTextPresenter(data[8], data[7], 0.01, 0).PresentAsText();
-
-					IncomingSignals = new ByteTextPresenter(data[10], false).PresentAsText();
-					OutgoingSignals = new ByteTextPresenter(data[12], false).PresentAsText();
-
-					AutomaticModeStage = new UshortTextPresenter(data[14], data[13], false).PresentAsText();
-					CalculatedTemperatureSetting = new DataDoubleTextPresenter(data[16], data[15], 0.01, 2).PresentAsText();
-
-					Diagnostic1 = new UshortTextPresenter(data[18], data[17], true).PresentAsText(); // TODO: show as bits
-					Diagnostic2 = new UshortTextPresenter(data[20], data[19], true).PresentAsText(); // TODO: show as bits
-
-					FirmwareBuildNumber = new DataDoubleTextPresenter(data[22], data[21], 1.0, 0).PresentAsText();
-
-
-					Reply = data.ToText();
-				});
-			}
-			// запрос 0x10 (16 dec):
-			if (code == 0x10 && data.Count == 21) {
-				_notifier.Notify(() => {
-					var request16 = new MukWarmFloorRequest16BuilderFromBytes(data).Build();
-					Request16 = request16;
-					Request16BytesTextVm.Update(data);
-				});
-			}
+			_reply03Listener.DataReceived += Reply03ListenerOnDataReceived;
+			_request16Listener.DataReceived += Request16ListenerOnDataReceived;
 		}
 
-		public IMukWarmFloorRequest16 Request16 {
-			get { return _request16; }
+		private void Reply03ListenerOnDataReceived(IList<byte> bytes, IMukWarmFloorReply03Data data)
+		{
+			//if (code == 0x03 && data.Count == 31) {
+			_notifier.Notify(() =>
+			{
+				Reply03 = data;
+
+				HeatingPwm = (bytes[3] * 256.0 + bytes[4]).ToString("f0");
+
+				AnalogInput = new UshortTextPresenter(bytes[6], bytes[5], false).PresentAsText();
+				TemperatureRegulatorWorkMode = new DataDoubleTextPresenter(bytes[8], bytes[7], 0.01, 0).PresentAsText();
+
+				IncomingSignals = new ByteTextPresenter(bytes[10], false).PresentAsText();
+				OutgoingSignals = new ByteTextPresenter(bytes[12], false).PresentAsText();
+
+				AutomaticModeStage = new UshortTextPresenter(bytes[14], bytes[13], false).PresentAsText();
+				CalculatedTemperatureSetting = new DataDoubleTextPresenter(bytes[16], bytes[15], 0.01, 2).PresentAsText();
+
+				Diagnostic1 = new UshortTextPresenter(bytes[18], bytes[17], true).PresentAsText(); // TODO: show as bits
+				Diagnostic2 = new UshortTextPresenter(bytes[20], bytes[19], true).PresentAsText(); // TODO: show as bits
+
+				FirmwareBuildNumber = new DataDoubleTextPresenter(bytes[22], bytes[21], 1.0, 0).PresentAsText();
+
+				Reply03BytesTextVm.Update(bytes);
+			});
+		}
+
+		private void Request16ListenerOnDataReceived(IList<byte> bytes, IMukWarmFloorRequest16Data data)
+		{
+			_notifier.Notify(() => {
+				var request16 = new MukWarmFloorRequest16BuilderFromBytes(bytes).Build();
+				Request16 = request16;
+				Request16BytesTextVm.Update(bytes);
+			});
+		}
+
+		public IMukWarmFloorRequest16Data Request16 {
+			get => _request16;
 			set {
 				if (_request16 != value) {
 					_request16 = value;
@@ -79,8 +95,18 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 			}
 		}
 
+		public IMukWarmFloorReply03Data Reply03 {
+			get => _reply03;
+			set {
+				if (_reply03 != value) {
+					_reply03 = value;
+					RaisePropertyChanged("Reply03");
+				}
+			}
+		}
+
 		public string HeatingPwm {
-			get { return _heatingPwm; }
+			get => _heatingPwm;
 			set {
 				if (_heatingPwm != value) {
 					_heatingPwm = value;
@@ -91,7 +117,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 
 
 		public string AnalogInput {
-			get { return _analogInput; }
+			get => _analogInput;
 			set {
 				if (_analogInput != value) {
 					_analogInput = value;
@@ -101,7 +127,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		}
 
 		public string TemperatureRegulatorWorkMode {
-			get { return _temperatureRegulatorWorkMode; }
+			get => _temperatureRegulatorWorkMode;
 			set {
 				if (_temperatureRegulatorWorkMode != value) {
 					_temperatureRegulatorWorkMode = value;
@@ -111,7 +137,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		}
 
 		public string IncomingSignals {
-			get { return _incomingSignals; }
+			get => _incomingSignals;
 			set {
 				if (_incomingSignals != value) {
 					_incomingSignals = value;
@@ -121,7 +147,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		}
 
 		public string OutgoingSignals {
-			get { return _outgoingSignals; }
+			get => _outgoingSignals;
 			set {
 				if (_outgoingSignals != value) {
 					_outgoingSignals = value;
@@ -131,7 +157,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		}
 
 		public string AutomaticModeStage {
-			get { return _automaticModeStage; }
+			get => _automaticModeStage;
 			set {
 				if (_automaticModeStage != value) {
 					_automaticModeStage = value;
@@ -141,7 +167,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		}
 
 		public string CalculatedTemperatureSetting {
-			get { return _calculatedTemperatureSetting; }
+			get => _calculatedTemperatureSetting;
 			set {
 				if (_calculatedTemperatureSetting != value) {
 					_calculatedTemperatureSetting = value;
@@ -151,7 +177,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		}
 
 		public string Diagnostic1 {
-			get { return _diagnostic1; }
+			get => _diagnostic1;
 			set {
 				if (_diagnostic1 != value) {
 					_diagnostic1 = value;
@@ -161,7 +187,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		}
 
 		public string Diagnostic2 {
-			get { return _diagnostic2; }
+			get => _diagnostic2;
 			set {
 				if (_diagnostic2 != value) {
 					_diagnostic2 = value;
@@ -171,7 +197,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		}
 
 		public string FirmwareBuildNumber {
-			get { return _firmwareBuildNumber; }
+			get => _firmwareBuildNumber;
 			set {
 				if (_firmwareBuildNumber != value) {
 					_firmwareBuildNumber = value;
@@ -181,7 +207,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 		}
 
 		public string Reply {
-			get { return _reply; }
+			get => _reply;
 			set {
 				if (_reply != value) {
 					_reply = value;

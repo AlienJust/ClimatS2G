@@ -138,11 +138,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BsSm\BsSmReplyDataView.xaml">
+    <Page Include="BsSm\Reply32\BsSmReply32DataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BsSm\BsSmRequestDataView.xaml">
+    <Page Include="BsSm\Request32\BsSmRequestDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,23 +166,25 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BsSm\BsSmDataCommand32ReplyBuilderFromReplyDataBytes.cs" />
-    <Compile Include="BsSm\BsSmDataCommand32ReplySimple.cs" />
-    <Compile Include="BsSm\BsSmDataCommand32RequestSimple.cs" />
+    <Compile Include="BsSm\Reply32\BsSmReply32BuilderFromReplyDataBytes.cs" />
+    <Compile Include="BsSm\Reply32\BsSmReply32DataSimple.cs" />
+    <Compile Include="BsSm\Reply32\CmdListenerBsSmReply32.cs" />
+    <Compile Include="BsSm\Request32\BsSmRequest32DataSimple.cs" />
     <Compile Include="BsSm\BsSmDataView.xaml.cs">
       <DependentUpon>BsSmDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BsSm\BsSmReplyDataView.xaml.cs">
-      <DependentUpon>BsSmReplyDataView.xaml</DependentUpon>
+    <Compile Include="BsSm\Reply32\BsSmReply32DataView.xaml.cs">
+      <DependentUpon>BsSmReply32DataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BsSm\BsSmReplyDataViewModel.cs" />
-    <Compile Include="BsSm\BsSmRequestDataView.xaml.cs">
+    <Compile Include="BsSm\Reply32\BsSmReply32DataViewModel.cs" />
+    <Compile Include="BsSm\Request32\BsSmRequestDataView.xaml.cs">
       <DependentUpon>BsSmRequestDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BsSm\BsSmRequestDataViewModel.cs" />
-    <Compile Include="BsSm\BuilderBsSmDataCommand32RequestFromCommandPartDataBytes.cs" />
-    <Compile Include="BsSm\IBsSmDataCommand32Reply.cs" />
-    <Compile Include="BsSm\IBsSmDataCommand32Request.cs" />
+    <Compile Include="BsSm\Request32\BsSmRequest32DataViewModel.cs" />
+    <Compile Include="BsSm\Request32\BsSmRequest32DataBuilderFromCommandPartDataBytes.cs" />
+    <Compile Include="BsSm\Request32\CmdListenerBsSmRequest32.cs" />
+    <Compile Include="BsSm\Reply32\IBsSmReply32Data.cs" />
+    <Compile Include="BsSm\Request32\IBsSmRequest32Data.cs" />
     <Compile Include="BsSm\IWorkmode1.cs" />
     <Compile Include="Bvs\BvsDataView.xaml.cs">
       <DependentUpon>BvsDataView.xaml</DependentUpon>
@@ -249,9 +251,13 @@
     <Compile Include="MukFlap\Reply03\MukFlapReply03TelemetryView.xaml.cs">
       <DependentUpon>MukFlapReply03TelemetryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MukWarmFloor\Reply03\CmdListenerMukWarmFloorReply03.cs" />
     <Compile Include="MukWarmFloor\Reply03\IMukWarmFloorDiagnostic1.cs" />
     <Compile Include="MukWarmFloor\Reply03\IMukWarmFloorDiagnostic2.cs" />
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorAutomaticModeStage.cs" />
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorAutomaticModeStageFromIntBuilder.cs" />
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorAutomaticModeStageToTextBuilder.cs" />
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorAutomaticModeToStringValueConverter.cs" />
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorDiagnostic1Simple.cs" />
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorDiagnostic2Builder.cs" />
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorDiagnostic2Simple.cs" />
@@ -261,7 +267,8 @@
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03DataView.xaml.cs">
       <DependentUpon>MukWarmFloorReply03DataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MukWarmFloor\Request16\IMukWarmFloorRequest16.cs" />
+    <Compile Include="MukWarmFloor\Request16\CmdListenerMukWarmFloorRequest16.cs" />
+    <Compile Include="MukWarmFloor\Request16\IMukWarmFloorRequest16Data.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataViewModel.cs" />
     <Compile Include="MukWarmFloor\MukWarmFloorDataView.xaml.cs">
       <DependentUpon>MukWarmFloorDataView.xaml</DependentUpon>
@@ -331,7 +338,7 @@
     </Compile>
     <Compile Include="MukWarmFloor\Reply03\IMukWarmFloorReply03Data.cs" />
     <Compile Include="MukWarmFloor\Request16\MukWarmFloorRequest16BuilderFromBytes.cs" />
-    <Compile Include="MukWarmFloor\Request16\MukWarmFloorRequest16Simple.cs" />
+    <Compile Include="MukWarmFloor\Request16\MukWarmFloorRequest16DataSimple.cs" />
     <Compile Include="MukWarmFloor\Request16\MukWarmFloorRequest16View.xaml.cs">
       <DependentUpon>MukWarmFloorRequest16View.xaml</DependentUpon>
     </Compile>

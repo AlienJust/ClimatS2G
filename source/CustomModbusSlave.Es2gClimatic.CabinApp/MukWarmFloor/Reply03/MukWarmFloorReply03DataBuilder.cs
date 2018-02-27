@@ -19,7 +19,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03 {
 				TemperatureRegulatorWorkMode = (data[7] * 256 + data[8]) * 0.01,
 				ByteOfIncomingSignals = data[10],
 				ByteOfOutgoingSignals = data[12],
-				AutomaticModeStage = new RawAndConvertedValues<int, MukWarmFloorAutomaticModeStage>(data[13] * 256 + data[14], new MukWarmFloorAutomaticModeStageBuilder()),
+				AutomaticModeStage = new RawAndConvertedValues<int, MukWarmFloorAutomaticModeStage>(data[13] * 256 + data[14], new MukWarmFloorAutomaticModeStageFromIntBuilder()),
 				CalculatedTemperatureSetting = (data[15] * 256 + data[14]) * 0.01,
 				MukWarmFloorDiagnostic1 = new RawAndConvertedValues<int, IMukWarmFloorDiagnostic1>(data[17] * 256 + data[18], new MukWarmFloorDiagnostic1Builder()),
 				MukWarmFloorDiagnostic2 = new RawAndConvertedValues<int, IMukWarmFloorDiagnostic2>(data[19] * 256 + data[20], new MukWarmFloorDiagnostic2Builder()),
@@ -27,21 +27,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03 {
 			};
 
 
-		}
-	}
-
-	class MukWarmFloorAutomaticModeStageBuilder : IBuilderOneToOne<int, MukWarmFloorAutomaticModeStage> {
-		public MukWarmFloorAutomaticModeStage Build(int source) {
-			switch (source) {
-				case 0:
-					return MukWarmFloorAutomaticModeStage.ControllerInitialization;
-				case 1:
-					return MukWarmFloorAutomaticModeStage.HeatModeIsOff;
-				case 2:
-					return MukWarmFloorAutomaticModeStage.HeatModeIsOn;
-				default:
-					throw new ArgumentOutOfRangeException("Cannot convert " + source + " to " + typeof(MukWarmFloorAutomaticModeStage).FullName + "'s value");
-			}
 		}
 	}
 }

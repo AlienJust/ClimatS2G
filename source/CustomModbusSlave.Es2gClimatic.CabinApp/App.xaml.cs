@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Threading;
 using System.Windows;
-using AlienJust.Adaptation.ConsoleLogger;
-using AlienJust.Adaptation.WindowsPresentation;
-using AlienJust.Support.Loggers;
-using AlienJust.Support.Loggers.Contracts;
-using AlienJust.Support.Text;
-using AlienJust.Support.Text.Contracts;
-using CustomModbus.Slave.FastReply.Contracts;
-using CustomModbus.Slave.FastReply.Queued;
-using CustomModbusSlave.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm;
+using CustomModbusSlave.Es2gClimatic.CabinApp.Bvs;
+using CustomModbusSlave.Es2gClimatic.CabinApp.Ksm;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
@@ -27,7 +21,6 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor;
-using DataAbstractionLevel.Low.PsnConfig;
 using MahApps.Metro;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp {
@@ -49,7 +42,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			base.OnStartup(e);
 		}
 
-		private readonly List<ICmdListenerStd> _listeners = new List<ICmdListenerStd>();
 		private void App_OnStartup(object sender, StartupEventArgs e) {
 			var af = new AppFactory("psn.Микроклимат-ЭС2ГП-кабина.xml");
 			var ab = af.Abilities;
@@ -63,6 +55,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			var cmdListenerMukCondenserFanReply03 = new CmdListenerMukCondenserFanReply03(4, 3, 29);
 			var cmdListenerMukCondenserRequest16 = new CmdListenerMukCondenserFanRequest16(4, 16, 15);
 
+			var cmdListenerMukWarmFloorReply03 = new CmdListenerMukWarmFloorReply03(5, 3, 31);
+			var cmdListenerMukWarmFloorRequest16 = new CmdListenerMukWarmFloorRequest16(5, 16, 21);
+
+			var cmdListenerBsSmRequest32 = new CmdListenerBsSmRequest32(6,32,20);
 			var cmdListenerBvsReply65 = new CmdListenerBvsReply65(0x1E, 65, 7);
 			var cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
 
@@ -75,6 +71,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			ab.CmdNotifierStd.AddListener(cmdListenerMukCondenserFanReply03);
 			ab.CmdNotifierStd.AddListener(cmdListenerMukCondenserRequest16);
 
+			ab.CmdNotifierStd.AddListener(cmdListenerMukWarmFloorReply03);
+			ab.CmdNotifierStd.AddListener(cmdListenerMukWarmFloorRequest16);
+
+			ab.CmdNotifierStd.AddListener(cmdListenerBsSmRequest32);
 			ab.CmdNotifierStd.AddListener(cmdListenerBvsReply65);
 			ab.CmdNotifierStd.AddListener(cmdListenerKsm50Params);
 
@@ -90,7 +90,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК вентилятора испарителя",
 					ShortHeader = "МУК 3",
-					Content = new MukVaporizerFanDataView() { DataContext = new MukVaporizerFanDataViewModelParamcentric(
+					Content = new MukVaporizerFanDataView {
+						DataContext = new MukVaporizerFanDataViewModelParamcentric(
 							mainVm.Notifier, ab.ParamSetter,
 							ab.RtuParamReceiver,
 							cmdListenerMukVaporizerReply03,
@@ -102,7 +103,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК вентилятора конденсатора",
 					ShortHeader = "МУК 4",
-					Content = new MukFridgeFanDataView() {
+					Content = new MukFridgeFanDataView {
 						DataContext = new MukFridgeFanDataViewModel(
 							mainVm.Notifier, ab.ParamSetter,
 							cmdListenerMukCondenserFanReply03,
@@ -116,14 +117,35 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 					ShortHeader = "МУК 5",
 					Content = new MukWarmFloorDataView {
 						DataContext = new MukWarmFloorDataViewModel(
-							mainVm.Notifier, ab.ParamSetter)
-							//cmdListenerMukCondenserFanReply03,
-							//cmdListenerMukCondenserRequest16
-						//)
+							mainVm.Notifier, ab.ParamSetter, cmdListenerMukWarmFloorReply03, cmdListenerMukWarmFloorRequest16)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "БС-СМ",
+					ShortHeader = "БС-СМ",
+					Content = new BsSmDataView {
+						DataContext = new MukWarmFloorDataViewModel(
+							mainVm.Notifier, ab.ParamSetter, cmdListenerMukWarmFloorReply03, cmdListenerMukWarmFloorRequest16)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "БВС",
+					ShortHeader = "БВС",
+					Content = new BvsDataView {
+						DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvsReply65)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "КСМ",
+					ShortHeader = "КСМ",
+					Content = new KsmDataView {
+						DataContext = new KsmDataViewModel(mainVm.Notifier, ab.ParamSetter, cmdListenerKsm50Params)
 					}
 				});
 			});
-			//var appThreadNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
 		}
 	}
 }
