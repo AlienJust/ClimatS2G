@@ -79,7 +79,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 		}
 
 		public bool IsEnabled {
-			get { return _isEnabled; }
+			get => _isEnabled;
 			set {
 				if (_isEnabled != value) {
 					_isEnabled = value;
@@ -94,10 +94,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 		}
 
 		public double? FormattedValue {
-			get {
-				return _formattedValue;
-
-			}
+			get => _formattedValue;
 			set {
 				if (_formattedValue != value) {
 					_formattedValue = value;
@@ -141,7 +138,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
 		}
 
 		public Colors LastOperationColor {
-			get { return _lastOperationColor; }
+			get => _lastOperationColor;
 			set {
 				if (_lastOperationColor != value) {
 					_lastOperationColor = value;

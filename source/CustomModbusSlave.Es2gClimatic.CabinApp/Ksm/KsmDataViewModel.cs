@@ -86,10 +86,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm {
 						new KsmBitParameterViewModel(4, "b.4 - отсылка текущих данных техническому абоненту")
 					})
 				, new KsmReadonlyParamViewModel(18, "Уставка ШИМ на клапан", new TextFormatterSimple("f2", "хз"))
+				, new KsmReadonlyParamViewModel(19, "Ручной принудительный режим", new TextFormatterSimple("f2", "хз"))
 			};
 
-			for (int i = 19; i < 27; ++i) {
-				_parameterVmList.Add(new KsmReadonlyParamViewModel(i, "Параметр " + (i + 1), new TextFormatterSimple("f2", "хз")));
+			for (int i = 20; i < 27; ++i) {
+				_parameterVmList.Add(new KsmReadonlyParamViewModel(i, "Параметр " + i, new TextFormatterSimple("f2", "хз")));
 			}
 			_parameterVmList.Add(new KsmReadonlyParamViewModel(27, "Версия ПО", new TextFormatterDotted("хз")));
 
