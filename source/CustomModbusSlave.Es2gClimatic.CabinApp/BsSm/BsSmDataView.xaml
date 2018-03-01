@@ -9,8 +9,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400">
 	<StackPanel Orientation="Vertical">
+		<TextBlock Text="Запрос команды 0x03:" FontWeight="Bold" TextDecorations="Underline"/>
 		<request32:BsSmRequestDataView DataContext="{Binding Path=BsSmRequest32Data}"/>
 		<shared:AnyCommandPartView DataContext="{Binding Path=BsSmRequest32DataBytes, Mode=OneTime}" />
+		<TextBlock Text="Ответ на команду 0x03:" FontWeight="Bold" TextDecorations="Underline"/>
 		<reply32:BsSmReply32DataView DataContext="{Binding Path=BsSmReply32Data}"/>
 		<shared:AnyCommandPartView DataContext="{Binding Path=BsSmRequest32DataBytes, Mode=OneTime}" />
 	</StackPanel>
