@@ -129,7 +129,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukCondenserFanReply03, _cmdListenerMukCondenserRequest16);
 			_mukWarmFloorDataVm = new MukWarmFloorDataViewModel(_notifier, _paramSetter, cmdListenerMukWarmFloorReply03, cmdListenerMukWarmFloorRequest16);
 
-			_bsSmDataVm = new BsSmDataViewModel(_notifier);
+			//_bsSmDataVm = new BsSmDataViewModel(_notifier);
 			BvsDataVm = new BvsDataViewModel(_notifier, _cmdListenerBvsReply65);
 			KsmDataVm = new KsmDataViewModel(_notifier, _paramSetter, _cmdListenerKsm50Params);
 
@@ -177,7 +177,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			_cmdListenerMukCondenserRequest16.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
 			//_mukWarmFloorDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
-			_bsSmDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
+			//_bsSmDataVm.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 			_cmdListenerBvsReply65.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 
 			_rtuParamReceiver.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);

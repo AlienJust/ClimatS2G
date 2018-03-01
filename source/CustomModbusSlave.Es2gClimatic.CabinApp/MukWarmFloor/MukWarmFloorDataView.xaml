@@ -17,7 +17,8 @@
 			Text="Ответ от МУК на команду КСМ с кодом 03:"
 			FontWeight="Bold" TextDecorations="Underline"  />
 		<reply03:MukWarmFloorReply03View DataContext="{Binding Path=Reply03}"/>
-		
+		<shared:AnyCommandPartView
+			DataContext="{Binding Path=Reply03BytesTextVm, Mode=OneTime}" />
 		<TextBlock
 			Text="Запрос от КСМ, код 16 (dec):"
 			FontWeight="Bold" TextDecorations="Underline"/>

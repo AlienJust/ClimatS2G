@@ -3,12 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:cabinBssm="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.BsSm"
              xmlns:reply32="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32"
+             xmlns:request32="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Request32"
+             xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400">
 	<StackPanel Orientation="Vertical">
-		<cabinBssm:BsSmRequestDataView DataContext="{Binding Path=BsSmRequestDataVm, Mode=OneTime}"/>
-		<reply32:BsSmReply32DataView DataContext="{Binding Path=BsSmReplyDataVm, Mode=OneTime}"/>
+		<request32:BsSmRequestDataView DataContext="{Binding Path=BsSmRequest32Data}"/>
+		<shared:AnyCommandPartView DataContext="{Binding Path=BsSmRequest32DataBytes, Mode=OneTime}" />
+		<reply32:BsSmReply32DataView DataContext="{Binding Path=BsSmReply32Data}"/>
+		<shared:AnyCommandPartView DataContext="{Binding Path=BsSmRequest32DataBytes, Mode=OneTime}" />
 	</StackPanel>
 </UserControl>

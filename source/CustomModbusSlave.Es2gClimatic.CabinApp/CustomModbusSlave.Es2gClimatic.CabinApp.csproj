@@ -176,11 +176,9 @@
     <Compile Include="BsSm\Reply32\BsSmReply32DataView.xaml.cs">
       <DependentUpon>BsSmReply32DataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BsSm\Reply32\BsSmReply32DataViewModel.cs" />
     <Compile Include="BsSm\Request32\BsSmRequestDataView.xaml.cs">
       <DependentUpon>BsSmRequestDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BsSm\Request32\BsSmRequest32DataViewModel.cs" />
     <Compile Include="BsSm\Request32\BsSmRequest32DataBuilderFromCommandPartDataBytes.cs" />
     <Compile Include="BsSm\Request32\CmdListenerBsSmRequest32.cs" />
     <Compile Include="BsSm\Reply32\IBsSmReply32Data.cs" />

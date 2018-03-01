@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm;
+using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32;
+using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Request32;
 using CustomModbusSlave.Es2gClimatic.CabinApp.Bvs;
 using CustomModbusSlave.Es2gClimatic.CabinApp.Ksm;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap;
@@ -58,7 +60,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			var cmdListenerMukWarmFloorReply03 = new CmdListenerMukWarmFloorReply03(5, 3, 31);
 			var cmdListenerMukWarmFloorRequest16 = new CmdListenerMukWarmFloorRequest16(5, 16, 21);
 
-			var cmdListenerBsSmRequest32 = new CmdListenerBsSmRequest32(6,32,20);
+			var cmdListenerBsSmRequest32 = new CmdListenerBsSmRequest32(6,32,21);
+			var cmdListenerBsSmReply32 = new CmdListenerBsSmReply32(6, 32, 20);
+
 			var cmdListenerBvsReply65 = new CmdListenerBvsReply65(0x1E, 65, 7);
 			var cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
 
@@ -75,12 +79,19 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			ab.CmdNotifierStd.AddListener(cmdListenerMukWarmFloorRequest16);
 
 			ab.CmdNotifierStd.AddListener(cmdListenerBsSmRequest32);
+			ab.CmdNotifierStd.AddListener(cmdListenerBsSmReply32);
+
 			ab.CmdNotifierStd.AddListener(cmdListenerBvsReply65);
 			ab.CmdNotifierStd.AddListener(cmdListenerKsm50Params);
 
 
 
 			af.ShowMainWindowInOwnThread("Технический абонент, кабина", ab, mainVm => {
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "Диагностика системы",
+					ShortHeader = "ДС"
+				});
+
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК заслонки",
 					ShortHeader = "МУК 2",
@@ -125,8 +136,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 					FullHeader = "БС-СМ",
 					ShortHeader = "БС-СМ",
 					Content = new BsSmDataView {
-						DataContext = new MukWarmFloorDataViewModel(
-							mainVm.Notifier, ab.ParamSetter, cmdListenerMukWarmFloorReply03, cmdListenerMukWarmFloorRequest16)
+						DataContext = new BsSmDataViewModel(
+							mainVm.Notifier, cmdListenerBsSmRequest32, cmdListenerBsSmReply32)
 					}
 				});
 
