@@ -1,11 +1,13 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
+﻿using System;
+
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
 	internal interface IBsSmReply32Data {
 		// Air conditioner work mode (byte 4):
 		int TargetTemperatureInsideTheCabin { get; }
 		int FanSpeedLevel { get; }
 		bool IsWarmFloorOn { get; }
 
-		uint AstronomicTime { get; }
+		DateTime AstronomicTime { get; }
 		uint DelayedStartTime { get; }
 
 		int TemperatureOutdoor { get; }

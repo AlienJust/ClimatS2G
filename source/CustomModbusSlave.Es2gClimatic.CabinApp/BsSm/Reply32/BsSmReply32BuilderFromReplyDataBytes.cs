@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
 	class BsSmReply32BuilderFromReplyDataBytes : Shared.IBuilder<IBsSmReply32Data> {
@@ -25,7 +26,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
 				targetTemperatureInsideTheCabin,
 				fanSpeedLevel,
 				isWarmFloorOn,
-				astronomicTime,
+				UnixTimeStampToDateTime(astronomicTime),
 				delayedStartTime,
 				temperatureOutdoor,
 				temperatureIndoor,
@@ -34,6 +35,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
 				bsSmState,
 				bsSmVersionNumber
 				);
+		}
+		public static DateTime UnixTimeStampToDateTime(double unixTimeStamp) {
+			// Unix timestamp is seconds past epoch
+			DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+			dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+			return dtDateTime;
 		}
 	}
 }

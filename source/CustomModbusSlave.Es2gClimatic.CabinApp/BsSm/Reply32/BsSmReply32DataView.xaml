@@ -55,7 +55,7 @@
 				Text="Астрономическое время" />
 			<TextBlock
 				Grid.Column="1"
-				Text="{Binding Path=AstronomicTime, Mode=OneWay}" />
+				Text="{Binding Path=AstronomicTime, Mode=OneWay, StringFormat=D, ConverterCulture=ru-RU}" />
 		</Grid>
 		<Grid>
 			<Grid.ColumnDefinitions>
