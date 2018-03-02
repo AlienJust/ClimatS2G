@@ -1,5 +1,5 @@
 ﻿namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm.State {
-	public interface IContract {
+	public interface IBsSmState {
 		bool NoLinkMk1AndMspuD1 { get; }
 		bool NoLinkMk2AndMspuD2 { get; }
 		bool ReliabilityBitFromMspuD1 { get; }

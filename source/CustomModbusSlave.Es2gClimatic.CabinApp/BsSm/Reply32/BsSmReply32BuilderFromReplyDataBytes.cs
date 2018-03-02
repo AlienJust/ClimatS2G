@@ -18,7 +18,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
 			int temperatureIndoor = _replyBytes[13] & 0x0F;
 			var climatMode = new Shared.BsSm.ClimaticSystemWorkModeBuilderFromInt((_replyBytes[13] & 0xF0) >> 4).Build();
 			var wm = new Shared.BsSm.WorkModeReplyBuilderFromByte(_replyBytes[14]).Build();
-			Shared.BsSm.State.IContract bsSmState = new Shared.BsSm.State.BuilderFromByte(_replyBytes[15]).Build();
+			Shared.BsSm.State.IBsSmState bsSmState = new Shared.BsSm.State.BuilderFromByte(_replyBytes[15]).Build();
 			int bsSmVersionNumber = _replyBytes[16];
 
 			return new BsSmReply32DataSimple(

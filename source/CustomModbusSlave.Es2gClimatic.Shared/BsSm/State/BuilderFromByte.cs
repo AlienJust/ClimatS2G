@@ -1,11 +1,11 @@
 ﻿namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm.State {
-	public class BuilderFromByte : IBuilder<IContract> {
+	public class BuilderFromByte : IBuilder<IBsSmState> {
 		private readonly byte _b;
 		public BuilderFromByte(byte b) {
 			_b = b;
 		}
 
-		public IContract Build() {
+		public IBsSmState Build() {
 			bool noLinkMk1AndMspuD1 = (_b & 0x01) == 0x01;
 			bool noLinkMk2AndMspuD2 = (_b & 0x02) == 0x02;
 			bool reliabilityBitFromMspuD1 = (_b & 0x04) == 0x04;

@@ -9,7 +9,7 @@
 	d:DesignHeight="300"
 	d:DesignWidth="300">
 	<UserControl.Resources>
-		<sharedBssm:ClimaticSystemWorkModeToStringThrowableConverter
+		<sharedBssm:ClimaticSystemWorkModeToStringNotThrowableConverterTwoWay
 			x:Key="ClimaticSystemWorkModeConverter" />
 	</UserControl.Resources>
 	<StackPanel>

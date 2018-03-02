@@ -191,7 +191,6 @@
       <DependentUpon>BvsReply65TelemetryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BsSm\BsSmDataViewModel.cs" />
-    <Compile Include="BsSm\NullableShortToNullableDoubleConverter01.cs" />
     <Compile Include="Ksm\KsmDataView.xaml.cs">
       <DependentUpon>KsmDataView.xaml</DependentUpon>
     </Compile>

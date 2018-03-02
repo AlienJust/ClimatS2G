@@ -1,6 +1,9 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts {
+﻿using System;
+using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
+
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts {
 	internal interface IBsSmAndKsm1DataCommand32Reply {
-		uint AstronomicTime { get; }
+		DateTime AstronomicTime { get; }
 		uint DelayedStartTime { get; }
 		int TemperatureOutdoor { get; }
 
@@ -9,10 +12,10 @@
 
 		//byte 14:
 		int TargetTemperatureInterior { get; }
-		int ClimaticSystemWorkmode14D4D7 { get; } // TODO: parse (see cabin app)
+		ClimaticSystemWorkMode ClimaticSystemWorkmode14D4D7 { get; } // TODO: parse (see cabin app)
 
 		//byte 15:
-		Shared.BsSm.IWorkMode WorkModeAndCompressorSwitch { get; }
+		Shared.BsSm.IBsSmWorkMode WorkModeAndCompressorSwitch { get; }
 		
 		int AllowedPowerConsuptionBy380Vline { get; }
 		int Reserve17 { get; }
@@ -25,7 +28,7 @@
 		IBsSmAndKsm1DataCommand32Request Ksm2Request { get; }
 
 
-		Shared.BsSm.State.IContract BsSmState { get; }
+		Shared.BsSm.State.IBsSmState BsSmState { get; }
 		int BsSmVersionNumber { get; }
 
 		int Reserve43 { get; }

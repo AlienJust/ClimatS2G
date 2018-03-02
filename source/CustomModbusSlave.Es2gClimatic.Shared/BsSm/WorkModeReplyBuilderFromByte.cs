@@ -1,12 +1,12 @@
 namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
-	public class WorkModeReplyBuilderFromByte : IBuilder<IWorkMode> {
+	public class WorkModeReplyBuilderFromByte : IBuilder<IBsSmWorkMode> {
 		private readonly byte _absoluteValue;
 
 		public WorkModeReplyBuilderFromByte(byte absoluteValue) {
 			_absoluteValue = absoluteValue;
 		}
 
-		public IWorkMode Build() {
+		public IBsSmWorkMode Build() {
 			return new WorkModeSimple(
 				(_absoluteValue & 0x01) == 0x01, // zb bit 0
 				(_absoluteValue & 0x02) == 0x02, // zb bit 1

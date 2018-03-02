@@ -1,8 +1,8 @@
 ﻿using AlienJust.Support.ModelViewViewModel;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm.State {
-	public class ViewModel : ViewModelBase, IContract, IUpdateable<IContract> {
-		private IContract _contract;
+	public class ViewModel : ViewModelBase, IBsSmState, IUpdateable<IBsSmState> {
+		private IBsSmState _contract;
 
 		public bool NoLinkMk1AndMspuD1 {
 			get {
@@ -60,7 +60,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm.State {
 			}
 		}
 
-		public void Update(IContract updatedValue) {
+		public void Update(IBsSmState updatedValue) {
 			_contract = updatedValue;
 			RaisePropertyChanged(() => NoLinkMk1AndMspuD1);
 			RaisePropertyChanged(() => NoLinkMk2AndMspuD2);

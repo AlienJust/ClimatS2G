@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:bsSm="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm"
              xmlns:state="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+             xmlns:bsSmShared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              mc:Ignorable="d" 
              d:DesignHeight="1050" d:DesignWidth="400">
+	<UserControl.Resources>
+		<bsSmShared:ClimaticSystemWorkModeToStringThrowableConverterTwoWay x:Key="ClimaticSystemWorkModeConverter"/>
+	</UserControl.Resources>
 	<StackPanel Orientation="Vertical">
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -14,7 +18,7 @@
 				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Астрономическое время"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=AstronomicTime, Mode=OneTime}"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=AstronomicTime, Mode=OneTime, StringFormat=D, ConverterCulture=ru-RU}"/>
 		</Grid>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -64,7 +68,7 @@
 				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Режим работы климатической системы"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=ClimaticSystemWorkmode14D4D7, Mode=OneTime}"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=ClimaticSystemWorkmode14D4D7, Mode=OneTime, Converter={StaticResource ClimaticSystemWorkModeConverter}}"/>
 		</Grid>
 		<bsSm:WorkModeReplyView DataContext="{Binding Path=WorkModeAndCompressorSwitch, Mode=OneTime}"/>
 		<Grid>

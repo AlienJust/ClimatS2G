@@ -126,15 +126,16 @@
     <Compile Include="AppWindow\StdNotifier.cs" />
     <Compile Include="AppWindow\TabItemViewModel.cs" />
     <Compile Include="BsSm\Fault\IntegerFaultCodeToTextConverter.cs" />
-    <Compile Include="BsSm\IWorkMode.cs" />
+    <Compile Include="BsSm\IBsSmWorkMode.cs" />
     <Compile Include="BsSm\State\BuilderFromByte.cs" />
     <Compile Include="BsSm\State\Simple.cs" />
     <Compile Include="BsSm\State\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="BsSm\State\ViewModel.cs" />
-    <Compile Include="BsSm\State\IContract.cs" />
-    <Compile Include="BsSm\ClimaticSystemWorkModeToStringThrowableConverter.cs" />
+    <Compile Include="BsSm\State\IBsSmState.cs" />
+    <Compile Include="BsSm\ClimaticSystemWorkModeToStringNotThrowableConverterTwoWay.cs" />
+    <Compile Include="BsSm\ClimaticSystemWorkModeToStringThrowableConverterTwoWay.cs" />
     <Compile Include="BsSm\WorkModeReplyBuilderFromByte.cs" />
     <Compile Include="BsSm\WorkModeSimple.cs" />
     <Compile Include="BsSm\WorkModeView.xaml.cs">

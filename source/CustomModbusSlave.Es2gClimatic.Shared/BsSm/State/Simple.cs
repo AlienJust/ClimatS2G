@@ -1,5 +1,5 @@
 ﻿namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm.State {
-	public class Simple : IContract {
+	public class Simple : IBsSmState {
 		public Simple(bool noLinkMk1AndMspuD1, bool noLinkMk2AndMspuD2, bool reliabilityBitFromMspuD1, bool reliabilityBitFromMspuD2, bool mspuD1ReceiptNumberFail, bool mspuD2ReceiptNumberFail, bool noLinkMk1BySpi, bool reserved) {
 			NoLinkMk1AndMspuD1 = noLinkMk1AndMspuD1;
 			NoLinkMk2AndMspuD2 = noLinkMk2AndMspuD2;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
@@ -17,7 +18,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 			int reserve13D4D7 = (_replyBytes[12] & 0xF0) >> 8;
 
 			int targetTemperatureInsideTheCabin = (_replyBytes[13] & 0x0F) - 2;
-			int climaticSystemWorkmode14D4D7 = (_replyBytes[13] & 0xF0) >> 4;
+			var climaticSystemWorkmode14D4D7 = new Shared.BsSm.ClimaticSystemWorkModeBuilderFromInt((_replyBytes[13] & 0xF0) >> 4).Build();
 
 			var workModeAndCompressorSwitch = new Shared.BsSm.WorkModeReplyBuilderFromByte(_replyBytes[14]).Build();
 
@@ -28,7 +29,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 
 			var ksm2Request = new BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes(_replyBytes.Skip(15).ToList()).Build();
 
-			Shared.BsSm.State.IContract contract = new Shared.BsSm.State.BuilderFromByte(_replyBytes[40]).Build();
+			Shared.BsSm.State.IBsSmState contract = new Shared.BsSm.State.BuilderFromByte(_replyBytes[40]).Build();
 			int bsSmVersionNumber = _replyBytes[41];
 
 			int reserve43 = _replyBytes[42];
@@ -36,7 +37,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 			int reserve45 = _replyBytes[44];
 
 			return new SimpleRelease.BsSmAndKsm1DataCommand32ReplySimple(
-				astronomicTime,
+				UnixTimeStampToDateTime(astronomicTime),
 				delayedStartTime,
 				temperatureOutdoor,
 				carType,
@@ -54,6 +55,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Build {
 				reserve44,
 				reserve45
 				);
+		}
+
+		public static DateTime UnixTimeStampToDateTime(double unixTimeStamp) {
+			// Unix timestamp is seconds past epoch
+			System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+			dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+			return dtDateTime;
 		}
 	}
 }

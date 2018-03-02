@@ -2,7 +2,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 	/// <summary>
 	/// Режим работы
 	/// </summary>
-	public interface IWorkMode {
+	public interface IBsSmWorkMode {
 		bool RelabilityFlag { get; }
 		bool PowerLimitation { get; }
 		bool Station { get; }

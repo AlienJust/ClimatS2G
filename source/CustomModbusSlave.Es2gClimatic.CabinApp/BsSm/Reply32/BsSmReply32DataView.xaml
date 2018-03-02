@@ -10,7 +10,7 @@
 	d:DesignHeight="520"
 	d:DesignWidth="400">
 	<UserControl.Resources>
-		<bsSm:ClimaticSystemWorkModeToStringThrowableConverter
+		<bsSm:ClimaticSystemWorkModeToStringNotThrowableConverterTwoWay
 			x:Key="ClimaticSystemWorkModeConverter" />
 	</UserControl.Resources>
 	<StackPanel

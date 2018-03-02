@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Windows.Data;
-using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm {
+namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 	[ValueConversion(typeof(double), typeof(int))]
-	class ThrowableClimaticSystemWorkModeToStringConverter : IValueConverter {
+	public sealed class ClimaticSystemWorkModeToStringThrowableConverterTwoWay : IValueConverter {
 		#region IValueConverter Members
 
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-			var ns = (ClimaticSystemWorkMode)value; // TODO: might throw exception?
+			if (value != null)
+			{
+				var ns = (ClimaticSystemWorkMode)value; // TODO: might throw exception?
 
-			return ns.ToText();
+				return ns.ToText();
+			}
+
+			throw new NullReferenceException("Expected value type of " + typeof(double).FullName + ", but received null :o");
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {

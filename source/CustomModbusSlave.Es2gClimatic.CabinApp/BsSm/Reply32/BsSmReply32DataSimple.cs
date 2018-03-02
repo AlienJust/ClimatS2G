@@ -1,6 +1,9 @@
+using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
+using CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;
+
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
 	class BsSmReply32DataSimple : IBsSmReply32Data {
-		public BsSmReply32DataSimple(int targetTemperatureInsideTheCabin, int fanSpeedLevel, bool isWarmFloorOn, uint astronomicTime, uint delayedStartTime, int temperatureOutdoor, int temperatureIndoor, Shared.BsSm.ClimaticSystemWorkMode climaticWorkmode, Shared.BsSm.IWorkMode workMode, Shared.BsSm.State.IContract contract, int bsSmVersionNumber) {
+		public BsSmReply32DataSimple(int targetTemperatureInsideTheCabin, int fanSpeedLevel, bool isWarmFloorOn, uint astronomicTime, uint delayedStartTime, int temperatureOutdoor, int temperatureIndoor, Shared.BsSm.ClimaticSystemWorkMode climaticWorkmode, Shared.BsSm.IBsSmWorkMode workMode, Shared.BsSm.State.IBsSmState contract, int bsSmVersionNumber) {
 			TargetTemperatureInsideTheCabin = targetTemperatureInsideTheCabin;
 			FanSpeedLevel = fanSpeedLevel;
 			IsWarmFloorOn = isWarmFloorOn;
@@ -26,11 +29,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32 {
 
 		public int TemperatureOutdoor { get; }
 
-		public Shared.BsSm.State.IContract BsSmState { get; }
+		public IBsSmState BsSmState { get; }
 
 		public int BsSmVersionNumber { get; }
 		public int TemperatureIndoor { get; }
-		public Shared.BsSm.ClimaticSystemWorkMode ClimaticWorkmode { get; }
-		public Shared.BsSm.IWorkMode WorkMode { get; }
+		public ClimaticSystemWorkMode ClimaticWorkmode { get; }
+		public IBsSmWorkMode WorkMode { get; }
 	}
 }
