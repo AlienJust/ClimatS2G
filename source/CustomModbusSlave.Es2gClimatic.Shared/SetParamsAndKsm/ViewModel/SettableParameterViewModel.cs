@@ -10,7 +10,7 @@ using ParamCentric.Modbus.Contracts;
 using ParamCentric.UserInterface.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {
-	public class SettableParameterViewModel : ViewModelBase, IReceivableParameter, IDisplayableParameter<double?>, ISettableByUserParameter<double?>, ISettableBytesPairtParameter {
+	public class SettableParameterViewModel : ViewModelBase, IReceivableParameter, IDisplayableParameter<double?>, ISettableByUserParameter<double?>, ISettableBytesPairParameter {
 		private readonly IDoubleBytesPairConverter _doubleBytesPairConverter;
 		private readonly IParameterSetter _parameterSetter;
 		private readonly IThreadNotifier _uiNotifier;

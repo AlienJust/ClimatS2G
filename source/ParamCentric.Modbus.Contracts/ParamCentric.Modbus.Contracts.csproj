@@ -42,7 +42,7 @@
     <Compile Include="IReceivableParameter.cs" />
     <Compile Include="IReceiverModbusCustom.cs" />
     <Compile Include="IReceiverModbusRtu.cs" />
-    <Compile Include="ISettableBytesPairtParameter.cs" />
+    <Compile Include="ISettableBytesPairParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

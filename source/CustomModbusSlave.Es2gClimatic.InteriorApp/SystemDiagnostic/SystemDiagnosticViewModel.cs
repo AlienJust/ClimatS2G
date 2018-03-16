@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
 using AlienJust.Support.Collections;
@@ -10,7 +9,6 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
@@ -40,7 +38,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private const Colors OkDiagColor = Colors.LimeGreen;
 		private const Colors ErDiagColor = Colors.Red;
 
-
+		private const Colors HiVoltageOnLine = Colors.Red;
+		private const Colors HiVoltageOffLine = Colors.LimeGreen;
 
 		private readonly IThreadNotifier _uiNotifier;
 		private readonly ICmdListener<IMukFlapOuterAirReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
@@ -98,6 +97,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		private string _concentratorInfo;
 		private Colors _concentratorInfoColor;
+
+
+		private Colors _voltage380Color;
+		private Colors _voltage3000Color;
 
 		private string _sensorOuterAirInfo;
 		private Colors _sensorOuterAirInfoColor;
@@ -543,6 +546,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				BsSmFaultVm3.Code = data.Ksm2Request.Fault3;
 				BsSmFaultVm4.Code = data.Ksm2Request.Fault4;
 				BsSmFaultVm5.Code = data.Ksm2Request.Fault5;
+
+				Voltage3000Color = data.WorkModeAndCompressorSwitch.HasVoltage3000V ? HiVoltageOnLine : HiVoltageOffLine;
 			});
 		}
 
@@ -635,11 +640,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				if (data[23].HighFirstUnsignedValue.GetBit(4)) {
 					BsSmInfo = NoLinkText;
 					BsSmInfoColor = NoLinkColor;
+					Voltage3000Color = UnknownColor;
 				}
 
 				if (data[23].HighFirstUnsignedValue.GetBit(5)) {
 					BvsInfo1 = NoLinkText;
 					BvsInfoColor1 = NoLinkColor;
+					Voltage380Color = UnknownColor;
 				}
 				else {
 					BvsInfo1 = OkLinkText;
@@ -701,6 +708,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				AutoVm6.IsOk = data.BvsInput11; // 2.2
 				AutoVm7.IsOk = data.BvsInput12; // 2.3
 				AutoVm8.IsOk = data.BvsInput10; // 2.1
+
+				Voltage380Color = data.BvsInput1 ? HiVoltageOnLine : HiVoltageOffLine;
 			});
 
 		}
@@ -1002,6 +1011,28 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
+		public Colors Voltage380Color {
+			get => _voltage380Color;
+			set {
+				if (_voltage380Color != value) {
+					_voltage380Color = value;
+					RaisePropertyChanged(() => Voltage380Color);
+				}
+			}
+		}
+		public Colors Voltage3000Color {
+			get => _voltage3000Color;
+			set {
+				if (_voltage3000Color != value) {
+					_voltage3000Color = value;
+					RaisePropertyChanged(() => Voltage3000Color);
+				}
+			}
+		}
+
+
+
 
 		public string SensorOuterAirInfo {
 			get => _sensorOuterAirInfo;
@@ -1454,6 +1485,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 			ConcentratorInfo = UnknownText;
 			ConcentratorInfoColor = UnknownColor;
+
+			Voltage380Color = UnknownColor;
+			Voltage3000Color = UnknownColor;
 
 			SensorOuterAirInfo = UnknownText;
 			SensorOuterAirInfoColor = UnknownColor;

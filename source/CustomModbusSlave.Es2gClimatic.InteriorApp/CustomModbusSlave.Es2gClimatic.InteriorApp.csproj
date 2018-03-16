@@ -65,6 +65,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Concurrent.Contracts.dll</HintPath>
     </Reference>
+    <Reference Include="AlienJust.Support.Conversion, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Conversion.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Conversion.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Conversion.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.Identy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Identy.dll</HintPath>

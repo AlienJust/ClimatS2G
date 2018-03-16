@@ -6,6 +6,7 @@
              xmlns:viewModel="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              xmlns:sharedUniversalParamsWpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+             xmlns:wamOrCoolForcedModes="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.Ksm.WamOrCoolForcedModes;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<ScrollViewer>
@@ -23,6 +24,10 @@
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type viewModel:SettableParameterViewModel}">
 						<sharedUniversalParamsWpf:SettableParameterView />
+					</DataTemplate>
+					<DataTemplate
+						DataType="{x:Type wamOrCoolForcedModes:WarmOrCoolForcedModeViewModel}">
+						<sharedUniversalParamsWpf:SettableDropdownParameterView />
 					</DataTemplate>
 				</ListBox.Resources>
 			</ListBox>

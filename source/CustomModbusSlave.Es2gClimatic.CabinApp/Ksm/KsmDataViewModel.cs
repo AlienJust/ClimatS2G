@@ -3,9 +3,12 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
+using AlienJust.Support.Conversion;
+using AlienJust.Support.Conversion.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.Ksm.WamOrCoolForcedModes;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
@@ -109,7 +112,39 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm {
 			_parameterVmList.Add(new SettableParameterViewModel(35, "Вентилятор приточного воздуха, почасовой счетчик работы", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
 			_parameterVmList.Add(new SettableParameterViewModel(36, "Дельта уставки температуры, отладка, ЦМР 0.1 0 = -2.5, 50 = +2.5", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
 
-			for (int i = 37; i < 50; ++i) {
+			var converter = new WarmOrCoolForcedModeToStringConverter();
+			var bpCoverter = new BuilderOneToOneFunc<BytesPair, string>(bp => {
+				try {
+					Console.WriteLine("Need to convert " + bp.HighFirstSignedValue + " to WarmOrCoolForcedMode");
+					return converter.Build((WarmOrCoolForcedMode)bp.HighFirstSignedValue);
+				}
+				catch {
+					Console.WriteLine("Cannot convert value " + bp + " to WarmOrCoolForcedMode");
+					return converter.Build(WarmOrCoolForcedMode.Unknown);
+				}});
+			//bpCoverter.Build(new BytesPair(0, 5));
+			/*_parameterVmList.Add(new Param37ViewModel(37, "Принудительный режим обогрев/охлаждение", null, bpCoverter,
+								new List<IRawAndConvertedValues<BytesPair, string>>
+								{
+									new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(1,0), converter.Build(WarmOrCoolForcedMode.Cool100Percent)),
+									new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(2,0), converter.Build(WarmOrCoolForcedMode.Cool50Percent)),
+									new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(3,0), converter.Build(WarmOrCoolForcedMode.Ventilation)),
+									new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(4,0), converter.Build(WarmOrCoolForcedMode.Warm100Percent)),
+									new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(5,0), converter.Build(WarmOrCoolForcedMode.Warm50Percent))
+								}));*/
+
+			_parameterVmList.Add(new WarmOrCoolForcedModeViewModel(37, "Принудительный режим обогрев/охлаждение", null, bpCoverter,
+				new List<IRawAndConvertedValues<BytesPair, string>>
+				{
+					new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0,0), converter.Build(WarmOrCoolForcedMode.AutomaticMode)),
+					new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0,1), converter.Build(WarmOrCoolForcedMode.Cool100Percent)),
+					new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0,2), converter.Build(WarmOrCoolForcedMode.Cool50Percent)),
+					new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0,3), converter.Build(WarmOrCoolForcedMode.Ventilation)),
+					new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0,4), converter.Build(WarmOrCoolForcedMode.Warm100Percent)),
+					new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0,5), converter.Build(WarmOrCoolForcedMode.Warm50Percent))
+				}, "Режим работы", parameterSetter, _notifier, new BuilderOneToOneFunc<BytesPair, BytesPair>(bp=>bp)));
+
+			for (int i = 38; i < 50; ++i) {
 				_parameterVmList.Add(new SettableParameterViewModel(i, "Параметр", 65535, 0, null, "f0", new DoubleBytesPairConverterSimpleUshort(), parameterSetter, notifier, null));
 			}
 

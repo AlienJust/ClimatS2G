@@ -50,6 +50,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Concurrent.Contracts.dll</HintPath>
     </Reference>
+    <Reference Include="AlienJust.Support.Conversion, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Conversion.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Conversion.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Conversion.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.Identy.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Identy.Contracts.dll</HintPath>
@@ -100,7 +108,10 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.4.3\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -167,6 +178,9 @@
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
     <Compile Include="CmdListenerBase.cs" />
     <Compile Include="IWindowContent.cs" />
+    <Compile Include="Ksm\WamOrCoolForcedModes\WarmOrCoolForcedModeViewModel.cs" />
+    <Compile Include="Ksm\WamOrCoolForcedModes\WarmOrCoolForcedMode.cs" />
+    <Compile Include="Ksm\WamOrCoolForcedModes\WarmOrCoolForcedModeToStringConverter.cs" />
     <Compile Include="ModbusRtuParamReceiver.cs" />
     <Compile Include="MukFanCondenser\Reply03\MukCondensorFanReply03DataSimple.cs" />
     <Compile Include="MukFanCondenser\Reply03\MukFanCondencerReply03View.xaml.cs">
@@ -318,6 +332,7 @@
     <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\BytesPairToTemperatureConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairNullableSomethingConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairSomethingConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\ObjectToStringConverter.cs" />
     <Compile Include="UniversalParams\GroupSimple.cs" />
     <Compile Include="UniversalParams\Wpf\KsmReadonlyBitsParameterView.xaml.cs">
       <DependentUpon>KsmReadonlyBitsParameterView.xaml</DependentUpon>
@@ -334,12 +349,18 @@
     <Compile Include="UniversalParams\Wpf\ParameterViewSimple.xaml.cs">
       <DependentUpon>ParameterViewSimple.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UniversalParams\Wpf\SendableParameterBase.cs" />
+    <Compile Include="UniversalParams\Wpf\SettableDropdownParameterViewModel.cs" />
+    <Compile Include="UniversalParams\Wpf\SettableDropdownParameterView.xaml.cs">
+      <DependentUpon>SettableDropdownParameterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UniversalParams\Wpf\SettableParameterView.xaml.cs">
       <DependentUpon>SettableParameterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UniversalParams\Wpf\SettableTemperatureParameterView.xaml.cs">
       <DependentUpon>SettableTemperatureParameterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UniversalParams\Wpf\ViewableSettableParameterBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="AnyCommandPartView.xaml">
@@ -453,6 +474,10 @@
     <Page Include="UniversalParams\Wpf\KsmReadonlyCommonParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniversalParams\Wpf\SettableDropdownParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UniversalParams\Wpf\SettableParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
