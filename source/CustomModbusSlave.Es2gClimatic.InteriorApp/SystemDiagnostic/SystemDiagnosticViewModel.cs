@@ -165,6 +165,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private Colors _сoncentratorAdvancedColor;
 		private string _concentratorAdvancedInfo;
 
+		private string _calculatedTemperatureSetting;
+
 		public AutoViewModel AutoVm1 { get; }
 		public AutoViewModel AutoVm2 { get; }
 		public AutoViewModel AutoVm3 { get; }
@@ -195,7 +197,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03,
 			ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32,
 			ICmdListener<IList<BytesPair>> cmdListenerKsm,
-			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65, 
+			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65,
 			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65) {
 
 			IsFullVersion = isFullVersion;
@@ -387,6 +389,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					FanEvaporatorColor = OkDiagColor;
 					FanEvaporatorInfo += ", норма";
 				}
+
+				CalculatedTemperatureSetting = data.CalculatedTemperatureSetting.ToString("f2");
 			});
 		}
 
@@ -595,6 +599,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					IsMaster = true;
 					IsSlave = true;
 					SegmentType = UnknownText;
+
+					CalculatedTemperatureSetting = NoLinkText;
 				}
 
 				if (data[22].HighFirstUnsignedValue.GetBit(4)) {
@@ -1031,9 +1037,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 
-
-
-
 		public string SensorOuterAirInfo {
 			get => _sensorOuterAirInfo;
 			set {
@@ -1073,7 +1076,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 
-
 		#region Props Датчик подаваемого воздуха
 		public string SensorSupplyAirInfo {
 			get => _sensorSupplyAirInfo;
@@ -1094,7 +1096,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 		#endregion
-
 
 		public string SensorInteriorAirInfo1 {
 			get => _sensorInteriorAirInfo1;
@@ -1445,6 +1446,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 
+		public string CalculatedTemperatureSetting {
+			get => _calculatedTemperatureSetting;
+			set {
+				if (_calculatedTemperatureSetting != value) {
+					_calculatedTemperatureSetting = value;
+					RaisePropertyChanged(() => CalculatedTemperatureSetting);
+				}
+			}
+		}
+
 		void ResetVmPropsToDefaultValues() {
 			SegmentType = UnknownText;
 			Version = UnknownText;
@@ -1544,6 +1555,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 			ConcentratorAdvancedInfo = UnknownText;
 			ConcentratorAdvancedColor = UnknownColor;
+
+			CalculatedTemperatureSetting = UnknownText;
 
 			IsMaster = true;
 			IsSlave = true;

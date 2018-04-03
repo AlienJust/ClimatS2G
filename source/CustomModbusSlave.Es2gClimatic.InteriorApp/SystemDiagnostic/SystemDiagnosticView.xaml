@@ -339,15 +339,53 @@
 				<ColumnDefinition />
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<StackPanel Orientation="Horizontal">
-				<Ellipse Stroke="Black" Width="30" Height="30" Fill="{Binding Path=Voltage380Color, Mode=OneWay,Converter={StaticResource BrushConverter}}"/>
-				<TextBlock Text="Наличие 380В" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+			<StackPanel
+				Orientation="Horizontal">
+				<Ellipse
+					Stroke="Black"
+					Width="30"
+					Height="30"
+					Fill="{Binding Path=Voltage380Color, Mode=OneWay,Converter={StaticResource BrushConverter}}" />
+				<TextBlock
+					Text="Наличие 380В"
+					FontWeight="Bold"
+					FontSize="14"
+					VerticalAlignment="Center" />
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" Grid.Column="1">
-				<Ellipse Stroke="Black" Width="30" Height="30" Fill="{Binding Path=Voltage3000Color, Mode=OneWay,Converter={StaticResource BrushConverter}}"/>
-				<TextBlock Text="Наличие 3кВ" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+			<StackPanel
+				Orientation="Horizontal"
+				Grid.Column="1">
+				<Ellipse
+					Stroke="Black"
+					Width="30"
+					Height="30"
+					Fill="{Binding Path=Voltage3000Color, Mode=OneWay,Converter={StaticResource BrushConverter}}" />
+				<TextBlock
+					Text="Наличие 3кВ"
+					FontWeight="Bold"
+					FontSize="14"
+					VerticalAlignment="Center" />
 			</StackPanel>
 		</Grid>
+		<StackPanel Orientation="Horizontal" 
+			Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BtwConverter}}">
+			<StackPanel.Background>
+				<LinearGradientBrush
+					StartPoint="0,0"
+					EndPoint="1,0">
+					<GradientStop
+						Offset="1"
+						Color="Transparent" />
+					<GradientStop
+						Offset="0"
+						Color="{Binding Path=MukInfoColor3, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+				</LinearGradientBrush>
+			</StackPanel.Background>
+			<TextBlock
+				Text="Рассчитанная уставка температуры"/>
+			<TextBlock
+				Text="{Binding Path=CalculatedTemperatureSetting, Mode=OneWay}" />
+		</StackPanel>
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
@@ -854,7 +892,9 @@
 			<TextBlock
 				Text="Автоматы:"
 				FontWeight="Bold" />
-			<StackPanel Grid.Row="1" Grid.Column="0">
+			<StackPanel
+				Grid.Row="1"
+				Grid.Column="0">
 				<systemDiagnostic:AutoView
 					DataContext="{Binding Path=AutoVm1, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
@@ -867,7 +907,8 @@
 					DataContext="{Binding Path=AutoVm9, Mode=OneTime}" />
 			</StackPanel>
 			<StackPanel
-				Grid.Row="1" Grid.Column="1">
+				Grid.Row="1"
+				Grid.Column="1">
 				<systemDiagnostic:AutoView
 					DataContext="{Binding Path=AutoVm2, Mode=OneTime}" />
 				<systemDiagnostic:AutoView
@@ -880,8 +921,8 @@
 		</Grid>
 		<StackPanel>
 			<TextBlock
-				Text="Диагностика МПСУиД:" 
-				FontWeight="Bold"/>
+				Text="Диагностика МПСУиД:"
+				FontWeight="Bold" />
 			<systemDiagnostic:BsSmFaultView
 				DataContext="{Binding Path=BsSmFaultVm1, Mode=OneTime}" />
 			<systemDiagnostic:BsSmFaultView
