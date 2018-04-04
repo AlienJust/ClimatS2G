@@ -33,8 +33,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Buil
 
 			var emersonDiagnostic = new EmersonDiagnosticBuilder(_data[26] + _data[25]*256).Build();
 
-			var emersonTemperature = (_data[28] + _data[27] * 256) * 0.01;
-			var emersonPressure = (_data[30] + _data[29] * 256) * 0.01;
+			var emersonTemperature = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[27], _data[28]), 0.01, 0.0, new BytesPair(0x7F, 0xFF));
+			var emersonPressure = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[29], _data[30]), 0.01, 0.0, new BytesPair(0x7F, 0xFF));
+
 			var emersonValveSetting = _data[32] + _data[31] * 256;
 
 

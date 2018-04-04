@@ -134,6 +134,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SystemDiagnostic\AutoView.xaml.cs">
+      <DependentUpon>AutoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SystemDiagnostic\AutoViewModel.cs" />
+    <Compile Include="SystemDiagnostic\BsSmFaultView.xaml.cs">
+      <DependentUpon>BsSmFaultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SystemDiagnostic\BsSmFaultViewModel.cs" />
+    <Compile Include="SystemDiagnostic\SystemDiagnosticView.xaml.cs">
+      <DependentUpon>SystemDiagnosticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SystemDiagnostic\SystemDiagnosticViewModel.cs" />
     <Page Include="BsSm\BsSmDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -324,6 +336,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MukWarmFloor\SetParameters\MukWarmFloorSetParamsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SystemDiagnostic\AutoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SystemDiagnostic\BsSmFaultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SystemDiagnostic\SystemDiagnosticView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

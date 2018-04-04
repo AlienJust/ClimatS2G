@@ -5,7 +5,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.SimpleRelease {
 	class MukFlapReply03Telemetry : IMukFlapAirReply03Telemetry {
-		public MukFlapReply03Telemetry(int flapPosition, ISensorIndication<double> temperatureAddress1, ISensorIndication<double> temperatureAddress2, IIncomingSignals incomingSignals, byte outgoingSignals, double analogInput, IMukFlapWorkmodeStage automaticModeStage, IMukFlapDiagnostic1 diagnostic1, IMukFlapDiagnostic2 diagnostic2, IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1, IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2, IEmersonDiagnostic emersonDiagnostic, double emersonTemperature, double emersonPressure, int emersonValveSetting, int firmwareBuildNumber) {
+		public MukFlapReply03Telemetry(int flapPosition, ISensorIndication<double> temperatureAddress1, ISensorIndication<double> temperatureAddress2, IIncomingSignals incomingSignals, byte outgoingSignals, double analogInput, IMukFlapWorkmodeStage automaticModeStage, IMukFlapDiagnostic1 diagnostic1, IMukFlapDiagnostic2 diagnostic2, IMukFlapDiagnosticOneWireSensor diagnostic3OneWire1, IMukFlapDiagnosticOneWireSensor diagnostic4OneWire2, IEmersonDiagnostic emersonDiagnostic, ISensorIndication<double> emersonTemperature, ISensorIndication<double> emersonPressure, int emersonValveSetting, int firmwareBuildNumber) {
 			FlapPosition = flapPosition;
 			TemperatureAddress1 = temperatureAddress1;
 			TemperatureAddress2 = temperatureAddress2;
@@ -36,8 +36,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Simp
 		public IMukFlapDiagnosticOneWireSensor Diagnostic3OneWire1 { get; }
 		public IMukFlapDiagnosticOneWireSensor Diagnostic4OneWire2 { get; }
 		public IEmersonDiagnostic EmersonDiagnostic { get; }
-		public double EmersonTemperature { get; }
-		public double EmersonPressure { get; }
+		public ISensorIndication<double> EmersonTemperature { get; }
+		public ISensorIndication<double> EmersonPressure { get; }
 		public int EmersonValveSetting { get; }
 		public int FirmwareBuildNumber { get; }
 	}
