@@ -126,9 +126,14 @@
     <Compile Include="AnyCommandPartViewModel.cs" />
     <Compile Include="AppWindow\AppFactory.cs" />
     <Compile Include="AppWindow\AppVersion.cs" />
+    <Compile Include="AppWindow\ComPortControlView.xaml.cs">
+      <DependentUpon>ComPortControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppWindow\ComPortControlViewModel.cs" />
     <Compile Include="AppWindow\ISharedAppAbilities.cs" />
     <Compile Include="AppWindow\ISharedMainViewModel.cs" />
     <Compile Include="AppWindow\IStdNotifier.cs" />
+    <Compile Include="AppWindow\SerialChannelWithTimeoutMonitorAndSendReplyAbility.cs" />
     <Compile Include="AppWindow\SharedAppAbilities.cs" />
     <Compile Include="AppWindow\SharedMainView.xaml.cs">
       <DependentUpon>SharedMainView.xaml</DependentUpon>
@@ -364,6 +369,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="AnyCommandPartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppWindow\ComPortControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

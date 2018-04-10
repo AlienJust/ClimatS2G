@@ -12,12 +12,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
+namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	/// <summary>
-	/// Interaction logic for BsSmFaultView.xaml
+	/// Interaction logic for ComPortControlView.xaml
 	/// </summary>
-	public partial class BsSmFaultView : UserControl {
-		public BsSmFaultView() {
+	public partial class ComPortControlView : UserControl {
+		public ComPortControlView() {
 			InitializeComponent();
 		}
 	}

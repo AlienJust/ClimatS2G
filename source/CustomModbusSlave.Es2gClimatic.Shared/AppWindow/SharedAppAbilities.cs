@@ -1,38 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using AlienJust.Adaptation.ConsoleLogger;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.Text;
 using AlienJust.Support.Text.Contracts;
-using CustomModbus.Slave.FastReply.Contracts;
-using CustomModbus.Slave.FastReply.Queued;
-using CustomModbusSlave.Contracts;
-using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
 using DataAbstractionLevel.Low.PsnConfig;
+using DataAbstractionLevel.Low.PsnConfig.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	public sealed class SharedAppAbilities : ISharedAppAbilities {
 		private const string NoStackInfoText = "[NO STACK INFO]";
 		private const string LogSeporator = " > ";
-		private readonly List<ICmdListenerStd> _cmdListeners;
-
-
-		public string TestPortName => "ТЕСТ";
-
-		public SerialChannel SerialChannel { get; }
-
-		public CommandHearedTimerNotThreadSafe CommandHearedTimeoutMonitor { get; }
-		public IStdNotifier CmdNotifierStd { get; }
-
 		public AppVersion Version { get; }
-		public IFastReplyGenerator ReplyGenerator { get; }
-		public IFastReplyAcceptor ReplyAcceptor { get; }
-		public IParameterSetter ParamSetter { get; }
-		public ModbusRtuParamReceiver RtuParamReceiver { get; }
 		public RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
+
+		private readonly IPsnProtocolConfiguration _psnConfig;
+		private readonly Dictionary<string, SerialChannelWithTimeoutMonitorAndSendReplyAbility> _channels;
+		public string TestPortName => "ТЕСТ";
+		public IStdNotifier CmdNotifierStd { get; }
+	
+		public ModbusRtuParamReceiver RtuParamReceiver { get; }
 
 		public SharedAppAbilities(string psnProtocolFileName) {
 			var isFullVersion = File.Exists("FullVersion.txt");
@@ -75,38 +64,37 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 				logConsoleYellow, logConsoleDarkCyan, logConsoleDarkCyan, logConsoleCyan, logConsoleGreen,
 				logConsoleWhite);
 
-			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, psnProtocolFileName)).LoadConfiguration();
-			Console.WriteLine("PSN config loaded: " + psnConfig.Information.Description);
+			_psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, psnProtocolFileName)).LoadConfiguration();
+			Console.WriteLine("PSN config loaded: " + _psnConfig.Information.Description);
 			//var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest(File.ReadAllText("CabinIoSample.txt").Split(' ').Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToList()));
 
-			SerialChannel = new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(psnConfig), logConsoleYellow);
-			Console.WriteLine("Serial channel created");
-
-			var replyGenerator = new ReplyGeneratorWithQueueAttempted();
-			ReplyGenerator = replyGenerator;
-			ReplyAcceptor = replyGenerator;
-			ParamSetter = replyGenerator;
-
+			//SerialChannel = new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(_psnConfig), logConsoleYellow);
+			//Console.WriteLine("Serial channel created");
+			
 			RtuParamReceiver = new ModbusRtuParamReceiver();
 
-			SerialChannel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
-
-			CommandHearedTimeoutMonitor = new CommandHearedTimerNotThreadSafe(SerialChannel, TimeSpan.FromSeconds(1));
-			CommandHearedTimeoutMonitor.Start();
-
-			CmdNotifierStd = new StdNotifier(SerialChannel);
+			CmdNotifierStd = new StdNotifier();
 			CmdNotifierStd.AddListener(RtuParamReceiver);
+			_channels = new Dictionary<string, SerialChannelWithTimeoutMonitorAndSendReplyAbility>();
 		}
 
+		public SerialChannelWithTimeoutMonitorAndSendReplyAbility CreateChannel(string channelName) {
+			var serialChannel = new SerialChannelWithTimeoutMonitorAndSendReplyAbility(new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(_psnConfig), DebugLogger.GetLogger(3));)
+			_channels.Add(channelName,serialChannel );
+			CmdNotifierStd.AddSerialChannel(serialChannel.Channel);
 
+			Console.WriteLine("Serial channel created, with timeout monitor and sending reply abbility, blackjack and hookers");
+			return serialChannel;
+		}
 
-		private void SerialChannelOnCommandHearedWithReplyPossibility(ICommandPart commandPart, ISendAbility sendability) {
-			if (commandPart.Address == 20) {
-				if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8) {
-					ReplyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray()); // TODO: bad performance (.ToArray())
-					var reply = ReplyGenerator.GenerateReply();
-					sendability.Send(reply);
-				}
+		public void DestroyChannel(string channelName) {
+			if (_channels.ContainsKey(channelName))
+			{
+				var channel = _channels[channelName];
+				_channels.Remove(channelName);
+				CmdNotifierStd.RemoveSerialChannel(channel.Channel);
+				channel.BecameUnused();
+				Console.WriteLine("Serial channel destroyed");
 			}
 		}
 	}

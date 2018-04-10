@@ -1,7 +1,4 @@
-﻿using System;
-using AlienJust.Support.Loggers;
-using CustomModbus.Slave.FastReply.Contracts;
-using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
+﻿using AlienJust.Support.Loggers;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	/// <summary>
@@ -9,21 +6,17 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	/// </summary>
 	public interface ISharedAppAbilities {
 		AppVersion Version { get; }
-
-		IFastReplyGenerator ReplyGenerator { get; }
-		IFastReplyAcceptor ReplyAcceptor { get; }
-		IParameterSetter ParamSetter { get; }
-
-		ModbusRtuParamReceiver RtuParamReceiver { get; }
 		string TestPortName { get; }
 		RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
-
-		SerialChannel SerialChannel { get; }
-		CommandHearedTimerNotThreadSafe CommandHearedTimeoutMonitor { get; }
+		
+		SerialChannelWithTimeoutMonitorAndSendReplyAbility CreateChannel(string channelName);
+		void DestroyChannel(string channelName);
 
 		/// <summary>
 		/// To notify std listeners
 		/// </summary>
 		IStdNotifier CmdNotifierStd { get; }
+
+		ModbusRtuParamReceiver RtuParamReceiver { get; }
 	}
 }

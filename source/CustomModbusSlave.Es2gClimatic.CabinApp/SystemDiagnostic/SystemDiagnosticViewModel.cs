@@ -407,7 +407,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 		}
 
 		/// <summary>
-		/// МУК вытяжного вентилятора, MODBUS адрес = 6
+		/// Contactor control module for warm floor, MODBUS address = 5
 		/// </summary>
 		/// <param name="bytes"></param>
 		/// <param name="data"></param>
@@ -491,9 +491,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 
 				// КСМ, бит "Нет связи с МУК заслонки рециркуляционого воздуха" взведен
 				if (data[23].HighFirstUnsignedValue.GetBit(0)) {
-					MukInfo7 = NoLinkText;
-					MukInfoColor7 = NoLinkColor;
-
 					FlapAirRecycleDiagInfo5Color = NoLinkColor;
 					FlapAirRecycleDiagInfo5 = NoLinkText;
 
@@ -506,9 +503,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 
 				// КСМ, бит "Нет связи с МУК заслонки лето-зима" взведен
 				if (data[23].HighFirstUnsignedValue.GetBit(2)) {
-					MukInfo8 = NoLinkText;
-					MukInfoColor8 = NoLinkColor;
-
 					FlapAirWinterSummerDiagInfo5Color = NoLinkColor;
 					FlapAirWinterSummerDiagInfo5 = NoLinkText;
 
@@ -530,15 +524,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 				else {
 					BvsInfo1 = OkLinkText;
 					BvsInfoColor1 = OkLinkColor;
-				}
-
-				if (data[23].HighFirstUnsignedValue.GetBit(6)) {
-					BvsInfo2 = NoLinkText;
-					BvsInfoColor2 = NoLinkColor;
-				}
-				else {
-					BvsInfo2 = OkLinkText;
-					BvsInfoColor2 = OkLinkColor;
 				}
 
 				var oneWireSensor1 = new SensorIndicationDoubleBasedOnBytesPair(data[0], 0.01, 0.0, new BytesPair(0x85, 0x00));
@@ -731,47 +716,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 			}
 		}
 
-
-		public string MukInfo7 {
-			get => _mukInfo7;
-			set {
-				if (_mukInfo7 != value) {
-					_mukInfo7 = value;
-					RaisePropertyChanged(() => MukInfo7);
-				}
-			}
-		}
-		public Colors MukInfoColor7 {
-			get => _mukInfoColor7;
-			set {
-				if (_mukInfoColor7 != value) {
-					_mukInfoColor7 = value;
-					RaisePropertyChanged(() => MukInfoColor7);
-				}
-			}
-		}
-
-
-		public string MukInfo8 {
-			get => _mukInfo8;
-			set {
-				if (_mukInfo8 != value) {
-					_mukInfo8 = value;
-					RaisePropertyChanged(() => MukInfo8);
-				}
-			}
-		}
-		public Colors MukInfoColor8 {
-			get => _mukInfoColor8;
-			set {
-				if (_mukInfoColor8 != value) {
-					_mukInfoColor8 = value;
-					RaisePropertyChanged(() => MukInfoColor8);
-				}
-			}
-		}
-
-
 		public string BsSmInfo {
 			get => _bsSmInfo;
 			set {
@@ -807,26 +751,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 				if (_bvsInfoColor1 != value) {
 					_bvsInfoColor1 = value;
 					RaisePropertyChanged(() => BvsInfoColor1);
-				}
-			}
-		}
-
-
-		public string BvsInfo2 {
-			get => _bvsInfo2;
-			set {
-				if (_bvsInfo2 != value) {
-					_bvsInfo2 = value;
-					RaisePropertyChanged(() => BvsInfo2);
-				}
-			}
-		}
-		public Colors BvsInfoColor2 {
-			get => _bvsInfoColor2;
-			set {
-				if (_bvsInfoColor2 != value) {
-					_bvsInfoColor2 = value;
-					RaisePropertyChanged(() => BvsInfoColor2);
 				}
 			}
 		}
@@ -1346,20 +1270,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 			MukInfo6 = UnknownText;
 			MukInfoColor6 = UnknownColor;
 
-			MukInfo7 = UnknownText;
-			MukInfoColor7 = UnknownColor;
-
-			MukInfo8 = UnknownText;
-			MukInfoColor8 = UnknownColor;
-
 			BsSmInfo = UnknownText;
 			BsSmInfoColor = UnknownColor;
 
 			BvsInfo1 = UnknownText;
 			BvsInfoColor1 = UnknownColor;
-
-			BvsInfo2 = UnknownText;
-			BvsInfoColor2 = UnknownColor;
 
 			EmersonInfo = UnknownText;
 			EmersonInfoColor = UnknownColor;

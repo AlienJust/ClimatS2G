@@ -7,6 +7,7 @@
 	xmlns:progamLog="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.ProgamLog"
 	xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 	xmlns:record="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.Record"
+	xmlns:appWindow="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.AppWindow"
 	Title="{Binding Path=WindowTitle, Mode=OneWay}"
 	TitleCharacterCasing="Normal"
 	Height="480"
@@ -95,44 +96,14 @@
 	</controls:MetroWindow.LeftWindowCommands>
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
-			<record:RecordView
-				DataContext="{Binding Path=RecordVm, Mode=OneTime}" />
-			<StackPanel
-				Orientation="Horizontal">
-				<TextBlock
-					Margin="2,2,2,2"
-					Text="Порт:"
-					VerticalAlignment="Center" />
-				<ComboBox
-					Margin="2,2,2,2"
-					ItemsSource="{Binding ComPortsAvailable}"
-					SelectedItem="{Binding SelectedComName}" />
-				<Button
-					Margin="2,2,2,2"
-					Command="{Binding GetPortsAvailableCommand}"
-					FontWeight="SemiBold"
-					BorderThickness="0"
-					Style="{DynamicResource AccentedSquareButtonStyle}">
-					<iconPacks:PackIconMaterial
-						Width="Auto"
-						Height="Auto"
-						Kind="Refresh" />
-				</Button>
-			</StackPanel>
-			<Button
-				Margin="2,2,2,2"
-				Command="{Binding Path=OpenPortCommand, Mode=OneTime}"
-				Content="Подкл."
-				Visibility="{Binding Path=IsPortOpened, Mode=OneWay, Converter={StaticResource InvertedBtwConverter}}"
-				BorderThickness="0"
-				Style="{DynamicResource AccentedSquareButtonStyle}" />
-			<Button
-				Margin="2,2,2,2"
-				Command="{Binding Path=ClosePortCommand, Mode=OneTime}"
-				Content="Откл."
-				Visibility="{Binding Path=IsPortOpened, Mode=OneWay, Converter={StaticResource BtvConverter}}"
-				BorderThickness="0"
-				Style="{DynamicResource AccentedSquareButtonStyle}" />
+			<ListView
+				ItemsSource="{Binding Path=ComPortVms, Mode=OneTime}">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<appWindow:ComPortControlView/>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
 		</controls:WindowCommands>
 	</controls:MetroWindow.RightWindowCommands>
 	<Grid>
@@ -190,4 +161,6 @@
 		</Border>
 	</Grid>
 </controls:MetroWindow>
+
+
 

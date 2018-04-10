@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using CustomModbusSlave.Contracts;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
-{
+namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	internal sealed class StdNotifier : IStdNotifier {
 		private readonly List<ICmdListenerStd> _listeners;
 		private readonly object _listenersSyncObj;
-		public StdNotifier(SerialChannel channel) {
+
+		private readonly object _channelsSyncObj;
+		private readonly List<SerialChannel> _channels;
+
+		public StdNotifier() {
 			_listenersSyncObj = new object();
 			_listeners = new List<ICmdListenerStd>();
 
-			channel.CommandHeared += ChannelOnCommandHeared;
+			_channelsSyncObj = new object();
+			_channels = new List<SerialChannel>();
 		}
 
 		private void ChannelOnCommandHeared(ICommandPart commandPart) {
@@ -25,6 +29,22 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 		public void AddListener(ICmdListenerStd listener) {
 			lock (_listenersSyncObj) {
 				_listeners.Add(listener);
+			}
+		}
+
+		public void AddSerialChannel(SerialChannel channel) {
+			lock (_channelsSyncObj) {
+				_channels.Add(channel);
+				channel.CommandHeared += ChannelOnCommandHeared;
+			}
+		}
+
+		public void RemoveChannel(SerialChannel channel) {
+			lock (_channelsSyncObj) {
+				if (_channels.Contains(channel)) {
+					_channels.Remove(channel);
+					channel.CommandHeared -= ChannelOnCommandHeared; // TODO: maybe subscribe and unsubscribe event in own thread?
+				}
 			}
 		}
 	}

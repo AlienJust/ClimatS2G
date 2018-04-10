@@ -159,7 +159,7 @@ namespace CustomModbusSlave {
 
 			_logger.Log(result, null);
 			lock (_dontStopSync)
-				_dontStop = true;
+				_dontStop = false;
 		}
 	}
 }

@@ -84,6 +84,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 			ab.CmdNotifierStd.AddListener(cmdListenerBvsReply65);
 			ab.CmdNotifierStd.AddListener(cmdListenerKsm50Params);
 
+			ab.Cr
 
 
 			af.ShowMainWindowInOwnThread("Технический абонент, кабина", ab, mainVm => {
