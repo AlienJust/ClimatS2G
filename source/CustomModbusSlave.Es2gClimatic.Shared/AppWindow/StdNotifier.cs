@@ -39,7 +39,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			}
 		}
 
-		public void RemoveChannel(SerialChannel channel) {
+		public void RemoveSerialChannel(SerialChannel channel) {
 			lock (_channelsSyncObj) {
 				if (_channels.Contains(channel)) {
 					_channels.Remove(channel);

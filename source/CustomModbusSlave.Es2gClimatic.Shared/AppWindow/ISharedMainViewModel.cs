@@ -10,5 +10,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 		IWindowSystem WindowsSystem { get; }
 		ILogger Logger { get; }
 		void AddTab(TabItemViewModel tabVm);
+		ComPortControlViewModel AddChannel(string channelName);
 	}
 }

@@ -20,7 +20,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		private readonly Dictionary<string, SerialChannelWithTimeoutMonitorAndSendReplyAbility> _channels;
 		public string TestPortName => "ТЕСТ";
 		public IStdNotifier CmdNotifierStd { get; }
-	
+
 		public ModbusRtuParamReceiver RtuParamReceiver { get; }
 
 		public SharedAppAbilities(string psnProtocolFileName) {
@@ -70,7 +70,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 			//SerialChannel = new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(_psnConfig), logConsoleYellow);
 			//Console.WriteLine("Serial channel created");
-			
+
 			RtuParamReceiver = new ModbusRtuParamReceiver();
 
 			CmdNotifierStd = new StdNotifier();
@@ -79,8 +79,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		}
 
 		public SerialChannelWithTimeoutMonitorAndSendReplyAbility CreateChannel(string channelName) {
-			var serialChannel = new SerialChannelWithTimeoutMonitorAndSendReplyAbility(new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(_psnConfig), DebugLogger.GetLogger(3));)
-			_channels.Add(channelName,serialChannel );
+			var serialChannel = new SerialChannelWithTimeoutMonitorAndSendReplyAbility(new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(_psnConfig), DebugLogger.GetLogger(3)));
+			_channels.Add(channelName, serialChannel);
 			CmdNotifierStd.AddSerialChannel(serialChannel.Channel);
 
 			Console.WriteLine("Serial channel created, with timeout monitor and sending reply abbility, blackjack and hookers");
@@ -88,8 +88,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		}
 
 		public void DestroyChannel(string channelName) {
-			if (_channels.ContainsKey(channelName))
-			{
+			if (_channels.ContainsKey(channelName)) {
 				var channel = _channels[channelName];
 				_channels.Remove(channelName);
 				CmdNotifierStd.RemoveSerialChannel(channel.Channel);

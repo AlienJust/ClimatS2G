@@ -4,18 +4,16 @@ using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
-using System.Text;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.UserInterface.Contracts;
 using CustomModbusSlave.Contracts;
-using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
 using CustomModbusSlave.Es2gClimatic.Shared.Record;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
-	class ComPortControlViewModel : ViewModelBase
+	public sealed class ComPortControlViewModel : ViewModelBase
 	{
 		private readonly ISharedAppAbilities _appAbilities;
 		private readonly ILogger _logger;
@@ -36,7 +34,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		//private readonly CommandHearedTimerNotThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
 
-		public ComPortControlViewModel(ISharedAppAbilities appAbilities, ILogger logger, IThreadNotifier notifier, IWindowSystem windowSystem)
+		public ComPortControlViewModel(ISharedAppAbilities appAbilities, ILogger logger, IThreadNotifier notifier, IWindowSystem windowSystem, string channelName)
 		{
 			_appAbilities = appAbilities;
 			_logger = logger;
@@ -47,7 +45,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			GetPortsAvailableCommand = new RelayCommand(GetPortsAvailable);
 			RecordVm = new RecordViewModel(_notifier, _windowSystem);
 
-			_channel = _appAbilities.CreateChannel("anyname"); // TODO: namification
+			_channel = _appAbilities.CreateChannel(channelName);
 			_channel.Channel.CommandHeared += SerialChannelOnCommandHeared;
 			_channel.Channel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_channel.TimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
@@ -95,7 +93,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		}
 
 		private void ClosePort() {
-			_channel.ChannelCloseCurrentPortAsync(ex => _notifier.Notify(() => {
+			_channel.Channel.CloseCurrentPortAsync(ex => _notifier.Notify(() => {
 				if (ex == null) {
 					IsPortOpened = false;
 					_logger.Log("Порт " + _selectedComName + " закрыт");
@@ -169,5 +167,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 		public RelayCommand OpenPortCommand => _openPortCommand;
 		public RelayCommand ClosePortCommand => _closePortCommand;
+
+		public SerialChannelWithTimeoutMonitorAndSendReplyAbility Channel => _channel;
 	}
 }

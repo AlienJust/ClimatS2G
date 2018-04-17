@@ -24,7 +24,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		public ObservableCollection<TabItemViewModel> Tabs { get; }
 		public ObservableCollection<ComPortControlViewModel> ComPortControlVms { get; }
 
-		public SharedMainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, string windowTitle, ISharedAppAbilities appAbilities, List<string> channelNames) {
+		public SharedMainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, string windowTitle, ISharedAppAbilities appAbilities) {
 			_notifier = notifier;
 			_windowSystem = windowSystem;
 			_appAbilities = appAbilities;
@@ -34,9 +34,22 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
 			Tabs = new ObservableCollection<TabItemViewModel>();
 			ComPortControlVms = new ObservableCollection<ComPortControlViewModel>();
-			ComPortControlVms.Add(new ComPortControlViewModel(_appAbilities, _logger, _notifier, _windowSystem));
+			//ComPortControlVms.Add(new ComPortControlViewModel(_appAbilities, _logger, _notifier, _windowSystem));
 
 			_logger.Log("Программа загружена");
+		}
+
+		public ComPortControlViewModel AddChannel(string channelName)
+		{
+			//var channel = _appAbilities.CreateChannel(channelName); 
+			var result = new ComPortControlViewModel(_appAbilities, _logger, _notifier, _windowSystem, channelName);
+			ComPortControlVms.Add(result);
+			return result;
+		}
+
+		public void RemoveChannel(string channelName)
+		{
+			// TODO:
 		}
 
 		public void AddTab(TabItemViewModel tabVm) {

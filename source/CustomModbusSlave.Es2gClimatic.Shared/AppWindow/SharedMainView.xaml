@@ -6,7 +6,6 @@
 	xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
 	xmlns:progamLog="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.ProgamLog"
 	xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-	xmlns:record="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.Record"
 	xmlns:appWindow="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.AppWindow"
 	Title="{Binding Path=WindowTitle, Mode=OneWay}"
 	TitleCharacterCasing="Normal"
@@ -96,7 +95,7 @@
 	</controls:MetroWindow.LeftWindowCommands>
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
-			<ListView
+			<ListView Height="30" Width="200"
 				ItemsSource="{Binding Path=ComPortVms, Mode=OneTime}">
 				<ListView.ItemTemplate>
 					<DataTemplate>

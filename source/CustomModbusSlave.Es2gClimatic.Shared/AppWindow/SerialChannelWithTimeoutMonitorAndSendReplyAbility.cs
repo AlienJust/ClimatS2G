@@ -7,7 +7,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
-	public class SerialChannelWithTimeoutMonitorAndSendReplyAbility
+	public sealed class SerialChannelWithTimeoutMonitorAndSendReplyAbility
 	{
 		public SerialChannel Channel { get; }
 		public CommandHearedTimerNotThreadSafe TimeoutMonitor { get; }
