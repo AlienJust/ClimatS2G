@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
-using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Build;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.SetParameters;

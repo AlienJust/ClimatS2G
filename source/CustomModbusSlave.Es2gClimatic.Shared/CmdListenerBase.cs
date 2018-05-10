@@ -1,20 +1,20 @@
 using System.Collections.Generic;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared {
-	public abstract class CmdListenerBase<T> : IStdCheckableCmdListener, ICmdListener<T>, ICmdListenerStd {
-		private readonly byte _addrToCheck;
-		private readonly byte _codeToCheck;
-		private readonly int _length;
+	public abstract class CmdListenerBase<T> : IStdCheckableCmdListener, ICmdListener<T> {
+		public byte AddrToCheck { get; }
+		public byte CodeToCheck { get; }
+		public int Length { get; }
 
 		protected CmdListenerBase(byte addrToCheck, byte codeToCheck, int length) {
-			_addrToCheck = addrToCheck;
-			_codeToCheck = codeToCheck;
-			_length = length;
+			AddrToCheck = addrToCheck;
+			CodeToCheck = codeToCheck;
+			Length = length;
 		}
 		public event DataReceivedDelegate<T> DataReceived;
 
 		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
-			if (addr == _addrToCheck && code == _codeToCheck && _length == data.Count) {
+			if (addr == AddrToCheck && code == CodeToCheck && Length == data.Count) {
 				OnDataReceived(data, BuildData(data));
 			}
 		}
@@ -24,9 +24,5 @@ namespace CustomModbusSlave.Es2gClimatic.Shared {
 		protected virtual void OnDataReceived(IList<byte> bytes, T data) {
 			DataReceived?.Invoke(bytes, data);
 		}
-
-		public byte AddrToCheck => _addrToCheck;
-		public byte CodeToCheck => _codeToCheck;
-		public int Length => _length;
 	}
 }

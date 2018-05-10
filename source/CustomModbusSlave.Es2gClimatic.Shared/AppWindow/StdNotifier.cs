@@ -20,6 +20,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 		private void ChannelOnCommandHeared(ICommandPart commandPart) {
 			lock (_listenersSyncObj) {
+				//Console.WriteLine("Подслушана команда " + commandPart.CommandCode);
 				foreach (var cmdListenerStd in _listeners) {
 					cmdListenerStd.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes);
 				}
@@ -36,6 +37,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			lock (_channelsSyncObj) {
 				_channels.Add(channel);
 				channel.CommandHeared += ChannelOnCommandHeared;
+
+				Console.WriteLine("Канал зарегистрирован, итого каналов в списке: " + _channels.Count);
 			}
 		}
 

@@ -51,7 +51,7 @@
 		</Button>
 		<TextBlock
 			Text="{Binding Path=RecordsCount, Mode=OneWay}"
-			VerticalAlignment="Center">
+			VerticalAlignment="Center" Foreground="White">
 			<TextBlock.ToolTip>
 				Число записанных команд
 			</TextBlock.ToolTip>

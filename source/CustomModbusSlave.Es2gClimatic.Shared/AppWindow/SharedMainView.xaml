@@ -20,7 +20,8 @@
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="pack://application:,,,/ParamControls;component/Styles/AzureTabItem.xaml"/>
+				<ResourceDictionary
+					Source="pack://application:,,,/ParamControls;component/Styles/AzureTabItem.xaml" />
 				<!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
 				<!--<ResourceDictionary
 					Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
@@ -95,14 +96,23 @@
 	</controls:MetroWindow.LeftWindowCommands>
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
-			<ListView Height="30" Width="200"
-				ItemsSource="{Binding Path=ComPortVms, Mode=OneTime}">
-				<ListView.ItemTemplate>
+			<ListBox
+				Background="Transparent"
+				ItemsSource="{Binding Path=ComPortControlVms, Mode=OneTime}"
+				ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+				ScrollViewer.VerticalScrollBarVisibility="Disabled">
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel
+							IsItemsHost="True" />
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
+				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<appWindow:ComPortControlView/>
+						<appWindow:ComPortControlView />
 					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
+				</ListBox.ItemTemplate>
+			</ListBox>
 		</controls:WindowCommands>
 	</controls:MetroWindow.RightWindowCommands>
 	<Grid>
@@ -114,26 +124,29 @@
 			<RowDefinition
 				Height="Auto" />
 		</Grid.RowDefinitions>
-		<TabControl 
+		<TabControl
 			ItemContainerStyle="{StaticResource AzureTabItem}"
 			Grid.Row="0"
-			TabStripPlacement="Left" ItemsSource="{Binding Path=Tabs}">
+			TabStripPlacement="Left"
+			ItemsSource="{Binding Path=Tabs}">
 			<TabControl.ItemTemplate>
 				<DataTemplate>
-					<StackPanel Orientation="Horizontal">
+					<StackPanel
+						Orientation="Horizontal">
 						<TextBlock
-						Text="{Binding Path=ShortHeader, Mode=OneTime}"
-						Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+							Text="{Binding Path=ShortHeader, Mode=OneTime}"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
 						<TextBlock
-						Text="{Binding Path=FullHeader, Mode=OneTime}"
-						Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
+							Text="{Binding Path=FullHeader, Mode=OneTime}"
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
 					</StackPanel>
 				</DataTemplate>
 			</TabControl.ItemTemplate>
 			<TabControl.ContentTemplate>
 				<DataTemplate>
 					<ScrollViewer>
-						<ContentPresenter Content="{Binding Path=Content, Mode=OneTime}" />
+						<ContentPresenter
+							Content="{Binding Path=Content, Mode=OneTime}" />
 					</ScrollViewer>
 				</DataTemplate>
 			</TabControl.ContentTemplate>

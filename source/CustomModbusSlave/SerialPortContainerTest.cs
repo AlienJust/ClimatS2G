@@ -94,7 +94,7 @@ namespace CustomModbusSlave {
 		}
 
 		public void Close() {
-			//if (!_isOpen) throw new Exception("Port allready closed");
+			//if (!_isOpen) throw new Exception("Port already closed");
 			_isOpen = false;
 		}
 

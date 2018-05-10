@@ -49,7 +49,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 		public void RemoveChannel(string channelName)
 		{
-			// TODO:
+			// TODO: when closing app, also call IStdNotifier.RemoveChannel()
 		}
 
 		public void AddTab(TabItemViewModel tabVm) {

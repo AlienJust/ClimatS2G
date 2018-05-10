@@ -82,7 +82,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			var serialChannel = new SerialChannelWithTimeoutMonitorAndSendReplyAbility(new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(_psnConfig), DebugLogger.GetLogger(3)));
 			_channels.Add(channelName, serialChannel);
 			CmdNotifierStd.AddSerialChannel(serialChannel.Channel);
-
 			Console.WriteLine("Serial channel created, with timeout monitor and sending reply abbility, blackjack and hookers");
 			return serialChannel;
 		}
