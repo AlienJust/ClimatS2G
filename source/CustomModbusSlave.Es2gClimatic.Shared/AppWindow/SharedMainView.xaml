@@ -45,8 +45,6 @@
 				InvertVisibility="True" />
 			<converters:ColorsEnumToBrushConverter
 				x:Key="ColorsEnumToBrushConverter" />
-			<converters:ColorsEnumToColorConverter
-				x:Key="ColorsEnumToColorConverter" />
 
 			<DataTemplate
 				x:Key="MenuItemTemplate"
