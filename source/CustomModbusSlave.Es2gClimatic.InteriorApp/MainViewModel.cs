@@ -67,7 +67,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 		private readonly RelayCommand _openPortCommand;
 		private readonly RelayCommand _closePortCommand;
-		public RelayCommand GetPortsAvailableCommand { get; }
+
+		private readonly RelayCommand _getPortsAvailableCommand;
 
 		private readonly ProgramLogViewModel _programLogVm;
 		private readonly ILogger _logger;
@@ -143,7 +144,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 			_openPortCommand = new RelayCommand(OpenPort, () => !_isPortOpened);
 			_closePortCommand = new RelayCommand(ClosePort, () => _isPortOpened);
-			GetPortsAvailableCommand = new RelayCommand(GetPortsAvailable);
+			_getPortsAvailableCommand = new RelayCommand(GetPortsAvailable);
 
 			_programLogVm = new ProgramLogViewModel(this);
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
@@ -215,7 +216,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 				_rtuParamReceiver,
 				_cmdListenerMukVaporizerReply03,
 				_cmdListenerMukVaporizerRequest16
-				);
+			);
 
 			MukFridgeFanDataVm = new MukFridgeFanDataViewModel(_notifier, _paramSetter, _cmdListenerMukCondenserFanReply03, _cmdListenerMukCondenserRequest16);
 			MukAirExhausterDataVm = new MukAirExhausterDataViewModel(_notifier, _paramSetter, _cmdListenerMukAirExhausterReply03, _cmdListenerMukAirExhausterRequest16);
@@ -262,6 +263,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					var reply = _replyGenerator.GenerateReply();
 					sendAbility.Send(reply);
 				}
+
 				_cmdListenerKsmParams.ReceiveCommand(commandPart.Address, commandPart.CommandCode, commandPart.ReplyBytes); // TODO: or move it to SerialChannelOnCommandHeared
 			}
 		}
@@ -301,7 +303,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 		}
 
 		private void GetPortsAvailable() {
-			var ports = new List<string> { _testPortName };
+			var ports = new List<string> {_testPortName};
 			ports.AddRange(SerialPort.GetPortNames());
 			ComPortsAvailable = ports;
 			if (ComPortsAvailable.Count > 0) SelectedComName = ComPortsAvailable[0];
@@ -333,7 +335,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					Console.WriteLine(parts[i]);
 					valuesFromFile.Add(byte.Parse(parts[i], NumberStyles.HexNumber));
 				}*/
-				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] { " ", Environment.NewLine, "\t", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
+				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] {" ", Environment.NewLine, "\t", "\n", "\r"}, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
 			}
 			else {
 				portContainer = new SerialPortContainerReal(_selectedComName, 57600);
@@ -351,7 +353,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 				}
 			}));
 		}
-
 
 
 		public List<string> ComPortsAvailable {
@@ -404,8 +405,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			}
 		}
 
-		public RelayCommand OpenPortCommand => _openPortCommand;
-		public RelayCommand ClosePortCommand => _closePortCommand;
+		public ICommand GetPortsAvailableCommand => _getPortsAvailableCommand;
+		public ICommand OpenPortCommand => _openPortCommand;
+		public ICommand ClosePortCommand => _closePortCommand;
+
 		public ProgramLogViewModel ProgramLogVm => _programLogVm;
 		public IThreadNotifier Notifier => _notifier;
 	}

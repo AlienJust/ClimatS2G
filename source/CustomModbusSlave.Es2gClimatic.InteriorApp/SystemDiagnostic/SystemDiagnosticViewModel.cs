@@ -28,6 +28,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private const Colors UnknownColor = Colors.Yellow;
 		private const Colors NoLinkColor = Colors.Red;
 		private const Colors NoSensorColor = Colors.Red;
+		
+		//private const Colors IsHiVoltageColor = Colors.Red;
+		//private const Colors NoOrUnknownHighVoltage = Colors.Yellow;
 
 		private const Colors OkLinkColor = Colors.LimeGreen;
 		private const Colors OkSensorColor = Colors.LimeGreen;
@@ -39,7 +42,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private const Colors ErDiagColor = Colors.Red;
 
 		private const Colors HiVoltageOnLine = Colors.Red;
-		private const Colors HiVoltageOffLine = Colors.LimeGreen;
+		private const Colors HiVoltageOffLine = Colors.Yellow;
+		private const Colors HiVoltageUnknownColor = Colors.Yellow;
+		private const string HiVoltageOnLineText = "Есть!";
+		private const string HiVoltageOffLineText = "Нет";
+		private const string HiVoltageUnknownText = "ХЗ!";
 
 		private readonly IThreadNotifier _uiNotifier;
 		private readonly ICmdListener<IMukFlapOuterAirReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
@@ -101,6 +108,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		private Colors _voltage380Color;
 		private Colors _voltage3000Color;
+		private string _voltage380Text;
+		private string _voltage3000Text;
 
 		private string _sensorOuterAirInfo;
 		private Colors _sensorOuterAirInfoColor;
@@ -551,7 +560,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				BsSmFaultVm4.Code = data.Ksm2Request.Fault4;
 				BsSmFaultVm5.Code = data.Ksm2Request.Fault5;
 
-				Voltage3000Color = data.WorkModeAndCompressorSwitch.HasVoltage3000V ? HiVoltageOnLine : HiVoltageOffLine;
+				//Voltage3000Color = data.WorkModeAndCompressorSwitch.HasVoltage3000V ? HiVoltageOnLine : HiVoltageOffLine;
+				
+				if (data.WorkModeAndCompressorSwitch.HasVoltage3000V) {
+					Voltage3000Color = HiVoltageOnLine;
+					Voltage3000Text = HiVoltageOnLineText;
+				}
+				else {
+					Voltage3000Color = HiVoltageOffLine;
+					Voltage3000Text = HiVoltageOffLineText;
+				}
 			});
 		}
 
@@ -646,13 +664,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				if (data[23].HighFirstUnsignedValue.GetBit(4)) {
 					BsSmInfo = NoLinkText;
 					BsSmInfoColor = NoLinkColor;
-					Voltage3000Color = UnknownColor;
+					Voltage3000Color = HiVoltageUnknownColor;
+					Voltage3000Text = HiVoltageUnknownText;
 				}
 
 				if (data[23].HighFirstUnsignedValue.GetBit(5)) {
 					BvsInfo1 = NoLinkText;
 					BvsInfoColor1 = NoLinkColor;
-					Voltage380Color = UnknownColor;
+					Voltage380Color = HiVoltageUnknownColor;
+					Voltage380Text = HiVoltageUnknownText;
 				}
 				else {
 					BvsInfo1 = OkLinkText;
@@ -715,7 +735,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				AutoVm7.IsOk = data.BvsInput12; // 2.3
 				AutoVm8.IsOk = data.BvsInput10; // 2.1
 
-				Voltage380Color = data.BvsInput1 ? HiVoltageOnLine : HiVoltageOffLine;
+				if (data.BvsInput1) {
+					Voltage380Color = HiVoltageOnLine;
+					Voltage380Text = HiVoltageOnLineText;
+				}
+				else {
+					Voltage380Color = HiVoltageOffLine;
+					Voltage380Text = HiVoltageOffLineText;
+				}
 			});
 
 		}
@@ -1036,6 +1063,26 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+		
+		public string Voltage380Text {
+			get => _voltage380Text;
+			set {
+				if (_voltage380Text != value) {
+					_voltage380Text = value;
+					RaisePropertyChanged(() => Voltage380Text);
+				}
+			}
+		}
+		public string Voltage3000Text {
+			get => _voltage3000Text;
+			set {
+				if (_voltage3000Text != value) {
+					_voltage3000Text = value;
+					RaisePropertyChanged(() => Voltage3000Text);
+				}
+			}
+		}
+		
 
 		public string SensorOuterAirInfo {
 			get => _sensorOuterAirInfo;
@@ -1497,8 +1544,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			ConcentratorInfo = UnknownText;
 			ConcentratorInfoColor = UnknownColor;
 
-			Voltage380Color = UnknownColor;
-			Voltage3000Color = UnknownColor;
+			Voltage380Color = HiVoltageUnknownColor;
+			Voltage3000Color = HiVoltageUnknownColor;
+			Voltage380Text = HiVoltageUnknownText;
+			Voltage3000Text = HiVoltageUnknownText;
 
 			SensorOuterAirInfo = UnknownText;
 			SensorOuterAirInfoColor = UnknownColor;
