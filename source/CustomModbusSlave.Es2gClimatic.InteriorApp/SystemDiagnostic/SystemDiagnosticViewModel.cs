@@ -21,6 +21,12 @@ using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 	class SystemDiagnosticViewModel : ViewModelBase {
 		private const string UnknownText = "Неизвестно";
+		private const string UnknownTextShort = "X3";
+
+		private const string AutoSwitchAndContactorIsOkText = "V";
+		private const string AutoSwitchAndContactorIsErText = "X";
+		private const string AutoSwitchAndContactorIsX3Text = "X";
+
 		private const string NoLinkText = "Нет связи";
 		private const string OkLinkText = "Есть связь";
 		private const string NoSensorText = "Обрыв";
@@ -29,9 +35,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private const Colors NoLinkColor = Colors.Red;
 		private const Colors NoSensorColor = Colors.Red;
 		
-		//private const Colors IsHiVoltageColor = Colors.Red;
-		//private const Colors NoOrUnknownHighVoltage = Colors.Yellow;
-
 		private const Colors OkLinkColor = Colors.LimeGreen;
 		private const Colors OkSensorColor = Colors.LimeGreen;
 
@@ -175,13 +178,18 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private string _concentratorAdvancedInfo;
 
 		private string _calculatedTemperatureSetting;
+		private string _contactorOfCompressor1Value;
+		private string _contactorOfCompressor2Value;
+		private string _contactorOfHeater380Value;
+		private string _heater380Pwm;
+		private string _heater3KPwm;
 
 		public AutoViewModel AutoVm1 { get; }
 		public AutoViewModel AutoVm2 { get; }
 		public AutoViewModel AutoVm3 { get; }
-		public AutoViewModel AutoVm4 { get; }
-		public AutoViewModel AutoVm5 { get; }
-		public AutoViewModel AutoVm6 { get; }
+		public AutoViewModel AutoVmCompressor1 { get; }
+		public AutoViewModel AutoVmCompressor2 { get; }
+		public AutoViewModel AutoVmHeater380 { get; }
 		public AutoViewModel AutoVm7 { get; }
 		public AutoViewModel AutoVm8 { get; }
 		public AutoViewModel AutoVm9 { get; }
@@ -239,15 +247,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_cmdListenerBvs2Reply65.DataReceived += CmdListenerBvs2Reply65OnDataReceived;
 
 			ResetVmPropsToDefaultValues();
-			AutoVm1 = new AutoViewModel("Автоматический выключатель приточного вентилятора 1");
-			AutoVm2 = new AutoViewModel("Автоматический выключатель приточного вентилятора 2");
-			AutoVm3 = new AutoViewModel("Автоматический выключатель вытяжных вентиляторов");
-			AutoVm4 = new AutoViewModel("Автоматический выключатель Компрессора 1");
-			AutoVm5 = new AutoViewModel("Автоматический выключатель Компрессора 2");
-			AutoVm6 = new AutoViewModel("Автоматический выключатель нагревателя 380");
-			AutoVm7 = new AutoViewModel("Автоматический выключатель рециркуляционных нагревателей");
-			AutoVm8 = new AutoViewModel("Автоматический выключатель вентилятора конденсатора");
-			AutoVm9 = new AutoViewModel("Автоматический выключатель обеззораживателя");
+			AutoVm1 = new AutoViewModel("Автомат приточного вентилятора 1");
+			AutoVm2 = new AutoViewModel("Автомат приточного вентилятора 2");
+			AutoVm3 = new AutoViewModel("Автомат вытяжных вентиляторов");
+			AutoVmCompressor1 = new AutoViewModel("Автомат компрессора 1");
+			AutoVmCompressor2 = new AutoViewModel("Автомат компрессора 2");
+			AutoVmHeater380 = new AutoViewModel("Автомат калорифера 380");
+			AutoVm7 = new AutoViewModel("Автомат рециркуляционных нагревателей");
+			AutoVm8 = new AutoViewModel("Автомат вентилятора конденсатора");
+			AutoVm9 = new AutoViewModel("Автомат обеззараживателя");
 
 			BsSmFaultVm1 = new BsSmFaultViewModel();
 			BsSmFaultVm2 = new BsSmFaultViewModel();
@@ -399,6 +407,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					FanEvaporatorInfo += ", норма";
 				}
 
+				Heater380Pwm = data.HeatingPwm.ToString();
+				Heater3KPwm = data.HeatingPwm.ToString();
+
 				CalculatedTemperatureSetting = data.CalculatedTemperatureSetting.ToString("f2");
 			});
 		}
@@ -515,7 +526,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					ConcentratorAdvancedInfo = "Норма";
 					ConcentratorAdvancedColor = OkDiagColor;
 				}
-				ConcentratorAdvancedInfo += ", " + data.ConcentratorVoltage + "В";
+				if (IsHalfOrFullVersion) ConcentratorAdvancedInfo += ", " + data.ConcentratorVoltage + "В";
 			});
 		}
 
@@ -614,6 +625,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 					FanEvaporatorInfo = NoLinkText;
 
+					Heater380Pwm = NoLinkText;
+					Heater3KPwm = NoLinkText;
+
 					IsMaster = true;
 					IsSlave = true;
 					SegmentType = UnknownText;
@@ -673,15 +687,20 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					BvsInfoColor1 = NoLinkColor;
 					Voltage380Color = HiVoltageUnknownColor;
 					Voltage380Text = HiVoltageUnknownText;
+
+					ContactorOfCompressor1Value = AutoSwitchAndContactorIsErText;
+					ContactorOfHeater380Value = AutoSwitchAndContactorIsErText;
 				}
 				else {
 					BvsInfo1 = OkLinkText;
 					BvsInfoColor1 = OkLinkColor;
+					
 				}
 
 				if (data[23].HighFirstUnsignedValue.GetBit(6)) {
 					BvsInfo2 = NoLinkText;
 					BvsInfoColor2 = NoLinkColor;
+					ContactorOfCompressor2Value = AutoSwitchAndContactorIsErText;
 				}
 				else {
 					BvsInfo2 = OkLinkText;
@@ -730,8 +749,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private void CmdListenerBvs1Reply65OnDataReceived(IList<byte> bytes, IBvsReply65Telemetry data) {
 			_uiNotifier.Notify(() => {
 				AutoVm1.IsOk = data.BvsInput13; // 2.4
-				AutoVm4.IsOk = data.BvsInput9; // 2.0
-				AutoVm6.IsOk = data.BvsInput11; // 2.2
+				AutoVmCompressor1.IsOk = data.BvsInput9; // 2.0
+				AutoVmHeater380.IsOk = data.BvsInput11; // 2.2
 				AutoVm7.IsOk = data.BvsInput12; // 2.3
 				AutoVm8.IsOk = data.BvsInput10; // 2.1
 
@@ -743,6 +762,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					Voltage380Color = HiVoltageOffLine;
 					Voltage380Text = HiVoltageOffLineText;
 				}
+
+				ContactorOfCompressor1Value = data.BvsInput6 ? AutoSwitchAndContactorIsOkText : AutoSwitchAndContactorIsErText;
+				ContactorOfHeater380Value = data.BvsInput7 ? AutoSwitchAndContactorIsOkText : AutoSwitchAndContactorIsErText;
 			});
 
 		}
@@ -751,8 +773,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_uiNotifier.Notify(() => {
 				AutoVm2.IsOk = data.BvsInput13; // 2.4
 				AutoVm3.IsOk = data.BvsInput10; // 2.1
-				AutoVm5.IsOk = data.BvsInput9; // 2.0
+				AutoVmCompressor2.IsOk = data.BvsInput9; // 2.0
 				AutoVm9.IsOk = data.BvsInput7; // 1.6
+
+				ContactorOfCompressor2Value = data.BvsInput6 ? AutoSwitchAndContactorIsOkText : AutoSwitchAndContactorIsErText;
 			});
 		}
 
@@ -1503,6 +1527,36 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			}
 		}
 
+
+
+		public string ContactorOfCompressor1Value {
+			get => _contactorOfCompressor1Value;
+			set => SetProp(() => _contactorOfCompressor1Value != value, () => _contactorOfCompressor1Value = value, () => ContactorOfCompressor1Value);
+		}
+
+		public string ContactorOfCompressor2Value {
+			get => _contactorOfCompressor2Value;
+			set => SetProp(() => _contactorOfCompressor2Value != value, () => _contactorOfCompressor2Value = value, () => ContactorOfCompressor2Value);
+		}
+
+		public string ContactorOfHeater380Value {
+			get => _contactorOfHeater380Value;
+			set => SetProp(() => _contactorOfHeater380Value != value, () => _contactorOfHeater380Value = value, () => ContactorOfHeater380Value);
+		}
+
+		public string Heater380Pwm
+		{
+			get => _heater380Pwm;
+			set => SetProp(()=>_heater380Pwm != value, ()=>_heater380Pwm = value, ()=>Heater380Pwm);
+		}
+
+		public string Heater3KPwm
+		{
+			get => _heater3KPwm;
+			set => SetProp(() => _heater3KPwm != value, () => _heater3KPwm = value, () => Heater3KPwm);
+		}
+
+
 		void ResetVmPropsToDefaultValues() {
 			SegmentType = UnknownText;
 			Version = UnknownText;
@@ -1606,6 +1660,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			ConcentratorAdvancedColor = UnknownColor;
 
 			CalculatedTemperatureSetting = UnknownText;
+
+			ContactorOfCompressor1Value = AutoSwitchAndContactorIsX3Text;
+			ContactorOfCompressor2Value = AutoSwitchAndContactorIsX3Text;
+			ContactorOfHeater380Value = AutoSwitchAndContactorIsX3Text;
+
+			Heater380Pwm = UnknownText;
+			Heater3KPwm = UnknownText;
 
 			IsMaster = true;
 			IsSlave = true;

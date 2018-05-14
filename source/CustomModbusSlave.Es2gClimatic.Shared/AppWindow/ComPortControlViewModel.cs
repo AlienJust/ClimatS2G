@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Windows.Input;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers.Contracts;
@@ -23,7 +24,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		public RecordViewModel RecordVm { get; }
 		private readonly RelayCommand _openPortCommand;
 		private readonly RelayCommand _closePortCommand;
-		public RelayCommand GetPortsAvailableCommand { get; }
+		public ICommand GetPortsAvailableCommand { get; }
 
 		private bool _isPortOpened;
 
@@ -51,7 +52,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			_channel.TimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
 			_channel.TimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
 
-			_logger.Log("Программа загружена");
+			GetPortsAvailable();
+
+			_logger.Log("Канал обмена добавлен");
 		}
 
 		private void OpenPort() {
@@ -165,8 +168,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			}
 		}
 
-		public RelayCommand OpenPortCommand => _openPortCommand;
-		public RelayCommand ClosePortCommand => _closePortCommand;
+		public ICommand OpenPortCommand => _openPortCommand;
+		public ICommand ClosePortCommand => _closePortCommand;
 
 		public SerialChannelWithTimeoutMonitorAndSendReplyAbility Channel => _channel;
 	}

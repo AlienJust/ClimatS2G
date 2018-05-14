@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ParamControls
 {
@@ -30,6 +31,56 @@ namespace ParamControls
 		public string Value {
 			get => (string)GetValue(ValueProperty);
 			set => SetValue(ValueProperty, value);
+		}
+
+
+		public static DependencyProperty ValueForegroundProperty =
+			DependencyProperty.Register(
+				"ValueForeground"
+				, typeof(Brush)
+				, typeof(ParamSimple));
+		//, new FrameworkPropertyMetadata(FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+		public Brush ValueForeground {
+			get => (Brush)GetValue(ValueForegroundProperty);
+			set => SetValue(ValueForegroundProperty, value);
+		}
+
+		public static DependencyProperty ValueFontWeightProperty =
+			DependencyProperty.Register(
+				"ValueFontWeight"
+				, typeof(FontWeight)
+				, typeof(ParamSimple));
+		//, new FrameworkPropertyMetadata(FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+		public FontWeight ValueFontWeight {
+			get => (FontWeight)GetValue(ValueFontWeightProperty);
+			set => SetValue(ValueForegroundProperty, value);
+		}
+
+
+		public static DependencyProperty ValueColumnWidthProperty =
+			DependencyProperty.Register(
+				"ValueColumnWidth"
+				, typeof(GridLength)
+				, typeof(ParamSimple));
+		//, new FrameworkPropertyMetadata(FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+		public GridLength ValueColumnWidth {
+			get => (GridLength)GetValue(ValueColumnWidthProperty);
+			set => SetValue(ValueColumnWidthProperty, value);
+		}
+
+		public static DependencyProperty TextColumnWidthProperty =
+			DependencyProperty.Register(
+				"TextColumnWidth"
+				, typeof(GridLength)
+				, typeof(ParamSimple));
+		//, new FrameworkPropertyMetadata(FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+		public GridLength TextColumnWidth {
+			get => (GridLength)GetValue(TextColumnWidthProperty);
+			set => SetValue(TextColumnWidthProperty, value);
 		}
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
@@ -55,7 +53,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		public void AddTab(TabItemViewModel tabVm) {
 			//TabControlVm.Tabs.Add(tabVm);
 			Tabs.Add(tabVm);
-			Console.WriteLine("Tab added");
+			//Console.WriteLine("Tab added");
 		}
 
 		public bool TabHeadersAreLong {
