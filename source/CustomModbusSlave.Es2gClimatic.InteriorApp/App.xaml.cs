@@ -110,13 +110,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					}
 				});
 
+				if (appAbilities.Version == AppVersion.Full)
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК заслонки наружного воздуха",
 					ShortHeader = "МУК 2",
 					Content = new MukFlapDataView { DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapOuterAirReply03, cmdListenerMukFlapOuterAirRequest16) }
 				});
 
-				mainVm.AddTab(new TabItemViewModel {
+				if (appAbilities.Version == AppVersion.Full)
+					mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК вентилятора испарителя",
 					ShortHeader = "МУК 3",
 					Content = new MukVaporizerFanDataView {
@@ -129,7 +131,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					}
 				});
 
-				mainVm.AddTab(new TabItemViewModel {
+				if (appAbilities.Version == AppVersion.Full)
+					mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК вентилятора конденсатора",
 					ShortHeader = "МУК 4",
 					Content = new MukFridgeFanDataView {
@@ -141,7 +144,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					}
 				});
 
-				mainVm.AddTab(new TabItemViewModel {
+				if (appAbilities.Version == AppVersion.Full)
+					mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК вытяжного вентилятора пола",
 					ShortHeader = "МУК 6",
 					Content = new AirExhausterDataView {
@@ -149,7 +153,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					}
 				});
 
-				mainVm.AddTab(new TabItemViewModel {
+				if (appAbilities.Version == AppVersion.Full)
+					mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК заслонки рециркуляц. воздуха",
 					ShortHeader = "МУК 7",
 					Content = new MukFlapReturnAirDataView {
@@ -157,7 +162,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					}
 				});
 
-				mainVm.AddTab(new TabItemViewModel {
+				if (appAbilities.Version == AppVersion.Full)
+					mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК заслонки лето зима",
 					ShortHeader = "МУК 8",
 					Content = new MukFlapWinterSummerDataView {
@@ -165,7 +171,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					}
 				});
 
-				mainVm.AddTab(new TabItemViewModel {
+				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)
+					mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "БС-СМ",
 					ShortHeader = "БС-СМ",
 					Content = new BsSmDataView {
@@ -174,7 +181,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					}
 				});
 
-				mainVm.AddTab(new TabItemViewModel {
+				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)
+					mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "БВС1",
 					ShortHeader = "БВС1",
 					Content = new BvsDataView {
@@ -182,7 +190,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					}
 				});
 
-				mainVm.AddTab(new TabItemViewModel {
+				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)
+					mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "БВС2",
 					ShortHeader = "БВС2",
 					Content = new BvsDataView {
@@ -190,7 +199,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					}
 				});
 
-				mainVm.AddTab(new TabItemViewModel {
+				if (appAbilities.Version == AppVersion.Full)
+					mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "КСМ",
 					ShortHeader = "КСМ",
 					Content = new KsmDataView {
