@@ -86,7 +86,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 
 			appFactory.ShowMainWindowInOwnThread("Технический абонент, кабина", appAbilities, mainVm => {
 				var channel = mainVm.AddChannel("Single channel");
-				var channel1 = mainVm.AddChannel("Single 2 channel");
+				//var channel1 = mainVm.AddChannel("Single 2 channel");
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "Диагностика системы",
 					ShortHeader = "ДС"

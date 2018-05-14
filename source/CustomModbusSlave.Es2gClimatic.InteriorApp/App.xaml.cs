@@ -1,73 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading;
-using System.Windows;
-using AlienJust.Adaptation.ConsoleLogger;
-using AlienJust.Adaptation.WindowsPresentation;
-using AlienJust.Support.Loggers;
-using AlienJust.Support.Loggers.Contracts;
-using AlienJust.Support.Text;
-using AlienJust.Support.Text.Contracts;
+﻿using System.Windows;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Request16;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.View;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.ViewModel;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.Views;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
-using DataAbstractionLevel.Low.PsnConfig;
-using MahApps.Metro;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp
-{
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 	/// <summary>
 	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application {
-		private const string TestPortName = "ТЕСТ";
-		private const string NoStackInfoText = "[NO STACK INFO]";
-		private const string LogSeporator = " > ";
-
-		private ManualResetEvent _mainWindowCreationCompleteWaiter;
-		private RelayMultiLoggerWithStackTraceSimple _debugLogger;
-		private SerialChannel _serialChannel;
-
-		private ILoggerWithStackTrace _logConsoleDarkRed;
-		private ILoggerWithStackTrace _logConsoleRed;
-		private ILoggerWithStackTrace _logConsoleYellow;
-		private ILoggerWithStackTrace _logConsoleDarkCyan;
-		private ILoggerWithStackTrace _logConsoleCyan;
-		private ILoggerWithStackTrace _logConsoleGreen;
-		private ILoggerWithStackTrace _logConsoleWhite;
-
-		protected override void OnStartup(StartupEventArgs e) {
-			// get the current app style (theme and accent) from the application
-			// you can then use the current theme and custom accent instead set a new theme
-			Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
-
-			// now set the Green accent and dark theme
-			ThemeManager.ChangeAppStyle(Application.Current,
-				ThemeManager.GetAccent("Green"),
-				ThemeManager.GetAppTheme("BaseDark")); // or appStyle.Item1
-
-			base.OnStartup(e);
-		}
-		
 		private void App_OnStartup(object sender, StartupEventArgs e) {
 			var appFactory = new AppFactory("psn.Микроклимат-ЭС2ГП-салон.xml");
 			var appAbilities = appFactory.Abilities;
-			
+
 			// Заслонка наруж. воздуха
 			var cmdListenerMukFlapOuterAirReply03 = new CmdListenerMukFlapOuterAirReply03(2, 3, 47);
 			var cmdListenerMukFlapOuterAirRequest16 = new CmdListenerMukFlapOuterAirRequest16(2, 16, 21);
@@ -118,81 +85,119 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerBvs2Reply65);
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerKsmParams);
 
-			appFactory.ShowMainWindowInOwnThread("Технический абонент, кабина", appAbilities, mainVm => {
+			appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm => {
 				var channel = mainVm.AddChannel("Single channel");
-				var channel1 = mainVm.AddChannel("Single 2 channel");
+
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "Диагностика системы",
 					ShortHeader = "ДС",
-					Content = new SystemDiagnosticView()
+					Content = new SystemDiagnosticView {
+						DataContext = new SystemDiagnosticViewModel(
+							appAbilities.Version == AppVersion.Full,
+							appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full,
+								mainVm.Notifier,
+								cmdListenerMukFlapOuterAirReply03,
+								cmdListenerMukVaporizerReply03,
+								cmdListenerMukVaporizerRequest16,
+								cmdListenerMukCondenserFanReply03,
+								cmdListenerMukAirExhausterReply03,
+								cmdListenerMukFlapReturnAirReply03,
+								cmdListenerMukFlapWinterSummerReply03,
+								cmdListenerBsSmReply32,
+								cmdListenerKsmParams,
+								cmdListenerBvs1Reply65,
+								cmdListenerBvs2Reply65)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "МУК заслонки наружного воздуха",
+					ShortHeader = "МУК 2",
+					Content = new MukFlapDataView { DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapOuterAirReply03, cmdListenerMukFlapOuterAirRequest16) }
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "МУК вентилятора испарителя",
+					ShortHeader = "МУК 3",
+					Content = new MukVaporizerFanDataView {
+						DataContext = new MukVaporizerFanDataViewModelParamcentric(
+							mainVm.Notifier, channel.Channel.ParamSetter,
+							appAbilities.RtuParamReceiver,
+							cmdListenerMukVaporizerReply03,
+							cmdListenerMukVaporizerRequest16
+						)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "МУК вентилятора конденсатора",
+					ShortHeader = "МУК 4",
+					Content = new MukFridgeFanDataView {
+						DataContext = new MukFridgeFanDataViewModel(
+							mainVm.Notifier, channel.Channel.ParamSetter,
+							cmdListenerMukCondenserFanReply03,
+							cmdListenerMukCondenserRequest16
+						)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "МУК вытяжного вентилятора пола",
+					ShortHeader = "МУК 6",
+					Content = new AirExhausterDataView {
+						DataContext = new MukAirExhausterDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukAirExhausterReply03, cmdListenerMukAirExhausterRequest16)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "МУК заслонки рециркуляц. воздуха",
+					ShortHeader = "МУК 7",
+					Content = new MukFlapReturnAirDataView {
+						DataContext = new MukFlapReturnAirViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapReturnAirReply03, cmdListenerMukFlapAirRecycleRequest16)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "МУК заслонки лето зима",
+					ShortHeader = "МУК 8",
+					Content = new MukFlapWinterSummerDataView {
+						DataContext = new MukFlapWinterSummerViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapWinterSummerReply03, cmdListenerMukAirFlapWinterSummerRequest16)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "БС-СМ",
+					ShortHeader = "БС-СМ",
+					Content = new BsSmDataView {
+						DataContext = new BsSmDataViewModel(
+							mainVm.Notifier, cmdListenerBsSmRequest32, cmdListenerBsSmReply32)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "БВС1",
+					ShortHeader = "БВС1",
+					Content = new BvsDataView {
+						DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvs1Reply65)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "БВС2",
+					ShortHeader = "БВС2",
+					Content = new BvsDataView {
+						DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvs2Reply65)
+					}
+				});
+
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "КСМ",
+					ShortHeader = "КСМ",
+					Content = new KsmDataView {
+						DataContext = new KsmDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerKsmParams)
+					}
 				});
 			});
-			
-			
-			
-			_logConsoleDarkRed = new RelayLoggerWithStackTrace(
-				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.DarkRed, ConsoleColor.Black), 
-				new ChainedFormatter(new List<ITextFormatter> {new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)})), 
-				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-			_logConsoleRed = new RelayLoggerWithStackTrace(
-				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.Red, ConsoleColor.Black),
-				new ChainedFormatter(new List<ITextFormatter> { new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator) })),
-				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-			_logConsoleYellow = new RelayLoggerWithStackTrace(
-				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.Yellow, ConsoleColor.Black),
-				new ChainedFormatter(new List<ITextFormatter> { new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator) })),
-				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-			_logConsoleDarkCyan = new RelayLoggerWithStackTrace(
-				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.DarkCyan, ConsoleColor.Black),
-				new ChainedFormatter(new List<ITextFormatter> { new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator) })),
-				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-			_logConsoleCyan = new RelayLoggerWithStackTrace(
-				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.Cyan, ConsoleColor.Black),
-				new ChainedFormatter(new List<ITextFormatter> { new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator) })),
-				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-			_logConsoleGreen = new RelayLoggerWithStackTrace(
-				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.Green, ConsoleColor.Black),
-				new ChainedFormatter(new List<ITextFormatter> { new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator) })),
-				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-			_logConsoleWhite = new RelayLoggerWithStackTrace(
-				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.White, ConsoleColor.Black),
-				new ChainedFormatter(new List<ITextFormatter> { new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator) })),
-				new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-
-			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-салон.xml")).LoadConfiguration();
-			//var portConatiner = new SerialPortContainerRealWithTest(TestPortName, new SerialPortContainerReal(), new SerialPortContainerTest(File.ReadAllText("CabinIoSample.txt").Split(' ').Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToList()));
-			_serialChannel = new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(psnConfig), _logConsoleYellow);
-
-
-			List<Action> closeChildWindowsActions = new List<Action>(); // TODO: here to add close child windows
-			var appThreadNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
-
-
-			_mainWindowCreationCompleteWaiter = new ManualResetEvent(false);
-			var mainWindowThread = new Thread(() => {
-				var mainViewModel = new MainViewModel(
-					new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher), 
-					new WpfWindowSystem(),
-					_debugLogger, _serialChannel, TestPortName);
-
-				var mainWindow = new MainView(appThreadNotifier, () => {
-					foreach (var closingAction in closeChildWindowsActions) {
-						closingAction.Invoke();
-					}
-					closeChildWindowsActions.Clear();
-				}
-				) { DataContext = mainViewModel };
-				mainWindow.Show();
-
-				_mainWindowCreationCompleteWaiter.Set();
-				System.Windows.Threading.Dispatcher.Run();
-			});
-			mainWindowThread.SetApartmentState(ApartmentState.STA);
-			mainWindowThread.Priority = ThreadPriority.AboveNormal;
-			mainWindowThread.IsBackground = true;
-			mainWindowThread.Start();
-
-			_mainWindowCreationCompleteWaiter.WaitOne();
 		}
 	}
 }
