@@ -951,21 +951,21 @@
 					Text="{Binding Path=ConcentratorAdvancedInfo, Mode=OneWay}" />
 			</StackPanel>
 			<paramControls:ParamSimple
-				Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}"
-				Grid.Row="12"
-				Grid.Column="1"
-				Text="ШИМ калорифера 380В: "
-				ValueForeground="Black"
-				Value="{Binding Path=Heater380Pwm, Mode=OneWay}"
-				Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}"/>
-			<paramControls:ParamSimple
 				Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BtwConverter}}"
 				Grid.Row="12"
-				Grid.Column="0"
+				Grid.Column="1"
 				Text="ШИМ калорифера 3кВ: "
 				ValueForeground="Black"
 				Value="{Binding Path=Heater3KPwm, Mode=OneWay}"
 				Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}" />
+			<paramControls:ParamSimple
+				Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}"
+				Grid.Row="12"
+				Grid.Column="0"
+				Text="ШИМ калорифера 380В: "
+				ValueForeground="Black"
+				Value="{Binding Path=Heater380Pwm, Mode=OneWay}"
+				Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}"/>
 		</Grid>
 		<Grid>
 			<Grid.RowDefinitions>
@@ -1060,9 +1060,20 @@
 					Grid.Row="5"
 					Grid.Column="0"
 					DataContext="{Binding Path=AutoVm7, Mode=OneTime}" />
-				<systemDiagnostic:AutoView
+				<paramControls:ParamSimple
 					Grid.Row="5"
 					Grid.Column="1"
+					
+					Text="Контактор рецирк. нагревателей"
+					TextColumnWidth="10*"
+					ValueColumnWidth="1*"
+					Value="{Binding Path=ContactorOfRecycleHeatersValue, Mode=OneWay}"
+					ValueForeground="{Binding Path=ContactorOfRecycleHeatersValue, Mode=OneWay, Converter={StaticResource TextToBrushConverter}}"
+					ValueFontWeight="Bold" />
+				<systemDiagnostic:AutoView
+					Background="LightGray"
+					Grid.Row="6"
+					Grid.Column="0"
 					DataContext="{Binding Path=AutoVm8, Mode=OneTime}" />
 
 

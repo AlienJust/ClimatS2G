@@ -183,6 +183,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private string _contactorOfHeater380Value;
 		private string _heater380Pwm;
 		private string _heater3KPwm;
+		private string _contactorOfRecycleHeatersValue;
 
 		public AutoViewModel AutoVm1 { get; }
 		public AutoViewModel AutoVm2 { get; }
@@ -690,6 +691,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 					ContactorOfCompressor1Value = AutoSwitchAndContactorIsErText;
 					ContactorOfHeater380Value = AutoSwitchAndContactorIsErText;
+					ContactorOfRecycleHeatersValue = AutoSwitchAndContactorIsErText;
 				}
 				else {
 					BvsInfo1 = OkLinkText;
@@ -765,6 +767,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 				ContactorOfCompressor1Value = data.BvsInput6 ? AutoSwitchAndContactorIsOkText : AutoSwitchAndContactorIsErText;
 				ContactorOfHeater380Value = data.BvsInput7 ? AutoSwitchAndContactorIsOkText : AutoSwitchAndContactorIsErText;
+				ContactorOfRecycleHeatersValue = data.BvsInput8 ? AutoSwitchAndContactorIsOkText : AutoSwitchAndContactorIsErText;
 			});
 
 		}
@@ -1544,6 +1547,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			set => SetProp(() => _contactorOfHeater380Value != value, () => _contactorOfHeater380Value = value, () => ContactorOfHeater380Value);
 		}
 
+		public string ContactorOfRecycleHeatersValue {
+			get => _contactorOfRecycleHeatersValue;
+			set => SetProp(() => _contactorOfRecycleHeatersValue != value, () => _contactorOfRecycleHeatersValue = value, () => ContactorOfRecycleHeatersValue);
+		}
+
 		public string Heater380Pwm
 		{
 			get => _heater380Pwm;
@@ -1667,6 +1675,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 			Heater380Pwm = UnknownText;
 			Heater3KPwm = UnknownText;
+
+			ContactorOfRecycleHeatersValue = AutoSwitchAndContactorIsX3Text;
 
 			IsMaster = true;
 			IsSlave = true;
