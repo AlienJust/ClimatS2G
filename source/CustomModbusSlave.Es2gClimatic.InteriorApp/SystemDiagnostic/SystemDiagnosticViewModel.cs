@@ -448,7 +448,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					FanCondensorInfo += "Ступень 1   ";
 				if (data.Stage1IsOn)
 					FanCondensorInfo += "Ступень 2   ";
-				if (data.Diagnostic1.GetBit(5)) {
+				if (data.Diagnostic1.GetBit(2) || data.Diagnostic1.GetBit(3)) {
 					FanCondensorInfo += "Неисправность";
 					FanCondensorColor = ErDiagColor;
 				}
