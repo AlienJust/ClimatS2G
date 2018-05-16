@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs2;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Request16;
@@ -194,7 +195,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "БВС2",
 					ShortHeader = "БВС2",
-					Content = new BvsDataView {
+					Content = new Bvs2DataView {
 						DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvs2Reply65)
 					}
 				});
