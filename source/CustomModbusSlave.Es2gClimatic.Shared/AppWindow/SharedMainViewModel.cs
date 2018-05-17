@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
@@ -17,6 +18,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		private readonly ILogger _logger;
 
 		private bool _tabHeadersAreLong;
+		private FrameworkElement _topContent;
 
 		public string WindowTitle { get; }
 		public ObservableCollection<TabItemViewModel> Tabs { get; }
@@ -32,28 +34,22 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			_logger = new RelayLogger(_programLogVm, new DateTimeFormatter(" > "));
 			Tabs = new ObservableCollection<TabItemViewModel>();
 			ComPortControlVms = new ObservableCollection<ComPortControlViewModel>();
-			//ComPortControlVms.Add(new ComPortControlViewModel(_appAbilities, _logger, _notifier, _windowSystem));
 
 			_logger.Log("Программа загружена");
 		}
 
-		public ComPortControlViewModel AddChannel(string channelName)
-		{
-			//var channel = _appAbilities.CreateChannel(channelName); 
+		public ComPortControlViewModel AddChannel(string channelName) {
 			var result = new ComPortControlViewModel(_appAbilities, _logger, _notifier, _windowSystem, channelName);
 			ComPortControlVms.Add(result);
 			return result;
 		}
 
-		public void RemoveChannel(string channelName)
-		{
+		public void RemoveChannel(string channelName) {
 			// TODO: when closing app, also call IStdNotifier.RemoveChannel()
 		}
 
 		public void AddTab(TabItemViewModel tabVm) {
-			//TabControlVm.Tabs.Add(tabVm);
 			Tabs.Add(tabVm);
-			//Console.WriteLine("Tab added");
 		}
 
 		public bool TabHeadersAreLong {
@@ -74,5 +70,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		public IThreadNotifier Notifier => _notifier;
 		public IWindowSystem WindowsSystem => _windowSystem;
 		public ILogger Logger => _logger;
+
+		public FrameworkElement TopContent {
+			get => _topContent;
+			set => SetProp(() => !Equals(_topContent, value), () => _topContent = value, () => TopContent);
+		}
 	}
 }

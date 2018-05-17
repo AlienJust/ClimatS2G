@@ -29,8 +29,6 @@
 			<converters:BooleanToVisibilityConverter
 				x:Key="InvertedBtwConverter"
 				InvertVisibility="True" />
-			<converters:ColorsEnumToBrushConverter
-				x:Key="ColorsEnumToBrushConverter" />
 
 			<DataTemplate
 				x:Key="MenuItemTemplate"
@@ -102,13 +100,19 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
 				Height="6*" />
 			<RowDefinition
 				Height="1*" />
 		</Grid.RowDefinitions>
+		<ContentPresenter
+			Height="Auto"
+			Grid.Row="0"
+			Content="{Binding Path=TopContent, Mode=OneWay}" />
 		<TabControl
 			ItemContainerStyle="{StaticResource AzureTabItem}"
-			Grid.Row="0"
+			Grid.Row="1"
 			TabStripPlacement="Left"
 			ItemsSource="{Binding Path=Tabs}">
 			<TabControl.ItemTemplate>
@@ -134,7 +138,7 @@
 			</TabControl.ContentTemplate>
 		</TabControl>
 		<GridSplitter
-			Grid.Row="1"
+			Grid.Row="2"
 			Height="4"
 			BorderBrush="{DynamicResource AccentColorBrush}"
 			BorderThickness="1"
@@ -143,7 +147,7 @@
 			ResizeDirection="Rows"
 			HorizontalAlignment="Stretch" />
 		<progamLog:ProgramLogView
-			Grid.Row="1"
+			Grid.Row="2"
 			DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}"
 			Margin="4,8,6,4" />
 	</Grid>

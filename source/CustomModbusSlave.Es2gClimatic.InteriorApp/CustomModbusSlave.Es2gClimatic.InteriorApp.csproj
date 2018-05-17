@@ -126,6 +126,8 @@
       <HintPath>..\packages\MahApps.Metro.IconPacks.1.9.0\lib\net40\MahApps.Metro.IconPacks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.4.3\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -219,6 +221,10 @@
       <DependentUpon>SystemDiagnosticView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SystemDiagnostic\SystemDiagnosticViewModel.cs" />
+    <Compile Include="TopContent\TopContentView.xaml.cs">
+      <DependentUpon>TopContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TopContent\TopContentViewModel.cs" />
     <Page Include="BsSm\BsSmDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -526,6 +532,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SystemDiagnostic\SystemDiagnosticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TopContent\TopContentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,6 +18,7 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.Views;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.TopContent;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16;
@@ -88,6 +89,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 			appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm => {
 				var channel = mainVm.AddChannel("Single channel");
+
+				mainVm.TopContent = new TopContentView {DataContext = new TopContentViewModel(mainVm.Notifier, cmdListenerBsSmReply32) };
 
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "Диагностика системы",
