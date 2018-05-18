@@ -11,7 +11,7 @@
 	xmlns:views="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Views"
 	mc:Ignorable="d"
 	d:DesignHeight="1300"
-	d:DesignWidth="300">
+	d:DesignWidth="300" d:DataContext="{local:IMukFanVaporizerDataReply03}">
 	<UserControl.Resources>
 		<sensorIndications:SensorIndicationDoubleToStringConverter
 			x:Key="TemperatureConverter"
