@@ -19,8 +19,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 			var temperatureAddress1 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[5], _data[6]), 0.01, 0.0, new BytesPair(0x85, 0x00));
 			var temperatureAddress2 = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(_data[7], _data[8]), 0.01, 0.0, new BytesPair(0x85, 0x00));
 
-			var incomingSignals = new IncomingSignalsBuilder(_data[10]).Build();
+			var incomingSignals = new MukFlapReturnAirIncomingSignalsBuilder(_data[10]).Build();
+			
 			var outgoingSignals = _data[12];
+			var outgoingSignalsDescription = new MukFlapReturnAirOutgoingSignalsBuilder(outgoingSignals).Build();
 
 			var analogInput = (_data[14] + _data[13] * 256) * 0.1; // voltage
 			var automaticModeStage = new MukFlapWorkmodeStageBuilder(_data[16] + _data[15]*250).Build();
@@ -45,6 +47,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 				flapPwmSetting, temperatureAddress1, temperatureAddress2,
 				incomingSignals,
 				outgoingSignals,
+				outgoingSignalsDescription,
 				analogInput,
 				automaticModeStage,
 				diagnostic1,

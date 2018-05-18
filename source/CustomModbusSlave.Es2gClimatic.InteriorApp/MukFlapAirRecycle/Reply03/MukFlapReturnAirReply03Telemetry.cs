@@ -4,12 +4,13 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
-	class MukFlapReturnAirReply03Telemetry : IMukFlapReturnAirReply03Telemetry {
+	internal sealed class MukFlapReturnAirReply03Telemetry : IMukFlapReturnAirReply03Telemetry {
 		public MukFlapReturnAirReply03Telemetry(int flapPwmSetting, 
 			ISensorIndication<double> temperatureAddress1, 
 			ISensorIndication<double> temperatureAddress2, 
-			IIncomingSignals incomingSignals, 
+			IMukFlapReturnAirIncomingSignals incomingSignals, 
 			byte outgoingSignals, 
+			IMukFlapReturnAirOutgoingSignals outgoingSignalsDescription, 
 			double analogInput, 
 			IMukFlapWorkmodeStage automaticModeStage, 
 			IMukFlapAirRecycleDiagnostic1 diagnostic1, 
@@ -30,6 +31,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 			TemperatureAddress2 = temperatureAddress2;
 			IncomingSignals = incomingSignals;
 			OutgoingSignals = outgoingSignals;
+			OutgoingSignalsDescription = outgoingSignalsDescription;
 			AnalogInput = analogInput;
 			AutomaticModeStage = automaticModeStage;
 			Diagnostic1 = diagnostic1;
@@ -52,8 +54,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 		public int FlapPwmSetting { get; }
 		public ISensorIndication<double> TemperatureAddress1 { get; }
 		public ISensorIndication<double> TemperatureAddress2 { get; }
-		public IIncomingSignals IncomingSignals { get; }
+		public IMukFlapReturnAirIncomingSignals IncomingSignals { get; }
 		public byte OutgoingSignals { get; }
+		public IMukFlapReturnAirOutgoingSignals OutgoingSignalsDescription { get; }
 		public double AnalogInput { get; }
 		public IMukFlapWorkmodeStage AutomaticModeStage { get; }
 		public IMukFlapAirRecycleDiagnostic1 Diagnostic1 { get; }

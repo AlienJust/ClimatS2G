@@ -167,6 +167,10 @@
     <Compile Include="MukFlapAirOuter\Request16\CmdListenerMukFlapOuterAirRequest16.cs" />
     <Compile Include="MukFlapAirRecycle\Reply03\CmdListenerMukFlapReturnAirReply03.cs" />
     <Compile Include="MukFlapAirRecycle\Reply03\IMukFlapAirRecycleDiagnostic1.cs" />
+    <Compile Include="MukFlapAirRecycle\Reply03\IMukFlapReturnAirIncomingSignals.cs" />
+    <Compile Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirIncomingSignalsView.xaml.cs">
+      <DependentUpon>MukFlapReturnAirIncomingSignalsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukFlapAirRecycle\Reply03\MukFlapAirRecycleReply03ConcentratorStatusView.xaml.cs">
       <DependentUpon>MukFlapAirRecycleReply03ConcentratorStatusView.xaml</DependentUpon>
     </Compile>
@@ -178,13 +182,25 @@
     </Compile>
     <Compile Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirConcentratorStatusBuilderFromByte.cs" />
     <Compile Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirConcentratorStatusSimple.cs" />
+    <Compile Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirIncomingSignals.cs" />
+    <Compile Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirIncomingSignalsBuilder.cs" />
+    <Compile Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirOutgoingSignalsBuilder.cs" />
+    <Compile Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirOutgoingSignalsView.xaml.cs">
+      <DependentUpon>MukFlapReturnAirOutgoingSignalsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukFlapAirRecycle\Request16\CmdListenerMukFlapAirRecycleRequest16.cs" />
+    <Compile Include="MukFlapAirRecycle\Request16\ControlOfHiVoltageContactor.cs" />
+    <Compile Include="MukFlapAirRecycle\Request16\ControlOfHiVoltageContactorBuilder.cs" />
+    <Compile Include="MukFlapAirRecycle\Request16\IControlOfHiVoltageContactor.cs" />
     <Compile Include="MukFlapAirRecycle\Request16\MukFlapAirRecycleRequest16DataBuilder.cs" />
     <Compile Include="MukFlapAirRecycle\Request16\MukFlapAirRecycleRequest16DataSimple.cs" />
     <Compile Include="MukFlapAirRecycle\Request16\MukFlapAirRecycleRequest16DataView.xaml.cs">
       <DependentUpon>MukFlapAirRecycleRequest16DataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapAirRecycle\Request16\IMukFlapAirRecycleRequest16Data.cs" />
+    <Compile Include="MukFlapAirRecycle\Request16\ControlOfHiVoltageContactorView.xaml.cs">
+      <DependentUpon>ControlOfHiVoltageContactorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MukFlapAirWinterSummer\CmdListenerMukFlapReturnAirReply03.cs" />
     <Compile Include="MukFlapAirOuter\SetParameters\MukFlapOuterAirSetParamsView.xaml.cs">
       <DependentUpon>MukFlapOuterAirSetParamsView.xaml</DependentUpon>
@@ -479,6 +495,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirIncomingSignalsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MukFlapAirRecycle\Reply03\MukFlapAirRecycleReply03ConcentratorStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -487,9 +507,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MukFlapAirRecycle\Reply03\MukFlapReturnAirOutgoingSignalsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MukFlapAirRecycle\Request16\MukFlapAirRecycleRequest16DataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MukFlapAirRecycle\Request16\ControlOfHiVoltageContactorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MukFlapAirRecycle\SetParameters\MukFlapReturnAirSetParamsView.xaml">
       <Generator>MSBuild:Compile</Generator>

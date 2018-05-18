@@ -9,8 +9,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 		int FlapPwmSetting { get; }
 		ISensorIndication<double> TemperatureAddress1 { get; }
 		ISensorIndication<double> TemperatureAddress2 { get; }
-		IIncomingSignals IncomingSignals { get; }
+		IMukFlapReturnAirIncomingSignals IncomingSignals { get; }
 		byte OutgoingSignals { get; }
+		IMukFlapReturnAirOutgoingSignals OutgoingSignalsDescription { get; }
 		double AnalogInput { get; }
 
 		IMukFlapWorkmodeStage AutomaticModeStage { get; }
@@ -28,5 +29,22 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 		int FirmwareBuildNumber { get; }
 		int Reserve17 { get; }
 		int Reserve18 { get; }
+	}
+
+	internal interface IMukFlapReturnAirOutgoingSignals {
+		bool TurnContactor1On { get; }
+		bool TurnContactor2On { get; }
+		//включение контактора 1		
+		//включение контактора 2
+	}
+
+	internal sealed class MukFlapReturnAirOutgoingSignals : IMukFlapReturnAirOutgoingSignals {
+		public bool TurnContactor1On { get; }
+		public bool TurnContactor2On { get; }
+		
+		public MukFlapReturnAirOutgoingSignals(bool turnContactor1On, bool turnContactor2On) {
+			TurnContactor1On = turnContactor1On;
+			TurnContactor2On = turnContactor2On;
+		}
 	}
 }

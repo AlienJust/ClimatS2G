@@ -4,9 +4,11 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03"
+	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Request16"
 	mc:Ignorable="d"
 	d:DesignHeight="300"
-	d:DesignWidth="300">
+	d:DesignWidth="300" d:DataContext="{request16:IMukFlapAirRecycleRequest16Data}">
 	<StackPanel
 		Orientation="Vertical">
 		<Grid>
@@ -74,18 +76,25 @@
 				TextAlignment="Right" />
 		</Grid>
 
-		<Grid>
+		<Grid Background="LightGray">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition
 					Width="Auto" />
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
 			<TextBlock
-				Text="6.23 Резерв" />
+				Text="6.23 КСМ: управление высоковольтным контактором" />
 			<TextBlock
-				Grid.Column="1"
-				Text="{Binding Path=Reserve623, Mode=OneTime}"
+				Grid.Row="0" Grid.Column="1"
+				Text="{Binding Path=ControlOfHiVoltageContactorRaw, Mode=OneTime}"
 				TextAlignment="Right" />
+			<reply03:ControlOfHiVoltageContactorView
+				Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+				DataContext="{Binding Path=ControlOfHiVoltageContactorDescription, Mode=OneTime}" />
 		</Grid>
 
 		<Grid>
