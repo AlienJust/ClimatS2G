@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster {
