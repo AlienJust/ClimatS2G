@@ -10,7 +10,7 @@
 	xmlns:mukFlapAirRecycleReply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03"
 	mc:Ignorable="d"
 	d:DesignWidth="400"
-	d:DesignHeight="900">
+	d:DesignHeight="900" d:DataContext="{mukFlapAirRecycleReply03:IMukFlapReturnAirReply03Telemetry }">
 	<UserControl.Resources>
 		<sensorIndications:SensorIndicationDoubleToStringConverter
 			x:Key="TemperatureConverter"
@@ -69,26 +69,33 @@
 				</Grid.RowDefinitions>
 				<TextBlock
 					Text="Входные сигналы" />
-				<mukFlapOuterAirReply03:IncomingSignalsView
+				<mukFlapAirRecycleReply03:MukFlapReturnAirIncomingSignalsView
 					Grid.Row="1"
 					DataContext="{Binding Path=IncomingSignals, Mode=OneTime}" />
 			</Grid>
 		</Border>
 
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-					Width="3*" />
-				<ColumnDefinition
-					Width="1*" />
-			</Grid.ColumnDefinitions>
-			<TextBlock
-				Text="Выходные сигналы" />
-			<TextBlock
-				Grid.Column="1"
-				Text="{Binding Path=OutgoingSignals, Mode=OneTime}" />
-		</Grid>
-
+		<Border
+			BorderThickness="1"
+			BorderBrush="LightGray">
+			<StackPanel>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="3*" />
+						<ColumnDefinition
+							Width="1*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Text="Выходные сигналы" />
+					<TextBlock
+						Grid.Column="1"
+						Text="{Binding Path=OutgoingSignals, Mode=OneTime}" />
+				</Grid>
+				<mukFlapAirRecycleReply03:MukFlapReturnAirOutgoingSignalsView
+					DataContext="{Binding Path=IncomingSignals, Mode=OneTime}" />
+			</StackPanel>
+		</Border>
 
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -107,6 +114,7 @@
 		<Border
 			BorderThickness="1"
 			BorderBrush="LightGray">
+
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition />
@@ -200,7 +208,7 @@
 		</Grid>
 
 		<mukFlapAirRecycleReply03:MukFlapAirRecycleReply03ConcentratorStatusView
-			DataContext="{Binding Path=ConcentratorStatusParsed, Mode=OneTime}"/>
+			DataContext="{Binding Path=ConcentratorStatusParsed, Mode=OneTime}" />
 
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -271,7 +279,6 @@
 				Grid.Column="1"
 				Text="{Binding Path=FirmwareBuildNumber, Mode=OneTime}" />
 		</Grid>
-
 
 
 		<Grid>

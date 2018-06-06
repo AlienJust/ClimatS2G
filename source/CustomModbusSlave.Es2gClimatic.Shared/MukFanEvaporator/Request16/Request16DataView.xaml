@@ -7,7 +7,7 @@
 	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16"
 	mc:Ignorable="d"
 	d:DesignHeight="320"
-	d:DesignWidth="400">
+	d:DesignWidth="400" d:DataContext="{request16:IMukFanVaporizerDataRequest16}">
 	<StackPanel
 		Orientation="Vertical">
 		<TextBlock

@@ -11,8 +11,8 @@
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
-		<TextBlock Text="{Binding Path=ValueRaw, Mode=OneTime}"/>
-		<TextBlock Grid.Column="1" Text="-"/>
-		<TextBlock Grid.Column="2" Text="{Binding Path=ValueParsed, Mode=OneTime}"/>
+		<TextBlock Text="{Binding Path=ValueRaw, Mode=OneTime}" HorizontalAlignment="Right"/>
+		<TextBlock Grid.Column="1" Text=" - "/>
+		<TextBlock Grid.Column="2" Text="{Binding Path=ValueParsed, Mode=OneTime}" HorizontalAlignment="Left"/>
 	</Grid>
 </UserControl>

@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts {
+﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data.Contracts {
 	internal enum AutomaticWorkmodeStage {
 		ControllerInitialization, // 0
 		WaitingForPowerOnCommand, // 1

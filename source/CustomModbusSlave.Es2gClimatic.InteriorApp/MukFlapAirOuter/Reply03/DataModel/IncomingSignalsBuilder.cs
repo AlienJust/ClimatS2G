@@ -3,7 +3,7 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataMod
 using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Build {
-	class IncomingSignalsBuilder : IBuilder<IIncomingSignals> {
+	internal sealed class IncomingSignalsBuilder : IBuilder<IIncomingSignals> {
 		private readonly byte _data;
 		public IncomingSignalsBuilder(byte data) {
 			_data = data;

@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03.MukFlapReturnAirIncomingSignalsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="300" d:DataContext="{reply03:IMukFlapReturnAirIncomingSignals}">
+	<StackPanel>
+		<CheckBox Content="Контроль контактора 1" IsChecked="{Binding Path=ControlOfContactor1, Mode=OneTime}"/>
+		<CheckBox Content="Контроль контактора 1" IsChecked="{Binding Path=ControlOfContactor2, Mode=OneTime}"/>
+		<CheckBox Content="Признак двухсистемного поезда" IsChecked="{Binding Path=FlagOfDualSystemTrain, Mode=OneTime}"/>
+	</StackPanel>
+</UserControl>

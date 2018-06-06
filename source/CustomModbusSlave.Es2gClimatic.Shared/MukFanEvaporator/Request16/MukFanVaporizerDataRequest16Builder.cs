@@ -9,21 +9,22 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16 {
 		}
 
 		public IMukFanVaporizerDataRequest16 Build() {
-
 			var deltaTSettingRaw = _bytes[17] * 256 + _bytes[18];
+			
 			return new MukFanVaporizerDataRequest16Simple {
 				CurrentKsmCommandWorkmode =
 					new KsmCommandWorkmodeSimple {
 						WorkConfiguration = _bytes[7] & 0x0F,
 						ForceEmersonOffByLowPressure = _bytes[7] .GetBit(4),
 
-						AutomaticMode = (_bytes[8] & 0x01) == 0x01, // zb bit 0
-						ForceHeatRegulator = (_bytes[8] & 0x02) == 0x02, // zb bit 1, zb bit 2 skipped
-						ForceHeatModePwm100 = (_bytes[8] & 0x08) == 0x08, // zb bit 3
-						ForceCoolMode = (_bytes[8] & 0x10) == 0x10, // zb bit 4
-						HeatModeAndCoolModeAreOff = (_bytes[8] & 0x20) == 0x20, // zb bit 5
-						ManualMode = (_bytes[8] & 0x40) == 0x40, // zb bit 6
-						ForceHeatModePwm50 = (_bytes[8] & 0x80) == 0x80 // zb bit 7
+						AutomaticMode = _bytes[8].GetBit(0), // zb bit 0
+						ForceHeatRegulator = _bytes[8].GetBit(1),
+						ForceHeatModePwm100 = _bytes[8].GetBit(2),
+						ForceCoolMode = _bytes[8].GetBit(3),
+						AutomaticModeWithoutSetControl = _bytes[8].GetBit(4),
+						HeatModeAndCoolModeAreOff = _bytes[8].GetBit(5),
+						ManualMode = _bytes[8].GetBit(6),
+						ForceHeatModePwm50 = _bytes[8].GetBit(7)
 					},
 				OuterTemperature = _bytes[9] * 256 + _bytes[10], // word #1
 				InnerTemperature = (_bytes[11] * 256 + _bytes[12]) * .01, // word #2

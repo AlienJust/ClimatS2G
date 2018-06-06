@@ -4,6 +4,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16 {
 		public bool ForceHeatRegulator { get; set; }
 		public bool ForceHeatModePwm100 { get; set; }
 		public bool ForceCoolMode { get; set; }
+		public bool AutomaticModeWithoutSetControl { get; set; }
 		public bool HeatModeAndCoolModeAreOff { get; set; }
 		public bool ManualMode { get; set; }
 		public bool ForceHeatModePwm50 { get; set; }

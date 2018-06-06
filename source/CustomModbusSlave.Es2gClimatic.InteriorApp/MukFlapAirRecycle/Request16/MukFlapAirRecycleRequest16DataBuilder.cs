@@ -16,7 +16,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Request16
 				TemperatureOuterAir = new BytesPair(_bytes[9], _bytes[10]).HighFirstSignedValue,
 				TemperatureInnerAir = new BytesPair(_bytes[11], _bytes[12]).HighFirstSignedValue * 0.01,
 				FanLevelSetting = new BytesPair(_bytes[13], _bytes[14]).HighFirstSignedValue,
-				Reserve623 = new BytesPair(_bytes[15], _bytes[16]).HighFirstUnsignedValue,
+				ControlOfHiVoltageContactorRaw = new BytesPair(_bytes[15], _bytes[16]).HighFirstUnsignedValue,
+				ControlOfHiVoltageContactorDescription = new ControlOfHiVoltageContactorBuilder(_bytes[16]).Build(),
 				Reserve624 = new BytesPair(_bytes[17], _bytes[18]).HighFirstUnsignedValue
 			};
 		}

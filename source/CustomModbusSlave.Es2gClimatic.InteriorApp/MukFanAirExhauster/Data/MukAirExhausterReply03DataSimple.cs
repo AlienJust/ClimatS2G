@@ -1,7 +1,7 @@
-﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data.Contracts;
+﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Data {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data {
 	class MukAirExhausterReply03DataSimple : IMukAirExhausterReply03Data {
 		public MukAirExhausterReply03DataSimple(int heatPwm, ISensorIndication<double> temperatureOneWire, int inputSignals, int outputSignals, double analogInputCo2, IAutomaticWorkmodeStage workmodeStage, int fanSpeed, int diagnostic1, int diagnostic2Fan, int diagnostic3OneWire, int firmwareBuildNumber, int reserve11, int reserve12) {
 			HeatPwm = heatPwm;

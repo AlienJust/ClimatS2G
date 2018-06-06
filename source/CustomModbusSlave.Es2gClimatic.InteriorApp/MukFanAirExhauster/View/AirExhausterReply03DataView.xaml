@@ -49,23 +49,32 @@
 
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="Аналоговый вход c дачтика CO2"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=AnalogInputCo2, Mode=OneTime}" TextAlignment="Right"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=AnalogInputCo2, Mode=OneTime}"/>
 		</Grid>
 
 		<Border BorderThickness="1" BorderBrush="Black">
 			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition/>
-					<RowDefinition/>
-				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
 				<TextBlock Text="Этап работы в автоматическом режиме:"/>
-				<view:AutomaticWorkmodeStageView Grid.Row="1" DataContext="{Binding Path=WorkmodeStage, Mode=OneTime}"/>
+				<view:AutomaticWorkmodeStageView Grid.Column="1" DataContext="{Binding Path=WorkmodeStage, Mode=OneTime}"/>
 			</Grid>
 		</Border>
+		
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Скорость вентилятора"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=FanSpeed, Mode=OneTime}" TextAlignment="Right"/>
+		</Grid>
 
 		<Grid>
 			<Grid.ColumnDefinitions>
