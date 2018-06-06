@@ -629,9 +629,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					Heater380Pwm = NoLinkText;
 					Heater3KPwm = NoLinkText;
 
-					IsMaster = true;
-					IsSlave = true;
-					SegmentType = UnknownText;
+					// IsMaster = true;
+					// IsSlave = true;
+					// SegmentType = UnknownText; // not needed because segment type information goes in request, not in reply
 
 					CalculatedTemperatureSetting = NoLinkText;
 				}
@@ -649,7 +649,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					FanAirExhausterInfo = NoLinkText;
 				}
 
-				// КСМ, бит "Нет связи с МУК заслонки рециркуляционого воздуха" взведен
+				// КСМ, бит "Нет связи с МУК заслонки рециркуляционного воздуха" взведен
 				if (data[23].HighFirstUnsignedValue.GetBit(0)) {
 					MukInfo7 = NoLinkText;
 					MukInfoColor7 = NoLinkColor;
