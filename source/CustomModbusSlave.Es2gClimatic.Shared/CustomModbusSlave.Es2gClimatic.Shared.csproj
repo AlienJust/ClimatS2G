@@ -327,6 +327,10 @@
     <Compile Include="SetParamsAndKsm\ViewModel\SettableParameterViewModel.cs" />
     <Compile Include="SetParamsAndKsm\ViewModel\SettableTemperatureParameterViewModel.cs" />
     <Compile Include="TelemetryIsNullException.cs" />
+    <Compile Include="TestSystems\ITestSysAsync.cs" />
+    <Compile Include="TestSystems\TestSystemView.xaml.cs">
+      <DependentUpon>TestSystemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextPresenters\ByteTextPresenter.cs" />
     <Compile Include="TextPresenters\Contracts\ITextPresenter.cs" />
     <Compile Include="TextPresenters\DataDoubleTextPresenter.cs" />
@@ -467,6 +471,10 @@
     <Page Include="SetParamsAndKsm\AnyParameter\SettableAnyParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TestSystems\TestSystemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UniversalParams\Wpf\KsmReadonlyBitsParameterView.xaml">
       <Generator>MSBuild:Compile</Generator>
