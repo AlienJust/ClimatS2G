@@ -16,6 +16,7 @@
 			FontFamily="Courier New" />
 		<TextBlock
 			Text="{Binding Path=AstroTime}"
-			FontFamily="Courier New" />
+			FontFamily="Courier New" 
+			FontWeight="Bold"/>
 	</StackPanel>
 </UserControl>
