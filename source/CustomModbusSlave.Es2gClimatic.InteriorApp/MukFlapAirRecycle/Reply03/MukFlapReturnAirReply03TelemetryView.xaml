@@ -10,7 +10,7 @@
 	xmlns:mukFlapAirRecycleReply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03"
 	mc:Ignorable="d"
 	d:DesignWidth="400"
-	d:DesignHeight="900" d:DataContext="{mukFlapAirRecycleReply03:IMukFlapReturnAirReply03Telemetry }">
+	d:DesignHeight="900">
 	<UserControl.Resources>
 		<sensorIndications:SensorIndicationDoubleToStringConverter
 			x:Key="TemperatureConverter"
@@ -93,7 +93,7 @@
 						Text="{Binding Path=OutgoingSignals, Mode=OneTime}" />
 				</Grid>
 				<mukFlapAirRecycleReply03:MukFlapReturnAirOutgoingSignalsView
-					DataContext="{Binding Path=IncomingSignals, Mode=OneTime}" />
+					DataContext="{Binding Path=OutgoingSignalsDescription, Mode=OneTime}" />
 			</StackPanel>
 		</Border>
 
