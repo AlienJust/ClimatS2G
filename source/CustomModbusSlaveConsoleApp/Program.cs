@@ -47,7 +47,7 @@ namespace CustomModbusSlaveConsoleApp
 		}
 
 		private static void SchOnCommandHeared(ICommandPart commandPart) {
-			Console.WriteLine("============================== Command part found! =============================== CMD: " + commandPart.CommandCode + ", ADDR: " + commandPart.Address + ", BODY: " + commandPart.ReplyBytes.ToText());
+			Console.WriteLine("============================= Command part found! ============================== CMD: " + commandPart.CommandCode + ", ADDR: " + commandPart.Address + ", BODY: " + commandPart.ReplyBytes.ToText());
 		}
 	}
 }
