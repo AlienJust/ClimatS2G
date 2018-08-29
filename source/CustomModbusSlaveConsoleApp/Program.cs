@@ -29,7 +29,7 @@ namespace CustomModbusSlaveConsoleApp
 			var argPortName = args.First(a => a.StartsWith(ArgStartPortName)).Split(':')[1];
 			var argBaudRate = int.Parse(args.First(a => a.StartsWith(ArgStartBaudRate)).Split(':')[1]);
 
-			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.Микроклимат-ЭС2ГП-салон.xml")).LoadConfiguration();
+			var psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, "psn.S2G-climatic-interior.xml")).LoadConfiguration();
 
 			var serialPortContainer = new SerialPortContainerReal(argPortName, argBaudRate);
 			var sch = new SerialChannel(

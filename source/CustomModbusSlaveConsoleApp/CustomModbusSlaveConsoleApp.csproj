@@ -79,10 +79,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="psn.Микроклимат-ЭС2ГП-кабина.xml">
+    <Content Include="psn.S2G-climatic-cabin.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="psn.Микроклимат-ЭС2ГП-салон.xml">
+    <Content Include="psn.S2G-climatic-interior.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -34,7 +34,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 	/// </summary>
 	public partial class App : Application {
 		private void App_OnStartup(object sender, StartupEventArgs e) {
-			var appFactory = new AppFactory("psn.Микроклимат-ЭС2ГП-салон.xml");
+			var appFactory = new AppFactory("psn.S2G-climatic-interior.xml");
 			var appAbilities = appFactory.Abilities;
 
 			// Заслонка наруж. воздуха

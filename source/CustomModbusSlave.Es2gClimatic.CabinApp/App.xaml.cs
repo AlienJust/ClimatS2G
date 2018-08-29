@@ -43,7 +43,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 		}
 
 		private void App_OnStartup(object sender, StartupEventArgs e) {
-			var appFactory = new AppFactory("psn.Микроклимат-ЭС2ГП-кабина.xml");
+			var appFactory = new AppFactory("psn.S2G-climatic-cabin.xml");
 			var appAbilities = appFactory.Abilities;
 
 			var cmdListenerMukFlapAirReply03 = new CmdListenerMukFlapAirReply03(2, 3, 39);
