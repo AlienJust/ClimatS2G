@@ -6,7 +6,7 @@ using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Request16;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
-using CustomModbusSlave.Es2gClimatic.Shared.TextPresenters;
+
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor {
 	internal class MukWarmFloorDataViewModel : ViewModelBase {
