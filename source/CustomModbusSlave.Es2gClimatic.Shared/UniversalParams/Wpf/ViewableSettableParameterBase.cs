@@ -7,7 +7,7 @@ using ParamCentric.UserInterface.Contracts;
 namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf
 {
 	public class ViewableSettableParameterBase<TRaw> : ViewModelBase, IDisplayableParameter<IRawAndConvertedValues<TRaw?, string>>, ISettableByUserParameter<IRawAndConvertedValues<TRaw, string>> where TRaw : struct {
-		public string NamePreffix { get; }
+		public string NamePrefix { get; }
 		public string Name { get; }
 
 		private IRawAndConvertedValues<TRaw, string> _formattedValue;
@@ -18,8 +18,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf
 
 		public string ToolTipText { get; }
 
-		public ViewableSettableParameterBase(string namePreffix, string name, TRaw? defaultValue, IBuilderOneToOne<TRaw, string> stringBuilder, string toolTipText) {
-			NamePreffix = namePreffix;
+		public ViewableSettableParameterBase(string namePrefix, string name, TRaw? defaultValue, IBuilderOneToOne<TRaw, string> stringBuilder, string toolTipText) {
+			NamePrefix = namePrefix;
 			Name = name;
 			ToolTipText = toolTipText;
 
@@ -45,6 +45,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf
 			}
 		}
 
-		public bool ShowToolTip => !String.IsNullOrWhiteSpace(ToolTipText);
+		public bool ShowToolTip => !string.IsNullOrWhiteSpace(ToolTipText);
 	}
 }

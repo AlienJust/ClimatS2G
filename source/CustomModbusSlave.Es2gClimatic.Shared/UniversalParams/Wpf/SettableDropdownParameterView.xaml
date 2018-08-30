@@ -58,7 +58,7 @@
 			</Grid.ColumnDefinitions>
 			<TextBlock
 				Grid.Column="0"
-				Text="{Binding Path=ParamIndex, Mode=OneTime}"
+				Text="{Binding Path=NamePrefix, Mode=OneTime}"
 				Margin="2"
 				VerticalAlignment="Center" />
 			<TextBlock

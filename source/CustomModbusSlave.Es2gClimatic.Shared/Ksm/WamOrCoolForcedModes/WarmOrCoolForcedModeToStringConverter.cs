@@ -1,13 +1,9 @@
 ﻿using AlienJust.Support.Conversion.Contracts;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.Ksm.WamOrCoolForcedModes
-{
-	public sealed class WarmOrCoolForcedModeToStringConverter : IBuilderOneToOne<WarmOrCoolForcedMode, string>
-	{
-		public string Build(WarmOrCoolForcedMode source)
-		{
-			switch (source)
-			{
+namespace CustomModbusSlave.Es2gClimatic.Shared.Ksm.WamOrCoolForcedModes {
+	public sealed class WarmOrCoolForcedModeToStringConverter : IBuilderOneToOne<WarmOrCoolForcedMode, string> {
+		public string Build(WarmOrCoolForcedMode source) {
+			switch (source) {
 				case WarmOrCoolForcedMode.AutomaticMode:
 					return "Авторежим";
 				case WarmOrCoolForcedMode.Cool100Percent:
@@ -22,6 +18,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.Ksm.WamOrCoolForcedModes
 					return "Нагрев 50%";
 				case WarmOrCoolForcedMode.TurnOnUov:
 					return "Включение УОВ";
+				case WarmOrCoolForcedMode.Test3000VoltageHeating:
+					return "Тест 3кВ обогрева";
 				case WarmOrCoolForcedMode.Unknown:
 					return "ХЗ, что за значение";
 				default:
