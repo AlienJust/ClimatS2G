@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AlienJust.Support.Concurrent.Contracts">
-      <HintPath>..\..\reference\AlienJust.Support.Concurrent.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="AlienJust.Support.Numeric">
       <HintPath>..\..\reference\AlienJust.Support.Numeric.dll</HintPath>
     </Reference>
