@@ -7,7 +7,7 @@ using AlienJust.Support.Loggers.Contracts;
 using CustomModbusSlave.Contracts;
 
 namespace CustomModbusSlave {
-	public class SerialChannel : ISerialChannel, ICommandPartFoundListener {
+	public class SerialChannel : ISerialChannel, ICommandPartFoundListener, ISerialChannelWithIoProgress {
 		public readonly ILoggerWithStackTrace _logger;
 		public event CommandHearedDelegate CommandHeared;
 		public event CommandHearedWithReplyPossibilityDelegate CommandHearedWithReplyPossibility;
@@ -24,8 +24,9 @@ namespace CustomModbusSlave {
 
 		private bool _dontStop;
 		private readonly object _dontStopSync;
+		private ISerialPortContainerWithProgress _portContainerWithProgress;
 
-		public SerialChannel(ICommandPartSearcher commandPartSearcher,/* ISendAbility sendAbility,*/ ILoggerWithStackTrace logger) {
+		public SerialChannel(ICommandPartSearcher commandPartSearcher, ILoggerWithStackTrace logger) {
 			_commandPartSearcher = commandPartSearcher;
 			//_portContainer = portContainer;
 			//_sendAbility = sendAbility;
@@ -44,7 +45,7 @@ namespace CustomModbusSlave {
 			ScheduleReadDataInBackground();
 		}
 
-		public void SelectPortAsync(/*string portName, int baudRate*/ISerialPortContainer portContainer, Action<Exception> comPortOpenedCallbackAction) {
+		public void SelectPortAsync(ISerialPortContainer portContainer, Action<Exception> comPortOpenedCallbackAction) {
 			_logger.Log("Закрытие ранее открытого порта (если был открыт) и открытие нового: " + portContainer, null);
 			_backgroundWorker.AddWork(() => {
 				Exception exception;
@@ -56,11 +57,14 @@ namespace CustomModbusSlave {
 					_portContainer.Open();
 					_sendAbility = portContainer;
 
+					_portContainerWithProgress = _portContainer as ISerialPortContainerWithProgress;
+
 					exception = null;
 				}
 				catch (Exception ex) {
 					exception = ex;
 				}
+
 				if (comPortOpenedCallbackAction != null) {
 					_notifyWorker.AddWork(() => comPortOpenedCallbackAction(exception));
 				}
@@ -77,6 +81,7 @@ namespace CustomModbusSlave {
 				catch (Exception ex) {
 					exception = ex;
 				}
+
 				if (comPortClosedCallbackAction != null) {
 					_notifyWorker.AddWork(() => comPortClosedCallbackAction(exception));
 				}
@@ -115,7 +120,8 @@ namespace CustomModbusSlave {
 					waiter.WaitOne();
 
 					lock (_dontStopSync) {
-						if (!_dontStop) return;
+						if (!_dontStop)
+							return;
 					}
 				}
 			});
@@ -134,8 +140,12 @@ namespace CustomModbusSlave {
 			_notifyWorker.AddWork(() => {
 				try {
 					var commandHeared = CommandHeared;
-					{
-						commandHeared?.Invoke(commandPart);
+					commandHeared?.Invoke(commandPart);
+
+					// TODO: Sync
+					if (_portContainerWithProgress != null) {
+						var progressChanged = ProgressChanged;
+						progressChanged?.Invoke(_portContainerWithProgress.ProgressPercentage);
 					}
 				}
 				catch (Exception ex) {
@@ -152,14 +162,19 @@ namespace CustomModbusSlave {
 			string result = "-----------------------------------------------------------------------------------------" + Environment.NewLine;
 			for (int i = 0; i < _incomingBuffer.Count; ++i) {
 				result += _incomingBuffer[i].ToString("X2") + " ";
-				if (i % 16 == 0) result += Environment.NewLine;
-				else if (i % 8 == 0) result += "    ";
-				else if (i % 4 == 0) result += "  ";
+				if (i % 16 == 0)
+					result += Environment.NewLine;
+				else if (i % 8 == 0)
+					result += "    ";
+				else if (i % 4 == 0)
+					result += "  ";
 			}
 
 			_logger.Log(result, null);
 			lock (_dontStopSync)
 				_dontStop = false;
 		}
+
+		public event ProgressChangedDelegate ProgressChanged;
 	}
 }

@@ -9,13 +9,13 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
 	public sealed class SerialChannelWithTimeoutMonitorAndSendReplyAbility
 	{
-		public SerialChannel Channel { get; }
+		public ISerialChannel Channel { get; }
 		public CommandHearedTimerNotThreadSafe TimeoutMonitor { get; }
 		public IFastReplyGenerator ReplyGenerator { get; }
 		public IFastReplyAcceptor ReplyAcceptor { get; }
 		public IParameterSetter ParamSetter { get; }
 
-		public SerialChannelWithTimeoutMonitorAndSendReplyAbility(SerialChannel channel)
+		public SerialChannelWithTimeoutMonitorAndSendReplyAbility(ISerialChannel channel)
 		{
 			Channel = channel;
 			Channel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;

@@ -14,8 +14,7 @@ using CustomModbusSlave.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.Record;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
-	public sealed class ComPortControlViewModel : ViewModelBase
-	{
+	public sealed class ComPortControlViewModel : ViewModelBase {
 		private readonly ISharedAppAbilities _appAbilities;
 		private readonly ILogger _logger;
 		private readonly IThreadNotifier _notifier;
@@ -30,13 +29,15 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 		private List<string> _comPortsAvailable;
 		private string _selectedComName;
+
 		private readonly SerialChannelWithTimeoutMonitorAndSendReplyAbility _channel;
+		private readonly ISerialChannelWithIoProgress _channelWithIoProgress;
 
 		//private readonly CommandHearedTimerNotThreadSafe _commandHearedTimeoutMonitor;
 		private Colors _linkBackColor;
+		private double _progress;
 
-		public ComPortControlViewModel(ISharedAppAbilities appAbilities, ILogger logger, IThreadNotifier notifier, IWindowSystem windowSystem, string channelName)
-		{
+		public ComPortControlViewModel(ISharedAppAbilities appAbilities, ILogger logger, IThreadNotifier notifier, IWindowSystem windowSystem, string channelName) {
 			_appAbilities = appAbilities;
 			_logger = logger;
 			_notifier = notifier;
@@ -46,29 +47,33 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			GetPortsAvailableCommand = new RelayCommand(GetPortsAvailable);
 			RecordVm = new RecordViewModel(_notifier, _windowSystem);
 
+
+			//TODO: unsubscribe
 			_channel = _appAbilities.CreateChannel(channelName);
 			_channel.Channel.CommandHeared += SerialChannelOnCommandHeared;
 			_channel.Channel.CommandHearedWithReplyPossibility += SerialChannelOnCommandHearedWithReplyPossibility;
 			_channel.TimeoutMonitor.SomeCommandWasHeared += CommandHearedTimeoutMonitorOnSomeCommandWasHeared;
 			_channel.TimeoutMonitor.NoAnyCommandWasHearedTooLong += CommandHearedTimeoutMonitorOnNoAnyCommandWasHearedTooLong;
 
+			_channelWithIoProgress = _channel.Channel as ISerialChannelWithIoProgress;
+			if (_channelWithIoProgress != null) _channelWithIoProgress.ProgressChanged += ChannelWithIoProgressOnProgressChanged;
+
+
 			GetPortsAvailable();
 
 			_logger.Log("Канал обмена добавлен");
 		}
 
+		private void ChannelWithIoProgressOnProgressChanged(double progressPercentage) {
+			_notifier.Notify(() => Progress = progressPercentage);
+		}
+
 		private void OpenPort() {
+			Progress = 0.0;
 			ISerialPortContainer portContainer;
 			if (_selectedComName == _appAbilities.TestPortName) {
 				var filename = _windowSystem.ShowOpenFileDialog("Текстовый файл с данными", "Текстовые файлы|*.txt|Все файлы|*.*");
-				/*List<byte> valuesFromFile = new List<byte>();
-				var parts = File.ReadAllText(filename).Split(new[] {" ", Environment.NewLine, "\t", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
-				for (int i = 0; i < parts.Length; ++i)
-				{
-					Console.WriteLine(parts[i]);
-					valuesFromFile.Add(byte.Parse(parts[i], NumberStyles.HexNumber));
-				}*/
-				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] { " ", Environment.NewLine, "\t", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
+				portContainer = !string.IsNullOrEmpty(filename) ? new SerialPortContainerTest(File.ReadAllText(filename).Split(new[] {" ", Environment.NewLine, "\t", "\n", "\r"}, StringSplitOptions.RemoveEmptyEntries).Select(t => byte.Parse(t, NumberStyles.HexNumber)).ToArray()) : new SerialPortContainerTest();
 			}
 			else {
 				portContainer = new SerialPortContainerReal(_selectedComName, 57600);
@@ -88,7 +93,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		}
 
 		private void GetPortsAvailable() {
-			var ports = new List<string> { _appAbilities.TestPortName };
+			var ports = new List<string> {_appAbilities.TestPortName};
 			ports.AddRange(SerialPort.GetPortNames());
 			ComPortsAvailable = ports;
 			if (ComPortsAvailable.Count > 0) SelectedComName = ComPortsAvailable[0];
@@ -169,8 +174,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		}
 
 		public double Progress {
-			get;
-
+			get => _progress;
+			set => SetProp(() => Math.Abs(_progress - value) > 1.0, () => _progress = value, () => Progress);
 		}
 
 		public ICommand OpenPortCommand => _openPortCommand;

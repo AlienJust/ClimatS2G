@@ -8,14 +8,14 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		private readonly object _listenersSyncObj;
 
 		private readonly object _channelsSyncObj;
-		private readonly List<SerialChannel> _channels;
+		private readonly List<ISerialChannel> _channels;
 
 		public StdNotifier() {
 			_listenersSyncObj = new object();
 			_listeners = new List<ICmdListenerStd>();
 
 			_channelsSyncObj = new object();
-			_channels = new List<SerialChannel>();
+			_channels = new List<ISerialChannel>();
 		}
 
 		private void ChannelOnCommandHeared(ICommandPart commandPart) {
@@ -33,7 +33,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			}
 		}
 
-		public void AddSerialChannel(SerialChannel channel) {
+		public void AddSerialChannel(ISerialChannel channel) {
 			lock (_channelsSyncObj) {
 				_channels.Add(channel);
 				channel.CommandHeared += ChannelOnCommandHeared;
@@ -42,7 +42,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			}
 		}
 
-		public void RemoveSerialChannel(SerialChannel channel) {
+		public void RemoveSerialChannel(ISerialChannel channel) {
 			lock (_channelsSyncObj) {
 				if (_channels.Contains(channel)) {
 					_channels.Remove(channel);
