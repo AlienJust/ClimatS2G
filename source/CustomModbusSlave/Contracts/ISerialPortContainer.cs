@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace CustomModbusSlave.Contracts {
 	public interface ISerialPortContainer : ISendAbility {

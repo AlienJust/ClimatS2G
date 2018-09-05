@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 	public class WorkModeSimple : IBsSmWorkMode {
 		public WorkModeSimple(bool relabilityFlag, bool powerLimitation, bool station, bool tunnel, bool longDistanceJourney, bool hasVoltage3000V, bool hasVoltage380V, bool isCompressorSwitchOnPermitted) {
 			RelabilityFlag = relabilityFlag;

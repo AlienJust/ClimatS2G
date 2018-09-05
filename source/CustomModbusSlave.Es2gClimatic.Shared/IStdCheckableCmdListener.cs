@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared {
 	/// <summary>
 	/// Defines common identifiers for command listeners to check them
 	/// </summary>

@@ -1,4 +1,4 @@
-using AlienJust.Support.Numeric.Bits;
+﻿using AlienJust.Support.Numeric.Bits;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {

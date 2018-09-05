@@ -9,6 +9,7 @@
 	xmlns:appWindow="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.AppWindow"
 	Title="{Binding Path=WindowTitle, Mode=OneWay}"
 	TitleCharacterCasing="Normal"
+	TitlebarHeight="40"
 	Height="480"
 	Width="640"
 	ResizeMode="CanResizeWithGrip"
@@ -21,14 +22,14 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary
-					Source="pack://application:,,,/ParamControls;component/Styles/AzureTabItem.xaml" />
+					Source="pack://application:,,,/ParamControls;component/Styles/AzureTabItem.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 
 			<BooleanToVisibilityConverter
-				x:Key="BtvConverter" />
+				x:Key="BtvConverter"/>
 			<converters:BooleanToVisibilityConverter
 				x:Key="InvertedBtwConverter"
-				InvertVisibility="True" />
+				InvertVisibility="True"/>
 
 			<DataTemplate
 				x:Key="MenuItemTemplate"
@@ -37,8 +38,8 @@
 					Height="48">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition
-							Width="48" />
-						<ColumnDefinition />
+							Width="48"/>
+						<ColumnDefinition/>
 					</Grid.ColumnDefinitions>
 					<TextBlock
 						Grid.Column="0"
@@ -47,32 +48,28 @@
 						VerticalAlignment="Center"
 						FontFamily="Arial"
 						Foreground="White"
-						Text="{Binding Glyph}" />
+						Text="{Binding Glyph}"/>
 					<TextBlock
 						Grid.Column="1"
 						VerticalAlignment="Center"
 						FontSize="16"
 						Foreground="White"
-						Text="{Binding Label}" />
+						Text="{Binding Label}"/>
 				</Grid>
 			</DataTemplate>
 		</ResourceDictionary>
 	</Window.Resources>
 	<controls:MetroWindow.WindowButtonCommands>
 		<controls:WindowButtonCommands
-			Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
+			Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}"/>
 	</controls:MetroWindow.WindowButtonCommands>
 	<controls:MetroWindow.LeftWindowCommands>
 		<controls:WindowCommands>
 			<ToggleButton
-				Margin="2,2,2,2"
+				Margin="0"
 				IsChecked="{Binding Path=TabHeadersAreLong}"
-				BorderThickness="0"
-				Style="{DynamicResource AccentedSquareButtonStyle}">
-				<iconPacks:PackIconMaterial
-					Width="Auto"
-					Height="Auto"
-					Kind="Menu" />
+				BorderThickness="0" Width="48" Height="32" Style="{DynamicResource AccentedSquareButtonStyle}">
+				<iconPacks:PackIconMaterial Kind="Menu"/>
 			</ToggleButton>
 		</controls:WindowCommands>
 	</controls:MetroWindow.LeftWindowCommands>
@@ -86,12 +83,12 @@
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
 						<WrapPanel
-							IsItemsHost="True" />
+							IsItemsHost="True"/>
 					</ItemsPanelTemplate>
 				</ListBox.ItemsPanel>
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<appWindow:ComPortControlView />
+						<appWindow:ComPortControlView/>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
@@ -100,16 +97,16 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition
-				Height="Auto" />
+				Height="Auto"/>
 			<RowDefinition
-				Height="6*" />
+				Height="6*"/>
 			<RowDefinition
-				Height="1*" />
+				Height="1*"/>
 		</Grid.RowDefinitions>
 		<ContentPresenter
 			Height="Auto"
 			Grid.Row="0"
-			Content="{Binding Path=TopContent, Mode=OneWay}" />
+			Content="{Binding Path=TopContent, Mode=OneWay}"/>
 		<TabControl
 			ItemContainerStyle="{StaticResource AzureTabItem}"
 			Grid.Row="1"
@@ -121,10 +118,10 @@
 						Orientation="Horizontal">
 						<TextBlock
 							Text="{Binding Path=ShortHeader, Mode=OneTime}"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}"/>
 						<TextBlock
 							Text="{Binding Path=FullHeader, Mode=OneTime}"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
+							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}"/>
 					</StackPanel>
 				</DataTemplate>
 			</TabControl.ItemTemplate>
@@ -132,7 +129,7 @@
 				<DataTemplate>
 					<ScrollViewer>
 						<ContentPresenter
-							Content="{Binding Path=Content, Mode=OneTime}" />
+							Content="{Binding Path=Content, Mode=OneTime}"/>
 					</ScrollViewer>
 				</DataTemplate>
 			</TabControl.ContentTemplate>
@@ -145,13 +142,10 @@
 			VerticalAlignment="Top"
 			Background="{DynamicResource AccentColorBrush}"
 			ResizeDirection="Rows"
-			HorizontalAlignment="Stretch" />
+			HorizontalAlignment="Stretch"/>
 		<progamLog:ProgramLogView
 			Grid.Row="2"
 			DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}"
-			Margin="4,8,6,4" />
+			Margin="4,8,6,4"/>
 	</Grid>
 </controls:MetroWindow>
-
-
-

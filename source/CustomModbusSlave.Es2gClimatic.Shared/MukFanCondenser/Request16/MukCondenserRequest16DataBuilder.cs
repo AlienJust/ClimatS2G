@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AlienJust.Support.Numeric.Bits;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16 {

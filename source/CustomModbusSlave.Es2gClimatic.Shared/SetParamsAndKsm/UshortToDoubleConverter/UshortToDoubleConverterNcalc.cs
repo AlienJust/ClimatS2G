@@ -1,4 +1,4 @@
-using NCalc;
+﻿using NCalc;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.UshortToDoubleConverter {
 	public class UshortToDoubleConverterNcalc : IUshortToDoubleConverter {

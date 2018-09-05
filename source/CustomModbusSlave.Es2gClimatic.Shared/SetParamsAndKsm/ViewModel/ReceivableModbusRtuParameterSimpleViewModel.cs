@@ -1,4 +1,4 @@
-using AlienJust.Support.Collections;
+﻿using AlienJust.Support.Collections;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters;
 using ParamCentric.Modbus.Contracts;

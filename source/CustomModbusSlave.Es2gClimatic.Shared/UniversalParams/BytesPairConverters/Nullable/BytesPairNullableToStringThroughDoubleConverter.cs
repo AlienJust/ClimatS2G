@@ -1,4 +1,4 @@
-using AlienJust.Support.Collections;
+﻿using AlienJust.Support.Collections;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.BytesPairConverters {

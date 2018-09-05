@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2 {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2 {
 	public class MukFlapDiagnostic2Builder : IBuilder<IMukFlapDiagnostic2> {
 		private readonly int _absoluteValue;
 		public MukFlapDiagnostic2Builder(int absoluteValue) {

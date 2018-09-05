@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.IO.Ports;
 using AlienJust.Support.Loggers;
 using AlienJust.Support.Loggers.Contracts;
@@ -48,7 +48,7 @@ namespace CustomModbusSlave {
 		}
 
 		public override string ToString() {
-			return _port.PortName + ", скорость обмена: " + _port.BaudRate + " б/с";
+			return _port.PortName + ", СЃРєРѕСЂРѕСЃС‚СЊ РѕР±РјРµРЅР°: " + _port.BaudRate + " Р±/СЃ";
 		}
 	}
 }

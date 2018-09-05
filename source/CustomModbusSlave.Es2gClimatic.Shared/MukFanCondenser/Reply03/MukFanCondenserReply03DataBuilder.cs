@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Numeric.Bits;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;

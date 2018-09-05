@@ -1,4 +1,4 @@
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
+﻿using CustomModbusSlave.MicroclimatEs2gApp.SetParams;
 using ParamCentric.Modbus.Contracts;
 using ParamCentric.UserInterface.Contracts;
 

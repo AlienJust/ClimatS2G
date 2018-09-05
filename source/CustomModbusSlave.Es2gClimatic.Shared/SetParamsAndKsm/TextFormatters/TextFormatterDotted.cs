@@ -1,4 +1,4 @@
-using AlienJust.Support.Collections;
+﻿using AlienJust.Support.Collections;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters {
 	public class TextFormatterDotted : ITextFormatter<BytesPair?> {

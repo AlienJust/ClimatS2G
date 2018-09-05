@@ -1,4 +1,4 @@
-using AlienJust.Support.Collections;
+﻿using AlienJust.Support.Collections;
 using AlienJust.Support.ModelViewViewModel;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel {

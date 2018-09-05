@@ -1,22 +1,22 @@
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16 {
+п»їnamespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16 {
 	internal enum KsmCommandWorkmode {
 		/// <summary>
-		/// Выключено
+		/// Р’С‹РєР»СЋС‡РµРЅРѕ
 		/// </summary>
 		Off = 0,
 
 		/// <summary>
-		/// Работа в автоматическом режиме
+		/// Р Р°Р±РѕС‚Р° РІ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРј СЂРµР¶РёРјРµ
 		/// </summary>
 		Auto = 1,
 
 		/// <summary>
-		/// Работа по ручной уставке
+		/// Р Р°Р±РѕС‚Р° РїРѕ СЂСѓС‡РЅРѕР№ СѓСЃС‚Р°РІРєРµ
 		/// </summary>
 		Manual = 2,
 
 		/// <summary>
-		/// Неизвестное значение
+		/// РќРµРёР·РІРµСЃС‚РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ
 		/// </summary>
 		Unknown
 	}

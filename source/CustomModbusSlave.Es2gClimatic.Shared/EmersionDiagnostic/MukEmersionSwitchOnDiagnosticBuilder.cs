@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic {
 	public class MukEmersionSwitchOnDiagnosticBuilder : IBuilder<IMukEmersionSwitchOnDiagnostic> {
 		private readonly int _absoluteValue;
 		public MukEmersionSwitchOnDiagnosticBuilder(int absoluteValue) {

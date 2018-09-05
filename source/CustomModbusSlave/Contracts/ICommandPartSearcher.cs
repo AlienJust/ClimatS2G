@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CustomModbusSlave.Contracts {
 	public interface ICommandPartSearcher {

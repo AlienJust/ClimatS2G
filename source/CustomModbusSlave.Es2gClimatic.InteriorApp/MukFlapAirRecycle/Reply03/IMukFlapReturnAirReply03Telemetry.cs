@@ -1,4 +1,4 @@
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
+﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
@@ -34,8 +34,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 	internal interface IMukFlapReturnAirOutgoingSignals {
 		bool TurnContactor1On { get; }
 		bool TurnContactor2On { get; }
-		//включение контактора 1		
-		//включение контактора 2
+		//РІРєР»СЋС‡РµРЅРёРµ РєРѕРЅС‚Р°РєС‚РѕСЂР° 1		
+		//РІРєР»СЋС‡РµРЅРёРµ РєРѕРЅС‚Р°РєС‚РѕСЂР° 2
 	}
 
 	internal sealed class MukFlapReturnAirOutgoingSignals : IMukFlapReturnAirOutgoingSignals {

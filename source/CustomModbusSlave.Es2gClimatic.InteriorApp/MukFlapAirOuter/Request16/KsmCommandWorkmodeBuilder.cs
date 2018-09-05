@@ -1,4 +1,4 @@
-using CustomModbusSlave.Es2gClimatic.Shared;
+﻿using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Request16 {
 	class KsmCommandWorkmodeBuilder : IBuilder<KsmCommandWorkmode> {

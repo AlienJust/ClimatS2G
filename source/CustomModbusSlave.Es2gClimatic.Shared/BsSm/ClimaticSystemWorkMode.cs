@@ -1,6 +1,6 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
+п»їnamespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 	/// <summary>
-	/// Режим работы климатической системы
+	/// Р РµР¶РёРј СЂР°Р±РѕС‚С‹ РєР»РёРјР°С‚РёС‡РµСЃРєРѕР№ СЃРёСЃС‚РµРјС‹
 	/// </summary>
 	public enum ClimaticSystemWorkMode {
 		Off,

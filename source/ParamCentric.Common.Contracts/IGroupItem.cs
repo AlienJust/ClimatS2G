@@ -1,4 +1,4 @@
-namespace ParamCentric.Common.Contracts {
+﻿namespace ParamCentric.Common.Contracts {
 	public interface IGroupItem {
 		string Name { get; }
 	}

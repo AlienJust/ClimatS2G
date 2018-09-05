@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.Bvs {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.Bvs {
 	public class BvsReply65TelemetrySimple : IBvsReply65Telemetry {
 		public bool BvsInput1 { get; set; }
 		public bool BvsInput2 { get; set; }

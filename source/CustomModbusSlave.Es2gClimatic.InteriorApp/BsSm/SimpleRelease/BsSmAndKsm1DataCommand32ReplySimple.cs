@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.BsSm;
 using CustomModbusSlave.Es2gClimatic.Shared.BsSm.State;

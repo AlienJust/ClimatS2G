@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared {
 	public abstract class CmdListenerBase<T> : IStdCheckableCmdListener, ICmdListener<T> {

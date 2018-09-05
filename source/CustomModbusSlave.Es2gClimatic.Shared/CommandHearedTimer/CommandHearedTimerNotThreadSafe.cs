@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Threading;
 using AlienJust.Support.Concurrent.Contracts;
 using CustomModbusSlave.Contracts;
@@ -45,7 +45,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.CommandHearedTimer {
 		public void Start() {
 			LastTimeAnyCommandWasHeared = DateTime.Now;
 
-			_checkThread = new Thread(PeriodicCheck) { IsBackground = true, Name = "Поток периодической проверки времени последней регистрации команды", Priority = ThreadPriority.BelowNormal };
+			_checkThread = new Thread(PeriodicCheck) { IsBackground = true, Name = "РџРѕС‚РѕРє РїРµСЂРёРѕРґРёС‡РµСЃРєРѕР№ РїСЂРѕРІРµСЂРєРё РІСЂРµРјРµРЅРё РїРѕСЃР»РµРґРЅРµР№ СЂРµРіРёСЃС‚СЂР°С†РёРё РєРѕРјР°РЅРґС‹", Priority = ThreadPriority.BelowNormal };
 			_checkThread.Start();
 
 			_serialChannel.CommandHeared += SerialChannelOnCommandHeared;

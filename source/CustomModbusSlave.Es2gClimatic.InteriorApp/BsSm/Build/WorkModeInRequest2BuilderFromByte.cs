@@ -1,4 +1,4 @@
-using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
+﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.BsSm;

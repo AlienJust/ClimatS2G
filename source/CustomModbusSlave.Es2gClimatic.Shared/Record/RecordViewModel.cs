@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
@@ -35,7 +35,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.Record {
 		private void StopRecord() {
 			IsRecording = false;
 			if (_recordedData.Count > 0) {
-				var filename = _windowSystem.ShowSaveFileDialog("Сохранение данных в виде текста", "Текстовые файлы|*.txt|Все файлы|*.*");
+				var filename = _windowSystem.ShowSaveFileDialog("РЎРѕС…СЂР°РЅРµРЅРёРµ РґР°РЅРЅС‹С… РІ РІРёРґРµ С‚РµРєСЃС‚Р°", "РўРµРєСЃС‚РѕРІС‹Рµ С„Р°Р№Р»С‹|*.txt|Р’СЃРµ С„Р°Р№Р»С‹|*.*");
 				if (!string.IsNullOrEmpty(filename)) {
 					using (var sw = new StreamWriter(File.OpenWrite(filename))) { 
 						for (int i = 0; i < _recordedData.Count; ++i) {

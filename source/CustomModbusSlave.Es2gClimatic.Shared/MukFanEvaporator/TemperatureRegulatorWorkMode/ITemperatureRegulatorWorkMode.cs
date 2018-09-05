@@ -1,19 +1,19 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode
+п»їnamespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode
 {
 	/// <summary>
-	/// Режим работы регулятора температуры
+	/// Р РµР¶РёРј СЂР°Р±РѕС‚С‹ СЂРµРіСѓР»СЏС‚РѕСЂР° С‚РµРјРїРµСЂР°С‚СѓСЂС‹
 	/// </summary>
 	public interface ITemperatureRegulatorWorkMode {
 		/// <summary>
-		/// Полное значение (пара байт)
+		/// РџРѕР»РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ (РїР°СЂР° Р±Р°Р№С‚)
 		/// </summary>
 		int FullValue { get; }
 		/// <summary>
-		/// режим «охлаждение», иначе режим «нагрев»
+		/// СЂРµР¶РёРј В«РѕС…Р»Р°Р¶РґРµРЅРёРµВ», РёРЅР°С‡Рµ СЂРµР¶РёРј В«РЅР°РіСЂРµРІВ»
 		/// </summary>
 		bool Cool { get; }
 		/// <summary>
-		/// режим ограничения охлаждения/нагрева по внешней температуре
+		/// СЂРµР¶РёРј РѕРіСЂР°РЅРёС‡РµРЅРёСЏ РѕС…Р»Р°Р¶РґРµРЅРёСЏ/РЅР°РіСЂРµРІР° РїРѕ РІРЅРµС€РЅРµР№ С‚РµРјРїРµСЂР°С‚СѓСЂРµ
 		/// </summary>
 		bool Restrict { get; }
 	}

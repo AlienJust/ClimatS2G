@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
+﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 	internal sealed class MukFlapReturnAirIncomingSignals : IMukFlapReturnAirIncomingSignals {
 		public MukFlapReturnAirIncomingSignals(bool controlOfContactor1, bool controlOfContactor2, bool flagOfDualSystemTrain) {
 			ControlOfContactor1 = controlOfContactor1;

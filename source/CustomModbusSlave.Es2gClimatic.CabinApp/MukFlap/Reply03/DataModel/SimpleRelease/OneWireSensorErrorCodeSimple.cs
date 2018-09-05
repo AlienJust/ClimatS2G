@@ -1,4 +1,4 @@
-using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
+﻿using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts;
 using CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.Contracts.Enums;
 
 namespace CustomModbusSlave.MicroclimatEs2gApp.MukFlap.DataModel.SimpleRelease {

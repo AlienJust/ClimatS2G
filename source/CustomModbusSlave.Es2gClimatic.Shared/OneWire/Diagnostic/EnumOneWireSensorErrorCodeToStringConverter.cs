@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Windows.Data;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire {
@@ -9,15 +9,15 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire {
 
 			switch (ns) {
 				case OneWireSensorErrorCode.FoundDeviceWithUnknownFamilyCode:
-					return "Найдено устройство с неизвестным кодом семейства";
+					return "РќР°Р№РґРµРЅРѕ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ СЃ РЅРµРёР·РІРµСЃС‚РЅС‹Рј РєРѕРґРѕРј СЃРµРјРµР№СЃС‚РІР°";
 				case OneWireSensorErrorCode.SensorNotFound:
-					return "Не найден датчик";
+					return "РќРµ РЅР°Р№РґРµРЅ РґР°С‚С‡РёРє";
 				case OneWireSensorErrorCode.NoReactionOnReset:
-					return "Нет реакции на сигнал reset";
+					return "РќРµС‚ СЂРµР°РєС†РёРё РЅР° СЃРёРіРЅР°Р» reset";
 				case OneWireSensorErrorCode.SensorShowsIncorrectWorking:
-					return "Датчик индицирует некорректную работу";
+					return "Р”Р°С‚С‡РёРє РёРЅРґРёС†РёСЂСѓРµС‚ РЅРµРєРѕСЂСЂРµРєС‚РЅСѓСЋ СЂР°Р±РѕС‚Сѓ";
 				case OneWireSensorErrorCode.NoError:
-					return "Нет ошибок, или неизвестный код";
+					return "РќРµС‚ РѕС€РёР±РѕРє, РёР»Рё РЅРµРёР·РІРµСЃС‚РЅС‹Р№ РєРѕРґ";
 				default:
 					return ns.ToString();
 			}

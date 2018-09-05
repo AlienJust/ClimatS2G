@@ -1,6 +1,6 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
+п»їnamespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 	/// <summary>
-	/// Режим работы
+	/// Р РµР¶РёРј СЂР°Р±РѕС‚С‹
 	/// </summary>
 	public interface IBsSmWorkMode {
 		bool RelabilityFlag { get; }

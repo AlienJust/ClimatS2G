@@ -1,4 +1,4 @@
-using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
+﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.SimpleRelease {
 	class WorkModeInRequestSimple : IWorkModeInRequest {

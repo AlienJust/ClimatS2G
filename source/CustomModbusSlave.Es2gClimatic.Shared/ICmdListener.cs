@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared {
 	/// <summary>
 	/// Type depended interface for command listeners
 	/// </summary>

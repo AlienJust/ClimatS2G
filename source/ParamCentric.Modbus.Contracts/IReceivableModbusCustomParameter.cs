@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ParamCentric.Common.Contracts;
 
 namespace ParamCentric.Modbus.Contracts {

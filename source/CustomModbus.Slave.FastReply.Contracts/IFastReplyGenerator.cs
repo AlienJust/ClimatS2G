@@ -1,4 +1,4 @@
-namespace CustomModbus.Slave.FastReply.Contracts {
+﻿namespace CustomModbus.Slave.FastReply.Contracts {
 	public interface IFastReplyGenerator {
 		byte[] GenerateReply();
 	}

@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
+﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 	class MukFlapReturnAirConcentratorStatusSimple : IMukFlapReturnAirConcentratorStatus {
 		public bool CommandToPal { get; set; }
 		public bool CommandFromPal { get; set; }

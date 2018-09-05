@@ -1,4 +1,4 @@
-using AlienJust.Support.Collections;
+﻿using AlienJust.Support.Collections;
 using ParamCentric.Common.Contracts;
 
 namespace ParamCentric.Modbus.Contracts {

@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 	public class ClimaticSystemWorkModeBuilderFromString : IBuilder<ClimaticSystemWorkMode> {
@@ -10,25 +10,25 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 
 		public ClimaticSystemWorkMode Build() {
 			switch (_textValue) {
-				case "Выключено":
+				case "Р’С‹РєР»СЋС‡РµРЅРѕ":
 					return ClimaticSystemWorkMode.Off;
-				case "Включено":
+				case "Р’РєР»СЋС‡РµРЅРѕ":
 					return ClimaticSystemWorkMode.On;
-				case "Резерв":
+				case "Р РµР·РµСЂРІ":
 					return ClimaticSystemWorkMode.Reserved;
-				case "Отстой во включённом состоянии":
+				case "РћС‚СЃС‚РѕР№ РІРѕ РІРєР»СЋС‡С‘РЅРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё":
 					return ClimaticSystemWorkMode.DowntimeWhileOn;
-				case "Техобслуживание":
+				case "РўРµС…РѕР±СЃР»СѓР¶РёРІР°РЅРёРµ":
 					return ClimaticSystemWorkMode.Maintenance;
-				case "Мойка":
+				case "РњРѕР№РєР°":
 					return ClimaticSystemWorkMode.Washing;
-				case "Аварийная вентиляция":
+				case "РђРІР°СЂРёР№РЅР°СЏ РІРµРЅС‚РёР»СЏС†РёСЏ":
 					return ClimaticSystemWorkMode.EmergencyVenting;
-				case "Аварийное отопление":
+				case "РђРІР°СЂРёР№РЅРѕРµ РѕС‚РѕРїР»РµРЅРёРµ":
 					return ClimaticSystemWorkMode.EmergencyHeating;
-				case "Тестирование (запуск системы)":
+				case "РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ (Р·Р°РїСѓСЃРє СЃРёСЃС‚РµРјС‹)":
 					return ClimaticSystemWorkMode.Test;
-				case "Неизваестно":
+				case "РќРµРёР·РІР°РµСЃС‚РЅРѕ":
 					return ClimaticSystemWorkMode.Unknown;
 				default:
 					throw new Exception("Cannot convert text " + _textValue + " to " + typeof(ClimaticSystemWorkMode).FullName);

@@ -1,8 +1,8 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared {
+п»їnamespace CustomModbusSlave.Es2gClimatic.Shared {
 	/// <summary>
-	/// Строитель чего-бы то ни было
+	/// РЎС‚СЂРѕРёС‚РµР»СЊ С‡РµРіРѕ-Р±С‹ С‚Рѕ РЅРё Р±С‹Р»Рѕ
 	/// </summary>
-	/// <typeparam name="T">Тип объекта, который строитель строит</typeparam>
+	/// <typeparam name="T">РўРёРї РѕР±СЉРµРєС‚Р°, РєРѕС‚РѕСЂС‹Р№ СЃС‚СЂРѕРёС‚РµР»СЊ СЃС‚СЂРѕРёС‚</typeparam>
 	public interface IBuilder<out T> {
 		T Build();
 	}

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data {
@@ -6,15 +6,15 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data {
 		public static string ToText(this AutomaticWorkmodeStage value) {
 			switch (value) {
 				case AutomaticWorkmodeStage.ControllerInitialization:
-					return "инициализация контроллера";
+					return "РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°";
 				case AutomaticWorkmodeStage.WaitingForPowerOnCommand:
-					return "ожидание команды на включение";
+					return "РѕР¶РёРґР°РЅРёРµ РєРѕРјР°РЅРґС‹ РЅР° РІРєР»СЋС‡РµРЅРёРµ";
 				case AutomaticWorkmodeStage.WorkingWithFanOnByTable:
-					return "работа с включением вентилятора по таблице";
+					return "СЂР°Р±РѕС‚Р° СЃ РІРєР»СЋС‡РµРЅРёРµРј РІРµРЅС‚РёР»СЏС‚РѕСЂР° РїРѕ С‚Р°Р±Р»РёС†Рµ";
 				case AutomaticWorkmodeStage.Unknown:
-					return "неизвестно";
+					return "РЅРµРёР·РІРµСЃС‚РЅРѕ";
 				default:
-					throw new ArgumentOutOfRangeException(nameof(value), "неизвестное значение");
+					throw new ArgumentOutOfRangeException(nameof(value), "РЅРµРёР·РІРµСЃС‚РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ");
 			}
 		}
 	}

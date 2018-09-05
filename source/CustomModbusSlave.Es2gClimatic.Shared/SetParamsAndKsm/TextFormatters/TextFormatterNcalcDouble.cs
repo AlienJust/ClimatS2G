@@ -1,4 +1,4 @@
-using AlienJust.Support.Collections;
+﻿using AlienJust.Support.Collections;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.UshortToDoubleConverter;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters {

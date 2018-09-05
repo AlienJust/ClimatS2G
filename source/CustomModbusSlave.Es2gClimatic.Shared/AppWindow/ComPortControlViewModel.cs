@@ -168,6 +168,11 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			}
 		}
 
+		public double Progress {
+			get;
+
+		}
+
 		public ICommand OpenPortCommand => _openPortCommand;
 		public ICommand ClosePortCommand => _closePortCommand;
 

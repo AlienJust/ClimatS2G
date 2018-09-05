@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 

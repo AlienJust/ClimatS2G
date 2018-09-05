@@ -1,17 +1,17 @@
-using System;
+п»їusing System;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16 {
 	internal static class KsmCommandWorkmodeExtensions {
 		public static string ToText(this KsmCommandWorkmode mode) {
 			switch (mode) {
 				case KsmCommandWorkmode.Off:
-					return "Выключено";
+					return "Р’С‹РєР»СЋС‡РµРЅРѕ";
 				case KsmCommandWorkmode.Auto:
-					return "Работа в автоматическом режиме";
+					return "Р Р°Р±РѕС‚Р° РІ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРј СЂРµР¶РёРјРµ";
 				case KsmCommandWorkmode.Manual:
-					return "Работа по ручной уставке";
+					return "Р Р°Р±РѕС‚Р° РїРѕ СЂСѓС‡РЅРѕР№ СѓСЃС‚Р°РІРєРµ";
 				case KsmCommandWorkmode.Unknown:
-					return "Неизвестное значение";
+					return "РќРµРёР·РІРµСЃС‚РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ";
 				default:
 					throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
 			}

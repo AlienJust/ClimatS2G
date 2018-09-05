@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters {
 	public class TextFormatterIntegerDotted : ITextFormatter<int> {
 
 		public string Format(int value) {

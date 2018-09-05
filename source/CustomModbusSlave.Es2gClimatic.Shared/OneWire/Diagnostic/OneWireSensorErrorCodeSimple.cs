@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire {
 	public class OneWireSensorErrorCodeSimple : IOneWireSensorErrorCode {
 		public OneWireSensorErrorCodeSimple(int absoluteValue) {
 			AbsoluteValue = absoluteValue;

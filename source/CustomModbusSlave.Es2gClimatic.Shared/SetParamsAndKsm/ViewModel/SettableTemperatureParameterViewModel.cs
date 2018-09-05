@@ -1,4 +1,4 @@
-using AlienJust.Support.Concurrent.Contracts;
+﻿using AlienJust.Support.Concurrent.Contracts;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
 

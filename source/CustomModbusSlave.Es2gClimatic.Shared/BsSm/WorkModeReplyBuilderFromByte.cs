@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 	public class WorkModeReplyBuilderFromByte : IBuilder<IBsSmWorkMode> {
 		private readonly byte _absoluteValue;
 

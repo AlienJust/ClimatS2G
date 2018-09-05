@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Request16 {
+﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Request16 {
 	class MukFlapAirRecycleRequest16DataSimple : IMukFlapAirRecycleRequest16Data {
 		public int MukFlapAirRecycleWorkmodeCommandFromKsm { get; set; }
 		public int TemperatureOuterAir { get; set; }

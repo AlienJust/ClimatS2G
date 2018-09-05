@@ -1,4 +1,4 @@
-using AlienJust.Support.Numeric.Bits;
+﻿using AlienJust.Support.Numeric.Bits;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
 	internal class MukFanVaporizerDataReply03Diagnostic1Builder : IBuilder<IMukFanVaporizerDataReply03Diagnostic1> {

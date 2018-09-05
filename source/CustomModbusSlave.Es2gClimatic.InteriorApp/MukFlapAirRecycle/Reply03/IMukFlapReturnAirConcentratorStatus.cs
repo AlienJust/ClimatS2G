@@ -1,42 +1,42 @@
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
+п»їnamespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 	internal interface IMukFlapReturnAirConcentratorStatus {
 		/// <summary>
-		/// команда на ПЛМ (1 - «включение»)
+		/// РєРѕРјР°РЅРґР° РЅР° РџР›Рњ (1 - В«РІРєР»СЋС‡РµРЅРёРµВ»)
 		/// </summary>
 		bool CommandToPal { get; }
 
 		/// <summary>
-		/// команда с ПЛМ (1- включение ключа)
+		/// РєРѕРјР°РЅРґР° СЃ РџР›Рњ (1- РІРєР»СЋС‡РµРЅРёРµ РєР»СЋС‡Р°)
 		/// </summary>
 		bool CommandFromPal { get; }
 
 		/// <summary>
-		/// работа / неисправность
+		/// СЂР°Р±РѕС‚Р° / РЅРµРёСЃРїСЂР°РІРЅРѕСЃС‚СЊ
 		/// </summary>
 		bool WorkOrError { get; }
 
 		/// <summary>
-		/// ошибка по неответу драйвера
+		/// РѕС€РёР±РєР° РїРѕ РЅРµРѕС‚РІРµС‚Сѓ РґСЂР°Р№РІРµСЂР°
 		/// </summary>
 		bool ErrorNoAnswerFromDriver { get; }
 
 		/// <summary>
-		/// ошибка по току CC
+		/// РѕС€РёР±РєР° РїРѕ С‚РѕРєСѓ CC
 		/// </summary>
 		bool ErrorByCurrentCc { get; }
 
 		/// <summary>
-		/// значение компаратора
+		/// Р·РЅР°С‡РµРЅРёРµ РєРѕРјРїР°СЂР°С‚РѕСЂР°
 		/// </summary>
 		bool ComparatorValue { get; }
 
 		/// <summary>
-		/// резерв
+		/// СЂРµР·РµСЂРІ
 		/// </summary>
 		bool Reserve { get; }
 
 		/// <summary>
-		/// адрес
+		/// Р°РґСЂРµСЃ
 		/// </summary>
 		bool Address { get; }
 	}

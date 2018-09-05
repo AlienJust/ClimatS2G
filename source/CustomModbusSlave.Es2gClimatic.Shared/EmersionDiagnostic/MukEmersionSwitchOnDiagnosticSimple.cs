@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic {
 	class MukEmersionSwitchOnDiagnosticSimple : IMukEmersionSwitchOnDiagnostic {
 		public MukEmersionSwitchOnDiagnosticSimple(bool mukIsSwitchingEmersionOn, bool mukIsWatingFor5MinutesAfterLastSwitchingEmersionOn, bool mukIsWaitingFor5MinutesWhileEmersionIsSwithedOn) {
 			MukIsSwitchingEmersionOn = mukIsSwitchingEmersionOn;

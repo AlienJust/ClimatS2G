@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
 	internal class MukFanVaporizerDataReply03Diagnostic2Simple : IMukFanVaporizerDataReply03Diagnostic2 {
 		public bool PhaseErrorOrPowerLost { get; set; }
 		public bool ReserveBit1 { get; set; }

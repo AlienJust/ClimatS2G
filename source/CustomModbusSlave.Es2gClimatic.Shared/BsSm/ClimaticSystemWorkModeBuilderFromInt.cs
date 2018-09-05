@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
+Ôªønamespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 	public class ClimaticSystemWorkModeBuilderFromInt : IBuilder<ClimaticSystemWorkMode> {
 		private readonly int _integerValue;
 
@@ -27,7 +27,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.BsSm {
 				case 8:
 					return ClimaticSystemWorkMode.Test;
 				default:
-					return ClimaticSystemWorkMode.Unknown; // ÙË„Ìˇ Í‡Í‡ˇ-ÚÓ
+					return ClimaticSystemWorkMode.Unknown; // —Ñ–∏–≥–Ω—è –∫–∞–∫–∞—è-—Ç–æ
 					//throw new Exception("Cannot convert int " + _integerValue + " to " + typeof(ClimaticSystemWorkMode).FullName);
 			}
 		}

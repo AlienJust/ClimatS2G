@@ -1,4 +1,4 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2 {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2 {
 	public class MukFlapDiagnostic2 : IMukFlapDiagnostic2 {
 		public MukFlapDiagnostic2(bool osShowsFlapDoesNotReachLimitPositions, bool osShowsFlapDoesNotReach50Percent) {
 			OsShowsFlapDoesNotReachLimitPositions = osShowsFlapDoesNotReachLimitPositions;

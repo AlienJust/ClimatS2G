@@ -1,4 +1,4 @@
-using AlienJust.Support.Collections;
+Ôªøusing AlienJust.Support.Collections;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
 using CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters;
 
@@ -25,7 +25,7 @@ namespace CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.BytesPairC
 			//else if (!_signed ) rawValue = value.Value.HighFirstUnsignedValue;
 
 			var si = new SensorIndicationDoubleBasedOnBytesPair(value.Value, _multiplier, _addition, _noLinkCode);
-			if (si.NoLinkWithSensor) return "Œ·˚‚ ‰‡Ú˜ËÍ‡";
+			if (si.NoLinkWithSensor) return "–û–±—Ä—ã–≤ –¥–∞—Ç—á–∏–∫–∞";
 
 			return si.Indication.ToString(_format);
 		}

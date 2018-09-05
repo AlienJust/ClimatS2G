@@ -1,5 +1,5 @@
-namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {
+ï»¿namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {
 	public static class SensorIndicationExt {
-		public const string NoLinkText = "Îáğûâ äàò÷èêà";
+		public const string NoLinkText = "ĞĞ±Ñ€Ñ‹Ğ² Ğ´Ğ°Ñ‚Ñ‡Ğ¸ĞºĞ°";
 	}
 }

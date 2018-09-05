@@ -1,11 +1,11 @@
-using System;
+п»їusing System;
 using System.Collections.Concurrent;
 using AlienJust.Support.Numeric;
 using CustomModbus.Slave.FastReply.Contracts;
 
 namespace CustomModbus.Slave.FastReply.Queued {
 	public class ReplyGeneratorWithQueueAttempted : IParameterSetter, IFastReplyGenerator, IFastReplyAcceptor {
-		// адрес, значение, callback, число попыток
+		// Р°РґСЂРµСЃ, Р·РЅР°С‡РµРЅРёРµ, callback, С‡РёСЃР»Рѕ РїРѕРїС‹С‚РѕРє
 		private readonly BlockingCollection<QueueItem> _itemsToWrite;
 		private readonly byte[] _noAnyParamWasChangedReplyToBeFast;
 		private readonly byte[] _fastReply;
@@ -23,7 +23,7 @@ namespace CustomModbus.Slave.FastReply.Queued {
 			_noAnyParamWasChangedReplyToBeFast = new byte[] { 20, 33, 0, 0, 0, 0, 0x08, 0xBF }; // default reply with precalculated CRC16
 			_fastReply = new byte[] { 20, 33, 0, 0, 0, 0, 0, 0 }; // reply pattern
 
-			_commonExceptionToBeFast = new Exception("За указанное число попыток нужный номер параметра не был получен");
+			_commonExceptionToBeFast = new Exception("Р—Р° СѓРєР°Р·Р°РЅРЅРѕРµ С‡РёСЃР»Рѕ РїРѕРїС‹С‚РѕРє РЅСѓР¶РЅС‹Р№ РЅРѕРјРµСЂ РїР°СЂР°РјРµС‚СЂР° РЅРµ Р±С‹Р» РїРѕР»СѓС‡РµРЅ");
 
 			_currentItem = null;
 			_currentItemSyncLockObject = new object();
@@ -57,7 +57,7 @@ namespace CustomModbus.Slave.FastReply.Queued {
 		public void SetParameterAsync(int zeroBasedParameterNumber, ushort value, Action<Exception> callback) {
 			lock (_currentItemSyncLockObject) {
 				/*if (_currentItem != null) {
-					_currentItem.OnCompleteCallback.Invoke(new Exception("Не удалось записать параметр, т.к. поступил запрос на запись нового параметра"));
+					_currentItem.OnCompleteCallback.Invoke(new Exception("РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РїРёСЃР°С‚СЊ РїР°СЂР°РјРµС‚СЂ, С‚.Рє. РїРѕСЃС‚СѓРїРёР» Р·Р°РїСЂРѕСЃ РЅР° Р·Р°РїРёСЃСЊ РЅРѕРІРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°"));
 					_currentItem = null;
 				}*/
 
@@ -77,7 +77,7 @@ namespace CustomModbus.Slave.FastReply.Queued {
 						_currentItem = null;
 					}
 					else {
-						// если попытки кончились:
+						// РµСЃР»Рё РїРѕРїС‹С‚РєРё РєРѕРЅС‡РёР»РёСЃСЊ:
 						if (_currentItem.AttemptsCount <= 0) {
 							_currentItem.OnCompleteCallback.Invoke(_commonExceptionToBeFast);
 							_currentItem = null;

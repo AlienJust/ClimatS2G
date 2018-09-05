@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using AlienJust.Support.Collections;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {

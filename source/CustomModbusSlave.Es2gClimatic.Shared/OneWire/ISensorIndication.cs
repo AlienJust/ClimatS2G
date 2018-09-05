@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {
 	public interface ISensorIndication<out T> {

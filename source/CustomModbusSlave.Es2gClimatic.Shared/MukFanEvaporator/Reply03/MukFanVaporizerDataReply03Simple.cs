@@ -1,4 +1,4 @@
-using CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic;
+﻿using CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;

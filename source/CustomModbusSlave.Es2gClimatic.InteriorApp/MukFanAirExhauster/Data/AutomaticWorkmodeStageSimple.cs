@@ -1,4 +1,4 @@
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data.Contracts;
+﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data {
 	class AutomaticWorkmodeStageSimple : IAutomaticWorkmodeStage {

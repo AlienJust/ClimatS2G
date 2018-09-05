@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Windows.Data;
 using AlienJust.Support.Collections;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
@@ -13,22 +13,22 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
 			var result = $"{val} - ";
 			switch (val) {
 				case 0:
-					result += "инициализация контроллера";
+					result += "РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°";
 					break;
 				case 1:
-					result += "тест вентилятора";
+					result += "С‚РµСЃС‚ РІРµРЅС‚РёР»СЏС‚РѕСЂР°";
 					break;
 				case 2:
-					result += "рабочий режим с исправным вентилятором";
+					result += "СЂР°Р±РѕС‡РёР№ СЂРµР¶РёРј СЃ РёСЃРїСЂР°РІРЅС‹Рј РІРµРЅС‚РёР»СЏС‚РѕСЂРѕРј";
 					break;
 				case 3:
-					result += "режим работы с неисправным вентилятором";
+					result += "СЂРµР¶РёРј СЂР°Р±РѕС‚С‹ СЃ РЅРµРёСЃРїСЂР°РІРЅС‹Рј РІРµРЅС‚РёР»СЏС‚РѕСЂРѕРј";
 					break;
 				case 4:
-					result += "выключение всех реле и ШИМ по отсутствию данных по температуре";
+					result += "РІС‹РєР»СЋС‡РµРЅРёРµ РІСЃРµС… СЂРµР»Рµ Рё РЁРРњ РїРѕ РѕС‚СЃСѓС‚СЃС‚РІРёСЋ РґР°РЅРЅС‹С… РїРѕ С‚РµРјРїРµСЂР°С‚СѓСЂРµ";
 					break;
 				default:
-					result += "неизвестно";
+					result += "РЅРµРёР·РІРµСЃС‚РЅРѕ";
 					break;
 			}
 
@@ -68,19 +68,19 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
 		public static string ToText(this MukFanEvaporatorWorkstage val) {
 			switch (val) {
 				case MukFanEvaporatorWorkstage.ControllerInit:
-					return "инициализация контроллера";
+					return "РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°";
 				case MukFanEvaporatorWorkstage.FanTest:
-					return "тест вентилятора";
+					return "С‚РµСЃС‚ РІРµРЅС‚РёР»СЏС‚РѕСЂР°";
 				case MukFanEvaporatorWorkstage.WorkAndFanIsGood:
-					return "рабочий режим с исправным вентилятором";
+					return "СЂР°Р±РѕС‡РёР№ СЂРµР¶РёРј СЃ РёСЃРїСЂР°РІРЅС‹Рј РІРµРЅС‚РёР»СЏС‚РѕСЂРѕРј";
 				case MukFanEvaporatorWorkstage.WorkAndFanIsBad:
-					return "режим работы с неисправным вентилятором";
+					return "СЂРµР¶РёРј СЂР°Р±РѕС‚С‹ СЃ РЅРµРёСЃРїСЂР°РІРЅС‹Рј РІРµРЅС‚РёР»СЏС‚РѕСЂРѕРј";
 				case MukFanEvaporatorWorkstage.AllSwitchesAndPwmAreCauseNoTemperatureData:
-					return "выключение всех реле и ШИМ по отсутствию данных по температуре";
+					return "РІС‹РєР»СЋС‡РµРЅРёРµ РІСЃРµС… СЂРµР»Рµ Рё РЁРРњ РїРѕ РѕС‚СЃСѓС‚СЃС‚РІРёСЋ РґР°РЅРЅС‹С… РїРѕ С‚РµРјРїРµСЂР°С‚СѓСЂРµ";
 				case MukFanEvaporatorWorkstage.Unknown:
-					return "неизвестно";
+					return "РЅРµРёР·РІРµСЃС‚РЅРѕ";
 				default:
-					return "[не реализовано]";
+					return "[РЅРµ СЂРµР°Р»РёР·РѕРІР°РЅРѕ]";
 			}
 		}
 	}
