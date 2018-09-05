@@ -277,6 +277,7 @@
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\IDoubleBytesPairConverter.cs" />
     <Compile Include="SetParamsAndKsm\Contracts\IParameterRoot.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\KsmWorkstageBuilder.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\KsmWorkStageExtensions.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterDotted.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterIntegerDotted.cs" />
     <Compile Include="SetParamsAndKsm\UshortToDoubleConverter\IUshortToDoubleConverter.cs" />
