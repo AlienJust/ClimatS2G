@@ -185,7 +185,7 @@
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
     <Compile Include="CmdListenerBase.cs" />
-    <Compile Include="IWindowContent.cs" />
+    <Compile Include="ITabItem.cs" />
     <Compile Include="Ksm\WamOrCoolForcedModes\WarmOrCoolForcedModeViewModel.cs" />
     <Compile Include="Ksm\WamOrCoolForcedModes\WarmOrCoolForcedMode.cs" />
     <Compile Include="Ksm\WamOrCoolForcedModes\WarmOrCoolForcedModeToStringConverter.cs" />
@@ -226,6 +226,10 @@
     <Compile Include="MukFanEvaporator\MukVaporizerFanDataViewModelParamcentric.cs" />
     <Compile Include="MukFanEvaporator\Reply03\IMukFanVaporizerDataReply03Diagnostic1.cs" />
     <Compile Include="MukFanEvaporator\Reply03\IMukFanVaporizerDataReply03Diagnostic2.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\MukFanEvaporatorWorkstage.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\MukFanEvaporatorWorkstageBuilder.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\MukFanEvaporatorWorkstageExt.cs" />
+    <Compile Include="MukFanEvaporator\Reply03\MukFanEvaporatorWorkstageToStringConverter.cs" />
     <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1Builder.cs" />
     <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1Simple.cs" />
     <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1View.xaml.cs">
@@ -272,13 +276,22 @@
       <DependentUpon>TemperatureRegulatorWorkModeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SetParamsAndKsm\Converters\UshortToStringConverterDotted.cs" />
+    <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterModifyAndOffsetUshort.cs" />
+    <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterModifyShort.cs" />
+    <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterModifyUshort.cs" />
+    <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterSimpleShort.cs" />
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\DoubleBytesPairConverterSimpleUshort.cs" />
     <Compile Include="SetParamsAndKsm\Contracts\ICurrentValueSettable.cs" />
     <Compile Include="SetParamsAndKsm\DoubleBytesPairConverter\IDoubleBytesPairConverter.cs" />
     <Compile Include="SetParamsAndKsm\Contracts\IParameterRoot.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\KsmWorkStage.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\KsmWorkstageBuilder.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\KsmWorkStageExtensions.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\ManualForcedMode.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\ManualForcedModeBuilder.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\ManualForcedModeExtensions.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterDotted.cs" />
+    <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterForcedManualMode.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\TextFormatterIntegerDotted.cs" />
     <Compile Include="SetParamsAndKsm\UshortToDoubleConverter\IUshortToDoubleConverter.cs" />
     <Compile Include="SetParamsAndKsm\TextFormatters\ITextFormatter.cs" />
@@ -321,7 +334,7 @@
     <Compile Include="ProgamLog\ProgramLogViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OneWire\ISensorIndication.cs" />
-    <Compile Include="OneWire\SensorIndicationBase.cs" />
+    <Compile Include="OneWire\SensorIndicationBytesPairCheck.cs" />
     <Compile Include="OneWire\SensorIndicationDoubleBasedOnBytesPair.cs" />
     <Compile Include="OneWire\SensorIndicationDoubleToStringConverter.cs" />
     <Compile Include="SetParamsAndKsm\AnyParameter\SettableAnyParameterView.xaml.cs">
@@ -333,9 +346,11 @@
     <Compile Include="SetParamsAndKsm\ViewModel\SettableTemperatureParameterViewModel.cs" />
     <Compile Include="TelemetryIsNullException.cs" />
     <Compile Include="TestSystems\ITestSysAsync.cs" />
+    <Compile Include="TestSystems\TestSysResult.cs" />
     <Compile Include="TestSystems\TestSystemView.xaml.cs">
       <DependentUpon>TestSystemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TestSystems\TestSystemViewModel.cs" />
     <Compile Include="TextPresenters\ByteTextPresenter.cs" />
     <Compile Include="TextPresenters\Contracts\ITextPresenter.cs" />
     <Compile Include="TextPresenters\DataDoubleTextPresenter.cs" />

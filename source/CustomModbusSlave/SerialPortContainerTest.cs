@@ -56,8 +56,4 @@ namespace CustomModbusSlave {
 
 		public double ProgressPercentage => 100.0 * _currrentPosition / _bytes.Count;
 	}
-
-	public interface ISerialPortContainerWithProgress {
-		double ProgressPercentage { get; }
-	}
 }

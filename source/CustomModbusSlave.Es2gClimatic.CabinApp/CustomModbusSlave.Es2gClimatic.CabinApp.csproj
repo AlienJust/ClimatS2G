@@ -272,7 +272,7 @@
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorDiagnostic1Builder.cs" />
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03Data.cs" />
     <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03DataBuilder.cs" />
-    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03DataView.xaml.cs">
+    <Compile Include="MukWarmFloor\Reply03\MukWarmFloorReply03View.cs">
       <DependentUpon>MukWarmFloorReply03DataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukWarmFloor\Request16\CmdListenerMukWarmFloorRequest16.cs" />
