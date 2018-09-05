@@ -1,5 +1,5 @@
 ﻿<UserControl
-	x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.MukFlapDiagnostic2View"
+	x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.MukFlapDiagnostic2View"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"

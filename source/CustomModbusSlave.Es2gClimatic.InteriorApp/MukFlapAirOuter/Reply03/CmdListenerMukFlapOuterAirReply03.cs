@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Build;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03 {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03 {
 	internal class CmdListenerMukFlapOuterAirReply03 : CmdListenerBase<IMukFlapOuterAirReply03Telemetry> {
 		public CmdListenerMukFlapOuterAirReply03(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}

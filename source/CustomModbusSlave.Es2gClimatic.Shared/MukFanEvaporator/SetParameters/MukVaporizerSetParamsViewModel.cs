@@ -4,7 +4,7 @@ using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.SetParameters {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.SetParameters {
 	public class MukVaporizerSetParamsViewModel : ViewModelBase {
 		public SettableParameterViewModel SettableParam324 { get; }
 		public SettableParameterViewModel SettableParam325 { get; }

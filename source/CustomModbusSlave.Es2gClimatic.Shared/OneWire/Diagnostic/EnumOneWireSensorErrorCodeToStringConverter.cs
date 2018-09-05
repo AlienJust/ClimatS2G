@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire {
+namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic {
 	[ValueConversion(typeof(OneWireSensorErrorCode), typeof(string))]
 	public class EnumOneWireSensorErrorCodeToStringConverter : IValueConverter {
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {

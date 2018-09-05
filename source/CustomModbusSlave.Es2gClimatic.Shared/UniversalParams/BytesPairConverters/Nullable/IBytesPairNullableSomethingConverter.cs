@@ -1,6 +1,6 @@
 ﻿using AlienJust.Support.Collections;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.BytesPairConverters.Nullable {
 	public interface IBytesPairNullableSomethingConverter<out T> {
 		T ConvertToSomething(BytesPair? value);
 	}

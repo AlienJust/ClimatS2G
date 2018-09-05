@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Request16 {
 	/// <summary>
 	/// Interaction logic for Request16DataView.xaml
 	/// </summary>

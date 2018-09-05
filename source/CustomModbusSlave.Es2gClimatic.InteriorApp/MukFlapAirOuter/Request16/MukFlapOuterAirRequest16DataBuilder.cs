@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Request16 {
 	class MukFlapOuterAirRequest16DataBuilder : IBuilder<IMukFlapOuterAirRequest16Data> {
 		private readonly IList<byte> _bytes;
 		public MukFlapOuterAirRequest16DataBuilder(IList<byte> bytes) {

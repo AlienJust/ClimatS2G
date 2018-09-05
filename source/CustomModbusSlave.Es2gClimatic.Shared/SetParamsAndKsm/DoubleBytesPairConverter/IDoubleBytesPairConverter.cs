@@ -1,5 +1,5 @@
 ﻿using AlienJust.Support.Collections;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters;
+using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.BytesPairConverters.Nullable;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter {
 	public interface IDoubleBytesPairConverter : IBytesPairSomethingConverter<double> {

@@ -5,15 +5,14 @@ using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Numeric.Bits;
-using CustomModbusSlave.CabinApp.InteriorApp.SystemDiagnostic;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
-using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {

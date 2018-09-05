@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {
+namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
 	[ValueConversion(typeof(double), typeof(int))]
 	public class SensorIndicationDoubleToStringConverter : IValueConverter {
 		#region IValueConverter Members

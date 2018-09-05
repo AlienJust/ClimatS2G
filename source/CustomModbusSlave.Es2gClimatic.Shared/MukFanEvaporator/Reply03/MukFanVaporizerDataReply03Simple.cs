@@ -1,7 +1,7 @@
 ﻿using CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
-using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.TemperatureRegulatorWorkMode;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
 	internal class MukFanVaporizerDataReply03Simple : IMukFanVaporizerDataReply03 {

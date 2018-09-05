@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.Collections;
 using AlienJust.Support.Numeric.Bits;
-using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03 {
 	class MukFanCondenserReply03DataBuilder : IBuilder<IMukCondensorFanReply03Data> {

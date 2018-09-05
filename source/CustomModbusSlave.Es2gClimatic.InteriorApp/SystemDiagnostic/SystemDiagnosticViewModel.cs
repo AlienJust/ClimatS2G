@@ -9,13 +9,13 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.DataModel.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
-using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {

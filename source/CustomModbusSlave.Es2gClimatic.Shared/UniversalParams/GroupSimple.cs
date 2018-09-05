@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams;
 using ParamCentric.Common.Contracts;
 
-namespace CustomModbusSlave.Es2gClimatic.UniversalParams {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams {
 	public class GroupSimple : IGroup {
 		public GroupSimple(string name, IList<IGroupItem> children) {
 			Name = name;

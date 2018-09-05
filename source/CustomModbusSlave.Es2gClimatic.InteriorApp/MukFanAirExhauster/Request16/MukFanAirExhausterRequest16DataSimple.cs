@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Request16 {
+﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Request16 {
 	class MukFanAirExhausterRequest16DataSimple : IMukFanAirExhausterRequest16Data {
 		public IMukFanAirExhausterWorkmodeCommandFromKsm MukFanAirExhausterWorkmodeCommandFromKsm { get; set; }
 		public int TemperatureOuterAir { get; set; }

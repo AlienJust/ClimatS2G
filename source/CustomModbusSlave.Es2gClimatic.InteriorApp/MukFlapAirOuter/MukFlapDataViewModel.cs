@@ -3,8 +3,8 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Request16;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.SetParameters;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Request16;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter

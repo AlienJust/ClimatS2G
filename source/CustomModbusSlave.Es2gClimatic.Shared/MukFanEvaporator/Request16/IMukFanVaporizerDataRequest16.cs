@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16 {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16 {
 	public interface IMukFanVaporizerDataRequest16 {
 		IKsmCommandWorkmode CurrentKsmCommandWorkmode { get; }
 		int OuterTemperature { get; }

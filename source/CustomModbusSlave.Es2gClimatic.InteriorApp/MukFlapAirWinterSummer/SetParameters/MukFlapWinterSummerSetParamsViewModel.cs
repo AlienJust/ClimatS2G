@@ -4,7 +4,7 @@ using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.SetParameters {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.SetParameters {
 	class MukFlapWinterSummerSetParamsViewModel : ViewModelBase {
 		public SettableParameterViewModel SettableParam827 { get; }
 		public SettableParameterViewModel SettableParam828 { get; }

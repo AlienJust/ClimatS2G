@@ -1,8 +1,7 @@
 ﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
-using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 	internal interface IMukFlapReturnAirReply03Telemetry {

@@ -1,6 +1,4 @@
-﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts.Enums;
-
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts {
+﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts {
 	internal interface IMukFlapWorkmodeStage {
 		int AbsoluteValue { get; }
 		MukFlapOuterAirWorkmodeStage KnownValue { get; }

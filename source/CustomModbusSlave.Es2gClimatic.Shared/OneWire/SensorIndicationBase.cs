@@ -1,7 +1,7 @@
 ﻿using System;
 using AlienJust.Support.Collections;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {
+namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
 	public abstract class SensorIndicationBytesPairCheck<T> : ISensorIndication<T> {
 		
 		private readonly BytesPair _noLinkCode;

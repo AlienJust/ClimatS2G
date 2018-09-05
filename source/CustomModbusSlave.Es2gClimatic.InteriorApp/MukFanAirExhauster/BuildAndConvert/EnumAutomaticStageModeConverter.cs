@@ -3,7 +3,7 @@ using System.Windows.Data;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data.Contracts;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.BuildAndConvert {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.BuildAndConvert {
 	[ValueConversion(typeof(double), typeof(int))]
 	class EnumAutomaticStageModeConverter : IValueConverter {
 		#region IValueConverter Members

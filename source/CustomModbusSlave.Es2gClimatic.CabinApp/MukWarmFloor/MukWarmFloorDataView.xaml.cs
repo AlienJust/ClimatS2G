@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor
 {
 	public partial class MukWarmFloorDataView : UserControl
 	{

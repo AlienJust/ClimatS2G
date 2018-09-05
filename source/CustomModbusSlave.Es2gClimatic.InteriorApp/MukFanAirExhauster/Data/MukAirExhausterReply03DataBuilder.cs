@@ -2,7 +2,7 @@
 using AlienJust.Support.Collections;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
-using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Data {
 	class MukAirExhausterReply03DataBuilder : IBuilder<IMukAirExhausterReply03Data> {

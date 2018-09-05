@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.Numeric.Bits;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16 {
 	internal class MukFanVaporizerDataRequest16Builder : IBuilder<IMukFanVaporizerDataRequest16> {
 		private readonly IList<byte> _bytes;
 		public MukFanVaporizerDataRequest16Builder(IList<byte> bytes) {

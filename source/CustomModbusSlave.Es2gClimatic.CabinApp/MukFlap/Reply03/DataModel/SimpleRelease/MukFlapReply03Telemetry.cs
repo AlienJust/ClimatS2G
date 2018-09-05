@@ -1,7 +1,7 @@
 ﻿using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
-using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.SimpleRelease {
 	class MukFlapReply03Telemetry : IMukFlapAirReply03Telemetry {

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Request16;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.DataModel.Contracts;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer.SetParameters;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapWinterSummer
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer
 {
 	class MukFlapWinterSummerViewModel : ViewModelBase {
 		private readonly IThreadNotifier _notifier;

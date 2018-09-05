@@ -1,6 +1,6 @@
 ﻿using AlienJust.Support.Collections;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters;
+using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.BytesPairConverters.Nullable;
 using ParamCentric.Modbus.Contracts;
 using ParamCentric.UserInterface.Contracts;
 

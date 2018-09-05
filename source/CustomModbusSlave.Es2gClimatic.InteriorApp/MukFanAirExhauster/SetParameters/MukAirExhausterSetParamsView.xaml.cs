@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.SetParameters {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.SetParameters {
 	/// <summary>
 	/// Interaction logic for MukAirExhausterSetParamsView.xaml
 	/// </summary>

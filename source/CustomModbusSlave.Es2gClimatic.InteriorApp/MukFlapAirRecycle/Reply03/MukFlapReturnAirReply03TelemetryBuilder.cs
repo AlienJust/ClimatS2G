@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using AlienJust.Support.Collections;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Build;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
-using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03 {
 	class MukFlapReturnAirReply03TelemetryBuilder : IBuilder<IMukFlapReturnAirReply03Telemetry> {

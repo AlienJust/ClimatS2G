@@ -5,16 +5,17 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03"
-	xmlns:sensorIndications="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;assembly=CustomModbusSlave.Es2gClimatic.Shared"
-	xmlns:views="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Views;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:oneWire="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:diagnostic2="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:diagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	mc:Ignorable="d"
 	d:DesignHeight="800"
 	d:DesignWidth="400">
 	<UserControl.Resources>
-		<sensorIndications:SensorIndicationDoubleToStringConverter
+		<oneWire:SensorIndicationDoubleToStringConverter
 			x:Key="TemperatureConverter"
 			Format="f2" />
-		<sensorIndications:SensorIndicationDoubleToStringConverter
+		<oneWire:SensorIndicationDoubleToStringConverter
 			x:Key="EmersonConverter"
 			Format="f2" />
 	</UserControl.Resources>
@@ -148,7 +149,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock
 					Text="Диагностика 2" />
-				<views:MukFlapDiagnostic2View
+				<diagnostic2:MukFlapDiagnostic2View
 					Grid.Row="1"
 					DataContext="{Binding Path=Diagnostic2, Mode=OneTime}" />
 			</Grid>
@@ -164,7 +165,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock
 					Text="Диагностика 3 (1w адрес 1)" />
-				<views:MukFlapDiagnosticOneWireSensorView
+				<diagnostic:MukFlapDiagnosticOneWireSensorView
 					Grid.Row="1"
 					DataContext="{Binding Path=Diagnostic3OneWire1, Mode=OneTime}" />
 			</Grid>
@@ -180,7 +181,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock
 					Text="Диагностика 4 (1w адрес 2)" />
-				<views:MukFlapDiagnosticOneWireSensorView
+				<diagnostic:MukFlapDiagnosticOneWireSensorView
 					Grid.Row="1"
 					DataContext="{Binding Path=Diagnostic4OneWire2, Mode=OneTime}" />
 			</Grid>

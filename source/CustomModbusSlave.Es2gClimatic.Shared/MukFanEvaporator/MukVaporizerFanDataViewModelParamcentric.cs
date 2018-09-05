@@ -2,19 +2,16 @@
 using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using AlienJust.Support.Text;
 using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.SetParameters;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode;
-using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.SetParameters;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
-using CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.BytesPairConverters;
+using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.BytesPairConverters.Nullable;
 using ParamCentric.Common.Contracts;
 using ParamCentric.Modbus.Contracts;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator {
 	public class MukVaporizerFanDataViewModelParamcentric : ViewModelBase, IGroup {
 		private readonly IThreadNotifier _notifier;
 		private readonly ICmdListener<IMukFanVaporizerDataReply03> _cmdListenerMukVaporizerReply03;

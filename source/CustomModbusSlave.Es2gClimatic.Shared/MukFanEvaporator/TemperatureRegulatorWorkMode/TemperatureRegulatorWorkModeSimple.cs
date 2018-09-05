@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.TemperatureRegulatorWorkMode {
 	public class TemperatureRegulatorWorkModeSimple : ITemperatureRegulatorWorkMode {
 		public TemperatureRegulatorWorkModeSimple(int fullValue, bool cool, bool restrict) {
 			FullValue = fullValue;

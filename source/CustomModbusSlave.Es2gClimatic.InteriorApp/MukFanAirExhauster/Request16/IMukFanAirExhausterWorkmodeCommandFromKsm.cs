@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Request16 {
+﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Request16 {
 	/// <summary>
 	/// Полученная от КСМ команда-режим работы вентилятора вытяжки воздуха
 	/// </summary>

@@ -1,4 +1,4 @@
-﻿using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+﻿using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03 {
 	class MukCondensorFanReply03DataSimple : IMukCondensorFanReply03Data {

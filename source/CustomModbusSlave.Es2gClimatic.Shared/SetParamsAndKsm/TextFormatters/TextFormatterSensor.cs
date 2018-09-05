@@ -1,5 +1,5 @@
 ﻿using AlienJust.Support.Collections;
-using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters {
 	public class TextFormatterSensor : ITextFormatter<BytesPair?> {

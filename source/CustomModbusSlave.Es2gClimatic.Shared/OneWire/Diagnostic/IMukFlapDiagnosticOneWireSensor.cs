@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic {
 	public interface IMukFlapDiagnosticOneWireSensor {
 		bool OneWireSensorError { get; }
 		IOneWireSensorErrorCode ErrorCode { get; }

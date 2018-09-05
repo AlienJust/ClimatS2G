@@ -3,7 +3,7 @@ using AlienJust.Support.Collections;
 using AlienJust.Support.Numeric.Bits;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Request16 {
 	class MukFanAirExhausterRequest16DataBuilder: IBuilder<IMukFanAirExhausterRequest16Data> {
 		private readonly IList<byte> _bytes;
 

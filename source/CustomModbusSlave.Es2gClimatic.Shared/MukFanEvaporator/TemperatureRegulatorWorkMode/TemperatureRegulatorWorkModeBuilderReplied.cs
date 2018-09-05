@@ -1,6 +1,6 @@
 ﻿using AlienJust.Support.Collections;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.TemperatureRegulatorWorkMode
 {
 	public class TemperatureRegulatorWorkModeBuilderReplied : IBuilder<ITemperatureRegulatorWorkMode>
 	{

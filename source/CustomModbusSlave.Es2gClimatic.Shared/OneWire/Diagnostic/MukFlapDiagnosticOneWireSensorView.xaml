@@ -1,14 +1,14 @@
-﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Views.MukFlapDiagnosticOneWireSensorView"
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic.MukFlapDiagnosticOneWireSensorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:views="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Views"
+             xmlns:diagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="200">
 	<StackPanel>
 		<CheckBox Content="Ошибка датчика" IsChecked="{Binding Path=OneWireSensorError, Mode=OneTime}"/>
-		<views:OneWireErrorCodeView DataContext="{Binding Path=ErrorCode, Mode=OneTime}"/>
+		<diagnostic:OneWireErrorCodeView DataContext="{Binding Path=ErrorCode, Mode=OneTime}"/>
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>

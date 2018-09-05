@@ -4,7 +4,7 @@ using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.DoubleBytesPairConverter;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.SetParameters {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.SetParameters {
 	class MukAirExhausterSetParamsViewModel : ViewModelBase {
 		public SettableParameterViewModel SettableParam619 { get; }
 		public SettableParameterViewModel SettableParam620 { get; }

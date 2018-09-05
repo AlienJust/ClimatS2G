@@ -4,15 +4,15 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:mukFlapOuterAirReply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03"
-	xmlns:sensorIndications="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;assembly=CustomModbusSlave.Es2gClimatic.Shared"
-	xmlns:views="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Views;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	xmlns:mukFlapAirRecycleReply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03"
+	xmlns:oneWire="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03"
+	xmlns:diagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	mc:Ignorable="d"
 	d:DesignWidth="400"
 	d:DesignHeight="900">
 	<UserControl.Resources>
-		<sensorIndications:SensorIndicationDoubleToStringConverter
+		<oneWire:SensorIndicationDoubleToStringConverter
 			x:Key="TemperatureConverter"
 			Format="f2" />
 	</UserControl.Resources>
@@ -122,7 +122,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock
 					Text="Режим работы" />
-				<mukFlapOuterAirReply03:MukFlapWorkmodeStageView
+				<reply03:MukFlapWorkmodeStageView
 					Grid.Row="1"
 					DataContext="{Binding Path=AutomaticModeStage, Mode=OneTime}" />
 			</Grid>
@@ -138,7 +138,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock
 					Text="Диагностика 1" />
-				<mukFlapOuterAirReply03:MukFlapAirRecycleDiagnostic1View
+				<mukFlapAirRecycleReply03:MukFlapAirRecycleDiagnostic1View
 					Grid.Row="1"
 					DataContext="{Binding Path=Diagnostic1, Mode=OneTime}" />
 			</Grid>
@@ -154,7 +154,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock
 					Text="Диагностика 2" />
-				<mukFlapOuterAirReply03:MukFlapDiagnostic2View
+				<reply03:MukFlapDiagnostic2View
 					Grid.Row="1"
 					DataContext="{Binding Path=Diagnostic2, Mode=OneTime}" />
 			</Grid>
@@ -170,7 +170,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock
 					Text="Диагностика 3 (1w адрес 1)" />
-				<views:MukFlapDiagnosticOneWireSensorView
+				<diagnostic:MukFlapDiagnosticOneWireSensorView
 					Grid.Row="1"
 					DataContext="{Binding Path=Diagnostic3OneWire1, Mode=OneTime}" />
 			</Grid>
@@ -186,7 +186,7 @@
 				</Grid.RowDefinitions>
 				<TextBlock
 					Text="Диагностика 4 (1w адрес 2)" />
-				<views:MukFlapDiagnosticOneWireSensorView
+				<diagnostic:MukFlapDiagnosticOneWireSensorView
 					Grid.Row="1"
 					DataContext="{Binding Path=Diagnostic4OneWire2, Mode=OneTime}" />
 			</Grid>

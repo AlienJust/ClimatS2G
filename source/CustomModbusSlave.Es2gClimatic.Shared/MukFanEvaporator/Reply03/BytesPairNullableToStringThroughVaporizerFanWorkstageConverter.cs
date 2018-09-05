@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 using AlienJust.Support.Collections;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters;
+using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.BytesPairConverters.Nullable;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
 	public class BytesPairNullableToStringThroughVaporizerFanWorkstageConverter : IBytesPairNullableSomethingConverter<string> {

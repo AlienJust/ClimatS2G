@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Request16 {
+﻿namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Request16 {
 
 	/// <summary>
 	/// Данные запроса от КСМ к МУК вытяжного вентилятора

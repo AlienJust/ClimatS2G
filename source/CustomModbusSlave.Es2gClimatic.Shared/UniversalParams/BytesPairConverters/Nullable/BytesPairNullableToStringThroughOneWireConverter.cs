@@ -1,8 +1,7 @@
 ﻿using AlienJust.Support.Collections;
-using CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;
-using CustomModbusSlave.MicroclimatEs2gApp.SetParams.BytesPairNullableConverters;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.Common.UniversalParams.BytesPairConverters {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.BytesPairConverters.Nullable {
 	public class BytesPairNullableToStringThroughOneWireConverter : IBytesPairNullableSomethingConverter<string> {
 		private readonly double _multiplier;
 		private readonly double _addition;

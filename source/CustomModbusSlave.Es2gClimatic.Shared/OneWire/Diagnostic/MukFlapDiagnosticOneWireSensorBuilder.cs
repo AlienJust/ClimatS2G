@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic {
 	public class MukFlapDiagnosticOneWireSensorBuilder : IBuilder<IMukFlapDiagnosticOneWireSensor> {
 		private readonly int _data;
 		public MukFlapDiagnosticOneWireSensorBuilder(int data) {

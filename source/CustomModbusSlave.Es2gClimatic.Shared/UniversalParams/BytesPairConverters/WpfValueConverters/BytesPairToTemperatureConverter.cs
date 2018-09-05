@@ -4,7 +4,7 @@ using System.Windows.Data;
 using AlienJust.Support.Collections;
 using NCalc;
 
-namespace CustomModbusSlave.MicroclimatEs2gApp.SetParams {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.BytesPairConverters.WpfValueConverters {
 	[ValueConversion(typeof(double), typeof(int))]
 	public class BytesPairToTemperatureConverter : IValueConverter {
 		#region IValueConverter Members

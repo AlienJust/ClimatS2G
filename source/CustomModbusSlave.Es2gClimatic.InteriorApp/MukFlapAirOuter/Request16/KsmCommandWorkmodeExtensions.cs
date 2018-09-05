@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Request16 {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Request16 {
 	internal static class KsmCommandWorkmodeExtensions {
 		public static string ToText(this KsmCommandWorkmode mode) {
 			switch (mode) {

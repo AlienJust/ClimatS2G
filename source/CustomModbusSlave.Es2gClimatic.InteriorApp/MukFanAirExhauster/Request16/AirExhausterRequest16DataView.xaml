@@ -1,16 +1,15 @@
 ﻿<UserControl
-	x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.Request16.AirExhausterRequest16DataView"
+	x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Request16.AirExhausterRequest16DataView"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:sharedSensorIndications="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.SensorIndications;assembly=CustomModbusSlave.Es2gClimatic.Shared"
-	xmlns:view="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukAirExhauster.View"
+	xmlns:oneWire="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire;assembly=CustomModbusSlave.Es2gClimatic.Shared"
 	mc:Ignorable="d"
 	d:DesignHeight="300"
 	d:DesignWidth="300">
 	<UserControl.Resources>
-		<sharedSensorIndications:SensorIndicationDoubleToStringConverter
+		<oneWire:SensorIndicationDoubleToStringConverter
 			x:Key="TemperatureConverter"
 			Format="f2" />
 	</UserControl.Resources>

@@ -92,7 +92,7 @@
 				Grid.Row="0" Grid.Column="1"
 				Text="{Binding Path=ControlOfHiVoltageContactorRaw, Mode=OneTime}"
 				TextAlignment="Right" />
-			<reply03:ControlOfHiVoltageContactorView
+			<request16:ControlOfHiVoltageContactorView
 				Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
 				DataContext="{Binding Path=ControlOfHiVoltageContactorDescription, Mode=OneTime}" />
 		</Grid>

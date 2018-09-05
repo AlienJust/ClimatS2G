@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Data;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.DataModel.Contracts.Enums;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapOuterAir.Reply03.Converters {
+namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.Converters {
 	[ValueConversion(typeof(double), typeof(int))]
 	class EnumMukFlapOuterAirWorkmodeStageToStringConverter : IValueConverter {
 		#region IValueConverter Members

@@ -1,7 +1,7 @@
 ﻿using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.Es2gClimatic.Shared.BsSm.Fault;
 
-namespace CustomModbusSlave.CabinApp.InteriorApp.SystemDiagnostic {
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 	class BsSmFaultViewModel : ViewModelBase {
 		private int _code;
 

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Views {
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Diagnostic2 {
 	/// <summary>
 	/// Логика взаимодействия для MukFlapDiagnostic2View.xaml
 	/// </summary>

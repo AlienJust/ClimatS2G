@@ -1,4 +1,4 @@
-﻿namespace CustomModbusSlave.Es2gClimatic.Shared.MukFlap.DiagnosticOneWire {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic {
 	public class MukFlapDiagnosticOneWireSensor : IMukFlapDiagnosticOneWireSensor {
 		public MukFlapDiagnosticOneWireSensor(bool oneWireSensorError, IOneWireSensorErrorCode errorCode, int? linkErrorCount) {
 			OneWireSensorError = oneWireSensorError;

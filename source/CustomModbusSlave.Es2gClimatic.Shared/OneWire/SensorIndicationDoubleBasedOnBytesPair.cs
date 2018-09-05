@@ -1,7 +1,6 @@
-﻿using System;
-using AlienJust.Support.Collections;
+﻿using AlienJust.Support.Collections;
 
-namespace CustomModbusSlave.Es2gClimatic.Shared.SensorIndications {
+namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
 	public class SensorIndicationDoubleBasedOnBytesPair : SensorIndicationBytesPairCheck<double> {
 		private readonly BytesPair _valueFirstHi;
 		private readonly double _modifier;

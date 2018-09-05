@@ -5,15 +5,15 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03"
-	xmlns:temperatureRegulatorWorkMode="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.TemperatureRegulatorWorkMode"
 	xmlns:emersionDiagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic"
-	xmlns:sensorIndications="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.SensorIndications"
-	xmlns:views="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFlap.Views"
+	xmlns:oneWire="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire"
+	xmlns:temperatureRegulatorWorkMode="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.TemperatureRegulatorWorkMode"
+	xmlns:diagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic"
 	mc:Ignorable="d"
 	d:DesignHeight="1300"
 	d:DesignWidth="300" d:DataContext="{local:IMukFanVaporizerDataReply03}">
 	<UserControl.Resources>
-		<sensorIndications:SensorIndicationDoubleToStringConverter
+		<oneWire:SensorIndicationDoubleToStringConverter
 			x:Key="TemperatureConverter"
 			Format="f2" />
 		<local:MukFanEvaporatorWorkstageToStringConverter
@@ -299,7 +299,7 @@
 					Grid.Column="1"
 					Text="{Binding Path=Diagnostic4, Mode=OneTime, StringFormat={}0x{0:X4}}" />
 			</Grid>
-			<views:MukFlapDiagnosticOneWireSensorView
+			<diagnostic:MukFlapDiagnosticOneWireSensorView
 				Grid.Row="1"
 				DataContext="{Binding Path=Diagnostic4OneWire1, Mode=OneTime}" />
 		</Grid>
@@ -329,7 +329,7 @@
 					Grid.Column="1"
 					Text="{Binding Path=Diagnostic5, Mode=OneTime, StringFormat={}0x{0:X4}}" />
 			</Grid>
-			<views:MukFlapDiagnosticOneWireSensorView
+			<diagnostic:MukFlapDiagnosticOneWireSensorView
 				Grid.Row="1"
 				DataContext="{Binding Path=Diagnostic5OneWire2, Mode=OneTime}" />
 		</Grid>

@@ -11,16 +11,15 @@ using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Request16;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFridge;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
-using CustomModbusSlave.Es2gClimatic.Shared.MukCondenser.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanVaporizer.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
-using CustomModbusSlave.MicroclimatEs2gApp.MukWarmFloor;
 using MahApps.Metro;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp {
