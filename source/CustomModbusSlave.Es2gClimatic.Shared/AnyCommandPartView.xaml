@@ -4,6 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-	<TextBox Text="{Binding Path=CommandBytesAsText, Mode=OneWay}" IsReadOnly="True"/>
+             d:DesignHeight="30" d:DesignWidth="300">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		<TextBox Text="{Binding Path=CommandBytesAsText, Mode=OneWay}" IsReadOnly="True" />
+		<Button Grid.Column="1" Content="Копировать" Command="{Binding Path=CopyCmd, Mode=OneTime}"></Button>
+	</Grid>
+	
 </UserControl>

@@ -17,6 +17,7 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Views;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.TopContent;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
@@ -27,6 +28,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
+using CustomModbusSlave.Es2gClimatic.Shared.TestSystems;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 	/// <summary>
@@ -112,6 +114,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 								cmdListenerBvs1Reply65,
 								cmdListenerBvs2Reply65)
 					}
+				});
+				
+				mainVm.AddTab(new TabItemViewModel {
+					FullHeader = "Тестирование системы",
+					ShortHeader = "ТЕСТ",
+					Content = new TestSystemView { DataContext = new TestSystemViewModel(mainVm.Notifier,"Охлаждение", new Freeze100Test(null, cmdListenerMukVaporizerReply03)) }
 				});
 
 				if (appAbilities.Version == AppVersion.Full)
