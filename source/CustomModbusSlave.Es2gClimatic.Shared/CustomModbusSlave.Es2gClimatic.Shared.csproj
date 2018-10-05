@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Abt.Controls.SciChart.Wpf.2.2">
+      <HintPath>..\..\reference\Abt.Controls.SciChart.Wpf.2.2.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Adaptation.ConsoleLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Adaptation.ConsoleLogger.dll</HintPath>
@@ -103,8 +106,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\NCalc.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net40\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Wpf.1.0.0\lib\net40\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RPD.SciChartControl">
+      <HintPath>..\..\reference\RPD.SciChartControl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -157,6 +169,17 @@
     <Compile Include="Bvs\BvsReply65TelemetrySimple.cs" />
     <Compile Include="Bvs\CmdListenerBvsReply65.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
+    <Compile Include="Chart\ChartView.xaml.cs" >
+      <DependentUpon>Chart\ChartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chart\ChartViewModel.cs" />
+    <Compile Include="Chart\IUpdatable.cs" />
+    <Compile Include="Chart\PointsSeriesAndAdditionalData.cs" />
+    <Compile Include="Chart\SeriesAdditionalData.cs" />
+    <Compile Include="Chart\WindowChart.xaml.cs" >
+      <DependentUpon>Chart\WindowChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chart\WindowChartViewModel.cs" />
     <Compile Include="CommandHearedTimer\CommandHearedTimerNotThreadSafe.cs" />
     <Compile Include="CommandHearedTimer\Contracts\ICommandHearedTimer.cs" />
     <Compile Include="CommandHearedTimer\Contracts\IStartStoppable.cs" />
@@ -241,6 +264,17 @@
       <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFanEvaporator\SetParameters\MukVaporizerSetParamsViewModel.cs" />
+    <Compile Include="Oscilloscope\OscilloscopeLogger.cs" />
+    <Compile Include="Oscilloscope\OscilloscopeWindow.xaml.cs">
+      <DependentUpon>Oscilloscope\OscilloscopeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Oscilloscope\OscilloscopeWindowSciVm.cs" />
+    <Compile Include="Oscilloscope\OscilloscopeWindowVm.cs" />
+    <Compile Include="Oscilloscope\PanModifierOnPause.cs" />
+    <Compile Include="Oscilloscope\PanModifierOnResume.cs" />
+    <Compile Include="ParamLogger\IParameterLogger.cs" />
+    <Compile Include="ParamLogger\IParamLoggerRegistrationPoint.cs" />
+    <Compile Include="ParamLogger\ParamLoggerRegistrationPointThreadSafe.cs" />
     <Compile Include="Record\RecordView.xaml.cs">
       <DependentUpon>RecordView.xaml</DependentUpon>
     </Compile>
@@ -404,6 +438,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Chart\ChartView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Chart\WindowChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="EmersionDiagnostic\EmersonDiagnosticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -469,6 +511,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MukFanEvaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Oscilloscope\OscilloscopeWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -561,6 +607,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SciChartLicense.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
