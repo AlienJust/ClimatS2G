@@ -1,7 +1,8 @@
 ﻿using AlienJust.Support.ModelViewViewModel;
+using CustomModbusSlave.Es2gClimatic.Shared.Chart;
 
 namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
-	class WindowChartViewModel :ViewModelBase {
+	public class WindowChartViewModel :ViewModelBase {
 		public WindowChartViewModel(ChartViewModel chartVm) {
 			ChartVm = chartVm;
 		}

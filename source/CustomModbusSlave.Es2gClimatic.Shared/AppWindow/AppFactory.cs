@@ -4,6 +4,7 @@ using System.Threading;
 using System.Windows;
 using AlienJust.Adaptation.WindowsPresentation;
 using AlienJust.Support.Concurrent.Contracts;
+using DrillingRig.ConfigApp.AppControl.ParamLogger;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
@@ -13,22 +14,43 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	public sealed class AppFactory {
 		private readonly Lazy<ISharedAppAbilities> _abilities;
 		private readonly ManualResetEvent _mainWindowCreationCompleteWaiter;
+		private readonly IParamLoggerRegistrationPoint _paramLoggerRegPoint;
 		private readonly List<Action> _closeChildWindowsActions;
+
 
 		public AppFactory(string psnProtocolFileName) {
 			_abilities = new Lazy<ISharedAppAbilities>(() => new SharedAppAbilities(psnProtocolFileName));
 			_mainWindowCreationCompleteWaiter = new ManualResetEvent(false);
 			_closeChildWindowsActions = new List<Action>(); // TODO: here to add close child windows
+			_paramLoggerRegPoint = new ParamLoggerRegistrationPointThreadSafe();
 		}
 
 		public ISharedAppAbilities Abilities => _abilities.Value;
 		
-		/// <summary>
-		/// T - is DataContext type (ViewModel)
-		/// </summary>
-		/// <param name="childWindow"></param>
-		public void ShowChildWindowInOwnThread<T>(Window childWindowView, Func<IThreadNotifier, T> viewModelCreator) {
 
+		public void ShowChildWindowInOwnThread(Func<IThreadNotifier, WindowAndClosableViewModel> windowCreateFunc) {
+			var childWindowWaiter = new ManualResetEvent(false);
+			var chartWindowThread = new Thread(() => {
+				var uiNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
+				Console.WriteLine("ShowChildWindowInOwnThread > uiNotifier created, line before window and WM were created");
+				var windowAndVm = windowCreateFunc.Invoke(uiNotifier);
+				windowAndVm.Window.DataContext = windowAndVm.WindowVm;
+				Console.WriteLine("ShowChildWindowInOwnThread > window and WM were created");
+				
+				_closeChildWindowsActions.Add(() => uiNotifier.Notify(() => {
+					windowAndVm.Window.Close();
+					windowAndVm.WindowVm.NotifyWindowIsClosed();
+				}));
+				windowAndVm.Window.Show();
+				childWindowWaiter.Set();
+				System.Windows.Threading.Dispatcher.Run();
+			});
+
+			chartWindowThread.SetApartmentState(ApartmentState.STA);
+			chartWindowThread.IsBackground = true;
+			chartWindowThread.Priority = ThreadPriority.AboveNormal;
+			chartWindowThread.Start();
+			childWindowWaiter.WaitOne();
 		}
 
 		/// <summary>
@@ -65,5 +87,19 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 			_mainWindowCreationCompleteWaiter.WaitOne();
 		}
+	}
+
+	public sealed class WindowAndClosableViewModel {
+		public WindowAndClosableViewModel(Window window, IClosableVm windowVm) {
+			Window = window;
+			WindowVm = windowVm;
+		}
+		public Window Window { get; }
+		public IClosableVm WindowVm { get; }
+	}
+	
+	public interface IClosableVm
+	{
+		void NotifyWindowIsClosed();
 	}
 }

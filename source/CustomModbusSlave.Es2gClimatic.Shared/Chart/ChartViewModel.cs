@@ -7,14 +7,16 @@ using System.Windows.Media;
 using Abt.Controls.SciChart;
 using Abt.Controls.SciChart.Model.DataSeries;
 using Abt.Controls.SciChart.Visuals.RenderableSeries;
+using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
+using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
+using DrillingRig.ConfigApp.LookedLikeAbb.Chart;
 using RPD.SciChartControl;
-using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
-	public class ChartViewModel : ViewModelBase, IParameterLogger {
-		private readonly IUserInterfaceRoot _uiRoot;
+namespace CustomModbusSlave.Es2gClimatic.Shared.Chart {
+	public class ChartViewModel : ViewModelBase, IParameterLogger, IClosableVm {
+		private readonly IThreadNotifier _uiNotifier;
 		private readonly List<Color> _colors;
 		//private int _currentColorIndex;
 		private readonly List<Color> _usedColors;
@@ -23,8 +25,8 @@ namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
 
 		private IUpdatable _updatable;
 
-		public ChartViewModel(IUserInterfaceRoot uiRoot, List<Color> colors) {
-			_uiRoot = uiRoot;
+		public ChartViewModel(IThreadNotifier uiNotifier, List<Color> colors) {
+			_uiNotifier = uiNotifier;
 			_colors = colors;
 			_usedColors = new List<Color>();
 			_logs = new Dictionary<string, PointsSeriesAndAdditionalData>();
@@ -57,7 +59,7 @@ namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
 		}
 
 		public void LogAnalogueParameter(string parameterName, double? value) {
-			_uiRoot.Notifier.Notify(() => {
+			_uiNotifier.Notify(() => {
 				if (value.HasValue) {
 					if (!_logs.ContainsKey(parameterName)) {
 						var dataSeries = new XyDataSeries<DateTime, double> { SeriesName = parameterName };
@@ -80,7 +82,7 @@ namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
 
 
 		public void LogDiscreteParameter(string parameterName, bool? value) {
-			_uiRoot.Notifier.Notify(() => {
+			_uiNotifier.Notify(() => {
 				if (value.HasValue) {
 					if (!_logs.ContainsKey(parameterName)) {
 						var dataSeries = new XyDataSeries<DateTime, double> { SeriesName = parameterName };
@@ -119,15 +121,19 @@ namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
 			}
 		}
 
-		public ObservableCollection<IChartSeriesViewModel> AnalogSeries { get; set; }
-		public ObservableCollection<IChartSeriesViewModel> DiscreteSeries { get; set; }
+		public ObservableCollection<IChartSeriesViewModel> AnalogSeries { get; }
+		public ObservableCollection<IChartSeriesViewModel> DiscreteSeries { get; }
 
-		public ObservableCollection<ISeriesAdditionalData> AnalogSeriesAdditionalData { get; set; }
-		public ObservableCollection<ISeriesAdditionalData> DiscreteSeriesAdditionalData { get; set; }
+		public ObservableCollection<ISeriesAdditionalData> AnalogSeriesAdditionalData { get; }
+		public ObservableCollection<ISeriesAdditionalData> DiscreteSeriesAdditionalData { get; }
 
 
 		public void SetUpdatable(IUpdatable updatable) {
 			_updatable = updatable;
+		}
+
+		public void NotifyWindowIsClosed() {
+			Console.WriteLine("ChartViewModel was notified about window is closed");
 		}
 	}
 }

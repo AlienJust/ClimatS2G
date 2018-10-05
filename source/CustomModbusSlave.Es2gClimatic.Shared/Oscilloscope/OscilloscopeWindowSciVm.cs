@@ -1,9 +1,11 @@
-﻿using AlienJust.Support.ModelViewViewModel;
+﻿using System;
+using AlienJust.Support.ModelViewViewModel;
+using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 
-namespace DrillingRig.ConfigApp.LookedLikeAbb.Oscilloscope {
-	class OscilloscopeWindowSciVm : ViewModelBase {
-		public OscilloscopeWindowSciVm() {
-			
+namespace CustomModbusSlave.Es2gClimatic.Shared.Oscilloscope {
+	public class OscilloscopeWindowSciVm : ViewModelBase, IClosableVm {
+		public void NotifyWindowIsClosed() {
+			Console.WriteLine("OscilloscopeWindowSciVm was notified about window is closed");
 		}
 	}
 }

@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Windows;
+using System.Windows.Media;
+using AlienJust.Adaptation.WindowsPresentation;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs2;
@@ -21,14 +25,18 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.TopContent;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
+using CustomModbusSlave.Es2gClimatic.Shared.Chart;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.Oscilloscope;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.Shared.TestSystems;
+using DrillingRig.ConfigApp.LookedLikeAbb.Chart;
+using DrillingRig.ConfigApp.LookedLikeAbb.Oscilloscope;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 	/// <summary>
@@ -220,6 +228,21 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					}
 				});
 			});
+			
+			/*
+			appFactory.ShowChildWindowInOwnThread(uiNotifier => {
+				var chartVm = new ChartViewModel(uiNotifier, new List<Color>{Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal});
+				//_paramLoggerRegPoint.RegisterLoggegr(chartVm); // TODO: REG on point
+				var chartWindow = new WindowChart();
+				return new WindowAndClosableViewModel(chartWindow, chartVm);
+			});*/
+			
+			appFactory.ShowChildWindowInOwnThread(uiNotifier => {
+				//_paramLoggerRegPoint.RegisterLoggegr(chartVm); // TODO: REG on point
+				var oscilloscopeWindow = new OscilloscopeWindow(new List<Color>{Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal});
+				return new WindowAndClosableViewModel(oscilloscopeWindow, new OscilloscopeWindowSciVm());
+			});
+
 		}
 	}
 }
