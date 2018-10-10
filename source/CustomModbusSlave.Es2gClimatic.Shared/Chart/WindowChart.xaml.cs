@@ -1,22 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 using Abt.Controls.SciChart.Visuals;
 using AlienJust.Adaptation.WindowsPresentation;
 using AlienJust.Support.Concurrent.Contracts;
-using CustomModbusSlave.Es2gClimatic.Shared.Chart;
+using DrillingRig.ConfigApp.LookedLikeAbb.Chart;
 using MahApps.Metro.Controls;
 
-namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
+namespace CustomModbusSlave.Es2gClimatic.Shared.Chart {
 	public partial class WindowChart : MetroWindow, IUpdatable {
 		private readonly IThreadNotifier _uiNotifier;
 		private SciChartSurface _sciChartSurface;
 		public WindowChart() {
+			Console.WriteLine("WindowChart .ctor() called");
 			InitializeComponent();
 			_uiNotifier = new WpfUiNotifierAsync(Dispatcher);
+			Console.WriteLine("WindowChart .ctor() complete");
 		}
 
 		public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject {
+			Console.WriteLine("WindowChart.FindVisualChildren() called");
 			if (depObj != null) {
 				for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++) {
 					DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
@@ -32,6 +36,7 @@ namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
 		}
 
 		private void MetroWindow_Loaded(object sender, RoutedEventArgs e) {
+			Console.WriteLine("WindowChart.MetroWindow_Loaded() called");
 			var cvm = DataContext as WindowChartViewModel;
 			cvm?.ChartVm.SetUpdatable(this);
 
@@ -39,6 +44,7 @@ namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
 				_sciChartSurface = child;
 				break;
 			}
+			Console.WriteLine("WindowChart.MetroWindow_Loaded() complete");
 		}
 
 		public void Update() {

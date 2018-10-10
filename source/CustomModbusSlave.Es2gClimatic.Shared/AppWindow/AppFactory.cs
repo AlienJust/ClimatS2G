@@ -26,17 +26,20 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		}
 
 		public ISharedAppAbilities Abilities => _abilities.Value;
-		
+
 
 		public void ShowChildWindowInOwnThread(Func<IThreadNotifier, WindowAndClosableViewModel> windowCreateFunc) {
 			var childWindowWaiter = new ManualResetEvent(false);
 			var childWindowThread = new Thread(() => {
+				//var uiNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
 				var uiNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
 				Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > uiNotifier created, line before window and WM were created");
 				var windowAndVm = windowCreateFunc.Invoke(uiNotifier);
-				windowAndVm.Window.DataContext = windowAndVm.WindowVm;
 				Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > window and WM were created");
-				
+
+				windowAndVm.Window.DataContext = windowAndVm.WindowVm;
+				Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > window WM assigned as window DataContext");
+
 				_closeChildWindowsActions.Add(() => uiNotifier.Notify(() => {
 					windowAndVm.Window.Close();
 					windowAndVm.WindowVm.NotifyWindowIsClosed();
@@ -63,28 +66,35 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			var appThreadNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
 
 			var mainWindowThread = new Thread(() => {
-				var mainWindowNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
-				var windowSystem = new WpfWindowSystem();
-
-				var mainViewModel = new SharedMainViewModel(mainWindowNotifier, windowSystem, windowTitle, appAbilities);
-				var mainWindow = new SharedMainView(appThreadNotifier, () => {
-					foreach (var closingAction in _closeChildWindowsActions) {
-						closingAction.Invoke();
-					}
-					_closeChildWindowsActions.Clear();
+				try {
+					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > Main window thread started");
+					var mainWindowNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
+					var windowSystem = new WpfWindowSystem();
+					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > uiNotifier and WpfWindowSystem created, line before window and WM were created");
+					var mainViewModel = new SharedMainViewModel(mainWindowNotifier, windowSystem, windowTitle, appAbilities);
+					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > windowVM was created");
+					var mainWindow = new SharedMainView(appThreadNotifier, () => {
+						foreach (var closingAction in _closeChildWindowsActions) {
+							closingAction.Invoke();
+						}
+						_closeChildWindowsActions.Clear();
+					}) { DataContext = mainViewModel };
+					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > mainWindow was created");
+					mainWindow.Show();
+					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > mainWindow.Show() was called");
+					callback(mainViewModel);
+					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > Callback was fired");
+					_mainWindowCreationCompleteWaiter.Set();
+					System.Windows.Threading.Dispatcher.Run();
 				}
-				) { DataContext = mainViewModel };
-				mainWindow.Show();
-				callback(mainViewModel);
-				_mainWindowCreationCompleteWaiter.Set();
-
-				System.Windows.Threading.Dispatcher.Run();
+				catch (Exception e) {
+					Console.WriteLine(e);
+				}
 			});
 			mainWindowThread.SetApartmentState(ApartmentState.STA);
 			mainWindowThread.Priority = ThreadPriority.AboveNormal;
 			mainWindowThread.IsBackground = true;
 			mainWindowThread.Start();
-
 			_mainWindowCreationCompleteWaiter.WaitOne();
 		}
 	}
@@ -97,9 +107,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		public Window Window { get; }
 		public IClosableVm WindowVm { get; }
 	}
-	
-	public interface IClosableVm
-	{
+
+	public interface IClosableVm {
 		void NotifyWindowIsClosed();
 	}
 }
