@@ -4,6 +4,7 @@ using System.Windows.Media;
 using Abt.Controls.SciChart.Visuals;
 using AlienJust.Adaptation.WindowsPresentation;
 using AlienJust.Support.Concurrent.Contracts;
+using CustomModbusSlave.Es2gClimatic.Shared.Chart;
 using MahApps.Metro.Controls;
 
 namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
@@ -19,8 +20,7 @@ namespace DrillingRig.ConfigApp.LookedLikeAbb.Chart {
 			if (depObj != null) {
 				for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++) {
 					DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-					var children = child as T;
-					if (children != null) {
+					if (child is T children) {
 						yield return children;
 					}
 
