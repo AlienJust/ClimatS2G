@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("CustomModbusSlave.MicroclimatEs2gApp")]
-[assembly: AssemblyCopyright("Copyright © Horizont 2016")]
+[assembly: AssemblyCopyright("Copyright © Horizon LTD 2016-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
