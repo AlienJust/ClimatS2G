@@ -52,6 +52,7 @@
     </Page>
     <Compile Include="ParamBool.cs" />
     <Compile Include="ParamRawAndConverted.cs" />
+    <Compile Include="ParamCheckable.cs" />
     <Compile Include="ParamSimple.cs">
       <SubType>Code</SubType>
     </Compile>

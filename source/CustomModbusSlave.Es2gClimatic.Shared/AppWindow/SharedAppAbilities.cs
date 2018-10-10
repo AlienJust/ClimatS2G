@@ -8,6 +8,7 @@ using AlienJust.Support.Text;
 using AlienJust.Support.Text.Contracts;
 using DataAbstractionLevel.Low.PsnConfig;
 using DataAbstractionLevel.Low.PsnConfig.Contracts;
+using DrillingRig.ConfigApp.AppControl.ParamLogger;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	public sealed class SharedAppAbilities : ISharedAppAbilities {
@@ -22,6 +23,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		public IStdNotifier CmdNotifierStd { get; }
 
 		public ModbusRtuParamReceiver RtuParamReceiver { get; }
+
+		public IParamLoggerRegistrationPoint ParamLoggerRegistrationPoint { get; }
+		public IParameterLogger ParameterLogger { get; }
 
 		public SharedAppAbilities(string psnProtocolFileName) {
 			var isFullVersion = File.Exists("FullVersion.txt");
@@ -76,6 +80,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			CmdNotifierStd = new StdNotifier();
 			CmdNotifierStd.AddListener(RtuParamReceiver);
 			_channels = new Dictionary<string, SerialChannelWithTimeoutMonitorAndSendReplyAbility>();
+
+			var paramLoggerAndRegPoint = new ParamLoggerRegistrationPointThreadSafe();
+			ParameterLogger = paramLoggerAndRegPoint;
+			ParamLoggerRegistrationPoint = paramLoggerAndRegPoint;
 		}
 
 		public SerialChannelWithTimeoutMonitorAndSendReplyAbility CreateChannel(string channelName) {

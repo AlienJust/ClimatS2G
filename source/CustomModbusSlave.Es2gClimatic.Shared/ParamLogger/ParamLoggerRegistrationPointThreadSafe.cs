@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 namespace DrillingRig.ConfigApp.AppControl.ParamLogger {
-	class ParamLoggerRegistrationPointThreadSafe : IParamLoggerRegistrationPoint, IParameterLogger {
+	sealed class ParamLoggerRegistrationPointThreadSafe : IParamLoggerRegistrationPoint, IParameterLogger {
 		private readonly List<IParameterLogger> _registredLoggers;
 		private readonly object _syncLoggers;
 

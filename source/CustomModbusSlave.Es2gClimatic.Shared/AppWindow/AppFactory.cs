@@ -14,19 +14,15 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	public sealed class AppFactory {
 		private readonly Lazy<ISharedAppAbilities> _abilities;
 		private readonly ManualResetEvent _mainWindowCreationCompleteWaiter;
-		private readonly IParamLoggerRegistrationPoint _paramLoggerRegPoint;
 		private readonly List<Action> _closeChildWindowsActions;
-
 
 		public AppFactory(string psnProtocolFileName) {
 			_abilities = new Lazy<ISharedAppAbilities>(() => new SharedAppAbilities(psnProtocolFileName));
 			_mainWindowCreationCompleteWaiter = new ManualResetEvent(false);
 			_closeChildWindowsActions = new List<Action>(); // TODO: here to add close child windows
-			_paramLoggerRegPoint = new ParamLoggerRegistrationPointThreadSafe();
 		}
 
 		public ISharedAppAbilities Abilities => _abilities.Value;
-
 
 		public void ShowChildWindowInOwnThread(Func<IThreadNotifier, WindowAndClosableViewModel> windowCreateFunc) {
 			var childWindowWaiter = new ManualResetEvent(false);
@@ -51,7 +47,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 			childWindowThread.SetApartmentState(ApartmentState.STA);
 			childWindowThread.IsBackground = true;
-			childWindowThread.Priority = ThreadPriority.AboveNormal;
+			childWindowThread.Priority = ThreadPriority.BelowNormal;
 			childWindowThread.Start();
 			childWindowWaiter.WaitOne();
 		}
@@ -79,11 +75,15 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 						}
 						_closeChildWindowsActions.Clear();
 					}) { DataContext = mainViewModel };
-					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > mainWindow was created");
+					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > mainWindow was created, let's call it's .Show() method");
+
 					mainWindow.Show();
+					//mainWindow.ShowDialog();
 					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > mainWindow.Show() was called");
+
 					callback(mainViewModel);
 					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > Callback was fired");
+
 					_mainWindowCreationCompleteWaiter.Set();
 					System.Windows.Threading.Dispatcher.Run();
 				}
@@ -92,8 +92,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 				}
 			});
 			mainWindowThread.SetApartmentState(ApartmentState.STA);
-			mainWindowThread.Priority = ThreadPriority.AboveNormal;
-			mainWindowThread.IsBackground = true;
+			mainWindowThread.Priority = ThreadPriority.Normal;
+			mainWindowThread.IsBackground = false;
 			mainWindowThread.Start();
 			_mainWindowCreationCompleteWaiter.WaitOne();
 		}

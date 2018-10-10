@@ -1,4 +1,5 @@
 ﻿using AlienJust.Support.Loggers;
+using DrillingRig.ConfigApp.AppControl.ParamLogger;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	/// <summary>
@@ -18,5 +19,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		IStdNotifier CmdNotifierStd { get; }
 
 		ModbusRtuParamReceiver RtuParamReceiver { get; }
+
+		IParamLoggerRegistrationPoint ParamLoggerRegistrationPoint { get; }
+		IParameterLogger ParameterLogger { get; }
 	}
 }

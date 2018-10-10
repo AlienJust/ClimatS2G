@@ -18,6 +18,25 @@
 		</Setter>
 	</Style>
 
+	<Style TargetType="{x:Type local:ParamCheckable}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:ParamCheckable}">
+					<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="{TemplateBinding TextColumnWidth}" />
+								<ColumnDefinition Width="{TemplateBinding ValueColumnWidth}" />
+							</Grid.ColumnDefinitions>
+							<CheckBox Content="{TemplateBinding Text}" IsChecked="{TemplateBinding IsChecked}" VerticalAlignment="Center" />
+							<TextBlock Grid.Column="1" Text="{TemplateBinding Value}" VerticalAlignment="Center" Foreground="{TemplateBinding ValueForeground}" FontWeight="{TemplateBinding ValueFontWeight}" />
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 	<Style TargetType="{x:Type local:ParamRawAndConverted}">
 		<Setter Property="Template">
 			<Setter.Value>

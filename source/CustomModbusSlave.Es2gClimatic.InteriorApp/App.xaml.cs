@@ -95,28 +95,28 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerBvs2Reply65);
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerKsmParams);
 
+			if (appAbilities.Version == AppVersion.Full) {
+				appFactory.ShowChildWindowInOwnThread(uiNotifier => {
+					
+					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow will be created in next line");
+					var oscilloscopeWindow = new OscilloscopeWindow(new List<Color> {Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal});
+					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow was created");
+					var vm = new OscilloscopeWindowSciVm();
+					appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(oscilloscopeWindow);
+					return new WindowAndClosableViewModel(oscilloscopeWindow, vm);
+				});
 
-			appFactory.ShowChildWindowInOwnThread(uiNotifier => {
-				//_paramLoggerRegPoint.RegisterLoggegr(chartVm); // TODO: REG on point
-				Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow will be created in next line");
-				var oscilloscopeWindow = new OscilloscopeWindow(new List<Color> { Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal });
-				Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow was created");
-				return new WindowAndClosableViewModel(oscilloscopeWindow, new OscilloscopeWindowSciVm());
-			});
-
-			
-			appFactory.ShowChildWindowInOwnThread(uiNotifier => {
-				var chartVm = new ChartViewModel(uiNotifier, new List<Color>{Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal});
-				//_paramLoggerRegPoint.RegisterLoggegr(chartVm); // TODO: REG on point
-				var chartWindow = new WindowChart();
-				return new WindowAndClosableViewModel(chartWindow, chartVm);
-			});
+				appFactory.ShowChildWindowInOwnThread(uiNotifier => {
+					var chartVm = new ChartViewModel(uiNotifier, new List<Color> { Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal });
+					appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(chartVm); // TODO: REG on point
+					var chartWindow = new WindowChart();
+					return new WindowAndClosableViewModel(chartWindow, chartVm);
+				});
+			}
 
 			appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm => {
 				var channel = mainVm.AddChannel("Single channel");
-
 				mainVm.TopContent = new TopContentView { DataContext = new TopContentViewModel(mainVm.Notifier, cmdListenerBsSmReply32) };
-
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "Диагностика системы",
 					ShortHeader = "ДС",
@@ -243,11 +243,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 						}
 					});
 			});
-
-
-
-
-
 		}
 	}
 }

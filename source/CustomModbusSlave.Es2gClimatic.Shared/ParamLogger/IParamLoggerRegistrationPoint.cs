@@ -1,5 +1,5 @@
 namespace DrillingRig.ConfigApp.AppControl.ParamLogger {
-	internal interface IParamLoggerRegistrationPoint {
+	public interface IParamLoggerRegistrationPoint {
 		void RegisterLoggegr(IParameterLogger logger);
 	}
 }

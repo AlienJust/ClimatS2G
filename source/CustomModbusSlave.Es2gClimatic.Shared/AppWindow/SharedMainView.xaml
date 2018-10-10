@@ -1,94 +1,56 @@
-﻿<controls:MetroWindow
-	x:Class="CustomModbusSlave.Es2gClimatic.Shared.AppWindow.SharedMainView"
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-	xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
-	xmlns:progamLog="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.ProgamLog"
-	xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-	xmlns:appWindow="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.AppWindow"
-	Title="{Binding Path=WindowTitle, Mode=OneWay}"
-	TitleCharacterCasing="Normal"
-	TitlebarHeight="40"
-	Height="480"
-	Width="640"
-	ResizeMode="CanResizeWithGrip"
-	SaveWindowPosition="True"
-	NonActiveWindowTitleBrush="{DynamicResource AccentColorBrush3}"
-	GlowBrush="{DynamicResource AccentColorBrush}"
-	Closing="MetroWindow_Closing"
-	Closed="MetroWindow_Closed">
+﻿<controls:MetroWindow x:Class="CustomModbusSlave.Es2gClimatic.Shared.AppWindow.SharedMainView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation" xmlns:progamLog="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.ProgamLog" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:appWindow="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.AppWindow" Title="{Binding Path=WindowTitle, Mode=OneWay}" TitleCharacterCasing="Normal" TitlebarHeight="40" Height="480" Width="640" ResizeMode="CanResizeWithGrip" SaveWindowPosition="True" NonActiveWindowTitleBrush="{DynamicResource AccentColorBrush3}" GlowBrush="{DynamicResource AccentColorBrush}" Closing="MetroWindow_Closing" Closed="MetroWindow_Closed">
 	<Window.Resources>
 		<ResourceDictionary>
+
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary
-					Source="pack://application:,,,/ParamControls;component/Styles/AzureTabItem.xaml"/>
+					<!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
+					<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+					<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+					<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+					<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+					<!-- Accent and AppTheme setting -->
+					<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml" />
+					<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+				<ResourceDictionary Source="pack://application:,,,/ParamControls;component/Styles/AzureTabItem.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
-			<BooleanToVisibilityConverter
-				x:Key="BtvConverter"/>
-			<converters:BooleanToVisibilityConverter
-				x:Key="InvertedBtwConverter"
-				InvertVisibility="True"/>
+			<BooleanToVisibilityConverter x:Key="BtvConverter" />
+			<converters:BooleanToVisibilityConverter x:Key="InvertedBtwConverter" InvertVisibility="True" />
 
-			<DataTemplate
-				x:Key="MenuItemTemplate"
-				DataType="{x:Type controls:HamburgerMenuGlyphItem}">
-				<Grid
-					Height="48">
+			<DataTemplate x:Key="MenuItemTemplate" DataType="{x:Type controls:HamburgerMenuGlyphItem}">
+				<Grid Height="48">
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="48"/>
-						<ColumnDefinition/>
+						<ColumnDefinition Width="48" />
+						<ColumnDefinition />
 					</Grid.ColumnDefinitions>
-					<TextBlock
-						Grid.Column="0"
-						FontSize="16"
-						HorizontalAlignment="Center"
-						VerticalAlignment="Center"
-						FontFamily="Arial"
-						Foreground="White"
-						Text="{Binding Glyph}"/>
-					<TextBlock
-						Grid.Column="1"
-						VerticalAlignment="Center"
-						FontSize="16"
-						Foreground="White"
-						Text="{Binding Label}"/>
+					<TextBlock Grid.Column="0" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" Foreground="White" Text="{Binding Glyph}" />
+					<TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="16" Foreground="White" Text="{Binding Label}" />
 				</Grid>
 			</DataTemplate>
 		</ResourceDictionary>
 	</Window.Resources>
 	<controls:MetroWindow.WindowButtonCommands>
-		<controls:WindowButtonCommands
-			Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}"/>
+		<controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
 	</controls:MetroWindow.WindowButtonCommands>
 	<controls:MetroWindow.LeftWindowCommands>
 		<controls:WindowCommands>
-			<ToggleButton
-				Margin="0"
-				IsChecked="{Binding Path=TabHeadersAreLong}"
-				BorderThickness="0" Width="48" Height="32" Style="{DynamicResource AccentedSquareButtonStyle}">
-				<iconPacks:PackIconMaterial Kind="Menu"/>
+			<ToggleButton Margin="0" IsChecked="{Binding Path=TabHeadersAreLong}" BorderThickness="0" Width="48" Height="32" Style="{DynamicResource AccentedSquareButtonStyle}">
+				<iconPacks:PackIconMaterial Kind="Menu" />
 			</ToggleButton>
 		</controls:WindowCommands>
 	</controls:MetroWindow.LeftWindowCommands>
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
-			<ListBox
-				Background="Transparent"
-				ItemsSource="{Binding Path=ComPortControlVms, Mode=OneTime}"
-				ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-				ScrollViewer.VerticalScrollBarVisibility="Disabled">
+			<ListBox Background="Transparent" ItemsSource="{Binding Path=ComPortControlVms, Mode=OneTime}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
-						<WrapPanel
-							IsItemsHost="True"/>
+						<WrapPanel IsItemsHost="True" />
 					</ItemsPanelTemplate>
 				</ListBox.ItemsPanel>
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<appWindow:ComPortControlView/>
+						<appWindow:ComPortControlView />
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
@@ -96,56 +58,29 @@
 	</controls:MetroWindow.RightWindowCommands>
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition
-				Height="Auto"/>
-			<RowDefinition
-				Height="6*"/>
-			<RowDefinition
-				Height="1*"/>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="6*" />
+			<RowDefinition Height="1*" />
 		</Grid.RowDefinitions>
-		<ContentPresenter
-			Height="Auto"
-			Grid.Row="0"
-			Content="{Binding Path=TopContent, Mode=OneWay}"/>
-		<TabControl
-			ItemContainerStyle="{StaticResource AzureTabItem}"
-			Grid.Row="1"
-			TabStripPlacement="Left"
-			ItemsSource="{Binding Path=Tabs}">
+		<ContentPresenter Height="Auto" Grid.Row="0" Content="{Binding Path=TopContent, Mode=OneWay}" />
+		<TabControl ItemContainerStyle="{StaticResource AzureTabItem}" Grid.Row="1" TabStripPlacement="Left" ItemsSource="{Binding Path=Tabs}">
 			<TabControl.ItemTemplate>
 				<DataTemplate>
-					<StackPanel
-						Orientation="Horizontal">
-						<TextBlock
-							Text="{Binding Path=ShortHeader, Mode=OneTime}"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}"/>
-						<TextBlock
-							Text="{Binding Path=FullHeader, Mode=OneTime}"
-							Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}"/>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{Binding Path=ShortHeader, Mode=OneTime}" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+						<TextBlock Text="{Binding Path=FullHeader, Mode=OneTime}" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
 					</StackPanel>
 				</DataTemplate>
 			</TabControl.ItemTemplate>
 			<TabControl.ContentTemplate>
 				<DataTemplate>
 					<ScrollViewer>
-						<ContentPresenter
-							Content="{Binding Path=Content, Mode=OneTime}"/>
+						<ContentPresenter Content="{Binding Path=Content, Mode=OneTime}" />
 					</ScrollViewer>
 				</DataTemplate>
 			</TabControl.ContentTemplate>
 		</TabControl>
-		<GridSplitter
-			Grid.Row="2"
-			Height="4"
-			BorderBrush="{DynamicResource AccentColorBrush}"
-			BorderThickness="1"
-			VerticalAlignment="Top"
-			Background="{DynamicResource AccentColorBrush}"
-			ResizeDirection="Rows"
-			HorizontalAlignment="Stretch"/>
-		<progamLog:ProgramLogView
-			Grid.Row="2"
-			DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}"
-			Margin="4,8,6,4"/>
+		<GridSplitter Grid.Row="2" Height="4" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" VerticalAlignment="Top" Background="{DynamicResource AccentColorBrush}" ResizeDirection="Rows" HorizontalAlignment="Stretch" />
+		<progamLog:ProgramLogView Grid.Row="2" DataContext="{Binding Path=ProgramLogVm, Mode=OneTime}" Margin="4,8,6,4" />
 	</Grid>
 </controls:MetroWindow>
