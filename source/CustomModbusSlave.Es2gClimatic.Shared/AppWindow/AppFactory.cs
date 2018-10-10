@@ -30,12 +30,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 		public void ShowChildWindowInOwnThread(Func<IThreadNotifier, WindowAndClosableViewModel> windowCreateFunc) {
 			var childWindowWaiter = new ManualResetEvent(false);
-			var chartWindowThread = new Thread(() => {
+			var childWindowThread = new Thread(() => {
 				var uiNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
-				Console.WriteLine("ShowChildWindowInOwnThread > uiNotifier created, line before window and WM were created");
+				Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > uiNotifier created, line before window and WM were created");
 				var windowAndVm = windowCreateFunc.Invoke(uiNotifier);
 				windowAndVm.Window.DataContext = windowAndVm.WindowVm;
-				Console.WriteLine("ShowChildWindowInOwnThread > window and WM were created");
+				Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > window and WM were created");
 				
 				_closeChildWindowsActions.Add(() => uiNotifier.Notify(() => {
 					windowAndVm.Window.Close();
@@ -46,10 +46,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 				System.Windows.Threading.Dispatcher.Run();
 			});
 
-			chartWindowThread.SetApartmentState(ApartmentState.STA);
-			chartWindowThread.IsBackground = true;
-			chartWindowThread.Priority = ThreadPriority.AboveNormal;
-			chartWindowThread.Start();
+			childWindowThread.SetApartmentState(ApartmentState.STA);
+			childWindowThread.IsBackground = true;
+			childWindowThread.Priority = ThreadPriority.AboveNormal;
+			childWindowThread.Start();
 			childWindowWaiter.WaitOne();
 		}
 

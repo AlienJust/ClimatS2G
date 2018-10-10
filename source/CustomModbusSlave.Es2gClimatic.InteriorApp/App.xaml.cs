@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
@@ -96,6 +97,22 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerBvs1Reply65);
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerBvs2Reply65);
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerKsmParams);
+			
+			
+			appFactory.ShowChildWindowInOwnThread(uiNotifier => {
+				//_paramLoggerRegPoint.RegisterLoggegr(chartVm); // TODO: REG on point
+				Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow will be created in next line");
+				var oscilloscopeWindow = new OscilloscopeWindow(new List<Color>{Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal});
+				Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow was created");
+				return new WindowAndClosableViewModel(oscilloscopeWindow, new OscilloscopeWindowSciVm());
+			});
+			
+			appFactory.ShowChildWindowInOwnThread(uiNotifier => {
+				var chartVm = new ChartViewModel(uiNotifier, new List<Color>{Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal});
+				//_paramLoggerRegPoint.RegisterLoggegr(chartVm); // TODO: REG on point
+				var chartWindow = new WindowChart();
+				return new WindowAndClosableViewModel(chartWindow, chartVm);
+			});
 
 			appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm => {
 				var channel = mainVm.AddChannel("Single channel");
@@ -229,19 +246,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 				});
 			});
 			
-			/*
-			appFactory.ShowChildWindowInOwnThread(uiNotifier => {
-				var chartVm = new ChartViewModel(uiNotifier, new List<Color>{Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal});
-				//_paramLoggerRegPoint.RegisterLoggegr(chartVm); // TODO: REG on point
-				var chartWindow = new WindowChart();
-				return new WindowAndClosableViewModel(chartWindow, chartVm);
-			});*/
 			
-			appFactory.ShowChildWindowInOwnThread(uiNotifier => {
-				//_paramLoggerRegPoint.RegisterLoggegr(chartVm); // TODO: REG on point
-				var oscilloscopeWindow = new OscilloscopeWindow(new List<Color>{Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal});
-				return new WindowAndClosableViewModel(oscilloscopeWindow, new OscilloscopeWindowSciVm());
-			});
+			
+			
 
 		}
 	}

@@ -169,14 +169,14 @@
     <Compile Include="Bvs\BvsReply65TelemetrySimple.cs" />
     <Compile Include="Bvs\CmdListenerBvsReply65.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
-    <Compile Include="Chart\ChartView.xaml.cs" >
+    <Compile Include="Chart\ChartView.xaml.cs">
       <DependentUpon>Chart\ChartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Chart\ChartViewModel.cs" />
     <Compile Include="Chart\IUpdatable.cs" />
     <Compile Include="Chart\PointsSeriesAndAdditionalData.cs" />
     <Compile Include="Chart\SeriesAdditionalData.cs" />
-    <Compile Include="Chart\WindowChart.xaml.cs" >
+    <Compile Include="Chart\WindowChart.xaml.cs">
       <DependentUpon>Chart\WindowChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Chart\WindowChartViewModel.cs" />

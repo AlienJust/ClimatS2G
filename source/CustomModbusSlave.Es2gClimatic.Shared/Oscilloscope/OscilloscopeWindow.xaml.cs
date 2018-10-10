@@ -15,9 +15,10 @@ using AlienJust.Adaptation.WindowsPresentation;
 using AlienJust.Support.Concurrent.Contracts;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
 using DrillingRig.ConfigApp.LookedLikeAbb.Chart;
+using DrillingRig.ConfigApp.LookedLikeAbb.Oscilloscope;
 using MahApps.Metro.Controls;
 
-namespace DrillingRig.ConfigApp.LookedLikeAbb.Oscilloscope {
+namespace CustomModbusSlave.Es2gClimatic.Shared.Oscilloscope {
 	public partial class OscilloscopeWindow : MetroWindow, IParameterLogger, IUpdatable {
 		private readonly List<Color> _colors;
 		private readonly List<Color> _usedColors;
@@ -66,7 +67,7 @@ namespace DrillingRig.ConfigApp.LookedLikeAbb.Oscilloscope {
 			// total range of 20 seconds
 
 			var yAxis = new NumericAxis {
-				AxisTitle = "Значания",
+				AxisTitle = "Значения",
 				AutoRange = AutoRange.Always,
 				VisibleRange = new DoubleRange(Ymin, Ymax)
 			};
