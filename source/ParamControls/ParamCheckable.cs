@@ -73,7 +73,7 @@ namespace ParamControls
 			DependencyProperty.Register(
 				"ValueColumnWidth"
 				, typeof(GridLength)
-				, typeof(ParamSimple));
+				, typeof(ParamCheckable));
 		//, new FrameworkPropertyMetadata(FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 		public GridLength ValueColumnWidth {
@@ -85,7 +85,7 @@ namespace ParamControls
 			DependencyProperty.Register(
 				"TextColumnWidth"
 				, typeof(GridLength)
-				, typeof(ParamSimple));
+				, typeof(ParamCheckable));
 		//, new FrameworkPropertyMetadata(FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 		public GridLength TextColumnWidth {

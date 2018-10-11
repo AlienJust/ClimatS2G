@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Views.MukFlapWinterSummerReply03TelemetryView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:oneWire="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire;assembly=CustomModbusSlave.Es2gClimatic.Shared" xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03" xmlns:diagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;assembly=CustomModbusSlave.Es2gClimatic.Shared" mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="800">
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Views.MukFlapWinterSummerReply03TelemetryView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:oneWire="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire;assembly=CustomModbusSlave.Es2gClimatic.Shared" xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03" xmlns:diagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;assembly=CustomModbusSlave.Es2gClimatic.Shared" xmlns:paramControls="clr-namespace:ParamControls;assembly=ParamControls" mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="800">
 	<UserControl.Resources>
 		<oneWire:SensorIndicationDoubleToStringConverter x:Key="TemperatureConverter" Format="f2" />
 	</UserControl.Resources>
@@ -11,13 +11,12 @@
 			<TextBlock Text="Уставка ШИМ на заслонку" />
 			<TextBlock Grid.Column="1" Text="{Binding Path=FlapPwmSetting, Mode=OneTime}" />
 		</Grid>
-
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="3*" />
 				<ColumnDefinition Width="1*" />
 			</Grid.ColumnDefinitions>
-			<TextBlock Text="Температура 1" />
+			<TextBlock Text="Температура 1" Margin="0,1,0,-1" />
 			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureAddress1, Mode=OneTime, Converter={StaticResource TemperatureConverter}}" />
 		</Grid>
 

@@ -35,6 +35,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.Oscilloscope;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.Shared.TestSystems;
+using ParamControls.Vm;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 	/// <summary>
@@ -202,6 +203,19 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 						FullHeader = "МУК заслонки лето зима",
 						ShortHeader = "МУК 8",
 						Content = new MukFlapWinterSummerDataView {
+							DataContext = new MukFlapWinterSummerViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapWinterSummerReply03, cmdListenerMukAirFlapWinterSummerRequest16)
+						}
+					});
+
+				if (appAbilities.Version == AppVersion.Full)
+					mainVm.AddTab(new TabItemViewModel {
+						FullHeader = "МУК IIX",
+						ShortHeader = "МУК IIX",
+						Content = 
+							new ParametersListView { DataContext = ParametersListVm(new List<IDisplayParameter> {
+								new D
+							})}
+							new MukFlapWinterSummerDataView {
 							DataContext = new MukFlapWinterSummerViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapWinterSummerReply03, cmdListenerMukAirFlapWinterSummerRequest16)
 						}
 					});
