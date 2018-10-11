@@ -12,12 +12,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ParamControls.Vm {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	/// <summary>
-	/// Interaction logic for ParametersListView.xaml
+	/// Interaction logic for ChartParameterView.xaml
 	/// </summary>
-	public partial class ParametersListView : UserControl {
-		public ParametersListView() {
+	public partial class ChartParameterView : UserControl {
+		public ChartParameterView() {
 			InitializeComponent();
 		}
 	}

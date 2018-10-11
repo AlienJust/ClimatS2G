@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
@@ -23,6 +24,7 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Views;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.TopContent;
+using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.Chart;
@@ -68,6 +70,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 			// МУК заслонки зима-лето
 			var cmdListenerMukFlapWinterSummerReply03 = new CmdListenerMukFlapWinterSummerReply03(8, 3, 47);
+
 			var cmdListenerMukAirFlapWinterSummerRequest16 = new CmdListenerMukFlapAirWinterSummerRequest16(8, 16, 21);
 
 			var cmdListenerBsSmReply32 = new CmdListenerBsSmReply32(10, 32, 47);
@@ -77,6 +80,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			var cmdListenerBvs2Reply65 = new CmdListenerBvsReply65(0x1D, 65, 7);
 
 			var cmdListenerKsmParams = new CmdListenerKsmParams(20, 16, 129);
+
+			var cmdListenerWinSum = new CmdListenerBytes(8, 3, 47);
 
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerMukFlapOuterAirReply03);
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerMukFlapOuterAirRequest16);
@@ -96,11 +101,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerBvs2Reply65);
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerKsmParams);
 
+			appAbilities.CmdNotifierStd.AddListener(cmdListenerWinSum);
+
 			if (appAbilities.Version == AppVersion.Full) {
 				appFactory.ShowChildWindowInOwnThread(uiNotifier => {
-					
+
 					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow will be created in next line");
-					var oscilloscopeWindow = new OscilloscopeWindow(new List<Color> {Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal});
+					var oscilloscopeWindow = new OscilloscopeWindow(new List<Color> { Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal });
 					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow was created");
 					var vm = new OscilloscopeWindowSciVm();
 					appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(oscilloscopeWindow);
@@ -211,13 +218,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					mainVm.AddTab(new TabItemViewModel {
 						FullHeader = "МУК IIX",
 						ShortHeader = "МУК IIX",
-						Content = 
-							new ParametersListView { DataContext = ParametersListVm(new List<IDisplayParameter> {
-								new D
-							})}
-							new MukFlapWinterSummerDataView {
-							DataContext = new MukFlapWinterSummerViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapWinterSummerReply03, cmdListenerMukAirFlapWinterSummerRequest16)
-						}
+						Content =
+							new ParametersListView {
+								DataContext = new ParameterListViewModel("Визуальная группа МУК заслонки лето-зима", new List<IDisplayParameter> {
+								new ChartReadyDisplayParameter<int>("Уставка ШИМ на клапан", new RelayParameterBlocking("PWM", cmdListenerWinSum, bytes=>bytes.Take(1).ToList()), mainVm.Notifier, bytes=>bytes[0], 0, dd=>(double)dd, (isChecked,crp) => { /*TODO: NOTIFY CHART*/ }),
+								new ChartReadyDisplayParameter<string>("WTF param", new RelayParameterBlocking("WTF", cmdListenerWinSum, bytes=>bytes.Skip(1).Take(1).ToList()), mainVm.Notifier, bytes=>bytes[0].ToString("X2"), "X3", dd=>0.0, (isChecked, crp) => { })
+							})
+							}
 					});
 
 				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)

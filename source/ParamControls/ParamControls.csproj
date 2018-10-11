@@ -48,11 +48,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Vm\Class1.cs" />
-    <Compile Include="Vm\ParametersListView.xaml.cs">
-      <DependentUpon>ParametersListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vm\TemplateSelector.cs" />
     <Page Include="Styles\AzureTabItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -67,10 +62,6 @@
     <Compile Include="ParamSimple.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Vm\ParametersListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
