@@ -14,10 +14,11 @@
 		<DataTemplate x:Key="CannotDisplayMessageTemplate">
 			<TextBlock Text="Не удалось отобразить параметр" />
 		</DataTemplate>
+
+		<vm:ChartParameterContentTemplateSelector x:Key="ChartParameterContentTemplateSelector" IntegerParameterDisplayTemplate="{StaticResource IntegerParameterDisplayTemplate}" CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}" />
 	</UserControl.Resources>
-	<CheckBox Content="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay}">
-		<CheckBox.ContentTemplateSelector>
-			<vm:DisplayParameterTemplateSelector IntegerParameterDisplayTemplate="{StaticResource IntegerParameterDisplayTemplate}" CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}"/>
-		</CheckBox.ContentTemplateSelector>
+	<!--<CheckBox Content="{Binding Path=DisplayParameter, Mode=OneTime}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay}" ContentTemplateSelector="{StaticResource ChartParameterContentTemplateSelector}"/>-->
+	<CheckBox IsChecked="{Binding Path=IsChecked, Mode=TwoWay}" HorizontalContentAlignment="Stretch">
+		<ListBox ItemTemplateSelector="{StaticResource ChartParameterContentTemplateSelector}" ItemsSource="{Binding Path=DisplayParameters}" HorizontalContentAlignment="Stretch"/>
 	</CheckBox>
 </UserControl>

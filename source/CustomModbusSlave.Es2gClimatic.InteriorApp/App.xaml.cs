@@ -220,9 +220,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 						ShortHeader = "МУК IIX",
 						Content =
 							new ParametersListView {
-								DataContext = new ParameterListViewModel("Визуальная группа МУК заслонки лето-зима", new List<IDisplayParameter> {
-								new ChartReadyDisplayParameter<int>("Уставка ШИМ на клапан", new RelayParameterBlocking("PWM", cmdListenerWinSum, bytes=>bytes.Take(1).ToList()), mainVm.Notifier, bytes=>bytes[0], 0, dd=>(double)dd, (isChecked,crp) => { /*TODO: NOTIFY CHART*/ }),
-								new ChartReadyDisplayParameter<string>("WTF param", new RelayParameterBlocking("WTF", cmdListenerWinSum, bytes=>bytes.Skip(1).Take(1).ToList()), mainVm.Notifier, bytes=>bytes[0].ToString("X2"), "X3", dd=>0.0, (isChecked, crp) => { })
+								DataContext = new ParameterListViewModel("Визуальная группа МУК заслонки лето-зима", new List<IChartReadyParameter> {
+								new ChartReadyDisplayParameter<int>(new RelayParameterViewModel<int>("Уставка ШИМ на клапан", new RelayParameterBlocking("PWM", cmdListenerWinSum, bytes=>bytes.Take(1).ToList()), mainVm.Notifier, bytes=>bytes[0], 0), dd=>(double)dd, (isChecked,crp) => { /*TODO: NOTIFY CHART*/ }),
+								new ChartReadyDisplayParameter<string>(new RelayParameterViewModel<string>("WTF param", new RelayParameterBlocking("WTF", cmdListenerWinSum, bytes=>bytes.Skip(1).Take(1).ToList()), mainVm.Notifier, bytes=>bytes[0].ToString("X2"), "X3"), dd=>0.0, (isChecked, crp) => { })
 							})
 							}
 					});

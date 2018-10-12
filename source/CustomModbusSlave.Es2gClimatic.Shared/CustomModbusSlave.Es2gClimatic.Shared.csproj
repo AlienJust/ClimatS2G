@@ -397,7 +397,7 @@
       <DependentUpon>ChartParameterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UniversalParams\Vm\ChartReadyDisplayParameter.cs" />
-    <Compile Include="UniversalParams\Vm\DisplayParameterTemplateSelector.cs" />
+    <Compile Include="UniversalParams\Vm\ChartParameterContentTemplateSelector.cs" />
     <Compile Include="UniversalParams\Vm\IChartReadyParameter.cs" />
     <Compile Include="UniversalParams\Vm\IDisplayParameter.cs" />
     <Compile Include="UniversalParams\Vm\IReceivableParameter.cs" />
