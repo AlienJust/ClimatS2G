@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ParamCentric.Common.Contracts;
 
 namespace ParamControls.Vm {
 	public sealed class ParameterListViewModel : IDisplayParameter, IDisplayGroup {
