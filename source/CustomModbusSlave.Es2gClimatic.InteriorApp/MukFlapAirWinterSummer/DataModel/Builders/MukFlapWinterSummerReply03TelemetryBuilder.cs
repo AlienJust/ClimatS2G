@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AlienJust.Support.Collections;
+using AlienJust.Support.Text;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.DataModel.SimpleReleases;
@@ -13,6 +15,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Data
 		private readonly IList<byte> _data;
 		public MukFlapWinterSummerReply03TelemetryBuilder(IList<byte> data) {
 			_data = data;
+			Console.WriteLine("Data=" + data.ToText());
 		}
 
 		public IMukFlapWinterSummerReply03Telemetry Build() {

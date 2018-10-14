@@ -12,7 +12,7 @@
 		</DataTemplate>
 
 		<DataTemplate x:Key="CannotDisplayMessageTemplate">
-			<TextBlock Text="Не удалось отобразить параметр" />
+			<TextBlock Text="Не удалось отобразить параметр" Foreground="Red" />
 		</DataTemplate>
 
 		<vm:ChartParameterContentTemplateSelector x:Key="ChartParameterContentTemplateSelector" IntegerParameterDisplayTemplate="{StaticResource IntegerParameterDisplayTemplate}" CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}" />

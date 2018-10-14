@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -45,6 +46,35 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 	/// </summary>
 	public partial class App : Application {
 		private void App_OnStartup(object sender, StartupEventArgs e) {
+			var colorsForGraphics = new List<Color> {
+				Colors.LawnGreen,
+				Colors.Red,
+				Colors.Cyan,
+				Colors.Yellow,
+				Colors.Coral,
+				Colors.LightGreen,
+				Colors.HotPink,
+				Colors.DeepSkyBlue,
+				Colors.Gold,
+				Colors.Orange,
+				Colors.Violet,
+				Colors.White,
+				Colors.Fuchsia,
+				Colors.LightSkyBlue,
+				Colors.LightGray,
+				Colors.Khaki,
+				Colors.SpringGreen,
+				Colors.Tomato,
+				Colors.LightCyan,
+				Colors.Goldenrod,
+				Colors.SlateBlue,
+				Colors.Cornsilk,
+				Colors.MediumPurple,
+				Colors.RoyalBlue,
+				Colors.MediumVioletRed,
+				Colors.MediumTurquoise };
+
+
 			var appFactory = new AppFactory("psn.S2G-climatic-interior.xml");
 			var appAbilities = appFactory.Abilities;
 
@@ -103,23 +133,29 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerWinSum);
 
+			
+
 			if (appAbilities.Version == AppVersion.Full) {
+				appFactory.ShowChildWindowInOwnThread(uiNotifier => {
+					var chartVm = new ChartViewModel(uiNotifier, colorsForGraphics);
+					appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(chartVm); // TODO: REG on point
+					var chartWindow = new WindowChart();
+					chartVm.SetUpdatable(chartWindow);
+
+					return new WindowAndClosableViewModel(chartWindow, new WindowChartViewModel(chartVm));
+				});
+
 				appFactory.ShowChildWindowInOwnThread(uiNotifier => {
 
 					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow will be created in next line");
-					var oscilloscopeWindow = new OscilloscopeWindow(new List<Color> { Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal });
+					var oscilloscopeWindow = new OscilloscopeWindow(colorsForGraphics);
 					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow was created");
 					var vm = new OscilloscopeWindowSciVm();
 					appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(oscilloscopeWindow);
 					return new WindowAndClosableViewModel(oscilloscopeWindow, vm);
 				});
 
-				appFactory.ShowChildWindowInOwnThread(uiNotifier => {
-					var chartVm = new ChartViewModel(uiNotifier, new List<Color> { Colors.Green, Colors.Red, Colors.Blue, Colors.Brown, Colors.Fuchsia, Colors.Teal });
-					appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(chartVm); // TODO: REG on point
-					var chartWindow = new WindowChart();
-					return new WindowAndClosableViewModel(chartWindow, chartVm);
-				});
+				
 			}
 
 			appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm => {
@@ -214,18 +250,23 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 						}
 					});
 
-				if (appAbilities.Version == AppVersion.Full)
+				if (appAbilities.Version == AppVersion.Full) {
+					IReceivableParameter mukFlapWinterSummerPwm = new ReceivableParameterRelayBlocking("PWM", cmdListenerWinSum, bytes => bytes.Skip(1).Take(2).ToList());
+
 					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "МУК IIX",
+						FullHeader = "МУК IIX TEST CHART AND Prm.Centric",
 						ShortHeader = "МУК IIX",
-						Content =
-							new ParametersListView {
-								DataContext = new ParameterListViewModel("Визуальная группа МУК заслонки лето-зима", new List<IChartReadyParameter> {
-								new ChartReadyDisplayParameter<int>(new RelayParameterViewModel<int>("Уставка ШИМ на клапан", new RelayParameterBlocking("PWM", cmdListenerWinSum, bytes=>bytes.Take(1).ToList()), mainVm.Notifier, bytes=>bytes[0], 0), dd=>(double)dd, (isChecked,crp) => { /*TODO: NOTIFY CHART*/ }),
-								new ChartReadyDisplayParameter<string>(new RelayParameterViewModel<string>("WTF param", new RelayParameterBlocking("WTF", cmdListenerWinSum, bytes=>bytes.Skip(1).Take(1).ToList()), mainVm.Notifier, bytes=>bytes[0].ToString("X2"), "X3"), dd=>0.0, (isChecked, crp) => { })
+						Content = new ParametersListView {
+							DataContext = new ParameterListViewModel("МУК8", "МУК заслонки лето-зима", new ObservableCollection<IChartReadyParameterVm> {
+								new ChartReadyDisplayParameterVm<int>(new DisplayParameterRelayViewModel<int>("МУК8", "Уставка ШИМ на клапан", mukFlapWinterSummerPwm, mainVm.Notifier, bytes => bytes[0] * 256 + bytes[1], 0), dd => (double) dd, ParameterLogType.Analogue, appAbilities.ParameterLogger),
+								new ChartReadyDisplayParameterVm<string>(new DisplayParameterRelayViewModel<string>("МУК8", "WTF param", new ReceivableParameterRelayBlocking("WTF", cmdListenerWinSum, bytes => bytes.Skip(1).Take(1).ToList()), mainVm.Notifier, bytes => bytes[0].ToString("X2"), "X3"), dd => 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger),
+								new ParameterListViewModel("МУК8", "Диагностика X", new ObservableCollection<IChartReadyParameterVm> {
+									new ChartReadyDisplayParameterVm<int>(new DisplayParameterRelayViewModel<int>("МУК8", "Уставка ШИМ на клапан 2", mukFlapWinterSummerPwm, mainVm.Notifier, bytes => bytes[0] * 256 + bytes[1], 0), dd => (double) dd, ParameterLogType.Analogue, appAbilities.ParameterLogger)
+								})
 							})
-							}
+						}
 					});
+				}
 
 				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)
 					mainVm.AddTab(new TabItemViewModel {

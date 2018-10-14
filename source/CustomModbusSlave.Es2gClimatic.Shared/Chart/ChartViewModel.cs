@@ -18,10 +18,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.Chart {
 	public class ChartViewModel : ViewModelBase, IParameterLogger, IClosableVm {
 		private readonly IThreadNotifier _uiNotifier;
 		private readonly List<Color> _colors;
-		//private int _currentColorIndex;
 		private readonly List<Color> _usedColors;
 		private readonly Dictionary<string, PointsSeriesAndAdditionalData> _logs;
-
 
 		private IUpdatable _updatable;
 

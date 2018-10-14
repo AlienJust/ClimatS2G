@@ -12,18 +12,13 @@
 			<TextBlock Text="Не удалось отобразить элемент" />
 		</DataTemplate>
 
-		<local:ParameterListItemTemplateSelector x:Key="ParameterListItemTemplateSelector"></local:ParameterListItemTemplateSelector>
+		<local:ParameterListItemTemplateSelector x:Key="ParameterListItemTemplateSelector" ChartParameterTemplate="{StaticResource ChartParameterTemplate}" DisplayGroupTemplate="{StaticResource DisplayGroupTemplate}" CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}"/>
 	</UserControl.Resources>
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<TextBox Text="{Binding Path=DisplayName, Mode=OneTime}"></TextBox>
-		<ListBox ItemTemplateSelector="{StaticResource ParameterListItemTemplateSelector}" ItemsSource="{Binding Path=GroupItems, Mode=OneTime}">
-
-		</ListBox>
-	</Grid>
-	
+	<Expander>
+		<Expander.Header>
+		<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" FontSize="14" FontWeight="Bold"/>
+		</Expander.Header>
+		<ListBox Grid.Row="1" ItemTemplateSelector="{StaticResource ParameterListItemTemplateSelector}" ItemsSource="{Binding Path=GroupItems, Mode=OneTime}"/>
+	</Expander>
 </UserControl>

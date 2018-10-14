@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using AlienJust.Support.Text;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
 namespace ParamControls.Vm {
-	public sealed class RelayParameterBlocking : IReceivableParameter {
+	public sealed class ReceivableParameterRelayBlocking : IReceivableParameter {
 		private readonly Func<IList<byte>, IList<byte>> _dataGetter;
 		private readonly ICmdListener<IList<byte>> _cmdPartListener;
 		public string ReceiveName { get; }
@@ -18,7 +19,7 @@ namespace ParamControls.Vm {
 
 		public event NotifyDataReceivedDelegate NotifyDataReceived;
 
-		public RelayParameterBlocking(string receiveName, ICmdListener<IList<byte>> cmdPartListener, Func<IList<byte>, IList<byte>> dataGetter) {
+		public ReceivableParameterRelayBlocking(string receiveName, ICmdListener<IList<byte>> cmdPartListener, Func<IList<byte>, IList<byte>> dataGetter) {
 			ReceiveName = receiveName;
 			_cmdPartListener = cmdPartListener;
 			_dataGetter = dataGetter;
@@ -28,7 +29,8 @@ namespace ParamControls.Vm {
 		}
 
 		private void CmdPartListenerOnDataReceived(IList<byte> bytes, IList<byte> data) {
-			Console.WriteLine("Parameter received from _cmdPartListener");
+			//Console.WriteLine("bytes=" + bytes.ToText());
+			//Console.WriteLine("data=" + data.ToText());
 			SetReceivedValueFromCommandPart(data);
 		}
 

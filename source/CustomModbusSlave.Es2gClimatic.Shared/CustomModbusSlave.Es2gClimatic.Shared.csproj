@@ -396,9 +396,10 @@
     <Compile Include="UniversalParams\Vm\ChartParameterView.xaml.cs">
       <DependentUpon>ChartParameterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UniversalParams\Vm\ChartReadyDisplayParameter.cs" />
+    <Compile Include="UniversalParams\Vm\ChartReadyDisplayParameterVm.cs" />
     <Compile Include="UniversalParams\Vm\ChartParameterContentTemplateSelector.cs" />
-    <Compile Include="UniversalParams\Vm\IChartReadyParameter.cs" />
+    <Compile Include="UniversalParams\Vm\IChartReadyParameterVm.cs" />
+    <Compile Include="UniversalParams\Vm\IDisplayGroup.cs" />
     <Compile Include="UniversalParams\Vm\IDisplayParameter.cs" />
     <Compile Include="UniversalParams\Vm\IReceivableParameter.cs" />
     <Compile Include="UniversalParams\Vm\NotifyDataReceivedDelegate.cs" />
@@ -406,8 +407,8 @@
     <Compile Include="UniversalParams\Vm\ParametersListView.xaml.cs">
       <DependentUpon>ParametersListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UniversalParams\Vm\RelayParameterBlocking.cs" />
-    <Compile Include="UniversalParams\Vm\RelayParameterViewModel.cs" />
+    <Compile Include="UniversalParams\Vm\ReceivableParameterRelayBlocking.cs" />
+    <Compile Include="UniversalParams\Vm\DisplayParameterRelayViewModel.cs" />
     <Compile Include="UniversalParams\Vm\ParameterListItemTemplateSelector.cs" />
     <Compile Include="UniversalParams\Wpf\KsmReadonlyBitsParameterView.xaml.cs">
       <DependentUpon>KsmReadonlyBitsParameterView.xaml</DependentUpon>

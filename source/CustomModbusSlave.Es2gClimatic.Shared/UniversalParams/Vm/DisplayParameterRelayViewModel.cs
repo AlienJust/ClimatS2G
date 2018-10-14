@@ -4,14 +4,18 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 
 namespace ParamControls.Vm {
-	public class RelayParameterViewModel<T> : ViewModelBase, IDisplayParameter<T> where T : IEquatable<T> {
+	public class DisplayParameterRelayViewModel<T> : ViewModelBase, IDisplayParameter<T> where T : IEquatable<T> {
 		private readonly IReceivableParameter _parameterModel;
 		private readonly IThreadNotifier _uiNotifier;
 		private readonly Func<IList<byte>, T> _displayValueGetter;
 		private readonly T _fallbackValue;
 		private T _displayValue;
 
-		public RelayParameterViewModel(string displayName, IReceivableParameter parameterModel, IThreadNotifier uiNotifier, Func<IList<byte>, T> displayValueGetter, T fallbackValue) {
+		public string FullName { get; }
+		public string DisplayName { get; }
+
+		public DisplayParameterRelayViewModel(string fullNamePreffix, string displayName, IReceivableParameter parameterModel, IThreadNotifier uiNotifier, Func<IList<byte>, T> displayValueGetter, T fallbackValue) {
+			FullName = fullNamePreffix + ": " + displayName;
 			DisplayName = displayName;
 			_parameterModel = parameterModel;
 			_uiNotifier = uiNotifier;
@@ -34,7 +38,6 @@ namespace ParamControls.Vm {
 			}); // TODO: many calls could lag interface!
 		}
 
-		public string DisplayName { get; }
 
 		public T DisplayValue {
 			get => _displayValue;
@@ -44,6 +47,7 @@ namespace ParamControls.Vm {
 						_displayValue = value;
 						RaisePropertyChanged(() => DisplayValue);
 					}
+					DisplayParameterValueMaybeChanged?.Invoke();
 				}
 				catch (Exception e) {
 					Console.WriteLine(e);
@@ -51,5 +55,7 @@ namespace ParamControls.Vm {
 				}
 			}
 		}
+
+		public event DisplayParameterValueMaybeChangedDelegate DisplayParameterValueMaybeChanged;
 	}
 }
