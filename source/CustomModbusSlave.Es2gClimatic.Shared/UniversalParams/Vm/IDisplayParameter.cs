@@ -1,7 +1,9 @@
-﻿namespace ParamControls.Vm {
+﻿using System.Threading;
+
+namespace ParamControls.Vm {
 	public interface IDisplayParameter<out T> : IDisplayParameter {
 		T DisplayValue { get; }
-
+		bool IsValueFallbackOrUnknown { get; }
 		event DisplayParameterValueMaybeChangedDelegate DisplayParameterValueMaybeChanged;
 	}
 

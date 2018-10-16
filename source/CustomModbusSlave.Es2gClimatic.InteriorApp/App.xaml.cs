@@ -5,6 +5,10 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
+using AlienJust.Support.Collections;
+using AlienJust.Support.Concurrent;
+using AlienJust.Support.Concurrent.Contracts;
+using AlienJust.Support.Numeric.Bits;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs2;
@@ -35,10 +39,12 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.Oscilloscope;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.Shared.TestSystems;
 using ParamControls.Vm;
+using Timer = System.Timers.Timer;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 	/// <summary>
@@ -46,6 +52,19 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 	/// </summary>
 	public partial class App : Application {
 		private void App_OnStartup(object sender, StartupEventArgs e) {
+			IWorker<Action> sharedTestWorker = new SingleThreadedRelayQueueWorkerProceedAllItemsBeforeStopNoLog<Action>("Shared Test Worker", a => {
+				try {
+					a();
+				}
+				catch (Exception exception) {
+					Console.WriteLine(exception);
+				}
+			}, ThreadPriority.BelowNormal, true, ApartmentState.Unknown);
+			var tt = new Timer(1000);
+			tt.AutoReset = true;
+			tt.Start();
+
+
 			var colorsForGraphics = new List<Color> {
 				Colors.LawnGreen,
 				Colors.Red,
@@ -72,7 +91,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 				Colors.MediumPurple,
 				Colors.RoyalBlue,
 				Colors.MediumVioletRed,
-				Colors.MediumTurquoise };
+				Colors.MediumTurquoise
+			};
 
 
 			var appFactory = new AppFactory("psn.S2G-climatic-interior.xml");
@@ -133,7 +153,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 			appAbilities.CmdNotifierStd.AddListener(cmdListenerWinSum);
 
-			
 
 			if (appAbilities.Version == AppVersion.Full) {
 				appFactory.ShowChildWindowInOwnThread(uiNotifier => {
@@ -146,7 +165,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 				});
 
 				appFactory.ShowChildWindowInOwnThread(uiNotifier => {
-
 					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow will be created in next line");
 					var oscilloscopeWindow = new OscilloscopeWindow(colorsForGraphics);
 					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow was created");
@@ -154,156 +172,94 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(oscilloscopeWindow);
 					return new WindowAndClosableViewModel(oscilloscopeWindow, vm);
 				});
-
-				
 			}
 
 			appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm => {
 				var channel = mainVm.AddChannel("Single channel");
-				mainVm.TopContent = new TopContentView { DataContext = new TopContentViewModel(mainVm.Notifier, cmdListenerBsSmReply32) };
-				mainVm.AddTab(new TabItemViewModel {
-					FullHeader = "Диагностика системы",
-					ShortHeader = "ДС",
-					Content = new SystemDiagnosticView {
-						DataContext = new SystemDiagnosticViewModel(
-							appAbilities.Version == AppVersion.Full,
-							appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full,
-								mainVm.Notifier,
-								cmdListenerMukFlapOuterAirReply03,
-								cmdListenerMukVaporizerReply03,
-								cmdListenerMukVaporizerRequest16,
-								cmdListenerMukCondenserFanReply03,
-								cmdListenerMukAirExhausterReply03,
-								cmdListenerMukFlapReturnAirReply03,
-								cmdListenerMukFlapWinterSummerReply03,
-								cmdListenerBsSmReply32,
-								cmdListenerKsmParams,
-								cmdListenerBvs1Reply65,
-								cmdListenerBvs2Reply65)
-					}
-				});
+				mainVm.TopContent = new TopContentView {DataContext = new TopContentViewModel(mainVm.Notifier, cmdListenerBsSmReply32)};
+				mainVm.AddTab(new TabItemViewModel {FullHeader = "Диагностика системы", ShortHeader = "ДС", Content = new SystemDiagnosticView {DataContext = new SystemDiagnosticViewModel(appAbilities.Version == AppVersion.Full, appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full, mainVm.Notifier, cmdListenerMukFlapOuterAirReply03, cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16, cmdListenerMukCondenserFanReply03, cmdListenerMukAirExhausterReply03, cmdListenerMukFlapReturnAirReply03, cmdListenerMukFlapWinterSummerReply03, cmdListenerBsSmReply32, cmdListenerKsmParams, cmdListenerBvs1Reply65, cmdListenerBvs2Reply65)}});
 
-				mainVm.AddTab(new TabItemViewModel {
-					FullHeader = "Тестирование системы",
-					ShortHeader = "ТЕСТ",
-					Content = new TestSystemView { DataContext = new TestSystemViewModel(mainVm.Notifier, "Охлаждение", new Freeze100Test(null, cmdListenerMukVaporizerReply03)) }
-				});
+				mainVm.AddTab(new TabItemViewModel {FullHeader = "Тестирование системы", ShortHeader = "ТЕСТ", Content = new TestSystemView {DataContext = new TestSystemViewModel(mainVm.Notifier, "Охлаждение 100%", new Freeze100Test(sharedTestWorker, cmdListenerMukVaporizerReply03, tt, channel.Channel.ParamSetter), AlienJust.Adaptation.WindowsPresentation.Converters.Colors.Transparent)}});
 
 				if (appAbilities.Version == AppVersion.Full)
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "МУК заслонки наружного воздуха",
-						ShortHeader = "МУК 2",
-						Content = new MukFlapDataView { DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapOuterAirReply03, cmdListenerMukFlapOuterAirRequest16) }
-					});
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК заслонки наружного воздуха", ShortHeader = "МУК 2", Content = new MukFlapDataView {DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapOuterAirReply03, cmdListenerMukFlapOuterAirRequest16)}});
 
 				if (appAbilities.Version == AppVersion.Full)
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "МУК вентилятора испарителя",
-						ShortHeader = "МУК 3",
-						Content = new MukVaporizerFanDataView {
-							DataContext = new MukVaporizerFanDataViewModelParamcentric(
-							mainVm.Notifier, channel.Channel.ParamSetter,
-							appAbilities.RtuParamReceiver,
-							cmdListenerMukVaporizerReply03,
-							cmdListenerMukVaporizerRequest16
-						)
-						}
-					});
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК вентилятора испарителя", ShortHeader = "МУК 3", Content = new MukVaporizerFanDataView {DataContext = new MukVaporizerFanDataViewModelParamcentric(mainVm.Notifier, channel.Channel.ParamSetter, appAbilities.RtuParamReceiver, cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16)}});
 
 				if (appAbilities.Version == AppVersion.Full)
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "МУК вентилятора конденсатора",
-						ShortHeader = "МУК 4",
-						Content = new MukFridgeFanDataView {
-							DataContext = new MukFridgeFanDataViewModel(
-							mainVm.Notifier, channel.Channel.ParamSetter,
-							cmdListenerMukCondenserFanReply03,
-							cmdListenerMukCondenserRequest16
-						)
-						}
-					});
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК вентилятора конденсатора", ShortHeader = "МУК 4", Content = new MukFridgeFanDataView {DataContext = new MukFridgeFanDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukCondenserFanReply03, cmdListenerMukCondenserRequest16)}});
 
 				if (appAbilities.Version == AppVersion.Full)
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "МУК вытяжного вентилятора пола",
-						ShortHeader = "МУК 6",
-						Content = new AirExhausterDataView {
-							DataContext = new MukAirExhausterDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukAirExhausterReply03, cmdListenerMukAirExhausterRequest16)
-						}
-					});
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК вытяжного вентилятора пола", ShortHeader = "МУК 6", Content = new AirExhausterDataView {DataContext = new MukAirExhausterDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukAirExhausterReply03, cmdListenerMukAirExhausterRequest16)}});
 
 				if (appAbilities.Version == AppVersion.Full)
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "МУК заслонки рециркуляц. воздуха",
-						ShortHeader = "МУК 7",
-						Content = new MukFlapReturnAirDataView {
-							DataContext = new MukFlapReturnAirViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapReturnAirReply03, cmdListenerMukFlapAirRecycleRequest16)
-						}
-					});
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК заслонки рециркуляц. воздуха", ShortHeader = "МУК 7", Content = new MukFlapReturnAirDataView {DataContext = new MukFlapReturnAirViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapReturnAirReply03, cmdListenerMukFlapAirRecycleRequest16)}});
 
 				if (appAbilities.Version == AppVersion.Full)
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "МУК заслонки лето зима",
-						ShortHeader = "МУК 8",
-						Content = new MukFlapWinterSummerDataView {
-							DataContext = new MukFlapWinterSummerViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapWinterSummerReply03, cmdListenerMukAirFlapWinterSummerRequest16)
-						}
-					});
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК заслонки лето зима", ShortHeader = "МУК 8", Content = new MukFlapWinterSummerDataView {DataContext = new MukFlapWinterSummerViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapWinterSummerReply03, cmdListenerMukAirFlapWinterSummerRequest16)}});
 
 				if (appAbilities.Version == AppVersion.Full) {
 					IReceivableParameter mukFlapWinterSummerPwm = new ReceivableParameterRelayBlocking("PWM", cmdListenerWinSum, bytes => bytes.Skip(1).Take(2).ToList());
+					IReceivableParameter mukFlapWinterTemperatureOneWireAddr1 = new ReceivableParameterRelayBlocking("T1W1", cmdListenerWinSum, bytes => bytes.Skip(3).Take(2).ToList());
+					IReceivableParameter mukFlapWinterTemperatureOneWireAddr2 = new ReceivableParameterRelayBlocking("T1W2", cmdListenerWinSum, bytes => bytes.Skip(5).Take(2).ToList());
+					IReceivableParameter mukFlapWinterIncomingSignals = new ReceivableParameterRelayBlocking("ISigs", cmdListenerWinSum, bytes => bytes.Skip(7).Take(1).ToList());
+					IReceivableParameter mukFlapWinterOutgoingSignals = new ReceivableParameterRelayBlocking("OSigs", cmdListenerWinSum, bytes => bytes.Skip(8).Take(1).ToList());
 
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "МУК IIX TEST CHART AND Prm.Centric",
-						ShortHeader = "МУК IIX",
-						Content = new ParametersListView {
-							DataContext = new ParameterListViewModel("МУК8", "МУК заслонки лето-зима", new ObservableCollection<IChartReadyParameterVm> {
-								new ChartReadyDisplayParameterVm<int>(new DisplayParameterRelayViewModel<int>("МУК8", "Уставка ШИМ на клапан", mukFlapWinterSummerPwm, mainVm.Notifier, bytes => bytes[0] * 256 + bytes[1], 0), dd => (double) dd, ParameterLogType.Analogue, appAbilities.ParameterLogger),
-								new ChartReadyDisplayParameterVm<string>(new DisplayParameterRelayViewModel<string>("МУК8", "WTF param", new ReceivableParameterRelayBlocking("WTF", cmdListenerWinSum, bytes => bytes.Skip(1).Take(1).ToList()), mainVm.Notifier, bytes => bytes[0].ToString("X2"), "X3"), dd => 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger),
-								new ParameterListViewModel("МУК8", "Диагностика X", new ObservableCollection<IChartReadyParameterVm> {
-									new ChartReadyDisplayParameterVm<int>(new DisplayParameterRelayViewModel<int>("МУК8", "Уставка ШИМ на клапан 2", mukFlapWinterSummerPwm, mainVm.Notifier, bytes => bytes[0] * 256 + bytes[1], 0), dd => (double) dd, ParameterLogType.Analogue, appAbilities.ParameterLogger)
-								})
-							})
-						}
-					});
+
+					var mukFlapWinterSummerPwmDisplay = new DisplayParameterRelayViewModel<int>("МУК8", "Уставка ШИМ на клапан", mukFlapWinterSummerPwm, mainVm.Notifier, bytes => bytes[0] * 256 + bytes[1], 0, -1);
+
+					var mukFlapWinterTemperatureOneWireAddr1Display = new DisplayParameterRelayViewModel<string>("МУК8", "Температура 1w адрес 1", mukFlapWinterTemperatureOneWireAddr1, mainVm.Notifier, bytes => {
+						var si = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(bytes[0], bytes[1]), 0.01, 0.0, new BytesPair(0x85, 0x00));
+						Console.WriteLine(si.ToString(d => d.ToString("f2")));
+						return si.ToString(d => d.ToString("f2"));
+					}, "X3", "???");
+
+					var mukFlapWinterTemperatureOneWireAddr2Display = new DisplayParameterRelayViewModel<string>("МУК8", "Температура 1w адрес 2", mukFlapWinterTemperatureOneWireAddr2, mainVm.Notifier, bytes => {
+						var si = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(bytes[0], bytes[1]), 0.01, 0.0, new BytesPair(0x85, 0x00));
+						Console.WriteLine(si.ToString(d => d.ToString("f2")));
+						return si.ToString(d => d.ToString("f2"));
+					}, "X3", "???");
+
+
+					var groupIncomingSignals = new ParameterListViewModel("МУК8", "Байт входных сигналов", new ObservableCollection<IChartReadyParameterVm>());
+					var mukFlapWinterIsigTurnEmrson1On = new DisplayParameterRelayViewModel<bool>(groupIncomingSignals.FullName, "Сигнал на включение Emersion1", mukFlapWinterIncomingSignals, mainVm.Notifier, bytes => bytes[0].GetBit(6), false, false);
+
+					var mukFlapWinterIsigTurnEmrson2On = new DisplayParameterRelayViewModel<bool>(groupIncomingSignals.FullName, "Сигнал на включение Emersion2", mukFlapWinterIncomingSignals, mainVm.Notifier, bytes => bytes[0].GetBit(7), false, false);
+
+
+					groupIncomingSignals.GroupItems.Add(new ChartReadyDisplayParameterVm<bool>(mukFlapWinterIsigTurnEmrson1On, b => b ? 1 : 0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
+					groupIncomingSignals.GroupItems.Add(new ChartReadyDisplayParameterVm<bool>(mukFlapWinterIsigTurnEmrson2On, b => b ? 1 : 0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
+
+
+					mainVm.AddTab(
+						new TabItemViewModel {
+							FullHeader = "МУК заслонки лето зима", 
+							ShortHeader = "МУК 8", 
+							Content = new ParametersListView {
+								DataContext = new ParameterListViewModel(
+									"МУК8", 
+									"МУК заслонки лето-зима", 
+									new ObservableCollection<IChartReadyParameterVm> {
+										new ChartReadyDisplayParameterVm<int>(mukFlapWinterSummerPwmDisplay, dd => dd, ParameterLogType.Analogue, appAbilities.ParameterLogger), 
+										new ChartReadyDisplayParameterVm<string>(mukFlapWinterTemperatureOneWireAddr1Display, dd => double.Parse(dd), ParameterLogType.Analogue, appAbilities.ParameterLogger), 
+										new ChartReadyDisplayParameterVm<string>(mukFlapWinterTemperatureOneWireAddr2Display, dd => double.Parse(dd), ParameterLogType.Analogue, appAbilities.ParameterLogger), 
+										groupIncomingSignals}
+									)
+							}});
 				}
 
 				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "БС-СМ",
-						ShortHeader = "БС-СМ",
-						Content = new BsSmDataView {
-							DataContext = new BsSmDataViewModel(
-							mainVm.Notifier, cmdListenerBsSmRequest32, cmdListenerBsSmReply32)
-						}
-					});
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "БС-СМ", ShortHeader = "БС-СМ", Content = new BsSmDataView {DataContext = new BsSmDataViewModel(mainVm.Notifier, cmdListenerBsSmRequest32, cmdListenerBsSmReply32)}});
 
 				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "БВС1",
-						ShortHeader = "БВС1",
-						Content = new BvsDataView {
-							DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvs1Reply65)
-						}
-					});
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "БВС1", ShortHeader = "БВС1", Content = new BvsDataView {DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvs1Reply65)}});
 
 				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "БВС2",
-						ShortHeader = "БВС2",
-						Content = new Bvs2DataView {
-							DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvs2Reply65)
-						}
-					});
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "БВС2", ShortHeader = "БВС2", Content = new Bvs2DataView {DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvs2Reply65)}});
 
 				if (appAbilities.Version == AppVersion.Full)
-					mainVm.AddTab(new TabItemViewModel {
-						FullHeader = "КСМ",
-						ShortHeader = "КСМ",
-						Content = new KsmDataView {
-							DataContext = new KsmDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerKsmParams)
-						}
-					});
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "КСМ", ShortHeader = "КСМ", Content = new KsmDataView {DataContext = new KsmDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerKsmParams)}});
 			});
 		}
 	}

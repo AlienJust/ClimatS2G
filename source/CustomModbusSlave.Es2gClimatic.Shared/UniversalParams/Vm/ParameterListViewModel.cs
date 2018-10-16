@@ -7,10 +7,14 @@ namespace ParamControls.Vm {
 		public string DisplayName { get; }
 		public string FullName { get; }
 
-		public ParameterListViewModel(string fullNamePreffix, string displayName, ObservableCollection<IChartReadyParameterVm> groupItems) {
+		public ParameterListViewModel(string fullNamePreffix, string displayName, IEnumerable<IChartReadyParameterVm> groupItems) {
 			FullName = fullNamePreffix + ": displayName";
 			DisplayName = displayName;
-			GroupItems = groupItems;
+			
+			GroupItems = new ObservableCollection<IChartReadyParameterVm>();
+			foreach (var item in groupItems) {
+				GroupItems.Add(item);
+			}
 		}
 
 		public ObservableCollection<IChartReadyParameterVm> GroupItems { get; }

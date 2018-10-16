@@ -21,7 +21,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 	class SystemDiagnosticViewModel : ViewModelBase {
 		private const string UnknownText = "Неизвестно";
-		private const string UnknownTextShort = "X3";
+		private const string UnknownTextShort = "??";
 
 		private const string AutoSwitchAndContactorIsOkText = "V";
 		private const string AutoSwitchAndContactorIsErText = "X";
@@ -34,7 +34,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private const Colors UnknownColor = Colors.Yellow;
 		private const Colors NoLinkColor = Colors.Red;
 		private const Colors NoSensorColor = Colors.Red;
-		
+
 		private const Colors OkLinkColor = Colors.LimeGreen;
 		private const Colors OkSensorColor = Colors.LimeGreen;
 
@@ -49,7 +49,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private const Colors HiVoltageUnknownColor = Colors.Yellow;
 		private const string HiVoltageOnLineText = "Есть!";
 		private const string HiVoltageOffLineText = "Нет";
-		private const string HiVoltageUnknownText = "ХЗ!";
+		private const string HiVoltageUnknownText = "??!";
 
 		private readonly IThreadNotifier _uiNotifier;
 		private readonly ICmdListener<IMukFlapOuterAirReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
@@ -124,6 +124,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		/// Датчик подаваемого воздуха
 		/// </summary>
 		private string _sensorSupplyAirInfo;
+
 		private Colors _sensorSupplyAirInfoColor;
 
 		private string _sensorInteriorAirInfo1;
@@ -204,20 +205,18 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		public bool IsFullVersion { get; }
 		public bool IsHalfOrFullVersion { get; }
 
-		public SystemDiagnosticViewModel(bool isFullVersion, bool isHalfOrFullVersion,
-			IThreadNotifier uiNotifier,
-			ICmdListener<IMukFlapOuterAirReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
-			ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03,
-			ICmdListener<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16,
-			ICmdListener<IMukCondensorFanReply03Data> cmdListenerMukCondenserFanReply03,
-			ICmdListener<IMukAirExhausterReply03Data> cmdListenerMukAirExhausterReply03,
-			ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03,
-			ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03,
-			ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32,
-			ICmdListener<IList<BytesPair>> cmdListenerKsm,
-			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65,
-			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65) {
 
+		private string _cleanerWorkHourCounter;
+		private string _thisSegmentCompressorWorkHourCounter;
+		private string _compressorSwitchCounter;
+		private string _condenserFan1WorkHourCounter;
+		private string _condenserFan2WorkHourCounter;
+		private string _heater380WorkHourCounter;
+		private string _heater3000WorkHourCounter;
+		private string _fanIncomingAirWorkHourCounter;
+		private string _fanOutgoingAirWorkHourCounter;
+
+		public SystemDiagnosticViewModel(bool isFullVersion, bool isHalfOrFullVersion, IThreadNotifier uiNotifier, ICmdListener<IMukFlapOuterAirReply03Telemetry> cmdListenerMukFlapOuterAirReply03, ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03, ICmdListener<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16, ICmdListener<IMukCondensorFanReply03Data> cmdListenerMukCondenserFanReply03, ICmdListener<IMukAirExhausterReply03Data> cmdListenerMukAirExhausterReply03, ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03, ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03, ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32, ICmdListener<IList<BytesPair>> cmdListenerKsm, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65) {
 			IsFullVersion = isFullVersion;
 			IsHalfOrFullVersion = isHalfOrFullVersion;
 
@@ -264,7 +263,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			BsSmFaultVm4 = new BsSmFaultViewModel();
 			BsSmFaultVm5 = new BsSmFaultViewModel();
 		}
-
 
 
 		/// <summary>
@@ -518,8 +516,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					ConcentratorInfoColor = OkLinkColor;
 				}
 
-				if (data.ConcentratorStatusParsed.WorkOrError || data.ConcentratorStatusParsed.ErrorNoAnswerFromDriver
-						|| data.ConcentratorStatusParsed.ErrorByCurrentCc) {
+				if (data.ConcentratorStatusParsed.WorkOrError || data.ConcentratorStatusParsed.ErrorNoAnswerFromDriver || data.ConcentratorStatusParsed.ErrorByCurrentCc) {
 					ConcentratorAdvancedInfo = "Неисправность";
 					ConcentratorAdvancedColor = ErDiagColor;
 				}
@@ -527,6 +524,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					ConcentratorAdvancedInfo = "Норма";
 					ConcentratorAdvancedColor = OkDiagColor;
 				}
+
 				if (IsHalfOrFullVersion) ConcentratorAdvancedInfo += ", " + data.ConcentratorVoltage + "В";
 			});
 		}
@@ -573,7 +571,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				BsSmFaultVm5.Code = data.Ksm2Request.Fault5;
 
 				//Voltage3000Color = data.WorkModeAndCompressorSwitch.HasVoltage3000V ? HiVoltageOnLine : HiVoltageOffLine;
-				
+
 				if (data.WorkModeAndCompressorSwitch.HasVoltage3000V) {
 					Voltage3000Color = HiVoltageOnLine;
 					Voltage3000Text = HiVoltageOnLineText;
@@ -696,7 +694,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				else {
 					BvsInfo1 = OkLinkText;
 					BvsInfoColor1 = OkLinkColor;
-					
 				}
 
 				if (data[23].HighFirstUnsignedValue.GetBit(6)) {
@@ -728,6 +725,17 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 					SensorInteriorAirInfo2 = oneWireSensor2.Indication.ToString("f2");
 					SensorInteriorAirInfoColor2 = OkSensorColor;
 				}
+
+				CleanerWorkHourCounter = data[39].HighFirstUnsignedValue.ToString();
+				ThisSegmentCompressorWorkHourCounter = data[40].HighFirstUnsignedValue.ToString();
+				CompressorSwitchCounter = data[41].HighFirstUnsignedValue.ToString();
+				CondenserFan1WorkHourCounter = data[42].HighFirstUnsignedValue.ToString();
+				CondenserFan2WorkHourCounter = data[43].HighFirstUnsignedValue.ToString();
+				Heater380WorkHourCounter = data[44].HighFirstUnsignedValue.ToString();
+				Heater3000WorkHourCounter = data[45].HighFirstUnsignedValue.ToString();
+
+				FanIncomingAirWorkHourCounter = data[46].HighFirstUnsignedValue.ToString();
+				FanOutgoingAirWorkHourCounter = data[47].HighFirstUnsignedValue.ToString();
 			});
 		}
 
@@ -769,7 +777,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				ContactorOfHeater380Value = data.BvsInput7 ? AutoSwitchAndContactorIsOkText : AutoSwitchAndContactorIsErText;
 				ContactorOfRecycleHeatersValue = data.BvsInput8 ? AutoSwitchAndContactorIsOkText : AutoSwitchAndContactorIsErText;
 			});
-
 		}
 
 		private void CmdListenerBvs2Reply65OnDataReceived(IList<byte> bytes, IBvsReply65Telemetry data) {
@@ -802,6 +809,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public bool IsMaster {
 			get => _isMaster;
 			set {
@@ -842,6 +850,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors MukInfoColor2 {
 			get => _mukInfoColor2;
 			set {
@@ -862,6 +871,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors MukInfoColor3 {
 			get => _mukInfoColor3;
 			set {
@@ -882,6 +892,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors MukInfoColor4 {
 			get => _mukInfoColor4;
 			set {
@@ -902,6 +913,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors MukInfoColor6 {
 			get => _mukInfoColor6;
 			set {
@@ -922,6 +934,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors MukInfoColor7 {
 			get => _mukInfoColor7;
 			set {
@@ -942,6 +955,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors MukInfoColor8 {
 			get => _mukInfoColor8;
 			set {
@@ -962,6 +976,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors BsSmInfoColor {
 			get => _bsSmInfoColor;
 			set {
@@ -982,6 +997,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors BvsInfoColor1 {
 			get => _bvsInfoColor1;
 			set {
@@ -1002,6 +1018,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors BvsInfoColor2 {
 			get => _bvsInfoColor2;
 			set {
@@ -1022,6 +1039,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors EmersonInfoColor {
 			get => _emersonInfoColor;
 			set {
@@ -1033,7 +1051,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		}
 
 
-
 		public string EvaporatorFanControllerInfo {
 			get => _evaporatorFanControllerInfo;
 			set {
@@ -1043,6 +1060,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors EvaporatorFanControllerInfoColor {
 			get => _evaporatorFanControllerInfoColor;
 			set {
@@ -1062,6 +1080,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors ConcentratorInfoColor {
 			get => _concentratorInfoColor;
 			set {
@@ -1081,6 +1100,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors Voltage3000Color {
 			get => _voltage3000Color;
 			set {
@@ -1090,7 +1110,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
-		
+
 		public string Voltage380Text {
 			get => _voltage380Text;
 			set {
@@ -1100,6 +1120,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public string Voltage3000Text {
 			get => _voltage3000Text;
 			set {
@@ -1109,7 +1130,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
-		
+
 
 		public string SensorOuterAirInfo {
 			get => _sensorOuterAirInfo;
@@ -1120,6 +1141,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors SensorOuterAirInfoColor {
 			get => _sensorOuterAirInfoColor;
 			set {
@@ -1140,6 +1162,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors SensorRecycleAirInfoColor {
 			get => _sensorRecycleAirInfoColor;
 			set {
@@ -1151,6 +1174,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		}
 
 		#region Props Датчик подаваемого воздуха
+
 		public string SensorSupplyAirInfo {
 			get => _sensorSupplyAirInfo;
 			set {
@@ -1160,6 +1184,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors SensorSupplyAirInfoColor {
 			get => _sensorSupplyAirInfoColor;
 			set {
@@ -1169,6 +1194,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		#endregion
 
 		public string SensorInteriorAirInfo1 {
@@ -1180,6 +1206,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors SensorInteriorAirInfoColor1 {
 			get => _sensorInteriorAirInfoColor1;
 			set {
@@ -1200,6 +1227,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors SensorInteriorAirInfoColor2 {
 			get => _sensorInteriorAirInfoColor2;
 			set {
@@ -1220,6 +1248,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors EmersonPressure1Color {
 			get => _emersonPressure1Color;
 			set {
@@ -1240,6 +1269,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors EmersonPressure2Color {
 			get => _emersonPressure2Color;
 			set {
@@ -1260,6 +1290,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors EmersonTemperature1Color {
 			get => _emersonTemperature1Color;
 			set {
@@ -1279,6 +1310,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors EmersonTemperature2Color {
 			get => _emersonTemperature2Color;
 			set {
@@ -1290,7 +1322,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		}
 
 
-
 		public string CondensorPressure1 {
 			get => _condensorPressure1;
 			set {
@@ -1300,6 +1331,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors CondensorPressure1Color {
 			get => _condensorPressure1Color;
 			set {
@@ -1320,6 +1352,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors CondensorPressure2Color {
 			get => _condensorPressure2Color;
 			set {
@@ -1340,6 +1373,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors FlapAirOuterDiagInfo5Color {
 			get => _flapAirOuterDiagInfo5Color;
 			set {
@@ -1349,6 +1383,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public string FlapAirOuterDiagInfo6 {
 			get => _flapAirOuterDiagInfo6;
 			set {
@@ -1358,6 +1393,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors FlapAirOuterDiagInfo6Color {
 			get => _flapAirOuterDiagInfo6Color;
 			set {
@@ -1378,6 +1414,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors FlapAirRecycleDiagInfo5Color {
 			get => _flapAirRecycleDiagInfo5Color;
 			set {
@@ -1387,6 +1424,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public string FlapAirRecycleDiagInfo6 {
 			get => _flapAirRecycleDiagInfo6;
 			set {
@@ -1396,6 +1434,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors FlapAirRecycleDiagInfo6Color {
 			get => _flapAirRecycleDiagInfo6Color;
 			set {
@@ -1416,6 +1455,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors FlapAirWinterSummerDiagInfo5Color {
 			get => _flapAirWinterSummerDiagInfo5Color;
 			set {
@@ -1425,6 +1465,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public string FlapAirWinterSummerDiagInfo6 {
 			get => _flapAirWinterSummerDiagInfo6;
 			set {
@@ -1434,6 +1475,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public Colors FlapAirWinterSummerDiagInfo6Color {
 			get => _flapAirWinterSummerDiagInfo6Color;
 			set {
@@ -1453,6 +1495,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public string FanAirExhausterInfo {
 			get => _fanAirExhausterInfo;
 			set {
@@ -1472,6 +1515,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public string FanEvaporatorInfo {
 			get => _fanEvaporatorInfo;
 			set {
@@ -1491,6 +1535,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public string FanCondensorInfo {
 			get => _fanCondensorInfo;
 			set {
@@ -1510,6 +1555,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
+
 		public string ConcentratorAdvancedInfo {
 			get => _concentratorAdvancedInfo;
 			set {
@@ -1529,7 +1575,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				}
 			}
 		}
-
 
 
 		public string ContactorOfCompressor1Value {
@@ -1552,14 +1597,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			set => SetProp(() => _contactorOfRecycleHeatersValue != value, () => _contactorOfRecycleHeatersValue = value, () => ContactorOfRecycleHeatersValue);
 		}
 
-		public string Heater380Pwm
-		{
+		public string Heater380Pwm {
 			get => _heater380Pwm;
-			set => SetProp(()=>_heater380Pwm != value, ()=>_heater380Pwm = value, ()=>Heater380Pwm);
+			set => SetProp(() => _heater380Pwm != value, () => _heater380Pwm = value, () => Heater380Pwm);
 		}
 
-		public string Heater3KPwm
-		{
+		public string Heater3KPwm {
 			get => _heater3KPwm;
 			set => SetProp(() => _heater3KPwm != value, () => _heater3KPwm = value, () => Heater3KPwm);
 		}
@@ -1680,6 +1723,107 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 			IsMaster = true;
 			IsSlave = true;
+
+			CleanerWorkHourCounter = UnknownText;
+			ThisSegmentCompressorWorkHourCounter = UnknownText;
+			CompressorSwitchCounter = UnknownText;
+			CondenserFan1WorkHourCounter = UnknownText;
+			CondenserFan2WorkHourCounter = UnknownText;
+			Heater380WorkHourCounter = UnknownText;
+			Heater3000WorkHourCounter = UnknownText;
+			FanIncomingAirWorkHourCounter = UnknownText;
+			FanOutgoingAirWorkHourCounter = UnknownText;
+			
+		}
+
+		public string CleanerWorkHourCounter {
+			get => _cleanerWorkHourCounter;
+			set {
+				if (_cleanerWorkHourCounter != value) {
+					_cleanerWorkHourCounter = value;
+					RaisePropertyChanged(() => CleanerWorkHourCounter);
+				}
+			}
+		}
+
+		public string ThisSegmentCompressorWorkHourCounter {
+			get => _thisSegmentCompressorWorkHourCounter;
+			set {
+				if (_thisSegmentCompressorWorkHourCounter != value) {
+					_thisSegmentCompressorWorkHourCounter = value;
+					RaisePropertyChanged(() => ThisSegmentCompressorWorkHourCounter);
+				}
+			}
+		}
+
+		public string CompressorSwitchCounter {
+			get => _compressorSwitchCounter;
+			set {
+				if (_compressorSwitchCounter != value) {
+					_compressorSwitchCounter = value;
+					RaisePropertyChanged(() => CompressorSwitchCounter);
+				}
+			}
+		}
+
+		public string CondenserFan1WorkHourCounter {
+			get => _condenserFan1WorkHourCounter;
+			set {
+				if (_condenserFan1WorkHourCounter != value) {
+					_condenserFan1WorkHourCounter = value;
+					RaisePropertyChanged(() => CondenserFan1WorkHourCounter);
+				}
+			}
+		}
+
+		public string CondenserFan2WorkHourCounter {
+			get => _condenserFan2WorkHourCounter;
+			set {
+				if (_condenserFan2WorkHourCounter != value) {
+					_condenserFan2WorkHourCounter = value;
+					RaisePropertyChanged(() => CondenserFan2WorkHourCounter);
+				}
+			}
+		}
+
+		public string Heater380WorkHourCounter {
+			get => _heater380WorkHourCounter;
+			set {
+				if (_heater380WorkHourCounter != value) {
+					_heater380WorkHourCounter = value;
+					RaisePropertyChanged(() => Heater380WorkHourCounter);
+				}
+			}
+		}
+
+		public string Heater3000WorkHourCounter {
+			get => _heater3000WorkHourCounter;
+			set {
+				if (_heater3000WorkHourCounter != value) {
+					_heater3000WorkHourCounter = value;
+					RaisePropertyChanged(() => Heater3000WorkHourCounter);
+				}
+			}
+		}
+
+		public string FanIncomingAirWorkHourCounter {
+			get => _fanIncomingAirWorkHourCounter;
+			set {
+				if (_fanIncomingAirWorkHourCounter != value) {
+					_fanIncomingAirWorkHourCounter = value;
+					RaisePropertyChanged(() => FanIncomingAirWorkHourCounter);
+				}
+			}
+		}
+
+		public string FanOutgoingAirWorkHourCounter {
+			get => _fanOutgoingAirWorkHourCounter;
+			set {
+				if (_fanOutgoingAirWorkHourCounter != value) {
+					_fanOutgoingAirWorkHourCounter = value;
+					RaisePropertyChanged(() => FanOutgoingAirWorkHourCounter);
+				}
+			}
 		}
 	}
 }

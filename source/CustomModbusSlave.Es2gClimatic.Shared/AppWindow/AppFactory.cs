@@ -7,7 +7,6 @@ using AlienJust.Support.Concurrent.Contracts;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
-
 	/// <summary>
 	/// Create new WPF application, in app.xaml.cs OnStartup() method call this class constructor and create new window
 	/// </summary>
@@ -73,8 +72,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 						foreach (var closingAction in _closeChildWindowsActions) {
 							closingAction.Invoke();
 						}
+
 						_closeChildWindowsActions.Clear();
-					}) { DataContext = mainViewModel };
+					}) {DataContext = mainViewModel};
 					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > mainWindow was created, let's call it's .Show() method");
 
 					mainWindow.Show();
@@ -104,6 +104,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 			Window = window;
 			WindowVm = windowVm;
 		}
+
 		public Window Window { get; }
 		public IClosableVm WindowVm { get; }
 	}

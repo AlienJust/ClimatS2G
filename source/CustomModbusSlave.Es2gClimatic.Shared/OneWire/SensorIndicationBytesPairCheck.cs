@@ -3,7 +3,7 @@ using AlienJust.Support.Collections;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
 	public abstract class SensorIndicationBytesPairCheck<T> : ISensorIndication<T> {
-		
+
 		private readonly BytesPair _noLinkCode;
 		private readonly BytesPair _value;
 
@@ -24,10 +24,16 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
 
 		protected abstract T GetIndiction();
 
+
+
 		public string ToString(Func<T, string> formatter) {
 			if (NoLinkWithSensor)
 				return SensorIndicationExt.NoLinkText;
 			return formatter(GetIndiction());
+		}
+
+		public override int GetHashCode() {
+			return _value.GetHashCode();
 		}
 	}
 }

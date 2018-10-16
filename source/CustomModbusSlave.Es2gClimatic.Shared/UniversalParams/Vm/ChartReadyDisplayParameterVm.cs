@@ -39,17 +39,33 @@ namespace ParamControls.Vm {
 
 		private void ParameterOnDisplayParameterValueMaybeChanged() {
 			if (_isChecked) {
-				_parameterLogger.LogAnalogueParameter(FullName, ChartValue);
+				try {
+					_parameterLogger.LogAnalogueParameter(FullName, ChartValue);
+				}
+				catch (Exception e) {
+					Console.WriteLine(e);
+				}
+				
 			}
 		}
 
 		private void ParameterOnDisplayParameterValueMaybeChangedBool() {
 			if (_isChecked) {
-				_parameterLogger.LogDiscreteParameter(FullName, ChartValue > 0.5);
+				try {
+					_parameterLogger.LogDiscreteParameter(FullName, ChartValue > 0.5);
+				}
+				catch (Exception e) {
+					Console.WriteLine(e);
+				}
 			}
 		}
 
-		public double ChartValue => _chartDataGetter.Invoke(_parameter.DisplayValue);
+		public double ChartValue {
+			get {
+				if (_parameter.IsValueFallbackOrUnknown) throw new Exception("Parameter is not ready to be charted");
+				return _chartDataGetter.Invoke(_parameter.DisplayValue);
+			}
+		}
 
 		public bool IsChecked {
 			get => _isChecked;

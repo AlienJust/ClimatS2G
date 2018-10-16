@@ -29,14 +29,13 @@ namespace ParamControls.Vm {
 		}
 
 		private void CmdPartListenerOnDataReceived(IList<byte> bytes, IList<byte> data) {
-			//Console.WriteLine("bytes=" + bytes.ToText());
-			//Console.WriteLine("data=" + data.ToText());
 			SetReceivedValueFromCommandPart(data);
 		}
 
 		private void SetReceivedValueFromCommandPart(IList<byte> commandPartDataWithoutHeaderAndCrc) {
 			ReceivedRawValue = _dataGetter(commandPartDataWithoutHeaderAndCrc); // TODO: Invoke when received, could lag driver thread!
 			NotifyDataReceived?.Invoke();
+			Console.WriteLine(ReceiveName + " value is " + ReceivedRawValue.ToText());
 		}
 	}
 }

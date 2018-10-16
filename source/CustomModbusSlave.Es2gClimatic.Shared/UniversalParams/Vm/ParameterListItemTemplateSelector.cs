@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace ParamControls.Vm {
@@ -9,22 +8,15 @@ namespace ParamControls.Vm {
 		public DataTemplate CannotDisplayMessageTemplate { get; set; }
 
 		public override DataTemplate SelectTemplate(object item, DependencyObject container) {
-			//получаем вызывающий контейнер
-			//if (container is FrameworkElement element) {
 			if (item is IDisplayGroup) {
-				return //element.FindResource("DisplayGroupTemplate") as DataTemplate;
-					DisplayGroupTemplate;
+				return DisplayGroupTemplate;
 			}
 
 			if (item is IChartReadyParameterVm) {
-				Console.WriteLine("======= item is IChartReadyParameterVm");
-				return //element.FindResource("ChartParameterTemplate") as DataTemplate;
-					ChartParameterTemplate;
+				return ChartParameterTemplate;
 			}
 
-			return //element.FindResource("CannotDisplayMessageTemplate") as DataTemplate;
-				CannotDisplayMessageTemplate;
+			return CannotDisplayMessageTemplate;
 		}
-		//return null;
 	}
 }

@@ -7,9 +7,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
 		private readonly double _afterModificationAddition;
 
 		public SensorIndicationDoubleBasedOnBytesPair(
-			BytesPair valueFirstHi, 
-			double modifier, 
-			double afterModificationAddition, 
+			BytesPair valueFirstHi,
+			double modifier,
+			double afterModificationAddition,
 			BytesPair noLinkCode) : base(valueFirstHi, noLinkCode) {
 			_valueFirstHi = valueFirstHi;
 			_modifier = modifier;
@@ -19,6 +19,11 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
 
 		protected override double GetIndiction() {
 			return _valueFirstHi.HighFirstSignedValue * _modifier + _afterModificationAddition;
+		}
+
+		public override string ToString() {
+			if (NoLinkWithSensor) return "Обрыв датчика";
+			return GetIndiction().ToString("f2");
 		}
 	}
 }

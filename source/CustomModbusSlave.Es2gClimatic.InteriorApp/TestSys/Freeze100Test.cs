@@ -1,32 +1,166 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Timers;
 using AlienJust.Support.Concurrent.Contracts;
+using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
-using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.TestSystems;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys {
 	public class Freeze100Test : ITestSysAsync {
-		private readonly IWorker<Action> _sharedWorker;
+		private readonly IWorker<Action> _sharedTestsWorker;
+		private readonly ICmdListener<IMukFanVaporizerDataReply03> _evaporator03Listener;
+		private readonly Timer _sharedTestTimer;
+		private readonly IParameterSetter _parameterSetter;
+
+		private readonly object _isTestRunningSync;
+		private bool _isTestRunning;
+
+		private readonly object _isTestCanceledSync;
 		private bool _isTestCanceled;
 
-		public Freeze100Test(IWorker<Action> sharedWorker, ICmdListenerStd evaporrator03Listener) {
-			_sharedWorker = sharedWorker;
+		private readonly object _lastReceivedDataSync;
+		private IMukFanVaporizerDataReply03 _lastReceivedData;
+
+		private readonly object _timeSync;
+		private DateTime _beginTime;
+
+		private readonly TimeSpan _testTimeout;
+
+		private readonly object _testCompleteSync;
+		private Action<TestSysResult> _testComplete;
+
+		private readonly object _progressChangedSync;
+		private Action<double, TestSysStepResult, string> _progressChanged;
+
+		public Freeze100Test(IWorker<Action> sharedTestsWorker, ICmdListener<IMukFanVaporizerDataReply03> evaporator03Listener, Timer sharedTestTimer, IParameterSetter parameterSetter) {
+			_sharedTestsWorker = sharedTestsWorker;
+			_evaporator03Listener = evaporator03Listener;
+			_sharedTestTimer = sharedTestTimer;
+			_parameterSetter = parameterSetter;
+
+			_sharedTestTimer.Elapsed += SharedTestTimerOnElapsed;
+
+			_evaporator03Listener.DataReceived += Evaporator03ListenerOnDataReceived;
+
+			_isTestCanceledSync = new object();
 			_isTestCanceled = false;
+
+			_isTestRunningSync = new object();
+			_isTestRunning = false;
+
+			_timeSync = new object();
+			_testTimeout = TimeSpan.FromSeconds(5.0);
+
+			_lastReceivedDataSync = new object();
+			_lastReceivedData = null;
+
+			_testCompleteSync = new object();
+			_testComplete = null;
+
+			_progressChangedSync = new object();
+			_progressChanged = null;
 		}
 
-		public void BeginTest(Action testHasBegun, Action<TestSysResult> testComplete) {
-			_sharedWorker.AddWork(() => {
-				testHasBegun.Invoke();
-				var result = TestSysResult.Canceled;
-				
+		private void SharedTestTimerOnElapsed(object sender, ElapsedEventArgs e) {
+			if (IsTestRunning) {
+				if (IsTestCanceled) {
+					IsTestRunning = false;
+					IsTestCanceled = true;
+					TestComplete.Invoke(TestSysResult.Canceled);
+				}
+				else if (e.SignalTime - BeginTime > _testTimeout) {
+					// timeout
+					TestComplete.Invoke(TestSysResult.Fail);
+					// TODO: report progress BAD
+					ProgressChanged.Invoke(100, TestSysStepResult.Bad, "МУК не включает Emerson");
+				}
+				else {
+					if (LastReceivedData.Diagnostic3Parsed.MukIsSwitchingEmersionOn) {
+						IsTestRunning = false;
+						LastReceivedData = null;
+						ProgressChanged.Invoke(100, TestSysStepResult.Good, "Включение Emerson осуществлено");
+						TestComplete.Invoke(TestSysResult.Success);
+					}
+				}
+			}
+		}
 
-				testComplete.Invoke(result);
+		public DateTime BeginTime {
+			get {
+				lock (_timeSync) return _beginTime;
+			}
+			set {
+				lock (_timeSync) _beginTime = value;
+			}
+		}
+
+		public void BeginTest(Action testHasBegun, Action<double, TestSysStepResult, string> progressChanged, Action<TestSysResult> testComplete) {
+			_sharedTestsWorker.AddWork(() => {
+				testHasBegun.Invoke();
+				BeginTime = DateTime.Now;
+				ProgressChanged = progressChanged;
+				TestComplete = testComplete;
+				IsTestRunning = true;
+
+				_parameterSetter.SetParameterAsync(48, 1, Console.WriteLine);
 			});
 		}
 
-		public void CancelCurrentTest()
-		{
-			_isTestCanceled = true;
+		public Action<double, TestSysStepResult, string> ProgressChanged {
+			get {
+				lock (_progressChangedSync) return _progressChanged;
+			}
+			set {
+				lock (_progressChangedSync) _progressChanged = value;
+			}
+		}
+
+		public Action<TestSysResult> TestComplete {
+			get {
+				lock (_testCompleteSync) return _testComplete;
+			}
+			set {
+				lock (_testCompleteSync) _testComplete = value;
+			}
+		}
+
+		private void Evaporator03ListenerOnDataReceived(IList<byte> bytes, IMukFanVaporizerDataReply03 data) {
+			if (!IsTestCanceled) {
+				lock (_lastReceivedDataSync) _lastReceivedData = data;
+			}
+		}
+
+		public void CancelCurrentTest() {
+			lock (_isTestCanceledSync) _isTestCanceled = true;
+		}
+
+		public bool IsTestCanceled {
+			get {
+				lock (_isTestCanceledSync) return _isTestCanceled;
+			}
+			set {
+				lock (_isTestCanceledSync) _isTestCanceled = value;
+			}
+		}
+
+		public bool IsTestRunning {
+			get {
+				lock (_isTestRunningSync) return _isTestRunning;
+			}
+			set {
+				lock (_isTestRunningSync) _isTestRunning = value;
+			}
+		}
+
+		public IMukFanVaporizerDataReply03 LastReceivedData {
+			get {
+				lock (_lastReceivedDataSync) return _lastReceivedData;
+			}
+			set {
+				lock (_lastReceivedDataSync) _lastReceivedData = value;
+			}
 		}
 	}
 }

@@ -1,28 +1,25 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using ParamControls.Vm;
 
-namespace ParamControls.Vm {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	public class ChartParameterContentTemplateSelector : DataTemplateSelector {
 		public DataTemplate IntegerParameterDisplayTemplate { get; set; }
+		public DataTemplate StringParameterDisplayTemplate { get; set; }
+		public DataTemplate BooleanParameterDisplayTemplate { get; set; }
 		public DataTemplate CannotDisplayMessageTemplate { get; set; }
 
-		public ChartParameterContentTemplateSelector() {
-			Console.WriteLine("-------------------    ChartParameterContentTemplateSelector .ctor called");
-		}
-
 		public override DataTemplate SelectTemplate(object item, DependencyObject container) {
-			Console.WriteLine("-------------------    SelectTemplate() called");
-			// getting calling container
-			//if (container is FrameworkElement element) {
-			if (item is IDisplayParameter<int>) {
-				Console.WriteLine("-------------------    item is IDisplayParameter<int>");
-				return IntegerParameterDisplayTemplate;
+			switch (item) {
+				case IDisplayParameter<int> _:
+					return IntegerParameterDisplayTemplate;
+				case IDisplayParameter<string> _:
+					return StringParameterDisplayTemplate;
+				case IDisplayParameter<bool> _:
+					return BooleanParameterDisplayTemplate;
+				default:
+					return CannotDisplayMessageTemplate;
 			}
-			Console.WriteLine("-------------------    item is NOT IDisplayParameter<int>");
-			return CannotDisplayMessageTemplate;
-			//}
-			//return null;
 		}
 	}
 }

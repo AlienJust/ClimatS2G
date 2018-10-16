@@ -376,7 +376,9 @@
     <Compile Include="SetParamsAndKsm\ViewModel\SettableTemperatureParameterViewModel.cs" />
     <Compile Include="TelemetryIsNullException.cs" />
     <Compile Include="TestSystems\ITestSysAsync.cs" />
+    <Compile Include="TestSystems\LogLineColored.cs" />
     <Compile Include="TestSystems\TestSysResult.cs" />
+    <Compile Include="TestSystems\TestSysStepResult.cs" />
     <Compile Include="TestSystems\TestSystemView.xaml.cs">
       <DependentUpon>TestSystemView.xaml</DependentUpon>
     </Compile>
