@@ -239,11 +239,13 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					groupIncomingSignals.GroupItems.Add(new ChartReadyDisplayParameterViewModel<IList<byte>, bool>(muk8GroupName + ", " + groupIncomingSignals.DisplayName, mukFlapWinterIncomingSignals, mukFlapWinterIsigTurnEmrson2On, data => data[0].GetBit(7) ? 1.0 : 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
 
 					var groupDiagnostic1 = new ParameterListViewModel("Диагностика 1", new ObservableCollection<IChartReadyParameterViewModel>());
-					var diagnostic1OneWire1Error = new DisplayParameterRelayViewModel<bool, IList<byte>>("Ошибка датчика 1w №1", mukFlapWinterSummerDiagnostic1, mainVm.Notifier, bytes => bytes[0].GetBit(6), false, false);
-					var diagnostic1OneWire2Error = new DisplayParameterRelayViewModel<bool, IList<byte>>("Ошибка датчика 1w №2", mukFlapWinterSummerDiagnostic2, mainVm.Notifier, bytes => bytes[0].GetBit(7), false, false);
+					var diagnostic1NoConnectionToEmerson = new DisplayParameterRelayViewModel<bool, IList<byte>>("Нет связи с Emerson", mukFlapWinterSummerDiagnostic1, mainVm.Notifier, bytes => bytes[1].GetBit(4), false, false);
+					var diagnostic1OneWire1Error = new DisplayParameterRelayViewModel<bool, IList<byte>>("Ошибка датчика 1w №1", mukFlapWinterSummerDiagnostic1, mainVm.Notifier, bytes => bytes[1].GetBit(6), false, false);
+					var diagnostic1OneWire2Error = new DisplayParameterRelayViewModel<bool, IList<byte>>("Ошибка датчика 1w №2", mukFlapWinterSummerDiagnostic1, mainVm.Notifier, bytes => bytes[1].GetBit(7), false, false);
 
-					groupDiagnostic1.GroupItems.Add(new ChartReadyDisplayParameterViewModel<IList<byte>, bool>(muk8GroupName + ", " + groupIncomingSignals.DisplayName, mukFlapWinterSummerDiagnostic1, diagnostic1OneWire1Error, data => data[0].GetBit(6) ? 1.0 : 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
-					groupDiagnostic1.GroupItems.Add(new ChartReadyDisplayParameterViewModel<IList<byte>, bool>(muk8GroupName + ", " + groupIncomingSignals.DisplayName, mukFlapWinterSummerDiagnostic1, diagnostic1OneWire2Error, data => data[0].GetBit(7) ? 1.0 : 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
+					groupDiagnostic1.GroupItems.Add(new ChartReadyDisplayParameterViewModel<IList<byte>, bool>(muk8GroupName + ", " + groupIncomingSignals.DisplayName, mukFlapWinterSummerDiagnostic1, diagnostic1NoConnectionToEmerson, data => data[1].GetBit(4) ? 1.0 : 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
+					groupDiagnostic1.GroupItems.Add(new ChartReadyDisplayParameterViewModel<IList<byte>, bool>(muk8GroupName + ", " + groupIncomingSignals.DisplayName, mukFlapWinterSummerDiagnostic1, diagnostic1OneWire1Error, data => data[1].GetBit(6) ? 1.0 : 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
+					groupDiagnostic1.GroupItems.Add(new ChartReadyDisplayParameterViewModel<IList<byte>, bool>(muk8GroupName + ", " + groupIncomingSignals.DisplayName, mukFlapWinterSummerDiagnostic1, diagnostic1OneWire2Error, data => data[1].GetBit(7) ? 1.0 : 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
 
 
 					var groupDiagnostic2 = new ParameterListViewModel("Диагностика 2", new ObservableCollection<IChartReadyParameterViewModel>());

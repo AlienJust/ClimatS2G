@@ -1,0 +1,1 @@
+Delete this file to remove hour counters from system diagnostic tab
