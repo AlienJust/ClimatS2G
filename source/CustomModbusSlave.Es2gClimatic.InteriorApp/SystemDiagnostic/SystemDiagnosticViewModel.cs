@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
 using AlienJust.Support.Collections;
@@ -204,8 +205,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 
 		public bool IsFullVersion { get; }
 		public bool IsHalfOrFullVersion { get; }
-
-
+		public bool IsHourCountersVisible { get; }
+		
 		private string _cleanerWorkHourCounter;
 		private string _thisSegmentCompressorWorkHourCounter;
 		private string _compressorSwitchCounter;
@@ -216,9 +217,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private string _fanIncomingAirWorkHourCounter;
 		private string _fanOutgoingAirWorkHourCounter;
 
-		public SystemDiagnosticViewModel(bool isFullVersion, bool isHalfOrFullVersion, IThreadNotifier uiNotifier, ICmdListener<IMukFlapOuterAirReply03Telemetry> cmdListenerMukFlapOuterAirReply03, ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03, ICmdListener<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16, ICmdListener<IMukCondensorFanReply03Data> cmdListenerMukCondenserFanReply03, ICmdListener<IMukAirExhausterReply03Data> cmdListenerMukAirExhausterReply03, ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03, ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03, ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32, ICmdListener<IList<BytesPair>> cmdListenerKsm, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65) {
+		public SystemDiagnosticViewModel(bool isFullVersion, bool isHalfOrFullVersion, bool isHourCountersVisible, IThreadNotifier uiNotifier, ICmdListener<IMukFlapOuterAirReply03Telemetry> cmdListenerMukFlapOuterAirReply03, ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03, ICmdListener<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16, ICmdListener<IMukCondensorFanReply03Data> cmdListenerMukCondenserFanReply03, ICmdListener<IMukAirExhausterReply03Data> cmdListenerMukAirExhausterReply03, ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03, ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03, ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32, ICmdListener<IList<BytesPair>> cmdListenerKsm, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65) {
 			IsFullVersion = isFullVersion;
 			IsHalfOrFullVersion = isHalfOrFullVersion;
+			IsHourCountersVisible = isHourCountersVisible;
+			Console.WriteLine("IsHourCountersVisible=" + IsHourCountersVisible);
 
 			_uiNotifier = uiNotifier;
 			_cmdListenerMukFlapOuterAirReply03 = cmdListenerMukFlapOuterAirReply03;

@@ -15,7 +15,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 		private const string NoStackInfoText = "[NO STACK INFO]";
 		private const string LogSeporator = " > ";
 		public AppVersion Version { get; }
+		public bool IsHourCountersVisible { get; }
 		public RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
+		
 
 		private readonly IPsnProtocolConfiguration _psnConfig;
 		private readonly Dictionary<string, SerialChannelWithTimeoutMonitorAndSendReplyAbility> _channels;
@@ -34,6 +36,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 
 			Version = isFullVersion ? AppVersion.Full :
 				isHalfOrFullVersion ? AppVersion.Half : AppVersion.Base;
+
+			IsHourCountersVisible = File.Exists("HourCounters.txt");
 
 			ILoggerWithStackTrace logConsoleDarkRed = new RelayLoggerWithStackTrace(
 				new RelayLogger(new ColoredConsoleLogger(ConsoleColor.DarkRed, ConsoleColor.Black),

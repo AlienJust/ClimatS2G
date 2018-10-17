@@ -2,7 +2,7 @@
 	<UserControl.Resources>
 		<converters:ColorsEnumToColorConverter x:Key="ColorConverter" />
 		<converters:ColorsEnumToBrushConverter x:Key="BrushConverter" />
-		<converters:BooleanToVisibilityConverter InvertVisibility="False" x:Key="BtwConverter" />
+		<converters:BooleanToVisibilityConverter InvertVisibility="False" x:Key="BoolToVisConverter" />
 		<converters:TextToBrushConverter DefaultBrush="Black" Brush1="LimeGreen" Brush2="Red" Brush3="Yellow" Text1="V" Text2="X" Text3="?" x:Key="TextToBrushConverter" />
 		<converters:TextToBrushConverter Text1="Нет связи" Text2="Неизвестно" x:Key="TextToBrushConverter2">
 			<converters:TextToBrushConverter.DefaultBrush>
@@ -45,7 +45,7 @@
 				<TextBlock Text="Сегмент: " />
 				<TextBlock Text="{Binding Path=SegmentType, Mode=OneWay}" />
 			</StackPanel>
-			<StackPanel Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BtwConverter}}" Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BoolToVisConverter}}" Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
 				<TextBlock Text="Версия ПО: " />
 				<TextBlock Text="{Binding Path=Version, Mode=OneWay}" />
 			</StackPanel>
@@ -75,7 +75,7 @@
 				<TextBlock Text="МУК №3: " />
 				<TextBlock Text="{Binding Path=MukInfo3, Mode=OneWay}" />
 			</StackPanel>
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent" />
@@ -149,7 +149,7 @@
 				<TextBlock Text="{Binding Path=BvsInfo2, Mode=OneWay}" />
 			</StackPanel>
 
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="5" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="5" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent" />
@@ -170,7 +170,7 @@
 				<TextBlock Text="Контролер вентилятора испарителя: " />
 				<TextBlock Text="{Binding Path=EvaporatorFanControllerInfo, Mode=OneWay}" />
 			</StackPanel>
-			<StackPanel Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="5" Grid.Column="2" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="5" Grid.Column="2" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent" />
@@ -202,7 +202,7 @@
 				<TextBlock Margin="2" Text="Наличие 3кВ" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" />
 			</StackPanel>
 		</Grid>
-		<StackPanel Orientation="Horizontal" Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BtwConverter}}">
+		<StackPanel Orientation="Horizontal" Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}">
 			<StackPanel.Background>
 				<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 					<GradientStop Offset="1" Color="Transparent" />
@@ -285,7 +285,7 @@
 				<TextBlock Text="Датчик воздуха в салоне 2: " />
 				<TextBlock Text="{Binding Path=SensorInteriorAirInfo2, Mode=OneWay}" />
 			</StackPanel>
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent" />
@@ -295,7 +295,7 @@
 				<TextBlock Text="Давление Emerson 1 канал: " />
 				<TextBlock Text="{Binding Path=EmersonPressure1, Mode=OneWay}" />
 			</StackPanel>
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent" />
@@ -306,7 +306,7 @@
 				<TextBlock Text="{Binding Path=EmersonPressure2, Mode=OneWay}" />
 			</StackPanel>
 
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="5" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="5" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent" />
@@ -317,7 +317,7 @@
 				<TextBlock Text="{Binding Path=EmersonTemperature1, Mode=OneWay}" />
 			</StackPanel>
 
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent" />
@@ -434,7 +434,7 @@
 				<TextBlock Text="{Binding Path=FanEvaporatorInfo, Mode=OneWay}" />
 			</StackPanel>
 
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="11" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="11" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent" />
@@ -444,7 +444,7 @@
 				<TextBlock Text="Вентилятор конденсатора: " />
 				<TextBlock Text="{Binding Path=FanCondensorInfo, Mode=OneWay}" />
 			</StackPanel>
-			<StackPanel Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="11" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="11" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent" />
@@ -454,8 +454,8 @@
 				<TextBlock Text="Концентратор: " />
 				<TextBlock Text="{Binding Path=ConcentratorAdvancedInfo, Mode=OneWay}" />
 			</StackPanel>
-			<paramControls:ParamSimple Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="12" Grid.Column="1" Text="ШИМ калорифера 3кВ: " ValueForeground="Black" Value="{Binding Path=Heater3KPwm, Mode=OneWay}" Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}" />
-			<paramControls:ParamSimple Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="12" Grid.Column="0" Text="ШИМ калорифера 380В: " ValueForeground="Black" Value="{Binding Path=Heater380Pwm, Mode=OneWay}" Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}" />
+			<paramControls:ParamSimple Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="12" Grid.Column="1" Text="ШИМ калорифера 3кВ: " ValueForeground="Black" Value="{Binding Path=Heater3KPwm, Mode=OneWay}" Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}" />
+			<paramControls:ParamSimple Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="12" Grid.Column="0" Text="ШИМ калорифера 380В: " ValueForeground="Black" Value="{Binding Path=Heater380Pwm, Mode=OneWay}" Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}" />
 		</Grid>
 		<Grid>
 			<Grid.RowDefinitions>
@@ -504,7 +504,7 @@
 				<ColumnDefinition/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-			<StackPanel Grid.Column="0">
+			<StackPanel Grid.Column="0" Visibility="{Binding Path=IsHourCountersVisible, Mode=OneTime, Converter={StaticResource BoolToVisConverter}}">
 				<TextBlock Text="Моточасы:" FontWeight="Bold" />
 				<paramControls:ParamSimple Text="Обеззараживатель, почасовой счетчик работы" Value="{Binding CleanerWorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>
 				<paramControls:ParamSimple Text="Компрессор этого сегмента,  почасовой счетчик" Value="{Binding ThisSegmentCompressorWorkHourCounter, Mode=OneWay}"  TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>

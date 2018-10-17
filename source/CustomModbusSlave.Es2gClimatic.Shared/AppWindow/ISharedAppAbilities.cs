@@ -8,6 +8,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow {
 	public interface ISharedAppAbilities {
 		AppVersion Version { get; }
 		string TestPortName { get; }
+		bool IsHourCountersVisible { get; }
+		
 		RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
 		
 		SerialChannelWithTimeoutMonitorAndSendReplyAbility CreateChannel(string channelName);
