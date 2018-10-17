@@ -398,14 +398,15 @@
     <Compile Include="UniversalParams\Vm\ChartParameterView.xaml.cs">
       <DependentUpon>ChartParameterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UniversalParams\Vm\ChartReadyDisplayParameterVm.cs" />
+    <Compile Include="UniversalParams\Vm\ChartReadyDisplayParameterViewModel.cs" />
     <Compile Include="UniversalParams\Vm\ChartParameterContentTemplateSelector.cs" />
-    <Compile Include="UniversalParams\Vm\IChartReadyParameterVm.cs" />
+    <Compile Include="UniversalParams\Vm\IChartReadyParameterViewModel.cs" />
     <Compile Include="UniversalParams\Vm\IDisplayGroup.cs" />
     <Compile Include="UniversalParams\Vm\IDisplayParameter.cs" />
     <Compile Include="UniversalParams\Vm\IReceivableParameter.cs" />
     <Compile Include="UniversalParams\Vm\NotifyDataReceivedDelegate.cs" />
     <Compile Include="UniversalParams\Vm\ParameterListViewModel.cs" />
+    <Compile Include="UniversalParams\Vm\ParameterLogType.cs" />
     <Compile Include="UniversalParams\Vm\ParametersListView.xaml.cs">
       <DependentUpon>ParametersListView.xaml</DependentUpon>
     </Compile>

@@ -2,6 +2,6 @@
 
 namespace ParamControls.Vm {
 	public interface IDisplayGroup : IDisplayParameter {
-		ObservableCollection<IChartReadyParameterVm> GroupItems { get; }
+		ObservableCollection<IChartReadyParameterViewModel> GroupItems { get; }
 	}
 }

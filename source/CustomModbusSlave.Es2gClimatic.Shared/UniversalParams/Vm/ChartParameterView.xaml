@@ -38,8 +38,8 @@
 						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 					<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" />
-					<CheckBox Grid.Column="1" IsChecked="{Binding Path=DisplayValue, Mode=TwoWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-					<TextBlock Grid.Column="1" Text="??" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+					<CheckBox Grid.Column="1" IsChecked="{Binding Path=DisplayValue, Mode=TwoWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" IsHitTestVisible="False" />
+					<TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				</Grid>
 			</Border>
 		</DataTemplate>

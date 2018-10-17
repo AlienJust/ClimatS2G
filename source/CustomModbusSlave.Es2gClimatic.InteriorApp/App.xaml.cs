@@ -19,6 +19,8 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.View;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.ViewModel;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Request16;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Reply03;
@@ -200,53 +202,73 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК заслонки лето зима", ShortHeader = "МУК 8", Content = new MukFlapWinterSummerDataView {DataContext = new MukFlapWinterSummerViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapWinterSummerReply03, cmdListenerMukAirFlapWinterSummerRequest16)}});
 
 				if (appAbilities.Version == AppVersion.Full) {
-					IReceivableParameter mukFlapWinterSummerPwm = new ReceivableParameterRelayBlocking("PWM", cmdListenerWinSum, bytes => bytes.Skip(1).Take(2).ToList());
-					IReceivableParameter mukFlapWinterTemperatureOneWireAddr1 = new ReceivableParameterRelayBlocking("T1W1", cmdListenerWinSum, bytes => bytes.Skip(3).Take(2).ToList());
-					IReceivableParameter mukFlapWinterTemperatureOneWireAddr2 = new ReceivableParameterRelayBlocking("T1W2", cmdListenerWinSum, bytes => bytes.Skip(5).Take(2).ToList());
-					IReceivableParameter mukFlapWinterIncomingSignals = new ReceivableParameterRelayBlocking("ISigs", cmdListenerWinSum, bytes => bytes.Skip(7).Take(1).ToList());
-					IReceivableParameter mukFlapWinterOutgoingSignals = new ReceivableParameterRelayBlocking("OSigs", cmdListenerWinSum, bytes => bytes.Skip(8).Take(1).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterSummerPwm = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("PWM", cmdListenerWinSum, bytes => bytes.Skip(1).Take(2).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterTemperatureOneWireAddr1 = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("T1W1", cmdListenerWinSum, bytes => bytes.Skip(3).Take(2).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterTemperatureOneWireAddr2 = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("T1W2", cmdListenerWinSum, bytes => bytes.Skip(5).Take(2).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterIncomingSignals = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("ISigs", cmdListenerWinSum, bytes => bytes.Skip(7).Take(1).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterOutgoingSignals = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("OSigs", cmdListenerWinSum, bytes => bytes.Skip(9).Take(1).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterSummerAnalogueInput = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("AInput", cmdListenerWinSum, bytes => bytes.Skip(11).Take(2).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterSummerAutomaticModeStage = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("AModeStage", cmdListenerWinSum, bytes => bytes.Skip(13).Take(2).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterSummerDiagnostic1 = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("Diag1", cmdListenerWinSum, bytes => bytes.Skip(15).Take(2).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterSummerDiagnostic2 = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("Diag2", cmdListenerWinSum, bytes => bytes.Skip(17).Take(2).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterSummerDiagnostic3 = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("Diag3", cmdListenerWinSum, bytes => bytes.Skip(19).Take(2).ToList());
+					IReceivableParameter<IList<byte>> mukFlapWinterSummerDiagnostic4 = new ReceivableParameterRelayBlocking<IList<byte>, IList<byte>>("Diag4", cmdListenerWinSum, bytes => bytes.Skip(21).Take(2).ToList());
 
 
-					var mukFlapWinterSummerPwmDisplay = new DisplayParameterRelayViewModel<int>("МУК8", "Уставка ШИМ на клапан", mukFlapWinterSummerPwm, mainVm.Notifier, bytes => bytes[0] * 256 + bytes[1], 0, -1);
+					const string muk8GroupName = "МУК8";
+					var mukFlapWinterSummerPwmDisplay = new DisplayParameterRelayViewModel<int, IList<byte>>("Уставка ШИМ на клапан", mukFlapWinterSummerPwm, mainVm.Notifier, bytes => bytes[0] * 256 + bytes[1], 0, -1);
 
-					var mukFlapWinterTemperatureOneWireAddr1Display = new DisplayParameterRelayViewModel<string>("МУК8", "Температура 1w адрес 1", mukFlapWinterTemperatureOneWireAddr1, mainVm.Notifier, bytes => {
-						var si = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(bytes[0], bytes[1]), 0.01, 0.0, new BytesPair(0x85, 0x00));
-						Console.WriteLine(si.ToString(d => d.ToString("f2")));
-						return si.ToString(d => d.ToString("f2"));
-					}, "X3", "???");
+					var mukFlapWinterTemperatureOneWireAddr1Display = new DisplayParameterRelayViewModel<string, IList<byte>>("Температура 1w адрес 1", mukFlapWinterTemperatureOneWireAddr1, mainVm.Notifier, bytes => new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(bytes[0], bytes[1]), 0.01, 0.0, new BytesPair(0x85, 0x00)).ToString(d => d.ToString("f2")), "ER", "??");
 
-					var mukFlapWinterTemperatureOneWireAddr2Display = new DisplayParameterRelayViewModel<string>("МУК8", "Температура 1w адрес 2", mukFlapWinterTemperatureOneWireAddr2, mainVm.Notifier, bytes => {
-						var si = new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(bytes[0], bytes[1]), 0.01, 0.0, new BytesPair(0x85, 0x00));
-						Console.WriteLine(si.ToString(d => d.ToString("f2")));
-						return si.ToString(d => d.ToString("f2"));
-					}, "X3", "???");
+					var mukFlapWinterTemperatureOneWireAddr2Display = new DisplayParameterRelayViewModel<string, IList<byte>>("Температура 1w адрес 2", mukFlapWinterTemperatureOneWireAddr2, mainVm.Notifier, bytes => new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(bytes[0], bytes[1]), 0.01, 0.0, new BytesPair(0x85, 0x00)).ToString(d => d.ToString("f2")), "ER", "??");
 
+					var mukFlapWinterOutgoingSignalsDisplay = new DisplayParameterRelayViewModel<int, IList<byte>>("Байт выходных сигналов", mukFlapWinterOutgoingSignals, mainVm.Notifier, bytes => bytes[0], 0, -1);
 
-					var groupIncomingSignals = new ParameterListViewModel("МУК8", "Байт входных сигналов", new ObservableCollection<IChartReadyParameterVm>());
-					var mukFlapWinterIsigTurnEmrson1On = new DisplayParameterRelayViewModel<bool>(groupIncomingSignals.FullName, "Сигнал на включение Emersion1", mukFlapWinterIncomingSignals, mainVm.Notifier, bytes => bytes[0].GetBit(6), false, false);
+					var mukFlapWinterSummerAnalogueInputDisplay = new DisplayParameterRelayViewModel<string, IList<byte>>("Аналоговый вход от заслонки", mukFlapWinterSummerAnalogueInput, mainVm.Notifier, data => ((data[0] * 256 + data[1]) * 0.1).ToString("f1"), "ER", "??");
 
-					var mukFlapWinterIsigTurnEmrson2On = new DisplayParameterRelayViewModel<bool>(groupIncomingSignals.FullName, "Сигнал на включение Emersion2", mukFlapWinterIncomingSignals, mainVm.Notifier, bytes => bytes[0].GetBit(7), false, false);
+					var mukFlapWinterSummerAutomaticModeStageDisplay = new DisplayParameterRelayViewModel<string, IList<byte>>("Этап работы", mukFlapWinterSummerAutomaticModeStage, mainVm.Notifier, data => new MukFlapWorkmodeStageBuilder(data[0] * 256 + data[1]).Build().ToText(), "ER", "??");
 
 
-					groupIncomingSignals.GroupItems.Add(new ChartReadyDisplayParameterVm<bool>(mukFlapWinterIsigTurnEmrson1On, b => b ? 1 : 0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
-					groupIncomingSignals.GroupItems.Add(new ChartReadyDisplayParameterVm<bool>(mukFlapWinterIsigTurnEmrson2On, b => b ? 1 : 0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
+					var groupIncomingSignals = new ParameterListViewModel("Байт входных сигналов", new ObservableCollection<IChartReadyParameterViewModel>());
+
+					var mukFlapWinterIsigTurnEmrson1On = new DisplayParameterRelayViewModel<bool, IList<byte>>("Сигнал на включение Emersion1", mukFlapWinterIncomingSignals, mainVm.Notifier, bytes => bytes[0].GetBit(6), false, false);
+					var mukFlapWinterIsigTurnEmrson2On = new DisplayParameterRelayViewModel<bool, IList<byte>>("Сигнал на включение Emersion2", mukFlapWinterIncomingSignals, mainVm.Notifier, bytes => bytes[0].GetBit(7), false, false);
 
 
-					mainVm.AddTab(
-						new TabItemViewModel {
-							FullHeader = "МУК заслонки лето зима", 
-							ShortHeader = "МУК 8", 
-							Content = new ParametersListView {
-								DataContext = new ParameterListViewModel(
-									"МУК8", 
-									"МУК заслонки лето-зима", 
-									new ObservableCollection<IChartReadyParameterVm> {
-										new ChartReadyDisplayParameterVm<int>(mukFlapWinterSummerPwmDisplay, dd => dd, ParameterLogType.Analogue, appAbilities.ParameterLogger), 
-										new ChartReadyDisplayParameterVm<string>(mukFlapWinterTemperatureOneWireAddr1Display, dd => double.Parse(dd), ParameterLogType.Analogue, appAbilities.ParameterLogger), 
-										new ChartReadyDisplayParameterVm<string>(mukFlapWinterTemperatureOneWireAddr2Display, dd => double.Parse(dd), ParameterLogType.Analogue, appAbilities.ParameterLogger), 
-										groupIncomingSignals}
-									)
-							}});
+					groupIncomingSignals.GroupItems.Add(new ChartReadyDisplayParameterViewModel<IList<byte>, bool>(muk8GroupName + ", " + groupIncomingSignals.DisplayName, mukFlapWinterIncomingSignals, mukFlapWinterIsigTurnEmrson1On, data => data[0].GetBit(6) ? 1.0 : 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
+					groupIncomingSignals.GroupItems.Add(new ChartReadyDisplayParameterViewModel<IList<byte>, bool>(muk8GroupName + ", " + groupIncomingSignals.DisplayName, mukFlapWinterIncomingSignals, mukFlapWinterIsigTurnEmrson2On, data => data[0].GetBit(7) ? 1.0 : 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
+
+					var groupDiagnostic1 = new ParameterListViewModel("Диагностика 1", new ObservableCollection<IChartReadyParameterViewModel>());
+					var diagnostic1OneWire1Error = new DisplayParameterRelayViewModel<bool, IList<byte>>("Ошибка датчика 1w №1", mukFlapWinterSummerDiagnostic1, mainVm.Notifier, bytes => bytes[0].GetBit(6), false, false);
+					var diagnostic1OneWire2Error = new DisplayParameterRelayViewModel<bool, IList<byte>>("Ошибка датчика 1w №2", mukFlapWinterSummerDiagnostic2, mainVm.Notifier, bytes => bytes[0].GetBit(7), false, false);
+
+					groupDiagnostic1.GroupItems.Add(new ChartReadyDisplayParameterViewModel<IList<byte>, bool>(muk8GroupName + ", " + groupIncomingSignals.DisplayName, mukFlapWinterSummerDiagnostic1, diagnostic1OneWire1Error, data => data[0].GetBit(6) ? 1.0 : 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
+					groupDiagnostic1.GroupItems.Add(new ChartReadyDisplayParameterViewModel<IList<byte>, bool>(muk8GroupName + ", " + groupIncomingSignals.DisplayName, mukFlapWinterSummerDiagnostic1, diagnostic1OneWire2Error, data => data[0].GetBit(7) ? 1.0 : 0.0, ParameterLogType.Discrete, appAbilities.ParameterLogger));
+
+
+					var groupDiagnostic2 = new ParameterListViewModel("Диагностика 2", new ObservableCollection<IChartReadyParameterViewModel>());
+					var groupDiagnostic3 = new ParameterListViewModel("Диагностика 3", new ObservableCollection<IChartReadyParameterViewModel>());
+					var groupDiagnostic4 = new ParameterListViewModel("Диагностика 4", new ObservableCollection<IChartReadyParameterViewModel>());
+
+					mainVm.AddTab(new TabItemViewModel {
+						FullHeader = "МУК заслонки лето зима",
+						ShortHeader = "МУК 8",
+						Content = new ParametersListView {
+							DataContext = new ParameterListViewModel("МУК 8", new ObservableCollection<IChartReadyParameterViewModel> {
+								new ChartReadyDisplayParameterViewModel<IList<byte>, int>(muk8GroupName, mukFlapWinterSummerPwm, mukFlapWinterSummerPwmDisplay, data => data[0] * 256.0 + data[1], ParameterLogType.Analogue, appAbilities.ParameterLogger),
+								new ChartReadyDisplayParameterViewModel<IList<byte>, string>(muk8GroupName, mukFlapWinterTemperatureOneWireAddr1, mukFlapWinterTemperatureOneWireAddr1Display, data => new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(data[0], data[1]), 0.01, 0.0, new BytesPair(0x85, 0x00)).Indication, ParameterLogType.Analogue, appAbilities.ParameterLogger),
+								new ChartReadyDisplayParameterViewModel<IList<byte>, string>(muk8GroupName, mukFlapWinterTemperatureOneWireAddr2, mukFlapWinterTemperatureOneWireAddr2Display, data => new SensorIndicationDoubleBasedOnBytesPair(new BytesPair(data[0], data[1]), 0.01, 0.0, new BytesPair(0x85, 0x00)).Indication, ParameterLogType.Analogue, appAbilities.ParameterLogger),
+								groupIncomingSignals,
+								new ChartReadyDisplayParameterViewModel<IList<byte>, int>(muk8GroupName, mukFlapWinterOutgoingSignals, mukFlapWinterOutgoingSignalsDisplay, data => data[0], ParameterLogType.Analogue, appAbilities.ParameterLogger),
+								new ChartReadyDisplayParameterViewModel<IList<byte>, string>(muk8GroupName, mukFlapWinterSummerAnalogueInput, mukFlapWinterSummerAnalogueInputDisplay, data => (data[0] * 256 + data[1]) * 0.1, ParameterLogType.Analogue, appAbilities.ParameterLogger),
+								new ChartReadyDisplayParameterViewModel<IList<byte>, string>(muk8GroupName, mukFlapWinterSummerAutomaticModeStage, mukFlapWinterSummerAutomaticModeStageDisplay, data => data[0] * 256 + data[1], ParameterLogType.Analogue, appAbilities.ParameterLogger),
+								groupDiagnostic1,
+								groupDiagnostic2,
+								groupDiagnostic3,
+								groupDiagnostic4
+							})
+						}
+					});
 				}
 
 				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)

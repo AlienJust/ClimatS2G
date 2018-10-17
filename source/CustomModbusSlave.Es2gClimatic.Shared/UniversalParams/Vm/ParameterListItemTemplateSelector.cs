@@ -12,7 +12,7 @@ namespace ParamControls.Vm {
 				return DisplayGroupTemplate;
 			}
 
-			if (item is IChartReadyParameterVm) {
+			if (item is IChartReadyParameterViewModel) {
 				return ChartParameterTemplate;
 			}
 

@@ -4,18 +4,19 @@ namespace ParamControls.Vm {
 	public interface IDisplayParameter<out T> : IDisplayParameter {
 		T DisplayValue { get; }
 		bool IsValueFallbackOrUnknown { get; }
-		event DisplayParameterValueMaybeChangedDelegate DisplayParameterValueMaybeChanged;
+		//event DisplayParameterValueMaybeChangedDelegate DisplayParameterValueMaybeChanged;
 	}
 
-	public delegate void DisplayParameterValueMaybeChangedDelegate();
+	//public delegate void DisplayParameterValueMaybeChangedDelegate();
 
 	public interface IDisplayParameter {
+		/// <summary>
+		/// Chart parameters - used for charts to qualify as unique name 
+		/// Groups and parameters - used for displaying and searching
+		/// </summary>
 		string DisplayName { get; }
 
-	/// <summary>
-	/// Chart parameters - used for charts to qualify as unique name, also 
-	/// Groups and parameters - used for searching
-	/// </summary>
-		string FullName { get; }
+
+		//string UniqueName { get; }
 	}
 }

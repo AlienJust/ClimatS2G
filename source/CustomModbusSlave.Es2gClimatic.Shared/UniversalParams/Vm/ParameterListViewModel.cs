@@ -2,22 +2,22 @@
 using System.Collections.ObjectModel;
 
 namespace ParamControls.Vm {
-	public sealed class ParameterListViewModel : IChartReadyParameterVm, IDisplayGroup {
+	public sealed class ParameterListViewModel : IChartReadyParameterViewModel, IDisplayGroup {
 		
 		public string DisplayName { get; }
-		public string FullName { get; }
+		//public string UniqueName { get; }
 
-		public ParameterListViewModel(string fullNamePreffix, string displayName, IEnumerable<IChartReadyParameterVm> groupItems) {
-			FullName = fullNamePreffix + ": displayName";
+		public ParameterListViewModel(string displayName, IEnumerable<IChartReadyParameterViewModel> groupItems) {
+			//UniqueName = fullNamePreffix + ": " + displayName";
 			DisplayName = displayName;
 			
-			GroupItems = new ObservableCollection<IChartReadyParameterVm>();
+			GroupItems = new ObservableCollection<IChartReadyParameterViewModel>();
 			foreach (var item in groupItems) {
 				GroupItems.Add(item);
 			}
 		}
 
-		public ObservableCollection<IChartReadyParameterVm> GroupItems { get; }
+		public ObservableCollection<IChartReadyParameterViewModel> GroupItems { get; }
 
 		// TODO: implement or not?
 		public double ChartValue { get; }

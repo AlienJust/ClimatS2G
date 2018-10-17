@@ -7,24 +7,30 @@ using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 
 namespace ParamControls.Vm {
-	public class DisplayParameterRelayViewModel<T> : ViewModelBase, IDisplayParameter<T> where T : IEquatable<T> {
-		private readonly IReceivableParameter _parameterModel;
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <typeparam name="T">Type of display data</typeparam>
+	/// <typeparam name="TR">Type of received data</typeparam>
+	public class DisplayParameterRelayViewModel<T, TR> : ViewModelBase, IDisplayParameter<T> where T : IEquatable<T> {
+		private readonly IReceivableParameter<TR> _parameterModel;
 		private readonly IThreadNotifier _uiNotifier;
 		
-		private readonly Func<IList<byte>, T> _displayValueGetter;
+		private readonly Func<TR, T> _displayValueGetter;
 		private T _displayValue;
 		
 		private bool _isValueFallback;
 		private readonly T _fallbackValue;
 		
 		private bool _isValueUnknown;
-		private T _unknownValue;
+		private readonly T _unknownValue;
 
-		public string FullName { get; }
+		//public string UniqueName { get; }
 		public string DisplayName { get; }
 
-		public DisplayParameterRelayViewModel(string fullNamePreffix, string displayName, IReceivableParameter parameterModel, IThreadNotifier uiNotifier, Func<IList<byte>, T> displayValueGetter, T fallbackValue, T unknownValue) {
-			FullName = fullNamePreffix + ": " + displayName;
+		public DisplayParameterRelayViewModel(string displayName, IReceivableParameter<TR> parameterModel, IThreadNotifier uiNotifier, Func<TR, T> displayValueGetter, T fallbackValue, T unknownValue) {
+			//UniqueName = fullNamePreffix + ": " + displayName;
+			//DisplayName = uniqNamePrefix + ": " + displayName;
 			DisplayName = displayName;
 			
 			_parameterModel = parameterModel;
@@ -45,11 +51,8 @@ namespace ParamControls.Vm {
 			_uiNotifier.Notify(() => {
 				try {
 					DisplayValue = _displayValueGetter(_parameterModel.ReceivedRawValue);
-					Console.WriteLine(FullName + " raw is " + _parameterModel.ReceivedRawValue.ToText());
-					Console.WriteLine(FullName + " v is " + DisplayValue + " and t is " + typeof(T).FullName);
 				}
-				catch (Exception e) {
-					Console.WriteLine(e);
+				catch {
 					DisplayValue = _fallbackValue;
 				}
 			}); // TODO: many calls could lag interface!
@@ -70,7 +73,7 @@ namespace ParamControls.Vm {
 						_displayValue = value;
 						RaisePropertyChanged(() => DisplayValue);
 					}
-					DisplayParameterValueMaybeChanged?.Invoke();
+					//DisplayParameterValueMaybeChanged?.Invoke();
 					IsValueFallback = false; 
 					IsValueUnknown = false;
 				}
@@ -127,6 +130,6 @@ namespace ParamControls.Vm {
 			}
 		}
 
-		public event DisplayParameterValueMaybeChangedDelegate DisplayParameterValueMaybeChanged;
+		//public event DisplayParameterValueMaybeChangedDelegate DisplayParameterValueMaybeChanged;
 	}
 }

@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="MukFanAirExhauster\SetParameters\MukAirExhausterSetParamsViewModel.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\CmdListenerMukFlapOuterAirReply03.cs" />
+    <Compile Include="MukFlapAirOuter\Reply03\Converters\MukFlapOuterAirWorkmodeStageExtensions.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\Contracts\MukFlapOuterAirWorkmodeStageExtensions.cs" />
     <Compile Include="MukFlapAirOuter\Request16\CmdListenerMukFlapOuterAirRequest16.cs" />
     <Compile Include="MukFlapAirRecycle\Reply03\CmdListenerMukFlapReturnAirReply03.cs" />
