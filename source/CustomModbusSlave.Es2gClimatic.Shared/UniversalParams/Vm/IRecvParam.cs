@@ -6,7 +6,7 @@ namespace ParamControls.Vm {
 	/// Represent some portion of received data
 	/// </summary>
 	/// <typeparam name="T">Type of received data</typeparam>
-	public interface IReceivableParameter<out T> {
+	public interface IRecvParam<out T> {
 		string ReceiveName { get; }
 		//IList<byte> ReceivedRawValue { get; } // UserSide
 		T ReceivedRawValue { get; }

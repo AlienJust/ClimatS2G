@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using AlienJust.Support.Text;
-using CustomModbusSlave.Es2gClimatic.Shared;
+using ParamControls.Vm;
 
-namespace ParamControls.Vm {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <typeparam name="T">Data output format</typeparam>
 	/// <typeparam name="TR">Raw input format</typeparam>
-	public sealed class ReceivableParameterRelayBlocking<T, TR> : IReceivableParameter<T> {
+	public sealed class RecvParam<T, TR> : IRecvParam<T> {
 		private readonly Func<TR, T> _dataGetter;
 		private readonly ICmdListener<TR> _cmdPartListener;
 		public string ReceiveName { get; }
@@ -28,7 +27,7 @@ namespace ParamControls.Vm {
 
 		public event NotifyDataReceivedDelegate NotifyDataReceived;
 
-		public ReceivableParameterRelayBlocking(string receiveName, ICmdListener<TR> cmdPartListener, Func<TR, T> dataGetter) {
+		public RecvParam(string receiveName, ICmdListener<TR> cmdPartListener, Func<TR, T> dataGetter) {
 			ReceiveName = receiveName;
 			_cmdPartListener = cmdPartListener;
 			_dataGetter = dataGetter;

@@ -12,8 +12,8 @@ namespace ParamControls.Vm {
 	/// </summary>
 	/// <typeparam name="T">Type of display data</typeparam>
 	/// <typeparam name="TR">Type of received data</typeparam>
-	public class DisplayParameterRelayViewModel<T, TR> : ViewModelBase, IDisplayParameter<T> where T : IEquatable<T> {
-		private readonly IReceivableParameter<TR> _parameterModel;
+	public class DispParamViewModel<T, TR> : ViewModelBase, IDisplayParameter<T> where T : IEquatable<T> {
+		private readonly IRecvParam<TR> _parameterModel;
 		private readonly IThreadNotifier _uiNotifier;
 		
 		private readonly Func<TR, T> _displayValueGetter;
@@ -28,7 +28,7 @@ namespace ParamControls.Vm {
 		//public string UniqueName { get; }
 		public string DisplayName { get; }
 
-		public DisplayParameterRelayViewModel(string displayName, IReceivableParameter<TR> parameterModel, IThreadNotifier uiNotifier, Func<TR, T> displayValueGetter, T fallbackValue, T unknownValue) {
+		public DispParamViewModel(string displayName, IRecvParam<TR> parameterModel, IThreadNotifier uiNotifier, Func<TR, T> displayValueGetter, T fallbackValue, T unknownValue) {
 			//UniqueName = fullNamePreffix + ": " + displayName;
 			//DisplayName = uniqNamePrefix + ": " + displayName;
 			DisplayName = displayName;

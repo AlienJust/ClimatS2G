@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace ParamControls.Vm {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	/// <summary>
 	/// Interaction logic for ParametersListView.xaml
 	/// </summary>

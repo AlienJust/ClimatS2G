@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AlienJust.Support.ModelViewViewModel;
+using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
 
 namespace ParamControls.Vm {
@@ -9,9 +10,9 @@ namespace ParamControls.Vm {
 	/// </summary>
 	/// <typeparam name="TR">Received data type</typeparam>
 	/// <typeparam name="TD">Display data type</typeparam>
-	public sealed class ChartReadyDisplayParameterViewModel<TR, TD> : ViewModelBase, IChartReadyParameterViewModel where TD : IEquatable<TD> {
+	public sealed class ChartParamViewModel<TR, TD> : ViewModelBase, IChartReadyParameterViewModel where TD : IEquatable<TD> {
 		private readonly string _uniqNamePrefix;
-		private readonly IReceivableParameter<TR> _recvParam;
+		private readonly IRecvParam<TR> _recvParam;
 		private readonly IDisplayParameter<TD> _parameter;
 		private readonly Func<TR, double> _chartDataGetter;
 		private readonly ParameterLogType _parameterLogType; // TODO: holding link for further proper unsubscribe later
@@ -22,7 +23,7 @@ namespace ParamControls.Vm {
 		public string DisplayName => _uniqNamePrefix + ": " + _parameter.DisplayName;
 		//public string UniqueName => _parameter.UniqueName;
 
-		public ChartReadyDisplayParameterViewModel(string uniqNamePrefix, IReceivableParameter<TR> recvParam, IDisplayParameter<TD> parameter, Func<TR, double> chartDataGetter, ParameterLogType parameterLogType, IParameterLogger parameterLogger) {
+		public ChartParamViewModel(string uniqNamePrefix, IRecvParam<TR> recvParam, IDisplayParameter<TD> parameter, Func<TR, double> chartDataGetter, ParameterLogType parameterLogType, IParameterLogger parameterLogger) {
 			_uniqNamePrefix = uniqNamePrefix;
 			_recvParam = recvParam;
 			_parameter = parameter;

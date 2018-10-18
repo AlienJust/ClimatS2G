@@ -284,6 +284,10 @@
     </Compile>
     <Compile Include="Record\RecordViewModel.cs" />
     <Compile Include="OneWire\SensorIndicationExt.cs" />
+    <Compile Include="Search\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Search\SearchViewModel.cs" />
     <Compile Include="SetParamsAndKsm\CmdListenerKsmParams.cs" />
     <Compile Include="MukFanEvaporator\Request16\CmdListenerMukVaporizerRequest16.cs" />
     <Compile Include="ICmdListener.cs" />
@@ -398,20 +402,20 @@
     <Compile Include="UniversalParams\Vm\ChartParameterView.xaml.cs">
       <DependentUpon>ChartParameterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UniversalParams\Vm\ChartReadyDisplayParameterViewModel.cs" />
+    <Compile Include="UniversalParams\Vm\ChartParamViewModel.cs" />
     <Compile Include="UniversalParams\Vm\ChartParameterContentTemplateSelector.cs" />
     <Compile Include="UniversalParams\Vm\IChartReadyParameterViewModel.cs" />
     <Compile Include="UniversalParams\Vm\IDisplayGroup.cs" />
     <Compile Include="UniversalParams\Vm\IDisplayParameter.cs" />
-    <Compile Include="UniversalParams\Vm\IReceivableParameter.cs" />
+    <Compile Include="UniversalParams\Vm\IRecvParam.cs" />
     <Compile Include="UniversalParams\Vm\NotifyDataReceivedDelegate.cs" />
-    <Compile Include="UniversalParams\Vm\ParameterListViewModel.cs" />
+    <Compile Include="UniversalParams\Vm\GroupParamViewModel.cs" />
     <Compile Include="UniversalParams\Vm\ParameterLogType.cs" />
     <Compile Include="UniversalParams\Vm\ParametersListView.xaml.cs">
       <DependentUpon>ParametersListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UniversalParams\Vm\ReceivableParameterRelayBlocking.cs" />
-    <Compile Include="UniversalParams\Vm\DisplayParameterRelayViewModel.cs" />
+    <Compile Include="UniversalParams\Vm\RecvParam.cs" />
+    <Compile Include="UniversalParams\Vm\DispParamViewModel.cs" />
     <Compile Include="UniversalParams\Vm\ParameterListItemTemplateSelector.cs" />
     <Compile Include="UniversalParams\Wpf\KsmReadonlyBitsParameterView.xaml.cs">
       <DependentUpon>KsmReadonlyBitsParameterView.xaml</DependentUpon>
@@ -547,6 +551,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Record\RecordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Search\SearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

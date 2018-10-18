@@ -167,6 +167,7 @@
       <DependentUpon>MukFlapReturnAirSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFlapAirRecycle\SetParameters\MukFlapReturnAirSetParamsViewModel.cs" />
+    <Compile Include="MukFlapAirWinterSummer\RecvParamsBuilderReply3.cs" />
     <Compile Include="MukFlapAirWinterSummer\Request16\CmdListenerMukFlapAirWinterSummerRequest16.cs" />
     <Compile Include="MukFlapAirWinterSummer\Request16\IMukFlapAirWinterSummerRequest16Data.cs" />
     <Compile Include="MukFlapAirWinterSummer\Request16\MukFlapAirWinterSummerRequest16DataBuilder.cs" />
