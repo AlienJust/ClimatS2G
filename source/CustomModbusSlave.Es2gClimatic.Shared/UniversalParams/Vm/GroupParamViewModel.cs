@@ -1,22 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using AlienJust.Support.ModelViewViewModel;
 using ParamControls.Vm;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
-	public sealed class GroupParamViewModel : IDisplayParameter, IDisplayGroup {
+	public sealed class GroupParamViewModel : ViewModelBase, IDisplayGroup {
 		public string DisplayName { get; }
+		private bool _isGroupExpanded;
+		public ObservableCollection<IDisplayParameter> ParametersAndGroups { get; }
 
-		public GroupParamViewModel(string displayName, IEnumerable<IDisplayParameter> groupItems) {
+		public GroupParamViewModel(string displayName) {
 			DisplayName = displayName;
+			_isGroupExpanded = true;
+			ParametersAndGroups = new ObservableCollection<IDisplayParameter>();
+		}
 
-			GroupItems = new ObservableCollection<IDisplayParameter>();
-			if (groupItems != null) {
-				foreach (var item in groupItems) {
-					GroupItems.Add(item);
-				}
+		public GroupParamViewModel(string displayName, IEnumerable<IDisplayParameter> displayParameters) : this(displayName) {
+			if (displayParameters == null) return;
+			foreach (var parameter in displayParameters) {
+				ParametersAndGroups.Add(parameter);
 			}
 		}
 
-		public ObservableCollection<IDisplayParameter> GroupItems { get; }
+		public bool IsGroupExpanded {
+			get => _isGroupExpanded;
+			set => SetProp(() => _isGroupExpanded != value, () => _isGroupExpanded = value, () => IsGroupExpanded);
+		}
+
+		public void AddParameterOrGroup(IDisplayParameter parameter) {
+			ParametersAndGroups.Add(parameter);
+		}
 	}
 }

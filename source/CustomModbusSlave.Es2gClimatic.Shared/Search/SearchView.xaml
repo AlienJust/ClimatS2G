@@ -12,7 +12,7 @@
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
-			<TextBox Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+			<TextBox Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 		</Grid>
 		<vm1:ParametersListView Grid.Row="1" DataContext="{Binding Path=ResultParamsVm, Mode=OneTime}"/>
 	</Grid>

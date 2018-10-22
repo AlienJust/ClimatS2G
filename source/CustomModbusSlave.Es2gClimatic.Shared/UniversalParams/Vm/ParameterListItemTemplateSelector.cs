@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
 
 namespace ParamControls.Vm {
 	public class ParameterListItemTemplateSelector : DataTemplateSelector {

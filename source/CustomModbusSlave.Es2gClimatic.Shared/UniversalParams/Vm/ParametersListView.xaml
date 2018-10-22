@@ -15,10 +15,10 @@
 		<local:ParameterListItemTemplateSelector x:Key="ParameterListItemTemplateSelector" ChartParameterTemplate="{StaticResource ChartParameterTemplate}" DisplayGroupTemplate="{StaticResource DisplayGroupTemplate}" CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}"/>
 	</UserControl.Resources>
 
-	<Expander>
+	<Expander IsExpanded="{Binding Path=IsGroupExpanded, Mode=TwoWay}">
 		<Expander.Header>
 		<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" FontSize="14" FontWeight="Bold"/>
 		</Expander.Header>
-		<ListBox Grid.Row="1" ItemTemplateSelector="{StaticResource ParameterListItemTemplateSelector}" ItemsSource="{Binding Path=GroupItems, Mode=OneTime}"/>
+		<ListBox Grid.Row="1" ItemTemplateSelector="{StaticResource ParameterListItemTemplateSelector}" ItemsSource="{Binding Path=ParametersAndGroups, Mode=OneTime}"/>
 	</Expander>
 </UserControl>
