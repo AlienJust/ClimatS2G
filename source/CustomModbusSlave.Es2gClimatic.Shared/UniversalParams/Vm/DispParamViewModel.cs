@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows.Media.Animation;
 using AlienJust.Adaptation.WindowsPresentation.Converters;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using AlienJust.Support.Text;
 
-namespace ParamControls.Vm {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	/// <summary>
 	/// 
 	/// </summary>

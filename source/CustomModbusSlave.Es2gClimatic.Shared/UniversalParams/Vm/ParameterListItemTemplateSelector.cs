@@ -1,8 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
 
-namespace ParamControls.Vm {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	public class ParameterListItemTemplateSelector : DataTemplateSelector {
 		public DataTemplate DisplayGroupTemplate { get; set; }
 		public DataTemplate ChartParameterTemplate { get; set; }

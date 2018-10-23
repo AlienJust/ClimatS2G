@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ParamControls.Vm;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	/// <summary>

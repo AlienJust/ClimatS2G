@@ -5,9 +5,23 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic {
 	[ValueConversion(typeof(OneWireSensorErrorCode), typeof(string))]
 	public class EnumOneWireSensorErrorCodeToStringConverter : IValueConverter {
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-			var ns = (OneWireSensorErrorCode)value; // TODO: might throw exception?
+			if (value != null) {
+				var ns = (OneWireSensorErrorCode)value; // TODO: might throw exception?
+				return ns.ToText();
+			}
 
-			switch (ns) {
+			return "null";
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
+			// TODO: if needed
+			throw new NotImplementedException("implement if needed");
+		}
+	}
+
+	public static class EnumOneWireSensorErrorCodeExtensions {
+		public static string ToText(this OneWireSensorErrorCode errodCode) {
+			switch (errodCode) {
 				case OneWireSensorErrorCode.FoundDeviceWithUnknownFamilyCode:
 					return "Найдено устройство с неизвестным кодом семейства";
 				case OneWireSensorErrorCode.SensorNotFound:
@@ -19,13 +33,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic {
 				case OneWireSensorErrorCode.NoError:
 					return "Нет ошибок, или неизвестный код";
 				default:
-					return ns.ToString();
+					return errodCode.ToString();
 			}
-		}
-
-		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-			// TODO: if needed
-			throw new NotImplementedException("implement if needed");
 		}
 	}
 }

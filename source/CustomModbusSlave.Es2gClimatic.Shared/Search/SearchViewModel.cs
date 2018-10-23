@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
-using ParamControls.Vm;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.Search {
 	public class SearchViewModel : ViewModelBase {

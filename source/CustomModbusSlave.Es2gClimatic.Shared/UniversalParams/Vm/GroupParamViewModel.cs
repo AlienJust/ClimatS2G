@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using AlienJust.Support.ModelViewViewModel;
-using ParamControls.Vm;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	public sealed class GroupParamViewModel : ViewModelBase, IDisplayGroup {

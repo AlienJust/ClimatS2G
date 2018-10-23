@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using ParamControls.Vm;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	public class ChartParameterContentTemplateSelector : DataTemplateSelector {

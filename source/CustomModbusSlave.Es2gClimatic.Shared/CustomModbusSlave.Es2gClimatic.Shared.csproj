@@ -398,7 +398,6 @@
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairNullableSomethingConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairSomethingConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\ObjectToStringConverter.cs" />
-    <Compile Include="UniversalParams\GroupSimple.cs" />
     <Compile Include="UniversalParams\Vm\ChartParameterView.xaml.cs">
       <DependentUpon>ChartParameterView.xaml</DependentUpon>
     </Compile>

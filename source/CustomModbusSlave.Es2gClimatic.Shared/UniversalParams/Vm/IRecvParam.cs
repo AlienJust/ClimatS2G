@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ParamControls.Vm {
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	
 	/// <summary>
 	/// Represent some portion of received data

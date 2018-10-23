@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
 
-namespace ParamControls.Vm {
+namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	/// <summary>
 	/// 
 	/// </summary>
@@ -15,13 +14,12 @@ namespace ParamControls.Vm {
 		private readonly IRecvParam<TR> _recvParam;
 		private readonly IDisplayParameter<TD> _parameter;
 		private readonly Func<TR, double> _chartDataGetter;
-		private readonly ParameterLogType _parameterLogType; // TODO: holding link for further proper unsubscribe later
+		private readonly ParameterLogType _parameterLogType; // TODO: holding link for further proper unsubscribe in later
 		private readonly IParameterLogger _parameterLogger;
 		private bool _isChecked;
 
 		public IList<IDisplayParameter> DisplayParameters { get; }
 		public string DisplayName => _uniqNamePrefix + ": " + _parameter.DisplayName;
-		//public string UniqueName => _parameter.UniqueName;
 
 		public ChartParamViewModel(string uniqNamePrefix, IRecvParam<TR> recvParam, IDisplayParameter<TD> parameter, Func<TR, double> chartDataGetter, ParameterLogType parameterLogType, IParameterLogger parameterLogger) {
 			_uniqNamePrefix = uniqNamePrefix;
