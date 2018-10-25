@@ -25,6 +25,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.Dat
 						return MukFlapOuterAirWorkmodeStage.WorkModePwmCorrectionBack;
 					case 5:
 						return MukFlapOuterAirWorkmodeStage.NoKsm;
+					case 6:
+						return MukFlapOuterAirWorkmodeStage.SetFromRemoteController;
+					case 7:
+						return MukFlapOuterAirWorkmodeStage.FlapCloseInWashingMode;
 					default:
 						return MukFlapOuterAirWorkmodeStage.Unknown;
 				}

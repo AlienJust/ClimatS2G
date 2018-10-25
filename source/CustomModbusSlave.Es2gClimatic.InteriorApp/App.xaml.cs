@@ -123,7 +123,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 			// МУК заслонки зима-лето
 			var cmdListenerMukFlapWinterSummerReply03 = new CmdListenerMukFlapWinterSummerReply03(8, 3, 47);
-
 			var cmdListenerMukAirFlapWinterSummerRequest16 = new CmdListenerMukFlapAirWinterSummerRequest16(8, 16, 21);
 
 			var cmdListenerBsSmReply32 = new CmdListenerBsSmReply32(10, 32, 47);
@@ -206,7 +205,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					mainVm.AddTab(new TabItemViewModel { FullHeader = "МУК заслонки лето зима", ShortHeader = "МУК 8", Content = new MukFlapWinterSummerDataView { DataContext = new MukFlapWinterSummerViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapWinterSummerReply03, cmdListenerMukAirFlapWinterSummerRequest16) } });
 
 				if (appAbilities.Version == AppVersion.Full) {
-					var tabsBuilder = new MukFlapAirWinterSummer.TabInterfaceBuilder(mainVm.Notifier, cmdListenerWinSum, appAbilities.ParameterLogger);
+					var tabsBuilder = new MukFlapAirWinterSummer.TabInterfaceBuilder(mainVm.Notifier, cmdListenerWinSum, cmdListenerMukAirFlapWinterSummerRequest16, appAbilities.ParameterLogger);
 					var tabVm = tabsBuilder.Build();
 					searchVm.RegisterTopLevelGroup(tabVm);
 					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК заслонки лето зима", ShortHeader = "МУК 8", Content = new ParametersListView {DataContext = tabVm}});

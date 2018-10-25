@@ -21,8 +21,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 		public IList<IDisplayParameter> DisplayParameters { get; }
 		public string DisplayName => _uniqNamePrefix + ": " + _parameter.DisplayName;
 
-		public ChartParamViewModel(string uniqNamePrefix, IRecvParam<TR> recvParam, IDisplayParameter<TD> parameter, Func<TR, double> chartDataGetter, ParameterLogType parameterLogType, IParameterLogger parameterLogger) {
-			_uniqNamePrefix = uniqNamePrefix;
+		public ChartParamViewModel(IRecvParam<TR> recvParam, IDisplayParameter<TD> parameter, Func<TR, double> chartDataGetter, ParameterLogType parameterLogType, IParameterLogger parameterLogger, params string[] uniqNamePrefix) {
+			_uniqNamePrefix = string.Join(", ", uniqNamePrefix);
 			_recvParam = recvParam;
 			_parameter = parameter;
 			_chartDataGetter = chartDataGetter;
