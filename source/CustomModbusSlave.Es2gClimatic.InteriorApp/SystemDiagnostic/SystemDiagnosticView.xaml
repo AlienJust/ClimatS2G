@@ -1,4 +1,9 @@
-﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic.SystemDiagnosticView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation" xmlns:systemDiagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic" xmlns:paramControls="clr-namespace:ParamControls;assembly=ParamControls" mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="600">
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic.SystemDiagnosticView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation" xmlns:systemDiagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic" xmlns:paramControls="clr-namespace:ParamControls;assembly=ParamControls"
+             xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+             xmlns:wpf="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Wpf;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+             xmlns:wamOrCoolForcedModes="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.Ksm.WamOrCoolForcedModes;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+             xmlns:viewModel="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.ViewModel;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+             mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="600">
 	<UserControl.Resources>
 		<converters:ColorsEnumToColorConverter x:Key="ColorConverter" />
 		<converters:ColorsEnumToBrushConverter x:Key="BrushConverter" />
@@ -515,6 +520,31 @@
 				<paramControls:ParamSimple Text="Отопитель 3000 в., почасовой счетчик работы" Value="{Binding Heater3000WorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>
 				<paramControls:ParamSimple Text="Вентилятор приточного воздуха, почасовой счетчик работы" Value="{Binding FanIncomingAirWorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>
 				<paramControls:ParamSimple Text="Вентилятор отработанного воздуха, почасовой счетчик работы" Value="{Binding FanOutgoingAirWorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>
+				
+				<ScrollViewer>
+					<StackPanel Orientation="Vertical">
+						<ListBox ItemsSource="{Binding Path=KsmParamList, Mode=OneTime}">
+							<ListBox.Resources>
+								<DataTemplate DataType="{x:Type viewModel:KsmReadonlyParamViewModel}">
+									<wpf:KsmReadonlyCommonParameterView />
+								</DataTemplate>
+								<DataTemplate DataType="{x:Type viewModel:KsmBitsParameterViewModel}">
+									<wpf:KsmReadonlyBitsParameterView />
+								</DataTemplate>
+								<DataTemplate DataType="{x:Type viewModel:SettableTemperatureParameterViewModel}">
+									<wpf:SettableTemperatureParameterView />
+								</DataTemplate>
+								<DataTemplate DataType="{x:Type viewModel:SettableParameterViewModel}">
+									<wpf:SettableParameterView />
+								</DataTemplate>
+								<DataTemplate DataType="{x:Type wamOrCoolForcedModes:WarmOrCoolForcedModeViewModel}">
+									<wpf:SettableDropdownParameterView />
+								</DataTemplate>
+							</ListBox.Resources>
+						</ListBox>
+						<shared:AnyCommandPartView DataContext="{Binding Path=DataAsText, Mode=OneTime}" />
+					</StackPanel>
+				</ScrollViewer>
 			</StackPanel>
 			<StackPanel Grid.Column="1">
 				<TextBlock Text="Диагностика МПСУиД:" FontWeight="Bold" />

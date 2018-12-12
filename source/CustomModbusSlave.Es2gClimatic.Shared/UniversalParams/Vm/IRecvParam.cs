@@ -10,4 +10,9 @@
 		T ReceivedRawValue { get; }
 		event NotifyDataReceivedDelegate NotifyDataReceived; // UserSide
 	}
+	
+	public interface ISendParam<out T> {
+		string SendName { get; }
+		T SentRawValue { get; }
+	}
 }

@@ -7,25 +7,25 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	/// <summary>
 	/// 
 	/// </summary>
-	/// <typeparam name="T">Type of display data</typeparam>
-	/// <typeparam name="TR">Type of received data</typeparam>
-	public class DispParamViewModel<T, TR> : ViewModelBase, IDisplayParameter<T> where T : IEquatable<T> {
-		private readonly IRecvParam<TR> _parameterModel;
+	/// <typeparam name="TDisplay">Type of display data</typeparam>
+	/// <typeparam name="TReceive">Type of received data</typeparam>
+	public class DispParamViewModel<TDisplay, TReceive> : ViewModelBase, IDisplayParameter<TDisplay> where TDisplay : IEquatable<TDisplay> {
+		private readonly IRecvParam<TReceive> _parameterModel;
 		private readonly IThreadNotifier _uiNotifier;
 		
-		private readonly Func<TR, T> _displayValueGetter;
-		private T _displayValue;
+		private readonly Func<TReceive, TDisplay> _displayValueGetter;
+		private TDisplay _displayValue;
 		
 		private bool _isValueFallback;
-		private readonly T _fallbackValue;
+		private readonly TDisplay _fallbackValue;
 		
 		private bool _isValueUnknown;
-		private readonly T _unknownValue;
+		private readonly TDisplay _unknownValue;
 
 		//public string UniqueName { get; }
 		public string DisplayName { get; }
 
-		public DispParamViewModel(string displayName, IRecvParam<TR> parameterModel, IThreadNotifier uiNotifier, Func<TR, T> displayValueGetter, T fallbackValue, T unknownValue) {
+		public DispParamViewModel(string displayName, IRecvParam<TReceive> parameterModel, IThreadNotifier uiNotifier, Func<TReceive, TDisplay> displayValueGetter, TDisplay fallbackValue, TDisplay unknownValue) {
 			//UniqueName = fullNamePreffix + ": " + displayName;
 			//DisplayName = uniqNamePrefix + ": " + displayName;
 			DisplayName = displayName;
@@ -56,7 +56,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 		}
 
 
-		public T DisplayValue {
+		public TDisplay DisplayValue {
 			get => _displayValue;
 			set {
 				try {

@@ -1,8 +1,8 @@
 ﻿using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.DataModel {
-	class MukFlapWorkmodeStageSimple : IMukFlapWorkmodeStage {
-		public MukFlapWorkmodeStageSimple(int absoluteValue) {
+	internal sealed class MukFlapWorkModeStageSimple : IMukFlapWorkmodeStage {
+		public MukFlapWorkModeStageSimple(int absoluteValue) {
 			AbsoluteValue = absoluteValue;
 		}
 

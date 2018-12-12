@@ -329,7 +329,7 @@
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\MukFlapWorkmodeStageBuilder.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\Contracts\IEmersonDiagnosticCircuit2.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\Contracts\IMukFlapWorkmodeStage.cs" />
-    <Compile Include="MukFlapAirOuter\Reply03\DataModel\MukFlapWorkmodeStageSimple.cs" />
+    <Compile Include="MukFlapAirOuter\Reply03\DataModel\MukFlapWorkModeStageSimple.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\EmersonDiagnosticCircuit2.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\MukFlapReply03Telemetry.cs" />
     <Compile Include="MukFlapAirOuter\Reply03\DataModel\MukFlapReply03TelemetryBuilder.cs" />

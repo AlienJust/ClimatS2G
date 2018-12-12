@@ -88,4 +88,45 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 			}
 		}
 	}
+	
+	
+	/// <typeparam name="TDispset">Dispset data type</typeparam>
+	public sealed class ChartParamSettableViewModel<TDispset> : ViewModelBase, IChartReadyParameterViewModel where TDispset : IEquatable<TDispset> {
+		private readonly string _uniqNamePrefix;
+		private readonly IDispsetParameter<TDispset> _parameter;
+		private readonly Func<TDispset, double> _chartDataGetter;
+		private readonly ParameterLogType _parameterLogType; // TODO: holding link for further proper unsubscribe in later
+		private readonly IParameterLogger _parameterLogger;
+		private bool _isChecked;
+
+		public IList<IDisplayParameter> DisplayParameters { get; }
+		public string DisplayName => _uniqNamePrefix + ": " + _parameter.DisplayName;
+
+		public ChartParamSettableViewModel(IDispsetParameter<TDispset> parameter) {
+			_parameter = parameter;
+			DisplayParameters = new List<IDisplayParameter> {_parameter};
+			_isChecked = false;
+		}
+
+		private double ChartValue {
+			get {
+				try {
+					return _chartDataGetter.Invoke(_recvParam.ReceivedRawValue); // Invoked in receiving thread!!!1
+				}
+				catch (Exception e) {
+					throw new Exception("Parameter is not ready to be charted", e);
+				}
+			}
+		}
+
+		public bool IsChecked {
+			get => _isChecked;
+			set {
+				if (_isChecked != value) {
+					_isChecked = value;
+					RaisePropertyChanged(() => IsChecked);
+				}
+			}
+		}
+	}
 }

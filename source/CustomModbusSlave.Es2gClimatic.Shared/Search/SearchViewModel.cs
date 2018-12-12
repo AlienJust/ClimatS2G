@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;

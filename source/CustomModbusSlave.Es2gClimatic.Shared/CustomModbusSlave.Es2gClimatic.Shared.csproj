@@ -402,10 +402,12 @@
       <DependentUpon>ChartParameterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UniversalParams\Vm\ChartParamViewModel.cs" />
-    <Compile Include="UniversalParams\Vm\ChartParameterContentTemplateSelector.cs" />
+    <Compile Include="UniversalParams\Vm\AggregateOrChartParameterContentTemplateSelector.cs" />
+    <Compile Include="UniversalParams\Vm\DispParamSettableViewModel.cs" />
     <Compile Include="UniversalParams\Vm\IChartReadyParameterViewModel.cs" />
     <Compile Include="UniversalParams\Vm\IDisplayGroup.cs" />
     <Compile Include="UniversalParams\Vm\IDisplayParameter.cs" />
+    <Compile Include="UniversalParams\Vm\IDispsetParameter.cs" />
     <Compile Include="UniversalParams\Vm\IRecvParam.cs" />
     <Compile Include="UniversalParams\Vm\NotifyDataReceivedDelegate.cs" />
     <Compile Include="UniversalParams\Vm\GroupParamViewModel.cs" />
@@ -416,6 +418,7 @@
     <Compile Include="UniversalParams\Vm\RecvParam.cs" />
     <Compile Include="UniversalParams\Vm\DispParamViewModel.cs" />
     <Compile Include="UniversalParams\Vm\ParameterListItemTemplateSelector.cs" />
+    <Compile Include="UniversalParams\Vm\SettParamViewModel.cs" />
     <Compile Include="UniversalParams\Wpf\KsmReadonlyBitsParameterView.xaml.cs">
       <DependentUpon>KsmReadonlyBitsParameterView.xaml</DependentUpon>
     </Compile>

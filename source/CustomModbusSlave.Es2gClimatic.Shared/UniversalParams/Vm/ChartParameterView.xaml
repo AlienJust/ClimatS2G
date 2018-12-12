@@ -1,17 +1,13 @@
-﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm.ChartParameterView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm" xmlns:oneWire="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire" xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation" mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm.ChartParameterView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm" xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation" xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
 	<UserControl.Resources>
-		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-		<converters:ColorsEnumToBrushConverter x:Key="ColorsEnumToBrushConverter" />
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/> <converters:ColorsEnumToBrushConverter x:Key="ColorsEnumToBrushConverter"/>
 		<DataTemplate x:Key="IntegerParameterDisplayTemplate">
 			<Border Background="{Binding Path=BackgroundColor, Mode=OneWay, Converter={StaticResource ColorsEnumToBrushConverter}}">
 				<Grid>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*"/> <ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
-					<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" />
-					<TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-					<TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+					<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}"/> <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/> <TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</Grid>
 			</Border>
 		</DataTemplate>
@@ -20,12 +16,9 @@
 			<Border Background="{Binding Path=BackgroundColor, Mode=OneWay, Converter={StaticResource ColorsEnumToBrushConverter}}">
 				<Grid>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*"/> <ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
-					<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" />
-					<TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-					<TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+					<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}"/> <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/> <TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</Grid>
 			</Border>
 		</DataTemplate>
@@ -34,23 +27,49 @@
 			<Border Background="{Binding Path=BackgroundColor, Mode=OneWay, Converter={StaticResource ColorsEnumToBrushConverter}}">
 				<Grid>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*"/> <ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
-					<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" />
-					<CheckBox Grid.Column="1" IsChecked="{Binding Path=DisplayValue, Mode=TwoWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" IsHitTestVisible="False" />
-					<TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+					<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}"/> <CheckBox Grid.Column="1" IsChecked="{Binding Path=DisplayValue, Mode=TwoWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" IsHitTestVisible="False"/> <TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</Grid>
 			</Border>
 		</DataTemplate>
 
 		<DataTemplate x:Key="CannotDisplayMessageTemplate">
-			<TextBlock Text="Не удалось отобразить параметр" Foreground="Red" />
+			<TextBlock Text="Не удалось отобразить параметр" Foreground="Red"/>
 		</DataTemplate>
 
-		<local:ChartParameterContentTemplateSelector x:Key="ChartParameterContentTemplateSelector" IntegerParameterDisplayTemplate="{StaticResource IntegerParameterDisplayTemplate}" StringParameterDisplayTemplate="{StaticResource StringParameterDisplayTemplate}" CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}" BooleanParameterDisplayTemplate="{StaticResource BooleanParameterDisplayTemplate}" />
+
+		<DataTemplate x:Key="StringIntegerParameterDispsetTemplate">
+			<Border Background="{Binding Path=BackgroundColor, Mode=OneWay, Converter={StaticResource ColorsEnumToBrushConverter}}">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/> <ColumnDefinition Width="Auto"/> <ColumnDefinition Width="Auto"/> <ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}"/> <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/> <TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/> <controls:NumericUpDown Grid.Column="2" Value="{Binding Path=DispsetValue, Mode=TwoWay}"/>
+					<!--TODO: change color on fallback-->
+					<Button Grid.Column="3" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}"/>
+				</Grid>
+			</Border>
+		</DataTemplate>
+
+
+		<DataTemplate x:Key="IntegerParameterSettableTemplate">
+			<Border Background="{Binding Path=BackgroundColor, Mode=OneWay, Converter={StaticResource ColorsEnumToBrushConverter}}">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/> <ColumnDefinition Width="Auto"/> <ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}"/> <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=DispsetValue, Mode=TwoWay}"/>
+					<!--TODO: change color on fallback-->
+					<Button Grid.Column="2" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}"/>
+				</Grid>
+			</Border>
+		</DataTemplate>
+
+
+		<local:AggregateOrChartParameterContentTemplateSelector x:Key="ChartParameterContentTemplateSelector" IntegerParameterDisplayTemplate="{StaticResource IntegerParameterDisplayTemplate}" StringParameterDisplayTemplate="{StaticResource StringParameterDisplayTemplate}" CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}" BooleanParameterDisplayTemplate="{StaticResource BooleanParameterDisplayTemplate}" StringIntegerDispsetTemplate="{StaticResource StringIntegerParameterDispsetTemplate}" IntegerParameterSettableTemplate="{StaticResource IntegerParameterSettableTemplate}"/>
 	</UserControl.Resources>
 	<CheckBox IsChecked="{Binding Path=IsChecked, Mode=TwoWay}" HorizontalContentAlignment="Stretch">
-		<ListBox ItemTemplateSelector="{StaticResource ChartParameterContentTemplateSelector}" ItemsSource="{Binding Path=DisplayParameters}" HorizontalContentAlignment="Stretch" />
+		<ListBox ItemTemplateSelector="{StaticResource ChartParameterContentTemplateSelector}" ItemsSource="{Binding Path=DisplayParameters}" HorizontalContentAlignment="Stretch"/>
 	</CheckBox>
 </UserControl>

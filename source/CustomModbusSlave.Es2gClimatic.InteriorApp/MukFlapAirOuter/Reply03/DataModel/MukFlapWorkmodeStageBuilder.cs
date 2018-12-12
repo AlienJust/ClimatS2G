@@ -10,7 +10,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03.Dat
 		}
 
 		public IMukFlapWorkmodeStage Build() {
-			return new MukFlapWorkmodeStageSimple(_absoluteValue);
+			return new MukFlapWorkModeStageSimple(_absoluteValue);
 
 		}
 	}
