@@ -2,7 +2,7 @@
 	mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
 	<UserControl.Resources>
 		<DataTemplate x:Key="AggregateParameterTemplate">
-			<vm:AggregateParameterView/>
+			<vm:AggregateParamView/>
 		</DataTemplate>
 		<DataTemplate x:Key="ChartParameterTemplate">
 			<vm:ChartParameterView/>
@@ -14,7 +14,7 @@
 			<TextBlock Text="Не удалось отобразить элемент" />
 		</DataTemplate>
 
-		<vm:ParameterListItemTemplateSelector x:Key="ParameterListItemTemplateSelector" ChartParameterTemplate="{StaticResource ChartParameterTemplate}" DisplayGroupTemplate="{StaticResource DisplayGroupTemplate}" CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}"/>
+		<vm:ParameterListItemTemplateSelector x:Key="ParameterListItemTemplateSelector" AggregateParameterTemplate="{StaticResource AggregateParameterTemplate}" ChartParameterTemplate="{StaticResource ChartParameterTemplate}" DisplayGroupTemplate="{StaticResource DisplayGroupTemplate}" CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}"/>
 	</UserControl.Resources>
 
 	<Expander IsExpanded="{Binding Path=IsGroupExpanded, Mode=TwoWay}">

@@ -5,7 +5,7 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
-	public class DispParamSettableViewModel<TDisplay, TRaw, TDisplaySet> : ViewModelBase, IDisplayParameter<TDisplay>, IDispsetParameter<TDisplaySet> where TDisplay : IEquatable<TDisplay> {
+	public class DispParamSettableViewModel<TDisplay, TRaw, TDisplaySet> : ViewModelBase, IDisplayParameter<TDisplay>, ISettParameter<TDisplaySet> where TDisplay : IEquatable<TDisplay> {
 		private readonly IRecvParam<TRaw> _recvModel;
 
 		private readonly IThreadNotifier _uiNotifier;
@@ -150,7 +150,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 		}
 
 
-		public TDisplaySet DispsetValue {
+		public TDisplaySet SettValue {
 			get => _dispsetValue;
 			set {
 				try {
@@ -159,13 +159,13 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 							_dispsetValue = value;
 							_sendValueValidator.Invoke(value); // if throws - we fallback
 							
-							RaisePropertyChanged(() => DispsetValue);
+							RaisePropertyChanged(() => SettValue);
 						}
 					}
 					else if (!_dispsetValue.Equals(value)) {
 						_dispsetValue = value;
 						_sendValueValidator.Invoke(value); // if throws - we fallback
-						RaisePropertyChanged(() => DispsetValue);
+						RaisePropertyChanged(() => SettValue);
 					}
 
 					//DisplayParameterValueMaybeChanged?.Invoke();
@@ -174,7 +174,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 				}
 				catch (Exception ex) {
 					_dispsetValue = _fallbackDispsetValue;
-					RaisePropertyChanged(() => DispsetValue);
+					RaisePropertyChanged(() => SettValue);
 					IsDispsetValueFallback = true;
 					IsDispsetValueUnknown = false;
 					Console.WriteLine(ex);
@@ -189,7 +189,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 				if (_isDispsetValueFallback != value) {
 					_isDispsetValueFallback = value;
 					RaisePropertyChanged(() => IsDispsetValueFallback);
-					RaisePropertyChanged(() => IsDispsetValueFallbackOrUnknown);
+					RaisePropertyChanged(() => IsSettValueFallbackOrUnknown);
 					RaisePropertyChanged(() => IsDispsetValueNotFallbackAndNotUnknown);
 				}
 			}
@@ -201,14 +201,14 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 				if (_isDispsetValueUnknown != value) {
 					_isDispsetValueUnknown = value;
 					RaisePropertyChanged(() => IsDispsetValueUnknown);
-					RaisePropertyChanged(() => IsDispsetValueFallbackOrUnknown);
+					RaisePropertyChanged(() => IsSettValueFallbackOrUnknown);
 					RaisePropertyChanged(() => IsDispsetValueNotFallbackAndNotUnknown);
 				}
 			}
 		}
 
-		public bool IsDispsetValueFallbackOrUnknown => _isDispsetValueFallback || _isDispsetValueUnknown;
-		public bool IsDispsetValueNotFallbackAndNotUnknown => !IsDispsetValueFallbackOrUnknown;
+		public bool IsSettValueFallbackOrUnknown => _isDispsetValueFallback || _isDispsetValueUnknown;
+		public bool IsDispsetValueNotFallbackAndNotUnknown => !IsSettValueFallbackOrUnknown;
 
 
 		public ICommand SetCommand => _setCommand;

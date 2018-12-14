@@ -398,6 +398,10 @@
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairNullableSomethingConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairSomethingConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\ObjectToStringConverter.cs" />
+    <Compile Include="UniversalParams\Vm\AggregateParamSettableViewModel.cs" />
+    <Compile Include="UniversalParams\Vm\AggregateParamView.xaml.cs">
+      <DependentUpon>AggregateParamView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UniversalParams\Vm\ChartParameterView.xaml.cs">
       <DependentUpon>ChartParameterView.xaml</DependentUpon>
     </Compile>
@@ -407,7 +411,7 @@
     <Compile Include="UniversalParams\Vm\IChartReadyParameterViewModel.cs" />
     <Compile Include="UniversalParams\Vm\IDisplayGroup.cs" />
     <Compile Include="UniversalParams\Vm\IDisplayParameter.cs" />
-    <Compile Include="UniversalParams\Vm\IDispsetParameter.cs" />
+    <Compile Include="UniversalParams\Vm\ISettParameter.cs" />
     <Compile Include="UniversalParams\Vm\IRecvParam.cs" />
     <Compile Include="UniversalParams\Vm\NotifyDataReceivedDelegate.cs" />
     <Compile Include="UniversalParams\Vm\GroupParamViewModel.cs" />
@@ -565,6 +569,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="TestSystems\TestSystemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UniversalParams\Vm\AggregateAndChartParamResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UniversalParams\Vm\AggregateParamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
