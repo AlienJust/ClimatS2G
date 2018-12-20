@@ -165,7 +165,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 					return new WindowAndClosableViewModel(chartWindow, new WindowChartViewModel(chartVm));
 				});
-
+				
+				/*
 				appFactory.ShowChildWindowInOwnThread(uiNotifier => {
 					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow will be created in next line");
 					var oscilloscopeWindow = new OscilloscopeWindow(colorsForGraphics);
@@ -174,17 +175,30 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(oscilloscopeWindow);
 					return new WindowAndClosableViewModel(oscilloscopeWindow, vm);
 				});
+				*/
 			}
 
 			appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm => {
 				var channel = mainVm.AddChannel("Single channel");
 				mainVm.TopContent = new TopContentView { DataContext = new TopContentViewModel(mainVm.Notifier, cmdListenerBsSmReply32) };
-				mainVm.AddTab(new TabItemViewModel { FullHeader = "Диагностика системы", ShortHeader = "ДС", Content = new SystemDiagnosticView { DataContext = new SystemDiagnosticViewModel(appAbilities.Version == AppVersion.Full, appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full, appAbilities.IsHourCountersVisible, mainVm.Notifier, cmdListenerMukFlapOuterAirReply03, cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16, cmdListenerMukCondenserFanReply03, cmdListenerMukAirExhausterReply03, cmdListenerMukFlapReturnAirReply03, cmdListenerMukFlapWinterSummerReply03, cmdListenerBsSmRequest32, cmdListenerBsSmReply32, cmdListenerKsmParams, cmdListenerBvs1Reply65, cmdListenerBvs2Reply65) } });
+				
+				var searchVm = new SearchViewModel(mainVm.Notifier); // Search View Model inited first to add items in future
+				
+				var tabsBuilderSd = new SdTabInterfaceBuilder(mainVm.Notifier, cmdListenerKsmParams, appAbilities.ParameterLogger, channel.Channel.ParamSetter, appAbilities.Version);
+				var tabVmSd = tabsBuilderSd.Build();
+				
+				mainVm.AddTab(new TabItemViewModel { FullHeader = "Диагностика системы", ShortHeader = "ДС", Content = new SystemDiagnosticView { DataContext = new SystemDiagnosticViewModel(appAbilities.Version == AppVersion.Full, appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full, appAbilities.IsHourCountersVisible, mainVm.Notifier, cmdListenerMukFlapOuterAirReply03, cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16, cmdListenerMukCondenserFanReply03, cmdListenerMukAirExhausterReply03, cmdListenerMukFlapReturnAirReply03, cmdListenerMukFlapWinterSummerReply03, cmdListenerBsSmRequest32, cmdListenerBsSmReply32, cmdListenerKsmParams, cmdListenerBvs1Reply65, cmdListenerBvs2Reply65, tabVmSd) } });
 
-				mainVm.AddTab(new TabItemViewModel { FullHeader = "Тестирование системы", ShortHeader = "ТЕСТ", Content = new TestSystemView { DataContext = new TestSystemViewModel(mainVm.Notifier, "Охлаждение 100%", new Freeze100Test(sharedTestWorker, cmdListenerMukVaporizerReply03, tt, channel.Channel.ParamSetter), AlienJust.Adaptation.WindowsPresentation.Converters.Colors.Transparent) } });
+				if (appAbilities.Version == AppVersion.Full) {
 
-				var searchVm = new SearchViewModel();
-				mainVm.AddTab(new TabItemViewModel { FullHeader = "Глобальный поиск параметров", ShortHeader = "ПОИСК", Content = new SearchView { DataContext = searchVm } });
+
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "Тестирование системы", ShortHeader = "ТЕСТ", Content = new TestSystemView {DataContext = new TestSystemViewModel(mainVm.Notifier, "Охлаждение 100%", new Freeze100Test(sharedTestWorker, cmdListenerMukVaporizerReply03, tt, channel.Channel.ParamSetter), AlienJust.Adaptation.WindowsPresentation.Converters.Colors.Transparent)}});
+				}
+
+
+				if (appAbilities.Version == AppVersion.Full) {
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "Глобальный поиск параметров", ShortHeader = "ПОИСК", Content = new SearchView {DataContext = searchVm}});
+				}
 
 				if (appAbilities.Version == AppVersion.Full)
 					mainVm.AddTab(new TabItemViewModel { FullHeader = "МУК заслонки наружного воздуха", ShortHeader = "МУК 2", Content = new MukFlapDataView { DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapOuterAirReply03, cmdListenerMukFlapOuterAirRequest16) } });
@@ -205,11 +219,19 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					mainVm.AddTab(new TabItemViewModel { FullHeader = "МУК заслонки лето зима", ShortHeader = "МУК 8", Content = new MukFlapWinterSummerDataView { DataContext = new MukFlapWinterSummerViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapWinterSummerReply03, cmdListenerMukAirFlapWinterSummerRequest16) } });
 
 				if (appAbilities.Version == AppVersion.Full) {
-					var tabsBuilder = new MukFlapAirWinterSummer.TabInterfaceBuilder(mainVm.Notifier, cmdListenerWinSum, cmdListenerMukAirFlapWinterSummerRequest16, appAbilities.ParameterLogger, channel.Channel.ParamSetter);
-					var tabVm = tabsBuilder.Build();
-					searchVm.RegisterTopLevelGroup(tabVm);
-					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК заслонки лето зима", ShortHeader = "МУК 8", Content = new ParametersListView {DataContext = tabVm}});
+					var tabsBuilderMuk8 = new MukFlapAirWinterSummer.TabInterfaceBuilder(mainVm.Notifier, cmdListenerWinSum, cmdListenerMukAirFlapWinterSummerRequest16, appAbilities.ParameterLogger, channel.Channel.ParamSetter);
+					var tabVmMuk8 = tabsBuilderMuk8.Build();
+					searchVm.RegisterTopLevelGroup(tabVmMuk8);
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК заслонки лето зима", ShortHeader = "МУК 8", Content = new ParametersListView {DataContext = tabVmMuk8}});
 				}
+				
+				if (appAbilities.Version == AppVersion.Full) {
+					var tabsBuilderKsm = new Ksm.KsmTabInterfaceBuilder(mainVm.Notifier, cmdListenerKsmParams, appAbilities.ParameterLogger, channel.Channel.ParamSetter, appAbilities.Version);
+					var tabVmKsm = tabsBuilderKsm.Build();
+					searchVm.RegisterTopLevelGroup(tabVmKsm);
+					mainVm.AddTab(new TabItemViewModel {FullHeader = "КСМ и в Африке КСМ", ShortHeader = "КСМ", Content = new ParametersListView {DataContext = tabVmKsm}});
+				}
+				
 
 				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)
 					mainVm.AddTab(new TabItemViewModel {

@@ -196,3 +196,5 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm {
 		}
 	}
 }
+
+

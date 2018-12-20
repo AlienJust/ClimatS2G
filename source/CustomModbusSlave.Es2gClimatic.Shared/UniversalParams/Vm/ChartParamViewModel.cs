@@ -9,7 +9,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 	/// </summary>
 	/// <typeparam name="TR">Received data type</typeparam>
 	/// <typeparam name="TD">Display data type</typeparam>
-	public sealed class ChartParamViewModel<TR, TD> : ViewModelBase, IChartReadyParameterViewModel where TD : IEquatable<TD> {
+	public sealed class ChartParamViewModel<TR, TD> : ViewModelBase, IChartReadyParameterViewModel /*where TD : IEquatable<TD>*/ {
 		private readonly string _uniqNamePrefix;
 		private readonly IRecvParam<TR> _recvParam;
 		private readonly IDisplayParameter<TD> _parameter;

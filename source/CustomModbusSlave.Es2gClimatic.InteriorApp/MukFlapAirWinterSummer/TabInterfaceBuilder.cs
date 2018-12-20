@@ -186,14 +186,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer {
 			var setParamsGroup = new GroupParamViewModel("Уставка параметров");
 
 			var setParam827 = new SettParamViewModel<bool>("827: Ручной/Автоматический режим", _uiNotifier, val => { }, false, false, (val, callback) => _parameterSetter.SetParameterAsync(827, (ushort)(val ? 1 : 0), callback));
-			var aggSetParam827 = new AggregateParamSettableViewModel<bool>(setParam827, muk08Group.DisplayName, reply03Group.DisplayName);
+			var aggSetParam827 = new AggregateParamViewModel<bool>(setParam827, muk08Group.DisplayName, setParamsGroup.DisplayName);
 
 
 
 
 
 			var setParam828 = new SettParamViewModel<int>("828: Уставка ШИМ на заслонку в ручном режиме", _uiNotifier, val => { if (val < 0 || val > 255) throw new ArgumentOutOfRangeException(); }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(828, (ushort)val, callback));
-			var aggSetParam828 = new AggregateParamSettableViewModel<int>(setParam828, muk08Group.DisplayName, reply03Group.DisplayName);
+			var aggSetParam828 = new AggregateParamViewModel<int>(setParam828, muk08Group.DisplayName, setParamsGroup.DisplayName);
 
 
 			setParamsGroup.AddParameterOrGroup(aggSetParam827);

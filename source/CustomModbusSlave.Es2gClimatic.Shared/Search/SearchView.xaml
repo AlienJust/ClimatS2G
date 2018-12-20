@@ -1,18 +1,26 @@
-﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.Shared.Search.SearchView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:vm1="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm"
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.Shared.Search.SearchView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:vm1="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm"
+	xmlns:behaviours="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Behaviours;assembly=AlienJust.Adaptation.WindowsPresentation"
 	mc:Ignorable="d" d:DesignHeight="30" d:DesignWidth="120">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
-			<TextBox Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+			<TextBox Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
+				behaviours:InputBindingsManager.UpdatePropertySourceWhenEnterPressed="TextBox.Text">
+				<TextBox.ToolTip>
+					<TextBlock Text="Введите текст для поиска и нажмите Enter"/>
+				</TextBox.ToolTip>
+			</TextBox>
 		</Grid>
-		<vm1:ParametersListView Grid.Row="1" DataContext="{Binding Path=ResultParamsVm, Mode=OneTime}"/>
+		<ScrollViewer Grid.Row="1" >
+			<vm1:ParametersListView DataContext="{Binding Path=ResultParamsVm, Mode=OneTime}"/>
+		</ScrollViewer>
 	</Grid>
 
 </UserControl>

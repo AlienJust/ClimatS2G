@@ -18,6 +18,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
+using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 	class SystemDiagnosticViewModel : ViewModelBase {
@@ -217,8 +218,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private string _heater3000WorkHourCounter;
 		private string _fanIncomingAirWorkHourCounter;
 		private string _fanOutgoingAirWorkHourCounter;
+		
+		
+		public IDisplayGroup KsmParamsVm { get; }
 
-		public SystemDiagnosticViewModel(bool isFullVersion, bool isHalfOrFullVersion, bool isHourCountersVisible, IThreadNotifier uiNotifier, ICmdListener<IMukFlapOuterAirReply03Telemetry> cmdListenerMukFlapOuterAirReply03, ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03, ICmdListener<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16, ICmdListener<IMukCondensorFanReply03Data> cmdListenerMukCondenserFanReply03, ICmdListener<IMukAirExhausterReply03Data> cmdListenerMukAirExhausterReply03, ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03, ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03, CmdListenerBase<IBsSmAndKsm1DataCommand32Request> cmdListenerBsSmRequest32, ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32,ICmdListener<IList<BytesPair>> cmdListenerKsm, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65) {
+		public SystemDiagnosticViewModel(bool isFullVersion, bool isHalfOrFullVersion, bool isHourCountersVisible, IThreadNotifier uiNotifier, ICmdListener<IMukFlapOuterAirReply03Telemetry> cmdListenerMukFlapOuterAirReply03, ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03, ICmdListener<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16, ICmdListener<IMukCondensorFanReply03Data> cmdListenerMukCondenserFanReply03, ICmdListener<IMukAirExhausterReply03Data> cmdListenerMukAirExhausterReply03, ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03, ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03, CmdListenerBase<IBsSmAndKsm1DataCommand32Request> cmdListenerBsSmRequest32, ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32,ICmdListener<IList<BytesPair>> cmdListenerKsm, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65, IDisplayGroup ksmParamsVm) {
 			IsFullVersion = isFullVersion;
 			IsHalfOrFullVersion = isHalfOrFullVersion;
 			IsHourCountersVisible = isHourCountersVisible;
@@ -238,6 +242,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			_cmdListenerKsm = cmdListenerKsm;
 			_cmdListenerBvs1Reply65 = cmdListenerBvs1Reply65;
 			_cmdListenerBvs2Reply65 = cmdListenerBvs2Reply65;
+			
+			KsmParamsVm = ksmParamsVm;
 
 			_cmdListenerMukFlapOuterAirReply03.DataReceived += CmdListenerMukFlapOuterAirReply03OnDataReceived;
 			_cmdListenerMukVaporizerReply03.DataReceived += CmdListenerMukVaporizerReply03OnDataReceived;

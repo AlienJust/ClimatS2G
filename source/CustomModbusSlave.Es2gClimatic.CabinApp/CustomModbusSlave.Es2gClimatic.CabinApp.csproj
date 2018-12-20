@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CustomModbusSlave.Es2gClimatic.CabinApp</RootNamespace>
     <AssemblyName>CustomModbusSlave.Es2gClimatic.CabinApp</AssemblyName>

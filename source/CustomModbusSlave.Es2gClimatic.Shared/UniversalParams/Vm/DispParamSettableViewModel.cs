@@ -5,7 +5,7 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
-	public class DispParamSettableViewModel<TDisplay, TRaw, TDisplaySet> : ViewModelBase, IDisplayParameter<TDisplay>, ISettParameter<TDisplaySet> where TDisplay : IEquatable<TDisplay> {
+	public class DispParamSettableViewModel<TDisplay, TRaw, TSet> : ViewModelBase, IDisplayAndSettableParameter<TDisplay, TSet> where TDisplay : IEquatable<TDisplay> {
 		private readonly IRecvParam<TRaw> _recvModel;
 
 		private readonly IThreadNotifier _uiNotifier;
@@ -18,21 +18,23 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 
 		private bool _isValueUnknown;
 		private readonly TDisplay _unknownValue;
-		private readonly Action<TDisplaySet> _sendValueValidator;
+		private readonly Action<TSet> _sendValueValidator;
 		public string DisplayName { get; }
 
 
-		private TDisplaySet _dispsetValue;
+		private TSet _settValue;
 
-		private bool _isDispsetValueFallback;
-		private readonly TDisplaySet _fallbackDispsetValue;
+		private bool _isSettValueFallback;
+		private readonly TSet _fallbackSettValue;
 
-		private bool _isDispsetValueUnknown;
-		private readonly TDisplaySet _unknownDispsetValue;
-		private readonly Action _setParameter;
+		private bool _isSettValueUnknown;
+		private readonly TSet _unknownSettValue;
+		private readonly  Action<TSet, Action<Exception>> _asyncParamSetter;
 		private readonly DependedCommand _setCommand;
+		
+		private Colors _backgroundColor;
 
-		public DispParamSettableViewModel(string displayName, IRecvParam<TRaw> recvModel, IThreadNotifier uiNotifier, Func<TRaw, TDisplay> displayValueGetter, TDisplay fallbackValue, TDisplay unknownValue, Action<TDisplaySet> sendValueValidator, TDisplaySet fallbackDispsetValue, TDisplaySet unknownDispsetValue, Action setParameter) {
+		public DispParamSettableViewModel(string displayName, IRecvParam<TRaw> recvModel, IThreadNotifier uiNotifier, Func<TRaw, TDisplay> displayValueGetter, TDisplay fallbackValue, TDisplay unknownValue, Action<TSet> sendValueValidator, TSet fallbackSettValue, TSet unknownSettValue, Action<TSet, Action<Exception>> asyncParamSetter) {
 			DisplayName = displayName;
 
 			_recvModel = recvModel;
@@ -47,22 +49,29 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 
 
 			_sendValueValidator = sendValueValidator;
-			_fallbackDispsetValue = fallbackDispsetValue;
-			_unknownDispsetValue = unknownDispsetValue;
-			_dispsetValue = unknownDispsetValue;
-			_isDispsetValueUnknown = true;
-			_isDispsetValueFallback = false;
+			_fallbackSettValue = fallbackSettValue;
+			_unknownSettValue = unknownSettValue;
+			_settValue = unknownSettValue;
+			_isSettValueUnknown = true;
+			_isSettValueFallback = false;
 
-			_setParameter = setParameter;
-			_setCommand = new DependedCommand(Set, () => IsDispsetValueNotFallbackAndNotUnknown);
-			_setCommand.AddDependOnProp(this, () => IsDispsetValueNotFallbackAndNotUnknown);
+			_backgroundColor = Colors.Transparent;
+
+			_asyncParamSetter = asyncParamSetter;
+			_setCommand = new DependedCommand(Set, () => IsSettValueNotFallbackAndNotUnknown);
+			_setCommand.AddDependOnProp(this, () => IsSettValueNotFallbackAndNotUnknown);
 
 
 			_recvModel.NotifyDataReceived += ParameterModelOnNotifyDataReceived;
 		}
 
 		private void Set() {
-			_setParameter.Invoke();
+			BackgroundColor = Colors.Yellow;
+			// TODO: check thread safity:
+			_asyncParamSetter.Invoke(SettValue, ex => {
+				if (ex != null) _uiNotifier.Notify(()=>BackgroundColor = Colors.OrangeRed);
+				else _uiNotifier.Notify(()=>BackgroundColor = Colors.LimeGreen);
+			});
 		}
 
 		private void ParameterModelOnNotifyDataReceived() {
@@ -141,76 +150,78 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 			DisplayValue = _unknownValue;
 		}
 
-		public Colors BackgroundColor {
-			get {
-				if (_isValueFallback) return Colors.PaleVioletRed;
-				if (_isValueUnknown) return Colors.Yellow;
-				return Colors.Transparent;
-			}
-		}
-
-
-		public TDisplaySet SettValue {
-			get => _dispsetValue;
+		public TSet SettValue {
+			get => _settValue;
 			set {
 				try {
-					if (_dispsetValue == null) {
+					if (_settValue == null) {
 						if (value != null) {
-							_dispsetValue = value;
+							_settValue = value;
 							_sendValueValidator.Invoke(value); // if throws - we fallback
-							
 							RaisePropertyChanged(() => SettValue);
 						}
 					}
-					else if (!_dispsetValue.Equals(value)) {
-						_dispsetValue = value;
+					else if (!_settValue.Equals(value)) {
+						_settValue = value;
 						_sendValueValidator.Invoke(value); // if throws - we fallback
 						RaisePropertyChanged(() => SettValue);
 					}
 
 					//DisplayParameterValueMaybeChanged?.Invoke();
-					IsDispsetValueFallback = false;
-					IsDispsetValueUnknown = false;
+					IsSettValueFallback = false;
+					IsSettValueUnknown = false;
 				}
 				catch (Exception ex) {
-					_dispsetValue = _fallbackDispsetValue;
+					_settValue = _fallbackSettValue;
 					RaisePropertyChanged(() => SettValue);
-					IsDispsetValueFallback = true;
-					IsDispsetValueUnknown = false;
+					IsSettValueFallback = true;
+					IsSettValueUnknown = false;
 					Console.WriteLine(ex);
 				}
 			}
 		}
 
 
-		public bool IsDispsetValueFallback {
-			get => _isDispsetValueFallback;
+		public bool IsSettValueFallback {
+			get => _isSettValueFallback;
 			set {
-				if (_isDispsetValueFallback != value) {
-					_isDispsetValueFallback = value;
-					RaisePropertyChanged(() => IsDispsetValueFallback);
+				if (_isSettValueFallback != value) {
+					_isSettValueFallback = value;
+					RaisePropertyChanged(() => IsSettValueFallback);
 					RaisePropertyChanged(() => IsSettValueFallbackOrUnknown);
-					RaisePropertyChanged(() => IsDispsetValueNotFallbackAndNotUnknown);
+					RaisePropertyChanged(() => IsSettValueNotFallbackAndNotUnknown);
 				}
 			}
 		}
 
-		public bool IsDispsetValueUnknown {
-			get => _isDispsetValueUnknown;
+		public bool IsSettValueUnknown {
+			get => _isSettValueUnknown;
 			set {
-				if (_isDispsetValueUnknown != value) {
-					_isDispsetValueUnknown = value;
-					RaisePropertyChanged(() => IsDispsetValueUnknown);
+				if (_isSettValueUnknown != value) {
+					_isSettValueUnknown = value;
+					RaisePropertyChanged(() => IsSettValueUnknown);
 					RaisePropertyChanged(() => IsSettValueFallbackOrUnknown);
-					RaisePropertyChanged(() => IsDispsetValueNotFallbackAndNotUnknown);
+					RaisePropertyChanged(() => IsSettValueNotFallbackAndNotUnknown);
 				}
 			}
 		}
 
-		public bool IsSettValueFallbackOrUnknown => _isDispsetValueFallback || _isDispsetValueUnknown;
-		public bool IsDispsetValueNotFallbackAndNotUnknown => !IsSettValueFallbackOrUnknown;
+		public bool IsSettValueFallbackOrUnknown => _isSettValueFallback || _isSettValueUnknown;
+		public bool IsSettValueNotFallbackAndNotUnknown => !IsSettValueFallbackOrUnknown;
 
 
 		public ICommand SetCommand => _setCommand;
+		
+		
+		
+		public Colors BackgroundColor {
+			get => _backgroundColor;
+			set {
+				if (_backgroundColor != value) {
+					_backgroundColor = value;
+					RaisePropertyChanged(()=>BackgroundColor);
+				}
+			}
+		}
 	}
 }

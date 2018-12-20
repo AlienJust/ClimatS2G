@@ -15,14 +15,16 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 
 
 		public DataTemplate StringIntegerDispsetTemplate { get; set; }
+		public DataTemplate IntegerIntegerDispsetTemplate { get; set; }
 		
 
-		
-		
 		
 		public DataTemplate CannotDisplayMessageTemplate { get; set; }
 
 		public override DataTemplate SelectTemplate(object item, DependencyObject container) {
+			if (item is IDisplayAndSettableParameter<int, int>) return IntegerIntegerDispsetTemplate;
+			if (item is IDisplayAndSettableParameter<string, int>) return StringIntegerDispsetTemplate;
+			
 			if (item is ISettParameter<int>) return IntegerParameterSettableTemplate;
 			if (item is ISettParameter<int?>) return IntegerParameterSettableTemplate;
 
@@ -34,9 +36,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 					return IntegerParameterDisplayTemplate;
 				
 				case IDisplayParameter<string> _:
-					if (item is ISettParameter<int>) {
-						return StringIntegerDispsetTemplate;
-					}
 					return StringParameterDisplayTemplate;
 				
 				case IDisplayParameter<bool> _:

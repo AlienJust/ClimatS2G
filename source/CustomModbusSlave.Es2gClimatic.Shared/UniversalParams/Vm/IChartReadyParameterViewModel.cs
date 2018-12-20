@@ -5,8 +5,4 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm {
 		bool IsChecked { get; set; }
 		IList<IDisplayParameter> DisplayParameters { get; } //
 	}
-
-	public interface IAggregateParameterViewModel : IDisplayParameter {
-		IList<IDisplayParameter> DisplayParameters { get; } //
-	}
 }
