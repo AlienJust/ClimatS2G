@@ -210,7 +210,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					mainVm.AddTab(new TabItemViewModel { FullHeader = "МУК вентилятора конденсатора", ShortHeader = "МУК 4", Content = new MukFridgeFanDataView { DataContext = new MukFridgeFanDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukCondenserFanReply03, cmdListenerMukCondenserRequest16) } });
 
 				if (appAbilities.Version == AppVersion.Full)
-					mainVm.AddTab(new TabItemViewModel { FullHeader = "МУК вытяжного вентилятора пола", ShortHeader = "МУК 6", Content = new AirExhausterDataView { DataContext = new MukAirExhausterDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukAirExhausterReply03, cmdListenerMukAirExhausterRequest16) } });
+					mainVm.AddTab(new TabItemViewModel { FullHeader = "МУК вытяжного вентилятора", ShortHeader = "МУК 6", Content = new AirExhausterDataView { DataContext = new MukAirExhausterDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukAirExhausterReply03, cmdListenerMukAirExhausterRequest16) } });
 
 				if (appAbilities.Version == AppVersion.Full)
 					mainVm.AddTab(new TabItemViewModel { FullHeader = "МУК заслонки рециркуляц. воздуха", ShortHeader = "МУК 7", Content = new MukFlapReturnAirDataView { DataContext = new MukFlapReturnAirViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapReturnAirReply03, cmdListenerMukFlapAirRecycleRequest16) } });
@@ -224,14 +224,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 					searchVm.RegisterTopLevelGroup(tabVmMuk8);
 					mainVm.AddTab(new TabItemViewModel {FullHeader = "МУК заслонки лето зима", ShortHeader = "МУК 8", Content = new ParametersListView {DataContext = tabVmMuk8}});
 				}
-				
+				/*
 				if (appAbilities.Version == AppVersion.Full) {
 					var tabsBuilderKsm = new Ksm.KsmTabInterfaceBuilder(mainVm.Notifier, cmdListenerKsmParams, appAbilities.ParameterLogger, channel.Channel.ParamSetter, appAbilities.Version);
 					var tabVmKsm = tabsBuilderKsm.Build();
 					searchVm.RegisterTopLevelGroup(tabVmKsm);
 					mainVm.AddTab(new TabItemViewModel {FullHeader = "КСМ и в Африке КСМ", ShortHeader = "КСМ", Content = new ParametersListView {DataContext = tabVmKsm}});
 				}
-				
+				*/
 
 				if (appAbilities.Version == AppVersion.Full || appAbilities.Version == AppVersion.Half)
 					mainVm.AddTab(new TabItemViewModel {
