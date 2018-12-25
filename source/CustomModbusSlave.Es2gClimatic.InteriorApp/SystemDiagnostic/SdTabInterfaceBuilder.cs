@@ -38,7 +38,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			// setting group of settable params
 			//var setParamsGroup = new GroupParamViewModel("Параметры КСМ");
 			
-			var recvParam39 = new RecvParam<int, IList<BytesPair>>("39: Обеззараживатель, почасовой счетчик работы", _cmdListenerKsmParams, data=>data[39].LowFirstUnsignedValue);
+			var recvParam39 = new RecvParam<int, IList<BytesPair>>("39: Обеззараживатель, почасовой счетчик работы", _cmdListenerKsmParams, data=>data[39].HighFirstUnsignedValue);
 			var setParam39 = new SettParamViewModel<int>(recvParam39.ReceiveName, _uiNotifier, val => {
 				if (val < 0 || val > 65535) throw new ArgumentOutOfRangeException();
 			}, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(39, (ushort)val, callback));
