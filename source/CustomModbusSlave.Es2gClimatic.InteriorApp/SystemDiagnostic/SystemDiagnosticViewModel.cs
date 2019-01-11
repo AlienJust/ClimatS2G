@@ -75,6 +75,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 		private string _version;
 		private string _workStage;
 
+		private string _farAway;
+
 		private string _mukInfo2;
 		private Colors _mukInfoColor2;
 
@@ -594,6 +596,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				*/
 
 				//Voltage3000Color = data.WorkModeAndCompressorSwitch.HasVoltage3000V ? HiVoltageOnLine : HiVoltageOffLine;
+				FarAway = data.WorkModeAndCompressorSwitch.LongDistanceJourney ? "Да" : "Нет";
+				
 
 				if (data.WorkModeAndCompressorSwitch.HasVoltage3000V) {
 					Voltage3000Color = HiVoltageOnLine;
@@ -859,6 +863,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 				if (_workStage != value) {
 					_workStage = value;
 					RaisePropertyChanged(() => WorkStage);
+				}
+			}
+		}
+		
+		public string FarAway {
+			get => _farAway;
+			set {
+				if (_farAway != value) {
+					_farAway = value;
+					RaisePropertyChanged(() => FarAway);
 				}
 			}
 		}
@@ -1635,6 +1649,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			SegmentType = UnknownText;
 			Version = UnknownText;
 			WorkStage = UnknownText;
+			FarAway = UnknownText;
 
 			MukInfo2 = UnknownText;
 			MukInfoColor2 = UnknownColor;

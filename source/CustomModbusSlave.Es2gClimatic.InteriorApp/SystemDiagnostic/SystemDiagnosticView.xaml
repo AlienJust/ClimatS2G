@@ -43,21 +43,20 @@
 			</Grid.RowDefinitions>
 			<StackPanel Grid.Column="0" Orientation="Horizontal">
 				<TextBlock Text="Сегмент: "/>
-				<TextBlock Text="{Binding Path=SegmentType, Mode=OneWay}"/>
+				<TextBlock Text="{Binding Path=SegmentType, Mode=OneWay}" FontWeight="Bold"/>
 			</StackPanel>
 			<StackPanel Visibility="{Binding Path=IsFullVersion, Mode=OneTime, Converter={StaticResource BoolToVisConverter}}" Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
 				<TextBlock Text="Версия ПО: "/>
-				<TextBlock Text="{Binding Path=Version, Mode=OneWay}"/>
+				<TextBlock Text="{Binding Path=Version, Mode=OneWay}" FontWeight="Bold"/>
+			</StackPanel>
+			<StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+				<TextBlock Text="Дальнее сообщение: "/>
+				<TextBlock Text="{Binding Path=FarAway, Mode=OneWay}" FontWeight="Bold"/>
 			</StackPanel>
 
 			<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
 				<TextBlock Text="Этап работы: "/>
 				<TextBlock Text="{Binding Path=WorkStage, Mode=OneWay}"/>
-			</StackPanel>
-
-			<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-				<TextBlock Text="Дальнее сообщение: "/>
-				<TextBlock Text="{Binding Path=FarAway, Mode=OneWay}"/>
 			</StackPanel>
 
 			<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
