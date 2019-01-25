@@ -164,7 +164,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.Ksm {
 				new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0, 4), converter.Build(WarmOrCoolForcedMode.Warm100Percent)),
 				new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0, 5), converter.Build(WarmOrCoolForcedMode.Warm50Percent)),
 				new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0, 6), converter.Build(WarmOrCoolForcedMode.TurnOnUov)),
-				new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0, 7), converter.Build(WarmOrCoolForcedMode.Test3000VoltageHeating))
+				new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0, 7), converter.Build(WarmOrCoolForcedMode.Test3000VoltageHeating)),
+				new RawAndConvertedValuesSimple<BytesPair, string>(new BytesPair(0, 8), converter.Build(WarmOrCoolForcedMode.Test380VoltageHeating))
 			}, "Режим работы", parameterSetter, _notifier, new BuilderOneToOneFunc<BytesPair, BytesPair>(bp => bp)));
 
 			_parameterVmList.Add(new SettableParameterViewModel(49, "Дельта уставки температуры, отладка", 32767 * 0.1 - 2.5, -32767 * 0.1 - 2.5, null, "f1", new DoubleBytesPairConverterModifyAndOffsetUshort(0.1, -2.5), parameterSetter, notifier, null));

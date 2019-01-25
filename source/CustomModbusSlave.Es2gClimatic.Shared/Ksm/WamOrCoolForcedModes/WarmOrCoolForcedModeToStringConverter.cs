@@ -20,6 +20,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.Ksm.WamOrCoolForcedModes {
 					return "Включение УОВ";
 				case WarmOrCoolForcedMode.Test3000VoltageHeating:
 					return "Тест 3кВ обогрева";
+				case WarmOrCoolForcedMode.Test380VoltageHeating:
+					return "Тест 380В обогрева";
 				case WarmOrCoolForcedMode.Unknown:
 					return "ХЗ, что за значение";
 				default:
