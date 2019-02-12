@@ -9,10 +9,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
 			try {
-				if (value == null) return "Нет данных (null)";
 				if (!(value is ISensorIndication<double> ns)) return "Нет данных";
-				if (ns.NoLinkWithSensor) return "Обрыв датчика";
-				return ns.Indication.ToString(Format, CultureInfo.InvariantCulture);
+				return ns.ToText(Format);
 			}
 			catch (Exception ex) {
 				return ex.Message;

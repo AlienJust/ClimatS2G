@@ -17,13 +17,13 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
 		}
 
 
-		protected override double GetIndiction() {
+		protected override double GetIndication() {
 			return _valueFirstHi.HighFirstSignedValue * _modifier + _afterModificationAddition;
 		}
 
 		public override string ToString() {
 			if (NoLinkWithSensor) return "Обрыв датчика";
-			return GetIndiction().ToString("f2");
+			return GetIndication().ToString("f2");
 		}
 	}
 }

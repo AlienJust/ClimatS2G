@@ -4,6 +4,7 @@
 		int OuterTemperature { get; }
 		double InnerTemperature { get; }
 		int FanSpeed { get; }
+
 		int DeltaT { get; }
 		double DeltaTSetting { get; }
 
@@ -11,5 +12,11 @@
 		/// Секция: мастер или слейв
 		/// </summary>
 		bool IsSlave { get; }
+
+		bool SalonBit { get; }
+		bool FarAwayGoingBit { get; }
+		bool HeadWagon { get; }
+		bool DoorsAreOpen { get; }
+		bool PowerLimitTurningRecycleHeatersOff { get; }
 	}
 }

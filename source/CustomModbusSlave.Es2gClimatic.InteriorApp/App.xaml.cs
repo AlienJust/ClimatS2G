@@ -165,17 +165,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 
 					return new WindowAndClosableViewModel(chartWindow, new WindowChartViewModel(chartVm));
 				});
-				
-				/*
-				appFactory.ShowChildWindowInOwnThread(uiNotifier => {
-					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow will be created in next line");
-					var oscilloscopeWindow = new OscilloscopeWindow(colorsForGraphics);
-					Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > oscilloscopeWindow was created");
-					var vm = new OscilloscopeWindowSciVm();
-					appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(oscilloscopeWindow);
-					return new WindowAndClosableViewModel(oscilloscopeWindow, vm);
-				});
-				*/
 			}
 
 			appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm => {
@@ -186,6 +175,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp {
 				
 				var tabsBuilderSd = new SdTabInterfaceBuilder(mainVm.Notifier, cmdListenerKsmParams, appAbilities.ParameterLogger, channel.Channel.ParamSetter, appAbilities.Version);
 				var tabVmSd = tabsBuilderSd.Build();
+				
+				var tabsBuilderM3 = new TabInterfaceBuilderMuk3(mainVm.Notifier,cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16, appAbilities.ParameterLogger, channel.Channel.ParamSetter);
+				var tabVmMuk3 = tabsBuilderM3.Build();
+				searchVm.RegisterTopLevelGroup(tabVmMuk3);
+				
 				
 				mainVm.AddTab(new TabItemViewModel { FullHeader = "Диагностика системы", ShortHeader = "ДС", Content = new SystemDiagnosticView { DataContext = new SystemDiagnosticViewModel(appAbilities.Version == AppVersion.Full, appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full, appAbilities.IsHourCountersVisible, mainVm.Notifier, cmdListenerMukFlapOuterAirReply03, cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16, cmdListenerMukCondenserFanReply03, cmdListenerMukAirExhausterReply03, cmdListenerMukFlapReturnAirReply03, cmdListenerMukFlapWinterSummerReply03, cmdListenerBsSmRequest32, cmdListenerBsSmReply32, cmdListenerKsmParams, cmdListenerBvs1Reply65, cmdListenerBvs2Reply65, tabVmSd) } });
 

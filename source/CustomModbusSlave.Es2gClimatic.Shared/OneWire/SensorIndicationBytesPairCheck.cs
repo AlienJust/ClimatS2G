@@ -18,18 +18,18 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
 			get {
 				if (NoLinkWithSensor)
 					throw new Exception(SensorIndicationExt.NoLinkText);
-				return GetIndiction();
+				return GetIndication();
 			}
 		}
 
-		protected abstract T GetIndiction();
+		protected abstract T GetIndication();
 
 
 
 		public string ToString(Func<T, string> formatter) {
 			if (NoLinkWithSensor)
 				return SensorIndicationExt.NoLinkText;
-			return formatter(GetIndiction());
+			return formatter(GetIndication());
 		}
 
 		public override int GetHashCode() {

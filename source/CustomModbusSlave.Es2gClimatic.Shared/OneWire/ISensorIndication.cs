@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.OneWire {
-	public interface ISensorIndication<T> {
+	public interface ISensorIndication<out T> {
 		bool NoLinkWithSensor { get; }
 		T Indication { get; }
 

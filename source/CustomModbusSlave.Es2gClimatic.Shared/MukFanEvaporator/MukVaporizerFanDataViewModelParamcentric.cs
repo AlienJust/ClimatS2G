@@ -16,8 +16,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator {
 		private readonly IThreadNotifier _notifier;
 		private readonly ICmdListener<IMukFanVaporizerDataReply03> _cmdListenerMukVaporizerReply03;
 		private readonly ICmdListener<IMukFanVaporizerDataRequest16> _cmdListenerMukVaporizerRequest16;
-		//private readonly IReceiverModbusCustom _customReceiver;
-		//private readonly IReceiverModbusRtu _rtuReceiver;
 		private const string Header = "МУК вентилятора испарителя";
 		private const string NoSensor = "Обрыв датчика";
 		
@@ -45,6 +43,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator {
 			_cmdListenerMukVaporizerRequest16.DataReceived += CmdListenerMukVaporizerRequest16OnDataReceived;
 
 			_children = new List<IGroupItem>();
+			
 			var pwmParameter = new ReceivableModbusRtuParameterSimpleViewModel("Уставка ШИМ на вентилятор", 3, 3, 0, new BytesPairNullableToStringThroughDoubleConverter(1.0, 0.0, false, true, "f0"));
 			var t1Parameter = new ReceivableModbusRtuParameterSimpleViewModel("Температура 1wire адрес 1", 3, 3, 1, new BytesPairNullableToStringThroughOneWireConverter(0.01, 0.0, "f2", new BytesPair(0x85, 0x00)));
 			var t2Parameter = new ReceivableModbusRtuParameterSimpleViewModel("Температура 1wire адрес 2", 3, 3, 2, new BytesPairNullableToStringThroughOneWireConverter(0.01, 0.0, "f2", new BytesPair(0x85, 0x00)));
@@ -52,7 +51,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator {
 			var outputSignals = new ReceivableModbusRtuParameterSimpleViewModel("Байт выходных сигналов (резерв)", 3, 3, 4, new BytesPairNullableToStringThroughDoubleConverter(1.0, 0.0, false, true, "f0"));
 			var pwmCalorifer = new ReceivableModbusRtuParameterSimpleViewModel("ШИМ на калорифер", 3, 3, 5, new BytesPairNullableToStringThroughDoubleConverter(1.0, 0.0, false, true, "f0"));
 			var workStage = new ReceivableModbusRtuParameterSimpleViewModel("Этап работы", 3, 3, 6, new BytesPairNullableToStringThroughVaporizerFanWorkstageConverter());
-			//var pwmParameter 
+			
+			 
 			rtuReceiver.RegisterParamToReceive(pwmParameter);
 			rtuReceiver.RegisterParamToReceive(t1Parameter);
 			rtuReceiver.RegisterParamToReceive(t2Parameter);
@@ -79,31 +79,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator {
 			_notifier.Notify(() => {
 				MukFanVaporizerDataReply03Text.Update(bytes);
 				MukFanVaporizerDataReply03 = data;
-				/*
-				FanPwm = data.FanPwm.ToString("f2");
-
-				TemperatureAddress1 = data.TemperatureAddress1.NoLinkWithSensor ? NoSensor : data.TemperatureAddress1.Indication.ToString("f2");
-				TemperatureAddress2 = data.TemperatureAddress1.NoLinkWithSensor ? NoSensor : data.TemperatureAddress2.Indication.ToString("f2");
-
-				IncomingSignals = "0x" + data.IncomingSignals.ToString("X2");
-				OutgoingSignals = "0x" + data.OutgoingSignals.ToString("X2");
-
-				AnalogInput = "0x" + data.AnalogInput.ToString("X4");
-				HeatingPwm = data.HeatingPwm.ToString();
-				AutomaticModeStage = data.AutomaticModeStage.ToString();
-				TemperatureRegulatorWorkMode = data.TemperatureRegulatorWorkMode;
-				CalculatedTemperatureSetting = data.CalculatedTemperatureSetting.ToString("f2");
-				FanSpeed = data.FanSpeed.ToString();
-				Diagnostic1 = "0x" + data.Diagnostic1.ToString("X4");
-				Diagnostic2 = "0x" + data.Diagnostic2.ToString("X4");
-				Diagnostic3 = "0x" + data.Diagnostic3.ToString("X4");
-				Diagnostic4 = "0x" + data.Diagnostic4.ToString("X4");
-				Diagnostic5 = data.Diagnostic5.ToString();
-
-				FirmwareBuildNumber = new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber);
-
-				Reply = bytes.ToText();
-				*/
 			});
 		}
 
