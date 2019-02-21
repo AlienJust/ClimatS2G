@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Timers;
 using AlienJust.Support.Concurrent.Contracts;
 using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.TestSystems;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys {
-	public class Freeze100Test : ITestSysAsync {
+	internal class Freeze100Test : ITestSysAsync {
 		private readonly IWorker<Action> _sharedTestsWorker;
 		private readonly ICmdListener<IMukFanVaporizerDataReply03> _evaporator03Listener;
 		private readonly Timer _sharedTestTimer;
@@ -20,8 +21,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys {
 		private readonly object _isTestCanceledSync;
 		private bool _isTestCanceled;
 
-		private readonly object _lastReceivedDataSync;
-		private IMukFanVaporizerDataReply03 _lastReceivedData;
+		private readonly object _lastReceivedDataSyncMukFanVaporizer03Reply;
+		private IMukFanVaporizerDataReply03 _lastReceivedDataMukFanVaporizer03Reply;
+		
+		private readonly object _lastReceivedDataSyncMukFFlapWinterSummer03Reply;
+		private IMukFanVaporizerDataReply03 _lastReceivedDataMukFanVaporizer03Reply;
 
 		private readonly object _timeSync;
 		private DateTime _beginTime;
@@ -34,7 +38,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys {
 		private readonly object _progressChangedSync;
 		private Action<double, TestSysStepResult, string> _progressChanged;
 
-		public Freeze100Test(IWorker<Action> sharedTestsWorker, ICmdListener<IMukFanVaporizerDataReply03> evaporator03Listener, Timer sharedTestTimer, IParameterSetter parameterSetter) {
+		public Freeze100Test(IWorker<Action> sharedTestsWorker, ICmdListener<IMukFanVaporizerDataReply03> evaporator03Listener, ICmdListener<IMukFlapWinterSummerReply03Telemetry> mukFlapWinterSummerReply03Listener, Timer sharedTestTimer, IParameterSetter parameterSetter) {
 			_sharedTestsWorker = sharedTestsWorker;
 			_evaporator03Listener = evaporator03Listener;
 			_sharedTestTimer = sharedTestTimer;
@@ -53,38 +57,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys {
 			_timeSync = new object();
 			_testTimeout = TimeSpan.FromSeconds(5.0);
 
-			_lastReceivedDataSync = new object();
-			_lastReceivedData = null;
+			_lastReceivedDataSyncMukFanVaporizer03Reply = new object();
+			_lastReceivedDataMukFanVaporizer03Reply = null;
 
 			_testCompleteSync = new object();
 			_testComplete = null;
 
 			_progressChangedSync = new object();
 			_progressChanged = null;
-		}
-
-		private void SharedTestTimerOnElapsed(object sender, ElapsedEventArgs e) {
-			if (IsTestRunning) {
-				if (IsTestCanceled) {
-					IsTestRunning = false;
-					IsTestCanceled = true;
-					TestComplete.Invoke(TestSysResult.Canceled);
-				}
-				else if (e.SignalTime - BeginTime > _testTimeout) {
-					// timeout
-					TestComplete.Invoke(TestSysResult.Fail);
-					// TODO: report progress BAD
-					ProgressChanged.Invoke(100, TestSysStepResult.Bad, "МУК не включает Emerson");
-				}
-				else {
-					if (LastReceivedData.Diagnostic3Parsed.MukIsSwitchingEmersionOn) {
-						IsTestRunning = false;
-						LastReceivedData = null;
-						ProgressChanged.Invoke(100, TestSysStepResult.Good, "Включение Emerson осуществлено");
-						TestComplete.Invoke(TestSysResult.Success);
-					}
-				}
-			}
 		}
 
 		public DateTime BeginTime {
@@ -105,7 +85,32 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys {
 				IsTestRunning = true;
 
 				_parameterSetter.SetParameterAsync(48, 1, Console.WriteLine);
+				ProgressChanged.Invoke(100, TestSysStepResult.Good, "48 параметр КСМ установлен в режим Охлаждение 100%");
 			});
+		}
+
+		private void SharedTestTimerOnElapsed(object sender, ElapsedEventArgs e) {
+			if (IsTestRunning) {
+				if (IsTestCanceled) {
+					IsTestRunning = false;
+					IsTestCanceled = true;
+					TestComplete.Invoke(TestSysResult.Canceled);
+				}
+				else if (e.SignalTime - BeginTime > _testTimeout) {
+					// timeout
+					IsTestRunning = false;
+					ProgressChanged.Invoke(100, TestSysStepResult.Bad, "МУК не включает Emerson");
+					TestComplete.Invoke(TestSysResult.Fail);
+				}
+				else {
+					if (LastReceivedData.Diagnostic3Parsed.MukIsSwitchingEmersionOn) {
+						IsTestRunning = false;
+						LastReceivedData = null;
+						ProgressChanged.Invoke(100, TestSysStepResult.Good, "Включение Emerson осуществлено");
+						TestComplete.Invoke(TestSysResult.Success);
+					}
+				}
+			}
 		}
 
 		public Action<double, TestSysStepResult, string> ProgressChanged {
@@ -128,7 +133,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys {
 
 		private void Evaporator03ListenerOnDataReceived(IList<byte> bytes, IMukFanVaporizerDataReply03 data) {
 			if (!IsTestCanceled) {
-				lock (_lastReceivedDataSync) _lastReceivedData = data;
+				lock (_lastReceivedDataSyncMukFanVaporizer03Reply) _lastReceivedDataMukFanVaporizer03Reply = data;
 			}
 		}
 
@@ -156,10 +161,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys {
 
 		public IMukFanVaporizerDataReply03 LastReceivedData {
 			get {
-				lock (_lastReceivedDataSync) return _lastReceivedData;
+				lock (_lastReceivedDataSyncMukFanVaporizer03Reply) return _lastReceivedDataMukFanVaporizer03Reply;
 			}
 			set {
-				lock (_lastReceivedDataSync) _lastReceivedData = value;
+				lock (_lastReceivedDataSyncMukFanVaporizer03Reply) _lastReceivedDataMukFanVaporizer03Reply = value;
 			}
 		}
 	}

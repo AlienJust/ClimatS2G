@@ -40,14 +40,14 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.TestSystems {
 
 		private void RunTest() {
 			TestLogLines.Clear();
+			LogUnsafe("Запуск теста", Colors.LimeGreen);
 			AssociatedWithModelTest.BeginTest(() => {
 				// TODO: test has been really started
 				_uiNotifier.Notify(() => {
 					IsRunningTest = true;
 				});
 			}, (progress, stepResult, message) => {
-				_uiNotifier.Notify(() =>
-				TestLogLines.Add(new LogLineColored(message, stepResult == TestSysStepResult.Good ? Colors.Lime : Colors.OrangeRed)));
+				LogSafe(message, stepResult == TestSysStepResult.Good ? Colors.Lime : Colors.OrangeRed);
 			}
 				, testResult => {
 					_uiNotifier.Notify(() => {
@@ -65,9 +65,11 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.TestSystems {
 								default:
 									throw new ArgumentOutOfRangeException(nameof(testResult), testResult, null);
 							}
+							LogUnsafe("Тест завершен", TestCompleteColor);
 						}
 						catch (Exception e) {
 							Console.WriteLine(e);
+							LogSafe("Произошла ошибка при завершении тестирования: " + e.Message, Colors.OrangeRed);
 						}
 						finally {
 							IsRunningTest = false;
@@ -90,9 +92,17 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.TestSystems {
 			set {
 				if (_testCompleteColor != value) {
 					_testCompleteColor = value;
-					RaisePropertyChanged(()=>TestCompleteColor);
+					RaisePropertyChanged(() => TestCompleteColor);
 				}
 			}
+		}
+
+		private void LogUnsafe(string text, Colors color) {
+			TestLogLines.Add(new LogLineColored(DateTime.Now.ToString("yyyy.MM.dd-HH:mm:ss") + " > " + text, color));
+		}
+
+		private void LogSafe(string text, Colors color) {
+			_uiNotifier.Notify(() => { LogUnsafe(text, color); });
 		}
 	}
 }
