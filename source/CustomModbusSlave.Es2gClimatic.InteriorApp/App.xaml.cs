@@ -186,7 +186,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 				searchVm.RegisterTopLevelGroup(tabVmMuk3);
 
 
-				mainVm.AddTab(new TabItemViewModel { FullHeader = "Диагностика системы", ShortHeader = "ДС", Content = new SystemDiagnosticView { DataContext = new SystemDiagnosticViewModel(appAbilities.Version == AppVersion.Full, appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full, appAbilities.IsHourCountersVisible, mainVm.Notifier, cmdListenerMukFlapOuterAirReply03, cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16, cmdListenerMukCondenserFanReply03, cmdListenerMukAirExhausterReply03, cmdListenerMukFlapReturnAirReply03, cmdListenerMukFlapWinterSummerReply03, cmdListenerBsSmRequest32, cmdListenerBsSmReply32, cmdListenerKsmParams, cmdListenerBvs1Reply65, cmdListenerBvs2Reply65, tabVmSd) } });
+				mainVm.AddTab(new TabItemViewModel { FullHeader = "Диагностика системы", ShortHeader = "ДС", Content = new SystemDiagnosticView { DataContext = new SystemDiagSalonViewModel(appAbilities.Version == AppVersion.Full, appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full, appAbilities.IsHourCountersVisible, mainVm.Notifier, cmdListenerMukFlapOuterAirReply03, cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16, cmdListenerMukCondenserFanReply03, cmdListenerMukAirExhausterReply03, cmdListenerMukFlapReturnAirReply03, cmdListenerMukFlapWinterSummerReply03, cmdListenerBsSmRequest32, cmdListenerBsSmReply32, cmdListenerKsmParams, cmdListenerBvs1Reply65, cmdListenerBvs2Reply65, tabVmSd) } });
 
 				if (appAbilities.Version == AppVersion.Full)
 				{

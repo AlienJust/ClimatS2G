@@ -201,7 +201,7 @@
     <Compile Include="SystemDiagnostic\SystemDiagnosticView.xaml.cs">
       <DependentUpon>SystemDiagnosticView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SystemDiagnostic\SystemDiagnosticViewModel.cs" />
+    <Compile Include="SystemDiagnostic\SystemDiagSalonViewModel.cs" />
     <Compile Include="TestSys\Freeze100Test.cs" />
     <Compile Include="TopContent\TopContentView.xaml.cs">
       <DependentUpon>TopContentView.xaml</DependentUpon>

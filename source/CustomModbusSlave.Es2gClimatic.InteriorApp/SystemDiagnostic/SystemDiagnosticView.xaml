@@ -235,6 +235,7 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
+				<RowDefinition />
 			</Grid.RowDefinitions>
 			<TextBlock Grid.ColumnSpan="2" Text="Датчики и диагностика устройств:" FontWeight="Bold"/>
 			<StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
@@ -289,7 +290,18 @@
 				<TextBlock Text="Датчик воздуха в салоне 2: "/>
 				<TextBlock Text="{Binding Path=SensorInteriorAirInfo2, Mode=OneWay}"/>
 			</StackPanel>
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
+				<StackPanel.Background>
+					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+						<GradientStop Offset="1" Color="Transparent" />
+						<GradientStop Offset="0" Color="{Binding Path=Co2LevelColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+					</LinearGradientBrush>
+				</StackPanel.Background>
+				<TextBlock Text="Уровень СО2: " />
+				<TextBlock Text="{Binding Path=Co2LevelText, Mode=OneWay}" />
+			</StackPanel>
+
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="5" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -299,7 +311,7 @@
 				<TextBlock Text="Давление Emerson 1 канал: "/>
 				<TextBlock Text="{Binding Path=EmersonPressure1, Mode=OneWay}"/>
 			</StackPanel>
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -310,7 +322,7 @@
 				<TextBlock Text="{Binding Path=EmersonPressure2, Mode=OneWay}"/>
 			</StackPanel>
 
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="5" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="6" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -321,7 +333,7 @@
 				<TextBlock Text="{Binding Path=EmersonTemperature1, Mode=OneWay}"/>
 			</StackPanel>
 
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -332,7 +344,7 @@
 				<TextBlock Text="{Binding Path=EmersonTemperature2, Mode=OneWay}"/>
 			</StackPanel>
 
-			<StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -342,7 +354,7 @@
 				<TextBlock Text="Давление конденсатора 1 канал: "/>
 				<TextBlock Text="{Binding Path=CondensorPressure1, Mode=OneWay}"/>
 			</StackPanel>
-			<StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -353,7 +365,7 @@
 				<TextBlock Text="{Binding Path=CondensorPressure2, Mode=OneWay}"/>
 			</StackPanel>
 
-			<StackPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Grid.Row="8" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -363,7 +375,7 @@
 				<TextBlock Text="Заслонка наружного воздуха встает в крайние положения: "/>
 				<TextBlock Text="{Binding Path=FlapAirOuterDiagInfo5, Mode=OneWay}"/>
 			</StackPanel>
-			<StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -374,7 +386,7 @@
 				<TextBlock Text="{Binding Path=FlapAirOuterDiagInfo6, Mode=OneWay}"/>
 			</StackPanel>
 
-			<StackPanel Grid.Row="8" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Grid.Row="9" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -384,7 +396,7 @@
 				<TextBlock Text="Заслонка рецирк. воздуха встает в крайние положения: "/>
 				<TextBlock Text="{Binding Path=FlapAirRecycleDiagInfo5, Mode=OneWay}"/>
 			</StackPanel>
-			<StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Grid.Row="9" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -395,7 +407,7 @@
 				<TextBlock Text="{Binding Path=FlapAirRecycleDiagInfo6, Mode=OneWay}"/>
 			</StackPanel>
 
-			<StackPanel Grid.Row="9" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Grid.Row="10" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -405,7 +417,7 @@
 				<TextBlock Text="Заслонка лето-зима встает в крайние положения: "/>
 				<TextBlock Text="{Binding Path=FlapAirWinterSummerDiagInfo5, Mode=OneWay}"/>
 			</StackPanel>
-			<StackPanel Grid.Row="9" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Grid.Row="10" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -417,7 +429,7 @@
 			</StackPanel>
 
 
-			<StackPanel Grid.Row="10" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Grid.Row="11" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -427,7 +439,7 @@
 				<TextBlock Text="Вытяжной вентилятор, ШИМ: "/>
 				<TextBlock Text="{Binding Path=FanAirExhausterInfo, Mode=OneWay}"/>
 			</StackPanel>
-			<StackPanel Grid.Row="10" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -438,7 +450,7 @@
 				<TextBlock Text="{Binding Path=FanEvaporatorInfo, Mode=OneWay}"/>
 			</StackPanel>
 
-			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="11" Grid.Column="0" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="12" Grid.Column="0" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -448,7 +460,7 @@
 				<TextBlock Text="Вентилятор конденсатора: "/>
 				<TextBlock Text="{Binding Path=FanCondensorInfo, Mode=OneWay}"/>
 			</StackPanel>
-			<StackPanel Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="11" Grid.Column="1" Orientation="Horizontal">
+			<StackPanel Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="12" Grid.Column="1" Orientation="Horizontal">
 				<StackPanel.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
 						<GradientStop Offset="1" Color="Transparent"/>
@@ -458,8 +470,8 @@
 				<TextBlock Text="Концентратор: "/>
 				<TextBlock Text="{Binding Path=ConcentratorAdvancedInfo, Mode=OneWay}"/>
 			</StackPanel>
-			<paramControls:ParamSimple Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="12" Grid.Column="1" Text="ШИМ калорифера 3кВ: " ValueForeground="Black" Value="{Binding Path=Heater3KPwm, Mode=OneWay}" Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}"/>
-			<paramControls:ParamSimple Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="12" Grid.Column="0" Text="ШИМ калорифера 380В: " ValueForeground="Black" Value="{Binding Path=Heater380Pwm, Mode=OneWay}" Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}"/>
+			<paramControls:ParamSimple Visibility="{Binding Path=IsSlave, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="13" Grid.Column="1" Text="ШИМ калорифера 3кВ: " ValueForeground="Black" Value="{Binding Path=Heater3KPwm, Mode=OneWay}" Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}"/>
+			<paramControls:ParamSimple Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}" Grid.Row="13" Grid.Column="0" Text="ШИМ калорифера 380В: " ValueForeground="Black" Value="{Binding Path=Heater380Pwm, Mode=OneWay}" Background="{Binding Path=Heater380Pwm, Mode=OneWay, Converter={StaticResource TextToBrushConverter2}}"/>
 		</Grid>
 		<Grid>
 			<Grid.RowDefinitions>

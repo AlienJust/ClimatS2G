@@ -99,10 +99,10 @@
       <DependentUpon>BsSmFaultView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SystemDiagnostic\BsSmFaultViewModel.cs" />
-    <Compile Include="SystemDiagnostic\SystemDiagnosticView.xaml.cs">
-      <DependentUpon>SystemDiagnosticView.xaml</DependentUpon>
+    <Compile Include="SystemDiagnostic\SystemDiagCabinView.xaml.cs">
+      <DependentUpon>SystemDiagCabinView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SystemDiagnostic\SystemDiagnosticViewModel.cs" />
+    <Compile Include="SystemDiagnostic\SystemDiagCabinViewModel.cs" />
     <Page Include="BsSm\BsSmDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,7 +295,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SystemDiagnostic\SystemDiagnosticView.xaml">
+    <Page Include="SystemDiagnostic\SystemDiagCabinView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
