@@ -109,7 +109,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 						)
 					}
 				});
-
+					/*
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК вентилятора конденсатора",
 					ShortHeader = "МУК 4",
@@ -121,7 +121,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp {
 						)
 					}
 				});
-
+				*/
 				mainVm.AddTab(new TabItemViewModel {
 					FullHeader = "МУК тёплого пола",
 					ShortHeader = "МУК 5",

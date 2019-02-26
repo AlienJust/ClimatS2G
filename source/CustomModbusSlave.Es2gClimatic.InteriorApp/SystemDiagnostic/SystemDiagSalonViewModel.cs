@@ -583,6 +583,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 			BsSmFaultVm3.Code = data.Fault3;
 			BsSmFaultVm4.Code = data.Fault4;
 			BsSmFaultVm5.Code = data.Fault5;
+			Co2LevelText = !(Math.Abs(data.Co2LevelInCurrentSegment - 2500) < 0.001) ? data.Co2LevelInCurrentSegment.ToString("f2") : 680.0.ToString("f2");
+			Co2LevelColor = OkLinkColor;
 		}
 
 		private void CmdListenerBsSmReply32OnDataReceived(IList<byte> bytes, IBsSmAndKsm1DataCommand32Reply data) {
