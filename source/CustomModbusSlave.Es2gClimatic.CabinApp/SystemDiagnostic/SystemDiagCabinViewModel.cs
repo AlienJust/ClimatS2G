@@ -5,6 +5,9 @@ using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Numeric.Bits;
+using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32;
+using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Request32;
+using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Reply03.DataModel.Contracts;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared;
@@ -13,6 +16,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
+using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm.TextFormatters;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
@@ -39,10 +43,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 		private const Colors HiVoltageOffLine = Colors.LimeGreen;
 
 		private readonly IThreadNotifier _uiNotifier;
-		private readonly ICmdListener<IMukFlapAirReply03Telemetry> _cmdListenerMukFlapOuterAirReply03;
+		private readonly ICmdListener<IMukFlapAirReply03Telemetry> _cmdListenerMukFlapAirReply03;
 		private readonly ICmdListener<IMukFanVaporizerDataReply03> _cmdListenerMukVaporizerReply03;
 		private readonly ICmdListener<IMukFanVaporizerDataRequest16> _cmdListenerMukVaporizerRequest16;
-		private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukCondenserFanReply03;
+		//private readonly ICmdListener<IMukCondensorFanReply03Data> _cmdListenerMukCondenserFanReply03;
 		private readonly ICmdListener<IMukWarmFloorReply03Data> _cmdListenerMukWarmFloorReply03;
 
 		private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm;
@@ -174,59 +178,38 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 		public bool IsFullVersion { get; }
 		public bool IsHalfOrFullVersion { get; }
 
-		public SystemDiagCabinViewModel(bool isFullVersion, bool isHalfOrFullVersion,
-			IThreadNotifier uiNotifier,
-			ICmdListener<IMukFlapAirReply03Telemetry> cmdListenerMukFlapOuterAirReply03,
-			ICmdListener<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03,
-			ICmdListener<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16,
-			ICmdListener<IMukCondensorFanReply03Data> cmdListenerMukCondenserFanReply03,
-			ICmdListener<IMukWarmFloorReply03Data> cmdListenerMukWarmFloorReply03,
-			//ICmdListener<IMukFlapReturnAirReply03Telemetry> cmdListenerMukFlapReturnAirReply03,
-			//ICmdListener<IMukFlapWinterSummerReply03Telemetry> cmdListenerMukFlapWinterSummerReply03,
-			//ICmdListener<IBsSmAndKsm1DataCommand32Reply> cmdListenerBsSmReply32,
-			ICmdListener<IList<BytesPair>> cmdListenerKsm,
-			ICmdListener<IBvsReply65Telemetry> cmdListenerBvs1Reply65
-			/*, ICmdListener<IBvsReply65Telemetry> cmdListenerBvs2Reply65*/) {
-
+		public SystemDiagCabinViewModel(bool isFullVersion, bool isHalfOrFullVersion, bool appAbilitiesIsHourCountersVisible, IThreadNotifier uiNotifier, CmdListenerBase<IMukFlapAirReply03Telemetry> cmdListenerMukFlapAirReply03, CmdListenerBase<IMukFanVaporizerDataReply03> cmdListenerMukVaporizerReply03, CmdListenerBase<IMukFanVaporizerDataRequest16> cmdListenerMukVaporizerRequest16, CmdListenerBase<IMukWarmFloorReply03Data> cmdListenerMukWarmFloorReply03, CmdListenerBase<IBsSmRequest32Data> cmdListenerBsSmRequest32, CmdListenerBase<IBsSmReply32Data> cmdListenerBsSmReply32, CmdListenerBase<IList<BytesPair>> cmdListenerKsmParams, CmdListenerBase<IBvsReply65Telemetry> cmdListenerBvsReply65) {
+			
 			IsFullVersion = isFullVersion;
 			IsHalfOrFullVersion = isHalfOrFullVersion;
 
 			_uiNotifier = uiNotifier;
-			_cmdListenerMukFlapOuterAirReply03 = cmdListenerMukFlapOuterAirReply03;
+			_cmdListenerMukFlapAirReply03 = cmdListenerMukFlapAirReply03;
 			_cmdListenerMukVaporizerReply03 = cmdListenerMukVaporizerReply03;
 			_cmdListenerMukVaporizerRequest16 = cmdListenerMukVaporizerRequest16;
-			_cmdListenerMukCondenserFanReply03 = cmdListenerMukCondenserFanReply03;
 			_cmdListenerMukWarmFloorReply03 = cmdListenerMukWarmFloorReply03;
-			//_cmdListenerMukFlapReturnAirReply03 = cmdListenerMukFlapReturnAirReply03;
-			//_cmdListenerMukFlapWinterSummerReply03 = cmdListenerMukFlapWinterSummerReply03;
-			//_cmdListenerBsSmReply32 = cmdListenerBsSmReply32;
-			_cmdListenerKsm = cmdListenerKsm;
-			_cmdListenerBvs1Reply65 = cmdListenerBvs1Reply65;
-			//_cmdListenerBvs2Reply65 = cmdListenerBvs2Reply65;
+			_cmdListenerKsm = cmdListenerKsmParams;
+			_cmdListenerBvs1Reply65 = cmdListenerBvsReply65;
 
-			_cmdListenerMukFlapOuterAirReply03.DataReceived += CmdListenerMukFlapOuterAirReply03OnDataReceived;
+			_cmdListenerMukFlapAirReply03.DataReceived += CmdListenerMukFlapAirReply03OnDataReceived;
 			_cmdListenerMukVaporizerReply03.DataReceived += CmdListenerMukVaporizerReply03OnDataReceived;
 			_cmdListenerMukVaporizerRequest16.DataReceived += CmdListenerMukVaporizerRequest16DataReceived;
-			_cmdListenerMukCondenserFanReply03.DataReceived += CmdListenerMukCondenserFanReply03OnDataReceived;
+			//_cmdListenerMukCondenserFanReply03.DataReceived += CmdListenerMukCondenserFanReply03OnDataReceived;
 			_cmdListenerMukWarmFloorReply03.DataReceived += CmdListenerMukWarmFloorReply03OnDataReceived;
-			//_cmdListenerMukFlapReturnAirReply03.DataReceived += CmdListenerMukFlapReturnAirReply03OnDataReceived;
-			//_cmdListenerMukFlapWinterSummerReply03.DataReceived += CmdListenerMukFlapWinterSummerReply03OnDataReceived;
-			//_cmdListenerBsSmReply32.DataReceived += CmdListenerBsSmReply32OnDataReceived;
 			_cmdListenerKsm.DataReceived += CmdListenerKsmOnDataReceived;
 
 			_cmdListenerBvs1Reply65.DataReceived += CmdListenerBvs1Reply65OnDataReceived;
-			//_cmdListenerBvs2Reply65.DataReceived += CmdListenerBvs2Reply65OnDataReceived;
 
 			ResetVmPropsToDefaultValues();
 			AutoVm1 = new AutoViewModel("Автоматический выключатель приточного вентилятора 1");
-			AutoVm2 = new AutoViewModel("Автоматический выключатель приточного вентилятора 2");
-			AutoVm3 = new AutoViewModel("Автоматический выключатель вытяжных вентиляторов");
+			//AutoVm2 = new AutoViewModel("Автоматический выключатель приточного вентилятора 2");
+			//AutoVm3 = new AutoViewModel("Автоматический выключатель вытяжных вентиляторов");
 			AutoVm4 = new AutoViewModel("Автоматический выключатель Компрессора 1");
-			AutoVm5 = new AutoViewModel("Автоматический выключатель Компрессора 2");
+			//AutoVm5 = new AutoViewModel("Автоматический выключатель Компрессора 2");
 			AutoVm6 = new AutoViewModel("Автоматический выключатель нагревателя 380");
 			AutoVm7 = new AutoViewModel("Автоматический выключатель рециркуляционных нагревателей");
 			AutoVm8 = new AutoViewModel("Автоматический выключатель вентилятора конденсатора");
-			AutoVm9 = new AutoViewModel("Автоматический выключатель обеззораживателя");
+			//AutoVm9 = new AutoViewModel("Автоматический выключатель обеззораживателя");
 
 			BsSmFaultVm1 = new BsSmFaultViewModel();
 			BsSmFaultVm2 = new BsSmFaultViewModel();
@@ -236,13 +219,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 		}
 
 
-
 		/// <summary>
 		/// МУК заслонки наружного воздуха, MODBUS адрес = 2
 		/// </summary>
 		/// <param name="bytes"></param>
 		/// <param name="data"></param>
-		private void CmdListenerMukFlapOuterAirReply03OnDataReceived(IList<byte> bytes, IMukFlapAirReply03Telemetry data) {
+		private void CmdListenerMukFlapAirReply03OnDataReceived(IList<byte> bytes, IMukFlapAirReply03Telemetry data) {
 			_uiNotifier.Notify(() => {
 				MukInfo2 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber) : OkLinkText;
 				MukInfoColor2 = OkLinkColor;
@@ -364,11 +346,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 			});
 		}
 
-		/// <summary>
-		/// МУК вентилятора конденсатора, MODBUS адрес = 4
-		/// </summary>
-		/// <param name="bytes"></param>
-		/// <param name="data"></param>
+		///// <summary>
+		///// МУК вентилятора конденсатора, MODBUS адрес = 4
+		///// </summary>
+		///// <param name="bytes"></param>
+		///// <param name="data"></param>
+		/*
 		private void CmdListenerMukCondenserFanReply03OnDataReceived(IList<byte> bytes, IMukCondensorFanReply03Data data) {
 			_uiNotifier.Notify(() => {
 				MukInfo4 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareBuildNumber) : OkLinkText;
@@ -406,7 +389,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 					FanCondensorColor = OkDiagColor;
 				}
 			});
-		}
+		}*/
 
 		/// <summary>
 		/// Contactor control module for warm floor, MODBUS address = 5
@@ -578,15 +561,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic {
 				Voltage380Color = data.BvsInput1 ? HiVoltageOnLine : HiVoltageOffLine;
 			});
 
-		}
-
-		private void CmdListenerBvs2Reply65OnDataReceived(IList<byte> bytes, IBvsReply65Telemetry data) {
-			_uiNotifier.Notify(() => {
-				AutoVm2.IsOk = data.BvsInput13; // 2.4
-				AutoVm3.IsOk = data.BvsInput10; // 2.1
-				AutoVm5.IsOk = data.BvsInput9; // 2.0
-				AutoVm9.IsOk = data.BvsInput7; // 1.6
-			});
 		}
 
 		public string SegmentType {
