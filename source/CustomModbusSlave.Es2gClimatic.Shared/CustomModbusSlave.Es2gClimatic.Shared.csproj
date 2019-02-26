@@ -271,7 +271,7 @@
       <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MukFanEvaporator\SetParameters\MukVaporizerSetParamsViewModel.cs" />
-    <Compile Include="MukFanEvaporator\TabInterfaceBuilder.cs" />
+    <Compile Include="MukFanEvaporator\TabInterfaceBuilderMuk3.cs" />
     <Compile Include="OneWire\SensorIndicationDoubleExt.cs" />
     <Compile Include="Oscilloscope\OscilloscopeLogger.cs" />
     <Compile Include="Oscilloscope\OscilloscopeWindow.xaml.cs">
