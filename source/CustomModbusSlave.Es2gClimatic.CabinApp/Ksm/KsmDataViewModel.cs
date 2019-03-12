@@ -76,8 +76,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm {
 						new KsmBitParameterViewModel(3, "b.3 - запись команд в МУК испарителя"),
 						new KsmBitParameterViewModel(4, "b.4 - вычитка текущих данных из МУК конденсатора"),
 						new KsmBitParameterViewModel(5, "b.5 - запись команд в МУК конденсатора"),
-						new KsmBitParameterViewModel(6, "b.6 - вычитка текущих данных из МУК телого пола"),
-						new KsmBitParameterViewModel(7, "b.7 - запись команд в МУК телого пола")
+						new KsmBitParameterViewModel(6, "b.6 - вычитка текущих данных из МУК теплого пола"),
+						new KsmBitParameterViewModel(7, "b.7 - запись команд в МУК теплого пола")
 					})
 
 				, new KsmBitsParameterViewModel(17, "Состояние обмена 2 (ErrorsResponse), 1 = ошибка обмена", new TextFormatterBits(UnknownBits)
