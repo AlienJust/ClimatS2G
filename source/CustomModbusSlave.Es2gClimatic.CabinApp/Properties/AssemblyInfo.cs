@@ -5,11 +5,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CustomModbusSlave.MicroclimatEs2gApp")]
+[assembly: AssemblyTitle("CustomModbusSlave.Es2gClimatic.CabinApp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CustomModbusSlave.MicroclimatEs2gApp")]
+[assembly: AssemblyProduct("CustomModbusSlave.Es2gClimatic.CabinApp")]
 [assembly: AssemblyCopyright("Copyright © Horizon LTD 2016-2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -48,5 +48,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.6.0")]
-[assembly: AssemblyFileVersion("1.2.6.0")]
+[assembly: AssemblyVersion("1.2.7.0")]
+[assembly: AssemblyFileVersion("1.2.7.0")]
