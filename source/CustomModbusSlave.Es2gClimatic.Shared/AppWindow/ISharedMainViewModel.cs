@@ -5,15 +5,15 @@ using AlienJust.Support.UserInterface.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
-	public interface ISharedMainViewModel
-	{
-		IThreadNotifier Notifier { get; }
-		IWindowSystem WindowsSystem { get; }
-		ILogger Logger { get; }
+    public interface ISharedMainViewModel
+    {
+        IThreadNotifier Notifier { get; }
+        IWindowSystem WindowsSystem { get; }
+        ILogger Logger { get; }
 
-		FrameworkElement TopContent { get; set; }
-		void AddTab(TabItemViewModel tabVm);
+        FrameworkElement TopContent { get; set; }
+        void AddTab(TabItemViewModel tabVm);
 
-		ComPortControlViewModel AddChannel(string channelName);
-	}
+        ComPortControlViewModel AddChannel(string channelName);
+    }
 }

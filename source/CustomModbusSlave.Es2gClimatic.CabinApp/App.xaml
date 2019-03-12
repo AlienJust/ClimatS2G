@@ -1,12 +1,12 @@
 ﻿<Application
-	x:Class="CustomModbusSlave.Es2gClimatic.CabinApp.App"
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	ShutdownMode="OnMainWindowClose"
-	Startup="App_OnStartup">
-	<Application.Resources>
-		<ResourceDictionary>
-			<!--<ResourceDictionary.MergedDictionaries>
+    x:Class="CustomModbusSlave.Es2gClimatic.CabinApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    ShutdownMode="OnMainWindowClose"
+    Startup="App_OnStartup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary
 					Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
 				<ResourceDictionary
@@ -19,6 +19,6 @@
 				<ResourceDictionary
 					Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
 			</ResourceDictionary.MergedDictionaries>-->
-		</ResourceDictionary>
-	</Application.Resources>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

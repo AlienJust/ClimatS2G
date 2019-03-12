@@ -20,120 +20,137 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using MahApps.Metro;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
-	public partial class App : Application {
-		protected override void OnStartup(StartupEventArgs e) {
-			// get the current app style (theme and accent) from the application
-			// you can then use the current theme and custom accent instead set a new theme
-			Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
+namespace CustomModbusSlave.Es2gClimatic.CabinApp
+{
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
+    {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            // get the current app style (theme and accent) from the application
+            // you can then use the current theme and custom accent instead set a new theme
+            Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
 
-			// now set the Green accent and dark theme
-			ThemeManager.ChangeAppStyle(Application.Current,
-				ThemeManager.GetAccent("Green"),
-				//ThemeManager.GetAppTheme("BaseDark")); // or appStyle.Item1
-				ThemeManager.GetAppTheme("BaseLight")); // or appStyle.Item1
+            // now set the Green accent and dark theme
+            ThemeManager.ChangeAppStyle(Application.Current,
+                ThemeManager.GetAccent("Green"),
+                //ThemeManager.GetAppTheme("BaseDark")); // or appStyle.Item1
+                ThemeManager.GetAppTheme("BaseLight")); // or appStyle.Item1
 
-			base.OnStartup(e);
-		}
+            base.OnStartup(e);
+        }
 
-		private void App_OnStartup(object sender, StartupEventArgs e) {
-			var appFactory = new AppFactory("psn.S2G-climatic-cabin.xml");
-			var appAbilities = appFactory.Abilities;
+        private void App_OnStartup(object sender, StartupEventArgs e)
+        {
+            var appFactory = new AppFactory("psn.S2G-climatic-cabin.xml");
+            var appAbilities = appFactory.Abilities;
 
-			var cmdListenerMukFlapAirReply03 = new CmdListenerMukFlapAirReply03(2, 3, 39);
-			var cmdListenerMukFlapAirRequest16 = new CmdListenerMukFlapAirRequest16(2, 16, 21);
+            var cmdListenerMukFlapAirReply03 = new CmdListenerMukFlapAirReply03(2, 3, 39);
+            var cmdListenerMukFlapAirRequest16 = new CmdListenerMukFlapAirRequest16(2, 16, 21);
 
-			var cmdListenerMukVaporizerReply03 = new CmdListenerMukVaporizerReply03(3, 3, 41);
-			var cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
+            var cmdListenerMukVaporizerReply03 = new CmdListenerMukVaporizerReply03(3, 3, 41);
+            var cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
 
-			var cmdListenerMukWarmFloorReply03 = new CmdListenerMukWarmFloorReply03(5, 3, 31);
-			var cmdListenerMukWarmFloorRequest16 = new CmdListenerMukWarmFloorRequest16(5, 16, 21);
+            var cmdListenerMukWarmFloorReply03 = new CmdListenerMukWarmFloorReply03(5, 3, 31);
+            var cmdListenerMukWarmFloorRequest16 = new CmdListenerMukWarmFloorRequest16(5, 16, 21);
 
-			var cmdListenerBsSmRequest32 = new CmdListenerBsSmRequest32(6,32,21);
-			var cmdListenerBsSmReply32 = new CmdListenerBsSmReply32(6, 32, 20);
+            var cmdListenerBsSmRequest32 = new CmdListenerBsSmRequest32(6, 32, 21);
+            var cmdListenerBsSmReply32 = new CmdListenerBsSmReply32(6, 32, 20);
 
-			var cmdListenerBvsReply65 = new CmdListenerBvsReply65(0x1E, 65, 7);
-			var cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
+            var cmdListenerBvsReply65 = new CmdListenerBvsReply65(0x1E, 65, 7);
+            var cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
 
-			appAbilities.CmdNotifierStd.AddListener(cmdListenerMukFlapAirReply03);
-			appAbilities.CmdNotifierStd.AddListener(cmdListenerMukFlapAirRequest16);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerMukFlapAirReply03);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerMukFlapAirRequest16);
 
-			appAbilities.CmdNotifierStd.AddListener(cmdListenerMukVaporizerReply03);
-			appAbilities.CmdNotifierStd.AddListener(cmdListenerMukVaporizerRequest16);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerMukVaporizerReply03);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerMukVaporizerRequest16);
 
-			appAbilities.CmdNotifierStd.AddListener(cmdListenerMukWarmFloorReply03);
-			appAbilities.CmdNotifierStd.AddListener(cmdListenerMukWarmFloorRequest16);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerMukWarmFloorReply03);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerMukWarmFloorRequest16);
 
-			appAbilities.CmdNotifierStd.AddListener(cmdListenerBsSmRequest32);
-			appAbilities.CmdNotifierStd.AddListener(cmdListenerBsSmReply32);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerBsSmRequest32);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerBsSmReply32);
 
-			appAbilities.CmdNotifierStd.AddListener(cmdListenerBvsReply65);
-			appAbilities.CmdNotifierStd.AddListener(cmdListenerKsm50Params);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerBvsReply65);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerKsm50Params);
 
 
-			appFactory.ShowMainWindowInOwnThread("Технический абонент, кабина", appAbilities, mainVm => {
-				var channel = mainVm.AddChannel("Single channel");
-				//var channel1 = mainVm.AddChannel("Single 2 channel");
-				mainVm.AddTab(new TabItemViewModel {
-					FullHeader = "Диагностика системы",
-					ShortHeader = "ДС"
-					, Content = new SystemDiagnosticView { DataContext = new SystemDiagCabinViewModel(appAbilities.Version == AppVersion.Full, appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full, appAbilities.IsHourCountersVisible, mainVm.Notifier, cmdListenerMukFlapAirReply03, cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16, cmdListenerMukWarmFloorReply03, cmdListenerBsSmRequest32, cmdListenerBsSmReply32, cmdListenerKsm50Params, cmdListenerBvsReply65) } });
+            appFactory.ShowMainWindowInOwnThread("Технический абонент, кабина", appAbilities, mainVm =>
+            {
+                var channel = mainVm.AddChannel("Single channel");
+                //var channel1 = mainVm.AddChannel("Single 2 channel");
+                mainVm.AddTab(new TabItemViewModel
+                {
+                    FullHeader = "Диагностика системы",
+                    ShortHeader = "ДС", Content = new SystemDiagnosticView {DataContext = new SystemDiagCabinViewModel(appAbilities.Version == AppVersion.Full, appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full, appAbilities.IsHourCountersVisible, mainVm.Notifier, cmdListenerMukFlapAirReply03, cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16, cmdListenerMukWarmFloorReply03, cmdListenerBsSmRequest32, cmdListenerBsSmReply32, cmdListenerKsm50Params, cmdListenerBvsReply65)}
+                });
 
-				mainVm.AddTab(new TabItemViewModel {
-					FullHeader = "МУК заслонки",
-					ShortHeader = "МУК 2",
-					Content = new MukFlapDataView { DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapAirReply03, cmdListenerMukFlapAirRequest16) }
-				});
+                mainVm.AddTab(new TabItemViewModel
+                {
+                    FullHeader = "МУК заслонки",
+                    ShortHeader = "МУК 2",
+                    Content = new MukFlapDataView {DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapAirReply03, cmdListenerMukFlapAirRequest16)}
+                });
 
-				mainVm.AddTab(new TabItemViewModel {
-					FullHeader = "МУК вентилятора испарителя",
-					ShortHeader = "МУК 3",
-					Content = new MukVaporizerFanDataView {
-						DataContext = new MukVaporizerFanDataViewModelParamcentric(
-							mainVm.Notifier, channel.Channel.ParamSetter,
-							appAbilities.RtuParamReceiver,
-							cmdListenerMukVaporizerReply03,
-							cmdListenerMukVaporizerRequest16
-						)
-					}
-				});
-				mainVm.AddTab(new TabItemViewModel {
-					FullHeader = "МУК тёплого пола",
-					ShortHeader = "МУК 5",
-					Content = new MukWarmFloorDataView {
-						DataContext = new MukWarmFloorDataViewModel(
-							mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukWarmFloorReply03, cmdListenerMukWarmFloorRequest16)
-					}
-				});
+                mainVm.AddTab(new TabItemViewModel
+                {
+                    FullHeader = "МУК вентилятора испарителя",
+                    ShortHeader = "МУК 3",
+                    Content = new MukVaporizerFanDataView
+                    {
+                        DataContext = new MukVaporizerFanDataViewModelParamcentric(
+                            mainVm.Notifier, channel.Channel.ParamSetter,
+                            appAbilities.RtuParamReceiver,
+                            cmdListenerMukVaporizerReply03,
+                            cmdListenerMukVaporizerRequest16
+                        )
+                    }
+                });
+                mainVm.AddTab(new TabItemViewModel
+                {
+                    FullHeader = "МУК тёплого пола",
+                    ShortHeader = "МУК 5",
+                    Content = new MukWarmFloorDataView
+                    {
+                        DataContext = new MukWarmFloorDataViewModel(
+                            mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukWarmFloorReply03, cmdListenerMukWarmFloorRequest16)
+                    }
+                });
 
-				mainVm.AddTab(new TabItemViewModel {
-					FullHeader = "БС-СМ",
-					ShortHeader = "БС-СМ",
-					Content = new BsSmDataView {
-						DataContext = new BsSmDataViewModel(
-							mainVm.Notifier, cmdListenerBsSmRequest32, cmdListenerBsSmReply32)
-					}
-				});
+                mainVm.AddTab(new TabItemViewModel
+                {
+                    FullHeader = "БС-СМ",
+                    ShortHeader = "БС-СМ",
+                    Content = new BsSmDataView
+                    {
+                        DataContext = new BsSmDataViewModel(
+                            mainVm.Notifier, cmdListenerBsSmRequest32, cmdListenerBsSmReply32)
+                    }
+                });
 
-				mainVm.AddTab(new TabItemViewModel {
-					FullHeader = "БВС",
-					ShortHeader = "БВС",
-					Content = new BvsDataView {
-						DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvsReply65)
-					}
-				});
+                mainVm.AddTab(new TabItemViewModel
+                {
+                    FullHeader = "БВС",
+                    ShortHeader = "БВС",
+                    Content = new BvsDataView
+                    {
+                        DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvsReply65)
+                    }
+                });
 
-				mainVm.AddTab(new TabItemViewModel {
-					FullHeader = "КСМ",
-					ShortHeader = "КСМ",
-					Content = new KsmDataView {
-						DataContext = new KsmDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerKsm50Params)
-					}
-				});
-			});
-		}
-	}
+                mainVm.AddTab(new TabItemViewModel
+                {
+                    FullHeader = "КСМ",
+                    ShortHeader = "КСМ",
+                    Content = new KsmDataView
+                    {
+                        DataContext = new KsmDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerKsm50Params)
+                    }
+                });
+            });
+        }
+    }
 }
