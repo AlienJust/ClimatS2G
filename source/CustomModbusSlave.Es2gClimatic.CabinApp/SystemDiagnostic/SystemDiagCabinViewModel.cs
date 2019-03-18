@@ -44,9 +44,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         private readonly IThreadNotifier _uiNotifier;
         private readonly ICmdListener<IMukFlapAirReply03Telemetry> _cmdListenerMukFlapAirReply03;
         private readonly ICmdListener<IMukFanVaporizerDataReply03> _cmdListenerMukVaporizerReply03;
-
         private readonly ICmdListener<IMukFanVaporizerDataRequest16> _cmdListenerMukVaporizerRequest16;
-
         private readonly ICmdListener<IMukWarmFloorReply03Data> _cmdListenerMukWarmFloorReply03;
 
         private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm;
@@ -62,15 +60,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         private string _mukInfo3;
         private Colors _mukInfoColor3;
 
-        private string _mukInfo4;
-        private Colors _mukInfoColor4;
-
         private string _mukInfo5;
         private Colors _mukInfoColor5;
 
 
-        private string _bsSiInfo;
-        private Colors _bsSiInfoColor;
+        private string _bsSmInfo;
+        private Colors _bsSmInfoColor;
 
         private string _bvsInfo;
         private Colors _bvsInfoColor;
@@ -122,38 +117,16 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         private string _emersonTemperature2;
         private Colors _emersonTemperature2Color;
 
-        private string _condensorPressure1;
-        private Colors _condensorPressure1Color;
-
-        private string _condensorPressure2;
-        private Colors _condensorPressure2Color;
-
         private string _flapAirOuterDiagInfo5;
         private Colors _flapAirOuterDiagInfo5Color;
         private string _flapAirOuterDiagInfo6;
         private Colors _flapAirOuterDiagInfo6Color;
 
-        private string _flapAirRecycleDiagInfo5;
-        private Colors _flapAirRecycleDiagInfo5Color;
-        private string _flapAirRecycleDiagInfo6;
-        private Colors _flapAirRecycleDiagInfo6Color;
-
-        private string _flapAirWinterSummerDiagInfo5;
-        private Colors _flapAirWinterSummerDiagInfo5Color;
-        private string _flapAirWinterSummerDiagInfo6;
-        private Colors _flapAirWinterSummerDiagInfo6Color;
-
-        private Colors _fanEvaporatorColor;
-        private string _fanAirExhausterInfo;
-
-        private Colors _fanAirExhausterColor;
         private string _fanEvaporatorInfo;
-
-        private Colors _fanCondensorColor;
-        private string _fanCondensorInfo;
-
-        private Colors _сoncentratorAdvancedColor;
-        private string _concentratorAdvancedInfo;
+        private Colors _fanEvaporatorColor;
+        
+        private string _mukWarmFloorPwm;
+        private Colors _mukWarmFloorPwmColor;
 
         private string _calculatedTemperatureSetting;
 
@@ -206,7 +179,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             _cmdListenerMukVaporizerRequest16.DataReceived += CmdListenerMukVaporizerRequest16DataReceived;
             _cmdListenerMukWarmFloorReply03.DataReceived += CmdListenerMukWarmFloorReply03OnDataReceived;
             _cmdListenerKsm.DataReceived += CmdListenerKsmOnDataReceived;
-
             _cmdListenerBvs1Reply65.DataReceived += CmdListenerBvs1Reply65OnDataReceived;
 
             ResetVmPropsToDefaultValues();
@@ -391,7 +363,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                 MukInfo5 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareVersion) : OkLinkText;
                 MukInfoColor5 = OkLinkColor;
 
-                FanAirExhausterInfo = data.PwmHeat.ToString(CultureInfo.InvariantCulture); // TODO
+                MukWarmFloorPwm = data.PwmHeat.ToString(CultureInfo.InvariantCulture); // TODO
+                MukWarmFloorPwmColor = OkLinkColor;
             });
         }
 
@@ -404,7 +377,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                 WorkStage = new TextFormatterWorkStage().Format(data[8]);
 
                 // КСМ, бит "Нет связи с МУК заслонки наружного воздуха" взведен
-                if (data[22].HighFirstUnsignedValue.GetBit(0))
+                if (data[16].HighFirstUnsignedValue.GetBit(0))
                 {
                     MukInfo2 = NoLinkText;
                     MukInfoColor2 = NoLinkColor;
@@ -421,7 +394,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                 }
 
                 // КСМ, бит "Нет связи с МУК вентилятора испарителя" взведен
-                if (data[22].HighFirstUnsignedValue.GetBit(2))
+                if (data[16].HighFirstUnsignedValue.GetBit(2))
                 {
                     MukInfo3 = NoLinkText;
                     MukInfoColor3 = NoLinkColor;
@@ -439,56 +412,40 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     SensorSupplyAirInfoColor = NoLinkColor;
 
                     FanEvaporatorInfo = NoLinkText;
+                    FanEvaporatorColor = NoLinkColor;
 
                     CalculatedTemperatureSetting = NoLinkText;
                 }
 
-                if (data[22].HighFirstUnsignedValue.GetBit(4))
-                {
-                    MukInfo4 = NoLinkText;
-                    MukInfoColor4 = NoLinkColor;
-                }
-
-                // КСМ, бит "Нет связи с МУК вытяжного вентилятора" взведен
-                if (data[22].HighFirstUnsignedValue.GetBit(6))
+                // КСМ, бит "Нет связи с МУК тёплого " взведен
+                if (data[16].HighFirstUnsignedValue.GetBit(6))
                 {
                     MukInfo5 = NoLinkText;
                     MukInfoColor5 = NoLinkColor;
 
-                    FanAirExhausterInfo = NoLinkText;
+                    MukWarmFloorPwm = NoLinkText;
+                    MukWarmFloorPwmColor = NoLinkColor;
+                }
+                else
+                {
+                    //MukInfo5 = OkLinkText;
+                    MukInfoColor5 = OkLinkColor;
                 }
 
-                // КСМ, бит "Нет связи с МУК заслонки рециркуляционого воздуха" взведен
-                if (data[23].HighFirstUnsignedValue.GetBit(0))
+
+                if (data[17].HighFirstUnsignedValue.GetBit(0))
                 {
-                    FlapAirRecycleDiagInfo5Color = NoLinkColor;
-                    FlapAirRecycleDiagInfo5 = NoLinkText;
-
-                    FlapAirRecycleDiagInfo6Color = NoLinkColor;
-                    FlapAirRecycleDiagInfo6 = NoLinkText;
-
-                    ConcentratorInfoColor = NoLinkColor;
-                    ConcentratorInfo = NoLinkText;
-                }
-
-                // КСМ, бит "Нет связи с МУК заслонки лето-зима" взведен
-                if (data[23].HighFirstUnsignedValue.GetBit(2))
-                {
-                    FlapAirWinterSummerDiagInfo5Color = NoLinkColor;
-                    FlapAirWinterSummerDiagInfo5 = NoLinkText;
-
-                    FlapAirWinterSummerDiagInfo6Color = NoLinkColor;
-                    FlapAirWinterSummerDiagInfo6 = NoLinkText;
-                }
-
-                if (data[23].HighFirstUnsignedValue.GetBit(4))
-                {
-                    BsSiInfo = NoLinkText;
-                    BsSiInfoColor = NoLinkColor;
+                    BsSmInfo = NoLinkText;
+                    BsSmInfoColor = NoLinkColor;
                     Voltage3000Color = UnknownColor;
                 }
+                else
+                {
+                    BsSmInfo = OkLinkText;
+                    BsSmInfoColor = OkLinkColor;
+                }
 
-                if (data[23].HighFirstUnsignedValue.GetBit(5))
+                if (data[17].HighFirstUnsignedValue.GetBit(1))
                 {
                     BvsInfo = NoLinkText;
                     BvsInfoColor = NoLinkColor;
@@ -632,33 +589,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         }
 
 
-        public string MukInfo4
-        {
-            get => _mukInfo4;
-            set
-            {
-                if (_mukInfo4 != value)
-                {
-                    _mukInfo4 = value;
-                    RaisePropertyChanged(() => MukInfo4);
-                }
-            }
-        }
-
-        public Colors MukInfoColor4
-        {
-            get => _mukInfoColor4;
-            set
-            {
-                if (_mukInfoColor4 != value)
-                {
-                    _mukInfoColor4 = value;
-                    RaisePropertyChanged(() => MukInfoColor4);
-                }
-            }
-        }
-
-
         public string MukInfo5
         {
             get => _mukInfo5;
@@ -685,28 +615,28 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             }
         }
 
-        public string BsSiInfo
+        public string BsSmInfo
         {
-            get => _bsSiInfo;
+            get => _bsSmInfo;
             set
             {
-                if (_bsSiInfo != value)
+                if (_bsSmInfo != value)
                 {
-                    _bsSiInfo = value;
-                    RaisePropertyChanged(() => BsSiInfo);
+                    _bsSmInfo = value;
+                    RaisePropertyChanged(() => BsSmInfo);
                 }
             }
         }
 
-        public Colors BsSiInfoColor
+        public Colors BsSmInfoColor
         {
-            get => _bsSiInfoColor;
+            get => _bsSmInfoColor;
             set
             {
-                if (_bsSiInfoColor != value)
+                if (_bsSmInfoColor != value)
                 {
-                    _bsSiInfoColor = value;
-                    RaisePropertyChanged(() => BsSiInfoColor);
+                    _bsSmInfoColor = value;
+                    RaisePropertyChanged(() => BsSmInfoColor);
                 }
             }
         }
@@ -1115,59 +1045,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         }
 
 
-        public string CondensorPressure1
-        {
-            get => _condensorPressure1;
-            set
-            {
-                if (_condensorPressure1 != value)
-                {
-                    _condensorPressure1 = value;
-                    RaisePropertyChanged(() => CondensorPressure1);
-                }
-            }
-        }
-
-        public Colors CondensorPressure1Color
-        {
-            get => _condensorPressure1Color;
-            set
-            {
-                if (_condensorPressure1Color != value)
-                {
-                    _condensorPressure1Color = value;
-                    RaisePropertyChanged(() => CondensorPressure1Color);
-                }
-            }
-        }
-
-
-        public string CondensorPressure2
-        {
-            get => _condensorPressure2;
-            set
-            {
-                if (_condensorPressure2 != value)
-                {
-                    _condensorPressure2 = value;
-                    RaisePropertyChanged(() => CondensorPressure2);
-                }
-            }
-        }
-
-        public Colors CondensorPressure2Color
-        {
-            get => _condensorPressure2Color;
-            set
-            {
-                if (_condensorPressure2Color != value)
-                {
-                    _condensorPressure2Color = value;
-                    RaisePropertyChanged(() => CondensorPressure2Color);
-                }
-            }
-        }
-
 
         public string FlapAirOuterDiagInfo5
         {
@@ -1222,133 +1099,28 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         }
 
 
-        public string FlapAirRecycleDiagInfo5
+        public Colors MukWarmFloorPwmColor
         {
-            get => _flapAirRecycleDiagInfo5;
+            get => _mukWarmFloorPwmColor;
             set
             {
-                if (_flapAirRecycleDiagInfo5 != value)
+                if (_mukWarmFloorPwmColor != value)
                 {
-                    _flapAirRecycleDiagInfo5 = value;
-                    RaisePropertyChanged(() => FlapAirRecycleDiagInfo5);
+                    _mukWarmFloorPwmColor = value;
+                    RaisePropertyChanged(() => MukWarmFloorPwmColor);
                 }
             }
         }
 
-        public Colors FlapAirRecycleDiagInfo5Color
+        public string MukWarmFloorPwm
         {
-            get => _flapAirRecycleDiagInfo5Color;
+            get => _mukWarmFloorPwm;
             set
             {
-                if (_flapAirRecycleDiagInfo5Color != value)
+                if (_mukWarmFloorPwm != value)
                 {
-                    _flapAirRecycleDiagInfo5Color = value;
-                    RaisePropertyChanged(() => FlapAirRecycleDiagInfo5Color);
-                }
-            }
-        }
-
-        public string FlapAirRecycleDiagInfo6
-        {
-            get => _flapAirRecycleDiagInfo6;
-            set
-            {
-                if (_flapAirRecycleDiagInfo6 != value)
-                {
-                    _flapAirRecycleDiagInfo6 = value;
-                    RaisePropertyChanged(() => FlapAirRecycleDiagInfo6);
-                }
-            }
-        }
-
-        public Colors FlapAirRecycleDiagInfo6Color
-        {
-            get => _flapAirRecycleDiagInfo6Color;
-            set
-            {
-                if (_flapAirRecycleDiagInfo6Color != value)
-                {
-                    _flapAirRecycleDiagInfo6Color = value;
-                    RaisePropertyChanged(() => FlapAirRecycleDiagInfo6Color);
-                }
-            }
-        }
-
-
-        public string FlapAirWinterSummerDiagInfo5
-        {
-            get => _flapAirWinterSummerDiagInfo5;
-            set
-            {
-                if (_flapAirWinterSummerDiagInfo5 != value)
-                {
-                    _flapAirWinterSummerDiagInfo5 = value;
-                    RaisePropertyChanged(() => FlapAirWinterSummerDiagInfo5);
-                }
-            }
-        }
-
-        public Colors FlapAirWinterSummerDiagInfo5Color
-        {
-            get => _flapAirWinterSummerDiagInfo5Color;
-            set
-            {
-                if (_flapAirWinterSummerDiagInfo5Color != value)
-                {
-                    _flapAirWinterSummerDiagInfo5Color = value;
-                    RaisePropertyChanged(() => FlapAirWinterSummerDiagInfo5Color);
-                }
-            }
-        }
-
-        public string FlapAirWinterSummerDiagInfo6
-        {
-            get => _flapAirWinterSummerDiagInfo6;
-            set
-            {
-                if (_flapAirWinterSummerDiagInfo6 != value)
-                {
-                    _flapAirWinterSummerDiagInfo6 = value;
-                    RaisePropertyChanged(() => FlapAirWinterSummerDiagInfo6);
-                }
-            }
-        }
-
-        public Colors FlapAirWinterSummerDiagInfo6Color
-        {
-            get => _flapAirWinterSummerDiagInfo6Color;
-            set
-            {
-                if (_flapAirWinterSummerDiagInfo6Color != value)
-                {
-                    _flapAirWinterSummerDiagInfo6Color = value;
-                    RaisePropertyChanged(() => FlapAirWinterSummerDiagInfo6Color);
-                }
-            }
-        }
-
-        public Colors FanAirExhausterColor
-        {
-            get => _fanAirExhausterColor;
-            set
-            {
-                if (_fanAirExhausterColor != value)
-                {
-                    _fanAirExhausterColor = value;
-                    RaisePropertyChanged(() => FanAirExhausterColor);
-                }
-            }
-        }
-
-        public string FanAirExhausterInfo
-        {
-            get => _fanAirExhausterInfo;
-            set
-            {
-                if (_fanAirExhausterInfo != value)
-                {
-                    _fanAirExhausterInfo = value;
-                    RaisePropertyChanged(() => FanAirExhausterInfo);
+                    _mukWarmFloorPwm = value;
+                    RaisePropertyChanged(() => MukWarmFloorPwm);
                 }
             }
         }
@@ -1379,58 +1151,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             }
         }
 
-        public Colors FanCondensorColor
-        {
-            get => _fanCondensorColor;
-            set
-            {
-                if (_fanCondensorColor != value)
-                {
-                    _fanCondensorColor = value;
-                    RaisePropertyChanged(() => FanCondensorColor);
-                }
-            }
-        }
-
-        public string FanCondensorInfo
-        {
-            get => _fanCondensorInfo;
-            set
-            {
-                if (_fanCondensorInfo != value)
-                {
-                    _fanCondensorInfo = value;
-                    RaisePropertyChanged(() => FanCondensorInfo);
-                }
-            }
-        }
-
-        public Colors ConcentratorAdvancedColor
-        {
-            get => _сoncentratorAdvancedColor;
-            set
-            {
-                if (_сoncentratorAdvancedColor != value)
-                {
-                    _сoncentratorAdvancedColor = value;
-                    RaisePropertyChanged(() => ConcentratorAdvancedColor);
-                }
-            }
-        }
-
-        public string ConcentratorAdvancedInfo
-        {
-            get => _concentratorAdvancedInfo;
-            set
-            {
-                if (_concentratorAdvancedInfo != value)
-                {
-                    _concentratorAdvancedInfo = value;
-                    RaisePropertyChanged(() => ConcentratorAdvancedInfo);
-                }
-            }
-        }
-
         public string CalculatedTemperatureSetting
         {
             get => _calculatedTemperatureSetting;
@@ -1455,14 +1175,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             MukInfo3 = UnknownText;
             MukInfoColor3 = UnknownColor;
 
-            MukInfo4 = UnknownText;
-            MukInfoColor4 = UnknownColor;
-
             MukInfo5 = UnknownText;
             MukInfoColor5 = UnknownColor;
 
-            BsSiInfo = UnknownText;
-            BsSiInfoColor = UnknownColor;
+            BsSmInfo = UnknownText;
+            BsSmInfoColor = UnknownColor;
 
             BvsInfo = UnknownText;
             BvsInfoColor = UnknownColor;
@@ -1507,37 +1224,16 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             EmersonTemperature2 = UnknownText;
             EmersonTemperature2Color = UnknownColor;
 
-            CondensorPressure1 = UnknownText;
-            CondensorPressure1Color = UnknownColor;
-            CondensorPressure2 = UnknownText;
-            CondensorPressure2Color = UnknownColor;
-
             FlapAirOuterDiagInfo5 = UnknownText;
             FlapAirOuterDiagInfo5Color = UnknownColor;
             FlapAirOuterDiagInfo6 = UnknownText;
             FlapAirOuterDiagInfo6Color = UnknownColor;
 
-            FlapAirRecycleDiagInfo5 = UnknownText;
-            FlapAirRecycleDiagInfo5Color = UnknownColor;
-            FlapAirRecycleDiagInfo6 = UnknownText;
-            FlapAirRecycleDiagInfo6Color = UnknownColor;
-
-            FlapAirWinterSummerDiagInfo5 = UnknownText;
-            FlapAirWinterSummerDiagInfo5Color = UnknownColor;
-            FlapAirWinterSummerDiagInfo6 = UnknownText;
-            FlapAirWinterSummerDiagInfo6Color = UnknownColor;
-
-            FanAirExhausterInfo = UnknownText;
-            FanAirExhausterColor = UnknownColor;
+            MukWarmFloorPwm = UnknownText;
+            MukWarmFloorPwmColor = UnknownColor;
 
             FanEvaporatorInfo = UnknownText;
             FanEvaporatorColor = UnknownColor;
-
-            FanCondensorInfo = UnknownText;
-            FanCondensorColor = UnknownColor;
-
-            ConcentratorAdvancedInfo = UnknownText;
-            ConcentratorAdvancedColor = UnknownColor;
 
             CalculatedTemperatureSetting = UnknownText;
         }

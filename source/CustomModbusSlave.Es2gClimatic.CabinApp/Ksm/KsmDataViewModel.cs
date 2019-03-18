@@ -141,7 +141,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm
             {
                 for (int i = 0; i < _parameterVmList.Count; ++i)
                 {
-                    _parameterVmList[i].ReceivedBytesValue = data[i]; //(ushort)(bytes[7 + i * 2] * 256.0 + bytes[8 + i * 2]));
+                    _parameterVmList[i].ReceivedBytesValue = data[i];
                 }
 
                 DataAsText.Update(bytes);
