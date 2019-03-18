@@ -1,4 +1,4 @@
-﻿namespace ParamCentric.Common.Contracts {
-	public interface IParameter : IGroupItem {
-	}
+﻿namespace ParamCentric.Common.Contracts
+{
+    public interface IParameter : IGroupItem { }
 }

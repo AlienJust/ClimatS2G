@@ -1,5 +1,7 @@
-﻿namespace ParamCentric.Modbus.Contracts {
-	public interface IReceiverModbusRtu {
-		void RegisterParamToReceive(IReceivableModbusRtuParameter parameter);
-	}
+﻿namespace ParamCentric.Modbus.Contracts
+{
+    public interface IReceiverModbusRtu
+    {
+        void RegisterParamToReceive(IReceivableModbusRtuParameter parameter);
+    }
 }

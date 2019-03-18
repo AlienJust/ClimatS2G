@@ -81,18 +81,34 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
             appFactory.ShowMainWindowInOwnThread("Технический абонент, кабина", appAbilities, mainVm =>
             {
                 var channel = mainVm.AddChannel("Single channel");
-                //var channel1 = mainVm.AddChannel("Single 2 channel");
                 mainVm.AddTab(new TabItemViewModel
                 {
                     FullHeader = "Диагностика системы",
-                    ShortHeader = "ДС", Content = new SystemDiagnosticView {DataContext = new SystemDiagCabinViewModel(appAbilities.Version == AppVersion.Full, appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full, appAbilities.IsHourCountersVisible, mainVm.Notifier, cmdListenerMukFlapAirReply03, cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16, cmdListenerMukWarmFloorReply03, cmdListenerBsSmRequest32, cmdListenerBsSmReply32, cmdListenerKsm50Params, cmdListenerBvsReply65)}
+                    ShortHeader = "ДС",
+                    Content = new SystemDiagnosticView
+                    {
+                        DataContext = new SystemDiagCabinViewModel(
+                            appAbilities.Version == AppVersion.Full,
+                            appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full,
+                            appAbilities.IsHourCountersVisible, mainVm.Notifier, cmdListenerMukFlapAirReply03,
+                            cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16,
+                            cmdListenerMukWarmFloorReply03, 
+                            cmdListenerKsm50Params, 
+                            cmdListenerBsSmRequest32,
+                            cmdListenerBsSmReply32,
+                            cmdListenerBvsReply65)
+                    }
                 });
 
                 mainVm.AddTab(new TabItemViewModel
                 {
                     FullHeader = "МУК заслонки",
                     ShortHeader = "МУК 2",
-                    Content = new MukFlapDataView {DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukFlapAirReply03, cmdListenerMukFlapAirRequest16)}
+                    Content = new MukFlapDataView
+                    {
+                        DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter,
+                            cmdListenerMukFlapAirReply03, cmdListenerMukFlapAirRequest16)
+                    }
                 });
 
                 mainVm.AddTab(new TabItemViewModel
