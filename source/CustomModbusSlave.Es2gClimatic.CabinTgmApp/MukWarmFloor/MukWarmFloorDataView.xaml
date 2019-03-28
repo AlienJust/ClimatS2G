@@ -1,0 +1,34 @@
+﻿<UserControl
+	x:Class="CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.MukWarmFloorDataView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:shared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+	xmlns:setParameters="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.SetParameters"
+	xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03"
+	xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Request16"
+	mc:Ignorable="d"
+	d:DesignHeight="600"
+	d:DesignWidth="300">
+	<StackPanel
+		Orientation="Vertical">
+		<TextBlock
+			Text="Ответ от МУК на команду КСМ с кодом 03:"
+			FontWeight="Bold" TextDecorations="Underline"  />
+		<reply03:MukWarmFloorReply03View DataContext="{Binding Path=Reply03}"/>
+		<shared:AnyCommandPartView
+			DataContext="{Binding Path=Reply03BytesTextVm, Mode=OneTime}" />
+		<TextBlock
+			Text="Запрос от КСМ, код 16 (dec):"
+			FontWeight="Bold" TextDecorations="Underline"/>
+		<request16:MukWarmFloorRequest16View
+			DataContext="{Binding Path=Request16, Mode=OneWay}" />
+		
+		<shared:AnyCommandPartView
+			DataContext="{Binding Path=Request16BytesTextVm, Mode=OneTime}" />
+		
+		<setParameters:MukWarmFloorSetParamsView
+			DataContext="{Binding Path=MukWarmFloorSetParamsVm, Mode=OneTime}" />
+	</StackPanel>
+</UserControl>

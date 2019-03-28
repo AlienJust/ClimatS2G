@@ -1,7 +1,6 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28721.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave", "CustomModbusSlave\CustomModbusSlave.csproj", "{9244D783-9410-4026-B3EF-49435F79A74A}"
 EndProject
@@ -24,6 +23,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbus.Slave.FastReply.Queued", "CustomModbus.Slave.FastReply.Queued\CustomModbus.Slave.FastReply.Queued.csproj", "{19373346-E61B-42D4-9A4C-7923DCE6E3FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamControls", "ParamControls\ParamControls.csproj", "{6286A75B-9E7D-43D5-A173-1DE721E0E959}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClimatic.CabinTgmApp", "CustomModbusSlave.Es2gClimatic.CabinTgmApp\CustomModbusSlave.Es2gClimatic.CabinTgmApp.csproj", "{2E521F3F-005F-446A-974A-7081AC9B0549}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +76,10 @@ Global
 		{6286A75B-9E7D-43D5-A173-1DE721E0E959}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6286A75B-9E7D-43D5-A173-1DE721E0E959}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6286A75B-9E7D-43D5-A173-1DE721E0E959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E521F3F-005F-446A-974A-7081AC9B0549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E521F3F-005F-446A-974A-7081AC9B0549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E521F3F-005F-446A-974A-7081AC9B0549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E521F3F-005F-446A-974A-7081AC9B0549}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

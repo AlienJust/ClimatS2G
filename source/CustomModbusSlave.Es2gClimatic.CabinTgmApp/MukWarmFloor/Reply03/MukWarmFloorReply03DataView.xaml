@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03.MukWarmFloorReply03View" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:paramControls="clr-namespace:ParamControls;assembly=ParamControls" xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03" mc:Ignorable="d" d:DesignHeight="190" d:DesignWidth="300">
+	<UserControl.Resources>
+		<reply03:MukWarmFloorAutomaticModeToStringValueConverter x:Key="AutomaticModeToStringValueConverter" />
+	</UserControl.Resources>
+	<StackPanel Orientation="Vertical">
+		<!--<paramControls:ParamSimple Text="ШИМ обогрев" Value="123" ValueForeground="{DynamicResource BlackBrush}" TextColumnWidth="*"/>-->
+		<paramControls:ParamSimple Text="ШИМ обогрев" Value="{Binding Path=PwmHeat, Mode=OneTime}" ValueForeground="{DynamicResource BlackBrush}" TextColumnWidth="*"/>
+		<paramControls:ParamSimple Text="Аналоговый вход (Температура ЦМР = 1 градус)" Value="{Binding Path=AnalogueInput, Mode=OneTime}" ValueForeground="{DynamicResource BlackBrush}" TextColumnWidth="*"/>
+		<paramControls:ParamSimple Text="Режим работы регулятора температуры" Value="{Binding Path=TemperatureRegulatorWorkMode, Mode=OneTime, StringFormat=f2}" ValueForeground="{DynamicResource BlackBrush}" TextColumnWidth="*"/>
+		<paramControls:ParamSimple Text="Байт входных сигналов" Value="{Binding Path=ByteOfIncomingSignals, Mode=OneTime}" ValueForeground="{DynamicResource BlackBrush}" TextColumnWidth="*"/>
+		<paramControls:ParamSimple Text="Байт выходных сигналов" Value="{Binding Path=ByteOfOutgoingSignals, Mode=OneTime}" ValueForeground="{DynamicResource BlackBrush}" TextColumnWidth="*"/>
+		<paramControls:ParamRawAndConverted Text="Этап работы в автоматическом режиме" RawValue="{Binding Path=AutomaticModeStage.RawValue, Mode=OneTime}" ConvertedValue="{Binding Path=AutomaticModeStage.ConvertedValue, Mode=OneTime, Converter={StaticResource AutomaticModeToStringValueConverter}}" />
+		<paramControls:ParamSimple Text="Рассчитанная уставка температуры" Value="{Binding Path=CalculatedTemperatureSetting, Mode=OneTime, StringFormat=f2}" ValueForeground="{DynamicResource BlackBrush}" TextColumnWidth="*"/>
+		<paramControls:ParamSimple FontWeight="Bold" Text="Диагностика 1 (плата МУК, обмен)" Value="{Binding Path=MukWarmFloorDiagnostic1.RawValue, Mode=OneTime, StringFormat=X4}" ValueForeground="{DynamicResource BlackBrush}" TextColumnWidth="*"/>
+		<paramControls:ParamBool Text="Обрыв терморезистора" IsChecked="{Binding Path=MukWarmFloorDiagnostic1.ConvertedValue.ThermoResistorIsLost, Mode=OneTime}" />
+		<paramControls:ParamSimple FontWeight="Bold" Text="Диагностика 2 (датчик температуры АЦП)" Value="{Binding Path=MukWarmFloorDiagnostic2.RawValue, Mode=OneTime, StringFormat=X4}" ValueForeground="{DynamicResource BlackBrush}" TextColumnWidth="*"/>
+		<paramControls:ParamSimple Text="Номер версии ПО" Value="{Binding Path=FirmwareVersion, Mode=OneTime}" ValueForeground="{DynamicResource BlackBrush}" TextColumnWidth="*"/>
+	</StackPanel>
+</UserControl>

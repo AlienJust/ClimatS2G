@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16.Request16DataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:request161="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.MukFlap.Request16"
+             xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+	<UserControl.Resources>
+		<converters:BooleanToTextConverter
+			x:Key="BitRegistryBit0Converter"
+			TrueText="Салон" FalseText="Кабина"/>
+	</UserControl.Resources>
+	<StackPanel Orientation="Vertical">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="КСМ: команда-режим работы"/>
+			<request161:KsmCommandWorkmodeView Grid.Column="1" DataContext="{Binding Path=CurrentKsmCommandWorkmode, Mode=OneTime}" HorizontalAlignment="Right"/>
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="КСМ: наружная температура"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=OuterTemperature}" TextAlignment="Right"/>
+		</Grid>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="КСМ: температура в помещении"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=InnerTemperature}" TextAlignment="Right"/>
+		</Grid>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="КСМ: уровень вентилирования"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=FanSpeedLevel, Mode=OneTime}" TextAlignment="Right"/>
+		</Grid>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<TextBlock Text="Битовый регистр"/>
+			<TextBlock
+				Grid.Row="0" Grid.Column="1"
+				Text="{Binding Path=BitRegistry, Mode=OneTime}" TextAlignment="Right"/>
+			<TextBlock
+				Grid.Row="1"
+				Grid.Column="0"
+				Text="b0 – если 1 то салон, иначе кабина" />
+			<TextBlock
+				Grid.Row="1"
+				Grid.Column="1"
+				Text="{Binding Path=InteriorOrCabin, Mode=OneTime, Converter={StaticResource BitRegistryBit0Converter}}"
+				TextAlignment="Right" />
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Резерв"/>
+			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve22, Mode=OneTime}" TextAlignment="Right"/>
+		</Grid>
+	</StackPanel>
+</UserControl>
