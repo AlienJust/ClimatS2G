@@ -1,6 +1,6 @@
 ﻿using AlienJust.Support.ModelViewViewModel;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
+namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.SystemDiagnostic
 {
     class AutoViewModel : ViewModelBase
     {

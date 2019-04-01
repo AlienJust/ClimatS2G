@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic.SystemDiagnosticView"
+﻿<UserControl x:Class="CustomModbusSlave.Es2gClimatic.CabinTgmApp.SystemDiagnostic.SystemDiagnosticView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
-             xmlns:systemDiagnostic="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic"
+             xmlns:systemDiagnostic1="clr-namespace:CustomModbusSlave.Es2gClimatic.CabinTgmApp.SystemDiagnostic"
              mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="600">
     <UserControl.Resources>
         <converters:ColorsEnumToColorConverter x:Key="ColorConverter" />
@@ -404,26 +404,26 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Автоматы:" FontWeight="Bold" />
             <StackPanel Grid.Row="1" Grid.Column="0">
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm1, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm3, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm5, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm7, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm9, Mode=OneTime}" />
+                <systemDiagnostic1:AutoView DataContext="{Binding Path=AutoVm1, Mode=OneTime}" />
+                <systemDiagnostic1:AutoView DataContext="{Binding Path=AutoVm3, Mode=OneTime}" />
+                <systemDiagnostic1:AutoView DataContext="{Binding Path=AutoVm5, Mode=OneTime}" />
+                <systemDiagnostic1:AutoView DataContext="{Binding Path=AutoVm7, Mode=OneTime}" />
+                <systemDiagnostic1:AutoView DataContext="{Binding Path=AutoVm9, Mode=OneTime}" />
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm2, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm4, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm6, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm8, Mode=OneTime}" />
+                <systemDiagnostic1:AutoView DataContext="{Binding Path=AutoVm2, Mode=OneTime}" />
+                <systemDiagnostic1:AutoView DataContext="{Binding Path=AutoVm4, Mode=OneTime}" />
+                <systemDiagnostic1:AutoView DataContext="{Binding Path=AutoVm6, Mode=OneTime}" />
+                <systemDiagnostic1:AutoView DataContext="{Binding Path=AutoVm8, Mode=OneTime}" />
             </StackPanel>
         </Grid>
         <StackPanel>
             <TextBlock Text="Диагностика МПСУиД:" FontWeight="Bold" />
-            <systemDiagnostic:BsSmFaultView DataContext="{Binding Path=BsSmFaultVm1, Mode=OneTime}" />
-            <systemDiagnostic:BsSmFaultView DataContext="{Binding Path=BsSmFaultVm2, Mode=OneTime}" />
-            <systemDiagnostic:BsSmFaultView DataContext="{Binding Path=BsSmFaultVm3, Mode=OneTime}" />
-            <systemDiagnostic:BsSmFaultView DataContext="{Binding Path=BsSmFaultVm4, Mode=OneTime}" />
-            <systemDiagnostic:BsSmFaultView DataContext="{Binding Path=BsSmFaultVm5, Mode=OneTime}" />
+            <systemDiagnostic1:BsSmFaultView DataContext="{Binding Path=BsSmFaultVm1, Mode=OneTime}" />
+            <systemDiagnostic1:BsSmFaultView DataContext="{Binding Path=BsSmFaultVm2, Mode=OneTime}" />
+            <systemDiagnostic1:BsSmFaultView DataContext="{Binding Path=BsSmFaultVm3, Mode=OneTime}" />
+            <systemDiagnostic1:BsSmFaultView DataContext="{Binding Path=BsSmFaultVm4, Mode=OneTime}" />
+            <systemDiagnostic1:BsSmFaultView DataContext="{Binding Path=BsSmFaultVm5, Mode=OneTime}" />
         </StackPanel>
     </StackPanel>
 </UserControl>
