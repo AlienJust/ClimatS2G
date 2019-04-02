@@ -56,7 +56,15 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" /> <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" /> <TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" /> <controls:NumericUpDown Grid.Column="2" Value="{Binding Path=SettValue, Mode=TwoWay}" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}"
+                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="?"
+                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" />
+                <controls:NumericUpDown Grid.Column="2" Value="{Binding Path=SettValue, Mode=TwoWay}"
+                                        VerticalAlignment="Center" />
                 <!--TODO: change color on fallback-->
                 <Button Grid.Column="3" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
             </Grid>
@@ -73,7 +81,38 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" /> <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" /> <TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" /> <controls:NumericUpDown Grid.Column="2" Value="{Binding Path=SettValue, Mode=TwoWay}" />
+                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}"
+                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="?"
+                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" />
+                <controls:NumericUpDown Grid.Column="2" Value="{Binding Path=SettValue, Mode=TwoWay}" />
+                <!--TODO: change color on fallback-->
+                <Button Grid.Column="3" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="StringDoubleParameterDispsetTemplate">
+        <Border Background="{Binding Path=BackgroundColor, Mode=OneWay, Converter={StaticResource ColorsEnumToBrushConverter}}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" Margin="2,0,2,0" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}"
+                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="?"
+                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" />
+                <controls:NumericUpDown Grid.Column="2" Value="{Binding Path=SettValue, Mode=TwoWay}" StringFormat="f2" />
                 <!--TODO: change color on fallback-->
                 <Button Grid.Column="3" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
             </Grid>
@@ -103,7 +142,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" /> 
+                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" />
                 <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=SettValue, Mode=TwoWay}" />
                 <!--TODO: change color on fallback-->
                 <Button Grid.Column="2" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
@@ -111,5 +150,18 @@
         </Border>
     </DataTemplate>
 
-    <vm:AggregateOrChartParameterContentTemplateSelector x:Key="AggOrChartParameterContentTemplateSelector" IntegerParameterDisplayTemplate="{StaticResource IntegerParameterDisplayTemplate}" StringParameterDisplayTemplate="{StaticResource StringParameterDisplayTemplate}" CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}" BooleanParameterDisplayTemplate="{StaticResource BooleanParameterDisplayTemplate}" StringIntegerDispsetTemplate="{StaticResource StringIntegerParameterDispsetTemplate}" IntegerIntegerDispsetTemplate="{StaticResource IntegerIntegerParameterDispsetTemplate}" IntegerParameterSettableTemplate="{StaticResource IntegerParameterSettableTemplate}" BooleanParameterSettableTemplate="{StaticResource BooleanParameterSettableTemplate}" />
+    <vm:AggregateOrChartParameterContentTemplateSelector
+        x:Key="AggOrChartParameterContentTemplateSelector"
+        IntegerParameterDisplayTemplate="{StaticResource IntegerParameterDisplayTemplate}"
+        StringParameterDisplayTemplate="{StaticResource StringParameterDisplayTemplate}"
+        
+        CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}"
+        
+        BooleanParameterDisplayTemplate="{StaticResource BooleanParameterDisplayTemplate}"
+        StringIntegerDispsetTemplate="{StaticResource StringIntegerParameterDispsetTemplate}"
+        IntegerIntegerDispsetTemplate="{StaticResource IntegerIntegerParameterDispsetTemplate}"
+        StringDoubleDispsetTemplate="{StaticResource StringDoubleParameterDispsetTemplate}"
+        
+        IntegerParameterSettableTemplate="{StaticResource IntegerParameterSettableTemplate}"
+        BooleanParameterSettableTemplate="{StaticResource BooleanParameterSettableTemplate}" />
 </ResourceDictionary>

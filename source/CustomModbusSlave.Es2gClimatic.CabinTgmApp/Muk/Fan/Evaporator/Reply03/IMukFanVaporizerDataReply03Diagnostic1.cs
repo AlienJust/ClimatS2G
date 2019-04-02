@@ -3,7 +3,7 @@
     public interface IMukFanVaporizerDataReply03Diagnostic1
     {
         bool FanControllerLinkLost { get; }
-        bool FanErrorByDiscreeteInput { get; }
+        bool FanErrorByDiscreteInput { get; }
         bool ErrorOneWireSensor1 { get; }
         bool ErrorOneWireSensor2 { get; }
     }

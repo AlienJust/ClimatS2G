@@ -20,11 +20,12 @@
             <TextBlock Text="Не удалось отобразить элемент" />
         </DataTemplate>
 
-        <vm:ParameterListItemTemplateSelector x:Key="ParameterListItemTemplateSelector"
-                                              AggregateParameterTemplate="{StaticResource AggregateParameterTemplate}"
-                                              ChartParameterTemplate="{StaticResource ChartParameterTemplate}"
-                                              DisplayGroupTemplate="{StaticResource DisplayGroupTemplate}"
-                                              CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}" />
+        <vm:ParameterListItemTemplateSelector
+            x:Key="ParameterListItemTemplateSelector"
+            AggregateParameterTemplate="{StaticResource AggregateParameterTemplate}"
+            ChartParameterTemplate="{StaticResource ChartParameterTemplate}"
+            DisplayGroupTemplate="{StaticResource DisplayGroupTemplate}"
+            CannotDisplayMessageTemplate="{StaticResource CannotDisplayMessageTemplate}" />
     </UserControl.Resources>
 
     <Expander IsExpanded="{Binding Path=IsGroupExpanded, Mode=TwoWay}">

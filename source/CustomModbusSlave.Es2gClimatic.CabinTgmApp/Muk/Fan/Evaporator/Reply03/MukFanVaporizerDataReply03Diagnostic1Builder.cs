@@ -17,7 +17,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Reply03
             return new MukFanVaporizerDataReply03Diagnostic1Simple
             {
                 FanControllerLinkLost = _b.GetBit(4),
-                FanErrorByDiscreeteInput = _b.GetBit(5),
+                FanErrorByDiscreteInput = _b.GetBit(5),
                 ErrorOneWireSensor1 = _b.GetBit(6),
                 ErrorOneWireSensor2 = _b.GetBit(7)
             };

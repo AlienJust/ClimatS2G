@@ -16,6 +16,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm
 
         public DataTemplate StringIntegerDispsetTemplate { get; set; }
         public DataTemplate IntegerIntegerDispsetTemplate { get; set; }
+        public DataTemplate StringDoubleDispsetTemplate { get; set; }
 
 
         public DataTemplate CannotDisplayMessageTemplate { get; set; }
@@ -24,6 +25,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm
         {
             if (item is IDisplayAndSettableParameter<int, int>) return IntegerIntegerDispsetTemplate;
             if (item is IDisplayAndSettableParameter<string, int>) return StringIntegerDispsetTemplate;
+            if (item is IDisplayAndSettableParameter<string, double>)
+            {
+                return StringDoubleDispsetTemplate;
+            }
 
             if (item is ISettParameter<int>) return IntegerParameterSettableTemplate;
             if (item is ISettParameter<int?>) return IntegerParameterSettableTemplate;

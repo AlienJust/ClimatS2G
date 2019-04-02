@@ -143,8 +143,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm
         }
 
         public bool IsSettValueFallbackOrUnknown => _isSettValueFallback || _isSettValueUnknown;
+        
         public bool IsSettValueNotFallbackAndNotUnknown => !IsSettValueFallbackOrUnknown;
-
 
         public ICommand SetCommand => _setCommand;
     }

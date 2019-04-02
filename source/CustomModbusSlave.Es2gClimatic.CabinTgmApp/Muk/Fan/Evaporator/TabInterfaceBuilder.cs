@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Conversion.Contracts;
 using AlienJust.Support.Numeric.Bits;
@@ -5,6 +8,7 @@ using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared;
+using CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
 
@@ -42,7 +46,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
 
             IRecvParam<IMukFanVaporizerDataReply03> mukFanData = new RecvParam<IMukFanVaporizerDataReply03, IMukFanVaporizerDataReply03>("Muk0303Rp",
                 _cmdListenerEvaporator03Reply, data => data);
-            
+
             var mukFlapWinterSummerPwmDisplay =
                 new DispParamViewModel<int, IMukFanVaporizerDataReply03>("Уставка ШИМ на клапан", mukFanData,
                     _uiNotifier, data => data.FanPwm, 0, -1);
@@ -66,7 +70,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             var mukFlapWinterTemperatureOneWireAddr2Display = new DispParamViewModel<string, IMukFanVaporizerDataReply03>(
                 "Температура 1w адрес 2", mukFanData, _uiNotifier,
                 data => data.TemperatureAddress1.ToString(d => d.ToString("f2")), "ER", "??");
-            
+
             var mukFlapWinterTemperatureOneWireAddr2Chart =
                 new ChartParamViewModel<IMukFanVaporizerDataReply03, string>(mukFanData,
                     mukFlapWinterTemperatureOneWireAddr2Display,
@@ -80,7 +84,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             var groupIncomingSignals = new GroupParamViewModel(mukFlapWinterIncomingSignals.ReceiveName);
             reply03Group.AddParameterOrGroup(groupIncomingSignals);
 
-            
+
             var mukFanVaporizerIsFaultFuse = new DispParamViewModel<bool, byte>(
                 "Нарушение целостности предохранителя вентилятора испарителя", mukFlapWinterIncomingSignals,
                 _uiNotifier, incomingByte => incomingByte.GetBit(0),
@@ -93,7 +97,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
 
 
             var mukFanVaporizerIsFaultTemp = new DispParamViewModel<bool, byte>(
-                "Нарушение целостности предохранителя вентилятора испарителя", mukFlapWinterIncomingSignals,
+                "Превышение по температуре", mukFlapWinterIncomingSignals,
                 _uiNotifier, incomingByte => incomingByte.GetBit(1),
                 false, false);
             var mukFanVaporizerIsFaultTempChart = new ChartParamViewModel<byte, bool>(
@@ -101,10 +105,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
                 data => data.GetBit(1) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 muk03Group.DisplayName, reply03Group.DisplayName, groupIncomingSignals.DisplayName);
             groupIncomingSignals.AddParameterOrGroup(mukFanVaporizerIsFaultTempChart);
-            
-            
+
+
             var mukFanVaporizerIsFaultHeaterOn = new DispParamViewModel<bool, byte>(
-                "Нарушение целостности предохранителя вентилятора испарителя", mukFlapWinterIncomingSignals,
+                "Калорифер включен", mukFlapWinterIncomingSignals,
                 _uiNotifier, incomingByte => incomingByte.GetBit(2),
                 false, false);
             var mukFanVaporizerIsFaultHeaterOnChart = new ChartParamViewModel<byte, bool>(
@@ -112,17 +116,16 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
                 data => data.GetBit(2) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 muk03Group.DisplayName, reply03Group.DisplayName, groupIncomingSignals.DisplayName);
             groupIncomingSignals.AddParameterOrGroup(mukFanVaporizerIsFaultHeaterOnChart);
-            
 
-            
+
             IRecvParam<byte> mukFlapWinterOutgoingSignals = new RecvParam<byte, IMukFanVaporizerDataReply03>(
                 "Байт выходных сигналов", _cmdListenerEvaporator03Reply, data => data.IncomingSignals);
             var groupOutgoingSignals = new GroupParamViewModel(mukFlapWinterOutgoingSignals.ReceiveName);
             reply03Group.AddParameterOrGroup(groupOutgoingSignals);
 
-            
+
             var mukFanVaporizerOsFaultHeaterOn = new DispParamViewModel<bool, byte>(
-                "Нарушение целостности предохранителя вентилятора испарителя", mukFlapWinterIncomingSignals,
+                "Включение калорифера", mukFlapWinterIncomingSignals,
                 _uiNotifier, incomingByte => incomingByte.GetBit(0),
                 false, false);
             var mukFanVaporizerOsFaultHeaterOnChart = new ChartParamViewModel<byte, bool>(
@@ -130,8 +133,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
                 data => data.GetBit(0) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 muk03Group.DisplayName, reply03Group.DisplayName, groupOutgoingSignals.DisplayName);
             groupOutgoingSignals.AddParameterOrGroup(mukFanVaporizerOsFaultHeaterOnChart);
-            
-            
+
 
             IRecvParam<ushort> analogueInputRecvParam =
                 new RecvParam<ushort, IMukFanVaporizerDataReply03>("Аналоговый вход от заслонки",
@@ -143,8 +145,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
                 analogueInputDispParam, data => data * 0.1, ParameterLogType.Analogue,
                 _parameterLogger, muk03Group.DisplayName, reply03Group.DisplayName);
             reply03Group.AddParameterOrGroup(analogueInputChartParam);
-            
-            
+
+
             IRecvParam<ushort> flapPwmRecvParam =
                 new RecvParam<ushort, IMukFanVaporizerDataReply03>("Уставка ШИМ на заслонку",
                     _cmdListenerEvaporator03Reply, data => data.FlapPwm);
@@ -169,32 +171,79 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             reply03Group.AddParameterOrGroup(automaticModeStageChartParam);
 
 
-            /*
+            IRecvParam<ushort> fanSpeedRecvParam =
+                new RecvParam<ushort, IMukFanVaporizerDataReply03>("Обороты вентилятора",
+                    _cmdListenerEvaporator03Reply, data => data.FanSpeed);
+            var fanSpeedDispParam = new DispParamViewModel<string, ushort>(
+                fanSpeedRecvParam.ReceiveName, fanSpeedRecvParam, _uiNotifier,
+                data => data.ToString(), "ER", "??");
+            var fanSpeedChartParam = new ChartParamViewModel<ushort, string>(fanSpeedRecvParam, fanSpeedDispParam,
+                data => data, ParameterLogType.Analogue, _parameterLogger, muk03Group.DisplayName,
+                reply03Group.DisplayName);
+            reply03Group.AddParameterOrGroup(fanSpeedChartParam);
+
+
             var groupDiagnostic1 = new GroupParamViewModel("Диагностика 1");
             reply03Group.AddParameterOrGroup(groupDiagnostic1);
-            IRecvParam<IList<byte>> mukFlapWinterSummerDiagnostic1 = new RecvParam<IList<byte>, IList<byte>>(groupDiagnostic1.DisplayName, _cmdListenerEvaporator03Reply, bytes => bytes.Skip(15).Take(2).ToList());
 
-            
-            var diagnostic1OneWire1ErrorDisplay = new DispParamViewModel<bool, IList<byte>>("Ошибка датчика 1w №1", mukFlapWinterSummerDiagnostic1, _uiNotifier, bytes => bytes[1].GetBit(6), false, false);
-            var diagnostic1OneWire1ErrorChart = new ChartParamViewModel<IList<byte>, bool>(mukFlapWinterSummerDiagnostic1, diagnostic1OneWire1ErrorDisplay, data => data[1].GetBit(6) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger, muk08Group.DisplayName, reply03Group.DisplayName, groupDiagnostic1.DisplayName);
-            groupDiagnostic1.ParametersAndGroups.Add(diagnostic1OneWire1ErrorChart);
+            IRecvParam<IMukFanVaporizerDataReply03Diagnostic1> diagnostic1RecvParam =
+                new RecvParam<IMukFanVaporizerDataReply03Diagnostic1, IMukFanVaporizerDataReply03>(
+                    groupDiagnostic1.DisplayName, _cmdListenerEvaporator03Reply, data => data.Diagnostic1Parsed);
+
+            var diag1NoIoWithControllerDispParam = new DispParamViewModel<bool, IMukFanVaporizerDataReply03Diagnostic1>(
+                "Отсутствие обмена с контроллером вентилятора",
+                diagnostic1RecvParam, _uiNotifier, data => data.FanControllerLinkLost, false, false);
+            var diag1NoIoWithControllerChartParam = new ChartParamViewModel<IMukFanVaporizerDataReply03Diagnostic1, bool>(
+                diagnostic1RecvParam,
+                diag1NoIoWithControllerDispParam, data => data.FanControllerLinkLost ? 1.0 : 0.0, ParameterLogType.Discrete,
+                _parameterLogger, muk03Group.DisplayName, reply03Group.DisplayName, groupDiagnostic1.DisplayName);
+            groupDiagnostic1.ParametersAndGroups.Add(diag1NoIoWithControllerChartParam);
+
+            var diag1FanErrorByDisreteInputDispParam = new DispParamViewModel<bool, IMukFanVaporizerDataReply03Diagnostic1>(
+                "Ошибка вентилятора (по дискретному входу)",
+                diagnostic1RecvParam, _uiNotifier, data => data.FanErrorByDiscreteInput, false, false);
+            var diag1FanErrorByDisreteInputChartParam = new ChartParamViewModel<IMukFanVaporizerDataReply03Diagnostic1, bool>(
+                diagnostic1RecvParam,
+                diag1FanErrorByDisreteInputDispParam, data => data.FanErrorByDiscreteInput ? 1.0 : 0.0, ParameterLogType.Discrete,
+                _parameterLogger, muk03Group.DisplayName, reply03Group.DisplayName, groupDiagnostic1.DisplayName);
+            groupDiagnostic1.ParametersAndGroups.Add(diag1FanErrorByDisreteInputChartParam);
 
 
-            var diagnostic1OneWire2ErrorDisplay = new DispParamViewModel<bool, IList<byte>>("Ошибка датчика 1w №2", mukFlapWinterSummerDiagnostic1, _uiNotifier, bytes => bytes[1].GetBit(7), false, false);
-            var diagnostic1OneWire2ErrorChart = new ChartParamViewModel<IList<byte>, bool>(mukFlapWinterSummerDiagnostic1, diagnostic1OneWire2ErrorDisplay, data => data[1].GetBit(7) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger, muk08Group.DisplayName, reply03Group.DisplayName, groupDiagnostic1.DisplayName);
-            groupDiagnostic1.ParametersAndGroups.Add(diagnostic1OneWire2ErrorChart);
+            var diag1OneWire1ErrorDispParam = new DispParamViewModel<bool, IMukFanVaporizerDataReply03Diagnostic1>(
+                "Ошибка датчика 1w №1",
+                diagnostic1RecvParam, _uiNotifier, data => data.ErrorOneWireSensor1, false, false);
+            var diag1OneWire1ErrorChartParam = new ChartParamViewModel<IMukFanVaporizerDataReply03Diagnostic1, bool>(
+                diagnostic1RecvParam,
+                diag1OneWire1ErrorDispParam, data => data.ErrorOneWireSensor1 ? 1.0 : 0.0, ParameterLogType.Discrete,
+                _parameterLogger, muk03Group.DisplayName, reply03Group.DisplayName, groupDiagnostic1.DisplayName);
+            groupDiagnostic1.ParametersAndGroups.Add(diag1OneWire1ErrorChartParam);
 
 
-            IRecvParam<IList<byte>> diagnostic2Recv = new RecvParam<IList<byte>, IList<byte>>("Диагностика 2", _cmdListenerEvaporator03Reply, bytes => bytes.Skip(17).Take(2).ToList());
-            var groupDiagnostic2 = new GroupParamViewModel(diagnostic2Recv.ReceiveName);
+            var diag1OneWire2ErrorDispParam = new DispParamViewModel<bool, IMukFanVaporizerDataReply03Diagnostic1>(
+                "Ошибка датчика 1w №2", diagnostic1RecvParam, _uiNotifier, data => data.ErrorOneWireSensor2, false, false);
+            var diag1OneWire2ErrorChartParam = new ChartParamViewModel<IMukFanVaporizerDataReply03Diagnostic1, bool>(
+                diagnostic1RecvParam, diag1OneWire2ErrorDispParam, data => data.ErrorOneWireSensor2 ? 1.0 : 0.0,
+                ParameterLogType.Discrete, _parameterLogger, muk03Group.DisplayName, reply03Group.DisplayName,
+                groupDiagnostic1.DisplayName);
+            groupDiagnostic1.ParametersAndGroups.Add(diag1OneWire2ErrorChartParam);
+
+
+            IRecvParam<IMukFanVaporizerDataReply03Diagnostic2> diag2RecvParam =
+                new RecvParam<IMukFanVaporizerDataReply03Diagnostic2, IMukFanVaporizerDataReply03>("Диагностика 2",
+                    _cmdListenerEvaporator03Reply, data => data.Diagnostic2Parsed);
+            var groupDiagnostic2 = new GroupParamViewModel(diag2RecvParam.ReceiveName);
             reply03Group.AddParameterOrGroup(groupDiagnostic2);
 
-            var diagnostic2NotReachingLimitDisp = new DispParamViewModel<bool, IList<byte>>("Заслонка не встает в крайние положения", diagnostic2Recv, _uiNotifier, bytes => bytes[1].GetBit(5), false, false);
-            var diagnostic2NotReachingLimitChart = new ChartParamViewModel<IList<byte>, bool>(diagnostic2Recv, diagnostic2NotReachingLimitDisp, data => data[1].GetBit(5) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger, muk08Group.DisplayName, reply03Group.DisplayName, groupDiagnostic2.DisplayName);
+            var diag2PhaseErrorOrNoPowerDispParam = new DispParamViewModel<bool, IMukFanVaporizerDataReply03Diagnostic2>(
+                "Ошибка фазы или отсутствие питание", diag2RecvParam, _uiNotifier, diag2 => diag2.PhaseErrorOrPowerLost,
+                false, false);
+            
+            /*
+            var diagnostic2NotReachingLimitChart = new ChartParamViewModel<IList<byte>, bool>(diag2RecvParam, diag2PhaseErrorOrNoPowerDispParam, data => data[1].GetBit(5) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger, muk08Group.DisplayName, reply03Group.DisplayName, groupDiagnostic2.DisplayName);
             groupDiagnostic2.AddParameterOrGroup(diagnostic2NotReachingLimitChart);
 
-            var diagnostic2NotCoveringHalfOfTheRangeDisp = new DispParamViewModel<bool, IList<byte>>("Заслонка не проходит 50% диапазона", diagnostic2Recv, _uiNotifier, bytes => bytes[1].GetBit(6), false, false);
-            var diagnostic2NotCoveringHalfOfTheRangeChart = new ChartParamViewModel<IList<byte>, bool>(diagnostic2Recv, diagnostic2NotCoveringHalfOfTheRangeDisp, data => data[1].GetBit(6) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger, muk08Group.DisplayName, reply03Group.DisplayName, groupDiagnostic2.DisplayName);
+            var diagnostic2NotCoveringHalfOfTheRangeDisp = new DispParamViewModel<bool, IList<byte>>("Заслонка не проходит 50% диапазона", diag2RecvParam, _uiNotifier, bytes => bytes[1].GetBit(6), false, false);
+            var diagnostic2NotCoveringHalfOfTheRangeChart = new ChartParamViewModel<IList<byte>, bool>(diag2RecvParam, diagnostic2NotCoveringHalfOfTheRangeDisp, data => data[1].GetBit(6) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger, muk08Group.DisplayName, reply03Group.DisplayName, groupDiagnostic2.DisplayName);
             groupDiagnostic2.AddParameterOrGroup(diagnostic2NotCoveringHalfOfTheRangeChart);
 
 
@@ -256,7 +305,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
 
             setParamsGroup.AddParameterOrGroup(aggSetParam827);
             setParamsGroup.AddParameterOrGroup(aggSetParam828);
-            
+
             */
 
 

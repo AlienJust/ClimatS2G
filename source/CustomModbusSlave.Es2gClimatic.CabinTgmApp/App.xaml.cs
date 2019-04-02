@@ -1,11 +1,7 @@
 ﻿using System.Windows;
-using CustomModbusSlave.Es2gClimatic.CabinApp.Ksm;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.SystemDiagnostic;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
 using CmdListenerMukVaporizerReply03 = CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Reply03.CmdListenerMukVaporizerReply03;
@@ -75,16 +71,13 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                             mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerFriquencyModifierRequest08, cmdListenerFriquencyModifierReply08)
                     }*/
                 });
-
-                mainVm.AddTab(new TabItemViewModel
-                {
-                    FullHeader = "КСМ",
-                    ShortHeader = "КСМ",
-                    Content = new KsmDataView
-                    {
-                        DataContext = new KsmDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerKsm50Params)
-                    }
-                });
+                
+                if (appAbilities.Version == AppVersion.Full) {
+                    var tabsBuilderKsm = new Ksm.KsmTabInterfaceBuilder(mainVm.Notifier, cmdListenerKsm50Params, appAbilities.ParameterLogger, channel.Channel.ParamSetter, appAbilities.Version);
+                    var tabVmKsm = tabsBuilderKsm.Build();
+                    //searchVm.RegisterTopLevelGroup(tabVmKsm);
+                    mainVm.AddTab(new TabItemViewModel {FullHeader = "КСМ и в Африке КСМ", ShortHeader = "КСМ", Content = new ParametersListView {DataContext = tabVmKsm}});
+                }
             });
         }
     }
