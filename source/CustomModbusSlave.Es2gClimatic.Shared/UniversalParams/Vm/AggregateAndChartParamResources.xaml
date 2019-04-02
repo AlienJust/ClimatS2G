@@ -13,7 +13,13 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" /> <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" /> <TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}"
+                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"  VerticalAlignment="Center" 
+                           Margin="2,0,2,0"/>
+                <TextBlock Grid.Column="1" Text="?"
+                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"  VerticalAlignment="Center" 
+                           Margin="2,0,2,0"/>
             </Grid>
         </Border>
     </DataTemplate>
@@ -25,7 +31,13 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" /> <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" /> <TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}"
+                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" 
+                           Margin="2,0,2,0"/>
+                <TextBlock Grid.Column="1" Text="?"
+                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" 
+                           Margin="2,0,2,0"/>
             </Grid>
         </Border>
     </DataTemplate>
@@ -37,7 +49,14 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" /> <CheckBox Grid.Column="1" IsChecked="{Binding Path=DisplayValue, Mode=TwoWay}" Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" IsHitTestVisible="False" /> <TextBlock Grid.Column="1" Text="?" Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" />
+                <CheckBox Grid.Column="1" IsChecked="{Binding Path=DisplayValue, Mode=TwoWay}"
+                          Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          IsHitTestVisible="False" VerticalAlignment="Center"  Margin="2,0,2,0"/>
+                <TextBlock Grid.Column="1" Text="?"
+                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" 
+                           Margin="2,0,2,0"/>
             </Grid>
         </Border>
     </DataTemplate>
@@ -57,16 +76,16 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}"
-                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
-                           VerticalAlignment="Center" />
-                <TextBlock Grid.Column="1" Text="?"
-                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
-                           VerticalAlignment="Center" />
-                <controls:NumericUpDown Grid.Column="2" Value="{Binding Path=SettValue, Mode=TwoWay}"
+                <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=SettValue, Mode=TwoWay}"
                                         VerticalAlignment="Center" />
                 <!--TODO: change color on fallback-->
-                <Button Grid.Column="3" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
+                <Button Grid.Column="2" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
+                <TextBlock Grid.Column="3" Text="{Binding Path=DisplayValue, Mode=OneWay}"
+                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center"  Margin="2,0,2,0"/>
+                <TextBlock Grid.Column="3" Text="?"
+                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center"  Margin="2,0,2,0"/>
             </Grid>
         </Border>
     </DataTemplate>
@@ -82,15 +101,17 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}"
-                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
-                           VerticalAlignment="Center" />
-                <TextBlock Grid.Column="1" Text="?"
-                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
-                           VerticalAlignment="Center" />
-                <controls:NumericUpDown Grid.Column="2" Value="{Binding Path=SettValue, Mode=TwoWay}" />
+                
+                <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=SettValue, Mode=TwoWay}" />
                 <!--TODO: change color on fallback-->
-                <Button Grid.Column="3" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
+                <Button Grid.Column="2" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
+                
+                <TextBlock Grid.Column="3" Text="{Binding Path=DisplayValue, Mode=OneWay}"
+                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" Margin="2,0,2,0" />
+                <TextBlock Grid.Column="3" Text="?"
+                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" Margin="2,0,2,0" />
             </Grid>
         </Border>
     </DataTemplate>
@@ -106,15 +127,15 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" Margin="2,0,2,0" VerticalAlignment="Center" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=DisplayValue, Mode=OneWay}"
-                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
-                           VerticalAlignment="Center" />
-                <TextBlock Grid.Column="1" Text="?"
-                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
-                           VerticalAlignment="Center" />
-                <controls:NumericUpDown Grid.Column="2" Value="{Binding Path=SettValue, Mode=TwoWay}" StringFormat="f2" />
+                <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=SettValue, Mode=TwoWay}" StringFormat="f2" />
                 <!--TODO: change color on fallback-->
-                <Button Grid.Column="3" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
+                <Button Grid.Column="2" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
+                <TextBlock Grid.Column="3" Text="{Binding Path=DisplayValue, Mode=OneWay}"
+                           Visibility="{Binding Path=IsValueNotFallbackAndNotUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" Margin="2,0,2,0" />
+                <TextBlock Grid.Column="3" Text="?"
+                           Visibility="{Binding Path=IsValueFallbackOrUnknown, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="Center" Margin="2,0,2,0" />
             </Grid>
         </Border>
     </DataTemplate>
@@ -128,7 +149,9 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" /> <CheckBox Grid.Column="1" IsChecked="{Binding Path=SettValue, Mode=TwoWay}" VerticalAlignment="Center" /> <Button Grid.Column="2" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
+                <TextBlock Text="{Binding Path=DisplayName, Mode=OneTime}" VerticalAlignment="Center" Margin="2,0,2,0" />
+                <CheckBox Grid.Column="1" IsChecked="{Binding Path=SettValue, Mode=TwoWay}" VerticalAlignment="Center" />
+                <Button Grid.Column="2" Content="Установить" Command="{Binding Path=SetCommand, Mode=OneTime}" />
             </Grid>
         </Border>
     </DataTemplate>
@@ -149,6 +172,7 @@
             </Grid>
         </Border>
     </DataTemplate>
+    
 
     <vm:AggregateOrChartParameterContentTemplateSelector
         x:Key="AggOrChartParameterContentTemplateSelector"
