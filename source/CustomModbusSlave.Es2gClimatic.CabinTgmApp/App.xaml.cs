@@ -8,6 +8,8 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
+using CmdListenerMukVaporizerReply03 = CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Reply03.CmdListenerMukVaporizerReply03;
+using CmdListenerMukVaporizerRequest16 = CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Request16.CmdListenerMukVaporizerRequest16;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
 {

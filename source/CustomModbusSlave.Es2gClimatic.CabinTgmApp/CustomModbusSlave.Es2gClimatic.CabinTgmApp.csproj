@@ -91,7 +91,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Muk\Fan\Evaporator\Reply03\BytesPairNullableToStringThroughVaporizerFanWorkstageConverter.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\CmdListenerMukVaporizerReply03.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\IMukFanVaporizerDataReply03.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\IMukFanVaporizerDataReply03Diagnostic1.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\IMukFanVaporizerDataReply03Diagnostic2.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\MukFanEvaporatorWorkstage.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\MukFanEvaporatorWorkstageBuilder.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\MukFanEvaporatorWorkstageExt.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\MukFanEvaporatorWorkstageToStringConverter.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\MukFanVaporizerDataReply03Builder.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1Builder.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1Simple.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\MukFanVaporizerDataReply03Diagnostic2Builder.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\MukFanVaporizerDataReply03Diagnostic2Simple.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Reply03\MukFanVaporizerDataReply03Simple.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Request16\CmdListenerMukVaporizerRequest16.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Request16\IKsmCommandWorkmode.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Request16\IMukFanVaporizerDataRequest16.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Request16\KsmCommandWorkmodeSimple.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Request16\MukFanVaporizerDataRequest16Builder.cs" />
+    <Compile Include="Muk\Fan\Evaporator\Request16\MukFanVaporizerDataRequest16Simple.cs" />
+    <Compile Include="Muk\Fan\Evaporator\SetParameters\MukVaporizerSetParamsViewModel.cs" />
     <Compile Include="Muk\Fan\Evaporator\TabInterfaceBuilder.cs" />
+    <Compile Include="Muk\Fan\Evaporator\TemperatureRegulatorWorkMode\ITemperatureRegulatorWorkMode.cs" />
+    <Compile Include="Muk\Fan\Evaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeBuilderReplied.cs" />
+    <Compile Include="Muk\Fan\Evaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeSimple.cs" />
     <Compile Include="SystemDiagnostic\AutoView.xaml.cs">
       <DependentUpon>AutoView.xaml</DependentUpon>
     </Compile>

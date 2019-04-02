@@ -2,9 +2,9 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Conversion.Contracts;
 using AlienJust.Support.Numeric.Bits;
 using CustomModbus.Slave.FastReply.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Reply03;
+using CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
-using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
 
@@ -35,7 +35,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
 
         public IDisplayGroup Build()
         {
-            var muk08Group = new GroupParamViewModel("МУК 3, вентилятор испарителя");
+            var muk03Group = new GroupParamViewModel("МУК 3, вентилятор испарителя");
             //const string reply03GroupName = "МУК 8, заслонка зима лето";
             var reply03Group = new GroupParamViewModel("Ответ на команду 3");
 
@@ -48,7 +48,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
                     _uiNotifier, data => data.FanPwm, 0, -1);
             var mukFlapWinterSummerPwmChart = new ChartParamViewModel<IMukFanVaporizerDataReply03, int>(mukFanData,
                 mukFlapWinterSummerPwmDisplay, data => data.FanPwm, ParameterLogType.Analogue, _parameterLogger,
-                muk08Group.DisplayName, reply03Group.DisplayName);
+                muk03Group.DisplayName, reply03Group.DisplayName);
             reply03Group.AddParameterOrGroup(mukFlapWinterSummerPwmChart);
 
 
@@ -59,11 +59,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             var mukFlapWinterTemperatureOneWireAddr1Chart = new ChartParamViewModel<IMukFanVaporizerDataReply03, string>(
                 mukFanData, mukFlapWinterTemperatureOneWireAddr1Display,
                 data => data.TemperatureAddress1.Indication, ParameterLogType.Analogue, _parameterLogger,
-                muk08Group.DisplayName, reply03Group.DisplayName);
+                muk03Group.DisplayName, reply03Group.DisplayName);
             reply03Group.AddParameterOrGroup(mukFlapWinterTemperatureOneWireAddr1Chart);
 
 
-            //IRecvParam<IList<byte>> mukFlapWinterTemperatureOneWireAddr2 = new RecvParam<IList<byte>, IList<byte>>("T1W2", _cmdListenerEvaporator03Reply, bytes => bytes.Skip(5).Take(2).ToList());
             var mukFlapWinterTemperatureOneWireAddr2Display = new DispParamViewModel<string, IMukFanVaporizerDataReply03>(
                 "Температура 1w адрес 2", mukFanData, _uiNotifier,
                 data => data.TemperatureAddress1.ToString(d => d.ToString("f2")), "ER", "??");
@@ -72,7 +71,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
                 new ChartParamViewModel<IMukFanVaporizerDataReply03, string>(mukFanData,
                     mukFlapWinterTemperatureOneWireAddr2Display,
                     data => data.TemperatureAddress2.Indication, ParameterLogType.Analogue, _parameterLogger,
-                    muk08Group.DisplayName, reply03Group.DisplayName);
+                    muk03Group.DisplayName, reply03Group.DisplayName);
             reply03Group.AddParameterOrGroup(mukFlapWinterTemperatureOneWireAddr2Chart);
 
 
@@ -81,6 +80,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             var groupIncomingSignals = new GroupParamViewModel(mukFlapWinterIncomingSignals.ReceiveName);
             reply03Group.AddParameterOrGroup(groupIncomingSignals);
 
+            
             var mukFanVaporizerIsFaultFuse = new DispParamViewModel<bool, byte>(
                 "Нарушение целостности предохранителя вентилятора испарителя", mukFlapWinterIncomingSignals,
                 _uiNotifier, incomingByte => incomingByte.GetBit(0),
@@ -88,7 +88,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             var mukFanVaporizerIsFaultFuseChart = new ChartParamViewModel<byte, bool>(
                 mukFlapWinterIncomingSignals, mukFanVaporizerIsFaultFuse,
                 data => data.GetBit(0) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
-                muk08Group.DisplayName, reply03Group.DisplayName, groupIncomingSignals.DisplayName);
+                muk03Group.DisplayName, reply03Group.DisplayName, groupIncomingSignals.DisplayName);
             groupIncomingSignals.AddParameterOrGroup(mukFanVaporizerIsFaultFuseChart);
 
 
@@ -99,7 +99,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             var mukFanVaporizerIsFaultTempChart = new ChartParamViewModel<byte, bool>(
                 mukFlapWinterIncomingSignals, mukFanVaporizerIsFaultTemp,
                 data => data.GetBit(1) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
-                muk08Group.DisplayName, reply03Group.DisplayName, groupIncomingSignals.DisplayName);
+                muk03Group.DisplayName, reply03Group.DisplayName, groupIncomingSignals.DisplayName);
             groupIncomingSignals.AddParameterOrGroup(mukFanVaporizerIsFaultTempChart);
             
             
@@ -110,7 +110,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             var mukFanVaporizerIsFaultHeaterOnChart = new ChartParamViewModel<byte, bool>(
                 mukFlapWinterIncomingSignals, mukFanVaporizerIsFaultHeaterOn,
                 data => data.GetBit(2) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
-                muk08Group.DisplayName, reply03Group.DisplayName, groupIncomingSignals.DisplayName);
+                muk03Group.DisplayName, reply03Group.DisplayName, groupIncomingSignals.DisplayName);
             groupIncomingSignals.AddParameterOrGroup(mukFanVaporizerIsFaultHeaterOnChart);
             
 
@@ -120,6 +120,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             var groupOutgoingSignals = new GroupParamViewModel(mukFlapWinterOutgoingSignals.ReceiveName);
             reply03Group.AddParameterOrGroup(groupOutgoingSignals);
 
+            
             var mukFanVaporizerOsFaultHeaterOn = new DispParamViewModel<bool, byte>(
                 "Нарушение целостности предохранителя вентилятора испарителя", mukFlapWinterIncomingSignals,
                 _uiNotifier, incomingByte => incomingByte.GetBit(0),
@@ -127,23 +128,48 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             var mukFanVaporizerOsFaultHeaterOnChart = new ChartParamViewModel<byte, bool>(
                 mukFlapWinterOutgoingSignals, mukFanVaporizerOsFaultHeaterOn,
                 data => data.GetBit(0) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
-                muk08Group.DisplayName, reply03Group.DisplayName, groupOutgoingSignals.DisplayName);
+                muk03Group.DisplayName, reply03Group.DisplayName, groupOutgoingSignals.DisplayName);
             groupOutgoingSignals.AddParameterOrGroup(mukFanVaporizerOsFaultHeaterOnChart);
             
+            
+
+            IRecvParam<ushort> analogueInputRecvParam =
+                new RecvParam<ushort, IMukFanVaporizerDataReply03>("Аналоговый вход от заслонки",
+                    _cmdListenerEvaporator03Reply, data => data.AnalogInput);
+            var analogueInputDispParam = new DispParamViewModel<string, ushort>(
+                analogueInputRecvParam.ReceiveName, analogueInputRecvParam, _uiNotifier,
+                data => (data * 0.1).ToString("f1"), "ER", "??");
+            var analogueInputChartParam = new ChartParamViewModel<ushort, string>(analogueInputRecvParam,
+                analogueInputDispParam, data => data * 0.1, ParameterLogType.Analogue,
+                _parameterLogger, muk03Group.DisplayName, reply03Group.DisplayName);
+            reply03Group.AddParameterOrGroup(analogueInputChartParam);
+            
+            
+            IRecvParam<ushort> flapPwmRecvParam =
+                new RecvParam<ushort, IMukFanVaporizerDataReply03>("Уставка ШИМ на заслонку",
+                    _cmdListenerEvaporator03Reply, data => data.FlapPwm);
+            var flapPwmDispParam = new DispParamViewModel<string, ushort>(
+                flapPwmRecvParam.ReceiveName, flapPwmRecvParam, _uiNotifier,
+                data => data.ToString(), "ER", "??");
+            var flapPwmChartParam = new ChartParamViewModel<ushort, string>(flapPwmRecvParam, flapPwmDispParam,
+                data => data, ParameterLogType.Analogue, _parameterLogger, muk03Group.DisplayName,
+                reply03Group.DisplayName);
+            reply03Group.AddParameterOrGroup(flapPwmChartParam);
+
+
+            /*IRecvParam<MukFanEvaporatorWorkstage> autoModeStageRecvParam =
+                new RecvParam<MukFanEvaporatorWorkstage, IMukFanVaporizerDataReply03>("Этап работы",
+                    _cmdListenerEvaporator03Reply, data => data.AutomaticModeStageParsed);*/
+            var automaticModeStageDispParam = new DispParamViewModel<string, IMukFanVaporizerDataReply03>(
+                "Этап работы", mukFanData, _uiNotifier,
+                data => data.AutomaticModeStageParsed.ToText(), "ER", "??");
+            var automaticModeStageChartParam = new ChartParamViewModel<IMukFanVaporizerDataReply03, string>(
+                mukFanData, automaticModeStageDispParam, data => data.AutomaticModeStage,
+                ParameterLogType.Analogue, _parameterLogger, muk03Group.DisplayName, reply03Group.DisplayName);
+            reply03Group.AddParameterOrGroup(automaticModeStageChartParam);
+
+
             /*
-
-            IRecvParam<IList<byte>> mukFlapWinterSummerAnalogueInput = new RecvParam<IList<byte>, IList<byte>>("Аналоговый вход от заслонки", _cmdListenerEvaporator03Reply, bytes => bytes.Skip(11).Take(2).ToList());
-            var mukFlapWinterSummerAnalogueInputDisplay = new DispParamViewModel<string, IList<byte>>(mukFlapWinterSummerAnalogueInput.ReceiveName, mukFlapWinterSummerAnalogueInput, _uiNotifier, data => ((data[0] * 256 + data[1]) * 0.1).ToString("f1"), "ER", "??");
-            var mukFlapWinterSummerAnalogueInputChart = new ChartParamViewModel<IList<byte>, string>(mukFlapWinterSummerAnalogueInput, mukFlapWinterSummerAnalogueInputDisplay, data => (data[0] * 256 + data[1]) * 0.1, ParameterLogType.Analogue, _parameterLogger, muk08Group.DisplayName, reply03Group.DisplayName);
-            reply03Group.AddParameterOrGroup(mukFlapWinterSummerAnalogueInputChart);
-
-
-            IRecvParam<IList<byte>> mukFlapWinterSummerAutomaticModeStage = new RecvParam<IList<byte>, IList<byte>>("Этап работы", _cmdListenerEvaporator03Reply, bytes => bytes.Skip(13).Take(2).ToList());
-            var mukFlapWinterSummerAutomaticModeStageDisplay = new DispParamViewModel<string, IList<byte>>(mukFlapWinterSummerAutomaticModeStage.ReceiveName, mukFlapWinterSummerAutomaticModeStage, _uiNotifier, data => new MukFlapWorkmodeStageBuilder(data[0] * 256 + data[1]).Build().ToText(), "ER", "??");
-            var mukFlapWinterSummerAutomaticModeStageChart = new ChartParamViewModel<IList<byte>, string>(mukFlapWinterSummerAutomaticModeStage, mukFlapWinterSummerAutomaticModeStageDisplay, data => data[0] * 256 + data[1], ParameterLogType.Analogue, _parameterLogger, muk08Group.DisplayName, reply03Group.DisplayName);
-            reply03Group.AddParameterOrGroup(mukFlapWinterSummerAutomaticModeStageChart);
-
-
             var groupDiagnostic1 = new GroupParamViewModel("Диагностика 1");
             reply03Group.AddParameterOrGroup(groupDiagnostic1);
             IRecvParam<IList<byte>> mukFlapWinterSummerDiagnostic1 = new RecvParam<IList<byte>, IList<byte>>(groupDiagnostic1.DisplayName, _cmdListenerEvaporator03Reply, bytes => bytes.Skip(15).Take(2).ToList());
@@ -234,9 +260,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
             */
 
 
-            muk08Group.AddParameterOrGroup(reply03Group);
+            muk03Group.AddParameterOrGroup(reply03Group);
             //muk08Group.AddParameterOrGroup(setParamsGroup);
-            return muk08Group;
+            return muk03Group;
         }
     }
 }
