@@ -57,7 +57,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             setParamsGroup.AddParameterOrGroup(chartParam00);
 
             #endregion
-            
+
             #region Param01
 
             var recvParam01 = new RecvParam<int, IList<BytesPair>>("01: Датчик на трубке выхода испарителя",
@@ -72,7 +72,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             setParamsGroup.AddParameterOrGroup(chartParam01);
 
             #endregion
-            
+
             #region Param02
 
             var recvParam02 = new RecvParam<int, IList<BytesPair>>("02: Датчик на трубке выхода конденсатора",
@@ -87,7 +87,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             setParamsGroup.AddParameterOrGroup(chartParam02);
 
             #endregion
-            
+
             #region Param03
 
             var recvParam03 = new RecvParam<int, IList<BytesPair>>("03: Уставка температуры в кабине",
@@ -102,7 +102,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             setParamsGroup.AddParameterOrGroup(chartParam03);
 
             #endregion
-            
+
             #region Param04
 
             var recvParam04 = new RecvParam<int, IList<BytesPair>>("04: Уставка объема подачи воздуха в кабину",
@@ -117,16 +117,16 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             setParamsGroup.AddParameterOrGroup(chartParam04);
 
             #endregion
-            
+
             #region Param05
 
             var recvParam05 = new RecvParam<int, IList<BytesPair>>("05: PIC порт A",
                 _cmdListenerKsmParams, data => data[05].LowFirstUnsignedValue);
-            
+
             var groupParam05 = new GroupParamViewModel(recvParam05.ReceiveName);
             setParamsGroup.AddParameterOrGroup(groupParam05);
 
-           
+
             var dispParam0504 = new DispParamViewModel<bool, int>(
                 "PA.4=0 – включение 3ст.", recvParam05,
                 _uiNotifier, incomingByte => !incomingByte.GetBit(4),
@@ -136,9 +136,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => !data.GetBit(4) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam05.DisplayName);
             groupParam05.AddParameterOrGroup(chartParam0504);
-            
-            
-            
+
+
             var dispParam0505 = new DispParamViewModel<bool, int>(
                 "PA.5=0 – включение 4ст.", recvParam05,
                 _uiNotifier, incomingByte => !incomingByte.GetBit(5),
@@ -148,20 +147,19 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => !data.GetBit(5) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam05.DisplayName);
             groupParam05.AddParameterOrGroup(chartParam0505);
-            
 
             #endregion
-            
-            
+
+
             #region Param06
 
             var recvParam06 = new RecvParam<int, IList<BytesPair>>("06: PIC порт C",
                 _cmdListenerKsmParams, data => data[06].LowFirstUnsignedValue);
-            
+
             var groupParam06 = new GroupParamViewModel(recvParam06.ReceiveName);
             setParamsGroup.AddParameterOrGroup(groupParam06);
 
-           
+
             var dispParam0600 = new DispParamViewModel<bool, int>(
                 "PС.0=0 – включение 1ст.", recvParam06,
                 _uiNotifier, incomingByte => !incomingByte.GetBit(0),
@@ -171,9 +169,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => !data.GetBit(0) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam06.DisplayName);
             groupParam06.AddParameterOrGroup(chartParam0600);
-            
-            
-            
+
+
             var dispParam0601 = new DispParamViewModel<bool, int>(
                 "PС.1=0 – включение клапана ЭРВ", recvParam06,
                 _uiNotifier, incomingByte => !incomingByte.GetBit(1),
@@ -183,7 +180,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => !data.GetBit(1) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam06.DisplayName);
             groupParam06.AddParameterOrGroup(chartParam0601);
-            
+
             var dispParam0606 = new DispParamViewModel<bool, int>(
                 "PС.6=1 – выключение реле разрешения запуска контактора компрессора", recvParam06,
                 _uiNotifier, incomingByte => incomingByte.GetBit(6),
@@ -193,9 +190,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => data.GetBit(6) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam06.DisplayName);
             groupParam06.AddParameterOrGroup(chartParam0606);
-            
-            
-            
+
+
             var dispParam0607 = new DispParamViewModel<bool, int>(
                 "PС.7=0 – включение 2ст.", recvParam06,
                 _uiNotifier, incomingByte => !incomingByte.GetBit(7),
@@ -205,20 +201,19 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => !data.GetBit(7) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam06.DisplayName);
             groupParam06.AddParameterOrGroup(chartParam0607);
-            
 
             #endregion
-            
+
 
             #region Param10
 
             var recvParam10 = new RecvParam<int, IList<BytesPair>>("10: PIC порт B",
                 _cmdListenerKsmParams, data => data[10].LowFirstUnsignedValue);
-            
+
             var groupParam10 = new GroupParamViewModel(recvParam10.ReceiveName);
             setParamsGroup.AddParameterOrGroup(groupParam10);
 
-           
+
             var dispParam1000 = new DispParamViewModel<bool, int>(
                 "PB.0=1 – авария компрессора по максимальному давлению", recvParam10,
                 _uiNotifier, incomingByte => incomingByte.GetBit(0),
@@ -228,9 +223,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => data.GetBit(0) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam10.DisplayName);
             groupParam10.AddParameterOrGroup(chartParam1000);
-            
-            
-            
+
+
             var dispParam1001 = new DispParamViewModel<bool, int>(
                 "PB.1=1 – авария компрессора по максимальному давлению", recvParam10,
                 _uiNotifier, incomingByte => incomingByte.GetBit(1),
@@ -240,8 +234,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => data.GetBit(1) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam10.DisplayName);
             groupParam10.AddParameterOrGroup(chartParam1001);
-            
-            
+
+
             var dispParam1002 = new DispParamViewModel<bool, int>(
                 "PB.2=1 – авария двигателя компрессора", recvParam10,
                 _uiNotifier, incomingByte => incomingByte.GetBit(2),
@@ -251,7 +245,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => data.GetBit(2) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam10.DisplayName);
             groupParam10.AddParameterOrGroup(chartParam1002);
-            
+
             var dispParam1003 = new DispParamViewModel<bool, int>(
                 "PB.3=0 – команда на включение кондиционера", recvParam10,
                 _uiNotifier, incomingByte => !incomingByte.GetBit(3),
@@ -261,7 +255,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => !data.GetBit(3) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam10.DisplayName);
             groupParam10.AddParameterOrGroup(chartParam1003);
-            
+
             var dispParam1004 = new DispParamViewModel<bool, int>(
                 "PB.4=0 – команда на включение кондиционера в режиме обогрев/охлаждение", recvParam10,
                 _uiNotifier, incomingByte => !incomingByte.GetBit(4),
@@ -271,7 +265,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 data => !data.GetBit(4) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger,
                 setParamsGroup.DisplayName, groupParam10.DisplayName);
             groupParam10.AddParameterOrGroup(chartParam1004);
-            
+
             var dispParam1005 = new DispParamViewModel<bool, int>(
                 "PB.5=0 – компрессор включен", recvParam10,
                 _uiNotifier, incomingByte => !incomingByte.GetBit(5),
@@ -283,6 +277,37 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             groupParam10.AddParameterOrGroup(chartParam1005);
 
             #endregion
+            
+            #region Param11
+
+            var recvParam11 = new RecvParam<int, IList<BytesPair>>("11: Давление в контуре низкого давления",
+                _cmdListenerKsmParams, data => data[11].LowFirstUnsignedValue);
+
+            var dispParam11 =
+                new DispParamViewModel<string, int>(recvParam11.ReceiveName, recvParam11,
+                    _uiNotifier, data => data.ToString(), "ER", "?");
+            var chartParam11 = new ChartParamViewModel<int, string>(recvParam11,
+                dispParam11, data => data, ParameterLogType.Analogue, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam11);
+
+            #endregion
+            
+            #region Param12
+
+            var recvParam12 = new RecvParam<int, IList<BytesPair>>("12: Давление в контуре низкого давления",
+                _cmdListenerKsmParams, data => data[12].LowFirstUnsignedValue);
+
+            var dispParam12 =
+                new DispParamViewModel<string, int>(recvParam12.ReceiveName, recvParam12,
+                    _uiNotifier, data => data.ToString(), "ER", "?");
+            var chartParam12 = new ChartParamViewModel<int, string>(recvParam12,
+                dispParam12, data => data, ParameterLogType.Analogue, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam12);
+
+            #endregion
+            
             
             #region Param28
 
