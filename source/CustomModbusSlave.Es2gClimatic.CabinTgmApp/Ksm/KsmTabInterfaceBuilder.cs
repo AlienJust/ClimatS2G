@@ -280,14 +280,14 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             
             #region Param11
 
-            var recvParam11 = new RecvParam<int, IList<BytesPair>>("11: Давление в контуре низкого давления",
-                _cmdListenerKsmParams, data => data[11].LowFirstUnsignedValue);
+            var recvParam11 = new RecvParam<int, IList<BytesPair>>("11: Давление в контуре низкого давления, бар",
+                _cmdListenerKsmParams, data => data[11].LowFirstSignedValue);
 
             var dispParam11 =
                 new DispParamViewModel<string, int>(recvParam11.ReceiveName, recvParam11,
-                    _uiNotifier, data => data.ToString(), "ER", "?");
+                    _uiNotifier, data => (data * 0.1).ToString("f1"), "ER", "?");
             var chartParam11 = new ChartParamViewModel<int, string>(recvParam11,
-                dispParam11, data => data, ParameterLogType.Analogue, _parameterLogger,
+                dispParam11, data => data * 0.1, ParameterLogType.Analogue, _parameterLogger,
                 setParamsGroup.DisplayName);
             setParamsGroup.AddParameterOrGroup(chartParam11);
 
@@ -295,19 +295,49 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             
             #region Param12
 
-            var recvParam12 = new RecvParam<int, IList<BytesPair>>("12: Давление в контуре низкого давления",
-                _cmdListenerKsmParams, data => data[12].LowFirstUnsignedValue);
+            var recvParam12 = new RecvParam<int, IList<BytesPair>>("12: Давление в контуре низкого давления, бар",
+                _cmdListenerKsmParams, data => data[12].LowFirstSignedValue);
 
             var dispParam12 =
                 new DispParamViewModel<string, int>(recvParam12.ReceiveName, recvParam12,
-                    _uiNotifier, data => data.ToString(), "ER", "?");
+                    _uiNotifier, data => (data * 0.1).ToString("f1"), "ER", "?");
             var chartParam12 = new ChartParamViewModel<int, string>(recvParam12,
-                dispParam12, data => data, ParameterLogType.Analogue, _parameterLogger,
+                dispParam12, data => data * 0.1, ParameterLogType.Analogue, _parameterLogger,
                 setParamsGroup.DisplayName);
             setParamsGroup.AddParameterOrGroup(chartParam12);
 
             #endregion
             
+            #region Param13
+
+            var recvParam13 = new RecvParam<int, IList<BytesPair>>("13: Температура в контуре низкого давления, град",
+                _cmdListenerKsmParams, data => data[13].LowFirstSignedValue);
+
+            var dispParam13 =
+                new DispParamViewModel<string, int>(recvParam13.ReceiveName, recvParam13,
+                    _uiNotifier, data => (data * 0.1).ToString("f1"), "ER", "?");
+            var chartParam13 = new ChartParamViewModel<int, string>(recvParam13,
+                dispParam13, data => data * 0.1, ParameterLogType.Analogue, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam13);
+
+            #endregion
+            
+            #region Param14
+
+            var recvParam14 = new RecvParam<int, IList<BytesPair>>("14: Перегрев хладагента, град",
+                _cmdListenerKsmParams, data => data[14].LowFirstSignedValue);
+
+            var dispParam14 =
+                new DispParamViewModel<string, int>(recvParam14.ReceiveName, recvParam14,
+                    _uiNotifier, data => data.ToString(), "ER", "?");
+            var chartParam14 = new ChartParamViewModel<int, string>(recvParam14,
+                dispParam14, data => data, ParameterLogType.Analogue, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam14);
+
+            #endregion
+
             
             #region Param28
 
