@@ -35,10 +35,23 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm
             _itemsToWrite = new BlockingCollection<Tuple<int, ushort, Action<Exception>>>();
             _parameterVmList = new List<IReceivableParameter>
             {
-                new KsmReadonlyParamViewModel(0, "Датчик 1wire №1", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85, 0x00), "f2", "хз", "обрыв")), new KsmReadonlyParamViewModel(1, "Датчик 1wire №2 ", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85, 0x00), "f2", "хз", "обрыв")), new KsmReadonlyParamViewModel(2, "Датчик 1wire №3", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85, 0x00), "f2", "хз", "обрыв")), new KsmReadonlyParamViewModel(3, "Датчик 1wire №4", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85, 0x00), "f2", "хз", "обрыв")), new KsmReadonlyParamViewModel(4, "Датчик 1wire №5", new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85, 0x00), "f2", "хз", "обрыв")), new KsmBitsParameterViewModel(5, "PIC порт A", new TextFormatterBits(UnknownBits), new List<IKsmBitParameterViewModel>
+                new KsmReadonlyParamViewModel(0, "Датчик 1wire №1",
+                    new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85, 0x00), "f2", "хз", "обрыв")),
+                new KsmReadonlyParamViewModel(1, "Датчик 1wire №2 ",
+                    new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85, 0x00), "f2", "хз", "обрыв")),
+                new KsmReadonlyParamViewModel(2, "Датчик 1wire №3",
+                    new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85, 0x00), "f2", "хз", "обрыв")),
+                new KsmReadonlyParamViewModel(3, "Датчик 1wire №4",
+                    new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85, 0x00), "f2", "хз", "обрыв")),
+                new KsmReadonlyParamViewModel(4, "Датчик 1wire №5",
+                    new TextFormatterSensor(0.01, 0.0, new BytesPair(0x85, 0x00), "f2", "хз", "обрыв")),
+                
+                new KsmBitsParameterViewModel(5, "PIC порт A", new TextFormatterBits(UnknownBits),
+                    new List<IKsmBitParameterViewModel>
                 {
                     new KsmBitParameterViewModel(4, "PA.4 = 0. Подогрев картера, включение"),
                 }),
+                
                 new KsmBitsParameterViewModel(6, "PIC порт C", new TextFormatterBits(UnknownBits), new List<IKsmBitParameterViewModel>
                 {
                     new KsmBitParameterViewModel(2, "PC.2 = 0: Клапан разгрузки кондиционера, включение"),

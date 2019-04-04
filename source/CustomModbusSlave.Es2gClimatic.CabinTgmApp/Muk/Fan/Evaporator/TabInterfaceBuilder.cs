@@ -182,6 +182,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
                 reply03Group.DisplayName);
             reply03Group.AddParameterOrGroup(fanSpeedChartParam);
 
+            #region Diagnostic1
 
             var groupDiagnostic1 = new GroupParamViewModel("Диагностика 1");
             reply03Group.AddParameterOrGroup(groupDiagnostic1);
@@ -226,17 +227,25 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
                 ParameterLogType.Discrete, _parameterLogger, muk03Group.DisplayName, reply03Group.DisplayName,
                 groupDiagnostic1.DisplayName);
             groupDiagnostic1.ParametersAndGroups.Add(diag1OneWire2ErrorChartParam);
+            
+            #endregion
 
 
             IRecvParam<IMukFanVaporizerDataReply03Diagnostic2> diag2RecvParam =
                 new RecvParam<IMukFanVaporizerDataReply03Diagnostic2, IMukFanVaporizerDataReply03>("Диагностика 2",
                     _cmdListenerEvaporator03Reply, data => data.Diagnostic2Parsed);
+
             var groupDiagnostic2 = new GroupParamViewModel(diag2RecvParam.ReceiveName);
             reply03Group.AddParameterOrGroup(groupDiagnostic2);
 
             var diag2PhaseErrorOrNoPowerDispParam = new DispParamViewModel<bool, IMukFanVaporizerDataReply03Diagnostic2>(
                 "Ошибка фазы или отсутствие питание", diag2RecvParam, _uiNotifier, diag2 => diag2.PhaseErrorOrPowerLost,
                 false, false);
+            var diag2PhaseErrorOrNoPowerChartParam = new ChartParamViewModel<IMukFanVaporizerDataReply03Diagnostic2, bool>(
+                diag2RecvParam,
+                diag1NoIoWithControllerDispParam, data => data.PhaseErrorOrPowerLost ? 1.0 : 0.0, ParameterLogType.Discrete,
+                _parameterLogger, muk03Group.DisplayName, reply03Group.DisplayName, groupDiagnostic1.DisplayName);
+            groupDiagnostic2.ParametersAndGroups.Add(diag2PhaseErrorOrNoPowerChartParam);
             
             /*
             var diagnostic2NotReachingLimitChart = new ChartParamViewModel<IList<byte>, bool>(diag2RecvParam, diag2PhaseErrorOrNoPowerDispParam, data => data[1].GetBit(5) ? 1.0 : 0.0, ParameterLogType.Discrete, _parameterLogger, muk08Group.DisplayName, reply03Group.DisplayName, groupDiagnostic2.DisplayName);

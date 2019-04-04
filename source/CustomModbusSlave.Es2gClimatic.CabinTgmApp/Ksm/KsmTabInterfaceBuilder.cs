@@ -46,7 +46,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param00
 
             var recvParam00 = new RecvParam<int, IList<BytesPair>>("00: Датчик в кабине машиниста",
-                _cmdListenerKsmParams, data => data[00].LowFirstUnsignedValue);
+                _cmdListenerKsmParams, data => data[00].HighFirstUnsignedValue);
 
             var dispParam00 =
                 new DispParamViewModel<string, int>(recvParam00.ReceiveName, recvParam00,
@@ -61,7 +61,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param01
 
             var recvParam01 = new RecvParam<int, IList<BytesPair>>("01: Датчик на трубке выхода испарителя",
-                _cmdListenerKsmParams, data => data[01].LowFirstUnsignedValue);
+                _cmdListenerKsmParams, data => data[01].HighFirstUnsignedValue);
 
             var dispParam01 =
                 new DispParamViewModel<string, int>(recvParam01.ReceiveName, recvParam01,
@@ -76,7 +76,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param02
 
             var recvParam02 = new RecvParam<int, IList<BytesPair>>("02: Датчик на трубке выхода конденсатора",
-                _cmdListenerKsmParams, data => data[02].LowFirstUnsignedValue);
+                _cmdListenerKsmParams, data => data[02].HighFirstUnsignedValue);
 
             var dispParam02 =
                 new DispParamViewModel<string, int>(recvParam02.ReceiveName, recvParam02,
@@ -91,7 +91,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param03
 
             var recvParam03 = new RecvParam<int, IList<BytesPair>>("03: Уставка температуры в кабине",
-                _cmdListenerKsmParams, data => data[03].LowFirstUnsignedValue);
+                _cmdListenerKsmParams, data => data[03].HighFirstUnsignedValue);
 
             var dispParam03 =
                 new DispParamViewModel<string, int>(recvParam03.ReceiveName, recvParam03,
@@ -106,7 +106,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param04
 
             var recvParam04 = new RecvParam<int, IList<BytesPair>>("04: Уставка объема подачи воздуха в кабину",
-                _cmdListenerKsmParams, data => data[04].LowFirstUnsignedValue);
+                _cmdListenerKsmParams, data => data[04].HighFirstUnsignedValue);
 
             var dispParam04 =
                 new DispParamViewModel<string, int>(recvParam04.ReceiveName, recvParam04,
@@ -121,7 +121,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param05
 
             var recvParam05 = new RecvParam<int, IList<BytesPair>>("05: PIC порт A",
-                _cmdListenerKsmParams, data => data[05].LowFirstUnsignedValue);
+                _cmdListenerKsmParams, data => data[05].HighFirstUnsignedValue);
 
             var groupParam05 = new GroupParamViewModel(recvParam05.ReceiveName);
             setParamsGroup.AddParameterOrGroup(groupParam05);
@@ -154,7 +154,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param06
 
             var recvParam06 = new RecvParam<int, IList<BytesPair>>("06: PIC порт C",
-                _cmdListenerKsmParams, data => data[06].LowFirstUnsignedValue);
+                _cmdListenerKsmParams, data => data[06].HighFirstUnsignedValue);
 
             var groupParam06 = new GroupParamViewModel(recvParam06.ReceiveName);
             setParamsGroup.AddParameterOrGroup(groupParam06);
@@ -208,7 +208,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param10
 
             var recvParam10 = new RecvParam<int, IList<BytesPair>>("10: PIC порт B",
-                _cmdListenerKsmParams, data => data[10].LowFirstUnsignedValue);
+                _cmdListenerKsmParams, data => data[10].HighFirstUnsignedValue);
 
             var groupParam10 = new GroupParamViewModel(recvParam10.ReceiveName);
             setParamsGroup.AddParameterOrGroup(groupParam10);
@@ -281,7 +281,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param11
 
             var recvParam11 = new RecvParam<int, IList<BytesPair>>("11: Давление в контуре низкого давления, бар",
-                _cmdListenerKsmParams, data => data[11].LowFirstSignedValue);
+                _cmdListenerKsmParams, data => data[11].HighFirstSignedValue);
 
             var dispParam11 =
                 new DispParamViewModel<string, int>(recvParam11.ReceiveName, recvParam11,
@@ -296,7 +296,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param12
 
             var recvParam12 = new RecvParam<int, IList<BytesPair>>("12: Давление в контуре низкого давления, бар",
-                _cmdListenerKsmParams, data => data[12].LowFirstSignedValue);
+                _cmdListenerKsmParams, data => data[12].HighFirstSignedValue);
 
             var dispParam12 =
                 new DispParamViewModel<string, int>(recvParam12.ReceiveName, recvParam12,
@@ -311,7 +311,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param13
 
             var recvParam13 = new RecvParam<int, IList<BytesPair>>("13: Температура в контуре низкого давления, град",
-                _cmdListenerKsmParams, data => data[13].LowFirstSignedValue);
+                _cmdListenerKsmParams, data => data[13].HighFirstSignedValue);
 
             var dispParam13 =
                 new DispParamViewModel<string, int>(recvParam13.ReceiveName, recvParam13,
@@ -326,7 +326,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param14
 
             var recvParam14 = new RecvParam<int, IList<BytesPair>>("14: Перегрев хладагента, град",
-                _cmdListenerKsmParams, data => data[14].LowFirstSignedValue);
+                _cmdListenerKsmParams, data => data[14].HighFirstSignedValue);
 
             var dispParam14 =
                 new DispParamViewModel<string, int>(recvParam14.ReceiveName, recvParam14,
@@ -343,7 +343,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
 
             var recvParam28 = new RecvParam<int, IList<BytesPair>>(
                 "28: Максимальный ШИМ (PWMmax_cool)", _cmdListenerKsmParams,
-                data => data[28].LowFirstUnsignedValue);
+                data => data[28].HighFirstUnsignedValue);
             var dispsetParam28 = new DispParamSettableViewModel<int, int, int>(recvParam28.ReceiveName, recvParam28,
                 _uiNotifier, i => i, 0, 0, val =>
                 {
@@ -359,7 +359,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
 
             var recvParam29 = new RecvParam<int, IList<BytesPair>>(
                 "29: Минимальный ШИМ (PWMmin_cool)", _cmdListenerKsmParams,
-                data => data[29].LowFirstUnsignedValue);
+                data => data[29].HighFirstUnsignedValue);
             var dispsetParam29 = new DispParamSettableViewModel<int, int, int>(recvParam29.ReceiveName, recvParam29,
                 _uiNotifier, i => i, 0, 0, val =>
                 {
@@ -375,7 +375,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
 
             var recvParam30 = new RecvParam<int, IList<BytesPair>>(
                 "30: Дельта +  (plus_cool)", _cmdListenerKsmParams,
-                data => data[30].LowFirstUnsignedValue);
+                data => data[30].HighFirstUnsignedValue);
             var dispsetParam30 = new DispParamSettableViewModel<int, int, int>(recvParam30.ReceiveName, recvParam30,
                 _uiNotifier, i => i, 0, 0, val =>
                 {
@@ -391,7 +391,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
 
             var recvParam31 = new RecvParam<int, IList<BytesPair>>(
                 "31: Дельта - (minus_cool)", _cmdListenerKsmParams,
-                data => data[31].LowFirstUnsignedValue);
+                data => data[31].HighFirstUnsignedValue);
             var dispsetParam31 = new DispParamSettableViewModel<int, int, int>(recvParam31.ReceiveName, recvParam31,
                 _uiNotifier, i => i, 0, 0, val =>
                 {
@@ -408,7 +408,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
 
             var recvParam36 = new RecvParam<int, IList<BytesPair>>(
                 "36: Дельта уставки температуры, отладка", _cmdListenerKsmParams,
-                data => data[36].LowFirstUnsignedValue);
+                data => data[36].HighFirstUnsignedValue);
             var dispsetParam36 = new DispParamSettableViewModel<string, int, double>(recvParam36.ReceiveName, recvParam36,
                 _uiNotifier, i => (i * 0.1 - 2.5).ToString("f1"), "ER", "?", val =>
                 {
@@ -425,7 +425,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
 
             var recvParam37 = new RecvParam<int, IList<BytesPair>>(
                 "37: Принудительный режим обогрев/охлаждение", _cmdListenerKsmParams,
-                data => data[37].LowFirstUnsignedValue);
+                data => data[37].HighFirstUnsignedValue);
             var dispsetParam37 = new DispParamSettableViewModel<string, int, int>(recvParam37.ReceiveName, recvParam37,
                 _uiNotifier, i => new WarmOrCoolForcedModeToStringConverter().Build((WarmOrCoolForcedMode) i), "ER",
                 "?", val =>
