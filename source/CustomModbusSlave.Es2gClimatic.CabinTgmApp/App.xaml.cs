@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.SystemDiagnostic;
+using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
@@ -19,13 +20,18 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
         {
             var appFactory = new AppFactory("psn.TGM-climatic-cabin.xml");
             var appAbilities = appFactory.Abilities;
-
             
             var cmdListenerMukVaporizerReply03 = new CmdListenerMukVaporizerReply03(3, 3, 41);
             appAbilities.CmdNotifierStd.AddListener(cmdListenerMukVaporizerReply03);
             
             var cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
             appAbilities.CmdNotifierStd.AddListener(cmdListenerMukVaporizerRequest16);
+
+            var cmdListenerFcRequestF0 = new CmdListenerBytes(8, 0xF0, 6);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerFcRequestF0);
+            
+            var cmdListenerFcReplyF0 = new CmdListenerBytes(8, 0xF0, 20);
+            appAbilities.CmdNotifierStd.AddListener(cmdListenerFcReplyF0);
 
             var cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
             appAbilities.CmdNotifierStd.AddListener(cmdListenerKsm50Params);

@@ -91,6 +91,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FrequencyConverter\F0Reply\IReplyF0.cs" />
+    <Compile Include="FrequencyConverter\F0Request\IRequestF0.cs" />
     <Compile Include="Ksm\KsmTabInterfaceBuilder.cs" />
     <Compile Include="Muk\Fan\Evaporator\Reply03\BytesPairNullableToStringThroughVaporizerFanWorkstageConverter.cs" />
     <Compile Include="Muk\Fan\Evaporator\Reply03\CmdListenerMukVaporizerReply03.cs" />
