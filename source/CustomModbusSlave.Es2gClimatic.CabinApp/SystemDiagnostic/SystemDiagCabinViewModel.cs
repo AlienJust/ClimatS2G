@@ -39,7 +39,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         private const Colors ErDiagColor = Colors.Red;
 
         private const Colors HiVoltageOnLine = Colors.Red;
-        private const Colors HiVoltageOffLine = Colors.LimeGreen;
+        private const Colors HiVoltageOffLine = Colors.Yellow;
+        private const Colors HiVoltageUnknownColor = Colors.Yellow;
+        private const string HiVoltageOnLineText = "Есть!";
+        private const string HiVoltageOffLineText = "Нет";
+        private const string HiVoltageUnknownText = "??!";
 
         private readonly IThreadNotifier _uiNotifier;
         private readonly ICmdListener<IMukFlapAirReply03Telemetry> _cmdListenerMukFlapAirReply03;
@@ -84,6 +88,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 
         private Colors _voltage380Color;
         private Colors _voltage3000Color;
+        private string _voltage380Text;
+        private string _voltage3000Text;
+
 
         private string _sensorOuterAirInfo;
         private Colors _sensorOuterAirInfoColor;
@@ -210,6 +217,17 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             {
                 BsSmInfo = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.BsSmVersionNumber) : OkLinkText;
                 BsSmInfoColor = OkLinkColor;
+
+                if (data.WorkMode.HasVoltage3000V)
+                {
+                    Voltage3000Color = HiVoltageOnLine;
+                    Voltage3000Text = HiVoltageOnLineText;
+                }
+                else
+                {
+                    Voltage3000Color = HiVoltageOffLine;
+                    Voltage3000Text = HiVoltageOffLineText;
+                }
             });
         }
 
@@ -448,17 +466,18 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     BsSmInfo = NoLinkText;
                     BsSmInfoColor = NoLinkColor;
                     Voltage3000Color = UnknownColor;
+                    Voltage3000Text = UnknownText;
                     BsSmFaultVm1.Code = null;
                     BsSmFaultVm2.Code = null;
                     BsSmFaultVm3.Code = null;
                     BsSmFaultVm4.Code = null;
                     BsSmFaultVm5.Code = null;
                 }
-                else
+                /*else
                 {
                     BsSmInfo = OkLinkText;
                     BsSmInfoColor = OkLinkColor;
-                }
+                }*/
 
                 // BVS state.
                 if (data[17].HighFirstUnsignedValue.GetBit(1))
@@ -467,6 +486,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     BvsInfo = NoLinkText;
                     BvsInfoColor = NoLinkColor;
                     Voltage380Color = UnknownColor;
+                    Voltage380Text = UnknownText;
 
                     AutoVm1.IsOk = null;
                     AutoVm2.IsOk = null;
@@ -513,6 +533,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         {
             _uiNotifier.Notify(() =>
             {
+                BvsInfo = OkLinkText;
+                BvsInfoColor = OkLinkColor;
+
                 AutoVm1.IsOk = data.BvsInput4; // bit 1.3
                 AutoVm2.IsOk = data.BvsInput9; // 2.0
                 AutoVm3.IsOk = data.BvsInput10; // 2.1
@@ -521,7 +544,18 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                 AutoVm6.IsOk = data.BvsInput13; // 2.4
                 AutoVm7.IsOk = data.BvsInput14; // 2.5
 
-                Voltage380Color = data.BvsInput1 ? HiVoltageOnLine : HiVoltageOffLine;
+                //Voltage380Color = data.BvsInput1 ? HiVoltageOnLine : HiVoltageOffLine;
+
+                if (data.BvsInput1)
+                {
+                    Voltage380Color = HiVoltageOnLine;
+                    Voltage380Text = HiVoltageOnLineText;
+                }
+                else
+                {
+                    Voltage380Color = HiVoltageOffLine;
+                    Voltage380Text = HiVoltageOffLineText;
+                }
             });
         }
 
@@ -787,6 +821,32 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                 {
                     _voltage3000Color = value;
                     RaisePropertyChanged(() => Voltage3000Color);
+                }
+            }
+        }
+
+        public string Voltage380Text
+        {
+            get => _voltage380Text;
+            set
+            {
+                if (_voltage380Text != value)
+                {
+                    _voltage380Text = value;
+                    RaisePropertyChanged(() => Voltage380Text);
+                }
+            }
+        }
+
+        public string Voltage3000Text
+        {
+            get => _voltage3000Text;
+            set
+            {
+                if (_voltage3000Text != value)
+                {
+                    _voltage3000Text = value;
+                    RaisePropertyChanged(() => Voltage3000Text);
                 }
             }
         }
@@ -1128,7 +1188,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             ConcentratorInfo = UnknownText;
             ConcentratorInfoColor = UnknownColor;
 
+            Voltage380Text = UnknownText;
             Voltage380Color = UnknownColor;
+            Voltage3000Text = UnknownText;
             Voltage3000Color = UnknownColor;
 
             SensorOuterAirInfo = UnknownText;

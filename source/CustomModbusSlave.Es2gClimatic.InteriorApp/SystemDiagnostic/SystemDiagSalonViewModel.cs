@@ -899,6 +899,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
         {
             _uiNotifier.Notify(() =>
             {
+                BvsInfo1 = OkLinkText;
+                BvsInfoColor1 = OkLinkColor;
+
                 AutoVm1.IsOk = data.BvsInput13; // 2.4
                 AutoVmCompressor1.IsOk = data.BvsInput9; // 2.0
                 AutoVmHeater380.IsOk = data.BvsInput11; // 2.2
@@ -926,6 +929,9 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
         {
             _uiNotifier.Notify(() =>
             {
+                BvsInfo2 = OkLinkText;
+                BvsInfoColor2 = OkLinkColor;
+
                 AutoVm2.IsOk = data.BvsInput13; // 2.4
                 AutoVm3.IsOk = data.BvsInput10; // 2.1
                 AutoVmCompressor2.IsOk = data.BvsInput9; // 2.0
