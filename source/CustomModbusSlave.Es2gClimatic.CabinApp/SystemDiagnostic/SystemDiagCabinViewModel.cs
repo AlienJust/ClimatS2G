@@ -48,6 +48,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         private readonly ICmdListener<IMukWarmFloorReply03Data> _cmdListenerMukWarmFloorReply03;
 
         private readonly ICmdListener<IList<BytesPair>> _cmdListenerKsm;
+        private readonly ICmdListener<IBsSmRequest32Data> _cmdListenerBsSm32Request;
+        private readonly ICmdListener<IBsSmReply32Data> _cmdListenerBsSm32Reply;
         private readonly ICmdListener<IBvsReply65Telemetry> _cmdListenerBvs1Reply65;
 
 
@@ -102,20 +104,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         private string _sensorInteriorAirInfo2;
         private Colors _sensorInteriorAirInfoColor2;
 
-        private string _co2LevelText;
-        private Colors _co2LevelColor;
-
         private string _emersonPressure1;
         private Colors _emersonPressure1Color;
 
-        private string _emersonPressure2;
-        private Colors _emersonPressure2Color;
-
         private string _emersonTemperature1;
         private Colors _emersonTemperature1Color;
-
-        private string _emersonTemperature2;
-        private Colors _emersonTemperature2Color;
 
         private string _flapAirOuterDiagInfo5;
         private Colors _flapAirOuterDiagInfo5Color;
@@ -124,7 +117,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 
         private string _fanEvaporatorInfo;
         private Colors _fanEvaporatorColor;
-        
+
         private string _mukWarmFloorPwm;
         private Colors _mukWarmFloorPwmColor;
 
@@ -137,8 +130,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         public AutoViewModel AutoVm5 { get; }
         public AutoViewModel AutoVm6 { get; }
         public AutoViewModel AutoVm7 { get; }
-        public AutoViewModel AutoVm8 { get; }
-        public AutoViewModel AutoVm9 { get; }
 
         public BsSmFaultViewModel BsSmFaultVm1 { get; }
         public BsSmFaultViewModel BsSmFaultVm2 { get; }
@@ -172,25 +163,27 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             _cmdListenerMukVaporizerRequest16 = cmdListenerMukVaporizerRequest16;
             _cmdListenerMukWarmFloorReply03 = cmdListenerMukWarmFloorReply03;
             _cmdListenerKsm = cmdListenerKsmParams;
+            _cmdListenerBsSm32Request = cmdListenerBsSm32Request;
+            _cmdListenerBsSm32Reply = cmdListenerBsSm32Reply;
             _cmdListenerBvs1Reply65 = cmdListenerBvsReply65;
+
 
             _cmdListenerMukFlapAirReply03.DataReceived += CmdListenerMukFlapAirReply03OnDataReceived;
             _cmdListenerMukVaporizerReply03.DataReceived += CmdListenerMukVaporizerReply03OnDataReceived;
-            _cmdListenerMukVaporizerRequest16.DataReceived += CmdListenerMukVaporizerRequest16DataReceived;
             _cmdListenerMukWarmFloorReply03.DataReceived += CmdListenerMukWarmFloorReply03OnDataReceived;
             _cmdListenerKsm.DataReceived += CmdListenerKsmOnDataReceived;
+            _cmdListenerBsSm32Request.DataReceived += CmdListenerBsSm32RequestDataReceived;
+            _cmdListenerBsSm32Reply.DataReceived += CmdListenerBsSm32ReplyDataReceived;
             _cmdListenerBvs1Reply65.DataReceived += CmdListenerBvs1Reply65OnDataReceived;
 
             ResetVmPropsToDefaultValues();
-            AutoVm1 = new AutoViewModel("Автоматический выключатель приточного вентилятора 1");
-            //AutoVm2 = new AutoViewModel("Автоматический выключатель приточного вентилятора 2");
-            //AutoVm3 = new AutoViewModel("Автоматический выключатель вытяжных вентиляторов");
-            AutoVm4 = new AutoViewModel("Автоматический выключатель Компрессора 1");
-            //AutoVm5 = new AutoViewModel("Автоматический выключатель Компрессора 2");
-            AutoVm6 = new AutoViewModel("Автоматический выключатель нагревателя 380");
-            AutoVm7 = new AutoViewModel("Автоматический выключатель рециркуляционных нагревателей");
-            AutoVm8 = new AutoViewModel("Автоматический выключатель вентилятора конденсатора");
-            //AutoVm9 = new AutoViewModel("Автоматический выключатель обеззораживателя");
+            AutoVm1 = new AutoViewModel("Контроль термостата предельной температуры в нагнетательной линии компрессора");
+            AutoVm2 = new AutoViewModel("Контроль включения автомата компрессора к сети 380 в");
+            AutoVm3 = new AutoViewModel("Конроль включения автомата питания вентилятора конденсатора 110 в");
+            AutoVm4 = new AutoViewModel("Контроль включения автомата питания калорифера к сети 380 в");
+            AutoVm5 = new AutoViewModel("Контроль включения автомата питания пола к сети 380 в");
+            AutoVm6 = new AutoViewModel("Контроль включения автомата питания вентилятора испарителя к сети 110 в");
+            AutoVm7 = new AutoViewModel("Контроль срабатывания термостата предельной температуры 120° С калорифера");
 
             BsSmFaultVm1 = new BsSmFaultViewModel();
             BsSmFaultVm2 = new BsSmFaultViewModel();
@@ -199,6 +192,26 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             BsSmFaultVm5 = new BsSmFaultViewModel();
         }
 
+        private void CmdListenerBsSm32RequestDataReceived(IList<byte> bytes, IBsSmRequest32Data data)
+        {
+            _uiNotifier.Notify(() =>
+            {
+                BsSmFaultVm1.Code = data.Fault1;
+                BsSmFaultVm2.Code = data.Fault2;
+                BsSmFaultVm3.Code = data.Fault3;
+                BsSmFaultVm4.Code = data.Fault4;
+                BsSmFaultVm5.Code = data.Fault5;
+            });
+        }
+
+        private void CmdListenerBsSm32ReplyDataReceived(IList<byte> bytes, IBsSmReply32Data data)
+        {
+            _uiNotifier.Notify(() =>
+            {
+                BsSmInfo = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.BsSmVersionNumber) : OkLinkText;
+                BsSmInfoColor = OkLinkColor;
+            });
+        }
 
         /// <summary>
         /// МУК заслонки наружного воздуха, MODBUS адрес = 2
@@ -219,12 +232,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 
                     EmersonPressure1 = NoLinkText;
                     EmersonPressure1Color = NoLinkColor;
-                    EmersonPressure2 = NoLinkText;
-                    EmersonPressure2Color = NoLinkColor;
                     EmersonTemperature1 = NoLinkText;
                     EmersonTemperature1Color = NoLinkColor;
-                    EmersonTemperature2 = NoLinkText;
-                    EmersonTemperature2Color = NoLinkColor;
                 }
                 else
                 {
@@ -363,7 +372,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                 MukInfo5 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareVersion) : OkLinkText;
                 MukInfoColor5 = OkLinkColor;
 
-                MukWarmFloorPwm = data.PwmHeat.ToString(CultureInfo.InvariantCulture); // TODO
+                MukWarmFloorPwm = data.PwmHeat.ToString(CultureInfo.InvariantCulture);
                 MukWarmFloorPwmColor = OkLinkColor;
             });
         }
@@ -432,12 +441,18 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     MukInfoColor5 = OkLinkColor;
                 }
 
-
+                // BS-SM state.
                 if (data[17].HighFirstUnsignedValue.GetBit(0))
                 {
+                    // TODO: Faults reset?
                     BsSmInfo = NoLinkText;
                     BsSmInfoColor = NoLinkColor;
                     Voltage3000Color = UnknownColor;
+                    BsSmFaultVm1.Code = null;
+                    BsSmFaultVm2.Code = null;
+                    BsSmFaultVm3.Code = null;
+                    BsSmFaultVm4.Code = null;
+                    BsSmFaultVm5.Code = null;
                 }
                 else
                 {
@@ -445,17 +460,28 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     BsSmInfoColor = OkLinkColor;
                 }
 
+                // BVS state.
                 if (data[17].HighFirstUnsignedValue.GetBit(1))
                 {
+                    // TODO: AutoVm reset?
                     BvsInfo = NoLinkText;
                     BvsInfoColor = NoLinkColor;
                     Voltage380Color = UnknownColor;
+
+                    AutoVm1.IsOk = null;
+                    AutoVm2.IsOk = null;
+                    AutoVm3.IsOk = null;
+                    AutoVm4.IsOk = null;
+                    AutoVm5.IsOk = null;
+                    AutoVm6.IsOk = null;
+                    AutoVm7.IsOk = null;
                 }
                 else
                 {
                     BvsInfo = OkLinkText;
                     BvsInfoColor = OkLinkColor;
                 }
+
 
                 var oneWireSensor1 = new SensorIndicationDoubleBasedOnBytesPair(data[0], 0.01, 0.0, new BytesPair(0x85, 0x00));
                 if (oneWireSensor1.NoLinkWithSensor)
@@ -483,26 +509,17 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             });
         }
 
-        private void CmdListenerMukVaporizerRequest16DataReceived(IList<byte> bytes, IMukFanVaporizerDataRequest16 data)
-        {
-            _uiNotifier.Notify(() =>
-            {
-                if (data != null)
-                {
-                    
-                }
-            });
-        }
-
         private void CmdListenerBvs1Reply65OnDataReceived(IList<byte> bytes, IBvsReply65Telemetry data)
         {
             _uiNotifier.Notify(() =>
             {
-                AutoVm1.IsOk = data.BvsInput13; // 2.4
-                AutoVm4.IsOk = data.BvsInput9; // 2.0
-                AutoVm6.IsOk = data.BvsInput11; // 2.2
-                AutoVm7.IsOk = data.BvsInput12; // 2.3
-                AutoVm8.IsOk = data.BvsInput10; // 2.1
+                AutoVm1.IsOk = data.BvsInput4; // bit 1.3
+                AutoVm2.IsOk = data.BvsInput9; // 2.0
+                AutoVm3.IsOk = data.BvsInput10; // 2.1
+                AutoVm4.IsOk = data.BvsInput11; // 2.2
+                AutoVm5.IsOk = data.BvsInput12; // 2.3
+                AutoVm6.IsOk = data.BvsInput13; // 2.4
+                AutoVm7.IsOk = data.BvsInput14; // 2.5
 
                 Voltage380Color = data.BvsInput1 ? HiVoltageOnLine : HiVoltageOffLine;
             });
@@ -910,34 +927,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             }
         }
 
-
-        public string Co2LevelText
-        {
-            get => _co2LevelText;
-            set
-            {
-                if (value != "2500" && _co2LevelText != value)
-                {
-                    _co2LevelText = value;
-                    RaisePropertyChanged(() => Co2LevelText);
-                }
-            }
-        }
-
-        public Colors Co2LevelColor
-        {
-            get => _co2LevelColor;
-            set
-            {
-                if (_co2LevelColor != value)
-                {
-                    _co2LevelColor = value;
-                    RaisePropertyChanged(() => Co2LevelColor);
-                }
-            }
-        }
-
-
         public string EmersonPressure1
         {
             get => _emersonPressure1;
@@ -965,32 +954,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         }
 
 
-        public string EmersonPressure2
-        {
-            get => _emersonPressure2;
-            set
-            {
-                if (_emersonPressure2 != value)
-                {
-                    _emersonPressure2 = value;
-                    RaisePropertyChanged(() => EmersonPressure2);
-                }
-            }
-        }
-
-        public Colors EmersonPressure2Color
-        {
-            get => _emersonPressure2Color;
-            set
-            {
-                if (_emersonPressure2Color != value)
-                {
-                    _emersonPressure2Color = value;
-                    RaisePropertyChanged(() => EmersonPressure2Color);
-                }
-            }
-        }
-
 
         public string EmersonTemperature1
         {
@@ -1017,34 +980,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                 }
             }
         }
-
-        public string EmersonTemperature2
-        {
-            get => _emersonTemperature2;
-            set
-            {
-                if (_emersonTemperature2 != value)
-                {
-                    _emersonTemperature2 = value;
-                    RaisePropertyChanged(() => EmersonTemperature2);
-                }
-            }
-        }
-
-        public Colors EmersonTemperature2Color
-        {
-            get => _emersonTemperature2Color;
-            set
-            {
-                if (_emersonTemperature2Color != value)
-                {
-                    _emersonTemperature2Color = value;
-                    RaisePropertyChanged(() => EmersonTemperature2Color);
-                }
-            }
-        }
-
-
 
         public string FlapAirOuterDiagInfo5
         {
@@ -1211,18 +1146,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             SensorInteriorAirInfo2 = UnknownText;
             SensorInteriorAirInfoColor2 = UnknownColor;
 
-            Co2LevelText = UnknownText;
-            Co2LevelColor = UnknownColor;
-
-
             EmersonPressure1 = UnknownText;
             EmersonPressure1Color = UnknownColor;
-            EmersonPressure2 = UnknownText;
-            EmersonPressure2Color = UnknownColor;
             EmersonTemperature1 = UnknownText;
             EmersonTemperature1Color = UnknownColor;
-            EmersonTemperature2 = UnknownText;
-            EmersonTemperature2Color = UnknownColor;
 
             FlapAirOuterDiagInfo5 = UnknownText;
             FlapAirOuterDiagInfo5Color = UnknownColor;

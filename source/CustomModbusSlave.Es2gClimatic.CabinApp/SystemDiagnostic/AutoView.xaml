@@ -9,8 +9,8 @@
     d:DesignHeight="30"
     d:DesignWidth="300">
     <UserControl.Resources>
-        <converters:BooleanToBrushConverter x:Key="BtbConverter" FalseBrush="Red" TrueBrush="LimeGreen" />
-        <converters:BooleanToTextConverter x:Key="BttConverter" FalseText="X" TrueText="V" />
+        <converters:NullableBooleanToBrushConverter x:Key="BtbConverter" FalseBrush="Red" TrueBrush="LimeGreen" NullBrush="Yellow"/>
+        <converters:NullableBooleanToTextConverter x:Key="BttConverter" FalseText="X" TrueText="V" NullText="?"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

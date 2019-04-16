@@ -5,9 +5,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 {
     class BsSmFaultViewModel : ViewModelBase
     {
-        private int _code;
+        private int? _code;
 
-        public int Code
+        public int? Code
         {
             get => _code;
             set
@@ -21,6 +21,14 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             }
         }
 
-        public string Description => IntegerFaultCodeToTextConverter.Convert(Code);
+        public string Description
+        {
+            get
+            {
+                if (_code.HasValue)
+                    return IntegerFaultCodeToTextConverter.Convert(_code.Value);
+                else return "?";
+            }
+        }
     }
 }

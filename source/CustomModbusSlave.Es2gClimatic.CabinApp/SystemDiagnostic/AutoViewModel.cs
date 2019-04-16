@@ -4,7 +4,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 {
     class AutoViewModel : ViewModelBase
     {
-        private bool _isOk;
+        private bool? _isOk;
 
         public AutoViewModel(string name)
         {
@@ -13,7 +13,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 
         public string Name { get; }
 
-        public bool IsOk
+        public bool? IsOk
         {
             get => _isOk;
             set

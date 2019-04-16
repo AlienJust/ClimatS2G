@@ -642,13 +642,16 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
 
         private void CmdListenerBsSmRequest32OnDataReceived(IList<byte> bytes, IBsSmAndKsm1DataCommand32Request data)
         {
-            BsSmFaultVm1.Code = data.Fault1;
-            BsSmFaultVm2.Code = data.Fault2;
-            BsSmFaultVm3.Code = data.Fault3;
-            BsSmFaultVm4.Code = data.Fault4;
-            BsSmFaultVm5.Code = data.Fault5;
-            Co2LevelText = !(Math.Abs(data.Co2LevelInCurrentSegment - 2500) < 0.001) ? data.Co2LevelInCurrentSegment.ToString("f2") : 680.0.ToString("f2");
-            Co2LevelColor = OkLinkColor;
+            _uiNotifier.Notify(() =>
+            {
+                BsSmFaultVm1.Code = data.Fault1;
+                BsSmFaultVm2.Code = data.Fault2;
+                BsSmFaultVm3.Code = data.Fault3;
+                BsSmFaultVm4.Code = data.Fault4;
+                BsSmFaultVm5.Code = data.Fault5;
+                Co2LevelText = !(Math.Abs(data.Co2LevelInCurrentSegment - 2500) < 0.001) ? data.Co2LevelInCurrentSegment.ToString("f2") : 680.0.ToString("f2");
+                Co2LevelColor = OkLinkColor;
+            });
         }
 
         private void CmdListenerBsSmReply32OnDataReceived(IList<byte> bytes, IBsSmAndKsm1DataCommand32Reply data)
@@ -659,12 +662,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                 //BsSmInfo = new TextFormatterIntegerDotted().Format(data.BsSmVersionNumber);
                 BsSmInfoColor = OkLinkColor;
 
-                /*BsSmFaultVm1.Code = data.Ksm2Request.Fault1;
-				BsSmFaultVm2.Code = data.Ksm2Request.Fault2;
-				BsSmFaultVm3.Code = data.Ksm2Request.Fault3;
-				BsSmFaultVm4.Code = data.Ksm2Request.Fault4;
-				BsSmFaultVm5.Code = data.Ksm2Request.Fault5;
-				*/
 
                 //Voltage3000Color = data.WorkModeAndCompressorSwitch.HasVoltage3000V ? HiVoltageOnLine : HiVoltageOffLine;
                 FarAway = data.WorkModeAndCompressorSwitch.LongDistanceJourney ? "Да" : "Нет";
@@ -788,6 +785,12 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                     BsSmInfoColor = NoLinkColor;
                     Voltage3000Color = HiVoltageUnknownColor;
                     Voltage3000Text = HiVoltageUnknownText;
+
+                    BsSmFaultVm1.Code = null;
+                    BsSmFaultVm2.Code = null;
+                    BsSmFaultVm3.Code = null;
+                    BsSmFaultVm4.Code = null;
+                    BsSmFaultVm5.Code = null;
                 }
 
                 if (data[23].HighFirstUnsignedValue.GetBit(5))
@@ -800,6 +803,17 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                     ContactorOfCompressor1Value = AutoSwitchAndContactorIsErText;
                     ContactorOfHeater380Value = AutoSwitchAndContactorIsErText;
                     ContactorOfRecycleHeatersValue = AutoSwitchAndContactorIsErText;
+
+
+                    AutoVm1.IsOk = null;
+                    AutoVm2.IsOk = null;
+                    AutoVm3.IsOk = null;
+                    AutoVmCompressor1.IsOk = null;
+                    AutoVmCompressor2.IsOk = null;
+                    AutoVmHeater380.IsOk = null;
+                    AutoVm7.IsOk = null;
+                    AutoVm8.IsOk = null;
+                    AutoVm9.IsOk = null;
                 }
                 else
                 {
