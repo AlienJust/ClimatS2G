@@ -400,7 +400,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         {
             _uiNotifier.Notify(() =>
             {
-                Version = IsFullVersion ? new TextFormatterDotted(UnknownText).Format(data[34]) : OkLinkText;
+                Version = IsFullVersion ? new TextFormatterDotted(UnknownText).Format(data[27]) : OkLinkText;
                 WorkStage = new TextFormatterWorkStage().Format(data[8]);
 
                 // КСМ, бит "Нет связи с МУК заслонки наружного воздуха" взведен

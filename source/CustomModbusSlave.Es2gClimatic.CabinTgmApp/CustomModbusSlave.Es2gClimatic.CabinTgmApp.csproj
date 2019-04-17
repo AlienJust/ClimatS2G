@@ -131,7 +131,7 @@
     <Compile Include="SystemDiagnostic\SystemDiagCabinView.xaml.cs">
       <DependentUpon>SystemDiagCabinView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SystemDiagnostic\SystemDiagCabinViewModel.cs" />
+    <Compile Include="SystemDiagnostic\SystemDiagCabinTgmViewModel.cs" />
     <Page Include="Ksm\KsmDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
