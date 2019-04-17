@@ -69,7 +69,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
             tt.AutoReset = true;
             tt.Start();
 
-
+            /*
             var colorsForGraphics = new List<Color> {
                                 Colors.LawnGreen,
                                 Colors.Red,
@@ -97,7 +97,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
                                 Colors.RoyalBlue,
                                 Colors.MediumVioletRed,
                                 Colors.MediumTurquoise
-                        };
+                        };*/
 
 
             var appFactory = new AppFactory("psn.S2G-climatic-interior.xml");
@@ -157,7 +157,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 
             appAbilities.CmdNotifierStd.AddListener(cmdListenerWinSum);
 
-
+            /*
             if (appAbilities.Version == AppVersion.Full)
             {
                 appFactory.ShowChildWindowInOwnThread(uiNotifier =>
@@ -169,7 +169,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 
                     return new WindowAndClosableViewModel(chartWindow, new WindowChartViewModel(chartVm));
                 });
-            }
+            }*/
 
             appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm =>
             {
