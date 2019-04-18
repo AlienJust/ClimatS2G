@@ -785,12 +785,6 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                     BsSmInfoColor = NoLinkColor;
                     Voltage3000Color = HiVoltageUnknownColor;
                     Voltage3000Text = HiVoltageUnknownText;
-
-                    BsSmFaultVm1.Code = null;
-                    BsSmFaultVm2.Code = null;
-                    BsSmFaultVm3.Code = null;
-                    BsSmFaultVm4.Code = null;
-                    BsSmFaultVm5.Code = null;
                 }
 
                 if (data[23].HighFirstUnsignedValue.GetBit(5))
@@ -806,14 +800,10 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
 
 
                     AutoVm1.IsOk = null;
-                    AutoVm2.IsOk = null;
-                    AutoVm3.IsOk = null;
                     AutoVmCompressor1.IsOk = null;
-                    AutoVmCompressor2.IsOk = null;
                     AutoVmHeater380.IsOk = null;
                     AutoVm7.IsOk = null;
                     AutoVm8.IsOk = null;
-                    AutoVm9.IsOk = null;
                 }
                 else
                 {
@@ -826,6 +816,11 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                     BvsInfo2 = NoLinkText;
                     BvsInfoColor2 = NoLinkColor;
                     ContactorOfCompressor2Value = AutoSwitchAndContactorIsErText;
+
+                    AutoVm2.IsOk = null;
+                    AutoVm3.IsOk = null;
+                    AutoVmCompressor2.IsOk = null;
+                    AutoVm9.IsOk = null;
                 }
                 else
                 {

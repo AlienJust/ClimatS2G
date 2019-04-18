@@ -123,6 +123,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
         public AutoViewModel AutoVm5 { get; }
         public AutoViewModel AutoVm6 { get; }
         public AutoViewModel AutoVm7 { get; }
+        public AutoViewModel AutoVm8 { get; }
+        public AutoViewModel AutoVm9 { get; }
 
         public BsSmFaultViewModel BsSmFaultVm1 { get; }
         public BsSmFaultViewModel BsSmFaultVm2 { get; }
@@ -171,12 +173,15 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 
             ResetVmPropsToDefaultValues();
             AutoVm1 = new AutoViewModel("Контроль термостата предельной температуры в нагнетательной линии компрессора");
-            AutoVm2 = new AutoViewModel("Контроль включения автомата компрессора к сети 380 в");
-            AutoVm3 = new AutoViewModel("Конроль включения автомата питания вентилятора конденсатора 110 в");
-            AutoVm4 = new AutoViewModel("Контроль включения автомата питания калорифера к сети 380 в");
+            AutoVm2 = new AutoViewModel("Контроль включения автомата компрессора к сети 380В");
+            AutoVm3 = new AutoViewModel("Контроль включения автомата питания вентилятора конденсатора 110В");
+            AutoVm4 = new AutoViewModel("Контроль включения автомата питания калорифера к сети 380В");
             AutoVm5 = new AutoViewModel("Контроль включения автомата питания пола к сети 380 в");
-            AutoVm6 = new AutoViewModel("Контроль включения автомата питания вентилятора испарителя к сети 110 в");
-            AutoVm7 = new AutoViewModel("Контроль срабатывания термостата предельной температуры 120° С калорифера");
+            AutoVm6 = new AutoViewModel("Контроль включения автомата питания вентилятора испарителя к сети 110В");
+            AutoVm7 = new AutoViewModel("Контроль срабатывания термостата предельной температуры 120°С калорифера");
+
+            AutoVm8 = new AutoViewModel("Контроль включения управляющего контактора подачи напряжения 380В на калорифер");
+            AutoVm9 = new AutoViewModel("Контроль срабатывания контактора подачи 380В на обогрев пола");
 
             BsSmFaultVm1 = new BsSmFaultViewModel();
             BsSmFaultVm2 = new BsSmFaultViewModel();
@@ -435,11 +440,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     BsSmInfoColor = NoLinkColor;
                     Voltage3000Color = UnknownColor;
                     Voltage3000Text = HiVoltageUnknownText;
-                    BsSmFaultVm1.Code = null;
-                    BsSmFaultVm2.Code = null;
-                    BsSmFaultVm3.Code = null;
-                    BsSmFaultVm4.Code = null;
-                    BsSmFaultVm5.Code = null;
                 }
 
                 // BVS state.
@@ -458,6 +458,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     AutoVm5.IsOk = null;
                     AutoVm6.IsOk = null;
                     AutoVm7.IsOk = null;
+
+                    AutoVm8.IsOk = null;
+                    AutoVm9.IsOk = null;
                 }
                 else
                 {
@@ -481,6 +484,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                 AutoVm5.IsOk = data.BvsInput12; // 2.3
                 AutoVm6.IsOk = data.BvsInput13; // 2.4
                 AutoVm7.IsOk = data.BvsInput14; // 2.5
+
+                AutoVm8.IsOk = data.BvsInput7; // 1.6
+                AutoVm9.IsOk = data.BvsInput8; // 1.7
 
                 //Voltage380Color = data.BvsInput1 ? HiVoltageOnLine : HiVoltageOffLine;
 

@@ -181,21 +181,21 @@
                 <StackPanel.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Offset="1" Color="Transparent" />
-                        <GradientStop Offset="0" Color="{Binding Path=SensorOuterAirInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+                        <GradientStop Offset="0" Color="{Binding Path=SensorRecycleAirInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
                     </LinearGradientBrush>
                 </StackPanel.Background>
                 <TextBlock Text="Датчик наружного воздуха: " />
-                <TextBlock Text="{Binding Path=SensorOuterAirInfo, Mode=OneWay}" />
+                <TextBlock Text="{Binding Path=SensorRecycleAirInfo, Mode=OneWay}" />
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                 <StackPanel.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Offset="1" Color="Transparent" />
-                        <GradientStop Offset="0" Color="{Binding Path=SensorRecycleAirInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
+                        <GradientStop Offset="0" Color="{Binding Path=SensorOuterAirInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
                     </LinearGradientBrush>
                 </StackPanel.Background>
                 <TextBlock Text="Датчик рецирк. воздуха: " />
-                <TextBlock Text="{Binding Path=SensorRecycleAirInfo, Mode=OneWay}" />
+                <TextBlock Text="{Binding Path=SensorOuterAirInfo, Mode=OneWay}" />
             </StackPanel>
 
             <StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
@@ -269,17 +269,19 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Автоматы:" FontWeight="Bold" />
+            <TextBlock Text="Автоматы и контакторы:" FontWeight="Bold" />
             <StackPanel Grid.Row="1" Grid.Column="0">
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm1, Mode=OneTime}" />
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm1, Mode=OneTime}" Background="LightGray"/>
                 <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm3, Mode=OneTime}" />
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm4, Mode=OneTime}" Background="LightGray"/>
                 <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm5, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm7, Mode=OneTime}" />
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm7, Mode=OneTime}" Background="LightGray"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm2, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm4, Mode=OneTime}" />
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm2, Mode=OneTime}" Background="LightGray"/>
                 <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm6, Mode=OneTime}" />
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm8, Mode=OneTime}" Background="LightGray"/>
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm9, Mode=OneTime}" />
             </StackPanel>
         </Grid>
         <StackPanel>
