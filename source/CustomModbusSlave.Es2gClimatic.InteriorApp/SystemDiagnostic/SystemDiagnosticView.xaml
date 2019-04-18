@@ -202,6 +202,14 @@
                 <Grid Width="30" Height="30">
                     <Ellipse Stroke="Black" Fill="{Binding Path=Voltage380Color, Mode=OneWay, Converter={StaticResource BrushConverter}}"/>
                     <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Voltage380Text}"/>
+                    <Ellipse Stroke="Transparent" Width="30" Height="10" VerticalAlignment="Top">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="Transparent" Offset="0.8"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
                 </Grid>
                 <TextBlock Margin="2" Text="Наличие 380В" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
             </StackPanel>
@@ -209,6 +217,14 @@
                 <Grid Width="30" Height="30">
                     <Ellipse Stroke="Black" Width="30" Height="30" Fill="{Binding Path=Voltage3000Color, Mode=OneWay,Converter={StaticResource BrushConverter}}"/>
                     <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Voltage3000Text}"/>
+                    <Ellipse Stroke="Transparent" Width="30" Height="10" VerticalAlignment="Top">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="Transparent" Offset="0.8"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
                 </Grid>
                 <TextBlock Margin="2" Text="Наличие 3кВ" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
             </StackPanel>

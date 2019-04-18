@@ -125,6 +125,14 @@
                 <Grid Width="30" Height="30">
                     <Ellipse Stroke="Black" Fill="{Binding Path=Voltage380Color, Mode=OneWay, Converter={StaticResource BrushConverter}}"/>
                     <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Voltage380Text}"/>
+                    <Ellipse Stroke="Transparent" Width="30" Height="10" VerticalAlignment="Top">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="Transparent" Offset="0.8"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
                 </Grid>
                 <TextBlock Text="Наличие 380В" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" />
             </StackPanel>
@@ -132,6 +140,14 @@
                 <Grid Width="30" Height="30">
                     <Ellipse Stroke="Black" Width="30" Height="30" Fill="{Binding Path=Voltage3000Color, Mode=OneWay,Converter={StaticResource BrushConverter}}"/>
                     <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Voltage3000Text}"/>
+                    <Ellipse Stroke="Transparent" Width="30" Height="10" VerticalAlignment="Top">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="Transparent" Offset="0.8"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
                 </Grid>
                 <TextBlock Text="Наличие 3кВ" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" />
             </StackPanel>
@@ -182,38 +198,7 @@
                 <TextBlock Text="{Binding Path=SensorRecycleAirInfo, Mode=OneWay}" />
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                <StackPanel.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Offset="1" Color="Transparent" />
-                        <GradientStop Offset="0" Color="{Binding Path=SensorSupplyAirInfoColor, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-                    </LinearGradientBrush>
-                </StackPanel.Background>
-                <TextBlock Text="Датчик подаваемого воздуха: " />
-                <TextBlock Text="{Binding Path=SensorSupplyAirInfo, Mode=OneWay}" />
-            </StackPanel>
-
-            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
-                <StackPanel.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Offset="1" Color="Transparent" />
-                        <GradientStop Offset="0" Color="{Binding Path=SensorInteriorAirInfoColor1, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-                    </LinearGradientBrush>
-                </StackPanel.Background>
-                <TextBlock Text="Датчик воздуха в салоне 1: " />
-                <TextBlock Text="{Binding Path=SensorInteriorAirInfo1, Mode=OneWay}" />
-            </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-                <StackPanel.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Offset="1" Color="Transparent" />
-                        <GradientStop Offset="0" Color="{Binding Path=SensorInteriorAirInfoColor2, Mode=OneWay, Converter={StaticResource ColorConverter}}" />
-                    </LinearGradientBrush>
-                </StackPanel.Background>
-                <TextBlock Text="Датчик наружного воздуха 5: " />
-                <TextBlock Text="{Binding Path=SensorInteriorAirInfo2, Mode=OneWay}" />
-            </StackPanel>
-            <StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
+            <StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
                 <StackPanel.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Offset="1" Color="Transparent" />
@@ -224,7 +209,7 @@
                 <TextBlock Text="{Binding Path=EmersonPressure1, Mode=OneWay}" />
             </StackPanel>
 
-            <StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+            <StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BtwConverter}}" Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
                 <StackPanel.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Offset="1" Color="Transparent" />

@@ -40,7 +40,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 
         private const Colors HiVoltageOnLine = Colors.Red;
         private const Colors HiVoltageOffLine = Colors.Yellow;
-        private const Colors HiVoltageUnknownColor = Colors.Yellow;
         private const string HiVoltageOnLineText = "Есть!";
         private const string HiVoltageOffLineText = "Нет";
         private const string HiVoltageUnknownText = "??!";
@@ -97,19 +96,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 
         private string _sensorRecycleAirInfo;
         private Colors _sensorRecycleAirInfoColor;
-
-        /// <summary>
-        /// Датчик подаваемого воздуха
-        /// </summary>
-        private string _sensorSupplyAirInfo;
-
-        private Colors _sensorSupplyAirInfoColor;
-
-        private string _sensorInteriorAirInfo1;
-        private Colors _sensorInteriorAirInfoColor1;
-
-        private string _sensorInteriorAirInfo2;
-        private Colors _sensorInteriorAirInfoColor2;
 
         private string _emersonPressure1;
         private Colors _emersonPressure1Color;
@@ -329,39 +315,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     EvaporatorFanControllerInfoColor = OkLinkColor;
                 }
 
-                if (data.TemperatureAddress1.NoLinkWithSensor)
-                {
-                    SensorOuterAirInfo = NoSensorText;
-                    SensorOuterAirInfoColor = NoSensorColor;
-                }
-                else
-                {
-                    SensorOuterAirInfo = data.TemperatureAddress1.Indication.ToString("f2");
-                    SensorOuterAirInfoColor = OkSensorColor;
-                }
-
-                if (data.TemperatureAddress2.NoLinkWithSensor)
-                {
-                    SensorRecycleAirInfo = NoSensorText;
-                    SensorRecycleAirInfoColor = NoSensorColor;
-                }
-                else
-                {
-                    SensorRecycleAirInfo = data.TemperatureAddress2.Indication.ToString("f2");
-                    SensorRecycleAirInfoColor = OkSensorColor;
-                }
-
-                if (data.TemperatureAddress3.NoLinkWithSensor)
-                {
-                    SensorSupplyAirInfo = NoSensorText;
-                    SensorSupplyAirInfoColor = NoSensorColor;
-                }
-                else
-                {
-                    SensorSupplyAirInfo = data.TemperatureAddress3.Indication.ToString("f2");
-                    SensorSupplyAirInfoColor = OkSensorColor;
-                }
-
                 FanEvaporatorInfo = data.FanSpeed.ToString(CultureInfo.InvariantCulture);
                 if (data.Diagnostic1.GetBit(4))
                 {
@@ -390,7 +343,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                 MukInfo5 = IsFullVersion ? new TextFormatterIntegerDotted().Format(data.FirmwareVersion) : OkLinkText;
                 MukInfoColor5 = OkLinkColor;
 
-                MukWarmFloorPwm = data.PwmHeat.ToString(CultureInfo.InvariantCulture);
+                MukWarmFloorPwm = data.AnalogueInput.ToString();
                 MukWarmFloorPwmColor = OkLinkColor;
             });
         }
@@ -429,22 +382,37 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     EvaporatorFanControllerInfo = NoLinkText;
                     EvaporatorFanControllerInfoColor = NoLinkColor;
 
-                    SensorOuterAirInfo = NoLinkText;
-                    SensorOuterAirInfoColor = NoLinkColor;
-
-                    SensorRecycleAirInfo = NoLinkText;
-                    SensorRecycleAirInfoColor = NoLinkColor;
-
-                    SensorSupplyAirInfo = NoLinkText;
-                    SensorSupplyAirInfoColor = NoLinkColor;
-
                     FanEvaporatorInfo = NoLinkText;
                     FanEvaporatorColor = NoLinkColor;
 
                     CalculatedTemperatureSetting = NoLinkText;
                 }
 
-                // КСМ, бит "Нет связи с МУК тёплого " взведен
+                var siOuter = new SensorIndicationDoubleBasedOnBytesPair(data[0], 0.01, 0.00, new BytesPair(0x85, 0x00));
+                if (siOuter.NoLinkWithSensor)
+                {
+                    SensorOuterAirInfo = NoSensorText;
+                    SensorOuterAirInfoColor = NoSensorColor;
+                }
+                else
+                {
+                    SensorOuterAirInfo = siOuter.Indication.ToString("f2");
+                    SensorOuterAirInfoColor = OkSensorColor;
+                }
+
+                var siRecycle = new SensorIndicationDoubleBasedOnBytesPair(data[4], 0.01, 0.00, new BytesPair(0x85, 0x00));
+                if (siRecycle.NoLinkWithSensor)
+                {
+                    SensorRecycleAirInfo = NoSensorText;
+                    SensorRecycleAirInfoColor = NoSensorColor;
+                }
+                else
+                {
+                    SensorRecycleAirInfo = siRecycle.Indication.ToString("f2");
+                    SensorRecycleAirInfoColor = OkSensorColor;
+                }
+
+                // КСМ, бит "Нет связи с МУК тёплого пола" взведен
                 if (data[16].HighFirstUnsignedValue.GetBit(6))
                 {
                     MukInfo5 = NoLinkText;
@@ -466,18 +434,13 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     BsSmInfo = NoLinkText;
                     BsSmInfoColor = NoLinkColor;
                     Voltage3000Color = UnknownColor;
-                    Voltage3000Text = UnknownText;
+                    Voltage3000Text = HiVoltageUnknownText;
                     BsSmFaultVm1.Code = null;
                     BsSmFaultVm2.Code = null;
                     BsSmFaultVm3.Code = null;
                     BsSmFaultVm4.Code = null;
                     BsSmFaultVm5.Code = null;
                 }
-                /*else
-                {
-                    BsSmInfo = OkLinkText;
-                    BsSmInfoColor = OkLinkColor;
-                }*/
 
                 // BVS state.
                 if (data[17].HighFirstUnsignedValue.GetBit(1))
@@ -486,7 +449,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                     BvsInfo = NoLinkText;
                     BvsInfoColor = NoLinkColor;
                     Voltage380Color = UnknownColor;
-                    Voltage380Text = UnknownText;
+                    Voltage380Text = HiVoltageUnknownText;
 
                     AutoVm1.IsOk = null;
                     AutoVm2.IsOk = null;
@@ -500,31 +463,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
                 {
                     BvsInfo = OkLinkText;
                     BvsInfoColor = OkLinkColor;
-                }
-
-
-                var oneWireSensor1 = new SensorIndicationDoubleBasedOnBytesPair(data[0], 0.01, 0.0, new BytesPair(0x85, 0x00));
-                if (oneWireSensor1.NoLinkWithSensor)
-                {
-                    SensorInteriorAirInfo1 = NoSensorText;
-                    SensorInteriorAirInfoColor1 = NoSensorColor;
-                }
-                else
-                {
-                    SensorInteriorAirInfo1 = oneWireSensor1.Indication.ToString("f2");
-                    SensorInteriorAirInfoColor1 = OkSensorColor;
-                }
-
-                var oneWireSensor2 = new SensorIndicationDoubleBasedOnBytesPair(data[1], 0.01, 0.0, new BytesPair(0x85, 0x00));
-                if (oneWireSensor2.NoLinkWithSensor)
-                {
-                    SensorInteriorAirInfo2 = NoSensorText;
-                    SensorInteriorAirInfoColor2 = NoSensorColor;
-                }
-                else
-                {
-                    SensorInteriorAirInfo2 = oneWireSensor2.Indication.ToString("f2");
-                    SensorInteriorAirInfoColor2 = OkSensorColor;
                 }
             });
         }
@@ -904,88 +842,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             }
         }
 
-        #region Props Датчик подаваемого воздуха
-
-        public string SensorSupplyAirInfo
-        {
-            get => _sensorSupplyAirInfo;
-            set
-            {
-                if (_sensorSupplyAirInfo != value)
-                {
-                    _sensorSupplyAirInfo = value;
-                    RaisePropertyChanged(() => SensorSupplyAirInfo);
-                }
-            }
-        }
-
-        public Colors SensorSupplyAirInfoColor
-        {
-            get => _sensorSupplyAirInfoColor;
-            set
-            {
-                if (_sensorSupplyAirInfoColor != value)
-                {
-                    _sensorSupplyAirInfoColor = value;
-                    RaisePropertyChanged(() => SensorSupplyAirInfoColor);
-                }
-            }
-        }
-
-        #endregion
-
-        public string SensorInteriorAirInfo1
-        {
-            get => _sensorInteriorAirInfo1;
-            set
-            {
-                if (_sensorInteriorAirInfo1 != value)
-                {
-                    _sensorInteriorAirInfo1 = value;
-                    RaisePropertyChanged(() => SensorInteriorAirInfo1);
-                }
-            }
-        }
-
-        public Colors SensorInteriorAirInfoColor1
-        {
-            get => _sensorInteriorAirInfoColor1;
-            set
-            {
-                if (_sensorInteriorAirInfoColor1 != value)
-                {
-                    _sensorInteriorAirInfoColor1 = value;
-                    RaisePropertyChanged(() => SensorInteriorAirInfoColor1);
-                }
-            }
-        }
-
-
-        public string SensorInteriorAirInfo2
-        {
-            get => _sensorInteriorAirInfo2;
-            set
-            {
-                if (_sensorInteriorAirInfo2 != value)
-                {
-                    _sensorInteriorAirInfo2 = value;
-                    RaisePropertyChanged(() => SensorInteriorAirInfo2);
-                }
-            }
-        }
-
-        public Colors SensorInteriorAirInfoColor2
-        {
-            get => _sensorInteriorAirInfoColor2;
-            set
-            {
-                if (_sensorInteriorAirInfoColor2 != value)
-                {
-                    _sensorInteriorAirInfoColor2 = value;
-                    RaisePropertyChanged(() => SensorInteriorAirInfoColor2);
-                }
-            }
-        }
 
         public string EmersonPressure1
         {
@@ -1188,9 +1044,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
             ConcentratorInfo = UnknownText;
             ConcentratorInfoColor = UnknownColor;
 
-            Voltage380Text = UnknownText;
+            Voltage380Text = HiVoltageUnknownText;
             Voltage380Color = UnknownColor;
-            Voltage3000Text = UnknownText;
+            Voltage3000Text = HiVoltageUnknownText;
             Voltage3000Color = UnknownColor;
 
             SensorOuterAirInfo = UnknownText;
@@ -1198,15 +1054,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 
             SensorRecycleAirInfo = UnknownText;
             SensorRecycleAirInfoColor = UnknownColor;
-
-            SensorSupplyAirInfo = UnknownText;
-            SensorSupplyAirInfoColor = UnknownColor;
-
-            SensorInteriorAirInfo1 = UnknownText;
-            SensorInteriorAirInfoColor1 = UnknownColor;
-
-            SensorInteriorAirInfo2 = UnknownText;
-            SensorInteriorAirInfoColor2 = UnknownColor;
 
             EmersonPressure1 = UnknownText;
             EmersonPressure1Color = UnknownColor;
