@@ -295,7 +295,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             
             #region Param12
 
-            var recvParam12 = new RecvParam<int, IList<BytesPair>>("12: Давление в контуре низкого давления, бар",
+            var recvParam12 = new RecvParam<int, IList<BytesPair>>("12: Давление в контуре высокого давления, бар",
                 _cmdListenerKsmParams, data => data[12].HighFirstSignedValue);
 
             var dispParam12 =
@@ -311,7 +311,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param13
 
             var recvParam13 = new RecvParam<int, IList<BytesPair>>("13: Температура в контуре низкого давления, град",
-                _cmdListenerKsmParams, data => data[13].HighFirstSignedValue);
+                _cmdListenerKsmParams, data => (sbyte)data[13].Second);
 
             var dispParam13 =
                 new DispParamViewModel<string, int>(recvParam13.ReceiveName, recvParam13,
