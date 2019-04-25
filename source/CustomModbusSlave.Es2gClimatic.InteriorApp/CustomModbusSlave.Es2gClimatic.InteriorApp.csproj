@@ -196,8 +196,8 @@
       <DependentUpon>BsSmFaultView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SystemDiagnostic\SdTabInterfaceBuilder.cs" />
-    <Compile Include="SystemDiagnostic\SystemDiagnosticView.xaml.cs">
-      <DependentUpon>SystemDiagnosticView.xaml</DependentUpon>
+    <Compile Include="SystemDiagnostic\SystemDiagSalonView.xaml.cs">
+      <DependentUpon>SystemDiagSalonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SystemDiagnostic\SystemDiagSalonViewModel.cs" />
     <Compile Include="TestSys\Freeze100Test.cs" />
@@ -527,7 +527,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SystemDiagnostic\SystemDiagnosticView.xaml">
+    <Page Include="SystemDiagnostic\SystemDiagSalonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

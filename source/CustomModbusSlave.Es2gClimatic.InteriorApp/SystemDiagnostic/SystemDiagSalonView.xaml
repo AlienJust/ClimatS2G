@@ -1,5 +1,5 @@
 ﻿<UserControl 
-    x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic.SystemDiagnosticView"
+    x:Class="CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic.SystemDiagSalonView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -533,17 +533,18 @@
 
             </Grid>
         </Grid>
+        <StackPanel Visibility="{Binding Path=IsMaster, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}">
         <vm:ParametersListView DataContext="{Binding Path=KsmParamsVm, Mode=OneTime}"/>
+        </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Visibility="{Binding Path=IsHourCountersVisible, Mode=OneTime, Converter={StaticResource BoolToVisConverter}}">
-                <paramControls:ParamSimple Text="Компрессор этого сегмента,  почасовой счетчик" Value="{Binding ThisSegmentCompressorWorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>
+                <paramControls:ParamSimple Text="Компрессор этого сегмента, почасовой счетчик" Value="{Binding ThisSegmentCompressorWorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>
                 <paramControls:ParamSimple Text="Компрессор, счетчик перевключений" Value="{Binding CompressorSwitchCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>
                 <paramControls:ParamSimple Text="Вентилятор конденсатора 1, почасовой счетчик работы" Value="{Binding CondenserFan1WorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>
-                <!--<paramControls:ParamSimple Text="Вентилятор конденсатора 2, почасовой счетчик работы" Value="{Binding CondenserFan2WorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>-->
                 <paramControls:ParamSimple Text="Отопитель 380 в., почасовой счетчик работы" Value="{Binding Heater380WorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>
                 <paramControls:ParamSimple Text="Отопитель 3000 в., почасовой счетчик работы" Value="{Binding Heater3000WorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>
                 <paramControls:ParamSimple Text="Вентилятор приточного воздуха, почасовой счетчик работы" Value="{Binding FanIncomingAirWorkHourCounter, Mode=OneWay}" TextColumnWidth="10*" ValueColumnWidth="1*" ValueForeground="Black"/>

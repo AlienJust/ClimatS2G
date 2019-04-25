@@ -160,7 +160,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
                 mainVm.AddTab(new TabItemViewModel
                 {
                     FullHeader = "Диагностика системы", ShortHeader = "ДС",
-                    Content = new SystemDiagnosticView
+                    Content = new SystemDiagSalonView
                     {
                         DataContext = new SystemDiagSalonViewModel(appAbilities.Version == AppVersion.Full,
                             appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full,

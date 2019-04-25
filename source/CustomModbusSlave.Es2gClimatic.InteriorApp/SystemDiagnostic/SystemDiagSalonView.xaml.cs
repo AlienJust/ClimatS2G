@@ -2,10 +2,10 @@
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic {
 	/// <summary>
-	/// Interaction logic for SystemDiagnosticView.xaml
+	/// Interaction logic for SystemDiagSalonView.xaml
 	/// </summary>
-	public partial class SystemDiagnosticView : UserControl {
-		public SystemDiagnosticView() {
+	public partial class SystemDiagSalonView : UserControl {
+		public SystemDiagSalonView() {
 			InitializeComponent();
 		}
 	}
