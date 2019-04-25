@@ -463,6 +463,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic
 
                     AutoVm8.IsOk = null;
                     AutoVm9.IsOk = null;
+                    AutoVm10.IsOk = null;
                 }
                 else
                 {
