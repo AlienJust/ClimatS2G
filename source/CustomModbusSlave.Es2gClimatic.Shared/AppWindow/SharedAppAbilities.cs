@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using AlienJust.Adaptation.ConsoleLogger;
-using AlienJust.Support.Loggers;
-using AlienJust.Support.Loggers.Contracts;
-using AlienJust.Support.Text;
-using AlienJust.Support.Text.Contracts;
+//using AlienJust.Adaptation.ConsoleLogger;
+//using AlienJust.Support.Loggers;
+//using AlienJust.Support.Loggers.Contracts;
+//using AlienJust.Support.Text;
+//using AlienJust.Support.Text.Contracts;
 using DataAbstractionLevel.Low.PsnConfig;
 using DataAbstractionLevel.Low.PsnConfig.Contracts;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
@@ -18,7 +18,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         private const string LogSeporator = " > ";
         public AppVersion Version { get; }
         public bool IsHourCountersVisible { get; }
-        public RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
+        //public RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
 
 
         private readonly IPsnProtocolConfiguration _psnConfig;
@@ -41,7 +41,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                 isHalfOrFullVersion ? AppVersion.Half : AppVersion.Base;
 
             IsHourCountersVisible = File.Exists("HourCounters.txt");
-
+            
+            /*
             ILoggerWithStackTrace logConsoleDarkRed = new RelayLoggerWithStackTrace(
                 new RelayLogger(new ColoredConsoleLogger(ConsoleColor.DarkRed, ConsoleColor.Black),
                     new ChainedFormatter(new List<ITextFormatter> {new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)})),
@@ -70,13 +71,14 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                 new RelayLogger(new ColoredConsoleLogger(ConsoleColor.White, ConsoleColor.Black),
                     new ChainedFormatter(new List<ITextFormatter> {new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)})),
                 new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-
+            
             DebugLogger = new RelayMultiLoggerWithStackTraceSimple(logConsoleDarkRed, logConsoleRed,
                 logConsoleYellow, logConsoleDarkCyan, logConsoleDarkCyan, logConsoleCyan, logConsoleGreen,
                 logConsoleWhite);
+            */
 
             _psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, psnProtocolFileName)).LoadConfiguration();
-            Console.WriteLine("PSN config loaded: " + _psnConfig.Information.Description);
+            //Console.WriteLine("PSN config loaded: " + _psnConfig.Information.Description);
 
             RtuParamReceiver = new ModbusRtuParamReceiver();
 
@@ -91,10 +93,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
         public SerialChannelWithTimeoutMonitorAndSendReplyAbility CreateChannel(string channelName)
         {
-            var serialChannel = new SerialChannelWithTimeoutMonitorAndSendReplyAbility(new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(_psnConfig), DebugLogger.GetLogger(3)));
+            var serialChannel = new SerialChannelWithTimeoutMonitorAndSendReplyAbility(new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(_psnConfig)));
             _channels.Add(channelName, serialChannel);
             CmdNotifierStd.AddSerialChannel(serialChannel.Channel);
-            Console.WriteLine("Serial channel created, with timeout monitor and sending reply abbility, blackjack and hookers");
+            //Console.WriteLine("Serial channel created, with timeout monitor and sending reply abbility, blackjack and hookers");
             return serialChannel;
         }
 
@@ -106,7 +108,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                 _channels.Remove(channelName);
                 CmdNotifierStd.RemoveSerialChannel(channel.Channel);
                 channel.BecameUnused();
-                Console.WriteLine("Serial channel destroyed");
+                //Console.WriteLine("Serial channel destroyed");
             }
         }
     }

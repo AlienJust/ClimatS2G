@@ -272,16 +272,18 @@
             <TextBlock Text="Автоматы и контакторы:" FontWeight="Bold" />
             <StackPanel Grid.Row="1" Grid.Column="0">
                 <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm1, Mode=OneTime}" Background="LightGray"/>
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm3, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm4, Mode=OneTime}" Background="LightGray"/>
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm5, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm7, Mode=OneTime}" Background="LightGray"/>
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm2, Mode=OneTime}" />
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm3, Mode=OneTime}" Background="LightGray"/>
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm4, Mode=OneTime}" />
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm5, Mode=OneTime}" Background="LightGray"/>
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm7, Mode=OneTime}"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm2, Mode=OneTime}" Background="LightGray"/>
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm6, Mode=OneTime}" />
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm8, Mode=OneTime}" Background="LightGray"/>
-                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm9, Mode=OneTime}" />
+                <systemDiagnostic:AutoView Background="LightGray" />
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm10, Mode=OneTime}"/>
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm6, Mode=OneTime}" Background="LightGray"/>
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm8, Mode=OneTime}" />
+                <systemDiagnostic:AutoView DataContext="{Binding Path=AutoVm9, Mode=OneTime}" Background="LightGray"/>
             </StackPanel>
         </Grid>
         <StackPanel>
