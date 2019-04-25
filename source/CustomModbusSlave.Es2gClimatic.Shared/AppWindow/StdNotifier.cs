@@ -48,7 +48,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                 _channels.Add(channel);
                 channel.CommandHeared += ChannelOnCommandHeared;
 
-                Console.WriteLine("Канал зарегистрирован, итого каналов в списке: " + _channels.Count);
+                //Console.WriteLine("Канал зарегистрирован, итого каналов в списке: " + _channels.Count);
             }
         }
 

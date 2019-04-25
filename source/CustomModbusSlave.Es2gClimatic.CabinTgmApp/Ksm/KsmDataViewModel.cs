@@ -104,12 +104,12 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.Ksm
             {
                 try
                 {
-                    Console.WriteLine("Need to convert " + bp.HighFirstSignedValue + " to WarmOrCoolForcedMode");
+                    //Console.WriteLine("Need to convert " + bp.HighFirstSignedValue + " to WarmOrCoolForcedMode");
                     return converter.Build((WarmOrCoolForcedMode) bp.HighFirstSignedValue);
                 }
                 catch
                 {
-                    Console.WriteLine("Cannot convert value " + bp + " to WarmOrCoolForcedMode");
+                    //Console.WriteLine("Cannot convert value " + bp + " to WarmOrCoolForcedMode");
                     return converter.Build(WarmOrCoolForcedMode.Unknown);
                 }
             });

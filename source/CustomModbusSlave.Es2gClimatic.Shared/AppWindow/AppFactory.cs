@@ -32,12 +32,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             {
                 //var uiNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
                 var uiNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
-                Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > uiNotifier created, line before window and WM were created");
+                //Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > uiNotifier created, line before window and WM were created");
                 var windowAndVm = windowCreateFunc.Invoke(uiNotifier);
-                Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > window and WM were created");
+                //Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > window and WM were created");
 
                 windowAndVm.Window.DataContext = windowAndVm.WindowVm;
-                Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > window WM assigned as window DataContext");
+                //Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > window WM assigned as window DataContext");
 
                 _closeChildWindowsActions.Add(() => uiNotifier.Notify(() =>
                 {
@@ -70,12 +70,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             {
                 try
                 {
-                    Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > Main window thread started");
+                    //Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > Main window thread started");
                     var mainWindowNotifier = new WpfUiNotifierAsync(System.Windows.Threading.Dispatcher.CurrentDispatcher);
                     var windowSystem = new WpfWindowSystem();
-                    Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > uiNotifier and WpfWindowSystem created, line before window and WM were created");
+                    //Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > uiNotifier and WpfWindowSystem created, line before window and WM were created");
                     var mainViewModel = new SharedMainViewModel(mainWindowNotifier, windowSystem, windowTitle, appAbilities);
-                    Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > windowVM was created");
+                    //Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > windowVM was created");
                     var mainWindow = new SharedMainView(appThreadNotifier, () =>
                     {
                         foreach (var closingAction in _closeChildWindowsActions)
@@ -85,21 +85,21 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
                         _closeChildWindowsActions.Clear();
                     }) {DataContext = mainViewModel};
-                    Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > mainWindow was created, let's call it's .Show() method");
+                    //Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > mainWindow was created, let's call it's .Show() method");
 
                     mainWindow.Show();
                     //mainWindow.ShowDialog();
-                    Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > mainWindow.Show() was called");
+                    //Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > mainWindow.Show() was called");
 
                     callback(mainViewModel);
-                    Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > Callback was fired");
+                    //Console.WriteLine(Thread.CurrentThread.ManagedThreadId + " > Callback was fired");
 
                     _mainWindowCreationCompleteWaiter.Set();
                     System.Windows.Threading.Dispatcher.Run();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    //Console.WriteLine(e);
                 }
             });
             mainWindowThread.SetApartmentState(ApartmentState.STA);

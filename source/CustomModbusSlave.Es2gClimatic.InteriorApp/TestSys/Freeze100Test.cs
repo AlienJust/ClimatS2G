@@ -93,7 +93,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TestSys
                 TestComplete = testComplete;
                 IsTestRunning = true;
 
-                _parameterSetter.SetParameterAsync(48, 1, Console.WriteLine);
+                _parameterSetter.SetParameterAsync(48, 1, exc=> { });
                 ProgressChanged.Invoke(100, TestSysStepResult.Good, "48 параметр КСМ установлен в режим Охлаждение 100%");
             });
         }

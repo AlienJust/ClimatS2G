@@ -1,4 +1,4 @@
-﻿using AlienJust.Support.Loggers;
+﻿//using AlienJust.Support.Loggers;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
@@ -12,7 +12,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         string TestPortName { get; }
         bool IsHourCountersVisible { get; }
 
-        RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
+        //RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
 
         SerialChannelWithTimeoutMonitorAndSendReplyAbility CreateChannel(string channelName);
         void DestroyChannel(string channelName);

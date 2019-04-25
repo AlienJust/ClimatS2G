@@ -238,7 +238,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
             IsFullVersion = isFullVersion;
             IsHalfOrFullVersion = isHalfOrFullVersion;
             IsHourCountersVisible = isHourCountersVisible;
-            Console.WriteLine("IsHourCountersVisible=" + IsHourCountersVisible);
+            //Console.WriteLine("IsHourCountersVisible=" + IsHourCountersVisible);
 
             _uiNotifier = uiNotifier;
             _cmdListenerMukFlapOuterAirReply03 = cmdListenerMukFlapOuterAirReply03;

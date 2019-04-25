@@ -24,6 +24,7 @@ namespace CustomModbusSlaveConsoleApp
 
         static void Main(string[] args)
         {
+            /*
             _logConsoleYellow = new RelayLoggerWithStackTrace(
                 new RelayLogger(new ColoredConsoleLogger(ConsoleColor.Yellow, ConsoleColor.Black),
                     new ChainedFormatter(new List<ITextFormatter>
@@ -31,6 +32,7 @@ namespace CustomModbusSlaveConsoleApp
                         new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)
                     })),
                 new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
+            */
 
             var argPortName = args.First(a => a.StartsWith(ArgStartPortName)).Split(':')[1];
             var argBaudRate = int.Parse(args.First(a => a.StartsWith(ArgStartBaudRate)).Split(':')[1]);
@@ -39,7 +41,7 @@ namespace CustomModbusSlaveConsoleApp
 
             var serialPortContainer = new SerialPortContainerReal(argPortName, argBaudRate);
             var sch = new SerialChannel(
-                new CommandPartSearcherPsnConfigBasedFast(psnConfig), _logConsoleYellow);
+                new CommandPartSearcherPsnConfigBasedFast(psnConfig)/*, _logConsoleYellow*/);
             sch.CommandHeared += SchOnCommandHeared;
             sch.SelectPortAsync(serialPortContainer, null);
             //Thread.Sleep(5000);

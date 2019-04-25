@@ -32,7 +32,6 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.TopContent;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
-using CustomModbusSlave.Es2gClimatic.Shared.Chart;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Request16;
@@ -62,44 +61,14 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
                 }
                 catch (Exception exception)
                 {
-                    Console.WriteLine(exception);
+                    //Console.WriteLine(exception);
                 }
             }, ThreadPriority.BelowNormal, true, ApartmentState.Unknown);
             var tt = new Timer(1000);
             tt.AutoReset = true;
             tt.Start();
 
-            /*
-            var colorsForGraphics = new List<Color> {
-                                Colors.LawnGreen,
-                                Colors.Red,
-                                Colors.Cyan,
-                                Colors.Yellow,
-                                Colors.Coral,
-                                Colors.LightGreen,
-                                Colors.HotPink,
-                                Colors.DeepSkyBlue,
-                                Colors.Gold,
-                                Colors.Orange,
-                                Colors.Violet,
-                                Colors.White,
-                                Colors.Fuchsia,
-                                Colors.LightSkyBlue,
-                                Colors.LightGray,
-                                Colors.Khaki,
-                                Colors.SpringGreen,
-                                Colors.Tomato,
-                                Colors.LightCyan,
-                                Colors.Goldenrod,
-                                Colors.SlateBlue,
-                                Colors.Cornsilk,
-                                Colors.MediumPurple,
-                                Colors.RoyalBlue,
-                                Colors.MediumVioletRed,
-                                Colors.MediumTurquoise
-                        };*/
-
-
+ 
             var appFactory = new AppFactory("psn.S2G-climatic-interior.xml");
             var appAbilities = appFactory.Abilities;
 
@@ -191,7 +160,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
                 mainVm.AddTab(new TabItemViewModel
                 {
                     FullHeader = "Диагностика системы", ShortHeader = "ДС",
-                    Content = new SystemDiagnosticView
+                    Content = new SystemDiagSalonView
                     {
                         DataContext = new SystemDiagSalonViewModel(appAbilities.Version == AppVersion.Full,
                             appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full,

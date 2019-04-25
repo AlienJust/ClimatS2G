@@ -16,7 +16,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Data
 
 		public MukFlapWinterSummerReply03TelemetryBuilder(IList<byte> data) {
 			_data = data;
-			Console.WriteLine("Data=" + data.ToText());
+			//Console.WriteLine("Data=" + data.ToText());
 		}
 
 		public IMukFlapWinterSummerReply03Telemetry Build() {

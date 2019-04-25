@@ -42,7 +42,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
         public ComPortControlViewModel AddChannel(string channelName)
         {
-            Console.WriteLine("SharedMainViewModel.AddChannel() called");
+            //Console.WriteLine("SharedMainViewModel.AddChannel() called");
             var result = new ComPortControlViewModel(_appAbilities, Logger, Notifier, WindowsSystem, channelName);
             ComPortControlVms.Add(result);
             return result;
@@ -51,12 +51,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         public void RemoveChannel(string channelName)
         {
             // TODO: when closing app, also call IStdNotifier.RemoveChannel()
-            Console.WriteLine("SharedMainViewModel.RemoveChannel() called");
+            //Console.WriteLine("SharedMainViewModel.RemoveChannel() called");
         }
 
         public void AddTab(TabItemViewModel tabVm)
         {
-            Console.WriteLine("SharedMainViewModel.AddTab() called");
+            //Console.WriteLine("SharedMainViewModel.AddTab() called");
             Tabs.Add(tabVm);
         }
 
@@ -65,7 +65,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             get => _tabHeadersAreLong;
             set
             {
-                Console.WriteLine("SharedMainViewModel.TabHeadersAreLong.Set() called");
+                //Console.WriteLine("SharedMainViewModel.TabHeadersAreLong.Set() called");
                 if (_tabHeadersAreLong != value)
                 {
                     _tabHeadersAreLong = value;
@@ -85,7 +85,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             get => _topContent;
             set //=> SetProp(() => !Equals(_topContent, value), () => _topContent = value, () => TopContent);
             {
-                Console.WriteLine("SharedMainViewModel.TopContent.Set() called");
+                //Console.WriteLine("SharedMainViewModel.TopContent.Set() called");
                 if (!Equals(_topContent, value))
                 {
                     _topContent = value;
