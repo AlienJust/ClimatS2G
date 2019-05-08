@@ -24,8 +24,9 @@
                 <ComboBox Margin="2,2,2,2" ItemsSource="{Binding ComPortsAvailable}" SelectedItem="{Binding SelectedComName}" />
                 <Button
                     Margin="2,2,2,2" Command="{Binding GetPortsAvailableCommand}"
-                    FontWeight="SemiBold" BorderThickness="0" Style="{DynamicResource AccentedSquareButtonStyle}">
-                    <iconPacks:PackIconMaterial Width="Auto" Height="Auto" Kind="Refresh" />
+                    FontWeight="SemiBold" FontSize="16" BorderThickness="0" Style="{DynamicResource AccentedSquareButtonStyle}">
+                    <!--<iconPacks:PackIconMaterial Width="Auto" Height="Auto" Kind="Refresh" />-->
+                    ↺
                 </Button>
             </StackPanel>
             <Button Margin="2,2,2,2" Command="{Binding Path=OpenPortCommand, Mode=OneTime}"

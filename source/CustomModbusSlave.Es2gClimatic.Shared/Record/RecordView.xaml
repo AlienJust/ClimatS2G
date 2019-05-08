@@ -8,53 +8,57 @@
 	mc:Ignorable="d"
 	d:DesignHeight="30"
 	d:DesignWidth="120">
-	<StackPanel
+    <StackPanel
 		Orientation="Horizontal">
-		<Button
+        <Button
 			Margin="2,2,2,2"
 			Command="{Binding StartRecordCommand, Mode=OneTime}"
 			FontWeight="SemiBold"
 			BorderThickness="0"
 			Style="{DynamicResource AccentedSquareButtonStyle}">
-			<Button.ToolTip>
-				<ToolTip>
-					Запись обмена
-				</ToolTip>
-			</Button.ToolTip>
-			<StackPanel
+            <Button.ToolTip>
+                <ToolTip>
+                    Запись обмена
+                </ToolTip>
+            </Button.ToolTip>
+            <StackPanel
 				Orientation="Horizontal">
-				<iconPacks:PackIconMaterial
+                <!--<iconPacks:PackIconMaterial
 					Width="Auto"
 					Height="Auto"
-					Kind="Record" />
-				<TextBlock
+					Kind="Record" />-->
+                <TextBlock
 					Margin="2,0,0,0"
-					Text="Rec"
+					Text="⏺ Rec"
 					VerticalAlignment="Center" />
-			</StackPanel>
-		</Button>
-		<Button
+            </StackPanel>
+        </Button>
+        <Button
 			Margin="2,2,2,2"
 			Command="{Binding StopRecordCommand, Mode=OneTime}"
 			FontWeight="SemiBold"
 			BorderThickness="0"
 			Style="{DynamicResource AccentedSquareButtonStyle}">
-			<Button.ToolTip>
-				<ToolTip>
-					Остановка записи и сохрание данных в файл
-				</ToolTip>
-			</Button.ToolTip>
-			<iconPacks:PackIconMaterial
+            <Button.ToolTip>
+                <ToolTip>
+                    Остановка записи и сохрание данных в файл
+                </ToolTip>
+            </Button.ToolTip>
+            <!--<iconPacks:PackIconMaterial
 				Width="Auto"
 				Height="Auto"
-				Kind="Stop" />
-		</Button>
-		<TextBlock
+				Kind="Stop" />-->
+            <TextBlock
+					Margin="2,0,2,0"
+					Text="■"
+					VerticalAlignment="Center" />
+        </Button>
+        <TextBlock
 			Text="{Binding Path=RecordsCount, Mode=OneWay}"
 			VerticalAlignment="Center" Foreground="White">
-			<TextBlock.ToolTip>
-				Число записанных команд
-			</TextBlock.ToolTip>
-		</TextBlock>
-	</StackPanel>
+            <TextBlock.ToolTip>
+                Число записанных команд
+            </TextBlock.ToolTip>
+        </TextBlock>
+    </StackPanel>
 </UserControl>

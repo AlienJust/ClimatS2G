@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm;
 using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32;
 using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Request32;
@@ -18,7 +17,6 @@ using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
-using MahApps.Metro;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinApp
 {
@@ -27,21 +25,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            // get the current app style (theme and accent) from the application
-            // you can then use the current theme and custom accent instead set a new theme
-            Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
-
-            // now set the Green accent and dark theme
-            ThemeManager.ChangeAppStyle(Application.Current,
-                ThemeManager.GetAccent("Green"),
-                //ThemeManager.GetAppTheme("BaseDark")); // or appStyle.Item1
-                ThemeManager.GetAppTheme("BaseLight")); // or appStyle.Item1
-
-            base.OnStartup(e);
-        }
-
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             var appFactory = new AppFactory("psn.S2G-climatic-cabin.xml");

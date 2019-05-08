@@ -48,7 +48,8 @@
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>
             <ToggleButton Margin="0" IsChecked="{Binding Path=TabHeadersAreLong}" BorderThickness="0" Width="48" Height="32" Style="{DynamicResource AccentedSquareButtonStyle}">
-                <iconPacks:PackIconMaterial Kind="Menu" />
+                <!--<iconPacks:PackIconMaterial Kind="Menu" />-->
+                ☰
             </ToggleButton>
         </controls:WindowCommands>
     </controls:MetroWindow.LeftWindowCommands>
