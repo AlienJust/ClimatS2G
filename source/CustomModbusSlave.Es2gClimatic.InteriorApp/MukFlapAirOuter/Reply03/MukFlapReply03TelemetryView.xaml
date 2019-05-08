@@ -210,7 +210,7 @@
 					Width="1*" />
 			</Grid.ColumnDefinitions>
 			<TextBlock
-				Text="Измеренная на Emerson температура, котнур 1" />
+				Text="Измеренная на Emerson температура перегрева, котнур 1" />
 			<TextBlock
 				Grid.Column="1"
 				Text="{Binding Path=EmersonTemperatureCircuit1, Mode=OneTime, Converter={StaticResource EmersonConverter}}" />
@@ -268,7 +268,7 @@
 					Width="1*" />
 			</Grid.ColumnDefinitions>
 			<TextBlock
-				Text="Измеренная на Emerson температура, котнур 2" />
+				Text="Измеренная на Emerson температура перегрева, котнур 2" />
 			<TextBlock
 				Grid.Column="1"
 				Text="{Binding Path=EmersonTemperatureCircuit2, Mode=OneTime, Converter={StaticResource EmersonConverter}}" />
