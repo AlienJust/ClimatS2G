@@ -352,7 +352,7 @@
                         <GradientStop Offset="0" Color="{Binding Path=EmersonTemperature1Color, Mode=OneWay, Converter={StaticResource ColorConverter}}"/>
                     </LinearGradientBrush>
                 </StackPanel.Background>
-                <TextBlock Text="Температура Emerson 1 канал: "/>
+                <TextBlock Text="Температура перегрева Emerson 1 канал: "/>
                 <TextBlock Text="{Binding Path=EmersonTemperature1, Mode=OneWay}"/>
             </StackPanel>
 
@@ -363,7 +363,7 @@
                         <GradientStop Offset="0" Color="{Binding Path=EmersonTemperature2Color, Mode=OneWay, Converter={StaticResource ColorConverter}}"/>
                     </LinearGradientBrush>
                 </StackPanel.Background>
-                <TextBlock Text="Температура Emerson 2 канал: "/>
+                <TextBlock Text="Температура перегрева Emerson 2 канал: "/>
                 <TextBlock Text="{Binding Path=EmersonTemperature2, Mode=OneWay}"/>
             </StackPanel>
 
