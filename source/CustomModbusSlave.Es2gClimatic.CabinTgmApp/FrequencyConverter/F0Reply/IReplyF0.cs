@@ -1,7 +1,7 @@
-namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.FrequencyConverter
+namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.FrequencyConverter.F0Reply
 {
-    public interface IRequestF0
+    public interface IReplyF0
     {
-        bool TurnOn { get; }
+        IFcState FcState { get; }
     }
 }

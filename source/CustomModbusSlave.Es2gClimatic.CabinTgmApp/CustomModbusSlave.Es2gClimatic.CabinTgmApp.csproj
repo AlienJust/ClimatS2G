@@ -82,8 +82,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FrequencyConverter\F0Reply\IReplyF0.cs" />
+    <Compile Include="FrequencyConverter\F0Request\CmdListenerFcF0Request.cs" />
     <Compile Include="FrequencyConverter\F0Request\IRequestF0.cs" />
+    <Compile Include="FrequencyConverter\F0Reply\CmdListenerFcF0Reply.cs" />
+    <Compile Include="FrequencyConverter\F0Reply\FcState.cs" />
+    <Compile Include="FrequencyConverter\F0Reply\IFcState.cs" />
+    <Compile Include="FrequencyConverter\F0Reply\IReplyF0.cs" />
+    <Compile Include="FrequencyConverter\F0Reply\ReplyF0Builder.cs" />
+    <Compile Include="FrequencyConverter\F0Reply\ReplyF0Simple.cs" />
+    <Compile Include="FrequencyConverter\F0Request\RequestF0Simple.cs" />
+    <Compile Include="FrequencyConverter\F0Request\RequestF0Builder.cs" />
+    <Compile Include="FrequencyConverter\TabInterfaceBuilderFc.cs" />
     <Compile Include="Ksm\KsmTabInterfaceBuilder.cs" />
     <Compile Include="Muk\Fan\Evaporator\Reply03\BytesPairNullableToStringThroughVaporizerFanWorkstageConverter.cs" />
     <Compile Include="Muk\Fan\Evaporator\Reply03\CmdListenerMukVaporizerReply03.cs" />

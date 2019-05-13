@@ -1,4 +1,7 @@
 ﻿using System.Windows;
+using CustomModbusSlave.Es2gClimatic.CabinTgmApp.FrequencyConverter;
+using CustomModbusSlave.Es2gClimatic.CabinTgmApp.FrequencyConverter.F0Reply;
+using CustomModbusSlave.Es2gClimatic.CabinTgmApp.FrequencyConverter.F0Request;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.SystemDiagnostic;
 using CustomModbusSlave.Es2gClimatic.Shared;
@@ -27,10 +30,10 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
             var cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 21);
             appAbilities.CmdNotifierStd.AddListener(cmdListenerMukVaporizerRequest16);
 
-            var cmdListenerFcRequestF0 = new CmdListenerBytes(8, 0xF0, 6);
+            var cmdListenerFcRequestF0 = new CmdListenerFcF0Request(8, 0xF0, 6);
             appAbilities.CmdNotifierStd.AddListener(cmdListenerFcRequestF0);
             
-            var cmdListenerFcReplyF0 = new CmdListenerBytes(8, 0xF0, 20);
+            var cmdListenerFcReplyF0 = new CmdListenerFcF0Reply(8, 0xF0, 20);
             appAbilities.CmdNotifierStd.AddListener(cmdListenerFcReplyF0);
 
             var cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
@@ -66,16 +69,15 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                     Content = new ParametersListView {DataContext = tabVmMuk3}
                 });
 
+                var tabsBuilderFc = new TabInterfaceBuilderFc(mainVm.Notifier, cmdListenerFcRequestF0,
+                    cmdListenerFcReplyF0, appAbilities.ParameterLogger, channel.Channel.ParamSetter);
+                var tabFc = tabsBuilderFc.Build();
+
                 mainVm.AddTab(new TabItemViewModel
                 {
                     FullHeader = "Преобразователь частоты",
                     ShortHeader = "ПЧ",
-                    /*
-                    Content = new FriquencyModifierView
-                    {
-                        DataContext = new FriquencyModifierViewModel(
-                            mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerFriquencyModifierRequest08, cmdListenerFriquencyModifierReply08)
-                    }*/
+                    Content = new ParametersListView {DataContext = tabFc}
                 });
                 
                 if (appAbilities.Version == AppVersion.Full) {
