@@ -326,7 +326,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             #region Param14
 
             var recvParam14 = new RecvParam<int, IList<BytesPair>>("14: Перегрев хладагента, град",
-                _cmdListenerKsmParams, data => data[14].HighFirstSignedValue);
+                _cmdListenerKsmParams, data => (sbyte)data[14].Second);
 
             var dispParam14 =
                 new DispParamViewModel<string, int>(recvParam14.ReceiveName, recvParam14,
