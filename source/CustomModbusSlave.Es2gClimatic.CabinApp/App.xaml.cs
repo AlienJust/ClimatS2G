@@ -11,6 +11,7 @@ using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03;
 using CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Request16;
 using CustomModbusSlave.Es2gClimatic.CabinApp.SystemDiagnostic;
+using CustomModbusSlave.Es2gClimatic.CabinApp.TopContent;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator;
@@ -64,6 +65,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
             appFactory.ShowMainWindowInOwnThread("Технический абонент, кабина", appAbilities, mainVm =>
             {
                 var channel = mainVm.AddChannel("Single channel");
+                mainVm.TopContent = new TopContentView { DataContext = new TopContentViewModel(mainVm.Notifier, cmdListenerBsSmReply32) };
+
                 mainVm.AddTab(new TabItemViewModel
                 {
                     FullHeader = "Диагностика системы",

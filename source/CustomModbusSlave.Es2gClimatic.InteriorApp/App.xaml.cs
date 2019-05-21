@@ -59,7 +59,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
                 {
                     a();
                 }
-                catch (Exception exception)
+                catch 
                 {
                     //Console.WriteLine(exception);
                 }

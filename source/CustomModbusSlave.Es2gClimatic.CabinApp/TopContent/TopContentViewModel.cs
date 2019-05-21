@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
-using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts;
+using CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Reply32;
 using CustomModbusSlave.Es2gClimatic.Shared;
 
-namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TopContent
+namespace CustomModbusSlave.Es2gClimatic.CabinApp.TopContent
 {
     class TopContentViewModel : ViewModelBase
     {
         private readonly IThreadNotifier _notifier;
-        private readonly ICmdListener<IBsSmAndKsm1DataCommand32Reply> _bsSmCmdListener;
+        private readonly ICmdListener<IBsSmReply32Data> _bsSmCmdListener;
 
         private string _astroTime;
 
-        public TopContentViewModel(IThreadNotifier notifier, ICmdListener<IBsSmAndKsm1DataCommand32Reply> bsSmCmdListener)
+        public TopContentViewModel(IThreadNotifier notifier, ICmdListener<IBsSmReply32Data> bsSmCmdListener)
         {
             _notifier = notifier;
             _bsSmCmdListener = bsSmCmdListener;
@@ -22,7 +21,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.TopContent
         }
 
 
-        private void BsSmCmdListenerOnDataReceived(IList<byte> bytes, IBsSmAndKsm1DataCommand32Reply data)
+        private void BsSmCmdListenerOnDataReceived(IList<byte> bytes, IBsSmReply32Data data)
         {
             _notifier.Notify(() => AstroTime = data.AstronomicTime.ToString("yyyy.MM.dd HH:mm:ss.fff"));
         }

@@ -95,6 +95,10 @@
       <DependentUpon>SystemDiagCabinView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SystemDiagnostic\SystemDiagCabinViewModel.cs" />
+    <Compile Include="TopContent\TopContentView.xaml.cs">
+      <DependentUpon>TopContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TopContent\TopContentViewModel.cs" />
     <Page Include="BsSm\BsSmDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -288,6 +292,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SystemDiagnostic\SystemDiagCabinView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TopContent\TopContentView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

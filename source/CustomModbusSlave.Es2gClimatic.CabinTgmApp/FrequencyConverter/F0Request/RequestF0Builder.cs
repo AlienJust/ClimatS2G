@@ -15,7 +15,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.FrequencyConverter.F0Reques
 
         public IRequestF0 Build()
         {
-            return new RequestF0Simple(_bytes[0], _bytes[1].GetBit(7));
+            return new RequestF0Simple(_bytes[2], _bytes[3].GetBit(7));
         }
     }
 }
