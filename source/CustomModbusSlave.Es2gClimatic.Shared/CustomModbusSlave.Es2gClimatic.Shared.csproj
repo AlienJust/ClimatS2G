@@ -33,6 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Abt.Controls.SciChart.Wpf.2.2">
+      <HintPath>..\..\reference\Abt.Controls.SciChart.Wpf.2.2.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Adaptation.ConsoleLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Adaptation.ConsoleLogger.dll</HintPath>
@@ -100,10 +103,14 @@
       <HintPath>..\packages\MahApps.Metro.1.4.3\lib\net40\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="NCalc, Version=1.3.8.0, Culture=neutral, PublicKeyToken=973cde3f1cafed03, processorArchitecture=MSIL">
-      <HintPath>..\packages\ncalc.1.3.8\lib\NCalc.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\NCalc.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RPD.SciChartControl">
+      <HintPath>..\..\reference\RPD.SciChartControl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -159,6 +166,17 @@
     <Compile Include="Bvs\BvsReply65TelemetrySimple.cs" />
     <Compile Include="Bvs\CmdListenerBvsReply65.cs" />
     <Compile Include="Bvs\IBvsReply65Telemetry.cs" />
+    <Compile Include="Chart\ChartView.xaml.cs">
+      <DependentUpon>ChartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chart\ChartViewModel.cs" />
+    <Compile Include="Chart\IUpdatable.cs" />
+    <Compile Include="Chart\PointsSeriesAndAdditionalData.cs" />
+    <Compile Include="Chart\SeriesAdditionalData.cs" />
+    <Compile Include="Chart\WindowChart.xaml.cs">
+      <DependentUpon>WindowChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chart\WindowChartViewModel.cs" />
     <Compile Include="CmdListenerBytes.cs" />
     <Compile Include="CommandHearedTimer\CommandHearedTimerNotThreadSafe.cs" />
     <Compile Include="CommandHearedTimer\Contracts\ICommandHearedTimer.cs" />
@@ -171,12 +189,12 @@
     <Compile Include="EmersionDiagnostic\MukEmersionSwitchOnDiagnosticBuilder.cs" />
     <Compile Include="ICmdListenerStd.cs" />
     <Compile Include="IStdCheckableCmdListener.cs" />
-    <Compile Include="IUpdateable.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkMode.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromInt.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkModeBuilderFromString.cs" />
     <Compile Include="BsSm\ClimaticSystemWorkModeExtensions.cs" />
     <Compile Include="IBuilder.cs" />
+    <Compile Include="IUpdateable.cs" />
     <Compile Include="IUserInterfaceRoot.cs" />
     <Compile Include="EmersionDiagnostic\IMukEmersionSwitchOnDiagnostic.cs" />
     <Compile Include="CmdListenerBase.cs" />
@@ -363,10 +381,10 @@
     <Compile Include="TextPresenters\UshortTextPresenter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\BytesPairNullableToStringThroughDoubleConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\BytesPairNullableToStringThroughOneWireConverter.cs" />
-    <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\BytesPairToStringConverter.cs" />
-    <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\BytesPairToTemperatureConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairNullableSomethingConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\Nullable\IBytesPairSomethingConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\BytesPairToStringConverter.cs" />
+    <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\BytesPairToTemperatureConverter.cs" />
     <Compile Include="UniversalParams\BytesPairConverters\WpfValueConverters\ObjectToStringConverter.cs" />
     <Compile Include="UniversalParams\Vm\AggregateParamViewModel.cs" />
     <Compile Include="UniversalParams\Vm\AggregateParamView.xaml.cs">
@@ -443,6 +461,14 @@
     <Page Include="BsSm\WorkModeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chart\ChartView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Chart\WindowChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="EmersionDiagnostic\EmersonDiagnosticView.xaml">
       <SubType>Designer</SubType>
@@ -620,7 +646,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

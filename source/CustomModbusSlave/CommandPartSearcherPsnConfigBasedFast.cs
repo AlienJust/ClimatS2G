@@ -21,7 +21,7 @@ namespace CustomModbusSlave {
 			_cmdPartConfigs = psnProtocolConfiguration.CommandParts.ToList();
 			_cmdPartsCount = _cmdPartConfigs.Count;
 
-			_commandPartSearcher = new PsnCommandPartSearcherStandart();
+			_commandPartSearcher = new PsnCommandPartSearcherAllDefinedValuesAndCrc();
 		}
 
 

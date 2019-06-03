@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Media;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.FrequencyConverter;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.FrequencyConverter.F0Reply;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.FrequencyConverter.F0Request;
@@ -6,6 +8,7 @@ using CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator;
 using CustomModbusSlave.Es2gClimatic.CabinTgmApp.SystemDiagnostic;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
+using CustomModbusSlave.Es2gClimatic.Shared.Chart;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
 using CmdListenerMukVaporizerReply03 = CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Reply03.CmdListenerMukVaporizerReply03;
@@ -44,6 +47,35 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
             {
                 appFactory.ShowChildWindowInOwnThread(uiNotifier =>
                 {
+                    var colorsForGraphics = new List<Color> {
+                                Colors.LawnGreen,
+                                Colors.Red,
+                                Colors.Cyan,
+                                Colors.Yellow,
+                                Colors.Coral,
+                                Colors.LightGreen,
+                                Colors.HotPink,
+                                Colors.DeepSkyBlue,
+                                Colors.Gold,
+                                Colors.Orange,
+                                Colors.Violet,
+                                Colors.White,
+                                Colors.Fuchsia,
+                                Colors.LightSkyBlue,
+                                Colors.LightGray,
+                                Colors.Khaki,
+                                Colors.SpringGreen,
+                                Colors.Tomato,
+                                Colors.LightCyan,
+                                Colors.Goldenrod,
+                                Colors.SlateBlue,
+                                Colors.Cornsilk,
+                                Colors.MediumPurple,
+                                Colors.RoyalBlue,
+                                Colors.MediumVioletRed,
+                                Colors.MediumTurquoise
+                        };
+
                     var chartVm = new ChartViewModel(uiNotifier, colorsForGraphics);
                     appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(chartVm); // TODO: REG on point
                     var chartWindow = new WindowChart();
