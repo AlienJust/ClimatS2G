@@ -38,8 +38,22 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
 
             var cmdListenerKsm50Params = new CmdListenerKsmParams(20, 16, 109);
             appAbilities.CmdNotifierStd.AddListener(cmdListenerKsm50Params);
-            
-            
+
+
+            if (appAbilities.Version == AppVersion.Full)
+            {
+                appFactory.ShowChildWindowInOwnThread(uiNotifier =>
+                {
+                    var chartVm = new ChartViewModel(uiNotifier, colorsForGraphics);
+                    appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(chartVm); // TODO: REG on point
+                    var chartWindow = new WindowChart();
+                    chartVm.SetUpdatable(chartWindow);
+
+                    return new WindowAndClosableViewModel(chartWindow, new WindowChartViewModel(chartVm));
+                });
+            }
+
+
             appFactory.ShowMainWindowInOwnThread("Технический абонент, кабина ТГМ6", appAbilities, mainVm =>
             {
                 var channel = mainVm.AddChannel("Single channel");
