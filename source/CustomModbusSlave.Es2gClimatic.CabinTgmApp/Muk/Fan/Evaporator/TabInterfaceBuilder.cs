@@ -69,7 +69,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator
 
             var mukFlapWinterTemperatureOneWireAddr2Display = new DispParamViewModel<string, IMukFanVaporizerDataReply03>(
                 "Температура 1w адрес 2", mukFanData, _uiNotifier,
-                data => data.TemperatureAddress1.ToString(d => d.ToString("f2")), "ER", "??");
+                data => data.TemperatureAddress2.ToString(d => d.ToString("f2")), "ER", "??");
 
             var mukFlapWinterTemperatureOneWireAddr2Chart =
                 new ChartParamViewModel<IMukFanVaporizerDataReply03, string>(mukFanData,
