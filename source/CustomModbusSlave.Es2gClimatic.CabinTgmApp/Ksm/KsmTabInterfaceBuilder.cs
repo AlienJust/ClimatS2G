@@ -277,7 +277,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             groupParam10.AddParameterOrGroup(chartParam1005);
 
             #endregion
-            
+
             #region Param11
 
             var recvParam11 = new RecvParam<int, IList<BytesPair>>("11: Давление в контуре низкого давления, бар",
@@ -292,7 +292,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             setParamsGroup.AddParameterOrGroup(chartParam11);
 
             #endregion
-            
+
             #region Param12
 
             var recvParam12 = new RecvParam<int, IList<BytesPair>>("12: Давление в контуре высокого давления, бар",
@@ -307,7 +307,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             setParamsGroup.AddParameterOrGroup(chartParam12);
 
             #endregion
-            
+
             #region Param13
 
             var recvParam13 = new RecvParam<int, IList<BytesPair>>("13: Температура в контуре низкого давления, град",
@@ -322,7 +322,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
             setParamsGroup.AddParameterOrGroup(chartParam13);
 
             #endregion
-            
+
             #region Param14
 
             var recvParam14 = new RecvParam<int, IList<BytesPair>>("14: Перегрев хладагента, град",
@@ -338,7 +338,135 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
 
             #endregion
 
-            
+            #region Param16_0
+
+            var recvParam16_0 = new RecvParam<bool, IList<BytesPair>>("16: Состояние обмена 1: b.0- вычитка текущих данных из МУК3",
+                _cmdListenerKsmParams, data => data[16].Second.GetBit(0));
+
+            var dispParam16_0 =
+                new DispParamViewModel<bool, bool>(recvParam16_0.ReceiveName, recvParam16_0,
+                    _uiNotifier, data => data, false, false);
+
+            var chartParam16_0 = new ChartParamViewModel<bool, bool>(recvParam16_0,
+                dispParam16_0, data => data ? 1 : 0, ParameterLogType.Discrete, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam16_0);
+
+            #endregion
+
+            #region Param16_1
+
+            var recvParam16_1 = new RecvParam<bool, IList<BytesPair>>("16: Состояние обмена 1: b.1- запись команд в МУК3",
+                _cmdListenerKsmParams, data => data[16].Second.GetBit(1));
+
+            var dispParam16_1 =
+                new DispParamViewModel<bool, bool>(recvParam16_1.ReceiveName, recvParam16_1,
+                    _uiNotifier, data => data, false, false);
+
+            var chartParam16_1 = new ChartParamViewModel<bool, bool>(recvParam16_1,
+                dispParam16_1, data => data ? 1 : 0, ParameterLogType.Discrete, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam16_1);
+
+            #endregion
+
+            #region Param16_2
+
+            var recvParam16_2 = new RecvParam<bool, IList<BytesPair>>("16: Состояние обмена 1: b.2- обмен с ПЧ",
+                _cmdListenerKsmParams, data => data[16].Second.GetBit(2));
+
+            var dispParam16_2 =
+                new DispParamViewModel<bool, bool>(recvParam16_2.ReceiveName, recvParam16_2,
+                    _uiNotifier, data => data, false, false);
+
+            var chartParam16_2 = new ChartParamViewModel<bool, bool>(recvParam16_2,
+                dispParam16_2, data => data ? 1 : 0, ParameterLogType.Discrete, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam16_2);
+
+            #endregion
+
+            #region Param16_3
+
+            var recvParam16_3 = new RecvParam<bool, IList<BytesPair>>("16: Состояние обмена 1: b.3- запись данных в РПД",
+                _cmdListenerKsmParams, data => data[16].Second.GetBit(3));
+
+            var dispParam16_3 =
+                new DispParamViewModel<bool, bool>(recvParam16_3.ReceiveName, recvParam16_3,
+                    _uiNotifier, data => data, false, false);
+
+            var chartParam16_3 = new ChartParamViewModel<bool, bool>(recvParam16_3,
+                dispParam16_3, data => data ? 1 : 0, ParameterLogType.Discrete, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam16_3);
+
+            #endregion
+
+            #region Param16_4
+
+            var recvParam16_4 = new RecvParam<bool, IList<BytesPair>>("16: Состояние обмена 1: b.4- вычитка корректируемого параметра из программы технического абонента",
+                _cmdListenerKsmParams, data => data[16].Second.GetBit(4));
+
+            var dispParam16_4 =
+                new DispParamViewModel<bool, bool>(recvParam16_4.ReceiveName, recvParam16_4,
+                    _uiNotifier, data => data, false, false);
+
+            var chartParam16_4 = new ChartParamViewModel<bool, bool>(recvParam16_4,
+                dispParam16_4, data => data ? 1 : 0, ParameterLogType.Discrete, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam16_4);
+
+            #endregion
+
+
+            #region Param16_5
+
+            var recvParam16_5 = new RecvParam<bool, IList<BytesPair>>("16: Состояние обмена 1: b.5- отсылка текущих данных техническому абоненту",
+                _cmdListenerKsmParams, data => data[16].Second.GetBit(5));
+
+            var dispParam16_5 =
+                new DispParamViewModel<bool, bool>(recvParam16_5.ReceiveName, recvParam16_5,
+                    _uiNotifier, data => data, false, false);
+
+            var chartParam16_5 = new ChartParamViewModel<bool, bool>(recvParam16_5,
+                dispParam16_5, data => data ? 1 : 0, ParameterLogType.Discrete, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam16_5);
+
+            #endregion
+
+
+            #region Param18
+
+            var recvParam18 = new RecvParam<int, IList<BytesPair>>("18: Уставка ПЧ",
+                _cmdListenerKsmParams, data => data[18].HighFirstSignedValue);
+
+            var dispParam18 =
+                new DispParamViewModel<string, int>(recvParam18.ReceiveName, recvParam18,
+                    _uiNotifier, data => data.ToString(), "ER", "?");
+            var chartParam18 = new ChartParamViewModel<int, string>(recvParam18,
+                dispParam18, data => data, ParameterLogType.Analogue, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam18);
+
+            #endregion
+
+            #region Param19
+
+            var recvParam19 = new RecvParam<int, IList<BytesPair>>("19: ШИМ клапана перегрева",
+                _cmdListenerKsmParams, data => data[19].Second);
+
+            var dispParam19 =
+                new DispParamViewModel<string, int>(recvParam19.ReceiveName, recvParam19,
+                    _uiNotifier, data => data.ToString(), "ER", "?");
+            var chartParam19 = new ChartParamViewModel<int, string>(recvParam19,
+                dispParam19, data => data, ParameterLogType.Analogue, _parameterLogger,
+                setParamsGroup.DisplayName);
+            setParamsGroup.AddParameterOrGroup(chartParam19);
+
+            #endregion
+
+
             #region Param28
 
             var recvParam28 = new RecvParam<int, IList<BytesPair>>(
@@ -348,7 +476,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 _uiNotifier, i => i, 0, 0, val =>
                 {
                     if (val < 0 || val > 255) throw new ArgumentOutOfRangeException();
-                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(28, (ushort) val, callback));
+                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(28, (ushort)val, callback));
             var aggSetParam28 = new ChartParamViewModel<int, int>(recvParam28, dispsetParam28, i => i,
                 ParameterLogType.Analogue, _parameterLogger, setParamsGroup.DisplayName);
             setParamsGroup.AddParameterOrGroup(aggSetParam28);
@@ -364,7 +492,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 _uiNotifier, i => i, 0, 0, val =>
                 {
                     if (val < 0 || val > 255) throw new ArgumentOutOfRangeException();
-                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(29, (ushort) val, callback));
+                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(29, (ushort)val, callback));
             var aggSetParam29 = new ChartParamViewModel<int, int>(recvParam29, dispsetParam29, i => i,
                 ParameterLogType.Analogue, _parameterLogger, setParamsGroup.DisplayName);
             setParamsGroup.AddParameterOrGroup(aggSetParam29);
@@ -380,7 +508,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 _uiNotifier, i => i, 0, 0, val =>
                 {
                     if (val < 0 || val > 65535) throw new ArgumentOutOfRangeException();
-                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(30, (ushort) val, callback));
+                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(30, (ushort)val, callback));
             var aggSetParam30 = new ChartParamViewModel<int, int>(recvParam30, dispsetParam30, i => i,
                 ParameterLogType.Analogue, _parameterLogger, setParamsGroup.DisplayName);
             setParamsGroup.AddParameterOrGroup(aggSetParam30);
@@ -396,7 +524,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 _uiNotifier, i => i, 0, 0, val =>
                 {
                     if (val < 0 || val > 65535) throw new ArgumentOutOfRangeException();
-                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(31, (ushort) val, callback));
+                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(31, (ushort)val, callback));
             var aggSetParam31 = new ChartParamViewModel<int, int>(recvParam31, dispsetParam31, i => i,
                 ParameterLogType.Analogue, _parameterLogger, setParamsGroup.DisplayName);
             setParamsGroup.AddParameterOrGroup(aggSetParam31);
@@ -413,7 +541,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 _uiNotifier, i => (i * 0.1 - 2.5).ToString("f1"), "ER", "?", val =>
                 {
                     if (val < -2.5 || val > 2.5) throw new ArgumentOutOfRangeException();
-                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(36, (ushort) ((val + 2.5) * 10), callback));
+                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(36, (ushort)((val + 2.5) * 10), callback));
             var aggSetParam36 = new ChartParamViewModel<int, string>(recvParam36, dispsetParam36, i => i,
                 ParameterLogType.Analogue, _parameterLogger, setParamsGroup.DisplayName);
             setParamsGroup.AddParameterOrGroup(aggSetParam36);
@@ -427,11 +555,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Ksm
                 "37: Принудительный режим обогрев/охлаждение", _cmdListenerKsmParams,
                 data => data[37].HighFirstUnsignedValue);
             var dispsetParam37 = new DispParamSettableViewModel<string, int, int>(recvParam37.ReceiveName, recvParam37,
-                _uiNotifier, i => new WarmOrCoolForcedModeToStringConverter().Build((WarmOrCoolForcedMode) i), "ER",
+                _uiNotifier, i => new WarmOrCoolForcedModeToStringConverter().Build((WarmOrCoolForcedMode)i), "ER",
                 "?", val =>
                 {
                     if (val < 0 || val > 10) throw new ArgumentOutOfRangeException();
-                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(37, (ushort) val, callback));
+                }, 0, 0, (val, callback) => _parameterSetter.SetParameterAsync(37, (ushort)val, callback));
             var aggSetParam37 = new ChartParamViewModel<int, string>(recvParam37, dispsetParam37, i => i,
                 ParameterLogType.Analogue, _parameterLogger, setParamsGroup.DisplayName);
             setParamsGroup.AddParameterOrGroup(aggSetParam37);
