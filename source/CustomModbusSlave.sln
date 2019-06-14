@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbus.Slave.FastRepl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamControls", "ParamControls\ParamControls.csproj", "{6286A75B-9E7D-43D5-A173-1DE721E0E959}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.Tgm6.CabinApp", "CustomModbusSlave.Es2gClimatic.CabinTgmApp\CustomModbusSlave.Climatic.Tgm6.CabinApp.csproj", "{2E521F3F-005F-446A-974A-7081AC9B0549}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.Tgm6.CabinApp", "CustomModbusSlave.Climatic.Tgm6.CabinApp\CustomModbusSlave.Climatic.Tgm6.CabinApp.csproj", "{2E521F3F-005F-446A-974A-7081AC9B0549}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
