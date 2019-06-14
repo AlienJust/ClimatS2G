@@ -32,6 +32,7 @@ using CustomModbusSlave.Es2gClimatic.InteriorApp.TopContent;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Bvs;
+using CustomModbusSlave.Es2gClimatic.Shared.Chart;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Reply03;
 using CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Request16;
@@ -126,11 +127,40 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 
             appAbilities.CmdNotifierStd.AddListener(cmdListenerWinSum);
 
-            /*
+
             if (appAbilities.Version == AppVersion.Full)
             {
                 appFactory.ShowChildWindowInOwnThread(uiNotifier =>
                 {
+                    var colorsForGraphics = new List<Color> {
+                                Colors.LawnGreen,
+                                Colors.Red,
+                                Colors.Cyan,
+                                Colors.Yellow,
+                                Colors.Coral,
+                                Colors.LightGreen,
+                                Colors.HotPink,
+                                Colors.DeepSkyBlue,
+                                Colors.Gold,
+                                Colors.Orange,
+                                Colors.Violet,
+                                Colors.White,
+                                Colors.Fuchsia,
+                                Colors.LightSkyBlue,
+                                Colors.LightGray,
+                                Colors.Khaki,
+                                Colors.SpringGreen,
+                                Colors.Tomato,
+                                Colors.LightCyan,
+                                Colors.Goldenrod,
+                                Colors.SlateBlue,
+                                Colors.Cornsilk,
+                                Colors.MediumPurple,
+                                Colors.RoyalBlue,
+                                Colors.MediumVioletRed,
+                                Colors.MediumTurquoise
+                        };
+
                     var chartVm = new ChartViewModel(uiNotifier, colorsForGraphics);
                     appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(chartVm); // TODO: REG on point
                     var chartWindow = new WindowChart();
@@ -138,7 +168,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
 
                     return new WindowAndClosableViewModel(chartWindow, new WindowChartViewModel(chartVm));
                 });
-            }*/
+            }
 
             appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm =>
             {

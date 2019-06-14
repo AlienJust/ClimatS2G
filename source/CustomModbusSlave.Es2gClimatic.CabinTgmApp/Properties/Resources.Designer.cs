@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Properties {
+namespace CustomModbusSlave.Climatic.Tgm6.CabinApp.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CustomModbusSlave.Es2gClimatic.CabinTgmApp.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CustomModbusSlave.Climatic.Tgm6.CabinApp.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

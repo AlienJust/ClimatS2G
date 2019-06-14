@@ -9,6 +9,7 @@
 		TurnOnUov = 6, // TODO: what is "UOV" means?
 		Test3000VoltageHeating = 7,
 		Test380VoltageHeating = 8,
-		Unknown
+        VentMaxСO2 = 9,
+        Unknown
 	}
 }
