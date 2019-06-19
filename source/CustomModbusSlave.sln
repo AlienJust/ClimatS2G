@@ -6,11 +6,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave", "Custom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlaveConsoleApp", "CustomModbusSlaveConsoleApp\CustomModbusSlaveConsoleApp.csproj", "{EB3B372F-234C-43F2-B80A-776A01A24BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClimatic.CabinApp", "CustomModbusSlave.Es2gClimatic.CabinApp\CustomModbusSlave.Es2gClimatic.CabinApp.csproj", "{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.Es2g.CabinApp", "CustomModbusSlave.Climatic.Es2g.CabinApp\CustomModbusSlave.Climatic.Es2g.CabinApp.csproj", "{E50F40A5-5E36-4BDF-B076-8748D5B22FBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClimatic.InteriorApp", "CustomModbusSlave.Es2gClimatic.InteriorApp\CustomModbusSlave.Es2gClimatic.InteriorApp.csproj", "{446DBE4B-6AFB-4784-AFAC-B99E66A6634E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.Es2g.InteriorApp", "CustomModbusSlave.Climatic.Es2g.InteriorApp\CustomModbusSlave.Climatic.Es2g.InteriorApp.csproj", "{446DBE4B-6AFB-4784-AFAC-B99E66A6634E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Es2gClimatic.Shared", "CustomModbusSlave.Es2gClimatic.Shared\CustomModbusSlave.Es2gClimatic.Shared.csproj", "{B20B54D7-E4ED-4B62-9308-9C975339F965}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.Shared", "CustomModbusSlave.Climatic.Shared\CustomModbusSlave.Climatic.Shared.csproj", "{B20B54D7-E4ED-4B62-9308-9C975339F965}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.Tgm6.CabinApp", "CustomModbusSlave.Climatic.Tgm6.CabinApp\CustomModbusSlave.Climatic.Tgm6.CabinApp.csproj", "{2E521F3F-005F-446A-974A-7081AC9B0549}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamCentric.Common.Contracts", "ParamCentric.Common.Contracts\ParamCentric.Common.Contracts.csproj", "{08B70D5B-732F-4EF5-9DDC-56B3561B9B83}"
 EndProject
@@ -24,8 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbus.Slave.FastRepl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamControls", "ParamControls\ParamControls.csproj", "{6286A75B-9E7D-43D5-A173-1DE721E0E959}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.Tgm6.CabinApp", "CustomModbusSlave.Climatic.Tgm6.CabinApp\CustomModbusSlave.Climatic.Tgm6.CabinApp.csproj", "{2E521F3F-005F-446A-974A-7081AC9B0549}"
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
