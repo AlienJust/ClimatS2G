@@ -14,14 +14,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
     public sealed class SharedAppAbilities : ISharedAppAbilities
     {
-        private const string NoStackInfoText = "[NO STACK INFO]";
-        private const string LogSeporator = " > ";
         public AppVersion Version { get; }
         public bool IsHourCountersVisible { get; }
-        //public RelayMultiLoggerWithStackTraceSimple DebugLogger { get; }
 
-
-        private readonly IPsnProtocolConfiguration _psnConfig;
         private readonly Dictionary<string, SerialChannelWithTimeoutMonitorAndSendReplyAbility> _channels;
         public string TestPortName => "ТЕСТ";
         public IStdNotifier CmdNotifierStd { get; }
@@ -30,6 +25,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
         public IParamLoggerRegistrationPoint ParamLoggerRegistrationPoint { get; }
         public IParameterLogger ParameterLogger { get; }
+
+        public IPsnProtocolConfiguration PsnProtocolConfiguration { get; }
 
         public SharedAppAbilities(string psnProtocolFileName)
         {
@@ -42,43 +39,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
             IsHourCountersVisible = File.Exists("HourCounters.txt");
             
-            /*
-            ILoggerWithStackTrace logConsoleDarkRed = new RelayLoggerWithStackTrace(
-                new RelayLogger(new ColoredConsoleLogger(ConsoleColor.DarkRed, ConsoleColor.Black),
-                    new ChainedFormatter(new List<ITextFormatter> {new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)})),
-                new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-            ILoggerWithStackTrace logConsoleRed = new RelayLoggerWithStackTrace(
-                new RelayLogger(new ColoredConsoleLogger(ConsoleColor.Red, ConsoleColor.Black),
-                    new ChainedFormatter(new List<ITextFormatter> {new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)})),
-                new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-            ILoggerWithStackTrace logConsoleYellow = new RelayLoggerWithStackTrace(
-                new RelayLogger(new ColoredConsoleLogger(ConsoleColor.Yellow, ConsoleColor.Black),
-                    new ChainedFormatter(new List<ITextFormatter> {new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)})),
-                new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-            ILoggerWithStackTrace logConsoleDarkCyan = new RelayLoggerWithStackTrace(
-                new RelayLogger(new ColoredConsoleLogger(ConsoleColor.DarkCyan, ConsoleColor.Black),
-                    new ChainedFormatter(new List<ITextFormatter> {new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)})),
-                new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-            ILoggerWithStackTrace logConsoleCyan = new RelayLoggerWithStackTrace(
-                new RelayLogger(new ColoredConsoleLogger(ConsoleColor.Cyan, ConsoleColor.Black),
-                    new ChainedFormatter(new List<ITextFormatter> {new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)})),
-                new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-            ILoggerWithStackTrace logConsoleGreen = new RelayLoggerWithStackTrace(
-                new RelayLogger(new ColoredConsoleLogger(ConsoleColor.Green, ConsoleColor.Black),
-                    new ChainedFormatter(new List<ITextFormatter> {new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)})),
-                new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-            ILoggerWithStackTrace logConsoleWhite = new RelayLoggerWithStackTrace(
-                new RelayLogger(new ColoredConsoleLogger(ConsoleColor.White, ConsoleColor.Black),
-                    new ChainedFormatter(new List<ITextFormatter> {new ThreadFormatter(LogSeporator, true, false, false), new DateTimeFormatter(LogSeporator)})),
-                new StackTraceFormatterWithNullSuport(LogSeporator, NoStackInfoText));
-            
-            DebugLogger = new RelayMultiLoggerWithStackTraceSimple(logConsoleDarkRed, logConsoleRed,
-                logConsoleYellow, logConsoleDarkCyan, logConsoleDarkCyan, logConsoleCyan, logConsoleGreen,
-                logConsoleWhite);
-            */
-
-            _psnConfig = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, psnProtocolFileName)).LoadConfiguration();
-            //Console.WriteLine("PSN config loaded: " + _psnConfig.Information.Description);
+            PsnProtocolConfiguration = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, psnProtocolFileName)).LoadConfiguration();
 
             RtuParamReceiver = new ModbusRtuParamReceiver();
 
@@ -93,10 +54,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
         public SerialChannelWithTimeoutMonitorAndSendReplyAbility CreateChannel(string channelName)
         {
-            var serialChannel = new SerialChannelWithTimeoutMonitorAndSendReplyAbility(new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(_psnConfig)));
+            var serialChannel = new SerialChannelWithTimeoutMonitorAndSendReplyAbility(new SerialChannel(new CommandPartSearcherPsnConfigBasedFast(PsnProtocolConfiguration)));
             _channels.Add(channelName, serialChannel);
             CmdNotifierStd.AddSerialChannel(serialChannel.Channel);
-            //Console.WriteLine("Serial channel created, with timeout monitor and sending reply abbility, blackjack and hookers");
             return serialChannel;
         }
 
@@ -108,7 +68,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                 _channels.Remove(channelName);
                 CmdNotifierStd.RemoveSerialChannel(channel.Channel);
                 channel.BecameUnused();
-                //Console.WriteLine("Serial channel destroyed");
             }
         }
     }

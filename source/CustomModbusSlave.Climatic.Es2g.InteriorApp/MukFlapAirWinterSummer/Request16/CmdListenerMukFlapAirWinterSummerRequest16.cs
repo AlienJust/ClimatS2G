@@ -6,7 +6,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirWinterSummer.Requ
 		public CmdListenerMukFlapAirWinterSummerRequest16(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
 
-		public override IMukFlapAirWinterSummerRequest16Data BuildData(IList<byte> bytes) {
+		public override IMukFlapAirWinterSummerRequest16Data BuildData(byte[] bytes) {
 			return new MukFlapAirWinterSummerRequest16DataBuilder(bytes).Build();
 		}
 	}

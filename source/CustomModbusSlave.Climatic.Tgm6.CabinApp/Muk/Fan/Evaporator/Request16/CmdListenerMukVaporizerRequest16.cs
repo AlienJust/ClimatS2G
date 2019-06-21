@@ -7,7 +7,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Request1
     {
         public CmdListenerMukVaporizerRequest16(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) { }
 
-        public override IMukFanVaporizerDataRequest16 BuildData(IList<byte> bytes)
+        public override IMukFanVaporizerDataRequest16 BuildData(byte[] bytes)
         {
             return new MukFanVaporizerDataRequest16Builder(bytes).Build();
         }

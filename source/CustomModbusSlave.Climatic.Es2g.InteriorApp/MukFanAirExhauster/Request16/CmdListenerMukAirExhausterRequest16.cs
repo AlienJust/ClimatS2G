@@ -6,7 +6,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFanAirExhauster.Request1
 		public CmdListenerMukAirExhausterRequest16(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
 
-		public override IMukFanAirExhausterRequest16Data BuildData(IList<byte> bytes) {
+		public override IMukFanAirExhausterRequest16Data BuildData(byte[] bytes) {
 			return new MukFanAirExhausterRequest16DataBuilder(bytes).Build();
 		}
 	}

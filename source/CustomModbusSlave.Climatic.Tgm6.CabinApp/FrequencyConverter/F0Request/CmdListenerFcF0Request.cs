@@ -7,7 +7,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.FrequencyConverter.F0Reques
     {
         public CmdListenerFcF0Request(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) { }
 
-        public override IRequestF0 BuildData(IList<byte> bytes)
+        public override IRequestF0 BuildData(byte[] bytes)
         {
             return new RequestF0Builder(bytes).Build();
         }

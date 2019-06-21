@@ -13,6 +13,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared
         /// <param name="addr">Address for the command</param>
         /// <param name="code">Command code</param>
         /// <param name="data">Data bytes</param>
-        void ReceiveCommand(byte addr, byte code, IList<byte> data);
+        void ReceiveCommand(byte addr, byte code, byte[] data);
     }
 }

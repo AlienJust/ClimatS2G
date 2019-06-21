@@ -6,7 +6,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirRecycle.Request16
 		public CmdListenerMukFlapAirRecycleRequest16(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
 
-		public override IMukFlapAirRecycleRequest16Data BuildData(IList<byte> bytes) {
+		public override IMukFlapAirRecycleRequest16Data BuildData(byte[] bytes) {
 			return new MukFlapAirRecycleRequest16DataBuilder(bytes).Build();
 		}
 	}

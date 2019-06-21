@@ -6,7 +6,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.MukWarmFloor.Reply03 {
 		public CmdListenerMukWarmFloorReply03(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
 
-		public override IMukWarmFloorReply03Data BuildData(IList<byte> bytes) {
+		public override IMukWarmFloorReply03Data BuildData(byte[] bytes) {
 			return new MukWarmFloorReply03DataBuilder(bytes).Build();
 		}
 	}

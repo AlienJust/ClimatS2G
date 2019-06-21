@@ -1,4 +1,5 @@
 ﻿//using AlienJust.Support.Loggers;
+using DataAbstractionLevel.Low.PsnConfig.Contracts;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
@@ -26,5 +27,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
         IParamLoggerRegistrationPoint ParamLoggerRegistrationPoint { get; }
         IParameterLogger ParameterLogger { get; }
+        IPsnProtocolConfiguration PsnProtocolConfiguration { get; }
     }
 }

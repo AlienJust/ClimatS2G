@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DataAbstractionLevel.Low.PsnConfig.Contracts;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared
@@ -7,9 +8,43 @@ namespace CustomModbusSlave.Es2gClimatic.Shared
     {
         public CmdListenerBytes(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) { }
 
-        public override IList<byte> BuildData(IList<byte> bytes)
+        public override IList<byte> BuildData(byte[] bytes)
         {
-            return bytes.Skip(2).Take(bytes.Count - 4).ToList();
+            return bytes.Skip(2).Take(bytes.Length - 4).ToList();
+        }
+    }
+
+
+    public interface ICmdPartConfigAndBytes
+    {
+        IPsnProtocolCommandPartConfiguration CmdPartConfig { get; }
+        byte[] DataBytes { get; }
+
+    }
+
+    internal sealed class CmdPartConfigAndBytesSimple : ICmdPartConfigAndBytes
+    {
+        public IPsnProtocolCommandPartConfiguration CmdPartConfig { get; }
+        public byte[] DataBytes { get; }
+        public CmdPartConfigAndBytesSimple(IPsnProtocolCommandPartConfiguration config, byte[] bytes)
+        {
+            CmdPartConfig = config;
+            DataBytes = bytes;
+        }
+    }
+
+    public sealed class CmdListenerCmdPartAndBytes : CmdListenerBase<ICmdPartConfigAndBytes>
+    {
+        private IPsnProtocolCommandPartConfiguration _cmdPartConfig;
+        public CmdListenerCmdPartAndBytes(IPsnProtocolCommandPartConfiguration config) :
+            base((byte)config.Address.DefinedValue, (byte)config.CommandCode.DefinedValue, config.Length)
+        {
+            _cmdPartConfig = config;
+        }
+
+        public override ICmdPartConfigAndBytes BuildData(byte[] bytes)
+        {
+            return new CmdPartConfigAndBytesSimple(_cmdPartConfig, bytes);
         }
     }
 }

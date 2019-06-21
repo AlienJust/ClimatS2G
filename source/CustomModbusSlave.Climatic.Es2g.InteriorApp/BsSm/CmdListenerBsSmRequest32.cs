@@ -8,7 +8,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm {
 		public CmdListenerBsSmRequest32(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
 
-		public override IBsSmAndKsm1DataCommand32Request BuildData(IList<byte> bytes) {
+		public override IBsSmAndKsm1DataCommand32Request BuildData(byte[] bytes) {
 			return new BsSmAndKsm1DataCommand32RequestBuilderFromCommandPartDataBytes(bytes).Build();
 		}
 	}

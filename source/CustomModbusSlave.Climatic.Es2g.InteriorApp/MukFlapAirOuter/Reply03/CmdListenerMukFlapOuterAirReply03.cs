@@ -8,7 +8,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03 {
 		public CmdListenerMukFlapOuterAirReply03(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
 
-		public override IMukFlapOuterAirReply03Telemetry BuildData(IList<byte> bytes) {
+		public override IMukFlapOuterAirReply03Telemetry BuildData(byte[] bytes) {
 			return new MukFlapReply03TelemetryBuilder(bytes).Build();
 		}
 	}

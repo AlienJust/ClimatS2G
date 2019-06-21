@@ -5,7 +5,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanCondenser.Request16 {
 		public CmdListenerMukCondenserFanRequest16(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
 
-		public override IMukCondenserRequest16Data BuildData(IList<byte> bytes) {
+		public override IMukCondenserRequest16Data BuildData(byte[] bytes) {
 			return new MukCondenserRequest16DataBuilder(bytes).Build();
 		}
 	}

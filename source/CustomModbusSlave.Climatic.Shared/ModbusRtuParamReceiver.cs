@@ -18,9 +18,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared
             _params.Add(parameter);
         }
 
-        public void ReceiveCommand(byte addr, byte code, IList<byte> data)
+        public void ReceiveCommand(byte addr, byte code, byte[] data)
         {
-            if (data.Count % 2 != 0)
+            if (data.Length % 2 != 0)
             {
                 // ответ ModbusRTU всегда нечетный! (запрос чётный)
                 foreach (var parameter in _params)

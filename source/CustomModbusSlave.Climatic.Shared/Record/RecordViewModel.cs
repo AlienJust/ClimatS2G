@@ -52,7 +52,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.Record {
 			}
 		}
 
-		public void ReceiveCommand(byte addr, byte code, IList<byte> data) {
+		public void ReceiveCommand(byte addr, byte code, byte[] data) {
 			_notifier.Notify(() => {
 				if (IsRecording) {
 					_recordedData.Add(data);

@@ -17,17 +17,17 @@ namespace CustomModbusSlave.Es2gClimatic.Shared
 
         public event DataReceivedDelegate<T> DataReceived;
 
-        public void ReceiveCommand(byte addr, byte code, IList<byte> data)
+        public void ReceiveCommand(byte addr, byte code, byte[] data)
         {
-            if (addr == AddrToCheck && code == CodeToCheck && Length == data.Count)
+            if (addr == AddrToCheck && code == CodeToCheck && Length == data.Length)
             {
                 OnDataReceived(data, BuildData(data));
             }
         }
 
-        public abstract T BuildData(IList<byte> bytes);
+        public abstract T BuildData(byte[] bytes);
 
-        protected virtual void OnDataReceived(IList<byte> bytes, T data)
+        protected virtual void OnDataReceived(byte[] bytes, T data)
         {
             DataReceived?.Invoke(bytes, data);
         }

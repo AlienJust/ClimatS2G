@@ -8,9 +8,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp.BsSm.Request32
     {
         public CmdListenerBsSmRequest32(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) { }
 
-        public override IBsSmRequest32Data BuildData(IList<byte> bytes)
+        public override IBsSmRequest32Data BuildData(byte[] bytes)
         {
-            return new BsSmRequest32DataBuilderFromCommandPartDataBytes(bytes.Skip(2).Take(bytes.Count - 4).ToList()).Build();
+            return new BsSmRequest32DataBuilderFromCommandPartDataBytes(bytes.Skip(2).Take(bytes.Length - 4).ToList()).Build();
         }
     }
 }

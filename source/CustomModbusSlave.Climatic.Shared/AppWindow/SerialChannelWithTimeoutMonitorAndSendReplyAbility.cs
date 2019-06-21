@@ -32,7 +32,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         {
             if (commandPart.Address == 20)
             {
-                if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Count == 8)
+                if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Length == 8)
                 {
                     ReplyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray()); // TODO: bad performance cause of .ToArray() call
                     var reply = ReplyGenerator.GenerateReply();

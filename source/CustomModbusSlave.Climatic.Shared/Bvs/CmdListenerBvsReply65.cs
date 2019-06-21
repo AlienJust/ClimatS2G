@@ -5,7 +5,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.Bvs {
 		public CmdListenerBvsReply65(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
 
-		public override IBvsReply65Telemetry BuildData(IList<byte> bytes) {
+		public override IBvsReply65Telemetry BuildData(byte[] bytes) {
 			return new BvsReply65TelemetryBuilder(bytes).Build();
 		}
 	}

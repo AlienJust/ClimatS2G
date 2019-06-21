@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using CustomModbusSlave.Contracts;
 using DataAbstractionLevel.Low.PsnConfig.Contracts;
@@ -8,11 +7,9 @@ using DataAbstractionLevel.Low.PsnData.Contracts;
 
 namespace CustomModbusSlave {
 	public class CommandPartSearcherPsnConfigBasedFast : ICommandPartSearcher {
-		//public static readonly ILogger _logger = new RelayActionLogger(Console.WriteLine, new DateTimeFormatter(" > "));
 		private readonly List<IPsnProtocolCommandPartConfiguration> _cmdPartConfigs;
 		private readonly int _cmdPartsCount;
 
-		//private const string CommandFoundMessageStart = "COMMAND PART FOUND <<<<<<<<<<<<<<<<<<<<<<<<<< ";
 
 		private readonly IPsnCommandPartSearcher _commandPartSearcher;
 
@@ -31,24 +28,25 @@ namespace CustomModbusSlave {
 					var commandPart = _cmdPartConfigs[x];
 
 					if (incomingBuffer.Count - i >= commandPart.Length) {
-						try {
-							var confirmation = _commandPartSearcher.IsHereCmdPart(incomingBuffer.ToArray(), i, commandPart);
+                        try
+                        {
+							var confirmation = _commandPartSearcher.IsHereCmdPart(incomingBuffer.ToArray(), i, commandPart); // TODO: IS NOT SO FAST CAUSE OF ARRAY
 							if (confirmation == PsnCommandPartConfirmation.EverythyngIsOk) {
-								var commandPartBytes = new List<byte>();
-								commandPartBytes.AddRange(incomingBuffer.Skip(i).Take(commandPart.Length));
+                                var commandPartBytes = incomingBuffer.Skip(i).Take(commandPart.Length).ToArray();
+                                //var commandPartBytes = new List<byte>();
+                                //commandPartBytes.AddRange(incomingBuffer.Skip(i).Take(commandPart.Length));
 
-								// clean buffer bytes before command and command's bytes:
-								int removeBytesCount = i + commandPart.Length;
+                                // clean buffer bytes before command and command's bytes:
+                                int removeBytesCount = i + commandPart.Length;
 								incomingBuffer.RemoveRange(0, removeBytesCount);
 								i = -1; // because the next cycle iteration will increase i by 1 and "i" will be zero
 
-								//_logger.Log($"{CommandFoundMessageStart}{commandPart.PartName}");
-								listener.CommandPartFound(new CommandPartSimple((byte)commandPart.Address.DefinedValue, (byte)commandPart.CommandCode.DefinedValue, commandPartBytes));
+								listener.CommandPartFound(new CommandPartSimple((byte)commandPart.Address.DefinedValue, (byte)commandPart.CommandCode.DefinedValue, commandPartBytes, commandPart));
 								break;
 							}
 						}
-						catch (Exception ex) {
-							//_logger.Log(ex);
+						catch
+                        {
 						}
 					}
 				}

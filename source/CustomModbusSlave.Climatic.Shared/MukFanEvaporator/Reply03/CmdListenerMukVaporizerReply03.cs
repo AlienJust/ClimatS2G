@@ -5,7 +5,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03 {
 		public CmdListenerMukVaporizerReply03(byte addrToCheck, byte codeToCheck, int length) : base(addrToCheck, codeToCheck, length) {
 		}
 
-		public override IMukFanVaporizerDataReply03 BuildData(IList<byte> bytes) {
+		public override IMukFanVaporizerDataReply03 BuildData(byte[] bytes) {
 			return new MukFanVaporizerDataReply03Builder(bytes).Build();
 		}
 	}
