@@ -18,9 +18,26 @@
       <Reply Length="29" Position="8">
         <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="24927f83-43ed-4d78-9b83-5889bdb8fb13" />
         <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="8215d0ad-1a42-4d4a-991e-c52c647101c3" />
-        <CpzPrm Name="ШИМ вентилятора, %" Expression="(256 - [u4]) / 2.56" Id="a61cd084-2e9a-4be2-af27-f75ee7f4aeed" />
-        <CpzPrm Name="Давление, датчик FSE-02S, бар" Expression="[s5] * 256.0 + [u6]" Id="fe0024a1-c5df-43a3-bc68-47138e6f5d3f" />
-        <CpzPrm Name="Байт входных сигналов" Expression="[s7] * 256.0 + [u8]" Id="de4eace4-c1e7-4166-af41-dd67616352ed" />
+        
+        <CpzPrm Name="ШИМ вентилятора, %" Expression="[u4] * 1.0" Id="a61cd084-2e9a-4be2-af27-f75ee7f4aeed">
+          <MultiView Expression="{$value} - {$text}%" Name="{$root}">
+            <NumberView Expression="[value]" StringFormat="f2" Name="{$value}"/>
+            <NumberView Expression="(256 - [value]) / 2.56" StringFormat="f2" Name="{$text}"/>
+          </MultiView>
+        </CpzPrm>
+
+        <CpzPrm Name="Давление, датчик FSE-02S, бар" Expression="[s5] * 256.0 + [u6]" Id="fe0024a1-c5df-43a3-bc68-47138e6f5d3f" >
+          <NumberView Expression="(256 - [value]) / 2.56" StringFormat="f2" Name="{$text}"/>
+        </CpzPrm>
+
+        <CpzPrm Name="Байт входных сигналов" Expression="[s7] * 256.0 + [u8]" Id="de4eace4-c1e7-4166-af41-dd67616352ed">
+          <MultiView Expression="{$value} - {$text}, {$text100}" Name="{$root}">
+            <NumberView Expression="[value]" StringFormat="f0" Name="{$value}"/>
+            <BooleanView Expression="[value] > 0" ResultTrue="Greater then zero!" ResultFalse="Negative or zero!" Name="{$text}" />
+            <BooleanView Expression="[value] > 100" ResultTrue="Greater then 100!" ResultFalse="Less or equals 100!" Name="{$text100}" />
+          </MultiView>
+        </CpzPrm>
+        
         <BitPrm Byte="10" Bit="0" IsValueInverted="True" Name="Байт входных сигналов: авария вентилятора M2/1" Id="de884c9f-2944-437c-a493-48cc07e716e4" />
         <BitPrm Byte="10" Bit="1" IsValueInverted="True" Name="Байт входных сигналов: Авария вентилятора M3/1" Id="4f42c96f-27f9-44cb-af3f-802141fa8303" />
         <BitPrm Byte="10" Bit="2" IsValueInverted="True" Name="Байт входных сигналов: Авария вентилятора M4/1" Id="23247d8a-5c5c-4ea3-95ad-e127093ae5f6" />
