@@ -18,53 +18,52 @@
       <Reply Length="29" Position="8">
         <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="24927f83-43ed-4d78-9b83-5889bdb8fb13" />
         <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="8215d0ad-1a42-4d4a-991e-c52c647101c3" />
-        
-        <CpzPrm Name="ШИМ вентилятора, %" Expression="[u4] * 1.0" Id="a61cd084-2e9a-4be2-af27-f75ee7f4aeed">
+
+        <CpzPrm Name="Номер версии ПО" Expression="[s23] * 256.0 + [u24]" Id="2cf844d7-04a9-4238-b6b6-10412972b4ad" />
+        <CpzPrm Name="ШИМ вентилятора" Expression="[u4] * 1.0" Id="a61cd084-2e9a-4be2-af27-f75ee7f4aeed">
           <MultiView Expression="{$value} - {$text}%" Name="{$root}">
             <NumberView Expression="[value]" StringFormat="f2" Name="{$value}"/>
             <NumberView Expression="(256 - [value]) / 2.56" StringFormat="f2" Name="{$text}"/>
           </MultiView>
         </CpzPrm>
-
+        <CpzPrm Name="Давлениее, датчик PT5-30M, бар" Expression="[s25] * 256.0 + [u26]" Id="afc67651-a44b-4a20-9b25-6364f8ad1d9b">
+          <NumberView Expression="(256 - [value]) / 2.56" StringFormat="f2" Name="{$text}"/>
+        </CpzPrm>
         <CpzPrm Name="Давление, датчик FSE-02S, бар" Expression="[s5] * 256.0 + [u6]" Id="fe0024a1-c5df-43a3-bc68-47138e6f5d3f" >
           <NumberView Expression="(256 - [value]) / 2.56" StringFormat="f2" Name="{$text}"/>
         </CpzPrm>
 
-        <CpzPrm Name="Байт входных сигналов" Expression="[s7] * 256.0 + [u8]" Id="de4eace4-c1e7-4166-af41-dd67616352ed">
+        <!--<CpzPrm Name="Байт входных сигналов" Expression="[s7] * 256.0 + [u8]" Id="de4eace4-c1e7-4166-af41-dd67616352ed">
           <MultiView Expression="{$value} - {$text}, {$text100}" Name="{$root}">
             <NumberView Expression="[value]" StringFormat="f0" Name="{$value}"/>
             <BooleanView Expression="[value] > 0" ResultTrue="Greater then zero!" ResultFalse="Negative or zero!" Name="{$text}" />
             <BooleanView Expression="[value] > 100" ResultTrue="Greater then 100!" ResultFalse="Less or equals 100!" Name="{$text100}" />
           </MultiView>
-        </CpzPrm>
-        
+        </CpzPrm>-->
+
         <BitPrm Byte="10" Bit="0" IsValueInverted="True" Name="Байт входных сигналов: авария вентилятора M2/1" Id="de884c9f-2944-437c-a493-48cc07e716e4" />
-        <BitPrm Byte="10" Bit="1" IsValueInverted="True" Name="Байт входных сигналов: Авария вентилятора M3/1" Id="4f42c96f-27f9-44cb-af3f-802141fa8303" />
-        <BitPrm Byte="10" Bit="2" IsValueInverted="True" Name="Байт входных сигналов: Авария вентилятора M4/1" Id="23247d8a-5c5c-4ea3-95ad-e127093ae5f6" />
-        <CpzPrm Name="Аналоговый вход (выборка с АЦП канала PF0 FSE-02S)" Expression="[s11] * 256.0 + [u12]" Id="c9cd71d1-f3a8-437d-bda4-168df47debfc" />
+        <BitPrm Byte="10" Bit="1" IsValueInverted="True" Name="Байт входных сигналов: авария вентилятора M3/1" Id="4f42c96f-27f9-44cb-af3f-802141fa8303" />
+        <BitPrm Byte="10" Bit="2" IsValueInverted="True" Name="Байт входных сигналов: авария вентилятора M4/1" Id="23247d8a-5c5c-4ea3-95ad-e127093ae5f6" />
+
         <CpzPrm Name="Этап работы в автоматическом режиме" Expression="[s13] * 256.0 + [u14]" Id="a4fc6dbf-1fe2-413a-bb8d-0197cbde0f2d">
-          <!--TODO-->
-          <View Type="Text">
-            <Anchor Value="0" Epsilon="0.1" Text="0 - инициализация контроллера" />
-            <Anchor Value="1" Epsilon="0.1" Text="1 - тест вентилятора" />
-            <Anchor Value="2" Epsilon="0.1" Text="2 - корректное выключение реле1 и реле 2 в режиме «выключено»" />
-            <Anchor Value="3" Epsilon="0.1" Text="3 - корректное выключение реле1 и реле 2 в режиме «включено»" />
-            <Default Text="Неизвестное значение" />
-          </View>
+          <MultiView Expression="{$value} - {$text0}{$text1}{$text2}{$text3}" Name="{$root}">
+            <NumberView Expression="[value]" StringFormat="f0" Name="{$value}"/>
+            <BooleanView Expression="[value] == 0" ResultTrue="инициализация контроллера" ResultFalse="" Name="{$text0}" />
+            <BooleanView Expression="[value] == 1" ResultTrue="тест вентилятора" ResultFalse="" Name="{$text1}" />
+            <BooleanView Expression="[value] == 2" ResultTrue="корректное выключение реле1 и реле 2 в режиме «выключено»" ResultFalse="" Name="{$text2}" />
+            <BooleanView Expression="[value] == 3" ResultTrue="корректное выключение реле1 и реле 2 в режиме «включено»" ResultFalse="" Name="{$text3}" />
+          </MultiView>
         </CpzPrm>
+
+        <CpzPrm Name="Аналоговый вход (выборка с АЦП канала PF0 FSE-02S)" Expression="[s11] * 256.0 + [u12]" Id="c9cd71d1-f3a8-437d-bda4-168df47debfc" />
         <CpzPrm Name="Аналоговый вход (выборка с АЦП канала PF1 PT5-30M)" Expression="[s15] * 256.0 + [u16]" Id="cbbb6fab-1c07-4320-83a0-f7ce27339fbd" />
+
         <BitPrm Byte="18" Bit="2" IsValueInverted="False" Name="Диагностика 1: обрыв датчика 2 по давлению" Id="f78dba83-3435-4632-bb6f-c869fa83fdf1" />
         <BitPrm Byte="18" Bit="3" IsValueInverted="False" Name="Диагностика 1: обрыв датчика 1 по давлению" Id="d6c88e44-11a9-4a03-bd03-85a4eaa52c84" />
         <BitPrm Byte="18" Bit="5" IsValueInverted="False" Name="Диагностика 1: авария вентилятора M2/1" Id="b6134fc1-0984-4c93-bbb3-b7eb2ba8de32" />
         <BitPrm Byte="18" Bit="6" IsValueInverted="False" Name="Диагностика 1: авария вентилятора M3/1" Id="873a3aee-37cb-481f-a707-241c9b2de17a" />
         <BitPrm Byte="18" Bit="7" IsValueInverted="False" Name="Диагностика 1: авария вентилятора M4/1" Id="fd650fcc-a0ec-4cc7-b946-82162c9ca4bf" />
-        <CpzPrm Name="Номер версии ПО" Expression="[s23] * 256.0 + [u24]" Id="2cf844d7-04a9-4238-b6b6-10412972b4ad" />
-        <CpzPrm Name="Давлениее, датчик PT5-30M, бар" Expression="[s25] * 256.0 + [u26]" Id="afc67651-a44b-4a20-9b25-6364f8ad1d9b">
-          <!--TODO-->
-          <View Type="Double">
-            <FormatString>f0</FormatString>
-          </View>
-        </CpzPrm>
+
         <VarVal Position="27.0" Length="8" Name="#CRCH" Id="b3bdde62-06b2-4f8d-9a9f-e191b3c5d223" />
         <VarVal Position="28.0" Length="8" Name="#CRCL" Id="d5064f76-f293-414b-a18b-fd46624a7779" />
       </Reply>
@@ -73,6 +72,8 @@
       <Request Length="15" Position="0" CycleMsTime="100">
         <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="752045f0-2618-4bff-bf7a-709fc85ec103" />
         <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="083c7a2d-f7e5-4e05-bed8-f2196d7bb9db" />
+        <BitPrm Byte="12" Bit="0" IsValueInverted="False" Name="Закрытие заслонки рециркуляционного воздуха" Id="28726421-a98a-474d-86e9-e38531667ea7" />
+
         <BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="работа (регулятор работает)" Id="649622f2-f9f1-419e-80b2-dd7474e57755" />
         <BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="стоянка (регулятор работает с ограничением D2 ШИМ мах стоянка)" Id="9b9c6063-6ef5-4d39-8b55-6ef52fe52c6f" />
         <BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="мойка (ШИМ =0)" Id="576683c9-92ab-4ac3-bd85-769012dd0f5c" />
@@ -81,7 +82,7 @@
         <BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="ручной режим" Id="6bae39a5-7ca8-44f5-be3e-a3a5a242324f" />
         <BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="включение только второй ступени принудительно" Id="bf4d642f-74ce-4149-a32d-41d71e247a7b" />
         <CpzPrm Name="Уставка по давлению, бар" Expression="([s9] * 256.0 + [u10]) * 1.0" Id="10354b26-cde1-421a-be5b-152dae2ed187" />
-        <BitPrm Byte="12" Bit="0" IsValueInverted="False" Name="Закрытие заслонки рециркуляционного воздуха" Id="28726421-a98a-474d-86e9-e38531667ea7" />
+
         <VarVal Position="13.0" Length="8" Name="#CRCH" Id="026b65fc-56f0-496b-a869-8fd0dca0093e" />
         <VarVal Position="14.0" Length="8" Name="#CRCL" Id="c7283cd8-ee2f-49a4-9441-42173d97c10c" />
       </Request>
@@ -102,19 +103,31 @@
       <Reply Length="41" Position="8">
         <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="44e09c42-fed7-4cc6-b415-7daa085f6a65" />
         <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="71b27de0-bfd1-4fd8-ac25-e985aa49ed33" />
-        <CpzPrm Name="ШИМ вентилятора, %" Expression="(256 - [u4]) / 2.56" Id="c733a59f-8bb4-48f9-a307-acbfc27e3ab4" />
+        <CpzPrm Name="Номер версии ПО" Expression="[s35] * 256.0 + [u36]" Id="e64ee472-ddbf-445c-a344-ce3de2b70d64" />
         <CpzPrm Name="Температура 1w адрес 1" Expression="([s5] * 256 + [u6]) * 0.01" Id="a636a8a4-ea18-474b-87eb-ce07e03e34ff" />
         <CpzPrm Name="Температура 1w адрес 2" Expression="([s7] * 256 + [u8]) * 0.01" Id="47446744-8e2e-459c-a9c3-407fbb89d1af" />
-        <CpzPrm Name="Байт входных сигналов" Expression="[s9] * 256.0 + [u10]" Id="73526cfd-7fd7-4b6a-8bd3-30b15dbe32ab" />
-        <CpzPrm Name="Байт выходных сигналов" Expression="[s11] * 256.0 + [u12]" Id="3b2779f8-7ca3-475b-b8f2-6a4c05bb6419" />
-        <!--13-14 and 15-16 are skipped-->
-        <CpzPrm Name="Этап работы в автоматическом режиме" Expression="[s17] * 256.0 + [u18]" Id="ffaac5c8-f9ac-4cd9-905e-b6ac5bfb4baf" />
-        <!--19-20 and 21-22 are skipped-->
+        <CpzPrm Name="Температура 1w адрес 3" Expression="([s37] * 256 + [u38]) * 0.01" Id="8c1eb56f-eb79-4599-905b-4768d2b04f81" />
+        <CpzPrm Name="ШИМ вентилятора, %" Expression="(256 - [u4]) / 2.56" Id="c733a59f-8bb4-48f9-a307-acbfc27e3ab4" />
         <CpzPrm Name="Обороты вент-ра, %" Expression="([s23] * 256 + [u24])/2.56" Id="9bb997c1-c59d-4341-a007-9e3ffbec20bb" />
+        <!--<CpzPrm Name="Байт входных сигналов" Expression="[s9] * 256.0 + [u10]" Id="73526cfd-7fd7-4b6a-8bd3-30b15dbe32ab" />
+        <CpzPrm Name="Байт выходных сигналов" Expression="[s11] * 256.0 + [u12]" Id="3b2779f8-7ca3-475b-b8f2-6a4c05bb6419" />-->
+        <!--13-14 and 15-16 are skipped-->
+        <CpzPrm Name="Этап работы в автоматическом режиме" Expression="[s17] * 256.0 + [u18]" Id="ffaac5c8-f9ac-4cd9-905e-b6ac5bfb4baf" >
+          <MultiView Expression="{$value} - {$text0}{$text1}{$text2}{$text3}" Name="{$root}">
+            <NumberView Expression="[value]" StringFormat="f0" Name="{$value}"/>
+            <BooleanView Expression="[value] == 0" ResultTrue="инициализация контроллера" ResultFalse="" Name="{$text0}" />
+            <BooleanView Expression="[value] == 1" ResultTrue="тест вентилятора" ResultFalse="" Name="{$text1}" />
+            <BooleanView Expression="[value] == 2" ResultTrue="корректное выключение реле1 и реле 2 в режиме «выключено»" ResultFalse="" Name="{$text2}" />
+            <BooleanView Expression="[value] == 3" ResultTrue="корректное выключение реле1 и реле 2 в режиме «включено»" ResultFalse="" Name="{$text3}" />
+          </MultiView>
+        </CpzPrm>
+        <!--19-20 and 21-22 are skipped-->
+
         <BitPrm Byte="26" Bit="4" IsValueInverted="False" Name="Отсутствие обмена с контроллером вент-ра" Id="251dc64f-d4c7-4713-abb4-2c192b5889ad" />
         <BitPrm Byte="26" Bit="5" IsValueInverted="False" Name="Ошибка вент-ра (по дискретному входу)" Id="cbb92fa6-bf10-4573-8813-1b8f87f681ac" />
         <BitPrm Byte="26" Bit="6" IsValueInverted="False" Name="Ошибка датчика 1w №1" Id="2b1e2500-e7a1-464c-ac03-8e1446ccf383" />
         <BitPrm Byte="26" Bit="7" IsValueInverted="False" Name="Ошибка датчика 1w №2" Id="9e09bc21-619b-4b48-b8cd-2a4bb32cc72b" />
+
         <BitPrm Byte="28" Bit="0" IsValueInverted="False" Name="Контр. вент.: ошибка фазы или отсутствие питание." Id="89345ff1-9fef-4285-854e-9539943b90a9" />
         <BitPrm Byte="28" Bit="2" IsValueInverted="False" Name="Контр. вент.: перегрев силового блока" Id="105e0783-bb9f-4ef1-840c-adcf2a8263a5" />
         <BitPrm Byte="28" Bit="4" IsValueInverted="False" Name="Контр. вент.: признак аварии" Id="3c43bb73-e30c-4d28-a3f6-6ab66aec6a12" />
@@ -131,8 +144,8 @@
         <!--29-30 are skipped-->
         <CpzPrm Name="Диагностика (1w адрес 1)" Expression="[s31] * 256.0 + [u32]" Id="ccde89b8-9a46-454b-b32b-3c14e6c3177d" />
         <CpzPrm Name="Диагностика 3 (1w адрес 2)" Expression="[s33] * 256.0 + [u34]" Id="dbc9a7ab-155f-4e17-9880-3ff74c5e93db" />
-        <CpzPrm Name="Номер версии ПО" Expression="[s35] * 256.0 + [u36]" Id="e64ee472-ddbf-445c-a344-ce3de2b70d64" />
-        <CpzPrm Name="Температура 1w адрес 3" Expression="([s37] * 256 + [u38]) * 0.01" Id="8c1eb56f-eb79-4599-905b-4768d2b04f81" />
+
+
         <VarVal Position="39.0" Length="8" Name="#CRCH" Id="b00ee441-af0a-4e29-a834-6072a00a0869" />
         <VarVal Position="40.0" Length="8" Name="#CRCL" Id="e49fb610-92b2-4228-a7c7-2ee94618cc85" />
       </Reply>
@@ -152,7 +165,7 @@
         <CpzPrm Name="Температура наружного воздуха" Expression="([s9] * 256.0 + [u10]) * 1.0 - 60.0" Id="96d45b98-6647-4d12-ad8a-446deda97974" />
         <CpzPrm Name="Температура в кабине" Expression="([s11] * 256 + [u12]) * 0.01" Id="641c14a0-75b1-46d6-9fcd-971211ce1b40" />
         <CpzPrm Name="Уставка по уровню вентилирования" Expression="[u14] * 1.0" Id="e302f618-4b0f-46da-8a39-e88b197c5fd2" />
-        <CpzPrm Name="уставка температуры" Expression="[s15] * 256.0 + [u16]" Id="e684882b-a2a9-407e-bcd5-e9885676a66e" />
+        <CpzPrm Name="Уставка температуры" Expression="[s15] * 256.0 + [u16]" Id="e684882b-a2a9-407e-bcd5-e9885676a66e" />
         <VarVal Position="19.0" Length="8" Name="#CRCH" Id="e6d98bca-2667-4c66-ac9c-d3aa73aaf546" />
         <VarVal Position="20.0" Length="8" Name="#CRCL" Id="03c090cd-60e6-48b3-a004-92893a01df0b" />
       </Request>
@@ -167,8 +180,10 @@
       <Request Length="6" Position="0">
         <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="613be9c7-482d-43ee-99e5-84d2361b331a" />
         <DefVal Position="1.0" Length="8" Value="0xf0" Name="#NCMD" Id="e0d12268-3646-4aca-a612-9d426a927618" />
-        <CpzPrm Name="Уставка ПЧ, Гц" Expression="[u2] * 1.0" Id="e12ad7a7-75fd-49e5-82f9-0115146d6d0b" />
+
         <VarVal Position="3.7" Length="1" Name="Включение ПЧ" Id="c790d010-15e9-4149-9714-b9e4b765154a" />
+        <CpzPrm Name="Уставка ПЧ, Гц" Expression="[u2] * 1.0" Id="e12ad7a7-75fd-49e5-82f9-0115146d6d0b" />
+
         <VarVal Position="4.0" Length="8" Name="#CRCH" Id="6a8911fc-6539-4bd3-beda-c2677e3b0742" />
         <VarVal Position="5.0" Length="8" Name="#CRCL" Id="35fef229-e5e6-46df-9372-3a2af752b765" />
       </Request>
@@ -289,10 +304,10 @@
       <Request Length="8" Position="0" CycleMsTime="100">
         <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="c081b10f-1f9d-4d65-bf36-36db77055460" />
         <DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="98b08869-a48c-4b13-9e50-6dbe89812eb6" />
-        <VarVal Position="2.0" Length="8" Name="Адрес параметра, hi" Id="af90b6e9-c1b1-4f98-9fab-6bded2b4a0f4" />
-        <VarVal Position="3.0" Length="8" Name="Адрес параметра, lo" Id="032afb50-5670-4db6-a995-075541280ed3" />
-        <VarVal Position="4.0" Length="8" Name="Значение параметра, hi" Id="73354abd-b48c-4089-8c83-3c09953cd3e8" />
-        <VarVal Position="5.0" Length="8" Name="Значение параметра, lo" Id="091860b2-3e3d-4348-9c48-9aff5e07e175" />
+        <VarVal Position="2.0" Length="8" Name="#Адрес параметра, hi" Id="af90b6e9-c1b1-4f98-9fab-6bded2b4a0f4" />
+        <VarVal Position="3.0" Length="8" Name="#Адрес параметра, lo" Id="032afb50-5670-4db6-a995-075541280ed3" />
+        <VarVal Position="4.0" Length="8" Name="#Значение параметра, hi" Id="73354abd-b48c-4089-8c83-3c09953cd3e8" />
+        <VarVal Position="5.0" Length="8" Name="#Значение параметра, lo" Id="091860b2-3e3d-4348-9c48-9aff5e07e175" />
         <VarVal Position="6.0" Length="8" Name="#CRCH" Id="4adf5ba5-bd3e-4c86-a380-3bad1969b3f1" />
         <VarVal Position="7.0" Length="8" Name="#CRCL" Id="5aafa4d4-061f-4447-b5e2-b97a541eeb5a" />
       </Request>
@@ -300,10 +315,11 @@
         <!--TODO: -->
         <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="2e8d99d8-004e-4c31-8cbd-fb79213f2558" />
         <DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="ca3bd860-7c09-410c-ae59-312ca12e2329" />
-        <VarVal Position="2.0" Length="8" Name="Адрес параметра, hi" Id="5d4e56a6-7237-42a8-bb53-ba7bf5608064" />
-        <VarVal Position="3.0" Length="8" Name="Адрес параметра, lo" Id="b566cbb9-8e6d-485a-a78e-95f53dd727b9" />
-        <VarVal Position="4.0" Length="8" Name="Значение параметра, hi" Id="6f8a35a9-3d78-49fe-b762-4e77f5e920ec" />
-        <VarVal Position="5.0" Length="8" Name="Значение параметра, lo" Id="a9bf20cf-4a34-4891-acb7-54b80d0f2589" />
+        <VarVal Position="2.0" Length="8" Name="#Адрес параметра, hi" Id="5d4e56a6-7237-42a8-bb53-ba7bf5608064" />
+        <VarVal Position="3.0" Length="8" Name="#Адрес параметра, lo" Id="b566cbb9-8e6d-485a-a78e-95f53dd727b9" />
+        <VarVal Position="4.0" Length="8" Name="#Значение параметра, hi" Id="6f8a35a9-3d78-49fe-b762-4e77f5e920ec" />
+        <VarVal Position="5.0" Length="8" Name="#Значение параметра, lo" Id="a9bf20cf-4a34-4891-acb7-54b80d0f2589" />
+
         <VarVal Position="6.0" Length="8" Name="#CRCH" Id="c7f8f83d-4519-4aa6-b264-e8ecd8f67f75" />
         <VarVal Position="7.0" Length="8" Name="#CRCL" Id="ce799f8b-3b0d-4861-90eb-2918e03a2550" />
       </Reply>
@@ -312,16 +328,33 @@
       <Request Length="109" Position="0" CycleMsTime="100">
         <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="bee66455-f5f5-4021-9b62-a6de46f064fd" />
         <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="4acda2d7-fe72-44d9-ad4b-2ac19bd22c50" />
-        <VarVal Position="2.0" Length="8" Name="Стартовый адрес, hi" Id="c5400c2c-f687-4c4d-bbd9-a85fc218ff60" />
-        <VarVal Position="3.0" Length="8" Name="Стартовый адрес, lo" Id="f32283d6-bd73-4aba-a6bf-e1da5767fa71" />
-        <VarVal Position="4.0" Length="8" Name="Количество слов, старший байт" Id="b3f5097d-0cb1-4ba3-841c-9787232034bd" />
-        <VarVal Position="5.0" Length="8" Name="Количество слов, младший байт" Id="1f363061-6e03-4539-80e4-f974e097cd82" />
-        <VarVal Position="6.0" Length="8" Name="Количество байт" Id="a7bef007-e8d9-45e7-a551-78a8559eaa02" />
+        <VarVal Position="2.0" Length="8" Name="#Стартовый адрес, hi" Id="c5400c2c-f687-4c4d-bbd9-a85fc218ff60" />
+        <VarVal Position="3.0" Length="8" Name="#Стартовый адрес, lo" Id="f32283d6-bd73-4aba-a6bf-e1da5767fa71" />
+        <VarVal Position="4.0" Length="8" Name="#Количество слов, старший байт" Id="b3f5097d-0cb1-4ba3-841c-9787232034bd" />
+        <VarVal Position="5.0" Length="8" Name="#Количество слов, младший байт" Id="1f363061-6e03-4539-80e4-f974e097cd82" />
+        <VarVal Position="6.0" Length="8" Name="#Количество байт" Id="a7bef007-e8d9-45e7-a551-78a8559eaa02" />
+
+        <CpzPrm Name="Версия ПО" Expression="[s61] * 256.0 + [u62]" Id="7ebdbc58-4253-4cc0-82c9-c1bca080125b" />
+
+
         <CpzPrm Name="Датчик в кабине машиниста" Expression="([s7] * 256.0 + [u8]) * 0.01" Id="cfdbbe7b-92a7-4407-833b-f62b2c17bb94" />
         <CpzPrm Name="Датчик на трубке выхода испарителя" Expression="([s9] * 256.0 + [u10]) * 0.01" Id="a4efbd49-57c2-424a-893b-95584b803fc6" />
         <CpzPrm Name="Датчик на трубке выхода конденсатора" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="0c99b862-9724-44d4-ad59-2680ac4a0c04" />
+
         <CpzPrm Name="Уставка температуры в кабине" Expression="([s13] * 256.0 + [u14]) * 0.01" Id="928fd1bb-38dd-42f3-857d-11288ae1830d" />
         <CpzPrm Name="Уставка объема подачи воздуха в кабину" Expression="[s15] * 256.0 + [u16]" Id="68980a6f-7751-4818-bbc4-b47b34e7d2a3" />
+
+        <CpzPrm Name="Давление в контуре низкого давления, бар" Expression="([s29] * 256 + [u30]) * 0.1" Id="de48dda8-285a-48bb-ad71-3ec2978afdc5" />
+        <CpzPrm Name="Давление в контуре высокого давления, бар" Expression="([s31] * 256 + [u32]) * 0.1" Id="b4476023-c2da-44a1-8eb9-df786ae820c6" />
+        <CpzPrm Name="Температура в контуре низкого давления, град." Expression="([s33] * 256 + [u34]) * 0.1" Id="3dedb536-fb55-4125-97f2-5a1986c27022" />
+        <CpzPrm Name="Перегрев хладагента, град." Expression="[s35] * 256.0 + [u36]" Id="333684c4-fd57-408d-8ab4-b4fbe80fe9e3" />
+
+
+        <CpzPrm Name="Максимальная уставка ПЧ" Expression="[s63] * 256.0 + [u64]" Id="a948ea22-4de6-4fcd-a320-d7c87525d6f5" />
+        <CpzPrm Name="Минимальная уставка ПЧ" Expression="[s65] * 256.0 + [u66]" Id="bd821429-6cab-45f1-bfe1-1dc7439792ea" />
+        <CpzPrm Name="Дельта + (plus_cool)" Expression="[s67] * 256.0 + [u68]" Id="527fdbdf-f3c7-4f4b-9fa7-8ff947a708b4" />
+        <CpzPrm Name="Дельта - (minus_cool)" Expression="[s69] * 256.0 + [u70]" Id="8e82dc25-96a9-4f9d-823b-09dd89ea5da6" />
+
         <BitPrm Byte="18" Bit="0" IsValueInverted="False" Name="PA.0 =" Id="4ba6b0f8-a6fa-4baa-8e6b-76a0d7aa771c" />
         <BitPrm Byte="18" Bit="1" IsValueInverted="False" Name="PA.1 =" Id="867e926c-98a3-4d67-9e15-f4afd2dab4dc" />
         <BitPrm Byte="18" Bit="2" IsValueInverted="False" Name="PA.2 =" Id="6be81105-87ca-4e95-a080-6209cf70063e" />
@@ -348,10 +381,7 @@
         <BitPrm Byte="28" Bit="0" IsValueInverted="False" Name="PIC порт B: авария компрессора по максимальному давлению" Id="8732ee63-7e82-44ee-ab54-891589c5ee8e" />
         <BitPrm Byte="28" Bit="1" IsValueInverted="False" Name="PIC порт B: авария компрессора по минимальному давлению" Id="99369199-f08d-4780-987d-e93a51b2ed79" />
         <BitPrm Byte="28" Bit="3" IsValueInverted="True" Name="PIC порт B: команда на включение кондиционера" Id="940f18a6-cda1-4dd6-8293-7440037215da" />
-        <CpzPrm Name="Давление в контуре низкого давления, бар" Expression="([s29] * 256 + [u30]) * 0.1" Id="de48dda8-285a-48bb-ad71-3ec2978afdc5" />
-        <CpzPrm Name="Давление в контуре высокого давления, бар" Expression="([s31] * 256 + [u32]) * 0.1" Id="b4476023-c2da-44a1-8eb9-df786ae820c6" />
-        <CpzPrm Name="Температура в контуре низкого давления, град." Expression="([s33] * 256 + [u34]) * 0.1" Id="3dedb536-fb55-4125-97f2-5a1986c27022" />
-        <CpzPrm Name="Перегрев хладагента, град." Expression="[s35] * 256.0 + [u36]" Id="333684c4-fd57-408d-8ab4-b4fbe80fe9e3" />
+
         <!--37 and 38 skipped-->
         <BitPrm Byte="40" Bit="0" IsValueInverted="False" Name="Состояние обмена 1: вычитка текущих данных из МУК2" Id="eabd1b16-ae10-434b-a6ab-8f2757a2b7b7" />
         <BitPrm Byte="40" Bit="1" IsValueInverted="False" Name="Состояние обмена 1: запись команд в МУК2" Id="fb112011-6691-4c4e-9471-13156c7ac87f" />
@@ -371,39 +401,36 @@
         <!--55 and 56 skipped-->
         <!--57 and 58 skipped-->
         <!--59 and 60 skipped-->
-        <CpzPrm Name="Версия ПО" Expression="[s61] * 256.0 + [u62]" Id="7ebdbc58-4253-4cc0-82c9-c1bca080125b" />
-        <CpzPrm Name="Максимальная уставка ПЧ" Expression="[s63] * 256.0 + [u64]" Id="a948ea22-4de6-4fcd-a320-d7c87525d6f5" />
-        <CpzPrm Name="Минимальная уставка ПЧ" Expression="[s65] * 256.0 + [u66]" Id="bd821429-6cab-45f1-bfe1-1dc7439792ea" />
-        <CpzPrm Name="Дельта + (plus_cool)" Expression="[s67] * 256.0 + [u68]" Id="527fdbdf-f3c7-4f4b-9fa7-8ff947a708b4" />
-        <CpzPrm Name="Дельта - (minus_cool)" Expression="[s69] * 256.0 + [u70]" Id="8e82dc25-96a9-4f9d-823b-09dd89ea5da6" />
+
         <!--71 and 72 skipped-->
         <!--73 and 74 skipped-->
         <!--75 and 76 skipped-->
         <!--77 and 78 skipped-->
         <CpzPrm Name="Дельта уставки температуры, отладка" Expression="([s79] * 256 + [u80]) * 0.1" Id="88e63640-d3b7-48cd-98db-95fafe6888e6" />
         <CpzPrm Name="Принудительный режим обогрев/охлаждение" Expression="[s81] * 256.0 + [u82]" Id="bdc6261d-32f8-4437-a72c-458cc275daf3" />
-        <CpzPrm Name="Параметр 38" Expression="[s83] * 256.0 + [u84]" Id="da94e97f-06b1-46a7-a67d-d5fa4f6bf58a" />
-        <CpzPrm Name="Параметр 39" Expression="[s85] * 256.0 + [u86]" Id="07495b7f-e49f-41fe-b380-ef282d9e0c06" />
-        <CpzPrm Name="Параметр 40" Expression="[s87] * 256.0 + [u88]" Id="2be1e09e-ccca-4b1f-9199-6558212b91a3" />
-        <CpzPrm Name="Параметр 41" Expression="[s89] * 256.0 + [u90]" Id="313b8f51-7c55-422e-9cc6-2a4ef95be4e7" />
-        <CpzPrm Name="Параметр 42" Expression="[s91] * 256.0 + [u92" Id="665d6370-ad95-41a4-ae69-d4711668d957" />
-        <CpzPrm Name="Параметр 43" Expression="[s93] * 256.0 + [u94]" Id="f260b2aa-4252-4a66-b618-50672f4fbb55" />
-        <CpzPrm Name="Параметр 44" Expression="[s95] * 256.0 + [u96]" Id="b279b89a-0d8d-4aaa-9374-6484f7ae91d3" />
-        <CpzPrm Name="Параметр 45" Expression="[s97] * 256.0 + [u98]" Id="638da727-58a0-4c06-af1a-945b0198ff18" />
-        <CpzPrm Name="Параметр 46" Expression="[s99] * 256.0 + [u100]" Id="afaaea12-348b-4d16-8326-320a62b4d9fa" />
-        <CpzPrm Name="Параметр 47" Expression="[s101] * 256.0 + [u102]" Id="c7906222-e5d9-4174-b8c7-afc58020237c" />
-        <CpzPrm Name="Параметр 48" Expression="[s103] * 256.0 + [u104]" Id="bd460e4e-faad-42af-8b24-0c4347a10aea" />
-        <CpzPrm Name="Параметр 49" Expression="[s105] * 256.0 + [u106]" Id="fe8ef872-7403-4977-9881-fc9f0bfc870b" />
+        <CpzPrm Name="#Параметр 38" Expression="[s83] * 256.0 + [u84]" Id="da94e97f-06b1-46a7-a67d-d5fa4f6bf58a" />
+        <CpzPrm Name="#Параметр 39" Expression="[s85] * 256.0 + [u86]" Id="07495b7f-e49f-41fe-b380-ef282d9e0c06" />
+        <CpzPrm Name="#Параметр 40" Expression="[s87] * 256.0 + [u88]" Id="2be1e09e-ccca-4b1f-9199-6558212b91a3" />
+        <CpzPrm Name="#Параметр 41" Expression="[s89] * 256.0 + [u90]" Id="313b8f51-7c55-422e-9cc6-2a4ef95be4e7" />
+        <CpzPrm Name="#Параметр 42" Expression="[s91] * 256.0 + [u92" Id="665d6370-ad95-41a4-ae69-d4711668d957" />
+        <CpzPrm Name="#Параметр 43" Expression="[s93] * 256.0 + [u94]" Id="f260b2aa-4252-4a66-b618-50672f4fbb55" />
+        <CpzPrm Name="#Параметр 44" Expression="[s95] * 256.0 + [u96]" Id="b279b89a-0d8d-4aaa-9374-6484f7ae91d3" />
+        <CpzPrm Name="#Параметр 45" Expression="[s97] * 256.0 + [u98]" Id="638da727-58a0-4c06-af1a-945b0198ff18" />
+        <CpzPrm Name="#Параметр 46" Expression="[s99] * 256.0 + [u100]" Id="afaaea12-348b-4d16-8326-320a62b4d9fa" />
+        <CpzPrm Name="#Параметр 47" Expression="[s101] * 256.0 + [u102]" Id="c7906222-e5d9-4174-b8c7-afc58020237c" />
+        <CpzPrm Name="#Параметр 48" Expression="[s103] * 256.0 + [u104]" Id="bd460e4e-faad-42af-8b24-0c4347a10aea" />
+        <CpzPrm Name="#Параметр 49" Expression="[s105] * 256.0 + [u106]" Id="fe8ef872-7403-4977-9881-fc9f0bfc870b" />
+
         <VarVal Position="107.0" Length="8" Name="#CRCH" Id="31c5f31a-c2f7-454f-be77-5f0da7aa31d6" />
         <VarVal Position="108.0" Length="8" Name="#CRCL" Id="aaca93c9-21bf-40e9-b993-017e8e259c7a" />
       </Request>
       <Reply Length="8" Position="109">
         <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="65be89d3-a765-411d-b7da-4f852cf6f8c8" />
         <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="8c291cee-8f2c-426d-b994-e4be899eb5e0" />
-        <VarVal Position="2.0" Length="8" Name="Стартовый адрес, hi" Id="cfcfe7de-ebe5-436d-b87a-29073ecca156" />
-        <VarVal Position="3.0" Length="8" Name="Стартовый адрес, lo" Id="384cc088-cd49-42da-b9a0-3230e5a217e8" />
-        <VarVal Position="4.0" Length="8" Name="Количество слов, старший байт" Id="9c4051f3-abad-4c3c-b8cc-aecc1fa0d6b2" />
-        <VarVal Position="5.0" Length="8" Name="Количество слов, младший байт" Id="0aca68e3-b261-4d59-90cf-68736bc2a480" />
+        <VarVal Position="2.0" Length="8" Name="#Стартовый адрес, hi" Id="cfcfe7de-ebe5-436d-b87a-29073ecca156" />
+        <VarVal Position="3.0" Length="8" Name="#Стартовый адрес, lo" Id="384cc088-cd49-42da-b9a0-3230e5a217e8" />
+        <VarVal Position="4.0" Length="8" Name="#Количество слов, старший байт" Id="9c4051f3-abad-4c3c-b8cc-aecc1fa0d6b2" />
+        <VarVal Position="5.0" Length="8" Name="#Количество слов, младший байт" Id="0aca68e3-b261-4d59-90cf-68736bc2a480" />
         <VarVal Position="6.0" Length="8" Name="#CRCH" Id="794c5f42-e2aa-4034-a6e2-86a076dd478d" />
         <VarVal Position="7.0" Length="8" Name="#CRCL" Id="375b0b25-9872-4612-be39-7efbfb2d258f" />
       </Reply>

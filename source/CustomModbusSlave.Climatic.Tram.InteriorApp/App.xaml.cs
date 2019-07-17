@@ -21,11 +21,11 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
         {
             var appFactory = new AppFactory("psn.TRAM-climatic-interior.xml");
             var appAbilities = appFactory.Abilities;
-            
-          
+
+
 
             var listeners = new List<Tuple<IPsnProtocolCommandPartConfiguration, ICmdListener<ICmdPartConfigAndBytes>>>();
-            foreach(var cmdPart in appAbilities.PsnProtocolConfiguration.CommandParts)
+            foreach (var cmdPart in appAbilities.PsnProtocolConfiguration.CommandParts)
             {
                 var listener = new CmdListenerCmdPartAndBytes(cmdPart);
                 listeners.Add(new Tuple<IPsnProtocolCommandPartConfiguration, ICmdListener<ICmdPartConfigAndBytes>>(cmdPart, listener));
@@ -82,7 +82,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
             {
                 var channel = mainVm.AddChannel("Single channel");
 
-                foreach(var device in appAbilities.PsnProtocolConfiguration.PsnDevices)
+                foreach (var device in appAbilities.PsnProtocolConfiguration.PsnDevices)
                 {
                     var commandPartsForCurrentDevice = listeners.Where(t => (byte)t.Item1.Address.DefinedValue == device.Address);
                     var devGroup = new GroupParamViewModel(device.Name);
@@ -93,40 +93,52 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                         var cmdPartGroup = new GroupParamViewModel(cmdPartAndListener.Item1.PartName);
 
                         int goodSignalsCount = 0;
-                        foreach(var param in cmdPartAndListener.Item1.VarParams)
+                        foreach (var param in cmdPartAndListener.Item1.VarParams)
                         {
                             if (param.Name.StartsWith("#")) continue;
                             goodSignalsCount++;
-                            // TODO: more types handling, also need to implement writable params
-                            if (!param.IsBitSignal)
-                            {
-                                var recvParam00 = new RecvParam<double, ICmdPartConfigAndBytes>(
-                                    param.Name,
-                                    cmdPartAndListener.Item2, 
-                                    data => data.CmdPartConfig.VarParams.First(p=>p.Id.IdentyString == param.Id.IdentyString).GetValue(data.DataBytes.ToArray(),0));
+                            var recvParam00 = new RecvParam<double, ICmdPartConfigAndBytes>(
+                                        param.Name,
+                                        cmdPartAndListener.Item2,
+                                        data => data.CmdPartConfig.VarParams.First(p => p.Id.IdentyString == param.Id.IdentyString).GetValue(data.DataBytes.ToArray(), 0));
 
-                                var dispParam00 =
-                                new DispParamViewModel<string, double>(recvParam00.ReceiveName, recvParam00,
-                                    mainVm.Notifier, data => data.ToString("f2"), "ER", "?"); // TODO: string format from props
-                                var chartParam00 = new ChartParamViewModel<double, string>(recvParam00,
+                            if (param.ParameterView != null && param.ParameterView.Count > 0)
+                            {
+                                // TODO: more types handling, also need to implement writable params
+                                foreach (var view in param.ParameterView)
+                                {
+                                    var dispParam00 =
+                                    new DispParamViewModel<string, double>(recvParam00.ReceiveName, recvParam00,
+                                        mainVm.Notifier, data => view.GetText(data), "ER", "?"); // TODO: string format from props
+
+                                    var chartParam00 = new ChartParamViewModel<double, string>(recvParam00,
                                     dispParam00, data => data, ParameterLogType.Analogue, appAbilities.ParameterLogger,
                                     cmdPartGroup.DisplayName);
-                                cmdPartGroup.AddParameterOrGroup(chartParam00);
+                                    cmdPartGroup.AddParameterOrGroup(chartParam00);
+                                }
                             }
                             else
                             {
-                                var recvParam00 = new RecvParam<double, ICmdPartConfigAndBytes>(
-                                    param.Name,
-                                    cmdPartAndListener.Item2,
-                                    data => data.CmdPartConfig.VarParams.First(p => p.Id.IdentyString == param.Id.IdentyString).GetValue(data.DataBytes.ToArray(), 0));
-
-                                var dispParam00 =
-                                new DispParamViewModel<bool, double>(recvParam00.ReceiveName, recvParam00,
-                                    mainVm.Notifier, data => data > 0.5, false, false); // TODO: string format from props
-                                var chartParam00 = new ChartParamViewModel<double, bool>(recvParam00,
-                                    dispParam00, data => data, ParameterLogType.Discrete, appAbilities.ParameterLogger,
-                                    cmdPartGroup.DisplayName);
-                                cmdPartGroup.AddParameterOrGroup(chartParam00);
+                                if (!param.IsBitSignal)
+                                {
+                                    var dispParam00 =
+                                    new DispParamViewModel<string, double>(recvParam00.ReceiveName, recvParam00,
+                                        mainVm.Notifier, data => data.ToString("f2"), "ER", "?"); // TODO: string format from props
+                                    var chartParam00 = new ChartParamViewModel<double, string>(recvParam00,
+                                        dispParam00, data => data, ParameterLogType.Analogue, appAbilities.ParameterLogger,
+                                        cmdPartGroup.DisplayName);
+                                    cmdPartGroup.AddParameterOrGroup(chartParam00);
+                                }
+                                else
+                                {
+                                    var dispParam00 =
+                                    new DispParamViewModel<bool, double>(recvParam00.ReceiveName, recvParam00,
+                                        mainVm.Notifier, data => data > 0.5, false, false); // TODO: string format from props
+                                    var chartParam00 = new ChartParamViewModel<double, bool>(recvParam00,
+                                        dispParam00, data => data, ParameterLogType.Discrete, appAbilities.ParameterLogger,
+                                        cmdPartGroup.DisplayName);
+                                    cmdPartGroup.AddParameterOrGroup(chartParam00);
+                                }
                             }
                         }
                         if (goodSignalsCount > 0)
