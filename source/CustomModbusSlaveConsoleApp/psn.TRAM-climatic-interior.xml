@@ -363,6 +363,11 @@
         <BitPrm Byte="18" Bit="5" IsValueInverted="False" Name="PA.5 =" Id="acbb1d7b-0adc-4f1d-81b2-d1ae52b74393" />
         <BitPrm Byte="18" Bit="6" IsValueInverted="False" Name="PA.6 =" Id="9e1a5c78-e556-4872-9bd1-91bd3bf44b34" />
         <BitPrm Byte="18" Bit="7" IsValueInverted="False" Name="PA.7 =" Id="f3e81f5e-8f2e-431d-a030-4aef00bfb189" />
+        
+        <BitPrm Byte="28" Bit="0" IsValueInverted="False" Name="PIC порт B: авария компрессора по максимальному давлению" Id="8732ee63-7e82-44ee-ab54-891589c5ee8e" />
+        <BitPrm Byte="28" Bit="1" IsValueInverted="False" Name="PIC порт B: авария компрессора по минимальному давлению" Id="99369199-f08d-4780-987d-e93a51b2ed79" />
+        <BitPrm Byte="28" Bit="3" IsValueInverted="True" Name="PIC порт B: команда на включение кондиционера" Id="940f18a6-cda1-4dd6-8293-7440037215da" />
+        
         <BitPrm Byte="20" Bit="0" IsValueInverted="False" Name="PC.0 =" Id="b9fd62ff-af12-4acf-afdc-92cbe87e260a" />
         <BitPrm Byte="20" Bit="1" IsValueInverted="False" Name="PC.1 =" Id="cf506f46-4e43-4eb4-9e0f-7f8f4921e3c1" />
         <BitPrm Byte="20" Bit="2" IsValueInverted="False" Name="PC.2 =" Id="ae99d51b-e888-4d2a-a6b2-377b42a1c719" />
@@ -378,9 +383,7 @@
         <BitPrm Byte="26" Bit="6" IsValueInverted="False" Name="Регистр аварий в режиме включено: D.6 - не пройден тест заслонки" Id="0d5460ce-423f-423d-9d0c-9c52ac44a260" />
         <BitPrm Byte="26" Bit="5" IsValueInverted="False" Name="Регистр аварий в режиме включено: D.5 - не пройден тест вентил. испарителя" Id="2c42df46-9e53-4033-96a8-255f93fdce3c" />
         <BitPrm Byte="26" Bit="4" IsValueInverted="False" Name="Регистр аварий в режиме включено: D.4 - не пройден тест вентил. конденсатора" Id="5da16e9f-ab1a-4c24-a41d-7737fd751641" />
-        <BitPrm Byte="28" Bit="0" IsValueInverted="False" Name="PIC порт B: авария компрессора по максимальному давлению" Id="8732ee63-7e82-44ee-ab54-891589c5ee8e" />
-        <BitPrm Byte="28" Bit="1" IsValueInverted="False" Name="PIC порт B: авария компрессора по минимальному давлению" Id="99369199-f08d-4780-987d-e93a51b2ed79" />
-        <BitPrm Byte="28" Bit="3" IsValueInverted="True" Name="PIC порт B: команда на включение кондиционера" Id="940f18a6-cda1-4dd6-8293-7440037215da" />
+        
 
         <!--37 and 38 skipped-->
         <BitPrm Byte="40" Bit="0" IsValueInverted="False" Name="Состояние обмена 1: вычитка текущих данных из МУК2" Id="eabd1b16-ae10-434b-a6ab-8f2757a2b7b7" />
