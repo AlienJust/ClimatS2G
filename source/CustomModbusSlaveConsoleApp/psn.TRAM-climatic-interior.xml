@@ -162,7 +162,7 @@
         <BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="КСМ команда: выкл обогрев и охл" Id="533296f8-af65-4e8e-899d-aacaecb79513" />
         <BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="КСМ команда: ручной режим (на алгоритм 3)" Id="46cba2b1-135c-40f5-9397-4f0918fcbf02" />
         <BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="КСМ команда: режим обогрева принудительно, ШИМ обогрева = 50%" Id="55ef3ba4-ad48-4a60-b88d-1af604fb7c0b" />
-        <CpzPrm Name="Температура наружного воздуха" Expression="([s9] * 256.0 + [u10]) * 1.0 - 60.0" Id="96d45b98-6647-4d12-ad8a-446deda97974" />
+        <CpzPrm Name="Температура наружного воздуха" Expression="[s9] * 256.0 + [u10]" Id="96d45b98-6647-4d12-ad8a-446deda97974" />
         <CpzPrm Name="Температура в кабине" Expression="([s11] * 256 + [u12]) * 0.01" Id="641c14a0-75b1-46d6-9fcd-971211ce1b40" />
         <CpzPrm Name="Уставка по уровню вентилирования" Expression="[u14] * 1.0" Id="e302f618-4b0f-46da-8a39-e88b197c5fd2" />
         <CpzPrm Name="Уставка температуры" Expression="[s15] * 256.0 + [u16]" Id="e684882b-a2a9-407e-bcd5-e9885676a66e" />

@@ -107,14 +107,26 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                                 // TODO: more types handling, also need to implement writable params
                                 foreach (var view in param.ParameterView)
                                 {
-                                    var dispParam00 =
-                                    new DispParamViewModel<string, double>(recvParam00.ReceiveName, recvParam00,
-                                        mainVm.Notifier, data => view.GetText(data), "ER", "?"); // TODO: string format from props
+                                    if (!param.IsBitSignal)
+                                    {
+                                        var dispParam00 = new DispParamViewModel<string, double>(recvParam00.ReceiveName, recvParam00,
+                                            mainVm.Notifier, data => view.GetText(data), "ER", "?"); // TODO: string format from props
 
-                                    var chartParam00 = new ChartParamViewModel<double, string>(recvParam00,
-                                    dispParam00, data => data, ParameterLogType.Analogue, appAbilities.ParameterLogger,
-                                    cmdPartGroup.DisplayName);
-                                    cmdPartGroup.AddParameterOrGroup(chartParam00);
+                                        var chartParam00 = new ChartParamViewModel<double, string>(recvParam00,
+                                        dispParam00, data => data, ParameterLogType.Analogue, appAbilities.ParameterLogger,
+                                        cmdPartGroup.DisplayName);
+                                        cmdPartGroup.AddParameterOrGroup(chartParam00);
+                                    }
+                                    else
+                                    {
+                                        var dispParam00 =
+                                        new DispParamViewModel<string, double>(recvParam00.ReceiveName, recvParam00,
+                                        mainVm.Notifier, data => view.GetText(data), "ER", "?"); // TODO: string format from props
+                                        var chartParam00 = new ChartParamViewModel<double, string>(recvParam00,
+                                            dispParam00, data => data, ParameterLogType.Discrete, appAbilities.ParameterLogger,
+                                            cmdPartGroup.DisplayName);
+                                        cmdPartGroup.AddParameterOrGroup(chartParam00);
+                                    }
                                 }
                             }
                             else
@@ -131,10 +143,18 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                                 }
                                 else
                                 {
-                                    var dispParam00 =
+                                    /*var dispParam00 =
                                     new DispParamViewModel<bool, double>(recvParam00.ReceiveName, recvParam00,
                                         mainVm.Notifier, data => data > 0.5, false, false); // TODO: string format from props
                                     var chartParam00 = new ChartParamViewModel<double, bool>(recvParam00,
+                                        dispParam00, data => data, ParameterLogType.Discrete, appAbilities.ParameterLogger,
+                                        cmdPartGroup.DisplayName);
+                                    cmdPartGroup.AddParameterOrGroup(chartParam00);*/
+
+                                    var dispParam00 =
+                                        new DispParamViewModel<string, double>(recvParam00.ReceiveName, recvParam00,
+                                            mainVm.Notifier, data => data > 0.5 ? "True" : "False", "ER", "?"); // TODO: string format from props
+                                    var chartParam00 = new ChartParamViewModel<double, string>(recvParam00,
                                         dispParam00, data => data, ParameterLogType.Discrete, appAbilities.ParameterLogger,
                                         cmdPartGroup.DisplayName);
                                     cmdPartGroup.AddParameterOrGroup(chartParam00);
