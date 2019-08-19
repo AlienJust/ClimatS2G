@@ -1,9 +1,9 @@
 ﻿using CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic;
+using CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.TemperatureRegulatorWorkMode;
 using CustomModbusSlave.Es2gClimatic.Shared.OneWire;
 using CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;
-using ITemperatureRegulatorWorkMode = CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.TemperatureRegulatorWorkMode.ITemperatureRegulatorWorkMode;
 
-namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Reply03
+namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03
 {
     internal class MukFanVaporizerDataReply03Simple : IMukFanVaporizerDataReply03
     {
@@ -13,7 +13,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp.Muk.Fan.Evaporator.Reply03
         public byte IncomingSignals { get; set; }
         public byte OutgoingSignals { get; set; }
         public ushort AnalogInput { get; set; }
-        public ushort FlapPwm { get; set; }
+        public ushort HeatingPwm { get; set; }
 
         public ushort AutomaticModeStage { get; set; }
         public MukFanEvaporatorWorkstage AutomaticModeStageParsed { get; set; }

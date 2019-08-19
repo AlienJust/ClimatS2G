@@ -1,0 +1,55 @@
+﻿<UserControl
+    x:Class="CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16.KsmCommandWorkmodeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    d:DesignHeight="200"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <StackPanel>
+        <CheckBox
+            IsChecked="{Binding Path=AutomaticMode, Mode=OneTime}">
+            БИТ №0: автоматический режим
+        </CheckBox>
+        <CheckBox
+            IsChecked="{Binding Path=ForceHeatRegulator, Mode=OneTime}">
+            БИТ №1: регулятор обогрев принудительно
+        </CheckBox>
+        <CheckBox
+            IsChecked="{Binding Path=ForceHeatModePwm100, Mode=OneTime}">
+            БИТ №2: режим обогрева принудительно, ШИМ обогрева = 100%
+        </CheckBox>
+        <CheckBox
+            IsChecked="{Binding Path=ForceCoolMode, Mode=OneTime}">
+            БИТ №3: режим охлаждение принудительно
+        </CheckBox>
+        <CheckBox
+            IsChecked="{Binding Path=AutomaticModeWithoutSetControl, Mode=OneTime}">
+            БИТ №4: автоматический режим без выдачи управления (на алгоритм 2)
+        </CheckBox>
+        <CheckBox
+            IsChecked="{Binding Path=HeatModeAndCoolModeAreOff, Mode=OneTime}">
+            БИТ №5: выкл обогрев и охл
+        </CheckBox>
+        <CheckBox
+            IsChecked="{Binding Path=ManualMode, Mode=OneTime}">
+            БИТ №6: ручной режим (на алгоритм 3)
+        </CheckBox>
+        <CheckBox
+            IsChecked="{Binding Path=ForceHeatModePwm50, Mode=OneTime}">
+            БИТ №7: режим обогрева принудительно, ШИМ обогрева = 50%
+        </CheckBox>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Конфигурация работы: " />
+            <TextBlock
+                Text="{Binding WorkConfiguration, Mode=OneTime}" />
+        </StackPanel>
+        <CheckBox
+            IsChecked="{Binding Path=ForceEmersonOffByLowPressure, Mode=OneTime}">
+            БИТ №12: Принудительное отключение Emerson по низкому давлению
+        </CheckBox>
+    </StackPanel>
+</UserControl>

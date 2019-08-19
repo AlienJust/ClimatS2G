@@ -1,0 +1,206 @@
+﻿<UserControl
+    x:Class="CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03.MukFanVaporizerDataReply03View"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03"
+    xmlns:temperatureRegulatorWorkMode="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.TemperatureRegulatorWorkMode"
+    xmlns:oneWire1="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+    xmlns:emersionDiagnostic1="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.EmersionDiagnostic;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+    xmlns:diagnostic1="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.OneWire.Diagnostic;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+    mc:Ignorable="d" d:DesignHeight="1300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <oneWire1:SensorIndicationDoubleToStringConverter x:Key="TemperatureConverter" Format="f2" />
+        <local:MukFanEvaporatorWorkstageToStringConverter x:Key="WorkstageConverter" />
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="ШИМ вентилятора" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=FanPwm, Mode=OneTime, StringFormat={}{0:n2}}"
+                   TextAlignment="Right" />
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Температура 1w адрес 1" />
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Text="{Binding Path=TemperatureAddress1, Mode=OneTime, Converter={StaticResource TemperatureConverter}}"
+                   TextAlignment="Right" />
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Температура 1w адрес 2" />
+        <TextBlock Grid.Row="2" Grid.Column="1"
+                   Text="{Binding Path=TemperatureAddress2, Mode=OneTime, Converter={StaticResource TemperatureConverter}}"
+                   TextAlignment="Right" />
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Байт входных сигналов" />
+        <TextBlock Grid.Row="3" Grid.Column="1"
+                   Text="{Binding Path=IncomingSignals, Mode=OneTime, StringFormat={}0x{0:X2}}" TextAlignment="Right" />
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Байт выходных сигналов" />
+        <TextBlock Grid.Row="4" Grid.Column="1"
+                   Text="{Binding Path=OutgoingSignals, Mode=OneTime, StringFormat={}0x{0:X2}}" TextAlignment="Right" />
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Аналоговый вход" />
+        <TextBlock Grid.Row="5" Grid.Column="1"
+                   Text="{Binding Path=AnalogInput, Mode=OneTime, StringFormat={}0x{0:X4}}" TextAlignment="Right" />
+
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="ШИМ на калорифер" />
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Path=HeatingPwm, Mode=OneTime}" TextAlignment="Right" />
+
+        <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Этап работы в автоматическом режиме" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=AutomaticModeStage, Mode=OneTime}" />
+            </Grid>
+            <TextBlock Grid.Row="1"
+                       Text="{Binding Path=AutomaticModeStageParsed, Mode=OneTime, Converter={StaticResource WorkstageConverter}}"
+                       HorizontalAlignment="Right" />
+        </Grid>
+
+        <!--<TextBlock Grid.Row="8" Grid.Column="0" Text="Режим работы регулятора температуры"/>
+			<TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Path=TemperatureRegulatorWorkMode, Mode=OneTime}" TextAlignment="Right"/>-->
+        <temperatureRegulatorWorkMode:TemperatureRegulatorWorkModeView Grid.Row="8" Grid.ColumnSpan="2" Grid.Column="0"
+                                                                       DataContext="{Binding Path=TemperatureRegulatorWorkMode, Mode=OneTime}" />
+
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="Рассчитанная уставка температуры" />
+        <TextBlock Grid.Row="9" Grid.Column="1"
+                   Text="{Binding Path=CalculatedTemperatureSetting, Mode=OneTime, StringFormat={}{0:n2}}" />
+
+        <TextBlock Grid.Row="10" Grid.Column="0" Text="Обороты вент-ра" />
+        <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Path=FanSpeed, Mode=OneTime}" />
+
+        <Grid Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Диагностика 1 (плата МУК, обмен)" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=Diagnostic1, Mode=OneTime, StringFormat={}0x{0:X4}}" />
+            </Grid>
+            <local:MukFanVaporizerDataReply03Diagnostic1View Grid.Row="1"
+                                                             DataContext="{Binding Path=Diagnostic1Parsed, Mode=OneTime}" />
+        </Grid>
+
+
+        <Grid Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Битовая диагностика от контроллера вент-ра" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=Diagnostic2, Mode=OneTime, StringFormat={}0x{0:X4}}" />
+            </Grid>
+            <local:MukFanVaporizerDataReply03Diagnostic2View Grid.Row="1"
+                                                             DataContext="{Binding Path=Diagnostic2Parsed, Mode=OneTime}" />
+        </Grid>
+
+
+        <Grid Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Диагностика 3 (Emerson)" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=Diagnostic3, Mode=OneTime, StringFormat={}0x{0:X4}}" />
+            </Grid>
+            <emersionDiagnostic1:EmersonDiagnosticView Grid.Row="1"
+                                                       DataContext="{Binding Path=Diagnostic3Parsed, Mode=OneTime}" />
+        </Grid>
+
+
+        <Grid Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Диагностика 4 (1w адрес 1)" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=Diagnostic4, Mode=OneTime, StringFormat={}0x{0:X4}}" />
+            </Grid>
+            <diagnostic1:MukFlapDiagnosticOneWireSensorView Grid.Row="1"
+                                                            DataContext="{Binding Path=Diagnostic4OneWire1, Mode=OneTime}" />
+        </Grid>
+
+
+        <Grid Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Диагностика 5 (1w адрес 2)" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=Diagnostic5, Mode=OneTime, StringFormat={}0x{0:X4}}" />
+            </Grid>
+            <diagnostic1:MukFlapDiagnosticOneWireSensorView Grid.Row="1"
+                                                            DataContext="{Binding Path=Diagnostic5OneWire2, Mode=OneTime}" />
+        </Grid>
+
+
+        <Grid Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Номер версии ПО" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=FirmwareBuildNumber, Mode=OneTime}" />
+        </Grid>
+
+        <TextBlock Grid.Row="17" Grid.Column="0" Text="Температура 1w адрес 3" />
+        <TextBlock Grid.Row="17" Grid.Column="1"
+                   Text="{Binding Path=TemperatureAddress3, Mode=OneTime, Converter={StaticResource TemperatureConverter}}"
+                   TextAlignment="Right" />
+    </Grid>
+</UserControl>

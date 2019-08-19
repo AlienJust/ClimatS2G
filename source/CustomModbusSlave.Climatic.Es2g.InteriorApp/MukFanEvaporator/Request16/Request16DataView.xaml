@@ -1,0 +1,115 @@
+﻿<UserControl
+    x:Class="CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16.Request16DataView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16"
+    mc:Ignorable="d" d:DesignHeight="320" d:DesignWidth="400">
+
+    <StackPanel Orientation="Vertical">
+        <TextBlock Text="КСМ: режим работы:" />
+        <request16:KsmCommandWorkmodeView DataContext="{Binding Path=CurrentKsmCommandWorkmode, Mode=OneTime}" />
+        <Grid Background="Wheat">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: наружная температура" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=OuterTemperature}" TextAlignment="Right" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: температура в кабине" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=InnerTemperature, StringFormat=' {0:f2} °C'}"
+                       TextAlignment="Right" />
+        </Grid>
+
+        <Grid Background="PaleGreen">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: уровень вентилирования" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=FanSpeed, Mode=OneTime}" TextAlignment="Right" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: салон" />
+            <CheckBox Grid.Column="1" IsChecked="{Binding Path=SalonBit, Mode=OneTime}" IsHitTestVisible="False" />
+        </Grid>
+
+
+        <Grid Background="Wheat">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: дальнее сообщение" />
+            <CheckBox Grid.Column="1" IsChecked="{Binding Path=FarAwayGoingBit, Mode=OneTime}" IsHitTestVisible="False" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: сегмент slave" />
+            <CheckBox Grid.Column="1" IsChecked="{Binding Path=IsSlave, Mode=OneTime}" IsHitTestVisible="False" />
+        </Grid>
+
+        <Grid Background="PaleGreen">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: головной вагон" />
+            <CheckBox Grid.Column="1" IsChecked="{Binding Path=HeadWagon, Mode=OneTime}" IsHitTestVisible="False" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: двери открыты" />
+            <CheckBox Grid.Column="1" IsChecked="{Binding Path=DoorsAreOpen, Mode=OneTime}" IsHitTestVisible="False" />
+        </Grid>
+
+        <Grid Background="Wheat">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: ограничение мощности, выключение рециркуляционных нагревателей" />
+            <CheckBox Grid.Column="1" IsChecked="{Binding Path=PowerLimitTurningRecycleHeatersOff, Mode=OneTime}"
+                      IsHitTestVisible="False" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: дельта Т" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=DeltaT, Mode=OneTime}" TextAlignment="Right" />
+        </Grid>
+
+        <Grid Background="PaleGreen">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: дельта Т в отладочном режиме" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=DeltaTSetting, Mode=OneTime}" TextAlignment="Right" />
+        </Grid>
+    </StackPanel>
+</UserControl>

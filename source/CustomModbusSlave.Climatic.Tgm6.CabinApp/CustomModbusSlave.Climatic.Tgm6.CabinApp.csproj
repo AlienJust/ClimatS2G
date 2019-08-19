@@ -100,57 +100,6 @@
     <Compile Include="FrequencyConverter\F0Request\RequestF0Builder.cs" />
     <Compile Include="FrequencyConverter\TabInterfaceBuilderFc.cs" />
     <Compile Include="Ksm\KsmTabInterfaceBuilder.cs" />
-    <Compile Include="MukFanEvaporator\MukVaporizerFanDataView.xaml.cs">
-      <DependentUpon>MukVaporizerFanDataView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFanEvaporator\MukVaporizerFanDataViewModelParamcentric.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\BytesPairNullableToStringThroughVaporizerFanWorkstageConverter.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\CmdListenerMukVaporizerReply03.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\IMukFanVaporizerDataReply03.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\IMukFanVaporizerDataReply03Diagnostic1.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\IMukFanVaporizerDataReply03Diagnostic2.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanEvaporatorWorkstage.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanEvaporatorWorkstageBuilder.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanEvaporatorWorkstageExt.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanEvaporatorWorkstageToStringConverter.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Builder.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1Builder.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1Simple.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1View.xaml.cs">
-      <DependentUpon>MukFanVaporizerDataReply03Diagnostic1View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic2Builder.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic2Simple.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic2View.xaml.cs">
-      <DependentUpon>MukFanVaporizerDataReply03Diagnostic2View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Simple.cs" />
-    <Compile Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03View.xaml.cs">
-      <DependentUpon>MukFanVaporizerDataReply03View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFanEvaporator\Request16\CmdListenerMukVaporizerRequest16.cs" />
-    <Compile Include="MukFanEvaporator\Request16\IKsmCommandWorkmode.cs" />
-    <Compile Include="MukFanEvaporator\Request16\IMukFanVaporizerDataRequest16.cs" />
-    <Compile Include="MukFanEvaporator\Request16\KsmCommandWorkmodeSimple.cs" />
-    <Compile Include="MukFanEvaporator\Request16\KsmCommandWorkmodeView.xaml.cs">
-      <DependentUpon>KsmCommandWorkmodeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFanEvaporator\Request16\MukFanVaporizerDataRequest16Builder.cs" />
-    <Compile Include="MukFanEvaporator\Request16\MukFanVaporizerDataRequest16Simple.cs" />
-    <Compile Include="MukFanEvaporator\Request16\Request16DataView.xaml.cs">
-      <DependentUpon>Request16DataView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFanEvaporator\SetParameters\MukVaporizerSetParamsView.xaml.cs">
-      <DependentUpon>MukVaporizerSetParamsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MukFanEvaporator\SetParameters\MukVaporizerSetParamsViewModel.cs" />
-    <Compile Include="MukFanEvaporator\TabInterfaceBuilderMuk3.cs" />
-    <Compile Include="MukFanEvaporator\TemperatureRegulatorWorkMode\ITemperatureRegulatorWorkMode.cs" />
-    <Compile Include="MukFanEvaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeBuilderReplied.cs" />
-    <Compile Include="MukFanEvaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeSimple.cs" />
-    <Compile Include="MukFanEvaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml.cs">
-      <DependentUpon>TemperatureRegulatorWorkModeView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Muk\Fan\Evaporator\Reply03\BytesPairNullableToStringThroughVaporizerFanWorkstageConverter.cs" />
     <Compile Include="Muk\Fan\Evaporator\Reply03\CmdListenerMukVaporizerReply03.cs" />
     <Compile Include="Muk\Fan\Evaporator\Reply03\IMukFanVaporizerDataReply03.cs" />
@@ -201,38 +150,6 @@
       <DependentUpon>KsmDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ksm\KsmDataViewModel.cs" />
-    <Page Include="MukFanEvaporator\MukVaporizerFanDataView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic1View.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03Diagnostic2View.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukFanEvaporator\Reply03\MukFanVaporizerDataReply03View.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukFanEvaporator\Request16\KsmCommandWorkmodeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukFanEvaporator\Request16\Request16DataView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukFanEvaporator\SetParameters\MukVaporizerSetParamsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MukFanEvaporator\TemperatureRegulatorWorkMode\TemperatureRegulatorWorkModeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="SystemDiagnostic\AutoView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Reply03.MukFanVaporizerDataReply03Diagnostic2View"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel
+        Orientation="Vertical">
+        <CheckBox
+            Content="b.0 = 1 – ошибка фазы или отсутствие питание"
+            IsChecked="{Binding Path=PhaseErrorOrPowerLost, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.1 = 1 – резерв"
+            IsChecked="{Binding Path=ReserveBit1, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.2 = 1 – перегрев силового блока"
+            IsChecked="{Binding Path=PowerSuplyOverheat, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.3 = 1 – резерв"
+            IsChecked="{Binding Path=ReserveBit3, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.4 = 1 – признак аварии"
+            IsChecked="{Binding Path=FaultAttribute, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.5 = 1 – перегрев мотора"
+            IsChecked="{Binding Path=MotorOverheat, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.6 = 1 – ошибка датчика Холла"
+            IsChecked="{Binding Path=HallSensorError, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.7 = 1 – блокировка мотора"
+            IsChecked="{Binding Path=MotorLock, Mode=OneTime}"
+            IsHitTestVisible="False" />
+
+
+        <CheckBox
+            Content="b.8 = 1- перегрузка по DC току"
+            IsChecked="{Binding Path=DcCurrentOverload, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.9 = 1- перегрев контроллера"
+            IsChecked="{Binding Path=ControllerOverheat, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.10 = 1- ошибка драйвера"
+            IsChecked="{Binding Path=DriverError, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.11 = 1- перенапряжение DC сети"
+            IsChecked="{Binding Path=DcOvervoltage, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.12 = 1- недостаточно напряжение в DC сети"
+            IsChecked="{Binding Path=DcLowVoltage, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.13 = 1- низкое напряжение"
+            IsChecked="{Binding Path=LowVoltage, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.14 = 1- резерв"
+            IsChecked="{Binding Path=ReserveBit14, Mode=OneTime}"
+            IsHitTestVisible="False" />
+        <CheckBox
+            Content="b.15 = 1- блокировка"
+            IsChecked="{Binding Path=Lock, Mode=OneTime}"
+            IsHitTestVisible="False" />
+    </StackPanel>
+</UserControl>
