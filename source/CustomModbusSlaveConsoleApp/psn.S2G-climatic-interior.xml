@@ -292,11 +292,18 @@
         <BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="режим обогрева принудительно, ШИМ обогрева=50%" Id="49b03174-b0b4-417b-9203-bbb2574f4a12" />
         <CpzPrm Name="Температура наружного воздуха" Expression="([s9] * 256.0 + [u10]) * 1.0" Id="f396e43c-66ac-4726-ba44-d99518d9141f" />
         <CpzPrm Name="Температура в помещении" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="5837e12c-7929-482e-9a08-0efedb8316a1" />
-        <CpzPrm Name="Уставка по уровню вентилирования" Expression="[s13] * 256.0 + [u14]" Id="38ddb319-cebb-47de-8f78-bf1aea4077f7" />
-        <CpzPrm Name="Дельта Т" Expression="[s15] * 256.0 + [u16]" Id="71f60208-c2fa-45fc-a4ab-526dd423c15f" />
-        <CpzPrm Name="Резерв" Expression="[s17] * 256.0 + [u18]" Id="b0f35b5f-bb0e-4c96-82e5-7511704cad74" />
-        <VarVal Position="19.0" Length="8" Name="#CRCH" Id="c8b053a0-a4c1-4a26-855f-94cb56237a38" />
-        <VarVal Position="20.0" Length="8" Name="#CRCL" Id="658f3e53-bc88-4cac-9d78-35b87e79b33a" />
+        
+        <CpzPrm Name="Уровнь вентилирования (биты)" Expression="[u14] * 1.0" Id="38ddb319-cebb-47de-8f78-bf1aea4077f7" />
+        <CpzPrm Name="Дельта Т" Expression="[s16] * 1.0" Id="71f60208-c2fa-45fc-a4ab-526dd423c15f" />
+        
+        <CpzPrm Name="Уставка ШИМ обогрева от слейва мастеру" Expression="[u15] * 1.0" Id="" />
+        <CpzPrm Name="Дельта Т в отладочном режиме" Expression="[s17] * 256.0 + [u18]" Id="" />
+        
+        <CpzPrm Name="Уставка ШИМ разгрузки" Expression="[u19] * 1.0" Id="" />
+        <CpzPrm Name="Таймер ШИМ разгрузки" Expression="[u20] * 1.0" Id="" />
+        
+        <VarVal Position="21.0" Length="8" Name="#CRCH" Id="c8b053a0-a4c1-4a26-855f-94cb56237a38" />
+        <VarVal Position="22.0" Length="8" Name="#CRCL" Id="658f3e53-bc88-4cac-9d78-35b87e79b33a" />
       </Request>
       <Reply Length="8" Position="21">
         <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="2dec3982-f2fc-4e21-94e0-faadd4ad3a2a" />
