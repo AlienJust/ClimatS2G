@@ -7,7 +7,11 @@
         public double InnerTemperature { get; set; }
         public int FanSpeed { get; set; }
         public int DeltaT { get; set; }
-        public double DeltaTSetting { get; set; }
+        public int HeatingPwmSettingFromSlaveToMaster { get; set; }
+        public double DeltaTInDebugMode { get; set; }
+        public int PwmUnloadingSetting { get; set; }
+        public int PwmUnloadingTime { get; set; }
+
 
         public bool IsSlave { get; set; }
         public bool SalonBit { get; set; }

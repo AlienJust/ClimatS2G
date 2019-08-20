@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16"
-    mc:Ignorable="d" d:DesignHeight="320" d:DesignWidth="400">
+    mc:Ignorable="d" d:DesignWidth="400" Height="450">
 
     <StackPanel Orientation="Vertical">
         <TextBlock Text="КСМ: режим работы:" />
@@ -108,8 +108,35 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: уставка ШИМ обогрева от слейва мастеру" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=HeatingPwmSettingFromSlaveToMaster, Mode=OneTime}" TextAlignment="Right" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
             <TextBlock Text="КСМ: дельта Т в отладочном режиме" />
-            <TextBlock Grid.Column="1" Text="{Binding Path=DeltaTSetting, Mode=OneTime}" TextAlignment="Right" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=DeltaTInDebugMode, Mode=OneTime}" TextAlignment="Right" />
+        </Grid>
+
+        <Grid Background="Wheat">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: уставка ШИМ разгрузки" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=PwmUnloadingSetting, Mode=OneTime}" TextAlignment="Right" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="КСМ: таймер ШИМ разгрузки" />
+            <TextBlock Grid.Column="1" Text="{Binding Path=PwmUnloadingTime, Mode=OneTime}" TextAlignment="Right" />
         </Grid>
     </StackPanel>
 </UserControl>

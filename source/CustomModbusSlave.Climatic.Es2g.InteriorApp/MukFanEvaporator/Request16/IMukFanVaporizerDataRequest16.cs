@@ -6,15 +6,16 @@
         int OuterTemperature { get; }
         double InnerTemperature { get; }
         int FanSpeed { get; }
-
         int DeltaT { get; }
-        double DeltaTSetting { get; }
-
+        int HeatingPwmSettingFromSlaveToMaster { get; }
+        double DeltaTInDebugMode { get; }
+        int PwmUnloadingSetting { get; }
+        int PwmUnloadingTime { get; }
+        
         /// <summary>
         ///     Секция: мастер или слейв
         /// </summary>
         bool IsSlave { get; }
-
         bool SalonBit { get; }
         bool FarAwayGoingBit { get; }
         bool HeadWagon { get; }
