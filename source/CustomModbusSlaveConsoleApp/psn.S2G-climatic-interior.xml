@@ -280,7 +280,7 @@
       </Reply>
     </CmdMask>
     <CmdMask Name="между КСМ и МУК вентилятора испарителя 0x10">
-      <Request Length="21" Position="0" CycleMsTime="100">
+      <Request Length="23" Position="0" CycleMsTime="100">
         <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="cc6eaac2-66d1-4c5c-9afc-f852c4a7a735" />
         <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="c201f752-d45e-433e-b09c-555973896746" />
         <BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="автоматич режим  (МУК работает в режиме охлаждения или нагрева)" Id="1423327f-0cf2-4125-8a65-822403d0d047" />
@@ -305,7 +305,7 @@
         <VarVal Position="21.0" Length="8" Name="#CRCH" Id="c8b053a0-a4c1-4a26-855f-94cb56237a38" />
         <VarVal Position="22.0" Length="8" Name="#CRCL" Id="658f3e53-bc88-4cac-9d78-35b87e79b33a" />
       </Request>
-      <Reply Length="8" Position="21">
+      <Reply Length="8" Position="23">
         <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="2dec3982-f2fc-4e21-94e0-faadd4ad3a2a" />
         <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="0f949433-fdde-49b7-8d4a-eb184ca9cc7b" />
         <VarVal Position="6.0" Length="8" Name="#CRCH" Id="511f539f-a73a-4f7c-a11d-709e41df9250" />
