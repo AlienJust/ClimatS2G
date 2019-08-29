@@ -78,81 +78,85 @@ namespace CustomModbusSlave.Es2gClimatic.CabinApp
                             appAbilities.Version == AppVersion.Half || appAbilities.Version == AppVersion.Full,
                             appAbilities.IsHourCountersVisible, mainVm.Notifier, cmdListenerMukFlapAirReply03,
                             cmdListenerMukVaporizerReply03, cmdListenerMukVaporizerRequest16,
-                            cmdListenerMukWarmFloorReply03, 
-                            cmdListenerKsm50Params, 
+                            cmdListenerMukWarmFloorReply03,
+                            cmdListenerKsm50Params,
                             cmdListenerBsSmRequest32,
                             cmdListenerBsSmReply32,
                             cmdListenerBvsReply65)
                     }
                 });
 
-                mainVm.AddTab(new TabItemViewModel
+                if (appAbilities.Version == AppVersion.Full)
                 {
-                    FullHeader = "МУК заслонки",
-                    ShortHeader = "МУК 2",
-                    Content = new MukFlapDataView
+                    mainVm.AddTab(new TabItemViewModel
                     {
-                        DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter,
-                            cmdListenerMukFlapAirReply03, cmdListenerMukFlapAirRequest16)
-                    }
-                });
+                        FullHeader = "МУК заслонки",
+                        ShortHeader = "МУК 2",
+                        Content = new MukFlapDataView
+                        {
+                            DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter,
+                                cmdListenerMukFlapAirReply03, cmdListenerMukFlapAirRequest16)
+                        }
+                    });
 
-                mainVm.AddTab(new TabItemViewModel
-                {
-                    FullHeader = "МУК вентилятора испарителя",
-                    ShortHeader = "МУК 3",
-                    Content = new MukVaporizerFanDataView
+                    mainVm.AddTab(new TabItemViewModel
                     {
-                        DataContext = new MukVaporizerFanDataViewModelParamcentric(
-                            mainVm.Notifier, channel.Channel.ParamSetter,
-                            appAbilities.RtuParamReceiver,
-                            cmdListenerMukVaporizerReply03,
-                            cmdListenerMukVaporizerRequest16
-                        )
-                    }
-                });
-                mainVm.AddTab(new TabItemViewModel
-                {
-                    FullHeader = "МУК тёплого пола",
-                    ShortHeader = "МУК 5",
-                    Content = new MukWarmFloorDataView
+                        FullHeader = "МУК вентилятора испарителя",
+                        ShortHeader = "МУК 3",
+                        Content = new MukVaporizerFanDataView
+                        {
+                            DataContext = new MukVaporizerFanDataViewModelParamcentric(
+                                mainVm.Notifier, channel.Channel.ParamSetter,
+                                appAbilities.RtuParamReceiver,
+                                cmdListenerMukVaporizerReply03,
+                                cmdListenerMukVaporizerRequest16
+                            )
+                        }
+                    });
+                    mainVm.AddTab(new TabItemViewModel
                     {
-                        DataContext = new MukWarmFloorDataViewModel(
-                            mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukWarmFloorReply03, cmdListenerMukWarmFloorRequest16)
-                    }
-                });
+                        FullHeader = "МУК тёплого пола",
+                        ShortHeader = "МУК 5",
+                        Content = new MukWarmFloorDataView
+                        {
+                            DataContext = new MukWarmFloorDataViewModel(
+                                mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerMukWarmFloorReply03, cmdListenerMukWarmFloorRequest16)
+                        }
+                    });
 
-                mainVm.AddTab(new TabItemViewModel
-                {
-                    FullHeader = "БС-СМ",
-                    ShortHeader = "БС-СМ",
-                    Content = new BsSmDataView
+                    mainVm.AddTab(new TabItemViewModel
                     {
-                        DataContext = new BsSmDataViewModel(
-                            mainVm.Notifier, cmdListenerBsSmRequest32, cmdListenerBsSmReply32)
-                    }
-                });
+                        FullHeader = "БС-СМ",
+                        ShortHeader = "БС-СМ",
+                        Content = new BsSmDataView
+                        {
+                            DataContext = new BsSmDataViewModel(
+                                mainVm.Notifier, cmdListenerBsSmRequest32, cmdListenerBsSmReply32)
+                        }
+                    });
 
-                mainVm.AddTab(new TabItemViewModel
-                {
-                    FullHeader = "БВС",
-                    ShortHeader = "БВС",
-                    Content = new BvsDataView
+                    mainVm.AddTab(new TabItemViewModel
                     {
-                        DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvsReply65)
-                    }
-                });
+                        FullHeader = "БВС",
+                        ShortHeader = "БВС",
+                        Content = new BvsDataView
+                        {
+                            DataContext = new BvsDataViewModel(mainVm.Notifier, cmdListenerBvsReply65)
+                        }
+                    });
 
-                mainVm.AddTab(new TabItemViewModel
-                {
-                    FullHeader = "КСМ",
-                    ShortHeader = "КСМ",
-                    Content = new KsmDataView
+                    mainVm.AddTab(new TabItemViewModel
                     {
-                        DataContext = new KsmDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerKsm50Params)
-                    }
-                });
+                        FullHeader = "КСМ",
+                        ShortHeader = "КСМ",
+                        Content = new KsmDataView
+                        {
+                            DataContext = new KsmDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter, cmdListenerKsm50Params)
+                        }
+                    });
+                }
             });
+
         }
     }
 }
