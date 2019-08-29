@@ -70,6 +70,8 @@
         <VarVal Position="46.0" Length="8" Name="#CRCL" Id="a180e0a1-1415-4513-9e3c-6b1ea5515aef" />
       </Reply>
     </CmdMask>
+    
+    
     <CmdMask Name="между КСМ и МУК вентилятора испарителя 03">
       <Request Length="8" Position="0" CycleMsTime="100">
         <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="f6d1067a-203b-4d99-8eed-f193a6cccc69" />
@@ -115,6 +117,41 @@
         <VarVal Position="40.0" Length="8" Name="#CRCL" Id="bd5cdc04-b0a6-4818-bd66-80d3e33e27f0" />
       </Reply>
     </CmdMask>
+
+    <CmdMask Name="между КСМ и МУК вентилятора испарителя 0x10">
+      <Request Length="23" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="cc6eaac2-66d1-4c5c-9afc-f852c4a7a735" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="c201f752-d45e-433e-b09c-555973896746" />
+        <BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="автоматич режим  (МУК работает в режиме охлаждения или нагрева)" Id="1423327f-0cf2-4125-8a65-822403d0d047" />
+        <BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="регулятор обогрев принудительно" Id="7b2a1cf0-014c-4dbd-933c-4bb3173816a2" />
+        <BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="режим обогрева принудительно, ШИМ обогрева  =100%" Id="4a9702fc-b975-4a4e-8a50-9134aababa5f" />
+        <BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="режим охлаждение принудительно" Id="8f545181-5f20-499c-b583-be7cf08f2761" />
+        <BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="выкл обогрев и охл" Id="5b6d6a2f-2f2e-453d-9f55-93ee9e2c51fd" />
+        <BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="ручной режим" Id="ee23d16a-6d2e-4d0c-9557-2fbffd7277b7" />
+        <BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="режим обогрева принудительно, ШИМ обогрева=50%" Id="49b03174-b0b4-417b-9203-bbb2574f4a12" />
+        <CpzPrm Name="Температура наружного воздуха" Expression="([s9] * 256.0 + [u10]) * 1.0" Id="f396e43c-66ac-4726-ba44-d99518d9141f" />
+        <CpzPrm Name="Температура в помещении" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="5837e12c-7929-482e-9a08-0efedb8316a1" />
+
+        <CpzPrm Name="Уровнь вентилирования (биты)" Expression="[u14] * 1.0" Id="38ddb319-cebb-47de-8f78-bf1aea4077f7" />
+        <CpzPrm Name="Дельта Т" Expression="[s16] * 1.0" Id="71f60208-c2fa-45fc-a4ab-526dd423c15f" />
+
+        <CpzPrm Name="Уставка ШИМ обогрева от слейва мастеру" Expression="[u15] * 1.0" Id="" />
+        <CpzPrm Name="Дельта Т в отладочном режиме" Expression="[s17] * 256.0 + [u18]" Id="" />
+
+        <CpzPrm Name="Уставка ШИМ разгрузки" Expression="[u19] * 1.0" Id="" />
+        <CpzPrm Name="Таймер ШИМ разгрузки" Expression="[u20] * 1.0" Id="" />
+
+        <VarVal Position="21.0" Length="8" Name="#CRCH" Id="c8b053a0-a4c1-4a26-855f-94cb56237a38" />
+        <VarVal Position="22.0" Length="8" Name="#CRCL" Id="658f3e53-bc88-4cac-9d78-35b87e79b33a" />
+      </Request>
+      <Reply Length="8" Position="23">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="2dec3982-f2fc-4e21-94e0-faadd4ad3a2a" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="0f949433-fdde-49b7-8d4a-eb184ca9cc7b" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="511f539f-a73a-4f7c-a11d-709e41df9250" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="1c03343b-75ef-40ee-bb19-60126204df64" />
+      </Reply>
+    </CmdMask>
+    
     <CmdMask Name="между КСМ и МУК вентилятора конденсатора 03">
       <Request Length="8" Position="0" CycleMsTime="100">
         <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="aa2231b6-6e35-4586-bd4f-8e73564e4ed4" />
@@ -279,39 +316,7 @@
         <VarVal Position="7.0" Length="8" Name="#CRCL" Id="dad0f404-f44e-4e77-9dc8-7f851e0ab865" />
       </Reply>
     </CmdMask>
-    <CmdMask Name="между КСМ и МУК вентилятора испарителя 0x10">
-      <Request Length="23" Position="0" CycleMsTime="100">
-        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="cc6eaac2-66d1-4c5c-9afc-f852c4a7a735" />
-        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="c201f752-d45e-433e-b09c-555973896746" />
-        <BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="автоматич режим  (МУК работает в режиме охлаждения или нагрева)" Id="1423327f-0cf2-4125-8a65-822403d0d047" />
-        <BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="регулятор обогрев принудительно" Id="7b2a1cf0-014c-4dbd-933c-4bb3173816a2" />
-        <BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="режим обогрева принудительно, ШИМ обогрева  =100%" Id="4a9702fc-b975-4a4e-8a50-9134aababa5f" />
-        <BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="режим охлаждение принудительно" Id="8f545181-5f20-499c-b583-be7cf08f2761" />
-        <BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="выкл обогрев и охл" Id="5b6d6a2f-2f2e-453d-9f55-93ee9e2c51fd" />
-        <BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="ручной режим" Id="ee23d16a-6d2e-4d0c-9557-2fbffd7277b7" />
-        <BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="режим обогрева принудительно, ШИМ обогрева=50%" Id="49b03174-b0b4-417b-9203-bbb2574f4a12" />
-        <CpzPrm Name="Температура наружного воздуха" Expression="([s9] * 256.0 + [u10]) * 1.0" Id="f396e43c-66ac-4726-ba44-d99518d9141f" />
-        <CpzPrm Name="Температура в помещении" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="5837e12c-7929-482e-9a08-0efedb8316a1" />
-        
-        <CpzPrm Name="Уровнь вентилирования (биты)" Expression="[u14] * 1.0" Id="38ddb319-cebb-47de-8f78-bf1aea4077f7" />
-        <CpzPrm Name="Дельта Т" Expression="[s16] * 1.0" Id="71f60208-c2fa-45fc-a4ab-526dd423c15f" />
-        
-        <CpzPrm Name="Уставка ШИМ обогрева от слейва мастеру" Expression="[u15] * 1.0" Id="" />
-        <CpzPrm Name="Дельта Т в отладочном режиме" Expression="[s17] * 256.0 + [u18]" Id="" />
-        
-        <CpzPrm Name="Уставка ШИМ разгрузки" Expression="[u19] * 1.0" Id="" />
-        <CpzPrm Name="Таймер ШИМ разгрузки" Expression="[u20] * 1.0" Id="" />
-        
-        <VarVal Position="21.0" Length="8" Name="#CRCH" Id="c8b053a0-a4c1-4a26-855f-94cb56237a38" />
-        <VarVal Position="22.0" Length="8" Name="#CRCL" Id="658f3e53-bc88-4cac-9d78-35b87e79b33a" />
-      </Request>
-      <Reply Length="8" Position="23">
-        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="2dec3982-f2fc-4e21-94e0-faadd4ad3a2a" />
-        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="0f949433-fdde-49b7-8d4a-eb184ca9cc7b" />
-        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="511f539f-a73a-4f7c-a11d-709e41df9250" />
-        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="1c03343b-75ef-40ee-bb19-60126204df64" />
-      </Reply>
-    </CmdMask>
+    
     <CmdMask Name="между КСМ и МУК вентилятора конденсатора 0x10">
       <Request Length="15" Position="0" CycleMsTime="100">
         <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="93390543-f0b9-43cc-be74-d4834c483e70" />
