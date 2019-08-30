@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -7,7 +6,6 @@ using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Chart;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
-using DataAbstractionLevel.Low.PsnConfig.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
 {
@@ -22,8 +20,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
             var appFactory = new AppFactory("psn.TRAM-climatic-interior.xml");
             var appAbilities = appFactory.Abilities;
 
+            var paramPresenter = appAbilities.GetParametersPresentation("Tram.Iterior.Tabs.xml");
 
-
+            /*
             var listeners = new List<Tuple<IPsnProtocolCommandPartConfiguration, ICmdListener<ICmdPartConfigAndBytes>>>();
             foreach (var cmdPart in appAbilities.PsnProtocolConfiguration.CommandParts)
             {
@@ -31,7 +30,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                 listeners.Add(new Tuple<IPsnProtocolCommandPartConfiguration, ICmdListener<ICmdPartConfigAndBytes>>(cmdPart, listener));
                 appAbilities.CmdNotifierStd.AddListener(listener);
             }
-
+            */
 
 
 
@@ -39,7 +38,8 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
             {
                 appFactory.ShowChildWindowInOwnThread(uiNotifier =>
                 {
-                    var colorsForGraphics = new List<Color> {
+                    var colorsForGraphics = new List<Color>
+                    {
                                 Colors.LawnGreen,
                                 Colors.Red,
                                 Colors.Cyan,
@@ -66,7 +66,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                                 Colors.RoyalBlue,
                                 Colors.MediumVioletRed,
                                 Colors.MediumTurquoise
-                        };
+                    };
 
                     var chartVm = new ChartViewModel(uiNotifier, colorsForGraphics);
                     appAbilities.ParamLoggerRegistrationPoint.RegisterLoggegr(chartVm); // TODO: REG on point
@@ -82,9 +82,16 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
             {
                 var channel = mainVm.AddChannel("Single channel");
 
+
+                foreach (var paramViewAndKey in paramPresenter.Parameters)
+                {
+                    mainVm.AddParameter(paramViewAndKey.Key, paramViewAndKey.Value, appAbilities.PsnProtocolConfigurationParams[paramViewAndKey.Value.Identifier]);
+                }
+
+
                 foreach (var device in appAbilities.PsnProtocolConfiguration.PsnDevices)
                 {
-                    var commandPartsForCurrentDevice = listeners.Where(t => (byte)t.Item1.Address.DefinedValue == device.Address);
+                    //var commandPartsForCurrentDevice = listeners.Where(t => (byte)t.Item1.Address.DefinedValue == device.Address);
                     var devGroup = new GroupParamViewModel(device.Name);
 
                     foreach (var cmdPartAndListener in commandPartsForCurrentDevice)

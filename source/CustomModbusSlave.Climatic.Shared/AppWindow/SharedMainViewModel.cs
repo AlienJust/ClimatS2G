@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using AlienJust.Support.Concurrent.Contracts;
@@ -7,13 +8,16 @@ using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using AlienJust.Support.UserInterface.Contracts;
+using CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
+using DataAbstractionLevel.Low.PsnConfig.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
     sealed class SharedMainViewModel : ViewModelBase, IUserInterfaceRoot, ISharedMainViewModel
     {
         private readonly ISharedAppAbilities _appAbilities;
+        private readonly Dictionary<string, IParameterViewModel> _parameters;
         private bool _tabHeadersAreLong;
         private FrameworkElement _topContent;
         public ProgramLogViewModel ProgramLogVm { get; }
@@ -36,6 +40,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             Logger = new RelayLogger(ProgramLogVm, new DateTimeFormatter(" > "));
             Tabs = new ObservableCollection<TabItemViewModel>();
             ComPortControlVms = new ObservableCollection<ComPortControlViewModel>();
+
+            _parameters = new Dictionary<string, IParameterViewModel>();
 
             Logger.Log("Программа загружена");
         }
@@ -92,6 +98,13 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                     RaisePropertyChanged(() => TopContent);
                 }
             }
+        }
+
+        public Dictionary<string, IParameterViewModel> Parameters => _parameters;
+
+        public void AddParameter(string key, IParameterDescription description, IPsnProtocolParameterConfigurationVariable configuration)
+        {
+            _parameters.Add(key, new ParameterViewModelSimple(_appAbilities.ParamListener, Notifier, description, configuration.Name));
         }
     }
 }

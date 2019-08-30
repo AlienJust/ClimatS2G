@@ -121,6 +121,7 @@
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +135,8 @@
       <DependentUpon>ComPortControlView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppWindow\ComPortControlViewModel.cs" />
+    <Compile Include="AppWindow\IParameterViewModel.cs" />
+    <Compile Include="AppWindow\IParamListener.cs" />
     <Compile Include="AppWindow\ISharedAppAbilities.cs" />
     <Compile Include="AppWindow\ISharedMainViewModel.cs" />
     <Compile Include="AppWindow\IStdNotifier.cs" />
@@ -231,6 +234,17 @@
     </Compile>
     <Compile Include="MukFanCondenser\SetParameters\MukFridgeSetParamsViewModel.cs" />
     <Compile Include="OneWire\SensorIndicationDoubleExt.cs" />
+    <Compile Include="ParameterPresentation\Views\BooleanView.cs" />
+    <Compile Include="ParameterPresentation\IParameterView.cs" />
+    <Compile Include="ParameterPresentation\IParametersPresenter.cs" />
+    <Compile Include="ParameterPresentation\IParameterDescription.cs" />
+    <Compile Include="ParameterPresentation\Views\DefaultView.cs" />
+    <Compile Include="ParameterPresentation\Views\MultiView.cs" />
+    <Compile Include="ParameterPresentation\Views\NumberView.cs" />
+    <Compile Include="ParameterPresentation\ParameterDescriptionSimple.cs" />
+    <Compile Include="ParameterPresentation\ParametersPresenterSimple.cs" />
+    <Compile Include="ParameterPresentation\ParametersPresenterXmlBuilder.cs" />
+    <Compile Include="ParameterPresentation\ViewXmlBuilder.cs" />
     <Compile Include="ParamLogger\IParameterLogger.cs" />
     <Compile Include="ParamLogger\IParamLoggerRegistrationPoint.cs" />
     <Compile Include="ParamLogger\ParamLoggerRegistrationPointThreadSafe.cs" />

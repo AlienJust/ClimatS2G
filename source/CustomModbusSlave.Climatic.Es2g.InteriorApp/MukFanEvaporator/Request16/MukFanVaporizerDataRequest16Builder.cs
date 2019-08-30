@@ -14,7 +14,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16
 
         public IMukFanVaporizerDataRequest16 Build()
         {
-            var deltaTInDebugModeRaw = _bytes[16] * 256 + _bytes[17];
+            var deltaTInDebugModeRaw = _bytes[17] * 256 + _bytes[18];
 
             return new MukFanVaporizerDataRequest16Simple
             {
@@ -44,18 +44,18 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.MukFanEvaporator.Request16
                 DoorsAreOpen = _bytes[13].GetBit(5),
                 PowerLimitTurningRecycleHeatersOff = _bytes[13].GetBit(6),
 
-                FanSpeed = _bytes[13], // word #3
+                FanSpeed = _bytes[14], // word #3
 
-                HeatingPwmSettingFromSlaveToMaster = _bytes[14],
-                DeltaT = _bytes[15], // word #4, bit 01
+                HeatingPwmSettingFromSlaveToMaster = _bytes[15],
+                DeltaT = _bytes[16], // word #4, bit 01
 
 
 
                 DeltaTInDebugMode = deltaTInDebugModeRaw == 25 || deltaTInDebugModeRaw == 0
                     ? 0.0
                     : (deltaTInDebugModeRaw - 25) * 0.1, // word #5, 19 & 20 bytes are CRC
-                PwmUnloadingTime = _bytes[18],
-                PwmUnloadingSetting = _bytes[19],
+                PwmUnloadingTime = _bytes[19],
+                PwmUnloadingSetting = _bytes[20],
             };
         }
     }

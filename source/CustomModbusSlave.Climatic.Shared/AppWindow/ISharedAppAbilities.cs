@@ -1,6 +1,7 @@
-﻿//using AlienJust.Support.Loggers;
+﻿using CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation;
 using DataAbstractionLevel.Low.PsnConfig.Contracts;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
+using System.Collections.Generic;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
@@ -28,5 +29,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         IParamLoggerRegistrationPoint ParamLoggerRegistrationPoint { get; }
         IParameterLogger ParameterLogger { get; }
         IPsnProtocolConfiguration PsnProtocolConfiguration { get; }
+        Dictionary<string, IPsnProtocolParameterConfigurationVariable> PsnProtocolConfigurationParams { get; }
+
+        IParametersPresenter GetParametersPresentation(string filename);
+
+        IParamListener ParamListener { get; }
+
+        
     }
 }

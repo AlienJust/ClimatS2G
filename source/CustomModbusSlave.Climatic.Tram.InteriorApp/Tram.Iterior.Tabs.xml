@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Parameters>
+  <Parameter Key="param01" ParameterId="2cf844d7-04a9-4238-b6b6-10412972b4ad" CustomName="Версия ПО"/>
+  <Parameter Key="param02" ParameterId="a61cd084-2e9a-4be2-af27-f75ee7f4aeed">
+    <MultiView Expression="{$value} - {$text}%" Name="{$root}">
+      <NumberView Expression="[value]" StringFormat="f2" Name="{$value}" />
+      <NumberView Expression="(256 - [value]) / 2.56" StringFormat="f2" Name="{$text}" />
+    </MultiView>
+  </Parameter>
+</Parameters>

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-//using AlienJust.Adaptation.ConsoleLogger;
-//using AlienJust.Support.Loggers;
-//using AlienJust.Support.Loggers.Contracts;
-//using AlienJust.Support.Text;
-//using AlienJust.Support.Text.Contracts;
+using CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation;
 using DataAbstractionLevel.Low.PsnConfig;
 using DataAbstractionLevel.Low.PsnConfig.Contracts;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
@@ -20,7 +16,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         private readonly Dictionary<string, SerialChannelWithTimeoutMonitorAndSendReplyAbility> _channels;
         public string TestPortName => "ТЕСТ";
         public IStdNotifier CmdNotifierStd { get; }
-
+        public Dictionary<string, IPsnProtocolParameterConfigurationVariable> PsnProtocolConfigurationParams { get; }
         public ModbusRtuParamReceiver RtuParamReceiver { get; }
 
         public IParamLoggerRegistrationPoint ParamLoggerRegistrationPoint { get; }
@@ -38,8 +34,20 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                 isHalfOrFullVersion ? AppVersion.Half : AppVersion.Base;
 
             IsHourCountersVisible = File.Exists("HourCounters.txt");
-            
+
             PsnProtocolConfiguration = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, psnProtocolFileName)).LoadConfiguration();
+
+            
+            var allPsnParams = new Dictionary<string, IPsnProtocolParameterConfigurationVariable>();
+            foreach (var psnCommandPart in PsnProtocolConfiguration.CommandParts)
+            {
+                foreach(var param in psnCommandPart.VarParams)
+                {
+                    allPsnParams.Add(param.Id.IdentyString, param);
+                }
+            }
+            PsnProtocolConfigurationParams = allPsnParams;
+
 
             RtuParamReceiver = new ModbusRtuParamReceiver();
 
@@ -50,6 +58,14 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             var paramLoggerAndRegPoint = new ParamLoggerRegistrationPointThreadSafe();
             ParameterLogger = paramLoggerAndRegPoint;
             ParamLoggerRegistrationPoint = paramLoggerAndRegPoint;
+
+            var paramListener = new ParamListenerSimple(CmdNotifierStd);
+            foreach (var cmdPart in PsnProtocolConfiguration.CommandParts)
+            {
+                paramListener.AddPsnCommandPartConfigurationToListen(cmdPart);
+            }
+
+            ParamListener = paramListener;
         }
 
         public SerialChannelWithTimeoutMonitorAndSendReplyAbility CreateChannel(string channelName)
@@ -70,5 +86,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                 channel.BecameUnused();
             }
         }
+
+        public IParametersPresenter GetParametersPresentation(string filename)
+        {
+            return ParametersPresenterXmlBuilder.BuildParametersPresentationFromXml(filename);
+        }
+
+        public IParamListener ParamListener { get; }
     }
 }
