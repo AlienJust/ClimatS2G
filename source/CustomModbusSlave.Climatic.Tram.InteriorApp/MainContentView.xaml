@@ -44,33 +44,130 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param01].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param01].Value}" Grid.Column="1" />
+                    <Label Content="{Binding Path=Parameters[param_002_003_001].Name}"/>
+                    <Label Content="{Binding Path=Parameters[param_002_003_001].Value}" Grid.Column="1" />
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param02].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param02].Value}" Grid.Column="1" />
+                    <Label Content="{Binding Path=Parameters[param_002_003_002].Name}"/>
+                    <Label Content="{Binding Path=Parameters[param_002_003_002].Value}" Grid.Column="1" />
                 </Grid>
-                
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param03].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param03].Value}" Grid.Column="1" />
+                    <Label Content="{Binding Path=Parameters[param_002_003_003].Name}"/>
+                    <Label Content="{Binding Path=Parameters[param_002_003_003].Value}" Grid.Column="1" />
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param04].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param04].Value}" Grid.Column="1" />
+                    <Label Content="{Binding Path=Parameters[param_002_003_004].Name}"/>
+                    <Label Content="{Binding Path=Parameters[param_002_003_004].Value}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_002_003_005].Name}"/>
+                    <Label Content="{Binding Path=Parameters[param_002_003_005].Value}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_002_003_006].Name}"/>
+                    <Label Content="{Binding Path=Parameters[param_002_003_006].Value}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_002_003_007].Name}"/>
+                    <Label Content="{Binding Path=Parameters[param_002_003_007].Value}" Grid.Column="1" />
+                </Grid>
+            </StackPanel>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="МУК вентилятора испарителя" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+                    <TextBlock Text="МУК 3" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
+                </StackPanel>
+            </TabItem.Header>
+            <StackPanel Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_003_003_001].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_003_003_001].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_003_003_002].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_003_003_002].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_003_003_003].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_003_003_003].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_003_003_004].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_003_003_004].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_003_003_005].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_003_003_005].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_003_003_006].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_003_003_006].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_003_003_007].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_003_003_007].Value, Mode=OneWay}" Grid.Column="1" />
                 </Grid>
             </StackPanel>
         </TabItem>

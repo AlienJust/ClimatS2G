@@ -1,0 +1,48 @@
+﻿using DataAbstractionLevel.Low.PsnConfig.Contracts;
+using System.Xml.Linq;
+
+namespace CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation
+{
+    public sealed class ParametersPresenterXmlSerializer
+    {
+        private static void AddChildXmlNodesWithParameters(XElement parametersRootElement, IPsnProtocolConfiguration config, bool includeCustomName)
+        {
+            int commandPartNumber = 1;
+            foreach (var commandPart in config.CommandParts)
+            {
+                int address = (int)commandPart.Address.DefinedValue;
+                int command = (int)commandPart.CommandCode.DefinedValue;
+                int signalNumber = 1;
+                foreach (var varParam in commandPart.VarParams)
+                {
+                    if (varParam.Name.StartsWith("#")) continue;
+                    
+                    var key = "param_" + commandPartNumber.ToString("d2") + "_" + address.ToString("d3") + "_" + command.ToString("d3") + "_" + signalNumber.ToString("d3");
+
+                    //var paramDesc = new ParameterDescriptionSimple { Key = key, CustomName = null, Identifier = varParam.Id.IdentyString, View = null };
+
+                    var node = new XElement("Parameter", new XAttribute("Key", key), new XAttribute("Identifier", varParam.Id.IdentyString));
+                    if (includeCustomName) node.Add(new XAttribute("CustomName", varParam.Name));
+
+                    node.Add(new XAttribute("Comment", commandPart.PartName + " - " + varParam.Name));
+
+                    parametersRootElement.Add(node);
+                    signalNumber++;
+                }
+                commandPartNumber++;
+            }
+        }
+
+        public static void Serialize(string filename, IPsnProtocolConfiguration config, bool includeCustomName)
+        {
+            var xDoc = new XDocument();
+            var rootElement = new XElement("Parameters");
+
+
+            AddChildXmlNodesWithParameters(rootElement, config, includeCustomName);
+
+            xDoc.Add(rootElement);
+            xDoc.Save(filename);
+        }
+    }
+}

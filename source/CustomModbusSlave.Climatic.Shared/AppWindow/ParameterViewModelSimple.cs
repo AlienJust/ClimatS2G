@@ -1,6 +1,7 @@
 ﻿using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation;
+using System;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
@@ -23,14 +24,16 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             _listener.ValueReceived += ListenerValueReceived;
             Name = _parameterDescription.CustomName ?? parameterNameFromConfiguration;
             //ParameterId = description.Identifier;
+            Value = "?";
         }
 
         private void ListenerValueReceived(object sender, ParameterValueReceivedEventArgs e)
         {
             if (e.ParameterId == _parameterDescription.Identifier)
             {
+                //Console.WriteLine(e.ParameterId + " > " + Name + " > Received value: " + e.Value.ToString("f2"));
                 _uiNotifier.Notify(()=> {
-                    _parameterDescription.View.GetText(e.Value);
+                    Value = _parameterDescription.View.GetText(e.Value);
                 });
             }
         }

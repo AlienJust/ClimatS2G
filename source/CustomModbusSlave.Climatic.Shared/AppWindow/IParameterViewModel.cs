@@ -6,6 +6,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
     {
         string Name { get; }
 
-        string Value { get; }
+        string Value { get; set; }
     }
 }

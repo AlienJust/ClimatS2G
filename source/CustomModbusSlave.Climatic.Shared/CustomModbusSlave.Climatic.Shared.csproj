@@ -235,6 +235,7 @@
     </Compile>
     <Compile Include="MukFanCondenser\SetParameters\MukFridgeSetParamsViewModel.cs" />
     <Compile Include="OneWire\SensorIndicationDoubleExt.cs" />
+    <Compile Include="ParameterPresentation\ParametersPresenterXmlSerializer.cs" />
     <Compile Include="ParameterPresentation\Views\BooleanView.cs" />
     <Compile Include="ParameterPresentation\IParameterView.cs" />
     <Compile Include="ParameterPresentation\IParametersPresenter.cs" />

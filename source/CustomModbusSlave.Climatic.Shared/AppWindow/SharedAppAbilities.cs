@@ -64,7 +64,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             {
                 paramListener.AddPsnCommandPartConfigurationToListen(cmdPart);
             }
-
+            /*paramListener.ValueReceived += (o, ea) =>
+            {
+                Console.WriteLine("received param value " + ea.ParameterId);
+            };*/
             ParamListener = paramListener;
         }
 
