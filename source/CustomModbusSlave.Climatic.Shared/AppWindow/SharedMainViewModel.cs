@@ -14,7 +14,7 @@ using DataAbstractionLevel.Low.PsnConfig.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
-    sealed class SharedMainViewModel : ViewModelBase, IUserInterfaceRoot, ISharedMainViewModel
+    sealed class SharedMainViewModel : ViewModelBase, ISharedMainViewModel
     {
         private readonly ISharedAppAbilities _appAbilities;
         private readonly Dictionary<string, IParameterViewModel> _parameters;
@@ -111,6 +111,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                 {
                     _mainContent = value;
                     RaisePropertyChanged(() => MainContent);
+                    Console.WriteLine("MainContent was setted");
                 }
             }
         }

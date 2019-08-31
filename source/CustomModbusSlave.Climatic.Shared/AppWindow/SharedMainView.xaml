@@ -79,26 +79,9 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <ContentPresenter Height="Auto" Grid.Row="0" Content="{Binding Path=TopContent, Mode=OneWay}" />
-        <ContentPresenter Grid.Row="1" Content="{Binding Path=MainContent, Mode=OneWay}"/>
-        <!--
-        <TabControl ItemContainerStyle="{StaticResource AzureTabItem}" Grid.Row="1" TabStripPlacement="Left" ItemsSource="{Binding Path=Tabs}">
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=ShortHeader, Mode=OneTime}" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
-                        <TextBlock Text="{Binding Path=FullHeader, Mode=OneTime}" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
-                    </StackPanel>
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <ScrollViewer>
-                        <ContentPresenter Content="{Binding Path=Content, Mode=OneTime}" />
-                    </ScrollViewer>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
-        -->
+
+        <ContentPresenter Grid.Row="1" Content="{Binding Path=MainContent, Mode=OneWay}" />
+
         <GridSplitter Grid.Row="2" Height="4" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1"
                       VerticalAlignment="Top" Background="{DynamicResource AccentColorBrush}" ResizeDirection="Rows"
                       HorizontalAlignment="Stretch" />

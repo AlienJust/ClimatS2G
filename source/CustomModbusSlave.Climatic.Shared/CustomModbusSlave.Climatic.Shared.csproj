@@ -140,6 +140,7 @@
     <Compile Include="AppWindow\ISharedAppAbilities.cs" />
     <Compile Include="AppWindow\ISharedMainViewModel.cs" />
     <Compile Include="AppWindow\IStdNotifier.cs" />
+    <Compile Include="AppWindow\ParameterViewModelSimple.cs" />
     <Compile Include="AppWindow\SerialChannelWithTimeoutMonitorAndSendReplyAbility.cs" />
     <Compile Include="AppWindow\SharedAppAbilities.cs" />
     <Compile Include="AppWindow\SharedMainView.xaml.cs">

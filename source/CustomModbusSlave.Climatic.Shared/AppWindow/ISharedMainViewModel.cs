@@ -9,14 +9,15 @@ using DataAbstractionLevel.Low.PsnConfig.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
-    public interface ISharedMainViewModel : INotifyPropertyChanged
+    public interface ISharedMainViewModel : INotifyPropertyChanged, IUserInterfaceRoot
     {
-        IThreadNotifier Notifier { get; }
+        //IThreadNotifier Notifier { get; }
         IWindowSystem WindowsSystem { get; }
         ILogger Logger { get; }
 
         FrameworkElement TopContent { get; set; }
         FrameworkElement MainContent { get; set; }
+
         void AddTab(TabItemViewModel tabVm);
 
         ComPortControlViewModel AddChannel(string channelName);

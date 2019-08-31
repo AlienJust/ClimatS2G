@@ -9,7 +9,7 @@ namespace CustomModbusSlave.Climatic.Tram.InteriorApp
     {
         public MainContentView()
         {
-            
+            InitializeComponent();
         }
     }
 }

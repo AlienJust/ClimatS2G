@@ -17,17 +17,20 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
                 <!-- Accent and AppTheme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml" />
+                
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
+                
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
 
                 <ResourceDictionary Source="pack://application:,,,/ParamControls;component/Styles/AzureTabItem.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
             <BooleanToVisibilityConverter x:Key="BtvConverter" />
             <converters:BooleanToVisibilityConverter x:Key="InvertedBtwConverter" InvertVisibility="True" />
 
         </ResourceDictionary>
     </UserControl.Resources>
-    <TabControl ItemContainerStyle="{StaticResource AzureTabItem}" Grid.Row="1" TabStripPlacement="Left" ItemsSource="{Binding Path=Tabs}">
+    <TabControl ItemContainerStyle="{StaticResource AzureTabItem}" Grid.Row="1" TabStripPlacement="Left">
         <TabItem>
             <TabItem.Header>
                 <StackPanel Orientation="Horizontal">
@@ -52,6 +55,7 @@
                     <Label Content="{Binding Path=Parameters[param02].Name}"/>
                     <Label Content="{Binding Path=Parameters[param02].Value}" Grid.Column="1" />
                 </Grid>
+                
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -71,7 +75,4 @@
             </StackPanel>
         </TabItem>
     </TabControl>
-    <!--
-    
-    -->
 </UserControl>
