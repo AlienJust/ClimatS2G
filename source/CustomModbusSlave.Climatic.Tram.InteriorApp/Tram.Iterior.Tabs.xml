@@ -7,4 +7,10 @@
       <NumberView Expression="(256 - [value]) / 2.56" StringFormat="f2" Name="{$text}" />
     </MultiView>
   </Parameter>
+  <Parameter Key="param03" ParameterId="afc67651-a44b-4a20-9b25-6364f8ad1d9b">
+    <NumberView Expression="(256 - [value]) / 2.56" StringFormat="f2" Name="{$text}" />
+  </Parameter>
+  <Parameter Key="param04" ParameterId="fe0024a1-c5df-43a3-bc68-47138e6f5d3f">
+    <NumberView Expression="(256 - [value]) / 2.56" StringFormat="f2" Name="{$text}" />
+  </Parameter>
 </Parameters>

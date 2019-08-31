@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using CustomModbusSlave.Climatic.Tram.InteriorApp;
 using CustomModbusSlave.Es2gClimatic.Shared;
 using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Chart;
+using CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
@@ -87,7 +89,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                 {
                     mainVm.AddParameter(paramViewAndKey.Key, paramViewAndKey.Value, appAbilities.PsnProtocolConfigurationParams[paramViewAndKey.Value.Identifier]);
                 }
-
+                /*
 
                 foreach (var device in appAbilities.PsnProtocolConfiguration.PsnDevices)
                 {
@@ -150,14 +152,6 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                                 }
                                 else
                                 {
-                                    /*var dispParam00 =
-                                    new DispParamViewModel<bool, double>(recvParam00.ReceiveName, recvParam00,
-                                        mainVm.Notifier, data => data > 0.5, false, false); // TODO: string format from props
-                                    var chartParam00 = new ChartParamViewModel<double, bool>(recvParam00,
-                                        dispParam00, data => data, ParameterLogType.Discrete, appAbilities.ParameterLogger,
-                                        cmdPartGroup.DisplayName);
-                                    cmdPartGroup.AddParameterOrGroup(chartParam00);*/
-
                                     var dispParam00 =
                                         new DispParamViewModel<string, double>(recvParam00.ReceiveName, recvParam00,
                                             mainVm.Notifier, data => data > 0.5 ? "True" : "False", "ER", "?"); // TODO: string format from props
@@ -170,10 +164,16 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                         }
                         if (goodSignalsCount > 0)
                             devGroup.AddParameterOrGroup(cmdPartGroup);
-
+                        
                     }
                     mainVm.AddTab(new TabItemViewModel { FullHeader = device.Name, ShortHeader = "0x" + device.Address.ToString("X2"), Content = new ParametersListView { DataContext = (IDisplayGroup)devGroup } });
-                }
+                    
+                }*/
+                var mainContentVm = new MainContentViewModel(mainVm.Parameters, mainVm.Notifier, mainVm);
+                mainVm.MainContent = new MainContentView { DataContext = mainContentVm };
+
+                //ParametersPresenterXmlSerializer.Serialize("123.xml", appAbilities.PsnProtocolConfiguration, false);
+                //mainVm.MainContent = new MainContentView { DataContext = mainVm };
             });
         }
     }

@@ -20,6 +20,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         private readonly Dictionary<string, IParameterViewModel> _parameters;
         private bool _tabHeadersAreLong;
         private FrameworkElement _topContent;
+        private FrameworkElement _mainContent;
+
         public ProgramLogViewModel ProgramLogVm { get; }
         public IThreadNotifier Notifier { get; }
         public IWindowSystem WindowsSystem { get; }
@@ -75,6 +77,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                 if (_tabHeadersAreLong != value)
                 {
                     _tabHeadersAreLong = value;
+                    
                     foreach (var tabItemViewModel in Tabs)
                     {
                         tabItemViewModel.TabHeadersAreLong = value;
@@ -89,13 +92,25 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         public FrameworkElement TopContent
         {
             get => _topContent;
-            set //=> SetProp(() => !Equals(_topContent, value), () => _topContent = value, () => TopContent);
+            set
             {
-                //Console.WriteLine("SharedMainViewModel.TopContent.Set() called");
                 if (!Equals(_topContent, value))
                 {
                     _topContent = value;
                     RaisePropertyChanged(() => TopContent);
+                }
+            }
+        }
+
+        public FrameworkElement MainContent
+        {
+            get => _mainContent;
+            set
+            {
+                if (!Equals(_mainContent, value))
+                {
+                    _mainContent = value;
+                    RaisePropertyChanged(() => MainContent);
                 }
             }
         }
