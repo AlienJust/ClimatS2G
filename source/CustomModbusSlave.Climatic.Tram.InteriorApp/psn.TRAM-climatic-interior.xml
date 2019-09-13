@@ -226,8 +226,8 @@
         <VarVal Position="22.0" Length="8" Name="#CRCH" Id="ebb98d0f-2430-4299-a828-2b97ba97991f" />
         <VarVal Position="23.0" Length="8" Name="#CRCL" Id="9d95a77c-e52a-49bf-8fb6-c12be8f07a25" />
       </Request>
-      <Reply Length="29" Position="25">
-        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="d810b510-439d-4144-b207-7ebaf98e413c" />
+      <Reply Length="29" Position="24">
+        <DefVal Position="0.0" Length="8" Value="0x0A" Name="#ADDR" Id="d810b510-439d-4144-b207-7ebaf98e413c" />
         <DefVal Position="1.0" Length="8" Value="0x20" Name="#NCMD" Id="1d4d2974-d7e7-43c3-8c25-449286908b69" />
         <DefVal Position="2.0" Length="8" Value="0x18" Name="Количество байт данных" Id="a70709b8-5497-4acf-820c-61a5bafd903d" />
         <VarVal Position="3.0" Length="8" Name="2й сегмент, Температура в салоне" Id="0cad802a-3bee-4edc-b8d9-12ff09cb3b57" />

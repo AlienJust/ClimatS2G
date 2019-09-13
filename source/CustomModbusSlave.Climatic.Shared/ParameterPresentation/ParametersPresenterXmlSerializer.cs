@@ -7,7 +7,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation
     {
         private static void AddChildXmlNodesWithParameters(XElement parametersRootElement, IPsnProtocolConfiguration config, bool includeCustomName)
         {
-            int commandPartNumber = 1;
             foreach (var commandPart in config.CommandParts)
             {
                 int address = (int)commandPart.Address.DefinedValue;
@@ -16,10 +15,13 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation
                 foreach (var varParam in commandPart.VarParams)
                 {
                     if (varParam.Name.StartsWith("#")) continue;
-                    
-                    var key = "param_" + commandPartNumber.ToString("d2") + "_" + address.ToString("d3") + "_" + command.ToString("d3") + "_" + signalNumber.ToString("d3");
 
-                    //var paramDesc = new ParameterDescriptionSimple { Key = key, CustomName = null, Identifier = varParam.Id.IdentyString, View = null };
+                    var key = "param_" +
+                        address.ToString("d3") + "_" +
+                        command.ToString("d3") + "_" +
+                        (commandPart.PartType == PsnProtocolCommandPartType.Request ? "request_" : "reply_") + 
+                        signalNumber.ToString("d3");
+
 
                     var node = new XElement("Parameter", new XAttribute("Key", key), new XAttribute("Identifier", varParam.Id.IdentyString));
                     if (includeCustomName) node.Add(new XAttribute("CustomName", varParam.Name));
@@ -29,7 +31,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation
                     parametersRootElement.Add(node);
                     signalNumber++;
                 }
-                commandPartNumber++;
             }
         }
 

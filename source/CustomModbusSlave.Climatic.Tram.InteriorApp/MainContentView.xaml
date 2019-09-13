@@ -171,5 +171,145 @@
                 </Grid>
             </StackPanel>
         </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Преобразователь частоты" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+                    <TextBlock Text="ПЧ" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
+                </StackPanel>
+            </TabItem.Header>
+            <StackPanel Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_request_001].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_request_001].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_request_002].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_request_002].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_001].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_001].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_002].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_002].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_003].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_003].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_004].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_004].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_005].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_005].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+            </StackPanel>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="БС-СМ" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+                    <TextBlock Text="БС-СМ" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
+                </StackPanel>
+            </TabItem.Header>
+            <StackPanel Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_001].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_001].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_002].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_002].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_003].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_003].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_004].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_004].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_005].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_005].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_006].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_006].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_007].Name, Mode=OneTime}"/>
+                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_007].Value, Mode=OneWay}" Grid.Column="1" />
+                </Grid>
+            </StackPanel>
+        </TabItem>
     </TabControl>
 </UserControl>
