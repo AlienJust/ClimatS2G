@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation;
 using DataAbstractionLevel.Low.PsnConfig;
 using DataAbstractionLevel.Low.PsnConfig.Contracts;
@@ -37,7 +38,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
             PsnProtocolConfiguration = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, psnProtocolFileName)).LoadConfiguration();
 
-            
             var allPsnParams = new Dictionary<string, IPsnProtocolParameterConfigurationVariable>();
             foreach (var psnCommandPart in PsnProtocolConfiguration.CommandParts)
             {
@@ -46,29 +46,27 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                     allPsnParams.Add(param.Id.IdentyString, param);
                 }
             }
+
             PsnProtocolConfigurationParams = allPsnParams;
-
-
             RtuParamReceiver = new ModbusRtuParamReceiver();
 
             CmdNotifierStd = new StdNotifier();
             CmdNotifierStd.AddListener(RtuParamReceiver);
             _channels = new Dictionary<string, SerialChannelWithTimeoutMonitorAndSendReplyAbility>();
 
+            //CmdNotifierStd.
+
             var paramLoggerAndRegPoint = new ParamLoggerRegistrationPointThreadSafe();
             ParameterLogger = paramLoggerAndRegPoint;
             ParamLoggerRegistrationPoint = paramLoggerAndRegPoint;
 
-            var paramListener = new ParamListenerSimple(CmdNotifierStd);
+            var paramListener = new CommandPartAndParamListenerSimple(CmdNotifierStd);
             foreach (var cmdPart in PsnProtocolConfiguration.CommandParts)
             {
                 paramListener.AddPsnCommandPartConfigurationToListen(cmdPart);
             }
-            /*paramListener.ValueReceived += (o, ea) =>
-            {
-                Console.WriteLine("received param value " + ea.ParameterId);
-            };*/
             ParamListener = paramListener;
+            CommandPartListener = paramListener;
         }
 
         public SerialChannelWithTimeoutMonitorAndSendReplyAbility CreateChannel(string channelName)
@@ -94,7 +92,9 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         {
             return ParametersPresenterXmlBuilder.BuildParametersPresentationFromXml(filename);
         }
-
+             
         public IParamListener ParamListener { get; }
+
+        public ICommandPartListener CommandPartListener { get; }
     }
 }

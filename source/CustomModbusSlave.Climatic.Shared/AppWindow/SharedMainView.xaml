@@ -21,8 +21,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
                 <!-- Accent and AppTheme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />-->
 
                 <ResourceDictionary Source="pack://application:,,,/ParamControls;component/Styles/AzureTabItem.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -80,7 +80,25 @@
         </Grid.RowDefinitions>
         <ContentPresenter Height="Auto" Grid.Row="0" Content="{Binding Path=TopContent, Mode=OneWay}" />
 
-        <ContentPresenter Grid.Row="1" Content="{Binding Path=MainContent, Mode=OneWay}" />
+        <ContentPresenter Grid.Row="1" Content="{Binding Path=MainContent, Mode=OneWay}" Visibility="{Binding UseCustomContent, Converter={StaticResource BtvConverter}, Mode=OneTime}"/>
+        <TabControl ItemContainerStyle="{StaticResource AzureTabItem}" Grid.Row="1" TabStripPlacement="Left" ItemsSource="{Binding Path=Tabs}"  Visibility="{Binding UseCustomContent, Converter={StaticResource InvertedBtwConverter}, Mode=OneTime}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=ShortHeader, Mode=OneTime}" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+                        <TextBlock Text="{Binding Path=FullHeader, Mode=OneTime}" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
+                    </StackPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ScrollViewer>
+                        <ContentPresenter Content="{Binding Path=Content, Mode=OneTime}" />
+                    </ScrollViewer>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+        
 
         <GridSplitter Grid.Row="2" Height="4" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1"
                       VerticalAlignment="Top" Background="{DynamicResource AccentColorBrush}" ResizeDirection="Rows"

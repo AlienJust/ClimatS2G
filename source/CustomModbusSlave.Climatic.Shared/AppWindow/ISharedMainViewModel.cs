@@ -4,6 +4,7 @@ using System.Windows;
 using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.UserInterface.Contracts;
+using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation;
 using DataAbstractionLevel.Low.PsnConfig.Contracts;
 
@@ -24,9 +25,14 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
         Dictionary<string, IParameterViewModel> Parameters { get; }
 
-        void AddParameter(string key, IParameterDescription description, IPsnProtocolParameterConfigurationVariable configuration);
+        Dictionary<string, ICommandPartViewModel> CommandParts { get; }
 
-        
+        void AddParameter(string key, IParameterDescription description, IPsnProtocolParameterConfigurationVariable configuration, IParameterSetter parameterSetter);
+
+        void AddCommandPart(string key, IPsnProtocolCommandPartConfiguration config);
+
         bool TabHeadersAreLong { get; set; }
+
+        bool UseCustomContent { get; set; }
     }
 }

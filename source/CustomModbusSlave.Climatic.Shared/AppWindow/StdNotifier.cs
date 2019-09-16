@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CustomModbusSlave.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow

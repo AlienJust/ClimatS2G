@@ -8,5 +8,7 @@
         string CustomName { get; }
 
         IParameterView View { get; }
+
+        IParameterInjectionConfiguration Injection { get; }
     }
 }

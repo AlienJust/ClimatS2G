@@ -9,6 +9,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.AppWindow;
 using CustomModbusSlave.Es2gClimatic.Shared.Chart;
 using CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
+using DataAbstractionLevel.Low.PsnConfig.Contracts;
 
 namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
 {
@@ -22,20 +23,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
         {
             var appFactory = new AppFactory("psn.TRAM-climatic-interior.xml");
             var appAbilities = appFactory.Abilities;
-
             var paramPresenter = appAbilities.GetParametersPresentation("Tram.Iterior.Tabs.xml");
-
-            /*
-            var listeners = new List<Tuple<IPsnProtocolCommandPartConfiguration, ICmdListener<ICmdPartConfigAndBytes>>>();
-            foreach (var cmdPart in appAbilities.PsnProtocolConfiguration.CommandParts)
-            {
-                var listener = new CmdListenerCmdPartAndBytes(cmdPart);
-                listeners.Add(new Tuple<IPsnProtocolCommandPartConfiguration, ICmdListener<ICmdPartConfigAndBytes>>(cmdPart, listener));
-                appAbilities.CmdNotifierStd.AddListener(listener);
-            }
-            */
-
-
 
             if (appAbilities.Version == AppVersion.Full)
             {
@@ -85,16 +73,32 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
             {
                 try
                 {
+                    mainVm.UseCustomContent = true;
                     var channel = mainVm.AddChannel("Single channel");
-                    foreach (var paramViewAndKey in paramPresenter.Parameters)
+                    foreach (var paramDescriptionAndKey in paramPresenter.Parameters)
                     {
-                        mainVm.AddParameter(paramViewAndKey.Key, paramViewAndKey.Value, appAbilities.PsnProtocolConfigurationParams[paramViewAndKey.Value.Identifier]);
+                        mainVm.AddParameter(
+                            paramDescriptionAndKey.Key, 
+                            paramDescriptionAndKey.Value, 
+                            appAbilities.PsnProtocolConfigurationParams[paramDescriptionAndKey.Value.Identifier], 
+                            channel.ParameterSetter);
+                    }
+
+                    foreach (var cmdPartCfg in appAbilities.PsnProtocolConfiguration.CommandParts)
+                    {
+                        int address = (int)cmdPartCfg.Address.DefinedValue;
+                        int command = (int)cmdPartCfg.CommandCode.DefinedValue;
+                        var key = "cmdpart_" + address.ToString("d3") + "_" + command.ToString("d3") +
+                            (cmdPartCfg.PartType == PsnProtocolCommandPartType.Request ? "_request" : "_reply");
+                        mainVm.AddCommandPart(key,cmdPartCfg);
+                        Console.WriteLine(key);
                     }
 
                     //var mainContentVm = new MainContentViewModel(mainVm.Parameters, mainVm.Notifier, mainVm);
-                    //mainVm.MainContent = new MainContentView { DataContext = mainContentVm };
+                    mainVm.MainContent = new MainContentView { DataContext = mainVm };
 
-                    mainVm.MainContent = new MainContentView();
+                    //mainVm.MainContent = new MainContentView();
+                    
                     //mainVm.TopContent = new UserControl1();
                     //mainVm.MainContent = new UserControl1();
                     //mainVm.TopContent = new MainContentView();

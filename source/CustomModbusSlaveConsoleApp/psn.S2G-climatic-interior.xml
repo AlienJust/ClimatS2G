@@ -136,11 +136,11 @@
         <CpzPrm Name="Уровнь вентилирования (биты)" Expression="[u14] * 1.0" Id="38ddb319-cebb-47de-8f78-bf1aea4077f7" />
         <CpzPrm Name="Дельта Т" Expression="[s16] * 1.0" Id="71f60208-c2fa-45fc-a4ab-526dd423c15f" />
 
-        <CpzPrm Name="Уставка ШИМ обогрева от слейва мастеру" Expression="[u15] * 1.0" Id="" />
-        <CpzPrm Name="Дельта Т в отладочном режиме" Expression="[s17] * 256.0 + [u18]" Id="" />
+        <CpzPrm Name="Уставка ШИМ обогрева от слейва мастеру" Expression="[u15] * 1.0" Id="42508452-EA5F-45A5-87B9-F0DE77FBE8B2" />
+        <CpzPrm Name="Дельта Т в отладочном режиме" Expression="[s17] * 256.0 + [u18]" Id="C9051076-A495-4ABA-9A28-832799535CF1" />
 
-        <CpzPrm Name="Уставка ШИМ разгрузки" Expression="[u19] * 1.0" Id="" />
-        <CpzPrm Name="Таймер ШИМ разгрузки" Expression="[u20] * 1.0" Id="" />
+        <CpzPrm Name="Уставка ШИМ разгрузки" Expression="[u19] * 1.0" Id="0F4F8341-1162-48CF-B5AE-02E3A6EAB688" />
+        <CpzPrm Name="Таймер ШИМ разгрузки" Expression="[u20] * 1.0" Id="2154C645-3038-464C-AE4B-AEB88BC14F3F" />
 
         <VarVal Position="21.0" Length="8" Name="#CRCH" Id="c8b053a0-a4c1-4a26-855f-94cb56237a38" />
         <VarVal Position="22.0" Length="8" Name="#CRCL" Id="658f3e53-bc88-4cac-9d78-35b87e79b33a" />

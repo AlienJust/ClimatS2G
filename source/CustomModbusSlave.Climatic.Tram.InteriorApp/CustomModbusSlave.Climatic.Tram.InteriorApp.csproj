@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{ADFE2DA5-1F55-4C08-8CC3-9500A0984B62}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CustomModbusSlave.Climatic.Tram.InteriorApp</RootNamespace>
     <AssemblyName>CustomModbusSlave.Climatic.Tram.InteriorApp</AssemblyName>
@@ -96,6 +96,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SettableParamView.xaml.cs">
+      <DependentUpon>SettableParamView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ComboSettableParamView.xaml.cs">
+      <DependentUpon>ComboSettableParamView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommandPartView.xaml.cs">
+      <DependentUpon>CommandPartView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IPsnProtocolConfiguration.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -106,7 +115,9 @@
     <Compile Include="MainContentView.cs">
       <DependentUpon>MainContentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainContentViewModel.cs" />
+    <Compile Include="ParameterView.xaml.cs">
+      <DependentUpon>ParameterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -174,7 +185,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="SettableParamView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ComboSettableParamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CommandPartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParameterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

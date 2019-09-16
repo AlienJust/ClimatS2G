@@ -10,6 +10,7 @@ using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.UserInterface.Contracts;
+using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.Record;
 
@@ -219,5 +220,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         public ICommand ClosePortCommand => _closePortCommand;
 
         public SerialChannelWithTimeoutMonitorAndSendReplyAbility Channel => _channel;
+
+        public IParameterSetter ParameterSetter => _channel.ParamSetter;
     }
 }

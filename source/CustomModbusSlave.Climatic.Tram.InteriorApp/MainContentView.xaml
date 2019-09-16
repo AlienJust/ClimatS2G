@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CustomModbusSlave.Climatic.Tram.InteriorApp"
              xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600">
     <UserControl.Resources>
@@ -17,14 +18,14 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
                 <!-- Accent and AppTheme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml" />
-                
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
-                
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />-->
 
                 <ResourceDictionary Source="pack://application:,,,/ParamControls;component/Styles/AzureTabItem.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
+
             <BooleanToVisibilityConverter x:Key="BtvConverter" />
             <converters:BooleanToVisibilityConverter x:Key="InvertedBtwConverter" InvertVisibility="True" />
 
@@ -38,68 +39,58 @@
                     <TextBlock Text="МУК 2" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
                 </StackPanel>
             </TabItem.Header>
-            <StackPanel Orientation="Vertical">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_002_003_001].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param_002_003_001].Value}" Grid.Column="1" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_002_003_002].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param_002_003_002].Value}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_002_003_003].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param_002_003_003].Value}" Grid.Column="1" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_002_003_004].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param_002_003_004].Value}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_002_003_005].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param_002_003_005].Value}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_002_003_006].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param_002_003_006].Value}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_002_003_007].Name}"/>
-                    <Label Content="{Binding Path=Parameters[param_002_003_007].Value}" Grid.Column="1" />
-                </Grid>
-            </StackPanel>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <GroupBox Header="Ответ 03">
+                        <StackPanel Orientation="Vertical">
+                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_002_003_reply]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_010]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_012]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_013]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_014]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_015]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_016]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_017]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_018]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_019]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_020]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_021]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_022]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_023]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_024]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_025]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_026]}"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Запрос 16">
+                        <StackPanel>
+                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_002_016_request]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_010]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_012]}"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
         <TabItem>
             <TabItem.Header>
@@ -108,68 +99,58 @@
                     <TextBlock Text="МУК 3" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
                 </StackPanel>
             </TabItem.Header>
-            <StackPanel Orientation="Vertical">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_003_003_001].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_003_003_001].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_003_003_002].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_003_003_002].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_003_003_003].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_003_003_003].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_003_003_004].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_003_003_004].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_003_003_005].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_003_003_005].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_003_003_006].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_003_003_006].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_003_003_007].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_003_003_007].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-            </StackPanel>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <GroupBox Header="Ответ 03">
+                        <StackPanel Orientation="Vertical">
+                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_003_003_reply]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_010]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_012]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_013]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_014]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_015]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_016]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_017]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_018]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_019]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_020]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_021]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_022]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_023]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_024]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_025]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_026]}"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Запрос 16">
+                        <StackPanel>
+                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_003_016_request]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_010]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_012]}"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
         <TabItem>
             <TabItem.Header>
@@ -178,68 +159,31 @@
                     <TextBlock Text="ПЧ" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
                 </StackPanel>
             </TabItem.Header>
-            <StackPanel Orientation="Vertical">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_request_001].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_request_001].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_request_002].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_request_002].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_001].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_001].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_002].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_002].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_003].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_003].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_004].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_004].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_005].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_005].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-            </StackPanel>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <GroupBox Header="Запрос">
+                        <StackPanel Orientation="Vertical">
+                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_008_240_request]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_request_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_request_002]}"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Ответ">
+                        <StackPanel Orientation="Vertical">
+                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_008_240_reply]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_009]}"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
         <TabItem>
             <TabItem.Header>
@@ -248,68 +192,141 @@
                     <TextBlock Text="БС-СМ" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
                 </StackPanel>
             </TabItem.Header>
-            <StackPanel Orientation="Vertical">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_001].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_001].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_002].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_002].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <GroupBox Header="Запрос">
+                        <StackPanel Orientation="Vertical">
+                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_010_032_request]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_010]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_012]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_013]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_014]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_015]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_016]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_017]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_018]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_019]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_020]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_021]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_022]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_023]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_024]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_025]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_026]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_027]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_028]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_029]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_request_030]}"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_003].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_003].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_004].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_004].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_005].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_09_008_240_reply_005].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Ответ">
+                        <StackPanel Orientation="Vertical">
+                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_010_032_reply]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_010]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_012]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_013]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_014]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_015]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_016]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_017]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_018]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_019]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_020]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_021]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_022]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_023]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_024]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_025]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_026]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_027]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_028]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_029]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_030]}"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="КСМ" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+                    <TextBlock Text="КСМ" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
+                </StackPanel>
+            </TabItem.Header>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <GroupBox Header="Запрос">
+                        <StackPanel Orientation="Vertical">
+                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_020_016_request]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_010]}"/>
+                           
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_012]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_013]}"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_006].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_006].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_014]}"/>
+                            
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_015]}"/>
+                            <controls:NumericUpDown Value="{Binding Path=Parameters[param_020_016_request_015].Setter.Value}" 
+                                                    Minimum="0" Maximum="255" Interval="1"/>
+                            <local:SettableParamView DataContext="{Binding Path=Parameters[param_020_016_request_015].Setter}"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_007].Name, Mode=OneTime}"/>
-                    <Label Content="{Binding Path=Parameters[param_11_010_032_request_007].Value, Mode=OneWay}" Grid.Column="1" />
-                </Grid>
-            </StackPanel>
+                            
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_016]}"/>
+                            <controls:NumericUpDown Value="{Binding Path=Parameters[param_020_016_request_016].Setter.Value}" 
+                                                    Minimum="0" Maximum="255" Interval="1"/>
+                            <local:SettableParamView DataContext="{Binding Path=Parameters[param_020_016_request_016].Setter}"/>
+
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_017]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_018]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_019]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_020]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_021]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_022]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_023]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_024]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_025]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_026]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_027]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_028]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_029]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_020_016_request_030]}"/>
+                        </StackPanel>
+                    </GroupBox>
+                 </StackPanel>
+            </ScrollViewer>
         </TabItem>
     </TabControl>
 </UserControl>

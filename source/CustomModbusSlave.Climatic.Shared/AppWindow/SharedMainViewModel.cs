@@ -8,6 +8,7 @@ using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.ModelViewViewModel;
 using AlienJust.Support.Text;
 using AlienJust.Support.UserInterface.Contracts;
+using CustomModbus.Slave.FastReply.Contracts;
 using CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation;
 using CustomModbusSlave.Es2gClimatic.Shared.ProgamLog;
 using DataAbstractionLevel.Low.PsnConfig.Contracts;
@@ -17,7 +18,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
     sealed class SharedMainViewModel : ViewModelBase, ISharedMainViewModel
     {
         private readonly ISharedAppAbilities _appAbilities;
-        private readonly Dictionary<string, IParameterViewModel> _parameters;
+
+        public Dictionary<string, IParameterViewModel> Parameters { get; }
+        public Dictionary<string, ICommandPartViewModel> CommandParts { get; }
+
+
+
         private bool _tabHeadersAreLong;
         private FrameworkElement _topContent;
         private FrameworkElement _mainContent;
@@ -31,6 +37,23 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         public ObservableCollection<TabItemViewModel> Tabs { get; }
         public ObservableCollection<ComPortControlViewModel> ComPortControlVms { get; }
 
+
+        private bool _useCustomContent;
+        public bool UseCustomContent
+        {
+            get => _useCustomContent;
+            set
+            {
+                //Console.WriteLine("SharedMainViewModel.TabHeadersAreLong.Set() called");
+                if (_useCustomContent != value)
+                {
+                    _useCustomContent = value;
+
+                    RaisePropertyChanged(() => UseCustomContent);
+                }
+            }
+        }
+
         public SharedMainViewModel(IThreadNotifier notifier, IWindowSystem windowSystem, string windowTitle, ISharedAppAbilities appAbilities)
         {
             Notifier = notifier;
@@ -38,12 +61,16 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             _appAbilities = appAbilities;
             WindowTitle = windowTitle;
 
+            _tabHeadersAreLong = false;
+            _useCustomContent = false;
+
             ProgramLogVm = new ProgramLogViewModel(this);
             Logger = new RelayLogger(ProgramLogVm, new DateTimeFormatter(" > "));
             Tabs = new ObservableCollection<TabItemViewModel>();
             ComPortControlVms = new ObservableCollection<ComPortControlViewModel>();
 
-            _parameters = new Dictionary<string, IParameterViewModel>();
+            Parameters = new Dictionary<string, IParameterViewModel>();
+            CommandParts = new Dictionary<string, ICommandPartViewModel>();
 
             Logger.Log("Программа загружена");
         }
@@ -77,7 +104,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
                 if (_tabHeadersAreLong != value)
                 {
                     _tabHeadersAreLong = value;
-                    
+
                     foreach (var tabItemViewModel in Tabs)
                     {
                         tabItemViewModel.TabHeadersAreLong = value;
@@ -116,11 +143,19 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             }
         }
 
-        public Dictionary<string, IParameterViewModel> Parameters => _parameters;
 
-        public void AddParameter(string key, IParameterDescription description, IPsnProtocolParameterConfigurationVariable configuration)
+
+        public void AddParameter(string key, IParameterDescription description, IPsnProtocolParameterConfigurationVariable configuration, IParameterSetter parameterSetter)
         {
-            _parameters.Add(key, new ParameterViewModelSimple(_appAbilities.ParamListener, Notifier, description, configuration.Name));
+            Parameters.Add(key, new ParameterViewModelSimple(description.CustomName, configuration.Name,
+                new ParameterGetterViewModelSimple(description.Identifier, _appAbilities.ParamListener, Notifier, description.View),
+                description.Injection == null ? null : new ParameterSetterViewModelSimple(parameterSetter, Notifier, description.Injection)
+                ));
+        }
+
+        public void AddCommandPart(string key, IPsnProtocolCommandPartConfiguration config)
+        {
+            CommandParts.Add(key, new CommandPartViewModelSimple(_appAbilities.CommandPartListener, Notifier, config));
         }
     }
 }

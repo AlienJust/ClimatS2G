@@ -131,16 +131,28 @@
     <Compile Include="AnyCommandPartViewModel.cs" />
     <Compile Include="AppWindow\AppFactory.cs" />
     <Compile Include="AppWindow\AppVersion.cs" />
+    <Compile Include="AppWindow\CommandPartReceivedEventArgs.cs" />
+    <Compile Include="AppWindow\CommandPartViewModelSimple.cs" />
     <Compile Include="AppWindow\ComPortControlView.xaml.cs">
       <DependentUpon>ComPortControlView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppWindow\ComPortControlViewModel.cs" />
+    <Compile Include="AppWindow\ICommandPartListener.cs" />
+    <Compile Include="AppWindow\ICommandPartViewModel.cs" />
+    <Compile Include="AppWindow\IParameterGetterViewModel.cs" />
+    <Compile Include="AppWindow\IParameterSetterViewModel.cs" />
     <Compile Include="AppWindow\IParameterViewModel.cs" />
     <Compile Include="AppWindow\IParamListener.cs" />
     <Compile Include="AppWindow\ISharedAppAbilities.cs" />
     <Compile Include="AppWindow\ISharedMainViewModel.cs" />
     <Compile Include="AppWindow\IStdNotifier.cs" />
+    <Compile Include="AppWindow\LastSetStateResult.cs" />
+    <Compile Include="AppWindow\LastSetStateResultToColorConverter.cs" />
+    <Compile Include="AppWindow\ParameterSetterViewModelSimple.cs" />
+    <Compile Include="AppWindow\ParameterValueReceivedEventArgs.cs" />
+    <Compile Include="AppWindow\ParameterGetterViewModelSimple.cs" />
     <Compile Include="AppWindow\ParameterViewModelSimple.cs" />
+    <Compile Include="AppWindow\ParamListenerSimple.cs" />
     <Compile Include="AppWindow\SerialChannelWithTimeoutMonitorAndSendReplyAbility.cs" />
     <Compile Include="AppWindow\SharedAppAbilities.cs" />
     <Compile Include="AppWindow\SharedMainView.xaml.cs">
@@ -235,6 +247,9 @@
     </Compile>
     <Compile Include="MukFanCondenser\SetParameters\MukFridgeSetParamsViewModel.cs" />
     <Compile Include="OneWire\SensorIndicationDoubleExt.cs" />
+    <Compile Include="ParameterPresentation\InjectionXmlBuilder.cs" />
+    <Compile Include="ParameterPresentation\IParameterInjectionConfiguration.cs" />
+    <Compile Include="ParameterPresentation\ParameterInjectionConfigNcalc.cs" />
     <Compile Include="ParameterPresentation\ParametersPresenterXmlSerializer.cs" />
     <Compile Include="ParameterPresentation\Views\BooleanView.cs" />
     <Compile Include="ParameterPresentation\IParameterView.cs" />
@@ -547,6 +562,7 @@
   <ItemGroup>
     <Folder Include="Muk\Fan\" />
     <Folder Include="Muk\Flap\" />
+    <Folder Include="PresentationCommandPart\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomModbus.Slave.FastReply.Contracts\CustomModbus.Slave.FastReply.Contracts.csproj">

@@ -30,11 +30,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         IParameterLogger ParameterLogger { get; }
         IPsnProtocolConfiguration PsnProtocolConfiguration { get; }
         Dictionary<string, IPsnProtocolParameterConfigurationVariable> PsnProtocolConfigurationParams { get; }
-
         IParametersPresenter GetParametersPresentation(string filename);
 
         IParamListener ParamListener { get; }
 
-        
+        ICommandPartListener CommandPartListener { get; }
     }
 }

@@ -9,5 +9,7 @@
         public string CustomName { get; set; }
 
         public IParameterView View { get; set; }
+
+        public IParameterInjectionConfiguration Injection { get; set; }
     }
 }

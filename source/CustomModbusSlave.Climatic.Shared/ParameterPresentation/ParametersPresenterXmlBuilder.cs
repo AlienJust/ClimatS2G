@@ -14,13 +14,14 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation
                 xdoc.Element("Parameters").Elements("Parameter").Select(xmlTagParameter =>
                     {
                         var customNameXmlAttribute = xmlTagParameter.Attribute("CustomName");
-
+                        
                         return (IParameterDescription)new ParameterDescriptionSimple
                         {
                             Key = xmlTagParameter.Attribute("Key").Value,
-                            Identifier = xmlTagParameter.Attribute("ParameterId").Value,
+                            Identifier = xmlTagParameter.Attribute("Identifier").Value,
                             CustomName = customNameXmlAttribute?.Value,
-                            View = ViewXmlBuilder.GetViews(xmlTagParameter).FirstOrDefault() ?? new DefaultView()
+                            View = ViewXmlBuilder.GetViews(xmlTagParameter).FirstOrDefault() ?? new DefaultView(), // TODO: move away default view, use null here or NOT?
+                            Injection = InjectionXmlBuilder.GetInjectionConfiguration(xmlTagParameter)
                         };
                     }).ToDictionary(p => p.Key, p => p)
             };
