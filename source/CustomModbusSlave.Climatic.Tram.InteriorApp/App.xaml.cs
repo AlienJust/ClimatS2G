@@ -103,7 +103,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                     //mainVm.MainContent = new UserControl1();
                     //mainVm.TopContent = new MainContentView();
                     Console.WriteLine("mainVm.MainContent was setted up");
-                    ParametersPresenterXmlSerializer.Serialize("123.xml", appAbilities.PsnProtocolConfiguration, false);
+                    //ParametersPresenterXmlSerializer.Serialize("123.xml", appAbilities.PsnProtocolConfiguration, false);
                     //mainVm.MainContent = new MainContentView { DataContext = mainVm };
                 }
                 catch(Exception ex)
