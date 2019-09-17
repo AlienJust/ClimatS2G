@@ -145,11 +145,14 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
 
 
-        public void AddParameter(string key, IParameterDescription description, IPsnProtocolParameterConfigurationVariable configuration, IParameterSetter parameterSetter)
+        public void AddParameter(string key, IParameterDescription description, Tuple<IPsnProtocolCommandPartConfiguration, IPsnProtocolParameterConfigurationVariable> configuration, IParameterSetter parameterSetter)
         {
-            Parameters.Add(key, new ParameterViewModelSimple(description.CustomName, configuration.Name,
-                new ParameterGetterViewModelSimple(description.Identifier, _appAbilities.ParamListener, Notifier, description.View),
-                description.Injection == null ? null : new ParameterSetterViewModelSimple(parameterSetter, Notifier, description.Injection)
+            Parameters.Add(key, new ParameterViewModelSimple(description.CustomName, configuration.Item2.Name,
+                new ParameterGetterViewModelSimple(
+                    description.Identifier, _appAbilities.ParamListener, Notifier, description.View,
+                    _appAbilities.ParameterLogger, configuration.Item2.IsBitSignal, 
+                    configuration.Item1.PartName + ": " + configuration.Item2.Name),
+                    description.Injection == null ? null : new ParameterSetterViewModelSimple(parameterSetter, Notifier, description.Injection)
                 ));
         }
 

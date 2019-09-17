@@ -17,7 +17,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         private readonly Dictionary<string, SerialChannelWithTimeoutMonitorAndSendReplyAbility> _channels;
         public string TestPortName => "ТЕСТ";
         public IStdNotifier CmdNotifierStd { get; }
-        public Dictionary<string, IPsnProtocolParameterConfigurationVariable> PsnProtocolConfigurationParams { get; }
+        public Dictionary<string, Tuple<IPsnProtocolCommandPartConfiguration, IPsnProtocolParameterConfigurationVariable>> PsnProtocolConfigurationParams { get; }
         public ModbusRtuParamReceiver RtuParamReceiver { get; }
 
         public IParamLoggerRegistrationPoint ParamLoggerRegistrationPoint { get; }
@@ -38,12 +38,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
             PsnProtocolConfiguration = new PsnProtocolConfigurationLoaderFromXml(Path.Combine(Environment.CurrentDirectory, psnProtocolFileName)).LoadConfiguration();
 
-            var allPsnParams = new Dictionary<string, IPsnProtocolParameterConfigurationVariable>();
+            var allPsnParams = new Dictionary<string, Tuple<IPsnProtocolCommandPartConfiguration, IPsnProtocolParameterConfigurationVariable>>();
             foreach (var psnCommandPart in PsnProtocolConfiguration.CommandParts)
             {
                 foreach(var param in psnCommandPart.VarParams)
                 {
-                    allPsnParams.Add(param.Id.IdentyString, param);
+                    allPsnParams.Add(param.Id.IdentyString, new Tuple<IPsnProtocolCommandPartConfiguration, IPsnProtocolParameterConfigurationVariable>(psnCommandPart, param));
                 }
             }
 
@@ -54,7 +54,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             CmdNotifierStd.AddListener(RtuParamReceiver);
             _channels = new Dictionary<string, SerialChannelWithTimeoutMonitorAndSendReplyAbility>();
 
-            //CmdNotifierStd.
 
             var paramLoggerAndRegPoint = new ParamLoggerRegistrationPointThreadSafe();
             ParameterLogger = paramLoggerAndRegPoint;

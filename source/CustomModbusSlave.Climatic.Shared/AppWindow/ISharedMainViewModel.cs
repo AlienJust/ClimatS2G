@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using AlienJust.Support.Concurrent.Contracts;
@@ -27,7 +28,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
         Dictionary<string, ICommandPartViewModel> CommandParts { get; }
 
-        void AddParameter(string key, IParameterDescription description, IPsnProtocolParameterConfigurationVariable configuration, IParameterSetter parameterSetter);
+        void AddParameter(string key, IParameterDescription description, Tuple<IPsnProtocolCommandPartConfiguration, IPsnProtocolParameterConfigurationVariable> configuration, IParameterSetter parameterSetter);
 
         void AddCommandPart(string key, IPsnProtocolCommandPartConfiguration config);
 
