@@ -60,10 +60,12 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             ParamLoggerRegistrationPoint = paramLoggerAndRegPoint;
 
             var paramListener = new CommandPartAndParamListenerSimple(CmdNotifierStd);
+            
             foreach (var cmdPart in PsnProtocolConfiguration.CommandParts)
             {
                 paramListener.AddPsnCommandPartConfigurationToListen(cmdPart);
             }
+
             ParamListener = paramListener;
             CommandPartListener = paramListener;
         }

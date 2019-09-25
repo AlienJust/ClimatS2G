@@ -31,7 +31,14 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
             foreach (var param in data.CmdPartConfig.VarParams)
             {
-                RaiseValueReceived(param.Id.IdentyString, param.GetValue(data.DataBytes, 0));
+                try
+                {
+                    RaiseValueReceived(param.Id.IdentyString, param.GetValue(data.DataBytes, 0));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
             }
         }
 

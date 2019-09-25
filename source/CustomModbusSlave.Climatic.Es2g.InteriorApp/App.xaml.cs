@@ -80,6 +80,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
             // Вентилятор испарителя
             var cmdListenerMukVaporizerReply03 = new CmdListenerMukVaporizerReply03(3, 3, 41);
             var cmdListenerMukVaporizerRequest16 = new CmdListenerMukVaporizerRequest16(3, 16, 23);
+            var cmdListenerMukVaporizerRequest16old = new CmdListenerMukVaporizerRequest16(3, 16, 21);
 
             // Вентилятор конденсатора
             var cmdListenerMukCondenserFanReply03 = new CmdListenerMukCondenserFanReply03(4, 3, 29);
