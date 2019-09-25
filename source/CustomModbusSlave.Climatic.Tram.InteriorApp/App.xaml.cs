@@ -94,17 +94,9 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
                         Console.WriteLine(key);
                     }
 
-                    //var mainContentVm = new MainContentViewModel(mainVm.Parameters, mainVm.Notifier, mainVm);
                     mainVm.MainContent = new MainContentView { DataContext = mainVm };
-
-                    //mainVm.MainContent = new MainContentView();
-                    
-                    //mainVm.TopContent = new UserControl1();
-                    //mainVm.MainContent = new UserControl1();
-                    //mainVm.TopContent = new MainContentView();
                     Console.WriteLine("mainVm.MainContent was setted up");
                     //ParametersPresenterXmlSerializer.Serialize("123.xml", appAbilities.PsnProtocolConfiguration, false);
-                    //mainVm.MainContent = new MainContentView { DataContext = mainVm };
                 }
                 catch(Exception ex)
                 {
