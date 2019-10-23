@@ -66,6 +66,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Conversion.Contracts.dll</HintPath>
     </Reference>
+    <Reference Include="AlienJust.Support.Identy.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\AlienJust.Support.Identy.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="AlienJust.Support.ModelViewViewModel">
       <HintPath>..\..\reference\AlienJust.Support.ModelViewViewModel.dll</HintPath>
     </Reference>
@@ -76,6 +80,10 @@
     <Reference Include="AlienJust.Support.Text, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\reference\AlienJust.Support.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAbstractionLevel.Low, Version=0.20.107.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\reference\DataAbstractionLevel.Low.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.4.3.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.4.3\lib\net40\MahApps.Metro.dll</HintPath>
@@ -234,6 +242,9 @@
     <Compile Include="MukFlapAirWinterSummer\SetParameters\MukFlapWinterSummerSetParamsViewModel.cs" />
     <Compile Include="MukFlapAirWinterSummer\Views\MukFlapWinterSummerDataViewReply03.xaml.cs">
       <DependentUpon>MukFlapWinterSummerDataViewReply03.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParameterView.xaml.cs">
+      <DependentUpon>ParameterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -605,6 +616,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SystemDiagnostic\AutoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -696,6 +711,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="HourCounters.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Es2g.Iterior.Tabs.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

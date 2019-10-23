@@ -20,7 +20,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation
 
         public string GetText(double value)
         {
-            // TODO: calc NCALC expression
             var expr = new Expression(_expression);
             expr.Parameters.Add("value", value);
             bool result = (bool)expr.Evaluate();

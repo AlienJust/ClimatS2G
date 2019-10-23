@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
-using AlienJust.Support.Concurrent.Contracts;
 using AlienJust.Support.Loggers.Contracts;
 using AlienJust.Support.UserInterface.Contracts;
 using CustomModbus.Slave.FastReply.Contracts;

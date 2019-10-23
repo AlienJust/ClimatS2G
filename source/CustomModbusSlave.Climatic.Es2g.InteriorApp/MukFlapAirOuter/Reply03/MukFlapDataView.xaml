@@ -9,6 +9,7 @@
     xmlns:reply03="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Reply03"
     xmlns:request16="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.Request16"
     xmlns:setParameters="clr-namespace:CustomModbusSlave.Es2gClimatic.InteriorApp.MukFlapAirOuter.SetParameters"
+    xmlns:interiorapp="clr-namespace:CustomModbusSlave.Climatic.Es2g.InteriorApp"
     mc:Ignorable="d"
     d:DesignHeight="1200"
     d:DesignWidth="300">
@@ -21,6 +22,36 @@
             <TextBlock Text="Ответ на команду 3:" FontWeight="Bold" TextDecorations="Underline"/>
             <reply03:MukFlapReply03TelemetryView Grid.Row="1" DataContext="{Binding Path=Reply03Telemetry, Mode=OneWay}" />
         </Grid>
+        <Border BorderThickness="1" BorderBrush="LightGray">
+            <StackPanel Orientation="Vertical" Margin="2">
+                <Label Content="Битовая диагностика от Emerson контроллера, котнур 1" FontWeight="Bold"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_020]}"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_021]}"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_022]}"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_023]}"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_024]}"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_025]}"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_026]}"/>
+            </StackPanel>
+        </Border>
+        <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_027]}"/>
+        <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_028]}"/>
+        <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_029]}"/>
+        <Border BorderThickness="1" BorderBrush="LightGray">
+            <StackPanel Orientation="Vertical" Margin="2">
+                <Label Content="Битовая диагностика от Emerson контроллера, котнур 2" FontWeight="Bold"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_030]}"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_031]}"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_032]}"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_033]}"/>
+                <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_034]}"/>
+            </StackPanel>
+        </Border>
+        <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_035]}"/>
+        <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_036]}"/>
+        <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_037]}"/>
+        <interiorapp:ParameterView DataContext="{Binding MainVm.Parameters[param_002_003_reply_038]}"/>
+
         <shared:AnyCommandPartView DataContext="{Binding Path=Reply03TelemetryText, Mode=OneTime}" />
 
         <TextBlock Text="Запрос, код команды 16 dec:" FontWeight="Bold" TextDecorations="Underline" />

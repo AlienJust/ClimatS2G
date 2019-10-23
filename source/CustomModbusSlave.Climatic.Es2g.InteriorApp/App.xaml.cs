@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
-using AlienJust.Support.Collections;
 using AlienJust.Support.Concurrent;
 using AlienJust.Support.Concurrent.Contracts;
-using AlienJust.Support.Numeric.Bits;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs;
 using CustomModbusSlave.Es2gClimatic.InteriorApp.Bvs2;
@@ -43,6 +39,7 @@ using CustomModbusSlave.Es2gClimatic.Shared.Search;
 using CustomModbusSlave.Es2gClimatic.Shared.SetParamsAndKsm;
 using CustomModbusSlave.Es2gClimatic.Shared.TestSystems;
 using CustomModbusSlave.Es2gClimatic.Shared.UniversalParams.Vm;
+using DataAbstractionLevel.Low.PsnConfig.Contracts;
 using Timer = System.Timers.Timer;
 
 namespace CustomModbusSlave.Es2gClimatic.InteriorApp
@@ -171,10 +168,47 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
                 });
             }
 
+
+            var paramPresenter = appAbilities.GetParametersPresentation("Es2g.Iterior.Tabs.xml");
+
             appFactory.ShowMainWindowInOwnThread("Технический абонент, салон", appAbilities, mainVm =>
             {
                 var channel = mainVm.AddChannel("Single channel");
                 mainVm.TopContent = new TopContentView { DataContext = new TopContentViewModel(mainVm.Notifier, cmdListenerBsSmReply32) };
+
+                try
+                {
+                    //mainVm.UseCustomContent = true;
+                    //var channel = mainVm.AddChannel("Single channel");
+                    foreach (var paramDescriptionAndKey in paramPresenter.Parameters)
+                    {
+                        mainVm.AddParameter(
+                            paramDescriptionAndKey.Key,
+                            paramDescriptionAndKey.Value,
+                            appAbilities.PsnProtocolConfigurationParams[paramDescriptionAndKey.Value.Identifier],
+                            channel.ParameterSetter);
+                    }
+
+                    foreach (var cmdPartCfg in appAbilities.PsnProtocolConfiguration.CommandParts)
+                    {
+                        int address = (int)cmdPartCfg.Address.DefinedValue;
+                        int command = (int)cmdPartCfg.CommandCode.DefinedValue;
+                        var key = "cmdpart_" + address.ToString("d3") + "_" + command.ToString("d3") +
+                            (cmdPartCfg.PartType == PsnProtocolCommandPartType.Request ? "_request" : "_reply");
+                        mainVm.AddCommandPart(key, cmdPartCfg);
+                        Console.WriteLine(key);
+                    }
+
+                    //mainVm.MainContent = new MainContentView { DataContext = mainVm };
+                    Console.WriteLine("mainVm.MainContent was setted up");
+                    //ParametersPresenterXmlSerializer.Serialize("123.xml", appAbilities.PsnProtocolConfiguration, false);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+                
 
                 var searchVm = new SearchViewModel(mainVm.Notifier); // Search View Model inited first to add items in future
 
@@ -235,7 +269,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp
                         FullHeader = "МУК заслонки наружного воздуха", ShortHeader = "МУК 2",
                         Content = new MukFlapDataView
                         {
-                            DataContext = new MukFlapDataViewModel(mainVm.Notifier, channel.Channel.ParamSetter,
+                            DataContext = new MukFlapDataViewModel(mainVm, mainVm.Notifier, channel.Channel.ParamSetter,
                                 cmdListenerMukFlapOuterAirReply03, cmdListenerMukFlapOuterAirRequest16)
                         }
                     });
@@ -348,6 +382,10 @@ if (appAbilities.Version == AppVersion.Full) {
                                 cmdListenerKsmParams)
                         }
                     });
+
+                
+
+                //ParametersPresenterXmlSerializer.Serialize("1234.xml", appAbilities.PsnProtocolConfiguration, false);
             });
         }
     }
