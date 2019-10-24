@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CustomModbusSlave.Es2gClimatic.Shared
+﻿namespace CustomModbusSlave.Es2gClimatic.Shared
 {
     public abstract class CmdListenerBase<T> : IStdCheckableCmdListener, ICmdListener<T>
     {
@@ -21,11 +19,6 @@ namespace CustomModbusSlave.Es2gClimatic.Shared
         {
             if (addr == AddrToCheck && code == CodeToCheck && Length == data.Length)
             {
-                if (addr == 0x14 && code == 0x10)
-                {
-                    var x = true;
-                }
-
                 OnDataReceived(data, BuildData(data));
             }
         }
@@ -34,7 +27,8 @@ namespace CustomModbusSlave.Es2gClimatic.Shared
 
         protected virtual void OnDataReceived(byte[] bytes, T data)
         {
-            DataReceived?.Invoke(bytes, data);
+            var dataReceived = DataReceived;
+            dataReceived?.Invoke(bytes, data);
         }
 
         public override string ToString()

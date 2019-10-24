@@ -40,6 +40,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared
             base((byte)config.Address.DefinedValue, (byte)config.CommandCode.DefinedValue, config.Length)
         {
             _cmdPartConfig = config;
+            // TODO: can be done BETTER checking by using checkingAll defined params in command part
         }
 
         public override ICmdPartConfigAndBytes BuildData(byte[] bytes)

@@ -152,7 +152,7 @@
     <Compile Include="AppWindow\ParameterValueReceivedEventArgs.cs" />
     <Compile Include="AppWindow\ParameterGetterViewModelSimple.cs" />
     <Compile Include="AppWindow\ParameterViewModelSimple.cs" />
-    <Compile Include="AppWindow\ParamListenerSimple.cs" />
+    <Compile Include="AppWindow\CommandPartAndParamListenerSimple.cs" />
     <Compile Include="AppWindow\SerialChannelWithTimeoutMonitorAndSendReplyAbility.cs" />
     <Compile Include="AppWindow\SharedAppAbilities.cs" />
     <Compile Include="AppWindow\SharedMainView.xaml.cs">
