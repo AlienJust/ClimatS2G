@@ -44,49 +44,35 @@
                     <GroupBox Header="Ответ 03">
                         <StackPanel Orientation="Vertical">
                             <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_002_003_reply]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_001]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_002]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_003]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_004]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_005]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_006]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_007]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_008]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_009]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_010]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_011]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_012]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_013]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_014]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_015]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_016]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_017]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_018]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_019]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_020]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_021]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_022]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_023]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_024]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_025]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_026]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_010]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_012]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_013]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_014]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_003_reply_015]}"/>
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="Запрос 16">
                         <StackPanel>
                             <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_002_016_request]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_001]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_002]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_003]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_004]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_005]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_006]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_007]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_008]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_009]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_010]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_011]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_012]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_request_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_request_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_request_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_request_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_request_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_request_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_request_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_request_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_002_016_request_009]}"/>
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
@@ -104,49 +90,49 @@
                     <GroupBox Header="Ответ 03">
                         <StackPanel Orientation="Vertical">
                             <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_003_003_reply]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_001]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_002]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_003]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_004]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_005]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_006]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_007]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_008]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_009]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_010]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_011]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_012]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_013]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_014]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_015]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_016]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_017]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_018]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_019]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_020]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_021]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_022]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_023]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_024]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_025]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_026]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_010]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_012]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_013]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_014]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_015]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_016]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_017]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_018]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_019]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_020]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_021]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_022]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_023]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_024]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_025]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_003_reply_026]}"/>
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="Запрос 16">
                         <StackPanel>
-                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_003_016_request]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_001]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_002]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_003]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_004]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_005]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_006]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_007]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_008]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_009]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_010]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_011]}"/>
-                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_012]}"/>
+                            <local:CommandPartView DataContext="{Binding CommandParts[cmdpart_003_016_request_request]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_001]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_002]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_003]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_004]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_005]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_006]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_007]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_008]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_010]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_003_016_request_012]}"/>
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
@@ -264,6 +250,20 @@
                             <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_028]}"/>
                             <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_029]}"/>
                             <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_030]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_031]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_032]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_033]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_034]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_035]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_036]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_037]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_038]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_039]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_040]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_041]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_042]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_043]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_010_032_reply_044]}"/>
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
