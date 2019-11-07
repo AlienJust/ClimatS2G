@@ -73,7 +73,7 @@ namespace CustomModbusSlave.Es2gClimatic.CabinTgmApp
             {
                 try
                 {
-                    ParametersPresenterXmlSerializer.Serialize("123xxx.xml", appAbilities.PsnProtocolConfiguration, false);
+                    //ParametersPresenterXmlSerializer.Serialize("123xxx.xml", appAbilities.PsnProtocolConfiguration, false);
 
                     mainVm.UseCustomContent = true;
                     var channel = mainVm.AddChannel("Single channel");
