@@ -8,7 +8,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.BsSm.Contracts {
 		int TemperatureOutdoor { get; }
 
 		int CarType { get; }
-		int Reserve13D4D7 { get; }
+		bool DoorsAreOpen { get; }
+		int Reserve13D5D7 { get; }
 
 		//byte 14:
 		int TargetTemperatureInterior { get; }

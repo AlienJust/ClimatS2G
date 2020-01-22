@@ -8,137 +8,146 @@
              xmlns:bsSmShared="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.BsSm;assembly=CustomModbusSlave.Es2gClimatic.Shared"
              mc:Ignorable="d" 
              d:DesignHeight="1050" d:DesignWidth="400">
-	<UserControl.Resources>
-		<bsSmShared:ClimaticSystemWorkModeToStringThrowableConverterTwoWay x:Key="ClimaticSystemWorkModeConverter"/>
-	</UserControl.Resources>
-	<StackPanel Orientation="Vertical">
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Астрономическое время"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=AstronomicTime, Mode=OneTime, StringFormat=D, ConverterCulture=ru-RU}"/>
-		</Grid>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Время отложенного старта"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=DelayedStartTime, Mode=OneTime}"/>
-		</Grid>
+    <UserControl.Resources>
+        <bsSmShared:ClimaticSystemWorkModeToStringThrowableConverterTwoWay x:Key="ClimaticSystemWorkModeConverter"/>
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Астрономическое время"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=AstronomicTime, Mode=OneTime, StringFormat=D, ConverterCulture=ru-RU}"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Время отложенного старта"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=DelayedStartTime, Mode=OneTime}"/>
+        </Grid>
 
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Температура наружного воздуха"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=TemperatureOutdoor, Mode=OneTime}"/>
-		</Grid>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Тип вагона"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=CarType, Mode=OneTime}"/>
-		</Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Температура наружного воздуха"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=TemperatureOutdoor, Mode=OneTime}"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Тип вагона"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=CarType, Mode=OneTime}"/>
+        </Grid>
 
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Резерв 13 D4-D7"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve13D4D7, Mode=OneTime}"/>
-		</Grid>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Целевая температура в пассажирском салоне"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=TargetTemperatureInterior, Mode=OneTime}"/>
-		</Grid>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Режим работы климатической системы"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=ClimaticSystemWorkmode14D4D7, Mode=OneTime, Converter={StaticResource ClimaticSystemWorkModeConverter}}"/>
-		</Grid>
-		<bsSm:WorkModeReplyView DataContext="{Binding Path=WorkModeAndCompressorSwitch, Mode=OneTime}"/>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Допустимая потребляемая мощность от 380В"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=AllowedPowerConsuptionBy380Vline, Mode=OneTime}"/>
-		</Grid>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Резер 17"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve17, Mode=OneTime}"/>
-		</Grid>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Резерв 18"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve18, Mode=OneTime}"/>
-		</Grid>
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition />
-				<RowDefinition />
-			</Grid.RowDefinitions>
-			<TextBlock Text="Запрос от КСМ2 к БС-СМ:" FontWeight="Bold"/>
-			<!--<TextBlock Grid.Row="1" Text="/* TODO */"/>-->
-			<bsSm:BsSmAndKsm1RequestDataView
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Открытие дверей"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=DoorsAreOpen, Mode=OneTime}"/>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Резерв 13 D4-D7"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=Reserve13D5D7, Mode=OneTime}"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Целевая температура в пассажирском салоне"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=TargetTemperatureInterior, Mode=OneTime}"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Режим работы климатической системы"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=ClimaticSystemWorkmode14D4D7, Mode=OneTime, Converter={StaticResource ClimaticSystemWorkModeConverter}}"/>
+        </Grid>
+        <bsSm:WorkModeReplyView DataContext="{Binding Path=WorkModeAndCompressorSwitch, Mode=OneTime}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Допустимая потребляемая мощность от 380В"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=AllowedPowerConsuptionBy380Vline, Mode=OneTime}"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Резер 17"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=Reserve17, Mode=OneTime}"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Резерв 18"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=Reserve18, Mode=OneTime}"/>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Запрос от КСМ2 к БС-СМ:" FontWeight="Bold"/>
+            <!--<TextBlock Grid.Row="1" Text="/* TODO */"/>-->
+            <bsSm:BsSmAndKsm1RequestDataView
 				Grid.Row="1"
 				DataContext="{Binding Path=Ksm2Request, Mode=OneTime}"/>
-		</Grid>
-		<state:View DataContext="{Binding Path=BsSmState, Mode=OneTime}"/>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Версия ПО БС-СМ"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=BsSmVersionNumber, Mode=OneTime}"/>
-		</Grid>
+        </Grid>
+        <state:View DataContext="{Binding Path=BsSmState, Mode=OneTime}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Версия ПО БС-СМ"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=BsSmVersionNumber, Mode=OneTime}"/>
+        </Grid>
 
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Резерв 43"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve43, Mode=OneTime}"/>
-		</Grid>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Резерв 44"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve44, Mode=OneTime}"/>
-		</Grid>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="4*"/>
-				<ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Резерв 45"/>
-			<TextBlock Grid.Column="1" Text="{Binding Path=Reserve45, Mode=OneTime}"/>
-		</Grid>
-	</StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Резерв 43"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=Reserve43, Mode=OneTime}"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Резерв 44"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=Reserve44, Mode=OneTime}"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Резерв 45"/>
+            <TextBlock Grid.Column="1" Text="{Binding Path=Reserve45, Mode=OneTime}"/>
+        </Grid>
+    </StackPanel>
 </UserControl>

@@ -491,7 +491,8 @@
         <VarVal Position="10.0" Length="8" Name="Время отложенного старта D31 – D24" Id="1d4a7505-b7c8-4f03-adbf-42a874e5cc77" />
         <VarVal Position="11.0" Length="8" Name="Температура наружного воздуха" Id="830b2c50-60d8-4f81-8733-7a810ec2dee2" />
         <CpzPrm Name="Тип вагона" Expression="[12.0.4] * 1.0 " Id="c6e82c83-88d4-43be-8341-bf1c36201775" />
-        <CpzPrm Name="Резерв" Expression="[12.4.4] * 1.0 " Id="5edc7d34-2c09-49e4-9bbf-0555cea92f0c" />
+        <BitPrm Byte="12" Bit="4" IsValueInverted="False" Name="Открытие дверей" Id="4dc109c2-fa37-443a-bb0a-9d10ce7f56ca" />
+        <CpzPrm Name="Резерв" Expression="[12.5.3] * 1.0 " Id="5edc7d34-2c09-49e4-9bbf-0555cea92f0c" />
         <CpzPrm Name="Целевая температура в пассажирском салоне" Expression="[13.0.4] * 1.0 " Id="84b80632-5d23-434f-a122-787dbff7cb54" />
         <CpzPrm Name="Режим работы климатической системы" Expression="[13.4.4] * 1.0 " Id="4a7edbee-4c8f-4050-8228-0b1ec534df40" />
         <BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="Признак достоверности" Id="54daec6f-8837-4026-b03e-037a3e494a21" />
