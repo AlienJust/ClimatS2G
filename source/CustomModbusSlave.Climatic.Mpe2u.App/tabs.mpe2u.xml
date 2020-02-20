@@ -1,252 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Parameters>
-  <Parameter Key="param_002_003_reply_001" Identifier="15351abb-1a4f-4049-95bf-93f6c5a3ab09" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Номер версии ПО" />
-  <Parameter Key="param_002_003_reply_002" Identifier="c23b8441-7256-492b-b496-219425266e54" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - ШИМ вентилятора" >
-    <MultiView Expression="{$value} - {$text}%" Name="{$root}">
-      <NumberView Expression="[value]" StringFormat="f2" Name="{$value}" />
-      <NumberView Expression="(255 - [value]) / 2.55" StringFormat="f2" Name="{$text}" />
-    </MultiView>
-  </Parameter>
-  <Parameter Key="param_002_003_reply_003" Identifier="b787a8cc-180c-4baf-a476-a4f593c7db32" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Давлениее, датчик PT5-30M, бар" >
-    <NumberView Expression="(255 - [value]) / 2.55" StringFormat="f2" Name="{$text}" />
-  </Parameter>
-  <Parameter Key="param_002_003_reply_004" Identifier="0792aea9-ed01-41a4-adaa-f2748e52bc33" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Давление, датчик FSE-02S, бар" >
-    <NumberView Expression="(255 - [value]) / 2.55" StringFormat="f2" Name="{$text}" />
-  </Parameter>
-  <Parameter Key="param_002_003_reply_005" Identifier="54d9dd6f-9034-4368-8fce-1cc350a1868b" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Байт входных сигналов: авария вентилятора M2/1" />
-  <Parameter Key="param_002_003_reply_006" Identifier="7b854657-1828-41ef-93de-8a6e010aabac" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Байт входных сигналов: авария вентилятора M3/1" />
-  <Parameter Key="param_002_003_reply_007" Identifier="6800afd1-853d-4d7a-a3b2-5e7cc8a86436" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Байт входных сигналов: авария вентилятора M4/1" />
-  <Parameter Key="param_002_003_reply_008" Identifier="0590abae-9695-4d85-8436-d41c06be54d9" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Этап работы в автоматическом режиме" >
-    <MultiView Expression="{$value} - {$text0}{$text1}{$text2}{$text3}" Name="{$root}">
-      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
-      <BooleanView Expression="[value] == 0" ResultTrue="инициализация контроллера" ResultFalse="" Name="{$text0}" />
-      <BooleanView Expression="[value] == 1" ResultTrue="тест вентилятора" ResultFalse="" Name="{$text1}" />
-      <BooleanView Expression="[value] == 2" ResultTrue="корректное выключение реле1 и реле 2 в режиме «выключено»" ResultFalse="" Name="{$text2}" />
-      <BooleanView Expression="[value] == 3" ResultTrue="корректное выключение реле1 и реле 2 в режиме «включено»" ResultFalse="" Name="{$text3}" />
-    </MultiView>
-  </Parameter>
-  <Parameter Key="param_002_003_reply_009" Identifier="52a8d7ab-f8d3-4cd9-b33f-3b35e4000301" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Аналоговый вход (выборка с АЦП канала PF0 FSE-02S)" />
-  <Parameter Key="param_002_003_reply_010" Identifier="466ebab9-02fb-4924-a5f4-bb030f3cdc97" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Аналоговый вход (выборка с АЦП канала PF1 PT5-30M)" />
-  <Parameter Key="param_002_003_reply_011" Identifier="68286173-c1a7-4f4d-82c5-9cfc8644b6f9" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Диагностика 1: обрыв датчика 2 по давлению" />
-  <Parameter Key="param_002_003_reply_012" Identifier="1772279f-658b-475f-ad41-5c7ac248ff77" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Диагностика 1: обрыв датчика 1 по давлению" />
-  <Parameter Key="param_002_003_reply_013" Identifier="5b9d3b73-a804-4db5-b39b-c9430aca8709" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Диагностика 1: авария вентилятора M2/1" />
-  <Parameter Key="param_002_003_reply_014" Identifier="307259c8-23e5-4d17-a1f6-1027f84e3747" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Диагностика 1: авария вентилятора M3/1" />
-  <Parameter Key="param_002_003_reply_015" Identifier="ba80699f-2ac5-4e05-916f-0928b6b52f1d" Comment="МУК вентилятора конденсатора, команда 0x03: ответ - Диагностика 1: авария вентилятора M4/1" />
-
-  <Parameter Key="param_002_016_request_001" Identifier="a4cb741d-e091-4912-aa8a-4cb8411b16ec" Comment="МУК вентилятора конденсатора, команда 0x10: запрос - Закрытие заслонки рециркуляционного воздуха" />
-  <Parameter Key="param_002_016_request_002" Identifier="35099d2d-6cd4-41b1-bb2f-7791808efa8f" Comment="МУК вентилятора конденсатора, команда 0x10: запрос - работа (регулятор работает)" />
-  <Parameter Key="param_002_016_request_003" Identifier="13430041-5d4b-4058-8ce6-91636053d212" Comment="МУК вентилятора конденсатора, команда 0x10: запрос - стоянка (регулятор работает с ограничением D2 ШИМ мах стоянка)" />
-  <Parameter Key="param_002_016_request_004" Identifier="709db10f-439a-425e-a165-4b1a9cd5ebdd" Comment="МУК вентилятора конденсатора, команда 0x10: запрос - мойка (ШИМ =0)" />
-  <Parameter Key="param_002_016_request_005" Identifier="d878511d-66b5-4539-be66-651dc39e1cf5" Comment="МУК вентилятора конденсатора, команда 0x10: запрос - вент вкл мах (ШИМ мах)" />
-  <Parameter Key="param_002_016_request_006" Identifier="facd81da-8587-4b00-8156-1e7cdcf08ead" Comment="МУК вентилятора конденсатора, команда 0x10: запрос - вент выкл (ШИМ =0)" />
-  <Parameter Key="param_002_016_request_007" Identifier="98db80be-6fa7-4465-990e-eeceff23c64e" Comment="МУК вентилятора конденсатора, команда 0x10: запрос - ручной режим" />
-  <Parameter Key="param_002_016_request_008" Identifier="9ff80c20-8298-438e-afd3-281ddc634835" Comment="МУК вентилятора конденсатора, команда 0x10: запрос - включение только второй ступени принудительно" />
-  <Parameter Key="param_002_016_request_009" Identifier="35dbebf7-8e36-4b97-b59e-35cd9f3747c8" Comment="МУК вентилятора конденсатора, команда 0x10: запрос - Уставка по давлению, бар" />
-
-  <Parameter Key="param_003_003_reply_001" Identifier="f780e52c-302b-4281-94a5-5eac10711729" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Номер версии ПО" />
-  <Parameter Key="param_003_003_reply_002" Identifier="09555824-ab57-49ba-ae3d-206c7a2e2468" Comment="МУК вентилятора испарителя, команда 0x03: ответ - ШИМ вентилятора, %" />
-  <Parameter Key="param_003_003_reply_003" Identifier="48ba8bf4-d090-472b-8ab9-482761f0637a" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Температура 1w адрес 1" />
-  <Parameter Key="param_003_003_reply_004" Identifier="21ff243d-6a2a-42f7-8dfd-12c3ac9afa8e" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Температура 1w адрес 2" />
-  <Parameter Key="param_003_003_reply_005" Identifier="da703154-d9da-477b-8d85-a9d45c79c4f7" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Байт входных сигналов" />
-  <Parameter Key="param_003_003_reply_006" Identifier="6813e1a9-a7cf-4861-aba7-19581e99e4c7" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Байт выходных сигналов" />
-  <Parameter Key="param_003_003_reply_007" Identifier="e682a5e1-1758-472b-a505-92f8c9df6e9b" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Этап работы в автоматическом режиме" >
-    <MultiView Expression="{$value} - {$text0}{$text1}{$text2}{$text3}" Name="{$root}">
-      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
-      <BooleanView Expression="[value] == 0" ResultTrue="инициализация контроллера" ResultFalse="" Name="{$text0}" />
-      <BooleanView Expression="[value] == 1" ResultTrue="тест вентилятора" ResultFalse="" Name="{$text1}" />
-      <BooleanView Expression="[value] == 2" ResultTrue="корректное выключение реле1 и реле 2 в режиме «выключено»" ResultFalse="" Name="{$text2}" />
-      <BooleanView Expression="[value] == 3" ResultTrue="корректное выключение реле1 и реле 2 в режиме «включено»" ResultFalse="" Name="{$text3}" />
-    </MultiView>
-  </Parameter>
-  <Parameter Key="param_003_003_reply_008" Identifier="2610b7e2-8c37-459f-841a-69f7fd3067a1" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Обороты вент-ра, %" />
-  <Parameter Key="param_003_003_reply_009" Identifier="9f7a0e5a-bb9e-475c-9809-92f392df86ff" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Отсутствие обмена с контроллером вент-ра" />
-  <Parameter Key="param_003_003_reply_010" Identifier="665c4cb0-3908-4662-8d40-75a5e5c689b5" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Ошибка вент-ра (по дискретному входу)" />
-  <Parameter Key="param_003_003_reply_011" Identifier="bf9d9fd8-1e3f-4eaa-9b1e-ad85f1c1a6f9" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Ошибка датчика 1w №1" />
-  <Parameter Key="param_003_003_reply_012" Identifier="b08f526a-3d8f-4d7d-abc8-3029813efec6" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Ошибка датчика 1w №2" />
-  <Parameter Key="param_003_003_reply_013" Identifier="f109afbf-68f5-4d98-b05d-ae148fe0b729" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: ошибка фазы или отсутствие питание." />
-  <Parameter Key="param_003_003_reply_014" Identifier="82a8a9a2-1c8f-4339-a83a-87b3972a3cf1" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: перегрев силового блока" />
-  <Parameter Key="param_003_003_reply_015" Identifier="f9eec791-eff9-4c3b-a9d7-4cc67cc45bbb" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: признак аварии" />
-  <Parameter Key="param_003_003_reply_016" Identifier="e9d9464b-bc0b-4fc1-8b00-7a7fae55a616" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: перегрев мотора" />
-  <Parameter Key="param_003_003_reply_017" Identifier="917895ef-5546-4206-913c-60cbc95b044d" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: ошибка датчика Холла" />
-  <Parameter Key="param_003_003_reply_018" Identifier="e71e83c4-692d-46e3-99bc-06866d449b27" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: блокировка мотора" />
-  <Parameter Key="param_003_003_reply_019" Identifier="69090098-b6a0-4e3f-8749-ce4d4ce856ff" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: перегрузка по DC току" />
-  <Parameter Key="param_003_003_reply_020" Identifier="469fb437-c0e8-4e90-ad8f-f3176b75ca9e" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: перегрев контроллера" />
-  <Parameter Key="param_003_003_reply_021" Identifier="a8fba09c-f640-4d9d-a701-7b751b830695" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: ошибка драйвера" />
-  <Parameter Key="param_003_003_reply_022" Identifier="5cc6d81b-7192-466a-b18b-39cb60758476" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: перенапряжение DC сети" />
-  <Parameter Key="param_003_003_reply_023" Identifier="910d632c-43dc-4dfa-9da2-3ed547a1e4ee" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: недостаточно напряжение в DC сети" />
-  <Parameter Key="param_003_003_reply_024" Identifier="ea4d85f5-7504-4ccb-a041-b7fba090dfbf" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: низкое напряжение" />
-  <Parameter Key="param_003_003_reply_025" Identifier="a9bdeffe-2135-4674-8e80-1bd643d3fa76" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Контр. вент.: блокировка" />
-  <Parameter Key="param_003_003_reply_026" Identifier="5447ff98-e476-4a5a-a98b-9a5da7fe5062" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Диагностика (1w адрес 1)" />
-  <Parameter Key="param_003_003_reply_027" Identifier="ae19901c-30d5-43bc-8528-f78982d770f1" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Диагностика 3 (1w адрес 2)" />
-  <Parameter Key="param_003_003_reply_028" Identifier="1d12cc5c-b9bb-417a-929f-9b15a37b8f1a" Comment="МУК вентилятора испарителя, команда 0x03: ответ - Температура 1w адрес 3" />
-  <Parameter Key="param_003_016_request_001" Identifier="17259e09-ee66-42cc-a966-e6c3be5809d1" Comment="МУК вентилятора испарителя, команда 0x10: запрос - КСМ команда: автоматический режим (МУК работает в режиме охлаждения или нагрева)" />
-  <Parameter Key="param_003_016_request_002" Identifier="67ac0717-f0f2-49f7-a5ac-fb664d41c50c" Comment="МУК вентилятора испарителя, команда 0x10: запрос - КСМ команда: регулятор обогрев принудительно" />
-  <Parameter Key="param_003_016_request_003" Identifier="9ba65279-2645-41b3-9838-b1265f720f92" Comment="МУК вентилятора испарителя, команда 0x10: запрос - КСМ команда: режим обогрева принудительно, ШИМ обогрева = 100%" />
-  <Parameter Key="param_003_016_request_004" Identifier="e4165646-811c-45ea-a182-eeb42f747595" Comment="МУК вентилятора испарителя, команда 0x10: запрос - КСМ команда: режим охлаждение принудительно" />
-  <Parameter Key="param_003_016_request_005" Identifier="146f5029-568e-4888-9ce9-faa6e891e994" Comment="МУК вентилятора испарителя, команда 0x10: запрос - КСМ команда: автоматический режим без выдачи управления (на алгоритм 2)" />
-  <Parameter Key="param_003_016_request_006" Identifier="a2f3d1c9-f10a-4634-b4bc-b1cad04a37c9" Comment="МУК вентилятора испарителя, команда 0x10: запрос - КСМ команда: выкл обогрев и охл" />
-  <Parameter Key="param_003_016_request_007" Identifier="2628cbea-b7a7-43ea-9871-4a2ad2c13d76" Comment="МУК вентилятора испарителя, команда 0x10: запрос - КСМ команда: ручной режим (на алгоритм 3)" />
-  <Parameter Key="param_003_016_request_008" Identifier="320b53c2-2136-4624-b17e-1d422026f7a0" Comment="МУК вентилятора испарителя, команда 0x10: запрос - КСМ команда: режим обогрева принудительно, ШИМ обогрева = 50%" />
-  <Parameter Key="param_003_016_request_009" Identifier="19c2c44f-59a3-461e-9716-9eb5fb7853b3" Comment="МУК вентилятора испарителя, команда 0x10: запрос - Температура наружного воздуха" />
-  <Parameter Key="param_003_016_request_010" Identifier="b1802546-128d-426f-b886-31241d41a3dd" Comment="МУК вентилятора испарителя, команда 0x10: запрос - Температура в кабине" />
-  <Parameter Key="param_003_016_request_011" Identifier="65c91439-f396-4990-867b-9424e8071f27" Comment="МУК вентилятора испарителя, команда 0x10: запрос - Уставка по уровню вентилирования" />
-  <Parameter Key="param_003_016_request_012" Identifier="2173033c-0835-4457-ae89-6002dd31a98a" Comment="МУК вентилятора испарителя, команда 0x10: запрос - Уставка температуры" />
-  <Parameter Key="param_008_240_request_001" Identifier="4cc606f3-4e5b-4f7a-94d9-242cfdbae4de" Comment="Преобразователь частоты, команда 0xf0: запрос - Уставка ПЧ, Гц" />
-  <Parameter Key="param_008_240_request_002" Identifier="6e486f38-09a8-4b0e-8996-f0d93fa359e1" Comment="Преобразователь частоты, команда 0xf0: запрос - Включение ПЧ" />
-  <Parameter Key="param_008_240_reply_001" Identifier="d7c63903-5d0f-4abe-a931-0301c7c74ae0" Comment="Преобразователь частоты, команда 0xf0: ответ - Перегрузка по току (&gt; 250 %)" />
-  <Parameter Key="param_008_240_reply_002" Identifier="281ef4a9-ca75-48f6-ae07-2dc6ea923849" Comment="Преобразователь частоты, команда 0xf0: ответ - Защита по температуре (&gt; 110 °C)" />
-  <Parameter Key="param_008_240_reply_003" Identifier="c8b595f7-82d2-48f6-ad4c-9159e18a74a9" Comment="Преобразователь частоты, команда 0xf0: ответ - Повышенное/пониженное напряжение питания транзисторов (15 В)" />
-  <Parameter Key="param_008_240_reply_004" Identifier="4d1dbd25-6134-4f02-9b70-1407f5985fc3" Comment="Преобразователь частоты, команда 0xf0: ответ - КЗ нижних транзисторов или перекрытие управляющих сигналов" />
-  <Parameter Key="param_008_240_reply_005" Identifier="1979a16c-c46b-412f-9baa-91b0dc10075f" Comment="Преобразователь частоты, команда 0xf0: ответ - Повышенное входное напряжение" />
-  <Parameter Key="param_008_240_reply_006" Identifier="4034bcc8-bd8f-478e-a5d0-1af136d98be7" Comment="Преобразователь частоты, команда 0xf0: ответ - Перегрузка по току (&gt; 150 %)" />
-  <Parameter Key="param_008_240_reply_007" Identifier="b685814d-23e0-4e6e-9a42-4b5552e2d5e9" Comment="Преобразователь частоты, команда 0xf0: ответ - Выходное напряжение включено" />
-  <Parameter Key="param_008_240_reply_008" Identifier="d20af7ba-57df-4951-9818-5457ef1351bd" Comment="Преобразователь частоты, команда 0xf0: ответ - Заданная выходная частота, Гц" />
-  <Parameter Key="param_008_240_reply_009" Identifier="73b553fb-f8ca-4c79-bba7-2059b5b7c6a6" Comment="Преобразователь частоты, команда 0xf0: ответ - Текущая выходная частота, Гц" />
-  <Parameter Key="param_008_240_reply_010" Identifier="20052a85-3885-4f8a-8902-b0adecb5fd85" Comment="Преобразователь частоты, команда 0xf0: ответ - Ток фазы A, %" />
-  <Parameter Key="param_008_240_reply_011" Identifier="90891220-7ab9-43c3-9f79-560d3892ac02" Comment="Преобразователь частоты, команда 0xf0: ответ - Ток фазы B, %" />
-  <Parameter Key="param_008_240_reply_012" Identifier="e9bac782-351e-41a5-a049-22d5bd6c79dc" Comment="Преобразователь частоты, команда 0xf0: ответ - Ток фазы C, %" />
-  <Parameter Key="param_008_240_reply_013" Identifier="ca453a8b-166d-4b93-8286-78092df210cb" Comment="Преобразователь частоты, команда 0xf0: ответ - Напряжение цепи постоянного тока, В" />
-  <Parameter Key="param_008_240_reply_014" Identifier="f511ed81-205f-44e9-b840-cd7e50e34d47" Comment="Преобразователь частоты, команда 0xf0: ответ - Включен инвертор" />
-  <Parameter Key="param_008_240_reply_015" Identifier="0fec0a76-5171-4deb-b407-12a537bd6d53" Comment="Преобразователь частоты, команда 0xf0: ответ - Состояние инвертора: отказ" />
-  <Parameter Key="param_008_240_reply_016" Identifier="60ad2d5c-86ef-4d0e-bf9b-65278fb65264" Comment="Преобразователь частоты, команда 0xf0: ответ - Состояние инвертора: наличие диагностической информации" />
-  <Parameter Key="param_010_032_request_001" Identifier="39ef0468-246e-4975-a674-8faab993f53f" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Температура в салоне" />
-  <Parameter Key="param_010_032_request_002" Identifier="e8e425c0-be73-496d-a45d-a66cab09f028" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Температура наружного воздуха" />
-  <Parameter Key="param_010_032_request_003" Identifier="1d840849-ebc8-4beb-89da-1f51c3a7d7ad" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Уставка температуры в салоне" />
-  <Parameter Key="param_010_032_request_004" Identifier="7da4dcab-010f-42da-8f93-c842782bc27f" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Уставка расхода воздуха в салоне" />
-  <Parameter Key="param_010_032_request_005" Identifier="0edcb119-2613-41ba-9ea7-8901b3116737" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Уставка частоты ПЧ" />
-  <Parameter Key="param_010_032_request_006" Identifier="b49c7dc8-d9ec-404e-aad8-7c0dc3765428" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Текущий режим работы климатической системы" />
-  <Parameter Key="param_010_032_request_007" Identifier="153962f9-91e8-4cbd-98f5-edb0b130f809" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ ПЧ1" />
-  <Parameter Key="param_010_032_request_008" Identifier="e4612f31-0321-40ca-a59e-990c287c5230" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ ПЧ2" />
-  <Parameter Key="param_010_032_request_009" Identifier="4715528b-e8ee-47ac-b2b9-6739aeb15027" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ датчика 1" />
-  <Parameter Key="param_010_032_request_010" Identifier="621257a7-4f2f-450a-abe9-73d76b37e9b7" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ датчика 2" />
-  <Parameter Key="param_010_032_request_011" Identifier="f096ec3a-eb0a-4b8f-99c9-fc373a0f5ac7" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ МУК 1" />
-  <Parameter Key="param_010_032_request_012" Identifier="974ee91d-5e2a-40ba-b1ac-02df35d2fd64" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ МУК 2" />
-  <Parameter Key="param_010_032_request_013" Identifier="74315ee6-d40f-4eed-bfba-1a311745eba0" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ вентилятора 1" />
-  <Parameter Key="param_010_032_request_014" Identifier="7102d929-b3e2-4953-963a-66433b3440c1" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ вентилятора 2" />
-  <Parameter Key="param_010_032_request_015" Identifier="7f9b0be4-ea5a-4f75-9a0f-438266b2aa50" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Включен компрессор 1" />
-  <Parameter Key="param_010_032_request_016" Identifier="300399e1-7655-4d19-848e-933e1529c62f" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Включен компрессор 2" />
-  <Parameter Key="param_010_032_request_017" Identifier="54ddb694-80ed-4167-8de1-fb8b64282e34" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Неисправность вентилятора конденсатора M2/1" />
-  <Parameter Key="param_010_032_request_018" Identifier="93d213e9-9ef2-44e6-8e49-b08c83466695" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Неисправность вентилятора конденсатора M3/1" />
-  <Parameter Key="param_010_032_request_019" Identifier="ba259d8a-af06-4ce3-b762-403833f4e472" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Неисправность вентилятора конденсатора M4/1" />
-  <Parameter Key="param_010_032_request_020" Identifier="05329293-9252-4f28-b4c9-b8ba007b122c" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Неисправность вентилятора конденсатора M2/1 второго сегмента" />
-  <Parameter Key="param_010_032_request_021" Identifier="45f68cbd-c46c-4d71-93ba-2b45de1a3131" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Неисправность вентилятора конденсатора M3/1 второго сегмента" />
-  <Parameter Key="param_010_032_request_022" Identifier="32c33370-37d9-40d3-9c97-b5e173884ab6" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Неисправность вентилятора конденсатора M4/1 второго сегмента" />
-  <Parameter Key="param_010_032_request_023" Identifier="f4de3d88-bf68-4464-b9c1-e9554deaf7c9" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ компрессора 1 по низкому давлению" />
-  <Parameter Key="param_010_032_request_024" Identifier="b4b510c8-66fd-46d6-bc9a-092f298c85da" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ компрессора 1 по высокому давлению" />
-  <Parameter Key="param_010_032_request_025" Identifier="54322bb3-9c7d-47ba-9081-efba405172b2" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ компрессора 2 по низкому давлению" />
-  <Parameter Key="param_010_032_request_026" Identifier="12b08a6d-9392-4616-ad6a-5edd753ebfab" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ компрессора 2 по высокому давлению" />
-  <Parameter Key="param_010_032_request_027" Identifier="deb5199e-e681-42ec-b5d8-68db1dbb3a19" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ МУК вентилятора конденсатора 1" />
-  <Parameter Key="param_010_032_request_028" Identifier="e1a63019-0e98-472a-9682-351c522541c2" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Отказ МУК вентилятора конденсатора 2" />
-  <Parameter Key="param_010_032_request_029" Identifier="761d04be-2508-4577-92cd-eb5e27dff21b" Comment="БС-СМ CAN, команда 32 (0x20): запрос - Температура в салоне по датчику КСМ" />
-  <Parameter Key="param_010_032_reply_001" Identifier="e7c66233-cfdb-410d-8dd8-6d4894535e8b" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент, Температура в салоне" />
-  <Parameter Key="param_010_032_reply_002" Identifier="86668679-a0a4-4560-9696-b8911487d316" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент, Температура наружного воздуха" />
-  <Parameter Key="param_010_032_reply_003" Identifier="ce08c0e1-c33d-4fe6-aba5-01e1be62c75b" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент, Уставка температуры в салоне" />
-  <Parameter Key="param_010_032_reply_004" Identifier="bd7b1f0e-ea11-4b3c-b39d-6911f50084e7" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент, Уставка расхода воздуха в салоне" />
-  <Parameter Key="param_010_032_reply_005" Identifier="da28ca56-3841-4215-bd77-1c6f10fc45a9" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент, Уставка частоты ПЧ" />
-  <Parameter Key="param_010_032_reply_006" Identifier="81507b29-53e2-44ae-bdd1-8535f5849b4c" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент, Текущий режим работы климатической системы" />
-  <Parameter Key="param_010_032_reply_007" Identifier="a5086b9b-b260-44d1-8270-94f94b67d0c4" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ ПЧ1" />
-  <Parameter Key="param_010_032_reply_008" Identifier="6ac3cc39-bc79-43c4-8179-3f6972fc02af" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ ПЧ2" />
-  <Parameter Key="param_010_032_reply_009" Identifier="b7637b82-3c92-44e1-9ab5-e272cbbc1ff5" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ датчика 1" />
-  <Parameter Key="param_010_032_reply_010" Identifier="b6a2cb4d-8a91-4e81-9239-bc414ed4455e" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ датчика 2" />
-  <Parameter Key="param_010_032_reply_011" Identifier="a5121aa8-c3c0-4c68-b18d-2f0e82399418" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ МУК 1" />
-  <Parameter Key="param_010_032_reply_012" Identifier="0398fca1-148e-42fc-83f1-288cb6353bf8" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ МУК 2" />
-  <Parameter Key="param_010_032_reply_013" Identifier="0280512b-ad59-4fa7-8a75-9628a3966c29" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ вентилятора 1" />
-  <Parameter Key="param_010_032_reply_014" Identifier="6f584c18-8fc7-4695-9c76-1a5fce16609f" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ вентилятора 2" />
-  <Parameter Key="param_010_032_reply_015" Identifier="a959d961-f3c6-4884-80e8-a5c77f2507a4" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Включен компрессор 1" />
-  <Parameter Key="param_010_032_reply_016" Identifier="071bce6f-430f-49b6-98d5-484e331f575d" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Включен компрессор 2" />
-  <Parameter Key="param_010_032_reply_017" Identifier="0babe8d2-52c6-4d96-9db5-e2337f39a2ef" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Неисправность вентилятора конденсатора M2/1" />
-  <Parameter Key="param_010_032_reply_018" Identifier="5a6b7f28-d65a-4eff-a6ca-c686599d722d" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Неисправность вентилятора конденсатора M3/1" />
-  <Parameter Key="param_010_032_reply_019" Identifier="b9112459-8360-4d8b-821e-7661f0cb2ac0" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Неисправность вентилятора конденсатора M4/1" />
-  <Parameter Key="param_010_032_reply_020" Identifier="40d28d7f-76e7-40d2-af45-6e50fbf87b93" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ компрессора 1 по низкому давлению" />
-  <Parameter Key="param_010_032_reply_021" Identifier="0928a88a-fb88-4dc9-8528-b415e16f3f49" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ компрессора 1 по высокому давлению" />
-  <Parameter Key="param_010_032_reply_022" Identifier="36964c82-6ead-4e67-b286-078c448ad5d9" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ компрессора 2 по низкому давлению" />
-  <Parameter Key="param_010_032_reply_023" Identifier="9ab61f50-190e-4a36-8563-ccf2f51a69ae" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ компрессора 2 по высокому давлению" />
-  <Parameter Key="param_010_032_reply_024" Identifier="d7305786-640b-4a87-9a31-8bb422b7de10" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ МУК вентилятора конденсатора 1" />
-  <Parameter Key="param_010_032_reply_025" Identifier="986d3183-d627-40ec-b2de-dba9806363f7" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент: Отказ МУК вентилятора конденсатора 2" />
-  <Parameter Key="param_010_032_reply_026" Identifier="9d641abb-505b-488b-871e-7f64383db582" Comment="БС-СМ CAN, команда 32 (0x20): ответ - 2й сегмент, Температура в салоне по датчику КСМ" />
-  <Parameter Key="param_010_032_reply_027" Identifier="4fc86537-0164-4f77-b5e9-027fc22d90a5" Comment="БС-СМ CAN, команда 32 (0x20): ответ - СУ: открытие двери 1" />
-  <Parameter Key="param_010_032_reply_028" Identifier="3e0143f7-29e5-4c55-a81f-3c04f6e5ec3b" Comment="БС-СМ CAN, команда 32 (0x20): ответ - СУ: открытие двери 2" />
-  <Parameter Key="param_010_032_reply_029" Identifier="ab19b0f4-e351-4e72-8b6f-1b6f4f0df704" Comment="БС-СМ CAN, команда 32 (0x20): ответ - СУ: открытие двери 3" />
-  <Parameter Key="param_010_032_reply_030" Identifier="56eb926d-6b1c-4e38-808e-94bbff67a85c" Comment="БС-СМ CAN, команда 32 (0x20): ответ - СУ: открытие двери 4" />
-  <Parameter Key="param_010_032_reply_031" Identifier="8ed00726-4970-4d5d-bd14-00d06a4d8632" Comment="БС-СМ CAN, команда 32 (0x20): ответ - СУ: открытие двери 5" />
-  <Parameter Key="param_010_032_reply_032" Identifier="ff7a023c-0c10-4010-997d-da35f5a77df6" Comment="БС-СМ CAN, команда 32 (0x20): ответ - СУ: открытие двери 6" />
-  <Parameter Key="param_010_032_reply_033" Identifier="54ad31ec-f40e-4c51-a745-76c930f54f40" Comment="БС-СМ CAN, команда 32 (0x20): ответ - СУ: проезд стрелки без тока" />
-  <Parameter Key="param_010_032_reply_034" Identifier="20ffc685-3bbd-4ed6-86e3-c05ae4511bee" Comment="БС-СМ CAN, команда 32 (0x20): ответ - СУ: Уставка расхода воздуха, 0-100%." />
-  <Parameter Key="param_010_032_reply_035" Identifier="efe29da8-0b2a-4620-908a-0cd9073bda5d" Comment="БС-СМ CAN, команда 32 (0x20): ответ - СУ: Целевая температура в пассажирском салоне" />
-  <Parameter Key="param_010_032_reply_036" Identifier="816d7f43-757e-4b18-b219-527e9947a800" Comment="БС-СМ CAN, команда 32 (0x20): ответ - СУ: Режим работы климатической системы" />
-  <Parameter Key="param_010_032_reply_037" Identifier="51f34b64-3abf-4b2d-828b-ffea321dae82" Comment="БС-СМ CAN, команда 32 (0x20): ответ - Уставка температуры по линии CAN" />
-  <Parameter Key="param_010_032_reply_038" Identifier="3f081aba-9cdd-4299-ab61-b3801ee010d9" Comment="БС-СМ CAN, команда 32 (0x20): ответ - Уставка расхода воздуха по линии CAN" />
-  <Parameter Key="param_010_032_reply_039" Identifier="a4e1c6af-007e-4e13-bdee-fb19fdfbb507" Comment="БС-СМ CAN, команда 32 (0x20): ответ - Состояние БС-СМ: Нет связи  с СУ (период формирования 10 с)" />
-  <Parameter Key="param_010_032_reply_040" Identifier="833c9fdf-4018-466d-b294-fa91e20a351e" Comment="БС-СМ CAN, команда 32 (0x20): ответ - Состояние БС-СМ: Нет связи  с БС-СМ" />
-  <Parameter Key="param_010_032_reply_041" Identifier="8a84bb42-a486-4846-be7b-29d446d8d0b5" Comment="БС-СМ CAN, команда 32 (0x20): ответ - Состояние БС-СМ: Адрес БС-СМ1" />
-  <Parameter Key="param_010_032_reply_042" Identifier="832a73bb-0bd4-4b07-b3ac-77fedb480216" Comment="БС-СМ CAN, команда 32 (0x20): ответ - Состояние БС-СМ: Нет связи с КСМ2/КСМ1 (период формирования 10 секунд)" />
-  <Parameter Key="param_010_032_reply_043" Identifier="8c6ade95-39b4-4fcb-82dd-8c0e6184282e" Comment="БС-СМ CAN, команда 32 (0x20): ответ - Номер версии ПО БС-СМ" />
-  <Parameter Key="param_010_032_reply_044" Identifier="f8d0af9d-51e3-40c2-a9de-e9144629febb" Comment="БС-СМ CAN, команда 32 (0x20): ответ - Счетчики: Кол-во сбоев по SPI" />
-  <Parameter Key="param_010_032_reply_045" Identifier="8efa7e30-2586-4fbe-b1d4-4949ae41b7a0" Comment="БС-СМ CAN, команда 32 (0x20): ответ - Счетчики: Кол-во сбоев с КСМ1" />
-  <Parameter Key="param_010_032_reply_046" Identifier="03f26ae7-d74a-40be-8130-8c1475f3c665" Comment="БС-СМ CAN, команда 32 (0x20): ответ - Счетчики: Кол-во сбоев с КСМ2" />
-
-  <Parameter Key="param_020_016_request_001" Identifier="f9cee8af-6241-4156-97e5-6067bb457647" Comment="КСМ, команда 16 (0x10): запрос - Версия ПО" />
-  <Parameter Key="param_020_016_request_002" Identifier="1c9ae500-85da-4b9d-852c-65a696f59355" Comment="КСМ, команда 16 (0x10): запрос - Датчик в кабине машиниста" />
-  <Parameter Key="param_020_016_request_003" Identifier="de31c878-b1e8-4a32-81b6-e344e902727d" Comment="КСМ, команда 16 (0x10): запрос - Датчик на трубке выхода испарителя" />
-  <Parameter Key="param_020_016_request_004" Identifier="0ceea2a5-eb61-4cde-8cc7-c2f24255d449" Comment="КСМ, команда 16 (0x10): запрос - Датчик на трубке выхода конденсатора" />
-  <Parameter Key="param_020_016_request_005" Identifier="ebb21635-28ff-4a9d-ada6-d7e47879bad8" Comment="КСМ, команда 16 (0x10): запрос - Уставка температуры в кабине" />
-  <Parameter Key="param_020_016_request_006" Identifier="e5280f56-ebd4-4bfe-a60e-21a5d352ef34" Comment="КСМ, команда 16 (0x10): запрос - Уставка объема подачи воздуха в кабину" />
-  <Parameter Key="param_020_016_request_007" Identifier="10152f3c-72ac-4d20-8afa-d3f8cbc0a345" Comment="КСМ, команда 16 (0x10): запрос - Давление в контуре низкого давления, бар" />
-  <Parameter Key="param_020_016_request_008" Identifier="0f736f6c-cc37-4524-924d-52e507dc1646" Comment="КСМ, команда 16 (0x10): запрос - Давление в контуре высокого давления, бар" />
-  <Parameter Key="param_020_016_request_009" Identifier="83258caf-c8d6-4bae-94d2-4a098ec99779" Comment="КСМ, команда 16 (0x10): запрос - Температура в контуре низкого давления, град." />
-  <Parameter Key="param_020_016_request_010" Identifier="afd5257e-0b05-4de8-9868-f371fa0eb7fc" Comment="КСМ, команда 16 (0x10): запрос - Перегрев хладагента, град." />
-  <Parameter Key="param_020_016_request_011" Identifier="cae6125e-56c4-4213-92a4-e862d3b41543" Comment="КСМ, команда 16 (0x10): запрос - Максимальная уставка ПЧ" />
-  <Parameter Key="param_020_016_request_012" Identifier="31c054ab-b274-4c66-96c3-4757b6db2368" Comment="КСМ, команда 16 (0x10): запрос - Минимальная уставка ПЧ" />
-  <Parameter Key="param_020_016_request_013" Identifier="d85014ac-5584-414b-9a92-34a7044ba700" Comment="КСМ, команда 16 (0x10): запрос - Дельта + (plus_cool)" >
-    <Injection ParamNumberInPackage="13" ConvertExpression="[value] * 1.0" InvertBytesOrder="True">
-      <InjectTextValue Text="Максимум" Value="255"/>
-      <InjectTextValue Text="Минимум" Value="0"/>
-      <InjectTextValue Text="Средне" Value="127"/>
-    </Injection>
-  </Parameter>
-  <Parameter Key="param_020_016_request_014" Identifier="9ef12825-8ed2-40a6-bfe8-d8756947f540" Comment="КСМ, команда 16 (0x10): запрос - Дельта - (minus_cool)" >
-    <Injection ParamNumberInPackage="14" ConvertExpression="[value] * 1.0" InvertBytesOrder="True">
-      <InjectTextValue Text="Максимум" Value="255"/>
-      <InjectTextValue Text="Минимум" Value="0"/>
-      <InjectTextValue Text="Средне" Value="127"/>
-    </Injection>
-  </Parameter>
-  <Parameter Key="param_020_016_request_015" Identifier="29208e40-6db3-49d1-9ec6-2c785f40ceaf" Comment="КСМ, команда 16 (0x10): запрос - PA.0 =" />
-  <Parameter Key="param_020_016_request_016" Identifier="2d95b492-3719-406c-910f-da12e0a15aaf" Comment="КСМ, команда 16 (0x10): запрос - PA.1 =" />
-  <Parameter Key="param_020_016_request_017" Identifier="daecf4ef-8c85-4001-a466-2b8fb240d1e5" Comment="КСМ, команда 16 (0x10): запрос - PA.2 =" />
-  <Parameter Key="param_020_016_request_018" Identifier="3802b911-1717-476f-a170-8f014b22e354" Comment="КСМ, команда 16 (0x10): запрос - PA.3 =" />
-  <Parameter Key="param_020_016_request_019" Identifier="40607cb7-88d7-4297-bb6a-7e3f88ed839d" Comment="КСМ, команда 16 (0x10): запрос - PA.4 =" />
-  <Parameter Key="param_020_016_request_020" Identifier="f8d11dbb-1819-4019-b53c-ae5d92e47a01" Comment="КСМ, команда 16 (0x10): запрос - PA.5 =" />
-  <Parameter Key="param_020_016_request_021" Identifier="f7fbc591-301b-4c97-85a0-eff2af2d5767" Comment="КСМ, команда 16 (0x10): запрос - PA.6 =" />
-  <Parameter Key="param_020_016_request_022" Identifier="5ed3dae9-c049-4ac4-ac62-1786e65b9a70" Comment="КСМ, команда 16 (0x10): запрос - PA.7 =" />
-  <Parameter Key="param_020_016_request_023" Identifier="76ddfc9d-c303-48c7-986f-9593f11dd011" Comment="КСМ, команда 16 (0x10): запрос - PIC порт B: авария компрессора по максимальному давлению" />
-  <Parameter Key="param_020_016_request_024" Identifier="e62d6c2c-0b89-47c8-a9fa-d22a754572f8" Comment="КСМ, команда 16 (0x10): запрос - PIC порт B: авария компрессора по минимальному давлению" />
-  <Parameter Key="param_020_016_request_025" Identifier="42917e8f-412d-44e3-9201-b11e85385629" Comment="КСМ, команда 16 (0x10): запрос - PIC порт B: команда на включение кондиционера" />
-  <Parameter Key="param_020_016_request_026" Identifier="1a63a752-4d9c-49f1-8c62-6d230098395d" Comment="КСМ, команда 16 (0x10): запрос - PC.0 =" />
-  <Parameter Key="param_020_016_request_027" Identifier="91ee7c6b-4d42-411a-8b2a-e7b08ba3ef8e" Comment="КСМ, команда 16 (0x10): запрос - PC.1 =" />
-  <Parameter Key="param_020_016_request_028" Identifier="83bb206a-4a8d-42f0-8d7a-5497db7b3230" Comment="КСМ, команда 16 (0x10): запрос - PC.2 =" />
-  <Parameter Key="param_020_016_request_029" Identifier="b81602d8-be16-46a0-b45a-1df5e5588c94" Comment="КСМ, команда 16 (0x10): запрос - PC.3 =" />
-  <Parameter Key="param_020_016_request_030" Identifier="ef047f16-e7fa-47f0-968d-cef7d02874f7" Comment="КСМ, команда 16 (0x10): запрос - PC.4 =" />
-  <Parameter Key="param_020_016_request_031" Identifier="60bbbca4-4abe-41c0-a03c-474df7b273fa" Comment="КСМ, команда 16 (0x10): запрос - PC.5 =" />
-  <Parameter Key="param_020_016_request_032" Identifier="e21174e7-9682-40be-aae4-b42dbdb85687" Comment="КСМ, команда 16 (0x10): запрос - PC.6 =" />
-  <Parameter Key="param_020_016_request_033" Identifier="58cae8c5-657f-4974-998c-62cfc06dbfa6" Comment="КСМ, команда 16 (0x10): запрос - PC.7 =" />
-  <Parameter Key="param_020_016_request_034" Identifier="59b3282f-ce9b-4295-878d-5e7356794540" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера (ErrorsFlags): Отсутствие связи с PIC – процессором" />
-  <Parameter Key="param_020_016_request_035" Identifier="43b15ddf-aed6-4390-9e0c-1c46cab3e877" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера (ErrorsFlags): Отсутствие связи с EEPROM" />
-  <Parameter Key="param_020_016_request_036" Identifier="65437115-9e2b-4071-8198-41e400f2d5ed" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера (ErrorsFlags): КЗ шины 1 W" />
-  <Parameter Key="param_020_016_request_037" Identifier="84b0580a-8476-4861-8573-06a9aa079cfb" Comment="КСМ, команда 16 (0x10): запрос - Этап работы" />
-  <Parameter Key="param_020_016_request_038" Identifier="68f01a68-dca0-4574-a50a-9f935ec317d7" Comment="КСМ, команда 16 (0x10): запрос - Регистр аварий в режиме включено: D.6 - не пройден тест заслонки" />
-  <Parameter Key="param_020_016_request_039" Identifier="d2a53495-7563-48d1-8642-1cd74e7deac3" Comment="КСМ, команда 16 (0x10): запрос - Регистр аварий в режиме включено: D.5 - не пройден тест вентил. испарителя" />
-  <Parameter Key="param_020_016_request_040" Identifier="0b302def-b5b0-41c0-9798-822f5dc8e27f" Comment="КСМ, команда 16 (0x10): запрос - Регистр аварий в режиме включено: D.4 - не пройден тест вентил. конденсатора" />
-  <Parameter Key="param_020_016_request_041" Identifier="17cb2cc9-2b11-40b1-9233-8d11555b4c6f" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена 1: вычитка текущих данных из МУК2" />
-  <Parameter Key="param_020_016_request_042" Identifier="ec1386eb-0216-498b-bdfc-259a3f7e23b9" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена 1: запись команд в МУК2" />
-  <Parameter Key="param_020_016_request_043" Identifier="e8144dde-ff45-4266-82ab-fb9064af98bf" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена 1: вычитка текущих данных из МУК3" />
-  <Parameter Key="param_020_016_request_044" Identifier="9b8d65d3-f74e-44d2-bcd7-af95ebdef8d1" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена 1: запись команд в МУК3" />
-  <Parameter Key="param_020_016_request_045" Identifier="7039bf76-abef-467e-81c8-3f0081643498" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена 1: обмен с ПЧ" />
-  <Parameter Key="param_020_016_request_046" Identifier="54a4795b-40fb-40fe-949a-fe23f2d87cde" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена 1: обмен с БС-СМ" />
-  <Parameter Key="param_020_016_request_047" Identifier="85cf0907-3b76-43cd-957c-d386e3bd672e" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена 1: вычитка корректируемого параметра из программы технического абонента" />
-  <Parameter Key="param_020_016_request_048" Identifier="e2a60580-eff8-486d-b0ae-71d056735010" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена 1: отсылка текущих данных техническому абоненту" />
-  <Parameter Key="param_020_016_request_049" Identifier="57b52f89-7530-4148-b168-cb5d9d68934d" Comment="КСМ, команда 16 (0x10): запрос - Уставка ПЧ" />
-  <Parameter Key="param_020_016_request_050" Identifier="c5f646af-498e-46e2-9454-f28dc0e18510" Comment="КСМ, команда 16 (0x10): запрос - Ручной принудительный режим" />
-  <Parameter Key="param_020_016_request_051" Identifier="63c8a377-1a6e-49dd-942d-d8597ffa0558" Comment="КСМ, команда 16 (0x10): запрос - Дельта уставки температуры, отладка" />
-  <Parameter Key="param_020_016_request_052" Identifier="c16612a3-2672-4a50-94a4-69c6ce0a97f0" Comment="КСМ, команда 16 (0x10): запрос - Принудительный режим обогрев/охлаждение" />
+  <Parameter Key="param_008_070_request_001" Identifier="cfde89ae-22f3-41ee-b0fb-a327e5204cb5" Comment="между МК1 и СТПР-180 1 0x46: запрос - Команда БС-СН: D1 - Мастер/слейв" />
+  <Parameter Key="param_008_070_request_002" Identifier="78bdb517-2c3a-437d-8dd2-d7ecfe32b316" Comment="между МК1 и СТПР-180 1 0x46: запрос - Команда БС-СН: D0 - Команда назначения мастера/слейва" />
+  <Parameter Key="param_008_070_reply_001" Identifier="cace1844-372d-4607-b1ee-16901c69003f" Comment="между МК1 и СТПР-180 1 0x46: ответ - Напряжение контактной сети, В" />
+  <Parameter Key="param_008_070_reply_002" Identifier="04e2dcf2-303b-46a7-af2a-c7e788878ef2" Comment="между МК1 и СТПР-180 1 0x46: ответ - Выходное напряжение СТПР, В" />
+  <Parameter Key="param_008_070_reply_003" Identifier="7e7db70f-4c7d-42df-979f-e93310bdff47" Comment="между МК1 и СТПР-180 1 0x46: ответ - Входной ток СТПР, А" />
+  <Parameter Key="param_008_070_reply_004" Identifier="44c00393-ac48-4ad0-8403-50d7a769b6fd" Comment="между МК1 и СТПР-180 1 0x46: ответ - Выходной ток СТПР, А" />
+  <Parameter Key="param_008_070_reply_005" Identifier="f554dbae-66a1-4819-8138-1411f72a7bc8" Comment="между МК1 и СТПР-180 1 0x46: ответ - Выходное напряжение верхнего TLBC, В" />
+  <Parameter Key="param_008_070_reply_006" Identifier="acc18a32-125b-4755-9233-517cd6fded4c" Comment="между МК1 и СТПР-180 1 0x46: ответ - Выходное напряжение нижнего TLBC, В" />
+  <Parameter Key="param_008_070_reply_007" Identifier="e3ff528f-0aff-44ef-b2b0-91be8aa4300c" Comment="между МК1 и СТПР-180 1 0x46: ответ - ШИМ TLBC" />
+  <Parameter Key="param_008_070_reply_008" Identifier="0d9e8332-d93c-4860-aa91-e31ae4693aae" Comment="между МК1 и СТПР-180 1 0x46: ответ - Ток верхнего полумоста, А" />
+  <Parameter Key="param_008_070_reply_009" Identifier="60d29408-0228-43d8-bfb7-06e6450cfafb" Comment="между МК1 и СТПР-180 1 0x46: ответ - Ток нижнего полумоста, А" />
+  <Parameter Key="param_008_070_reply_010" Identifier="de0fb02a-8747-4cd4-9d37-5a2773a6d616" Comment="между МК1 и СТПР-180 1 0x46: ответ - Температура радиатора, C" />
+  <Parameter Key="param_008_070_reply_011" Identifier="a5aac02f-fbe7-44c5-9edb-c00ee7a73f58" Comment="между МК1 и СТПР-180 1 0x46: ответ - Температура платы управления, C" />
+  <Parameter Key="param_008_070_reply_012" Identifier="efca8029-ac70-4a94-8d89-c905ef357f08" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D7 - Перегрузка по выходному току" />
+  <Parameter Key="param_008_070_reply_013" Identifier="966bdf2b-c632-402e-8600-1cb67f659354" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D6 - Повышенное напряжение контактной сети" />
+  <Parameter Key="param_008_070_reply_014" Identifier="4088cc0e-7418-4707-9a57-0783c8377c4a" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D5 - Пониженное напряжение контактной сети" />
+  <Parameter Key="param_008_070_reply_015" Identifier="49d99db4-8eb3-4c1f-bf00-bc6c3c449967" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D4 - Защита по температуре радиатора" />
+  <Parameter Key="param_008_070_reply_016" Identifier="70ff9b82-7e38-410a-adca-b02ce670b5ef" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D3 - Защита по току нижнего полумоста" />
+  <Parameter Key="param_008_070_reply_017" Identifier="521cae6b-701e-4092-af2b-fbb9116dcfba" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D2 - Защита по току верхнего полумоста" />
+  <Parameter Key="param_008_070_reply_018" Identifier="f9298707-bafd-41ab-a2c7-48dfe324c7da" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D1 - Блокировка от транзисторного ключа" />
+  <Parameter Key="param_008_070_reply_019" Identifier="123b08af-1479-4d61-8c5f-aa2e32447691" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D0 - Блокировка на транзисторный ключ" />
+  <Parameter Key="param_008_070_reply_020" Identifier="d94f34df-f9ea-4ac7-b9cd-7d6e4f45304d" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D7 - Неисправность ключей инвертора" />
+  <Parameter Key="param_008_070_reply_021" Identifier="7342f922-06ca-439d-82eb-883d624c454c" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D6 - Защита по разнице напряжений TLBC" />
+  <Parameter Key="param_008_070_reply_022" Identifier="8ad69617-71fa-4f91-ac8b-a45e8bf6ab1d" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D5 - Защита по температуре платы" />
+  <Parameter Key="param_008_070_reply_023" Identifier="ab7d5a81-fa06-4822-bcc7-adcb7e1c5077" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D4 - Превышение предельного количества аварийных режимов" />
+  <Parameter Key="param_008_070_reply_024" Identifier="ee37593c-a2eb-4aaa-b8e9-ab81e46eb512" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D3 - Неисправность ключа TLBC4" />
+  <Parameter Key="param_008_070_reply_025" Identifier="2549b048-0a05-4737-9da0-75890bbd8b7c" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D2 - Неисправность ключа TLBC3" />
+  <Parameter Key="param_008_070_reply_026" Identifier="31739dbc-a0de-4764-b3de-8f41302b9b33" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D1 - Неисправность ключа TLBC2" />
+  <Parameter Key="param_008_070_reply_027" Identifier="633df379-81f5-488f-afb6-2d60890bc018" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D0 - Неисправность ключа TLBC1" />
+  <Parameter Key="param_008_070_reply_028" Identifier="792e1ce8-b75a-44d4-9095-6871330e7207" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D7 - Неисправность ключа инвертора 8" />
+  <Parameter Key="param_008_070_reply_029" Identifier="2935ef27-9d0b-4612-b06c-1e9131400b9d" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D6 - Неисправность ключа инвертора 7" />
+  <Parameter Key="param_008_070_reply_030" Identifier="064c6739-c1f7-44f9-8a33-6c4530a82283" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D5 - Неисправность ключа инвертора 6" />
+  <Parameter Key="param_008_070_reply_031" Identifier="6ab5f2c4-361a-47c7-8195-b9e86ec70571" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D4 - Неисправность ключа инвертора 5" />
+  <Parameter Key="param_008_070_reply_032" Identifier="5394008f-b6c1-4b35-8c90-a1d066b95ac7" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D3 - Неисправность ключа инвертора 4" />
+  <Parameter Key="param_008_070_reply_033" Identifier="1b5c5e2e-3896-4552-8178-63364dcd2f54" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D2 - Неисправность ключа инвертора 3" />
+  <Parameter Key="param_008_070_reply_034" Identifier="165ffd43-6c1b-4dd1-b115-3a6f4dba412b" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D1 - Неисправность ключа инвертора 2" />
+  <Parameter Key="param_008_070_reply_035" Identifier="05cc58a2-d0cf-44f5-a760-c69e2aaf6569" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D0 - Неисправность ключа инвертора 1" />
+  <Parameter Key="param_008_070_reply_036" Identifier="9ef7e009-5234-488f-86e2-ec8604b631c7" Comment="между МК1 и СТПР-180 1 0x46: ответ - Авария в нагрузке СТПР-180" />
+  <Parameter Key="param_008_070_reply_037" Identifier="d822fc5a-5e1d-4cf9-a307-8d66132582a5" Comment="между МК1 и СТПР-180 1 0x46: ответ - Обрыв синхронизации мастера/слейва" />
+  <Parameter Key="param_008_070_reply_038" Identifier="d93219b7-cf5b-4f2b-ad3d-ad7d9df4a155" Comment="между МК1 и СТПР-180 1 0x46: ответ - Мастер/слейв" />
+  <Parameter Key="param_024_070_request_001" Identifier="d871d609-7de6-4f7d-9242-581a001c9c1c" Comment="между МК1 и СТПР-180 2 0x46: запрос - Команда БС-СН: D1 - Мастер/слейв" />
+  <Parameter Key="param_024_070_request_002" Identifier="e2f9068e-e8ce-4531-a7dd-e8f971f252b5" Comment="между МК1 и СТПР-180 2 0x46: запрос - Команда БС-СН: D0 - Команда назначения мастера/слейва" />
+  <Parameter Key="param_024_070_reply_001" Identifier="436ac2aa-c5ff-4b68-a732-68df4c260c4c" Comment="между МК1 и СТПР-180 2 0x46: ответ - Напряжение контактной сети, В" />
+  <Parameter Key="param_024_070_reply_002" Identifier="8301a7df-1847-4b31-b378-f9f14165a5da" Comment="между МК1 и СТПР-180 2 0x46: ответ - Выходное напряжение СТПР, В" />
+  <Parameter Key="param_024_070_reply_003" Identifier="f223f44f-13e9-4e46-85e6-cf3a3886a570" Comment="между МК1 и СТПР-180 2 0x46: ответ - Входной ток СТПР, А" />
+  <Parameter Key="param_024_070_reply_004" Identifier="56cb4491-16c6-4b82-ae81-1e6485833663" Comment="между МК1 и СТПР-180 2 0x46: ответ - Выходной ток СТПР, А" />
+  <Parameter Key="param_024_070_reply_005" Identifier="0dd28f42-ed64-4dcf-bbcc-223a24e2bb0c" Comment="между МК1 и СТПР-180 2 0x46: ответ - Выходное напряжение верхнего TLBC, В" />
+  <Parameter Key="param_024_070_reply_006" Identifier="b0fb180a-fb94-488d-a365-6925d0e7c6aa" Comment="между МК1 и СТПР-180 2 0x46: ответ - Выходное напряжение нижнего TLBC, В" />
+  <Parameter Key="param_024_070_reply_007" Identifier="312b94d2-271f-488a-9edf-fabb329f0fec" Comment="между МК1 и СТПР-180 2 0x46: ответ - ШИМ TLBC" />
+  <Parameter Key="param_024_070_reply_008" Identifier="d57638af-0646-4dec-ae90-7c816a7152b6" Comment="между МК1 и СТПР-180 2 0x46: ответ - Ток верхнего полумоста, А" />
+  <Parameter Key="param_024_070_reply_009" Identifier="34c524ed-26ed-4df3-bf28-c0655b425363" Comment="между МК1 и СТПР-180 2 0x46: ответ - Ток нижнего полумоста, А" />
+  <Parameter Key="param_024_070_reply_010" Identifier="23f80fdc-9d15-4776-afb6-7644020d6ca1" Comment="между МК1 и СТПР-180 2 0x46: ответ - Температура радиатора, C" />
+  <Parameter Key="param_024_070_reply_011" Identifier="122ffa31-2140-420e-81c1-fe49e1308c70" Comment="между МК1 и СТПР-180 2 0x46: ответ - Температура платы управления, C" />
+  <Parameter Key="param_024_070_reply_012" Identifier="eb3d5922-07d0-4303-9888-2e7496925e42" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D7 - Перегрузка по выходному току" />
+  <Parameter Key="param_024_070_reply_013" Identifier="2ae492d2-8e0b-4d47-b942-daecdbfc4fe5" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D6 - Повышенное напряжение контактной сети" />
+  <Parameter Key="param_024_070_reply_014" Identifier="1cd1a0fc-9107-40d6-9df3-acacd863d43e" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D5 - Пониженное напряжение контактной сети" />
+  <Parameter Key="param_024_070_reply_015" Identifier="8bafaa61-8655-47aa-aec5-1f02e06b0003" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D4 - Защита по температуре радиатора" />
+  <Parameter Key="param_024_070_reply_016" Identifier="86abca3c-4fda-42e2-92ce-10855c3f2593" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D3 - Защита по току нижнего полумоста" />
+  <Parameter Key="param_024_070_reply_017" Identifier="9fdbf2ac-5e64-4877-b690-78fa4a37eee6" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D2 - Защита по току верхнего полумоста" />
+  <Parameter Key="param_024_070_reply_018" Identifier="05ef3608-203c-40a7-9510-e77384ad8b77" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D1 - Блокировка от транзисторного ключа" />
+  <Parameter Key="param_024_070_reply_019" Identifier="e6f3ea38-c4de-43ac-9597-69006846f65e" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D0 - Блокировка на транзисторный ключ" />
+  <Parameter Key="param_024_070_reply_020" Identifier="55992541-d122-4354-9e35-fa3cd9aad0d0" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D7 - Неисправность ключей инвертора" />
+  <Parameter Key="param_024_070_reply_021" Identifier="899f28d3-370d-4afb-bfec-1755afaf8d81" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D6 - Защита по разнице напряжений TLBC" />
+  <Parameter Key="param_024_070_reply_022" Identifier="8331a884-96b7-486d-8f94-b90a32c46e1d" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D5 - Защита по температуре платы" />
+  <Parameter Key="param_024_070_reply_023" Identifier="8edf67c8-0205-440c-8d8e-26b1377fad36" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D4 - Превышение предельного количества аварийных режимов" />
+  <Parameter Key="param_024_070_reply_024" Identifier="f8803c4f-9ba2-4ec6-972a-7227e9da932d" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D3 - Неисправность ключа TLBC4" />
+  <Parameter Key="param_024_070_reply_025" Identifier="8590f142-1a50-47f4-a471-e6f747981a18" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D2 - Неисправность ключа TLBC3" />
+  <Parameter Key="param_024_070_reply_026" Identifier="ed15ef2c-e741-4c99-a5a9-309e18a20b3f" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D1 - Неисправность ключа TLBC2" />
+  <Parameter Key="param_024_070_reply_027" Identifier="6f918e7f-5cbc-4828-b8c9-8fe315a4c3a9" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D0 - Неисправность ключа TLBC1" />
+  <Parameter Key="param_024_070_reply_028" Identifier="94d0371a-85a0-4473-be56-628ea17f7d21" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D7 - Неисправность ключа инвертора 8" />
+  <Parameter Key="param_024_070_reply_029" Identifier="cc6e0de9-4d57-489e-b938-8db640a10b4b" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D6 - Неисправность ключа инвертора 7" />
+  <Parameter Key="param_024_070_reply_030" Identifier="0ea42d47-d369-4b8b-b642-e6a8851620a4" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D5 - Неисправность ключа инвертора 6" />
+  <Parameter Key="param_024_070_reply_031" Identifier="2623e46d-71f2-486a-b499-61e6318b9ffb" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D4 - Неисправность ключа инвертора 5" />
+  <Parameter Key="param_024_070_reply_032" Identifier="633adc8f-9443-4a55-97f7-643ce752e5db" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D3 - Неисправность ключа инвертора 4" />
+  <Parameter Key="param_024_070_reply_033" Identifier="39e11a17-d0c9-402c-aca6-08754d1c6817" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D2 - Неисправность ключа инвертора 3" />
+  <Parameter Key="param_024_070_reply_034" Identifier="80e60308-ef5a-4ede-8e17-3279cfa586ab" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D1 - Неисправность ключа инвертора 2" />
+  <Parameter Key="param_024_070_reply_035" Identifier="19ae6912-a52d-4066-a85b-2033675cdb5e" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D0 - Неисправность ключа инвертора 1" />
+  <Parameter Key="param_024_070_reply_036" Identifier="34703e84-0ac2-4808-b4b0-88c26c34be71" Comment="между МК1 и СТПР-180 2 0x46: ответ - Авария в нагрузке СТПР-180" />
+  <Parameter Key="param_024_070_reply_037" Identifier="c2b0c889-69db-43d1-ba38-b13be6d0a567" Comment="между МК1 и СТПР-180 2 0x46: ответ - Обрыв синхронизации мастера/слейва" />
+  <Parameter Key="param_024_070_reply_038" Identifier="f5ec3c56-0ac8-4670-84ba-8b230ef027ab" Comment="между МК1 и СТПР-180 2 0x46: ответ - Мастер/слейв" />
 </Parameters>

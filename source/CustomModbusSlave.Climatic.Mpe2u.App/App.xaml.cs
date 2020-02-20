@@ -17,9 +17,9 @@ namespace CustomModbusSlave.Climatic.Mpe2u.App
 
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            var appFactory = new AppFactory("psn.МПЭ2У.xml");
+            var appFactory = new AppFactory("psn.mpe2u_m8_v1.xml");
             var appAbilities = appFactory.Abilities;
-            var paramPresenter = appAbilities.GetParametersPresentation("tabs.МПЭ2У.xml");
+            var paramPresenter = appAbilities.GetParametersPresentation("tabs.mpe2u.xml");
 
             if (appAbilities.Version == AppVersion.Full)
             {
