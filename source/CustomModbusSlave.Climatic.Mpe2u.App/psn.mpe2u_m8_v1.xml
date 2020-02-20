@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="МПЭ2У М8" Version="1" Description="Кодовое и информационное взаимодействие блока БС-СН с абонентами внутренней магистрали М8 элеткровоза МПЭ2У" RpdId="109" Id="3c9f2847-39a4-4d08-8c4a-08531437a664">
+  <PsnMeters>
+    <PsnMeter Address="0x08" Name="СТПР-180 1" />
+    <PsnMeter Address="0x18" Name="СТПР-180 2" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="между МК1 и СТПР-180 1 0x46">
+      <Request Length="5" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="7d9b0f25-c552-46b0-a382-64a6849ed9fb" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="d34b8e01-f970-499d-84cf-3507bd12759e" />
+        <BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Команда БС-СН: D1 - Мастер/слейв" Id="cfde89ae-22f3-41ee-b0fb-a327e5204cb5" />
+        <BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Команда БС-СН: D0 - Команда назначения мастера/слейва" Id="78bdb517-2c3a-437d-8dd2-d7ecfe32b316" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="83a8273b-9864-47d3-9410-32a13d4ba176" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="6f3ce7b9-b6ab-422c-bb70-99a51ebea027" />
+      </Request>
+      <Reply Length="24" Position="5">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="efe10095-3546-45c7-b85e-8aecd1e94f99" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="81e87b69-2022-42f0-9a40-033181cf33f0" />
+        <CpzPrm Name="Напряжение контактной сети, В" Expression="[u2] + [s3] * 256.0" Id="cace1844-372d-4607-b1ee-16901c69003f" />
+        <CpzPrm Name="Выходное напряжение СТПР, В" Expression="[u4] + [s5] * 256.0" Id="04e2dcf2-303b-46a7-af2a-c7e788878ef2" />
+        <CpzPrm Name="Входной ток СТПР, А" Expression="[u6] + [s7] * 256.0" Id="7e7db70f-4c7d-42df-979f-e93310bdff47" />
+        <CpzPrm Name="Выходной ток СТПР, А" Expression="[u8] + [s9] * 256.0" Id="44c00393-ac48-4ad0-8403-50d7a769b6fd" />
+        <CpzPrm Name="Выходное напряжение верхнего TLBC, В" Expression="[u10] + [s11] * 256.0" Id="f554dbae-66a1-4819-8138-1411f72a7bc8" />
+        <CpzPrm Name="Выходное напряжение нижнего TLBC, В" Expression="[u12] + [s13] * 256.0" Id="acc18a32-125b-4755-9233-517cd6fded4c" />
+        <CpzPrm Name="ШИМ TLBC" Expression="[u14] * 32.0" Id="e3ff528f-0aff-44ef-b2b0-91be8aa4300c" />
+        <CpzPrm Name="Ток верхнего полумоста, А" Expression="[u15] * 1.0" Id="0d9e8332-d93c-4860-aa91-e31ae4693aae" />
+        <CpzPrm Name="Ток нижнего полумоста, А" Expression="[u16] * 1.0" Id="60d29408-0228-43d8-bfb7-06e6450cfafb" />
+        <CpzPrm Name="Температура радиатора, C" Expression="[u17] * 2.0" Id="de0fb02a-8747-4cd4-9d37-5a2773a6d616" />
+        <CpzPrm Name="Температура платы управления, C" Expression="[u18] * 2.0" Id="a5aac02f-fbe7-44c5-9edb-c00ee7a73f58" />
+        <BitPrm Byte="19" Bit="7" IsValueInverted="False" Name="Диагностика СТПР: D7 - Перегрузка по выходному току" Id="efca8029-ac70-4a94-8d89-c905ef357f08" />
+        <BitPrm Byte="19" Bit="6" IsValueInverted="False" Name="Диагностика СТПР: D6 - Повышенное напряжение контактной сети" Id="966bdf2b-c632-402e-8600-1cb67f659354" />
+        <BitPrm Byte="19" Bit="5" IsValueInverted="False" Name="Диагностика СТПР: D5 - Пониженное напряжение контактной сети" Id="4088cc0e-7418-4707-9a57-0783c8377c4a" />
+        <BitPrm Byte="19" Bit="4" IsValueInverted="False" Name="Диагностика СТПР: D4 - Защита по температуре радиатора" Id="49d99db4-8eb3-4c1f-bf00-bc6c3c449967" />
+        <BitPrm Byte="19" Bit="3" IsValueInverted="False" Name="Диагностика СТПР: D3 - Защита по току нижнего полумоста" Id="70ff9b82-7e38-410a-adca-b02ce670b5ef" />
+        <BitPrm Byte="19" Bit="2" IsValueInverted="False" Name="Диагностика СТПР: D2 - Защита по току верхнего полумоста" Id="521cae6b-701e-4092-af2b-fbb9116dcfba" />
+        <BitPrm Byte="19" Bit="1" IsValueInverted="False" Name="Диагностика СТПР: D1 - Блокировка от транзисторного ключа" Id="f9298707-bafd-41ab-a2c7-48dfe324c7da" />
+        <BitPrm Byte="19" Bit="0" IsValueInverted="False" Name="Диагностика СТПР: D0 - Блокировка на транзисторный ключ" Id="123b08af-1479-4d61-8c5f-aa2e32447691" />
+        <BitPrm Byte="20" Bit="7" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D7 - Неисправность ключей инвертора" Id="d94f34df-f9ea-4ac7-b9cd-7d6e4f45304d" />
+        <BitPrm Byte="20" Bit="6" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D6 - Защита по разнице напряжений TLBC" Id="7342f922-06ca-439d-82eb-883d624c454c" />
+        <BitPrm Byte="20" Bit="5" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D5 - Защита по температуре платы" Id="8ad69617-71fa-4f91-ac8b-a45e8bf6ab1d" />
+        <BitPrm Byte="20" Bit="4" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D4 - Превышение предельного количества аварийных режимов" Id="ab7d5a81-fa06-4822-bcc7-adcb7e1c5077" />
+        <BitPrm Byte="20" Bit="3" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D3 - Неисправность ключа TLBC4" Id="ee37593c-a2eb-4aaa-b8e9-ab81e46eb512" />
+        <BitPrm Byte="20" Bit="2" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D2 - Неисправность ключа TLBC3" Id="2549b048-0a05-4737-9da0-75890bbd8b7c" />
+        <BitPrm Byte="20" Bit="1" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D1 - Неисправность ключа TLBC2" Id="31739dbc-a0de-4764-b3de-8f41302b9b33" />
+        <BitPrm Byte="20" Bit="0" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D0 - Неисправность ключа TLBC1" Id="633df379-81f5-488f-afb6-2d60890bc018" />
+        <BitPrm Byte="21" Bit="7" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D7 - Неисправность ключа инвертора 8" Id="792e1ce8-b75a-44d4-9095-6871330e7207" />
+        <BitPrm Byte="21" Bit="6" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D6 - Неисправность ключа инвертора 7" Id="2935ef27-9d0b-4612-b06c-1e9131400b9d" />
+        <BitPrm Byte="21" Bit="5" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D5 - Неисправность ключа инвертора 6" Id="064c6739-c1f7-44f9-8a33-6c4530a82283" />
+        <BitPrm Byte="21" Bit="4" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D4 - Неисправность ключа инвертора 5" Id="6ab5f2c4-361a-47c7-8195-b9e86ec70571" />
+        <BitPrm Byte="21" Bit="3" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D3 - Неисправность ключа инвертора 4" Id="5394008f-b6c1-4b35-8c90-a1d066b95ac7" />
+        <BitPrm Byte="21" Bit="2" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D2 - Неисправность ключа инвертора 3" Id="1b5c5e2e-3896-4552-8178-63364dcd2f54" />
+        <BitPrm Byte="21" Bit="1" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D1 - Неисправность ключа инвертора 2" Id="165ffd43-6c1b-4dd1-b115-3a6f4dba412b" />
+        <BitPrm Byte="21" Bit="0" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D0 - Неисправность ключа инвертора 1" Id="05cc58a2-d0cf-44f5-a760-c69e2aaf6569" />
+        <BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="Авария в нагрузке СТПР-180" Id="9ef7e009-5234-488f-86e2-ec8604b631c7" />
+        <BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Обрыв синхронизации мастера/слейва" Id="d822fc5a-5e1d-4cf9-a307-8d66132582a5" />
+        <BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Мастер/слейв" Id="d93219b7-cf5b-4f2b-ad3d-ad7d9df4a155" />
+        <VarVal Position="23.0" Length="8" Name="#CRCH" Id="91353da5-b246-4e97-abb6-83f92b159218" />
+        <VarVal Position="24.0" Length="8" Name="#CRCL" Id="51fad9d5-3c21-4ca6-9441-c11bc4385ab3" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между МК1 и СТПР-180 2 0x46">
+      <Request Length="5" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="89b431a6-0dc3-4750-9056-7da39462479b" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="443e955a-17d8-4bed-9587-b14dd09269b9" />
+        <BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Команда БС-СН: D1 - Мастер/слейв" Id="d871d609-7de6-4f7d-9242-581a001c9c1c" />
+        <BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Команда БС-СН: D0 - Команда назначения мастера/слейва" Id="e2f9068e-e8ce-4531-a7dd-e8f971f252b5" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="94c5bd34-7e59-4568-b9e6-9eb44b74b16f" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="635672e6-7740-4353-97b3-073e1c33e1b7" />
+      </Request>
+      <Reply Length="24" Position="5">
+        <DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="ff8c9086-bdc4-4ed1-9388-4a7c6dbee12f" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="eaabef21-2f47-417a-8702-a9bf085ad7c3" />
+        <CpzPrm Name="Напряжение контактной сети, В" Expression="[u2] + [s3] * 256.0" Id="436ac2aa-c5ff-4b68-a732-68df4c260c4c" />
+        <CpzPrm Name="Выходное напряжение СТПР, В" Expression="[u4] + [s5] * 256.0" Id="8301a7df-1847-4b31-b378-f9f14165a5da" />
+        <CpzPrm Name="Входной ток СТПР, А" Expression="[u6] + [s7] * 256.0" Id="f223f44f-13e9-4e46-85e6-cf3a3886a570" />
+        <CpzPrm Name="Выходной ток СТПР, А" Expression="[u8] + [s9] * 256.0" Id="56cb4491-16c6-4b82-ae81-1e6485833663" />
+        <CpzPrm Name="Выходное напряжение верхнего TLBC, В" Expression="[u10] + [s11] * 256.0" Id="0dd28f42-ed64-4dcf-bbcc-223a24e2bb0c" />
+        <CpzPrm Name="Выходное напряжение нижнего TLBC, В" Expression="[u12] + [s13] * 256.0" Id="b0fb180a-fb94-488d-a365-6925d0e7c6aa" />
+        <CpzPrm Name="ШИМ TLBC" Expression="[u14] * 32.0" Id="312b94d2-271f-488a-9edf-fabb329f0fec" />
+        <CpzPrm Name="Ток верхнего полумоста, А" Expression="[u15] * 1.0" Id="d57638af-0646-4dec-ae90-7c816a7152b6" />
+        <CpzPrm Name="Ток нижнего полумоста, А" Expression="[u16] * 1.0" Id="34c524ed-26ed-4df3-bf28-c0655b425363" />
+        <CpzPrm Name="Температура радиатора, C" Expression="[u17] * 2.0" Id="23f80fdc-9d15-4776-afb6-7644020d6ca1" />
+        <CpzPrm Name="Температура платы управления, C" Expression="[u18] * 2.0" Id="122ffa31-2140-420e-81c1-fe49e1308c70" />
+        <BitPrm Byte="19" Bit="7" IsValueInverted="False" Name="Диагностика СТПР: D7 - Перегрузка по выходному току" Id="eb3d5922-07d0-4303-9888-2e7496925e42" />
+        <BitPrm Byte="19" Bit="6" IsValueInverted="False" Name="Диагностика СТПР: D6 - Повышенное напряжение контактной сети" Id="2ae492d2-8e0b-4d47-b942-daecdbfc4fe5" />
+        <BitPrm Byte="19" Bit="5" IsValueInverted="False" Name="Диагностика СТПР: D5 - Пониженное напряжение контактной сети" Id="1cd1a0fc-9107-40d6-9df3-acacd863d43e" />
+        <BitPrm Byte="19" Bit="4" IsValueInverted="False" Name="Диагностика СТПР: D4 - Защита по температуре радиатора" Id="8bafaa61-8655-47aa-aec5-1f02e06b0003" />
+        <BitPrm Byte="19" Bit="3" IsValueInverted="False" Name="Диагностика СТПР: D3 - Защита по току нижнего полумоста" Id="86abca3c-4fda-42e2-92ce-10855c3f2593" />
+        <BitPrm Byte="19" Bit="2" IsValueInverted="False" Name="Диагностика СТПР: D2 - Защита по току верхнего полумоста" Id="9fdbf2ac-5e64-4877-b690-78fa4a37eee6" />
+        <BitPrm Byte="19" Bit="1" IsValueInverted="False" Name="Диагностика СТПР: D1 - Блокировка от транзисторного ключа" Id="05ef3608-203c-40a7-9510-e77384ad8b77" />
+        <BitPrm Byte="19" Bit="0" IsValueInverted="False" Name="Диагностика СТПР: D0 - Блокировка на транзисторный ключ" Id="e6f3ea38-c4de-43ac-9597-69006846f65e" />
+        <BitPrm Byte="20" Bit="7" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D7 - Неисправность ключей инвертора" Id="55992541-d122-4354-9e35-fa3cd9aad0d0" />
+        <BitPrm Byte="20" Bit="6" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D6 - Защита по разнице напряжений TLBC" Id="899f28d3-370d-4afb-bfec-1755afaf8d81" />
+        <BitPrm Byte="20" Bit="5" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D5 - Защита по температуре платы" Id="8331a884-96b7-486d-8f94-b90a32c46e1d" />
+        <BitPrm Byte="20" Bit="4" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D4 - Превышение предельного количества аварийных режимов" Id="8edf67c8-0205-440c-8d8e-26b1377fad36" />
+        <BitPrm Byte="20" Bit="3" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D3 - Неисправность ключа TLBC4" Id="f8803c4f-9ba2-4ec6-972a-7227e9da932d" />
+        <BitPrm Byte="20" Bit="2" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D2 - Неисправность ключа TLBC3" Id="8590f142-1a50-47f4-a471-e6f747981a18" />
+        <BitPrm Byte="20" Bit="1" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D1 - Неисправность ключа TLBC2" Id="ed15ef2c-e741-4c99-a5a9-309e18a20b3f" />
+        <BitPrm Byte="20" Bit="0" IsValueInverted="False" Name="Диагностика силовых ключей СТПР: D0 - Неисправность ключа TLBC1" Id="6f918e7f-5cbc-4828-b8c9-8fe315a4c3a9" />
+        <BitPrm Byte="21" Bit="7" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D7 - Неисправность ключа инвертора 8" Id="94d0371a-85a0-4473-be56-628ea17f7d21" />
+        <BitPrm Byte="21" Bit="6" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D6 - Неисправность ключа инвертора 7" Id="cc6e0de9-4d57-489e-b938-8db640a10b4b" />
+        <BitPrm Byte="21" Bit="5" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D5 - Неисправность ключа инвертора 6" Id="0ea42d47-d369-4b8b-b642-e6a8851620a4" />
+        <BitPrm Byte="21" Bit="4" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D4 - Неисправность ключа инвертора 5" Id="2623e46d-71f2-486a-b499-61e6318b9ffb" />
+        <BitPrm Byte="21" Bit="3" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D3 - Неисправность ключа инвертора 4" Id="633adc8f-9443-4a55-97f7-643ce752e5db" />
+        <BitPrm Byte="21" Bit="2" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D2 - Неисправность ключа инвертора 3" Id="39e11a17-d0c9-402c-aca6-08754d1c6817" />
+        <BitPrm Byte="21" Bit="1" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D1 - Неисправность ключа инвертора 2" Id="80e60308-ef5a-4ede-8e17-3279cfa586ab" />
+        <BitPrm Byte="21" Bit="0" IsValueInverted="False" Name="Диагностика силовых ключей инвертора: D0 - Неисправность ключа инвертора 1" Id="19ae6912-a52d-4066-a85b-2033675cdb5e" />
+        <BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="Авария в нагрузке СТПР-180" Id="34703e84-0ac2-4808-b4b0-88c26c34be71" />
+        <BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Обрыв синхронизации мастера/слейва" Id="c2b0c889-69db-43d1-ba38-b13be6d0a567" />
+        <BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Мастер/слейв" Id="f5ec3c56-0ac8-4670-84ba-8b230ef027ab" />
+        <VarVal Position="23.0" Length="8" Name="#CRCH" Id="040bd9ad-36ae-4204-b1ab-14703ad83931" />
+        <VarVal Position="24.0" Length="8" Name="#CRCL" Id="7f24b215-3e16-4eff-ba8a-85d33290f488" />
+      </Reply>
+    </CmdMask>
+  </Commands>
+</PsnConfiguration>

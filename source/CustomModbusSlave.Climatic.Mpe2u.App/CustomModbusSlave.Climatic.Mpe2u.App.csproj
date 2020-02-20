@@ -181,12 +181,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="psn.МПЭ2У.xml">
+    <None Include="psn.mpe2u_m8_v1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="tabs.МПЭ2У.xml">
+    <None Include="tabs.mpe2u.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
