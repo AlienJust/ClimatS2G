@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="CustomModbusSlave.Climatic.Mpe2u.App.SettableParamView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CustomModbusSlave.Climatic.Tram.InteriorApp"
+             xmlns:appwindow="clr-namespace:CustomModbusSlave.Es2gClimatic.Shared.AppWindow;assembly=CustomModbusSlave.Es2gClimatic.Shared"
+             mc:Ignorable="d" 
+             d:DesignHeight="45" d:DesignWidth="80">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <appwindow:LastSetStateResultToColorConverter x:Key="StateToColorConverter" UnknownColor="DarkKhaki" SuccessColor="Green" UnsuccessColor="Red"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Button Grid.Column="1" Command="{Binding Path=SetValue, Mode=OneTime}" Content="Установить">
+        <Button.Background>
+            <SolidColorBrush Color="{Binding LastSet, Converter={StaticResource StateToColorConverter}}"/>
+        </Button.Background>
+    </Button>
+</UserControl>
