@@ -24,8 +24,8 @@
         <CpzPrm Name="Выходное напряжение верхнего TLBC, В" Expression="[u10] + [s11] * 256.0" Id="f554dbae-66a1-4819-8138-1411f72a7bc8" />
         <CpzPrm Name="Выходное напряжение нижнего TLBC, В" Expression="[u12] + [s13] * 256.0" Id="acc18a32-125b-4755-9233-517cd6fded4c" />
         <CpzPrm Name="ШИМ TLBC" Expression="[u14] * 32.0" Id="e3ff528f-0aff-44ef-b2b0-91be8aa4300c" />
-        <CpzPrm Name="Ток верхнего полумоста, А" Expression="[u15] * 1.0" Id="0d9e8332-d93c-4860-aa91-e31ae4693aae" />
-        <CpzPrm Name="Ток нижнего полумоста, А" Expression="[u16] * 1.0" Id="60d29408-0228-43d8-bfb7-06e6450cfafb" />
+        <CpzPrm Name="ШИМ" Expression="[u15] * 1.0" Id="0d9e8332-d93c-4860-aa91-e31ae4693aae" />
+        <CpzPrm Name="Режим" Expression="[u16] * 1.0" Id="60d29408-0228-43d8-bfb7-06e6450cfafb" />
         <CpzPrm Name="Температура радиатора, C" Expression="[u17] * 2.0" Id="de0fb02a-8747-4cd4-9d37-5a2773a6d616" />
         <CpzPrm Name="Температура платы управления, C" Expression="[u18] * 2.0" Id="a5aac02f-fbe7-44c5-9edb-c00ee7a73f58" />
         <BitPrm Byte="19" Bit="7" IsValueInverted="False" Name="Диагностика СТПР: D7 - Перегрузка по выходному току" Id="efca8029-ac70-4a94-8d89-c905ef357f08" />
@@ -78,8 +78,8 @@
         <CpzPrm Name="Выходное напряжение верхнего TLBC, В" Expression="[u10] + [s11] * 256.0" Id="0dd28f42-ed64-4dcf-bbcc-223a24e2bb0c" />
         <CpzPrm Name="Выходное напряжение нижнего TLBC, В" Expression="[u12] + [s13] * 256.0" Id="b0fb180a-fb94-488d-a365-6925d0e7c6aa" />
         <CpzPrm Name="ШИМ TLBC" Expression="[u14] * 32.0" Id="312b94d2-271f-488a-9edf-fabb329f0fec" />
-        <CpzPrm Name="Ток верхнего полумоста, А" Expression="[u15] * 1.0" Id="d57638af-0646-4dec-ae90-7c816a7152b6" />
-        <CpzPrm Name="Ток нижнего полумоста, А" Expression="[u16] * 1.0" Id="34c524ed-26ed-4df3-bf28-c0655b425363" />
+        <CpzPrm Name="ШИМ" Expression="[u15] * 1.0" Id="d57638af-0646-4dec-ae90-7c816a7152b6" />
+        <CpzPrm Name="Режим" Expression="[u16] * 1.0" Id="34c524ed-26ed-4df3-bf28-c0655b425363" />
         <CpzPrm Name="Температура радиатора, C" Expression="[u17] * 2.0" Id="23f80fdc-9d15-4776-afb6-7644020d6ca1" />
         <CpzPrm Name="Температура платы управления, C" Expression="[u18] * 2.0" Id="122ffa31-2140-420e-81c1-fe49e1308c70" />
         <BitPrm Byte="19" Bit="7" IsValueInverted="False" Name="Диагностика СТПР: D7 - Перегрузка по выходному току" Id="eb3d5922-07d0-4303-9888-2e7496925e42" />
