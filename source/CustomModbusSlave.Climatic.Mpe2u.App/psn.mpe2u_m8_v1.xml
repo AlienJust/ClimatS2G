@@ -14,7 +14,7 @@
         <VarVal Position="3.0" Length="8" Name="#CRCH" Id="83a8273b-9864-47d3-9410-32a13d4ba176" />
         <VarVal Position="4.0" Length="8" Name="#CRCL" Id="6f3ce7b9-b6ab-422c-bb70-99a51ebea027" />
       </Request>
-      <Reply Length="24" Position="5">
+      <Reply Length="25" Position="5">
         <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="efe10095-3546-45c7-b85e-8aecd1e94f99" />
         <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="81e87b69-2022-42f0-9a40-033181cf33f0" />
         <CpzPrm Name="Напряжение контактной сети, В" Expression="[u2] + [s3] * 256.0" Id="cace1844-372d-4607-b1ee-16901c69003f" />
@@ -68,7 +68,7 @@
         <VarVal Position="3.0" Length="8" Name="#CRCH" Id="94c5bd34-7e59-4568-b9e6-9eb44b74b16f" />
         <VarVal Position="4.0" Length="8" Name="#CRCL" Id="635672e6-7740-4353-97b3-073e1c33e1b7" />
       </Request>
-      <Reply Length="24" Position="5">
+      <Reply Length="25" Position="5">
         <DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="ff8c9086-bdc4-4ed1-9388-4a7c6dbee12f" />
         <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="eaabef21-2f47-417a-8702-a9bf085ad7c3" />
         <CpzPrm Name="Напряжение контактной сети, В" Expression="[u2] + [s3] * 256.0" Id="436ac2aa-c5ff-4b68-a732-68df4c260c4c" />
