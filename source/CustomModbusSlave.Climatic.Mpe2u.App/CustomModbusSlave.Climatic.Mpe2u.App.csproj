@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{755FE756-4479-4D09-BB63-F59744103337}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CustomModbusSlave.Climatic.Mpe2u.App</RootNamespace>
     <AssemblyName>CustomModbusSlave.Climatic.Mpe2u.App</AssemblyName>
@@ -179,7 +179,6 @@
   <ItemGroup>
     <Resource Include="icon2.ico" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="psn.mpe2u_m8_v1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
