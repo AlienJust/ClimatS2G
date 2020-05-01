@@ -4,7 +4,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{755FE756-4479-4D09-BB63-F59744103338}</ProjectGuid>
+    <!--TODO: change guid-->
+    <!--<ProjectGuid>{755FE756-4479-4D09-BB63-F59744103338}</ProjectGuid>-->
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CustomModbusSlave.Climatic.TramUkvzM2App</RootNamespace>
