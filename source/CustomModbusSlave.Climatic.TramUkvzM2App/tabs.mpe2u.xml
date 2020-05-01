@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Parameters>
+  <Parameter Key="param_008_070_request_001" Identifier="cfde89ae-22f3-41ee-b0fb-a327e5204cb5" Comment="между МК1 и СТПР-180 1 0x46: запрос - Команда БС-СН: D1 - Мастер/слейв" />
+  <Parameter Key="param_008_070_request_002" Identifier="78bdb517-2c3a-437d-8dd2-d7ecfe32b316" Comment="между МК1 и СТПР-180 1 0x46: запрос - Команда БС-СН: D0 - Команда назначения мастера/слейва" />
+  <Parameter Key="param_008_070_reply_001" Identifier="cace1844-372d-4607-b1ee-16901c69003f" Comment="между МК1 и СТПР-180 1 0x46: ответ - Напряжение контактной сети, В" />
+  <Parameter Key="param_008_070_reply_002" Identifier="04e2dcf2-303b-46a7-af2a-c7e788878ef2" Comment="между МК1 и СТПР-180 1 0x46: ответ - Выходное напряжение СТПР, В" />
+  <Parameter Key="param_008_070_reply_003" Identifier="7e7db70f-4c7d-42df-979f-e93310bdff47" Comment="между МК1 и СТПР-180 1 0x46: ответ - Входной ток СТПР, А" />
+  <Parameter Key="param_008_070_reply_004" Identifier="44c00393-ac48-4ad0-8403-50d7a769b6fd" Comment="между МК1 и СТПР-180 1 0x46: ответ - Выходной ток СТПР, А" />
+  <Parameter Key="param_008_070_reply_005" Identifier="f554dbae-66a1-4819-8138-1411f72a7bc8" Comment="между МК1 и СТПР-180 1 0x46: ответ - Выходное напряжение верхнего TLBC, В" />
+  <Parameter Key="param_008_070_reply_006" Identifier="acc18a32-125b-4755-9233-517cd6fded4c" Comment="между МК1 и СТПР-180 1 0x46: ответ - Выходное напряжение нижнего TLBC, В" />
+  <Parameter Key="param_008_070_reply_007" Identifier="e3ff528f-0aff-44ef-b2b0-91be8aa4300c" Comment="между МК1 и СТПР-180 1 0x46: ответ - ШИМ TLBC" />
+  <Parameter Key="param_008_070_reply_008" Identifier="0d9e8332-d93c-4860-aa91-e31ae4693aae" Comment="между МК1 и СТПР-180 1 0x46: ответ - Ток верхнего полумоста, А" />
+  <Parameter Key="param_008_070_reply_009" Identifier="60d29408-0228-43d8-bfb7-06e6450cfafb" Comment="между МК1 и СТПР-180 1 0x46: ответ - Ток нижнего полумоста, А" />
+  <Parameter Key="param_008_070_reply_010" Identifier="de0fb02a-8747-4cd4-9d37-5a2773a6d616" Comment="между МК1 и СТПР-180 1 0x46: ответ - Температура радиатора, C" />
+  <Parameter Key="param_008_070_reply_011" Identifier="a5aac02f-fbe7-44c5-9edb-c00ee7a73f58" Comment="между МК1 и СТПР-180 1 0x46: ответ - Температура платы управления, C" />
+  <Parameter Key="param_008_070_reply_012" Identifier="efca8029-ac70-4a94-8d89-c905ef357f08" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D7 - Перегрузка по выходному току" />
+  <Parameter Key="param_008_070_reply_013" Identifier="966bdf2b-c632-402e-8600-1cb67f659354" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D6 - Повышенное напряжение контактной сети" />
+  <Parameter Key="param_008_070_reply_014" Identifier="4088cc0e-7418-4707-9a57-0783c8377c4a" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D5 - Пониженное напряжение контактной сети" />
+  <Parameter Key="param_008_070_reply_015" Identifier="49d99db4-8eb3-4c1f-bf00-bc6c3c449967" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D4 - Защита по температуре радиатора" />
+  <Parameter Key="param_008_070_reply_016" Identifier="70ff9b82-7e38-410a-adca-b02ce670b5ef" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D3 - Защита по току нижнего полумоста" />
+  <Parameter Key="param_008_070_reply_017" Identifier="521cae6b-701e-4092-af2b-fbb9116dcfba" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D2 - Защита по току верхнего полумоста" />
+  <Parameter Key="param_008_070_reply_018" Identifier="f9298707-bafd-41ab-a2c7-48dfe324c7da" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D1 - Блокировка от транзисторного ключа" />
+  <Parameter Key="param_008_070_reply_019" Identifier="123b08af-1479-4d61-8c5f-aa2e32447691" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика СТПР: D0 - Блокировка на транзисторный ключ" />
+  <Parameter Key="param_008_070_reply_020" Identifier="d94f34df-f9ea-4ac7-b9cd-7d6e4f45304d" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D7 - Неисправность ключей инвертора" />
+  <Parameter Key="param_008_070_reply_021" Identifier="7342f922-06ca-439d-82eb-883d624c454c" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D6 - Защита по разнице напряжений TLBC" />
+  <Parameter Key="param_008_070_reply_022" Identifier="8ad69617-71fa-4f91-ac8b-a45e8bf6ab1d" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D5 - Защита по температуре платы" />
+  <Parameter Key="param_008_070_reply_023" Identifier="ab7d5a81-fa06-4822-bcc7-adcb7e1c5077" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D4 - Превышение предельного количества аварийных режимов" />
+  <Parameter Key="param_008_070_reply_024" Identifier="ee37593c-a2eb-4aaa-b8e9-ab81e46eb512" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D3 - Неисправность ключа TLBC4" />
+  <Parameter Key="param_008_070_reply_025" Identifier="2549b048-0a05-4737-9da0-75890bbd8b7c" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D2 - Неисправность ключа TLBC3" />
+  <Parameter Key="param_008_070_reply_026" Identifier="31739dbc-a0de-4764-b3de-8f41302b9b33" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D1 - Неисправность ключа TLBC2" />
+  <Parameter Key="param_008_070_reply_027" Identifier="633df379-81f5-488f-afb6-2d60890bc018" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей СТПР: D0 - Неисправность ключа TLBC1" />
+  <Parameter Key="param_008_070_reply_028" Identifier="792e1ce8-b75a-44d4-9095-6871330e7207" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D7 - Неисправность ключа инвертора 8" />
+  <Parameter Key="param_008_070_reply_029" Identifier="2935ef27-9d0b-4612-b06c-1e9131400b9d" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D6 - Неисправность ключа инвертора 7" />
+  <Parameter Key="param_008_070_reply_030" Identifier="064c6739-c1f7-44f9-8a33-6c4530a82283" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D5 - Неисправность ключа инвертора 6" />
+  <Parameter Key="param_008_070_reply_031" Identifier="6ab5f2c4-361a-47c7-8195-b9e86ec70571" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D4 - Неисправность ключа инвертора 5" />
+  <Parameter Key="param_008_070_reply_032" Identifier="5394008f-b6c1-4b35-8c90-a1d066b95ac7" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D3 - Неисправность ключа инвертора 4" />
+  <Parameter Key="param_008_070_reply_033" Identifier="1b5c5e2e-3896-4552-8178-63364dcd2f54" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D2 - Неисправность ключа инвертора 3" />
+  <Parameter Key="param_008_070_reply_034" Identifier="165ffd43-6c1b-4dd1-b115-3a6f4dba412b" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D1 - Неисправность ключа инвертора 2" />
+  <Parameter Key="param_008_070_reply_035" Identifier="05cc58a2-d0cf-44f5-a760-c69e2aaf6569" Comment="между МК1 и СТПР-180 1 0x46: ответ - Диагностика силовых ключей инвертора: D0 - Неисправность ключа инвертора 1" />
+  <Parameter Key="param_008_070_reply_036" Identifier="9ef7e009-5234-488f-86e2-ec8604b631c7" Comment="между МК1 и СТПР-180 1 0x46: ответ - Авария в нагрузке СТПР-180" />
+  <Parameter Key="param_008_070_reply_037" Identifier="d822fc5a-5e1d-4cf9-a307-8d66132582a5" Comment="между МК1 и СТПР-180 1 0x46: ответ - Обрыв синхронизации мастера/слейва" />
+  <Parameter Key="param_008_070_reply_038" Identifier="d93219b7-cf5b-4f2b-ad3d-ad7d9df4a155" Comment="между МК1 и СТПР-180 1 0x46: ответ - Мастер/слейв" />
+  <Parameter Key="param_024_070_request_001" Identifier="d871d609-7de6-4f7d-9242-581a001c9c1c" Comment="между МК1 и СТПР-180 2 0x46: запрос - Команда БС-СН: D1 - Мастер/слейв" />
+  <Parameter Key="param_024_070_request_002" Identifier="e2f9068e-e8ce-4531-a7dd-e8f971f252b5" Comment="между МК1 и СТПР-180 2 0x46: запрос - Команда БС-СН: D0 - Команда назначения мастера/слейва" />
+  <Parameter Key="param_024_070_reply_001" Identifier="436ac2aa-c5ff-4b68-a732-68df4c260c4c" Comment="между МК1 и СТПР-180 2 0x46: ответ - Напряжение контактной сети, В" />
+  <Parameter Key="param_024_070_reply_002" Identifier="8301a7df-1847-4b31-b378-f9f14165a5da" Comment="между МК1 и СТПР-180 2 0x46: ответ - Выходное напряжение СТПР, В" />
+  <Parameter Key="param_024_070_reply_003" Identifier="f223f44f-13e9-4e46-85e6-cf3a3886a570" Comment="между МК1 и СТПР-180 2 0x46: ответ - Входной ток СТПР, А" />
+  <Parameter Key="param_024_070_reply_004" Identifier="56cb4491-16c6-4b82-ae81-1e6485833663" Comment="между МК1 и СТПР-180 2 0x46: ответ - Выходной ток СТПР, А" />
+  <Parameter Key="param_024_070_reply_005" Identifier="0dd28f42-ed64-4dcf-bbcc-223a24e2bb0c" Comment="между МК1 и СТПР-180 2 0x46: ответ - Выходное напряжение верхнего TLBC, В" />
+  <Parameter Key="param_024_070_reply_006" Identifier="b0fb180a-fb94-488d-a365-6925d0e7c6aa" Comment="между МК1 и СТПР-180 2 0x46: ответ - Выходное напряжение нижнего TLBC, В" />
+  <Parameter Key="param_024_070_reply_007" Identifier="312b94d2-271f-488a-9edf-fabb329f0fec" Comment="между МК1 и СТПР-180 2 0x46: ответ - ШИМ TLBC" />
+  <Parameter Key="param_024_070_reply_008" Identifier="d57638af-0646-4dec-ae90-7c816a7152b6" Comment="между МК1 и СТПР-180 2 0x46: ответ - Ток верхнего полумоста, А" />
+  <Parameter Key="param_024_070_reply_009" Identifier="34c524ed-26ed-4df3-bf28-c0655b425363" Comment="между МК1 и СТПР-180 2 0x46: ответ - Ток нижнего полумоста, А" />
+  <Parameter Key="param_024_070_reply_010" Identifier="23f80fdc-9d15-4776-afb6-7644020d6ca1" Comment="между МК1 и СТПР-180 2 0x46: ответ - Температура радиатора, C" />
+  <Parameter Key="param_024_070_reply_011" Identifier="122ffa31-2140-420e-81c1-fe49e1308c70" Comment="между МК1 и СТПР-180 2 0x46: ответ - Температура платы управления, C" />
+  <Parameter Key="param_024_070_reply_012" Identifier="eb3d5922-07d0-4303-9888-2e7496925e42" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D7 - Перегрузка по выходному току" />
+  <Parameter Key="param_024_070_reply_013" Identifier="2ae492d2-8e0b-4d47-b942-daecdbfc4fe5" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D6 - Повышенное напряжение контактной сети" />
+  <Parameter Key="param_024_070_reply_014" Identifier="1cd1a0fc-9107-40d6-9df3-acacd863d43e" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D5 - Пониженное напряжение контактной сети" />
+  <Parameter Key="param_024_070_reply_015" Identifier="8bafaa61-8655-47aa-aec5-1f02e06b0003" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D4 - Защита по температуре радиатора" />
+  <Parameter Key="param_024_070_reply_016" Identifier="86abca3c-4fda-42e2-92ce-10855c3f2593" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D3 - Защита по току нижнего полумоста" />
+  <Parameter Key="param_024_070_reply_017" Identifier="9fdbf2ac-5e64-4877-b690-78fa4a37eee6" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D2 - Защита по току верхнего полумоста" />
+  <Parameter Key="param_024_070_reply_018" Identifier="05ef3608-203c-40a7-9510-e77384ad8b77" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D1 - Блокировка от транзисторного ключа" />
+  <Parameter Key="param_024_070_reply_019" Identifier="e6f3ea38-c4de-43ac-9597-69006846f65e" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика СТПР: D0 - Блокировка на транзисторный ключ" />
+  <Parameter Key="param_024_070_reply_020" Identifier="55992541-d122-4354-9e35-fa3cd9aad0d0" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D7 - Неисправность ключей инвертора" />
+  <Parameter Key="param_024_070_reply_021" Identifier="899f28d3-370d-4afb-bfec-1755afaf8d81" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D6 - Защита по разнице напряжений TLBC" />
+  <Parameter Key="param_024_070_reply_022" Identifier="8331a884-96b7-486d-8f94-b90a32c46e1d" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D5 - Защита по температуре платы" />
+  <Parameter Key="param_024_070_reply_023" Identifier="8edf67c8-0205-440c-8d8e-26b1377fad36" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D4 - Превышение предельного количества аварийных режимов" />
+  <Parameter Key="param_024_070_reply_024" Identifier="f8803c4f-9ba2-4ec6-972a-7227e9da932d" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D3 - Неисправность ключа TLBC4" />
+  <Parameter Key="param_024_070_reply_025" Identifier="8590f142-1a50-47f4-a471-e6f747981a18" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D2 - Неисправность ключа TLBC3" />
+  <Parameter Key="param_024_070_reply_026" Identifier="ed15ef2c-e741-4c99-a5a9-309e18a20b3f" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D1 - Неисправность ключа TLBC2" />
+  <Parameter Key="param_024_070_reply_027" Identifier="6f918e7f-5cbc-4828-b8c9-8fe315a4c3a9" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей СТПР: D0 - Неисправность ключа TLBC1" />
+  <Parameter Key="param_024_070_reply_028" Identifier="94d0371a-85a0-4473-be56-628ea17f7d21" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D7 - Неисправность ключа инвертора 8" />
+  <Parameter Key="param_024_070_reply_029" Identifier="cc6e0de9-4d57-489e-b938-8db640a10b4b" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D6 - Неисправность ключа инвертора 7" />
+  <Parameter Key="param_024_070_reply_030" Identifier="0ea42d47-d369-4b8b-b642-e6a8851620a4" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D5 - Неисправность ключа инвертора 6" />
+  <Parameter Key="param_024_070_reply_031" Identifier="2623e46d-71f2-486a-b499-61e6318b9ffb" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D4 - Неисправность ключа инвертора 5" />
+  <Parameter Key="param_024_070_reply_032" Identifier="633adc8f-9443-4a55-97f7-643ce752e5db" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D3 - Неисправность ключа инвертора 4" />
+  <Parameter Key="param_024_070_reply_033" Identifier="39e11a17-d0c9-402c-aca6-08754d1c6817" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D2 - Неисправность ключа инвертора 3" />
+  <Parameter Key="param_024_070_reply_034" Identifier="80e60308-ef5a-4ede-8e17-3279cfa586ab" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D1 - Неисправность ключа инвертора 2" />
+  <Parameter Key="param_024_070_reply_035" Identifier="19ae6912-a52d-4066-a85b-2033675cdb5e" Comment="между МК1 и СТПР-180 2 0x46: ответ - Диагностика силовых ключей инвертора: D0 - Неисправность ключа инвертора 1" />
+  <Parameter Key="param_024_070_reply_036" Identifier="34703e84-0ac2-4808-b4b0-88c26c34be71" Comment="между МК1 и СТПР-180 2 0x46: ответ - Авария в нагрузке СТПР-180" />
+  <Parameter Key="param_024_070_reply_037" Identifier="c2b0c889-69db-43d1-ba38-b13be6d0a567" Comment="между МК1 и СТПР-180 2 0x46: ответ - Обрыв синхронизации мастера/слейва" />
+  <Parameter Key="param_024_070_reply_038" Identifier="f5ec3c56-0ac8-4670-84ba-8b230ef027ab" Comment="между МК1 и СТПР-180 2 0x46: ответ - Мастер/слейв" />
+</Parameters>

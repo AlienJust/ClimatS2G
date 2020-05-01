@@ -1,0 +1,149 @@
+﻿<UserControl x:Class="CustomModbusSlave.Climatic.TramUkvzM2App.MainContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CustomModbusSlave.Climatic.Tram.InteriorApp"
+             xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:app="clr-namespace:CustomModbusSlave.Climatic.TramUkvzM2App"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <!-- Accent and AppTheme setting -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />-->
+
+                <ResourceDictionary Source="pack://application:,,,/ParamControls;component/Styles/AzureTabItem.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BtvConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="InvertedBtwConverter" InvertVisibility="True" />
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <TabControl ItemContainerStyle="{StaticResource AzureTabItem}" Grid.Row="1" TabStripPlacement="Left">
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="СТПР-180 1 и 2" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource InvertedBtwConverter}}" />
+                    <TextBlock Text="СТПР180" Visibility="{Binding Path=TabHeadersAreLong, Converter={StaticResource BtvConverter}}" />
+                </StackPanel>
+            </TabItem.Header>
+            <ScrollViewer>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="СТПР 180 1">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Запрос" FontSize="16"/>
+                            <app:CommandPartView DataContext="{Binding CommandParts[cmdpart_008_070_request]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_request_001]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_request_002]}"/>
+                            <TextBlock Text="Ответ" FontSize="16"/>
+                            <app:CommandPartView DataContext="{Binding CommandParts[cmdpart_008_070_reply]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_001]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_002]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_003]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_004]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_005]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_006]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_007]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_008]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_009]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_010]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_011]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_012]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_013]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_014]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_015]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_016]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_017]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_018]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_019]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_020]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_021]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_022]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_023]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_024]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_025]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_026]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_027]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_028]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_029]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_030]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_031]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_032]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_033]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_034]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_035]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_036]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_037]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_008_070_reply_038]}"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="СТПР 180 2" Grid.Column="1">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Запрос" FontSize="16"/>
+                            <app:CommandPartView DataContext="{Binding CommandParts[cmdpart_024_070_request]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_request_001]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_request_002]}"/>
+                            <TextBlock Text="Ответ" FontSize="16"/>
+                            <app:CommandPartView DataContext="{Binding CommandParts[cmdpart_024_070_reply]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_001]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_002]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_003]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_004]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_005]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_006]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_007]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_008]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_009]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_010]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_011]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_012]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_013]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_014]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_015]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_016]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_017]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_018]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_019]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_020]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_021]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_022]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_023]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_024]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_025]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_026]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_027]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_028]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_029]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_030]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_031]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_032]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_033]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_034]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_035]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_036]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_037]}"/>
+                            <app:ParameterView DataContext="{Binding Parameters[param_024_070_reply_038]}"/>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
+</UserControl>
