@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.Mpe2u.App", "CustomModbusSlave.Climatic.Mpe2u.App\CustomModbusSlave.Climatic.Mpe2u.App.csproj", "{755FE756-4479-4D09-BB63-F59744103337}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.TramUkvzM2App", "CustomModbusSlave.Climatic.TramUkvzM2App\CustomModbusSlave.Climatic.TramUkvzM2App.csproj", "{E735430B-8EA1-4351-BD50-3161304D0EC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{755FE756-4479-4D09-BB63-F59744103337}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{755FE756-4479-4D09-BB63-F59744103337}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{755FE756-4479-4D09-BB63-F59744103337}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E735430B-8EA1-4351-BD50-3161304D0EC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E735430B-8EA1-4351-BD50-3161304D0EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E735430B-8EA1-4351-BD50-3161304D0EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E735430B-8EA1-4351-BD50-3161304D0EC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
