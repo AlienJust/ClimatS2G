@@ -4,8 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <!--TODO: change guid-->
-    <!--<ProjectGuid>{755FE756-4479-4D09-BB63-F59744103338}</ProjectGuid>-->
+    <ProjectGuid>{E735430B-8EA1-4351-BD50-3161304D0EC8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CustomModbusSlave.Climatic.TramUkvzM2App</RootNamespace>
@@ -181,7 +180,7 @@
     <Resource Include="icon2.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="psn.mpe2u_m8_v1.xml">
+    <None Include="psn.TRAM-UKVZ-M2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
