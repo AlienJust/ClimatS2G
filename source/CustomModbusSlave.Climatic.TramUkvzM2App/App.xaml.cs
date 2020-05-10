@@ -17,9 +17,9 @@ namespace CustomModbusSlave.Climatic.TramUkvzM2App
 
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            var appFactory = new AppFactory("psn.mpe2u_m8_v1.xml");
+            var appFactory = new AppFactory("psn.TRAM-UKVZ-M2.xml");
             var appAbilities = appFactory.Abilities;
-            var paramPresenter = appAbilities.GetParametersPresentation("tabs.mpe2u.xml");
+            var paramPresenter = appAbilities.GetParametersPresentation("tabs.tramukvzm2.xml");
 
             if (appAbilities.Version == AppVersion.Full)
             {
@@ -69,7 +69,7 @@ namespace CustomModbusSlave.Climatic.TramUkvzM2App
             {
                 try
                 {
-                    ParametersPresenterXmlSerializer.Serialize("123_mpe2u.xml", appAbilities.PsnProtocolConfiguration, false);
+                    ParametersPresenterXmlSerializer.Serialize("123_tramukvzm2.xml", appAbilities.PsnProtocolConfiguration, false);
 
                     mainVm.UseCustomContent = true;
                     var channel = mainVm.AddChannel("Single channel");

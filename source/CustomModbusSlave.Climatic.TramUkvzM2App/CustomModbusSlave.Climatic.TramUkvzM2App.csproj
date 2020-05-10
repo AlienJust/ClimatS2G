@@ -185,7 +185,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="tabs.mpe2u.xml">
+    <None Include="tabs.tramukvzm2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
