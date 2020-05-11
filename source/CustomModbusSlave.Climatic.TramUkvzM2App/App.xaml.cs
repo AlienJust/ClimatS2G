@@ -65,7 +65,7 @@ namespace CustomModbusSlave.Climatic.TramUkvzM2App
             }
 
 
-            appFactory.ShowMainWindowInOwnThread("Технический абонент, МПЭ2У", appAbilities, mainVm =>
+            appFactory.ShowMainWindowInOwnThread("Технический абонент, Трамвай УКВЗ М2", appAbilities, mainVm =>
             {
                 try
                 {
