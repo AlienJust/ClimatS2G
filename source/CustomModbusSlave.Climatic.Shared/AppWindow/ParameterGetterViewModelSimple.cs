@@ -3,10 +3,11 @@ using AlienJust.Support.ModelViewViewModel;
 using CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation;
 using DrillingRig.ConfigApp.AppControl.ParamLogger;
 using System;
+using System.Timers;
 
 namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
-    internal sealed class ParameterGetterViewModelSimple : ViewModelBase, IParameterGetterViewModel
+    internal sealed class ParameterGetterViewModelSimple : ViewModelBase, IParameterGetterViewModel, IDisposable
     {
         private string _value;
         public string Value
@@ -36,6 +37,20 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             }
         }
 
+        private bool _valueIsOld;
+        public bool ValueIsOld
+        {
+            get => _valueIsOld;
+            set
+            {
+                if (_valueIsOld != value)
+                {
+                    _valueIsOld = value;
+                    RaisePropertyChanged(() => ValueIsOld);
+                }
+            }
+        }
+
 
         private readonly IParamListener _listener;
         private readonly IThreadNotifier _uiNotifier;
@@ -45,10 +60,17 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         private readonly string _paramId;
         private readonly Action<string, double?> _log;
 
+        TimeSpan _linkLostTimeout;
+        DateTime _lastRecvTime;
+        Timer _timer;
+
         public ParameterGetterViewModelSimple(
             string paramId, IParamListener listener, IThreadNotifier uiNotifier, 
             IParameterView view, IParameterLogger parameterLogger, bool isBitParam, string logName)
         {
+            _timer = new Timer(1000);
+            _timer.Elapsed += TimerElapsed;
+            _timer.Start();
             _listener = listener;
             _uiNotifier = uiNotifier;
             _view = view;
@@ -62,6 +84,22 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
             _value = "?";
             _isLogged = false;
+
+            _valueIsOld = false;
+
+            _lastRecvTime = DateTime.Now;
+            _linkLostTimeout = TimeSpan.FromSeconds(5); // TODO: could be injected via .ctor()
+        }
+
+        private void TimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            if (_lastRecvTime + _linkLostTimeout < DateTime.Now)
+            {
+                _uiNotifier.Notify(() =>
+                {
+                    ValueIsOld = true;
+                });
+            }
         }
 
         /// <summary>
@@ -76,14 +114,57 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
         private void ListenerValueReceived(object sender, ParameterValueReceivedEventArgs e)
         {
+            // TODO: eliminate checking for better performance
             if (e.ParameterId == _paramId)
             {
                 _uiNotifier.Notify(() =>
                 {
-                    Value = _view.GetText(e.Value);
+                    Value = _view.GetText(e.Value); // TODO: What if error?
+                    ValueIsOld = false;
                     if (IsLogged) _log(_logName, e.Value);
                 });
             }
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                    _listener.ValueReceived -= ListenerValueReceived;
+
+                    _timer.Stop();
+                    _timer.Elapsed -= TimerElapsed;
+                    _timer.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~ParameterGetterViewModelSimple()
+        // {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }
