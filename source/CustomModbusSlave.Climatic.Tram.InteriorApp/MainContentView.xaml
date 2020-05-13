@@ -166,6 +166,13 @@
                             <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_007]}"/>
                             <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_008]}"/>
                             <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_009]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_010]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_011]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_012]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_013]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_014]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_015]}"/>
+                            <local:ParameterView DataContext="{Binding Parameters[param_008_240_reply_016]}"/>
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
