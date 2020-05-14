@@ -48,22 +48,24 @@
       <Reply Length="48" Position="4">
         <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="733e035d-9193-4647-b184-aea95a59b733" />
         <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="316e6c67-9667-450f-9c61-a0c04e169ac1" />
-        <BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Регистр наличия связи: D0 - Связь с СУ по линии CAN" Id="5858e1bf-d209-4f80-9441-6684ed398694" />
-        <BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Регистр наличия связи: D1 - Связь с КСМ соседнего сегмента КУ" Id="cc9627a9-cff9-4a5c-8b58-7ab29768bf99" />
-        <BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Регистр наличия связи: D2 - Связь с ПЧ" Id="d5161c57-9019-4ee5-9a83-95e048d4eab1" />
-        <BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Регистр наличия связи: D3 - резерв" Id="5e5742c4-c47b-4955-ab9b-098770788b0e" />
-        <BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Регистр наличия связи: D4 - резерв" Id="fc6dc7e5-68b7-420a-a7c1-10788242c78b" />
+        <BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Регистр наличия связи: D0 - авария обмена «мастер — слейв»" Id="5858e1bf-d209-4f80-9441-6684ed398694" />
+        <BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Регистр наличия связи: D1 - авария обмена с ПЧ" Id="cc9627a9-cff9-4a5c-8b58-7ab29768bf99" />
+        <BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Регистр наличия связи: D2 - отсутствие данных от СУ в обмене с слейвом КСМ" Id="d5161c57-9019-4ee5-9a83-95e048d4eab1" />
+        <BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Регистр наличия связи: D3 - отсутствие связи с СУ в линии CAN" Id="5e5742c4-c47b-4955-ab9b-098770788b0e" />
+        <BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Регистр наличия связи: D4 - отсутствие данных от мастера КСМ в линии CAN" Id="fc6dc7e5-68b7-420a-a7c1-10788242c78b" />
         <BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Регистр наличия связи: D5 - резерв" Id="4eb3c483-8950-4067-ad03-e58d058dbd3b" />
         <BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Регистр наличия связи: D6 - резерв" Id="e6e77913-024e-4535-b4d3-0434989cf442" />
         <BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Регистр наличия связи: D7 - резерв" Id="6211415b-bfb5-4367-843a-cedc1d96572d" />
+
         <BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Статус климатического контроллера: D0 - нарушена связь с платой расширения, регистры IO" Id="58cbbd10-c9e0-4b51-ae64-f40bc337967c" />
         <BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Статус климатического контроллера: D1 - нарушена связь с датчиком температуры 1" Id="392f52dc-d706-4926-b8c7-2dcf2b3f81dc" />
-        <BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Статус климатического контроллера: D2 - нарушена связь с датчиком температуры 1" Id="f71072f5-9123-462a-a0df-7d32840528a0" />
-        <BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Статус климатического контроллера: D3 - нарушена связь с датчиком температуры 1" Id="931fef96-72b6-4e93-8ae5-e06c96a051b1" />
-        <BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Статус климатического контроллера: D4 - нарушена связь с датчиком температуры 1" Id="bc5795ea-ee9d-4e7b-82d9-fd8edcbcac4b" />
-        <BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Статус климатического контроллера: D5 - нарушена связь с датчиком температуры 1" Id="4fd52987-302b-4073-a573-37c0d24f2bd2" />
+        <BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Статус климатического контроллера: D2 - нарушена связь с датчиком температуры 2" Id="f71072f5-9123-462a-a0df-7d32840528a0" />
+        <BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Статус климатического контроллера: D3 - нарушена связь с датчиком температуры 3" Id="931fef96-72b6-4e93-8ae5-e06c96a051b1" />
+        <BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Статус климатического контроллера: D4 - нарушена связь с датчиком температуры 4" Id="bc5795ea-ee9d-4e7b-82d9-fd8edcbcac4b" />
+        <BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Статус климатического контроллера: D5 - нарушена связь с датчиком температуры 5" Id="4fd52987-302b-4073-a573-37c0d24f2bd2" />
         <BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Статус климатического контроллера: D6 - нарушена связь с АЦП платы расширения" Id="91ed0e6d-450d-4cd4-9d8c-fe2876870b77" />
         <BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Статус климатического контроллера: D7 - нарушена связь с памятью FRAM" Id="f7f9450f-4b70-4559-84f9-5a5982bd5776" />
+
         <BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Дискретные входы: D0 - порт IO 1.5=1 команда на назначение «Master»;" Id="046e0578-7682-4b00-9bac-522019987b50" />
         <BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Дискретные входы: D1 - порт IO 0.1=1 команда на включение кондиционера" Id="d8216620-4005-4842-9887-2cc8f6a43c92" />
         <BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Дискретные входы: D2 - порт IO 0.2=0 авария компрессора №1 по максимальному давлению" Id="528848c3-778e-49b7-ad4d-c660464d0c22" />
@@ -80,7 +82,8 @@
         <BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Дискретные выходы: D5 - резерв" Id="3ba17c75-89fb-43a5-b6bf-5fc24c9d0ab7" />
         <BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Дискретные выходы: D6 - резерв" Id="d481ecf5-8673-4a73-b348-13f6b5dccd0a" />
         <BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Дискретные выходы: D7 - резерв" Id="b5a8a7ac-074d-40d8-8025-13c033313d46" />
-        <CpzPrm Name="Низкое давление, бар" Expression="[u7] * 0.1" Id="5ed26883-28f9-4112-999d-daafbfe68527" />
+        
+        <CpzPrm Name="Низкое давление, бар" Expression="[s7] * 0.1" Id="5ed26883-28f9-4112-999d-daafbfe68527" />
         <CpzPrm Name="Высокое давление, бар" Expression="[u8] * 1.0" Id="6d135930-7f03-492d-9781-5001825fe80a" />
         <CpzPrm Name="ОС МПБС, В" Expression="[u9] * 1.0" Id="7b184a35-618b-4b37-9295-0ebcf234560d" />
         <CpzPrm Name="ОС заслонки, В" Expression="[u10] * 1.0" Id="60cccc51-7b0d-4ea7-b9b7-a4ddcc56a3ed" />
