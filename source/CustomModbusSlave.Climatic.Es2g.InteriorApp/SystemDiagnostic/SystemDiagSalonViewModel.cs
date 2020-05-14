@@ -370,7 +370,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                 if (data.Diagnostic2.OsShowsFlapDoesNotReachLimitPositions)
                 {
                     FlapAirOuterDiagInfo5 = ErDiagText;
-                    FlapAirOuterDiagInfo5Color = ErDiagColor;
+
+                    FlapAirOuterDiagInfo5Color = IsFullVersion ? ErDiagColor : OkDiagColor;
                 }
                 else
                 {
@@ -381,7 +382,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                 if (data.Diagnostic2.OsShowsFlapDoesNotReach50Percent)
                 {
                     FlapAirOuterDiagInfo6 = ErDiagText;
-                    FlapAirOuterDiagInfo6Color = ErDiagColor;
+
+                    FlapAirOuterDiagInfo6Color = IsFullVersion ? ErDiagColor : OkDiagColor;
                 }
                 else
                 {
@@ -559,7 +561,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                 if (data.Diagnostic2.OsShowsFlapDoesNotReachLimitPositions)
                 {
                     FlapAirRecycleDiagInfo5 = ErDiagText;
-                    FlapAirRecycleDiagInfo5Color = ErDiagColor;
+
+                    FlapAirRecycleDiagInfo5Color = IsFullVersion ? ErDiagColor : OkDiagColor;
                 }
                 else
                 {
@@ -570,7 +573,8 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                 if (data.Diagnostic2.OsShowsFlapDoesNotReach50Percent)
                 {
                     FlapAirRecycleDiagInfo6 = ErDiagText;
-                    FlapAirRecycleDiagInfo6Color = ErDiagColor;
+
+                    FlapAirRecycleDiagInfo6Color = IsFullVersion ? ErDiagColor : OkDiagColor;
                 }
                 else
                 {
@@ -619,7 +623,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                 if (data.Diagnostic2.OsShowsFlapDoesNotReachLimitPositions)
                 {
                     FlapAirWinterSummerDiagInfo5 = ErDiagText;
-                    FlapAirWinterSummerDiagInfo5Color = ErDiagColor;
+                    FlapAirWinterSummerDiagInfo5Color = IsFullVersion ? ErDiagColor : OkDiagColor;
                 }
                 else
                 {
@@ -630,7 +634,7 @@ namespace CustomModbusSlave.Es2gClimatic.InteriorApp.SystemDiagnostic
                 if (data.Diagnostic2.OsShowsFlapDoesNotReach50Percent)
                 {
                     FlapAirWinterSummerDiagInfo6 = ErDiagText;
-                    FlapAirWinterSummerDiagInfo6Color = ErDiagColor;
+                    FlapAirWinterSummerDiagInfo6Color = IsFullVersion ? ErDiagColor : OkDiagColor;
                 }
                 else
                 {
