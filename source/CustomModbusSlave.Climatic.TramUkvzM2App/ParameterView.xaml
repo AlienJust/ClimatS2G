@@ -10,7 +10,18 @@
         <converters:BooleanToBrushConverter TrueBrush="#AAFFFF00" FalseBrush="Transparent" x:Key="booltobrushConverter"/>
     </UserControl.Resources>
     <Border Background="{Binding Getter.ValueIsOld, Converter={StaticResource booltobrushConverter}}">
-        <Border.Style>            <Style>                <Setter Property="Border.BorderBrush" Value="LightGray"/>                <Setter Property="Border.BorderThickness" Value="0,0,0,2"/>                 <Style.Triggers>                    <Trigger Property="Border.IsMouseOver" Value="True">                        <Setter Property="Border.BorderBrush" Value="LimeGreen" />                        <Setter Property="Border.BorderThickness" Value="8,0,8,3"/>                    </Trigger>                </Style.Triggers>            </Style>        </Border.Style>
+        <Border.Style>
+            <Style>
+                <Setter Property="Border.BorderBrush" Value="LightGray"/>
+                <Setter Property="Border.BorderThickness" Value="0,0,0,2"/> 
+                <Style.Triggers>
+                    <Trigger Property="Border.IsMouseOver" Value="True">
+                        <Setter Property="Border.BorderBrush" Value="LimeGreen" />
+                        <Setter Property="Border.BorderThickness" Value="8,0,8,3"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
         <Grid Margin="2,0,0,2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

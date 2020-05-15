@@ -9,6 +9,33 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 {
     internal sealed class ParameterGetterViewModelSimple : ViewModelBase, IParameterGetterViewModel, IDisposable
     {
+        private readonly object _lastRecvTimeSync;
+        private readonly IParamListener _listener;
+        private readonly IThreadNotifier _uiNotifier;
+        private readonly IParameterView _view;
+        private readonly IParameterLogger _parameterLogger;
+        private readonly string _logName;
+        private readonly string _paramId;
+        private readonly Action<string, double?> _log;
+
+        private readonly TimeSpan _linkLostTimeout;
+        private DateTime _lastRecvTime;
+        private readonly Timer _timer;
+
+        private DateTime LastRecvTimeSafe
+        { 
+            get
+            {
+                lock (_lastRecvTimeSync) return _lastRecvTime;
+            }
+            set
+            {
+                lock (_lastRecvTimeSync) _lastRecvTime = value;
+            }
+        }
+
+
+
         private string _value;
         public string Value
         {
@@ -52,17 +79,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
         }
 
 
-        private readonly IParamListener _listener;
-        private readonly IThreadNotifier _uiNotifier;
-        private readonly IParameterView _view;
-        private readonly IParameterLogger _parameterLogger;
-        private readonly string _logName;
-        private readonly string _paramId;
-        private readonly Action<string, double?> _log;
-
-        TimeSpan _linkLostTimeout;
-        DateTime _lastRecvTime;
-        Timer _timer;
+        
 
         public ParameterGetterViewModelSimple(
             string paramId, IParamListener listener, IThreadNotifier uiNotifier, 
@@ -87,13 +104,14 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
 
             _valueIsOld = false;
 
+            _lastRecvTimeSync = new object();
             _lastRecvTime = DateTime.Now;
             _linkLostTimeout = TimeSpan.FromSeconds(5); // TODO: could be injected via .ctor()
         }
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            if (_lastRecvTime + _linkLostTimeout < DateTime.Now)
+            if (LastRecvTimeSafe + _linkLostTimeout < DateTime.Now)
             {
                 _uiNotifier.Notify(() =>
                 {
@@ -117,6 +135,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             // TODO: eliminate checking for better performance
             if (e.ParameterId == _paramId)
             {
+                LastRecvTimeSafe = DateTime.Now;
                 _uiNotifier.Notify(() =>
                 {
                     Value = _view.GetText(e.Value); // TODO: What if error?
