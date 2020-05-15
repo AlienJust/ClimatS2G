@@ -147,6 +147,28 @@
         <VarVal Position="47.0" Length="8" Name="#CRCL" Id="aaa84102-ee9f-482e-94e2-5c38c1b47562" />
       </Reply>
     </CmdMask>
+    <CmdMask Name="между КСМ и техническим абонентом (cmd: 33 dec)">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="4a6eef41-8eed-4a28-91d1-587c5ae8cc09" />
+        <DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="03fdd20c-9ff6-4255-8fcd-17908ffe3050" />
+        <VarVal Position="2.0" Length="8" Name="Адрес параметра, hi" Id="93165876-3b7d-4773-ab6f-77dba079d6f1" />
+        <VarVal Position="3.0" Length="8" Name="Адрес параметра, lo" Id="01b724ed-fe82-46bf-a615-15a6782ab2de" />
+        <VarVal Position="4.0" Length="8" Name="Значение параметра, hi" Id="1d6aafa2-0d3c-4194-9b11-8b3c344f1658" />
+        <VarVal Position="5.0" Length="8" Name="Значение параметра, lo" Id="0f05daef-ba40-4ee2-bcee-3f02fefd9f54" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="7a1731a9-8c73-4487-91da-3ed6bd515f79" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="d31c4f27-b5b4-4509-a5b2-bc5b4a1f1d24" />
+      </Request>
+      <Reply Length="8" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="1cf29513-edf6-4018-a84f-189c0d67fc54" />
+        <DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="d800d700-879d-4aee-841a-6e34df82ab2c" />
+        <VarVal Position="2.0" Length="8" Name="Адрес параметра, hi" Id="7fab505b-d983-42c3-8bc1-fd09a09b07a1" />
+        <VarVal Position="3.0" Length="8" Name="Адрес параметра, lo" Id="35ffcf81-2e41-43a3-82be-4cce0ec283b7" />
+        <VarVal Position="4.0" Length="8" Name="Значение параметра, hi" Id="3596becb-e57c-4f3e-8a54-2029434ffd44" />
+        <VarVal Position="5.0" Length="8" Name="Значение параметра, lo" Id="9d77ca4d-7a34-483a-ac42-e4fc62287ef6" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="ea078f2a-01fc-4d68-896b-1bb23b1bcd7e" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="0d2719ff-8508-4e92-9179-b95fef0e10ac" />
+      </Reply>
+    </CmdMask>
     <CmdMask Name="КСМ, команда 16 (0x10)">
       <Request Length="129" Position="0">
         <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="55860893-1919-4d15-a277-dc40dd2e4a65" />
