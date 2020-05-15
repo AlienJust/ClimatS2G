@@ -34,9 +34,10 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.AppWindow
             {
                 if (commandPart.CommandCode == 33 && commandPart.ReplyBytes.Length == 8)
                 {
-                    ReplyAcceptor.AcceptReply(commandPart.ReplyBytes.ToArray()); // TODO: bad performance cause of .ToArray() call
+                    ReplyAcceptor.AcceptReply(commandPart.ReplyBytes);
                     var reply = ReplyGenerator.GenerateReply();
                     sendability.Send(reply);
+                    //Console.WriteLine("Sended reply");
                 }
             }
         }
