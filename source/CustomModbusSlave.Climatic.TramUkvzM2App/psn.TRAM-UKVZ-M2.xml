@@ -206,8 +206,13 @@
         <CpzPrm Name="ОС МПБС, В" Expression="[s27] * 256.0 + [u28]" Id="057a3b0a-de15-41a9-a70b-afda7b70d567" />
         <CpzPrm Name="Датчик высокого давления, Бар" Expression="[s29] * 256.0 + [u30]" Id="c2efc792-0a66-44fc-916e-f219e4fd4059" />
         <CpzPrm Name="Датчик низкого давления, Бар" Expression="[s31] * 256.0 + [u32]" Id="0597b685-328c-4162-ae52-e4acf2e42655" />
-        <!--33 and 34 are skipped-->
-        <!--35 and 36 are skipped-->
+
+        <BitPrm Byte="34" Bit="0" IsValueInverted="False" Name="Регистр дискретных сигналов: Низкое давление не в норме" />
+        <BitPrm Byte="34" Bit="1" IsValueInverted="False" Name="Регистр дискретных сигналов: Высокое давление не в норме"/>
+        <BitPrm Byte="34" Bit="2" IsValueInverted="False" Name="Регистр дискретных сигналов: ОС МБПС не в норме"/>
+        <BitPrm Byte="34" Bit="3" IsValueInverted="False" Name="Регистр дискретных сигналов: ОС заслонки не в норме"/>
+
+        <CpzPrm Name="Расчитанная уставка температуры в салоне, гр" Expression="([s35] * 256.0 + [u36]) * 0.01"/>
         <CpzPrm Name="Уставка положения воздушной заслонки (ШИМ), %" Expression="[s37] * 256.0 + [u38]" Id="d91a6cf9-4d23-48c9-b7a8-4959dea42845" />
         <CpzPrm Name="Уставка расхода вентилятора испарителя (ШИМ), %" Expression="[s39] * 256.0 + [u40]" Id="b528a947-0afe-466e-b3a1-e38c92bb5da9" />
         <BitPrm Byte="42" Bit="0" IsValueInverted="False" Name="СУ: Сигналы 1: открытие двери 1" Id="6f57422b-c55b-4bec-adbc-4f2cf9650882" />
