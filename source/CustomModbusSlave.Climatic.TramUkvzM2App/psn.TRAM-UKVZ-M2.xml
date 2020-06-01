@@ -30,7 +30,7 @@
         <CpzPrm Name="Ток фазы A, %" Expression="([s8] * 256.0 + [u9]) / 3.14" Id="b2856a61-4022-46a9-8020-6f4162cbc756" />
         <CpzPrm Name="Ток фазы B, %" Expression="([s10] * 256.0 + [u11]) / 3.14" Id="7a1a36f8-8bc0-4af2-86b7-0f1103ab912a" />
         <CpzPrm Name="Ток фазы C, %" Expression="([s12] * 256.0 + [u13]) / 3.14" Id="73c5caaa-3332-4ad8-930c-6edafb6a4269" />
-        <CpzPrm Name="Напряжение цепи постоянного тока, В" Expression="([u14] * 256.0 + [u15]) * 6.8 / 6.0" Id="875b7c2b-2c57-44b1-93aa-0702c5e8b710" />
+        <CpzPrm Name="Напряжение цепи постоянного тока, В" Expression="([u14] * 256.0 + [u15]) * 1.2" Id="875b7c2b-2c57-44b1-93aa-0702c5e8b710" />
         <VarVal Position="16.0" Length="1" Name="Включен инвертор" Id="665f29b0-72ee-409b-9fbf-7796ca00c291" />
         <VarVal Position="17.7" Length="1" Name="Состояние инвертора: отказ" Id="3e5459d9-479c-4e8f-8f8b-4d3d2b15d14b" />
         <VarVal Position="17.5" Length="1" Name="Состояние инвертора: наличие диагностической информации" Id="f6bfded1-e8bc-4ef8-a288-8859dd0813d1" />
