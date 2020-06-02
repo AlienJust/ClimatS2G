@@ -118,6 +118,7 @@
   <Parameter Key="param_001_003_reply_090" Identifier="45de12da-2251-4fad-8bfc-14924111dd7f" Comment="между КСМ и РПД 03: ответ - Уставка температуры по линии CAN" />
   <Parameter Key="param_001_003_reply_091" Identifier="e86257d2-ae6f-46f0-ba94-530bb3fa1dd8" Comment="между КСМ и РПД 03: ответ - Версия ПО" />
   <Parameter Key="param_001_003_reply_092" Identifier="652da10c-8ec2-4c95-a443-28676e44559d" Comment="между КСМ и РПД 03: ответ - Режим работы климатического контроллера" />
+  
   <Parameter Key="param_020_016_request_001" Identifier="b378f906-0a39-4fb7-be6b-09829b15c36a" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №1" />
   <Parameter Key="param_020_016_request_002" Identifier="5c46dcc5-b637-40d8-851a-1cfd299bd13b" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №1" />
   <Parameter Key="param_020_016_request_003" Identifier="044beaab-5bdc-46c3-b613-0e1b38504de3" Comment="КСМ, команда 16 (0x10): запрос - Температура наружного воздуха" />
@@ -146,28 +147,35 @@
   <Parameter Key="param_020_016_request_026" Identifier="057a3b0a-de15-41a9-a70b-afda7b70d567" Comment="КСМ, команда 16 (0x10): запрос - ОС МПБС, В" />
   <Parameter Key="param_020_016_request_027" Identifier="c2efc792-0a66-44fc-916e-f219e4fd4059" Comment="КСМ, команда 16 (0x10): запрос - Датчик высокого давления, Бар" />
   <Parameter Key="param_020_016_request_028" Identifier="0597b685-328c-4162-ae52-e4acf2e42655" Comment="КСМ, команда 16 (0x10): запрос - Датчик низкого давления, Бар" />
-  <Parameter Key="param_020_016_request_029" Identifier="d91a6cf9-4d23-48c9-b7a8-4959dea42845" Comment="КСМ, команда 16 (0x10): запрос - Уставка положения воздушной заслонки (ШИМ), %" />
-  <Parameter Key="param_020_016_request_030" Identifier="b528a947-0afe-466e-b3a1-e38c92bb5da9" Comment="КСМ, команда 16 (0x10): запрос - Уставка расхода вентилятора испарителя (ШИМ), %" />
-  <Parameter Key="param_020_016_request_031" Identifier="6f57422b-c55b-4bec-adbc-4f2cf9650882" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 1" />
-  <Parameter Key="param_020_016_request_032" Identifier="c3d5e503-1f5c-496b-a35e-82cadad60ce9" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 2" />
-  <Parameter Key="param_020_016_request_033" Identifier="ded4c62d-8299-491a-95a9-53b5bfa8b094" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 3" />
-  <Parameter Key="param_020_016_request_034" Identifier="ba366a75-e005-49f9-aa63-d3a512bb774a" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 4" />
-  <Parameter Key="param_020_016_request_035" Identifier="47c8862a-0267-4c78-868d-07f63e2a5f08" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 5" />
-  <Parameter Key="param_020_016_request_036" Identifier="eac9b146-2b9d-4294-98bb-be5b3cf63b94" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 6" />
-  <Parameter Key="param_020_016_request_037" Identifier="a2823b04-8d50-4f48-910b-033e18f8ef28" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 2: проезд стрелки без тока" />
-  <Parameter Key="param_020_016_request_038" Identifier="a99eac52-5dab-4961-ae7b-5cf0e72b521b" Comment="КСМ, команда 16 (0x10): запрос - СУ: Уставка расхода воздуха, %" />
-  <Parameter Key="param_020_016_request_039" Identifier="6baaa9af-6875-4854-a945-47fa481ce448" Comment="КСМ, команда 16 (0x10): запрос - СУ: Целевая температура в пассажирском салоне, гр." />
-  <Parameter Key="param_020_016_request_040" Identifier="451fcb4a-4698-4fd6-a2fd-e813cb325d53" Comment="КСМ, команда 16 (0x10): запрос - СУ: Режим работы климатической системы" />
-  <Parameter Key="param_020_016_request_041" Identifier="643ea4a7-277c-423b-b62e-ee23daa38a36" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по RS магистралям: D0 — авария обмена «мастер — слейв»" />
-  <Parameter Key="param_020_016_request_042" Identifier="4000446d-6973-4ba0-b381-be5ce83226ef" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по RS магистралям: D1 — авария обмена с ПЧ" />
-  <Parameter Key="param_020_016_request_043" Identifier="bb60156f-5608-408b-9746-f3778823a3a8" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по CAN линии: D0 – отсутствие связи с СУ" />
-  <Parameter Key="param_020_016_request_044" Identifier="43693dd7-918b-4967-abad-03f1aa25ae55" Comment="КСМ, команда 16 (0x10): запрос - Расчитанная уставка ПЧ, гц" />
-  <Parameter Key="param_020_016_request_045" Identifier="d49f1e80-130a-4a40-af3c-b57adeb7cbb2" Comment="КСМ, команда 16 (0x10): запрос - Рассчитаная уставка расхода воздуха, %" />
-  <Parameter Key="param_020_016_request_046" Identifier="d8270e1f-5020-4577-b44b-876d15f41cef" Comment="КСМ, команда 16 (0x10): запрос - Версия ПО" />
-  <Parameter Key="param_020_016_request_047" Identifier="09700400-445a-4946-85ae-2537606c9b37" Comment="КСМ, команда 16 (0x10): запрос - Максимальная уставка ПЧ, гц" />
-  <Parameter Key="param_020_016_request_048" Identifier="7f822dcf-881d-4cce-a311-8394fadb8e96" Comment="КСМ, команда 16 (0x10): запрос - Минимальная уставка ПЧ, гц" />
-  <Parameter Key="param_020_016_request_049" Identifier="bc13e029-b032-4f22-8dc2-5eddee1dfc32" Comment="КСМ, команда 16 (0x10): запрос - Дельта + рассогласования, гр" />
-  <Parameter Key="param_020_016_request_050" Identifier="41a7f881-f9d6-4d92-aeaf-a12fdd4966c7" Comment="КСМ, команда 16 (0x10): запрос - Дельта - рассогласования, гр" />
-  <Parameter Key="param_020_016_request_051" Identifier="8962d3e9-0850-4b74-946d-184756c3fc46" Comment="КСМ, команда 16 (0x10): запрос - Принудительный режим обогрев/охлаждение" />
-  <Parameter Key="param_020_016_request_052" Identifier="ec85f4d2-fb12-4f5a-8b6c-c8ec65234c87" Comment="КСМ, команда 16 (0x10): запрос - Дельта уставки температуры, отладка" />
+  
+  <Parameter Key="param_020_016_request_029" Identifier="a995c782-d9be-404e-b0c4-ba2d82781f7a" Comment="КСМ, команда 16 (0x10): запрос - Регистр дискретных сигналов: Низкое давление не в норме" />
+  <Parameter Key="param_020_016_request_030" Identifier="2503fcf0-a58d-4bf9-b6fb-fc9a00090624" Comment="КСМ, команда 16 (0x10): запрос - Регистр дискретных сигналов: Высокое давление не в норме" />
+  <Parameter Key="param_020_016_request_031" Identifier="f4ced604-f8a2-4a99-997c-a95da9968db4" Comment="КСМ, команда 16 (0x10): запрос - Регистр дискретных сигналов: ОС МБПС не в норме" />
+  <Parameter Key="param_020_016_request_032" Identifier="b4d42b01-4b86-4177-a644-da28636d3581" Comment="КСМ, команда 16 (0x10): запрос - Регистр дискретных сигналов: ОС заслонки не в норме" />
+  <Parameter Key="param_020_016_request_033" Identifier="55ecadb5-ca5a-4fec-a720-71d59e1d5fb8" Comment="КСМ, команда 16 (0x10): запрос - Расчитанная уставка температуры в салоне, гр" />
+  
+  <Parameter Key="param_020_016_request_034" Identifier="d91a6cf9-4d23-48c9-b7a8-4959dea42845" Comment="КСМ, команда 16 (0x10): запрос - Уставка положения воздушной заслонки (ШИМ), %" />
+  <Parameter Key="param_020_016_request_035" Identifier="b528a947-0afe-466e-b3a1-e38c92bb5da9" Comment="КСМ, команда 16 (0x10): запрос - Уставка расхода вентилятора испарителя (ШИМ), %" />
+  <Parameter Key="param_020_016_request_036" Identifier="6f57422b-c55b-4bec-adbc-4f2cf9650882" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 1" />
+  <Parameter Key="param_020_016_request_037" Identifier="c3d5e503-1f5c-496b-a35e-82cadad60ce9" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 2" />
+  <Parameter Key="param_020_016_request_038" Identifier="ded4c62d-8299-491a-95a9-53b5bfa8b094" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 3" />
+  <Parameter Key="param_020_016_request_039" Identifier="ba366a75-e005-49f9-aa63-d3a512bb774a" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 4" />
+  <Parameter Key="param_020_016_request_040" Identifier="47c8862a-0267-4c78-868d-07f63e2a5f08" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 5" />
+  <Parameter Key="param_020_016_request_041" Identifier="eac9b146-2b9d-4294-98bb-be5b3cf63b94" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 6" />
+  <Parameter Key="param_020_016_request_042" Identifier="a2823b04-8d50-4f48-910b-033e18f8ef28" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 2: проезд стрелки без тока" />
+  <Parameter Key="param_020_016_request_043" Identifier="a99eac52-5dab-4961-ae7b-5cf0e72b521b" Comment="КСМ, команда 16 (0x10): запрос - СУ: Уставка расхода воздуха, %" />
+  <Parameter Key="param_020_016_request_044" Identifier="6baaa9af-6875-4854-a945-47fa481ce448" Comment="КСМ, команда 16 (0x10): запрос - СУ: Целевая температура в пассажирском салоне, гр." />
+  <Parameter Key="param_020_016_request_045" Identifier="451fcb4a-4698-4fd6-a2fd-e813cb325d53" Comment="КСМ, команда 16 (0x10): запрос - СУ: Режим работы климатической системы" />
+  <Parameter Key="param_020_016_request_046" Identifier="643ea4a7-277c-423b-b62e-ee23daa38a36" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по RS магистралям: D0 — авария обмена «мастер — слейв»" />
+  <Parameter Key="param_020_016_request_047" Identifier="4000446d-6973-4ba0-b381-be5ce83226ef" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по RS магистралям: D1 — авария обмена с ПЧ" />
+  <Parameter Key="param_020_016_request_048" Identifier="bb60156f-5608-408b-9746-f3778823a3a8" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по CAN линии: D0 – отсутствие связи с СУ" />
+  <Parameter Key="param_020_016_request_049" Identifier="43693dd7-918b-4967-abad-03f1aa25ae55" Comment="КСМ, команда 16 (0x10): запрос - Расчитанная уставка ПЧ, гц" />
+  <Parameter Key="param_020_016_request_050" Identifier="d49f1e80-130a-4a40-af3c-b57adeb7cbb2" Comment="КСМ, команда 16 (0x10): запрос - Рассчитаная уставка расхода воздуха, %" />
+  <Parameter Key="param_020_016_request_051" Identifier="d8270e1f-5020-4577-b44b-876d15f41cef" Comment="КСМ, команда 16 (0x10): запрос - Версия ПО" />
+  <Parameter Key="param_020_016_request_052" Identifier="09700400-445a-4946-85ae-2537606c9b37" Comment="КСМ, команда 16 (0x10): запрос - Максимальная уставка ПЧ, гц" />
+  <Parameter Key="param_020_016_request_053" Identifier="7f822dcf-881d-4cce-a311-8394fadb8e96" Comment="КСМ, команда 16 (0x10): запрос - Минимальная уставка ПЧ, гц" />
+  <Parameter Key="param_020_016_request_054" Identifier="bc13e029-b032-4f22-8dc2-5eddee1dfc32" Comment="КСМ, команда 16 (0x10): запрос - Дельта + рассогласования, гр" />
+  <Parameter Key="param_020_016_request_055" Identifier="41a7f881-f9d6-4d92-aeaf-a12fdd4966c7" Comment="КСМ, команда 16 (0x10): запрос - Дельта - рассогласования, гр" />
+  <Parameter Key="param_020_016_request_056" Identifier="8962d3e9-0850-4b74-946d-184756c3fc46" Comment="КСМ, команда 16 (0x10): запрос - Принудительный режим обогрев/охлаждение" />
+  <Parameter Key="param_020_016_request_057" Identifier="ec85f4d2-fb12-4f5a-8b6c-c8ec65234c87" Comment="КСМ, команда 16 (0x10): запрос - Дельта уставки температуры, отладка" />
 </Parameters>
