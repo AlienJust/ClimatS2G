@@ -105,7 +105,6 @@
     <Compile Include="CommandPartView.xaml.cs">
       <DependentUpon>CommandPartView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IPsnProtocolConfiguration.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -6,7 +6,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation
     internal sealed class ParameterInjectionConfigNcalc : IParameterInjectionConfiguration
     {
         private readonly string _ncalcConvertExpression;
-        private readonly bool _isInverBytesOrderRequired;
+        private readonly bool _isInverBytesOrderRequired; // TODO: Implement using BytesOrder
 
         public IList<ParameterPreselectedValue> PreselectedValueList { get; }
 

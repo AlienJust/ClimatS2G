@@ -247,9 +247,11 @@
     </Compile>
     <Compile Include="MukFanCondenser\SetParameters\MukFridgeSetParamsViewModel.cs" />
     <Compile Include="OneWire\SensorIndicationDoubleExt.cs" />
+    <Compile Include="ParameterPresentation\BytesOrder.cs" />
     <Compile Include="ParameterPresentation\InjectionXmlBuilder.cs" />
     <Compile Include="ParameterPresentation\IParameterInjectionConfiguration.cs" />
     <Compile Include="ParameterPresentation\ParameterInjectionConfigNcalc.cs" />
+    <Compile Include="ParameterPresentation\ParameterPreselectedValue.cs" />
     <Compile Include="ParameterPresentation\ParametersPresenterXmlSerializer.cs" />
     <Compile Include="ParameterPresentation\Views\BooleanView.cs" />
     <Compile Include="ParameterPresentation\IParameterView.cs" />

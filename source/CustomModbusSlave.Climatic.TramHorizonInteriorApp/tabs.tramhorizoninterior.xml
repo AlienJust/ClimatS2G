@@ -154,8 +154,11 @@
   <Parameter Key="param_020_016_request_031" Identifier="9caf3e15-8544-4182-aed3-a7e6d6903d47" Comment="КСМ, команда 16 (0x10): запрос - Регистр дискретных сигналов: ОС МБПС не в норме" />
   <Parameter Key="param_020_016_request_032" Identifier="ef4708e6-31cf-419a-8441-881ac3404e0f" Comment="КСМ, команда 16 (0x10): запрос - Регистр дискретных сигналов: ОС заслонки не в норме" />
   <Parameter Key="param_020_016_request_033" Identifier="7cb7cfa5-b156-4561-a662-16a37b3d381c" Comment="КСМ, команда 16 (0x10): запрос - Расчитанная уставка температуры в салоне, гр" />
-  <Parameter Key="param_020_016_request_034" Identifier="54168ca8-7c87-48ee-bd5d-c0a27a1f6452" Comment="КСМ, команда 16 (0x10): запрос - Уставка положения воздушной заслонки (ШИМ), %" />
-  <Parameter Key="param_020_016_request_035" Identifier="987777ac-bdb6-4099-b073-39235004ebff" Comment="КСМ, команда 16 (0x10): запрос - Уставка расхода вентилятора испарителя (ШИМ), %" />
+  <Parameter Key="param_020_016_request_034" Identifier="54168ca8-7c87-48ee-bd5d-c0a27a1f6452" Comment="КСМ, команда 16 (0x10): запрос - Уставка положения воздушной заслонки (ШИМ), %" >
+  </Parameter>
+  <Parameter Key="param_020_016_request_035" Identifier="987777ac-bdb6-4099-b073-39235004ebff" Comment="КСМ, команда 16 (0x10): запрос - Уставка расхода вентилятора испарителя (ШИМ), %" >
+    <Injection ParamNumberInPackage="35" ConvertExpression="[value] * 1.0" InvertBytesOrder="True" />
+  </Parameter>
   <Parameter Key="param_020_016_request_036" Identifier="c7d8904b-f312-4656-8770-a3659977900b" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 1" />
   <Parameter Key="param_020_016_request_037" Identifier="593a6919-91fe-42bf-bad7-a082557bae89" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 2" />
   <Parameter Key="param_020_016_request_038" Identifier="b092dd33-d885-4e0d-af36-55c80d90e519" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 3" />
@@ -173,10 +176,24 @@
   <Parameter Key="param_020_016_request_049" Identifier="572c74b2-7a25-4696-b2d4-c7c90fbce18b" Comment="КСМ, команда 16 (0x10): запрос - Расчитанная уставка ПЧ, гц" />
   <Parameter Key="param_020_016_request_050" Identifier="c6594321-5ff1-488b-93b5-5386500df9ce" Comment="КСМ, команда 16 (0x10): запрос - Рассчитаная уставка расхода воздуха, %" />
   <Parameter Key="param_020_016_request_051" Identifier="2e2bf647-d9f0-4ba7-9530-e50e340ec7ab" Comment="КСМ, команда 16 (0x10): запрос - Версия ПО" />
-  <Parameter Key="param_020_016_request_052" Identifier="9112307f-7d55-4c8e-abf8-c435d7db9d20" Comment="КСМ, команда 16 (0x10): запрос - Максимальная уставка ПЧ, гц" />
-  <Parameter Key="param_020_016_request_053" Identifier="ec25fcdc-aa14-49ae-8515-f1d1ab8663af" Comment="КСМ, команда 16 (0x10): запрос - Минимальная уставка ПЧ, гц" />
-  <Parameter Key="param_020_016_request_054" Identifier="dda932e7-9fff-4323-9f87-ea87d2018e93" Comment="КСМ, команда 16 (0x10): запрос - Дельта + рассогласования, гр" />
-  <Parameter Key="param_020_016_request_055" Identifier="e941b421-a6f6-4216-8426-cc64dfb8f17a" Comment="КСМ, команда 16 (0x10): запрос - Дельта - рассогласования, гр" />
+  
+  <Parameter Key="param_020_016_request_052" Identifier="9112307f-7d55-4c8e-abf8-c435d7db9d20" Comment="КСМ, команда 16 (0x10): запрос - Максимальная уставка ПЧ, гц" >
+    <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+    <Injection ParamNumberInPackage="35" ConvertExpression="[value] * 1.0" InvertBytesOrder="True" />
+  </Parameter>
+  <Parameter Key="param_020_016_request_053" Identifier="ec25fcdc-aa14-49ae-8515-f1d1ab8663af" Comment="КСМ, команда 16 (0x10): запрос - Минимальная уставка ПЧ, гц" >
+    <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+    <Injection ParamNumberInPackage="36" ConvertExpression="[value] * 1.0" InvertBytesOrder="True" />
+  </Parameter>
+  <Parameter Key="param_020_016_request_054" Identifier="dda932e7-9fff-4323-9f87-ea87d2018e93" Comment="КСМ, команда 16 (0x10): запрос - Дельта + рассогласования, гр" >
+    <NumberView Expression="[value]" StringFormat="f1" Name="{$value}" />
+    <Injection ParamNumberInPackage="37" ConvertExpression="[value] * 10.0" InvertBytesOrder="True" />
+  </Parameter>
+  <Parameter Key="param_020_016_request_055" Identifier="e941b421-a6f6-4216-8426-cc64dfb8f17a" Comment="КСМ, команда 16 (0x10): запрос - Дельта - рассогласования, гр" >
+    <NumberView Expression="[value]" StringFormat="f1" Name="{$value}" />
+    <Injection ParamNumberInPackage="38" ConvertExpression="[value] * 10.0" InvertBytesOrder="True" />
+  </Parameter>
+  
   <Parameter Key="param_020_016_request_056" Identifier="abedd964-02cd-4f97-b34e-cc747e121846" Comment="КСМ, команда 16 (0x10): запрос - Принудительный режим обогрев/охлаждение" />
   <Parameter Key="param_020_016_request_057" Identifier="f233fe23-aa5c-4695-a120-3a2499fe16a8" Comment="КСМ, команда 16 (0x10): запрос - Дельта уставки температуры, отладка" />
 </Parameters>

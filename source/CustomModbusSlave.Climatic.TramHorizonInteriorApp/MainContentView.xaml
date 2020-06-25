@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
-             xmlns:app="clr-namespace:CustomModbusSlave.Climatic.TramUkvzM2App"
+             xmlns:app="clr-namespace:CustomModbusSlave.Climatic.TramUkvzM2App" xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600">
     <UserControl.Resources>
@@ -171,7 +171,7 @@
                             <app:ParameterView DataContext="{Binding Parameters[param_001_003_reply_060]}"/>
                             <app:ParameterView DataContext="{Binding Parameters[param_001_003_reply_061]}"/>
                             <app:ParameterView DataContext="{Binding Parameters[param_001_003_reply_062]}"/>
-                            
+
                             <app:ParameterView DataContext="{Binding Parameters[param_001_003_reply_063]}"/>
                             <app:ParameterView DataContext="{Binding Parameters[param_001_003_reply_064]}"/>
                             <app:ParameterView DataContext="{Binding Parameters[param_001_003_reply_065]}"/>
@@ -280,7 +280,54 @@
 
                     <app:ParameterView DataContext="{Binding Parameters[param_020_016_request_050]}"/>
                     <app:ParameterView DataContext="{Binding Parameters[param_020_016_request_051]}"/>
-                    <app:ParameterView DataContext="{Binding Parameters[param_020_016_request_052]}"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <app:ParameterView DataContext="{Binding Parameters[param_020_016_request_052]}"/>
+                        <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=Parameters[param_020_016_request_052].Setter.Value}" Minimum="0" Maximum="65535" MinWidth="120"/>
+                        <app:SettableParamView Grid.Column="2" DataContext="{Binding Path=Parameters[param_020_016_request_052].Setter}"/>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <app:ParameterView DataContext="{Binding Parameters[param_020_016_request_053]}"/>
+                        <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=Parameters[param_020_016_request_053].Setter.Value}" Minimum="0" Maximum="65535" MinWidth="120"/>
+                        <app:SettableParamView Grid.Column="2" DataContext="{Binding Path=Parameters[param_020_016_request_053].Setter}"/>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <app:ParameterView DataContext="{Binding Parameters[param_020_016_request_054]}"/>
+                        <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=Parameters[param_020_016_request_054].Setter.Value}" Minimum="0" Maximum="6553.5" MinWidth="120" Interval="0.1" StringFormat="f1"/>
+                        <app:SettableParamView Grid.Column="2" DataContext="{Binding Path=Parameters[param_020_016_request_054].Setter}"/>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <app:ParameterView DataContext="{Binding Parameters[param_020_016_request_055]}"/>
+                        <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=Parameters[param_020_016_request_055].Setter.Value}" Minimum="0" Maximum="6553.5" MinWidth="120" Interval="0.1" StringFormat="f1"/>
+                        <app:SettableParamView Grid.Column="2" DataContext="{Binding Path=Parameters[param_020_016_request_055].Setter}"/>
+                    </Grid>
+
+                    <app:ParameterView DataContext="{Binding Parameters[param_020_016_request_056]}"/>
+                    <app:ParameterView DataContext="{Binding Parameters[param_020_016_request_057]}"/>
+
 
                     <TextBlock Text="Ответ" FontSize="16"/>
                     <app:CommandPartView DataContext="{Binding CommandParts[cmdpart_020_016_reply]}"/>
