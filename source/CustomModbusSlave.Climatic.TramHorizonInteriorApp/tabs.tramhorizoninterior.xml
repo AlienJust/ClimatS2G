@@ -18,6 +18,7 @@
   <Parameter Key="param_008_240_reply_014" Identifier="eb42c094-32f6-4de0-b849-ebbe60470a86" Comment="КСМ и ПЧ 0xf0: ответ - Включен инвертор" />
   <Parameter Key="param_008_240_reply_015" Identifier="72aeb3fc-9cb7-4397-b17c-c39bf4a3bdfa" Comment="КСМ и ПЧ 0xf0: ответ - Состояние инвертора: отказ" />
   <Parameter Key="param_008_240_reply_016" Identifier="b27e229d-25f6-46af-b4c3-8801ba68d7fa" Comment="КСМ и ПЧ 0xf0: ответ - Состояние инвертора: наличие диагностической информации" />
+  
   <Parameter Key="param_001_003_reply_001" Identifier="2977c69e-5585-44ff-a3a0-95a06d0f36ab" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D0 - авария обмена «мастер — слейв»" />
   <Parameter Key="param_001_003_reply_002" Identifier="d117431a-2c27-4f73-ac2d-884450641ba1" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D1 - авария обмена с ПЧ" />
   <Parameter Key="param_001_003_reply_003" Identifier="0440b175-e4c4-4dec-80ea-a07cbedbb43a" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D2 - отсутствие данных от СУ в обмене с слейвом КСМ" />
@@ -110,6 +111,7 @@
   <Parameter Key="param_001_003_reply_090" Identifier="9896a477-38c7-4be2-961c-4b01315ab9d6" Comment="между КСМ и РПД 03: ответ - Уставка температуры по линии CAN" />
   <Parameter Key="param_001_003_reply_091" Identifier="b9003fa2-3549-4835-84b8-c0a2d3508489" Comment="между КСМ и РПД 03: ответ - Версия ПО" />
   <Parameter Key="param_001_003_reply_092" Identifier="adac607c-d192-481b-8c7c-d704666df59b" Comment="между КСМ и РПД 03: ответ - Режим работы климатического контроллера" />
+  
   <Parameter Key="param_020_033_request_001" Identifier="31246cf9-8413-4c2f-be1e-c2ff3b1e724e" Comment="между КСМ и техническим абонентом (cmd: 33 dec): запрос - Адрес параметра, hi" />
   <Parameter Key="param_020_033_request_002" Identifier="9238d82e-cbfb-43f5-9430-88dec2e2ca6d" Comment="между КСМ и техническим абонентом (cmd: 33 dec): запрос - Адрес параметра, lo" />
   <Parameter Key="param_020_033_request_003" Identifier="00e20c8f-4976-42d4-a6f6-d3d0a69945a9" Comment="между КСМ и техническим абонентом (cmd: 33 dec): запрос - Значение параметра, hi" />
@@ -118,6 +120,7 @@
   <Parameter Key="param_020_033_reply_002" Identifier="63afaf28-6cc5-4247-b59c-3ae23b6fffe4" Comment="между КСМ и техническим абонентом (cmd: 33 dec): ответ - Адрес параметра, lo" />
   <Parameter Key="param_020_033_reply_003" Identifier="54167fe9-67a0-41f5-b9db-91785f71379f" Comment="между КСМ и техническим абонентом (cmd: 33 dec): ответ - Значение параметра, hi" />
   <Parameter Key="param_020_033_reply_004" Identifier="63f72c22-67bf-4efd-a73f-d7e631ca4367" Comment="между КСМ и техническим абонентом (cmd: 33 dec): ответ - Значение параметра, lo" />
+  
   <Parameter Key="param_020_016_request_001" Identifier="149999da-e2a3-4b5c-b870-3c4e234e82ec" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №1" />
   <Parameter Key="param_020_016_request_002" Identifier="623b494f-a1f7-4b98-8f0d-08dd61042fe2" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №1" />
   <Parameter Key="param_020_016_request_003" Identifier="fb62d81a-efce-47ea-8091-bbdd4c75739d" Comment="КСМ, команда 16 (0x10): запрос - Температура наружного воздуха" />
@@ -166,6 +169,7 @@
   <Parameter Key="param_020_016_request_046" Identifier="a8ec437e-2024-4f43-8b12-ef8ac3dadb49" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по RS магистралям: D0 — авария обмена «мастер — слейв»" />
   <Parameter Key="param_020_016_request_047" Identifier="cb2d6f04-95ff-45eb-becd-a94fa13e8366" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по RS магистралям: D1 — авария обмена с ПЧ" />
   <Parameter Key="param_020_016_request_048" Identifier="60a364c1-b652-4790-9d9d-92adb61466f8" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по CAN линии: D0 – отсутствие связи с СУ" />
+  
   <Parameter Key="param_020_016_request_049" Identifier="572c74b2-7a25-4696-b2d4-c7c90fbce18b" Comment="КСМ, команда 16 (0x10): запрос - Расчитанная уставка ПЧ, гц" />
   <Parameter Key="param_020_016_request_050" Identifier="c6594321-5ff1-488b-93b5-5386500df9ce" Comment="КСМ, команда 16 (0x10): запрос - Рассчитаная уставка расхода воздуха, %" />
   <Parameter Key="param_020_016_request_051" Identifier="2e2bf647-d9f0-4ba7-9530-e50e340ec7ab" Comment="КСМ, команда 16 (0x10): запрос - Версия ПО" />
