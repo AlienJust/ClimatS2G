@@ -34,7 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.TramHorizonInteriorApp", "CustomModbusSlave.Climatic.TramHorizonInteriorApp\CustomModbusSlave.Climatic.TramHorizonInteriorApp.csproj", "{43AA7717-099E-4604-A09B-2160C7F402C8}"
 EndProject
-
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +100,10 @@ Global
 		{E735430B-8EA1-4351-BD50-3161304D0EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E735430B-8EA1-4351-BD50-3161304D0EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E735430B-8EA1-4351-BD50-3161304D0EC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43AA7717-099E-4604-A09B-2160C7F402C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43AA7717-099E-4604-A09B-2160C7F402C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43AA7717-099E-4604-A09B-2160C7F402C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43AA7717-099E-4604-A09B-2160C7F402C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,9 +17,9 @@ namespace CustomModbusSlave.Climatic.TramUkvzM2App
 
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            var appFactory = new AppFactory("psn.TRAM-UKVZ-M2.xml");
+            var appFactory = new AppFactory("psn.TRAM-Horizon-Interior.xml");
             var appAbilities = appFactory.Abilities;
-            var paramPresenter = appAbilities.GetParametersPresentation("tabs.tramukvzm2.xml");
+            var paramPresenter = appAbilities.GetParametersPresentation("tabs.tramhorizoninterior.xml");
 
             if (appAbilities.Version == AppVersion.Full)
             {
@@ -65,11 +65,11 @@ namespace CustomModbusSlave.Climatic.TramUkvzM2App
             }
 
 
-            appFactory.ShowMainWindowInOwnThread("Технический абонент, Трамвай УКВЗ М2", appAbilities, mainVm =>
+            appFactory.ShowMainWindowInOwnThread("Технический абонент, Трамвай Горизонт салон", appAbilities, mainVm =>
             {
                 try
                 {
-                    ParametersPresenterXmlSerializer.Serialize("123_tramukvzm2.xml", appAbilities.PsnProtocolConfiguration, false);
+                    ParametersPresenterXmlSerializer.Serialize("123_tramhorizoninter.xml", appAbilities.PsnProtocolConfiguration, false);
 
                     mainVm.UseCustomContent = true;
                     var channel = mainVm.AddChannel("Single channel");
