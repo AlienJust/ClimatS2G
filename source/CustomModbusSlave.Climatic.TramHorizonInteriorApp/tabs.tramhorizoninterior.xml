@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Parameters>
+  <Parameter Key="param_008_240_request_001" Identifier="cd920d41-78ca-4666-9f39-52e154193830" Comment="КСМ и ПЧ 0xf0: запрос - Уставка ПЧ, Гц" />
+  <Parameter Key="param_008_240_request_002" Identifier="576a3534-6997-4d94-be3f-176e83fde7d1" Comment="КСМ и ПЧ 0xf0: запрос - Устройство включено" />
+  <Parameter Key="param_008_240_reply_001" Identifier="a336da22-44b5-44ff-ae61-b3f169bbf6b1" Comment="КСМ и ПЧ 0xf0: ответ - Перегрузка по току (&gt; 250 %)" />
+  <Parameter Key="param_008_240_reply_002" Identifier="f9470f69-1f28-4995-92c1-7d1f71868fa7" Comment="КСМ и ПЧ 0xf0: ответ - Защита по температуре (&gt; 110 °C)" />
+  <Parameter Key="param_008_240_reply_003" Identifier="5d9c22ab-7e71-4a94-8a50-ed6111571ac7" Comment="КСМ и ПЧ 0xf0: ответ - Повышенное/пониженное напряжение питания транзисторов (15 В)" />
+  <Parameter Key="param_008_240_reply_004" Identifier="8751284d-871e-48fb-93d4-90d9880f899c" Comment="КСМ и ПЧ 0xf0: ответ - КЗ нижних транзисторов или перекрытие управляющих сигналов" />
+  <Parameter Key="param_008_240_reply_005" Identifier="ef19fe67-1ce2-4714-ba8f-c4b0937e432c" Comment="КСМ и ПЧ 0xf0: ответ - Повышенное входное напряжение" />
+  <Parameter Key="param_008_240_reply_006" Identifier="1fbebb7e-75bf-440a-af9e-cc649a74b35c" Comment="КСМ и ПЧ 0xf0: ответ - Перегрузка по току (&gt; 150 %)" />
+  <Parameter Key="param_008_240_reply_007" Identifier="f716da1e-16eb-4195-8a48-6bdce2aa59e2" Comment="КСМ и ПЧ 0xf0: ответ - Выходное напряжение включено" />
+  <Parameter Key="param_008_240_reply_008" Identifier="016d21de-bdbb-49da-818d-fec39a54572d" Comment="КСМ и ПЧ 0xf0: ответ - Заданная выходная частота, Гц" />
+  <Parameter Key="param_008_240_reply_009" Identifier="2ce4c02e-cdb8-4008-ac97-2864e2e714e3" Comment="КСМ и ПЧ 0xf0: ответ - Текущая выходная частота, Гц" />
+  <Parameter Key="param_008_240_reply_010" Identifier="b2856a61-4022-46a9-8020-6f4162cbc756" Comment="КСМ и ПЧ 0xf0: ответ - Ток фазы A, %" />
+  <Parameter Key="param_008_240_reply_011" Identifier="7a1a36f8-8bc0-4af2-86b7-0f1103ab912a" Comment="КСМ и ПЧ 0xf0: ответ - Ток фазы B, %" />
+  <Parameter Key="param_008_240_reply_012" Identifier="73c5caaa-3332-4ad8-930c-6edafb6a4269" Comment="КСМ и ПЧ 0xf0: ответ - Ток фазы C, %" />
+  <Parameter Key="param_008_240_reply_013" Identifier="875b7c2b-2c57-44b1-93aa-0702c5e8b710" Comment="КСМ и ПЧ 0xf0: ответ - Напряжение цепи постоянного тока, В" />
+  <Parameter Key="param_008_240_reply_014" Identifier="665f29b0-72ee-409b-9fbf-7796ca00c291" Comment="КСМ и ПЧ 0xf0: ответ - Включен инвертор" />
+  <Parameter Key="param_008_240_reply_015" Identifier="3e5459d9-479c-4e8f-8f8b-4d3d2b15d14b" Comment="КСМ и ПЧ 0xf0: ответ - Состояние инвертора: отказ" />
+  <Parameter Key="param_008_240_reply_016" Identifier="f6bfded1-e8bc-4ef8-a288-8859dd0813d1" Comment="КСМ и ПЧ 0xf0: ответ - Состояние инвертора: наличие диагностической информации" />
+  
+  <Parameter Key="param_001_003_reply_001" Identifier="5858e1bf-d209-4f80-9441-6684ed398694" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D0 - авария обмена «мастер — слейв»" />
+  <Parameter Key="param_001_003_reply_002" Identifier="cc9627a9-cff9-4a5c-8b58-7ab29768bf99" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D1 - авария обмена с ПЧ" />
+  <Parameter Key="param_001_003_reply_003" Identifier="d5161c57-9019-4ee5-9a83-95e048d4eab1" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D2 - отсутствие данных от СУ в обмене с слейвом КСМ" />
+  <Parameter Key="param_001_003_reply_004" Identifier="5e5742c4-c47b-4955-ab9b-098770788b0e" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D3 - отсутствие связи с СУ в линии CAN" />
+  <Parameter Key="param_001_003_reply_005" Identifier="fc6dc7e5-68b7-420a-a7c1-10788242c78b" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D4 - отсутствие данных от мастера КСМ в линии CAN" />
+  <Parameter Key="param_001_003_reply_006" Identifier="4eb3c483-8950-4067-ad03-e58d058dbd3b" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D5 - резерв" />
+  <Parameter Key="param_001_003_reply_007" Identifier="e6e77913-024e-4535-b4d3-0434989cf442" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D6 - резерв" />
+  <Parameter Key="param_001_003_reply_008" Identifier="6211415b-bfb5-4367-843a-cedc1d96572d" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D7 - резерв" />
+  
+  <Parameter Key="param_001_003_reply_009" Identifier="58cbbd10-c9e0-4b51-ae64-f40bc337967c" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D0 - нарушена связь с платой расширения, регистры IO" />
+  <Parameter Key="param_001_003_reply_010" Identifier="392f52dc-d706-4926-b8c7-2dcf2b3f81dc" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D1 - нарушена связь с датчиком температуры 1" />
+  <Parameter Key="param_001_003_reply_011" Identifier="f71072f5-9123-462a-a0df-7d32840528a0" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D2 - нарушена связь с датчиком температуры 2" />
+  <Parameter Key="param_001_003_reply_012" Identifier="931fef96-72b6-4e93-8ae5-e06c96a051b1" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D3 - нарушена связь с датчиком температуры 3" />
+  <Parameter Key="param_001_003_reply_013" Identifier="bc5795ea-ee9d-4e7b-82d9-fd8edcbcac4b" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D4 - нарушена связь с датчиком температуры 4" />
+  <Parameter Key="param_001_003_reply_014" Identifier="4fd52987-302b-4073-a573-37c0d24f2bd2" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D5 - нарушена связь с датчиком температуры 5" />
+  <Parameter Key="param_001_003_reply_015" Identifier="91ed0e6d-450d-4cd4-9d8c-fe2876870b77" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D6 - нарушена связь с АЦП платы расширения" />
+  <Parameter Key="param_001_003_reply_016" Identifier="f7f9450f-4b70-4559-84f9-5a5982bd5776" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D7 - нарушена связь с памятью FRAM" />
+  
+  <Parameter Key="param_001_003_reply_017" Identifier="046e0578-7682-4b00-9bac-522019987b50" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D0 - порт IO 1.5=1 команда на назначение «Master»;" />
+  <Parameter Key="param_001_003_reply_018" Identifier="d8216620-4005-4842-9887-2cc8f6a43c92" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D1 - порт IO 0.1=1 команда на включение кондиционера" />
+  <Parameter Key="param_001_003_reply_019" Identifier="528848c3-778e-49b7-ad4d-c660464d0c22" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D2 - порт IO 0.2=0 авария компрессора №1 по максимальному давлению" />
+  <Parameter Key="param_001_003_reply_020" Identifier="28c828b6-161f-49b6-9242-aa6c2501ddea" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D3 - порт IO 0.3=0 авария компрессора №1 по минимальному давлению" />
+  <Parameter Key="param_001_003_reply_021" Identifier="3ad9e8a4-c0e9-4262-a27c-b00bbe9ac8c4" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D4 - порт IO 0.4=1 авария, останов вентилятора испарителя M " />
+  <Parameter Key="param_001_003_reply_022" Identifier="e26b7939-61cb-47b5-b465-c38285f2f97a" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D5 - порт IO 0.5=1 останов вентилятора конденсатора M2/1" />
+  <Parameter Key="param_001_003_reply_023" Identifier="63a244e5-bcd5-46ce-8187-ed66cfff9200" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D6 - порт IO 0.6=1 останов вентилятора конденсатора M3/1" />
+  <Parameter Key="param_001_003_reply_024" Identifier="b30b9c43-c024-4125-9ca3-bcf1b576f2f0" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D7 - порт IO 0.7=1 останов вентилятора конденсатора M4/1" />
+  
+  <Parameter Key="param_001_003_reply_025" Identifier="5665327a-70dd-49fd-8856-39de2e1764ab" Comment="между КСМ и РПД 03: ответ - Дискретные выходы: D0 - Включение рециркуляционной заслонки" />
+  <Parameter Key="param_001_003_reply_026" Identifier="c08293c4-2f06-4835-9f80-26ff1fd76e9c" Comment="между КСМ и РПД 03: ответ - Дискретные выходы: D1 - Включение высоковольтного контактора" />
+  <Parameter Key="param_001_003_reply_027" Identifier="cbd7e051-f6c4-41b8-b01c-394a908f479f" Comment="между КСМ и РПД 03: ответ - Дискретные выходы: D2 - резерв" />
+  <Parameter Key="param_001_003_reply_028" Identifier="622cb15b-df97-4b1e-8705-2712bed3fbf9" Comment="между КСМ и РПД 03: ответ - Дискретные выходы: D3 - резерв" />
+  <Parameter Key="param_001_003_reply_029" Identifier="dec21465-5715-453e-8b11-73ee3471e22c" Comment="между КСМ и РПД 03: ответ - Дискретные выходы: D4 - резерв" />
+  <Parameter Key="param_001_003_reply_030" Identifier="3ba17c75-89fb-43a5-b6bf-5fc24c9d0ab7" Comment="между КСМ и РПД 03: ответ - Дискретные выходы: D5 - резерв" />
+  <Parameter Key="param_001_003_reply_031" Identifier="d481ecf5-8673-4a73-b348-13f6b5dccd0a" Comment="между КСМ и РПД 03: ответ - Дискретные выходы: D6 - резерв" />
+  <Parameter Key="param_001_003_reply_032" Identifier="b5a8a7ac-074d-40d8-8025-13c033313d46" Comment="между КСМ и РПД 03: ответ - Дискретные выходы: D7 - резерв" />
+  
+  <Parameter Key="param_001_003_reply_033" Identifier="5ed26883-28f9-4112-999d-daafbfe68527" Comment="между КСМ и РПД 03: ответ - Низкое давление, бар" />
+  <Parameter Key="param_001_003_reply_034" Identifier="6d135930-7f03-492d-9781-5001825fe80a" Comment="между КСМ и РПД 03: ответ - Высокое давление, бар" />
+  <Parameter Key="param_001_003_reply_035" Identifier="7b184a35-618b-4b37-9295-0ebcf234560d" Comment="между КСМ и РПД 03: ответ - ОС МПБС, В" />
+  <Parameter Key="param_001_003_reply_036" Identifier="60cccc51-7b0d-4ea7-b9b7-a4ddcc56a3ed" Comment="между КСМ и РПД 03: ответ - ОС заслонки, В" />
+  <Parameter Key="param_001_003_reply_037" Identifier="f9fc8742-a640-4e71-b29a-f8045cc3556b" Comment="между КСМ и РПД 03: ответ - Температура в салоне" />
+  <Parameter Key="param_001_003_reply_038" Identifier="001f72f4-4bb5-4d5e-b55e-5c3d5d4b05b2" Comment="между КСМ и РПД 03: ответ - Температура наружного воздуха" />
+  <Parameter Key="param_001_003_reply_039" Identifier="fd8241e6-c222-4e27-8211-9d90e1c16d54" Comment="между КСМ и РПД 03: ответ - Температура рециркуляционного воздуха" />
+  <Parameter Key="param_001_003_reply_040" Identifier="abfbc7f5-c1e8-41d9-b024-28f68a0a8916" Comment="между КСМ и РПД 03: ответ - Температура подаваемого воздуха" />
+  
+  <Parameter Key="param_001_003_reply_041" Identifier="f86a2249-0235-4e60-b9a2-8d4a7fe8febe" Comment="между КСМ и РПД 03: ответ - Регистр дискретных сигналов 1: D0 - Низкое давление не в норме" />
+  <Parameter Key="param_001_003_reply_042" Identifier="eeeca4bd-3dc0-47c6-998e-c79b0c2b08a7" Comment="между КСМ и РПД 03: ответ - Регистр дискретных сигналов 1: D1 - Высокое давление не в норме" />
+  <Parameter Key="param_001_003_reply_043" Identifier="fdc95a04-fb71-47b3-9f77-ee3533b96a84" Comment="между КСМ и РПД 03: ответ - Регистр дискретных сигналов 1: D2 - ОС МПБС не в норме" />
+  <Parameter Key="param_001_003_reply_044" Identifier="ca63076a-bda6-46bf-9bbb-98d4cb3babe5" Comment="между КСМ и РПД 03: ответ - Регистр дискретных сигналов 1: D3 - ОС заслонки не в норме" />
+  <Parameter Key="param_001_003_reply_045" Identifier="c997e928-931d-4802-948d-87b10808c381" Comment="между КСМ и РПД 03: ответ - Регистр дискретных сигналов 1: D4 - резерв" />
+  <Parameter Key="param_001_003_reply_046" Identifier="1d5b2db4-0b2c-400a-9edb-ae62de3fda41" Comment="между КСМ и РПД 03: ответ - Регистр дискретных сигналов 1: D5 - резерв" />
+  <Parameter Key="param_001_003_reply_047" Identifier="6e338b92-b39d-4b16-8432-10b56dd194fc" Comment="между КСМ и РПД 03: ответ - Регистр дискретных сигналов 1: D6 - резерв" />
+  <Parameter Key="param_001_003_reply_048" Identifier="a8bdf837-c963-409a-b444-984c988c41f8" Comment="между КСМ и РПД 03: ответ - Регистр дискретных сигналов 1: D7 - резерв" />
+  
+  <Parameter Key="param_001_003_reply_049" Identifier="859a1fa1-2395-43e7-85fa-40bc10e7bec4" Comment="между КСМ и РПД 03: ответ - ШИМ на вентилятор, %" />
+  <Parameter Key="param_001_003_reply_050" Identifier="3ad35d7a-93cb-4778-8c97-79d54f2a7ac0" Comment="между КСМ и РПД 03: ответ - Рассчитанная уставка температуры в салоне, гр" />
+  <Parameter Key="param_001_003_reply_051" Identifier="b588fde7-c791-4bfe-9e64-ea55476aaeff" Comment="между КСМ и РПД 03: ответ - Рассчитанная уставка расхода воздуха в салоне, %" />
+  <Parameter Key="param_001_003_reply_052" Identifier="aad95921-7716-4615-8d9f-fa5b6c053d8e" Comment="между КСМ и РПД 03: ответ - Уставка частоты ПЧ, %" />
+  <Parameter Key="param_001_003_reply_053" Identifier="6fcafdc4-454e-49a4-8581-3c80eb658375" Comment="между КСМ и РПД 03: ответ - 2й сегмент, Температура в салоне, гр" />
+  <Parameter Key="param_001_003_reply_054" Identifier="345f6433-9e59-494b-84b7-a203d3f89383" Comment="между КСМ и РПД 03: ответ - 2й сегмент, Температура наружного воздуха, гр" />
+  
+  <Parameter Key="param_001_003_reply_055" Identifier="deacb201-5119-4aad-925a-27680e00bfb3" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 1: D0 - Включен компрессор 1" />
+  <Parameter Key="param_001_003_reply_056" Identifier="0a38f84b-e001-48f0-ad18-365642006e8f" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 1: D1 - Включен компрессор 2" />
+  <Parameter Key="param_001_003_reply_057" Identifier="029aba42-f018-40a4-b0b6-cb00fd14d7e9" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 1: D2 - Неисправность вентилятора конденсатора M2/1 " />
+  <Parameter Key="param_001_003_reply_058" Identifier="6c5a0709-3fa4-4817-9a46-7bc4138db3f5" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 1: D3 - Неисправность вентилятора конденсатора M3/1 " />
+  <Parameter Key="param_001_003_reply_059" Identifier="b92fea3d-d3c5-433d-9ccf-b83398cb77ce" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 1: D4 - Неисправность вентилятора конденсатора M4/1 " />
+  <Parameter Key="param_001_003_reply_060" Identifier="be1de186-dfc2-426c-ae21-acbcba0711de" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 1: D5 - резерв" />
+  <Parameter Key="param_001_003_reply_061" Identifier="94c83340-bb1f-4637-b042-22befbf831f0" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 1: D6 - резерв" />
+  <Parameter Key="param_001_003_reply_062" Identifier="608088f2-2572-4c8a-9af9-56a8a58bf94b" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 1: D7 - резерв" />
+  <Parameter Key="param_001_003_reply_063" Identifier="13218320-fcba-4ff4-b90e-13e19c5c35c0" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 2: D0 - Отказ ПЧ2" />
+  <Parameter Key="param_001_003_reply_064" Identifier="a6ee0eac-64c3-4679-a7d5-ea6dbd38d7b8" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 2: D1 - Отказ датчика температуры в салоне 2" />
+  <Parameter Key="param_001_003_reply_065" Identifier="1bf0fcf7-aa5a-4119-9414-b78511d1af77" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 2: D2 - Отказ заслонки 2" />
+  <Parameter Key="param_001_003_reply_066" Identifier="0fdc6583-1a9d-45f9-be8f-ad5093ff60ad" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 2: D3 - Отказ вентилятора 2" />
+  <Parameter Key="param_001_003_reply_067" Identifier="676371cf-f0b5-4450-8138-ff5ff0248b8c" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 2: D4 - Отказ компрессора 2 по низкому давлению" />
+  <Parameter Key="param_001_003_reply_068" Identifier="094ce851-7813-4413-9124-d7d9cfb2cec2" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 2: D5 - Отказ компрессора 2 по высокому давлению" />
+  <Parameter Key="param_001_003_reply_069" Identifier="1feaa549-668a-4d0d-a6fa-ef1b4a0613d5" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 2: D6 - резерв" />
+  <Parameter Key="param_001_003_reply_070" Identifier="eab5a625-ea98-4767-933e-fdff5d87c427" Comment="между КСМ и РПД 03: ответ - Диагностика сегмента 2, р. 2: D7 - резерв" />
+  <Parameter Key="param_001_003_reply_071" Identifier="0f7a6c6c-250f-46bd-b479-1d30ba8f1446" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 1: b.0 - Открытие двери 1" />
+  <Parameter Key="param_001_003_reply_072" Identifier="ea80fe82-8175-43dc-8f93-476b5a4dd606" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 1: b.1 - Открытие двери 2" />
+  <Parameter Key="param_001_003_reply_073" Identifier="6da2a771-2adf-4c28-be94-ebe33a2cb207" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 1: b.2 - Открытие двери 3" />
+  <Parameter Key="param_001_003_reply_074" Identifier="30017062-f73b-45d6-9ef2-b06c5b2e4fb2" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 1: b.3 - Открытие двери 4" />
+  <Parameter Key="param_001_003_reply_075" Identifier="a350d0bb-4f27-4499-bb81-3656a2ecd60a" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 1: b.4 - Открытие двери 5" />
+  <Parameter Key="param_001_003_reply_076" Identifier="c129d2be-f085-407d-af01-4efa36f36a09" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 1: b.5 - Открытие двери 6" />
+  <Parameter Key="param_001_003_reply_077" Identifier="c46eb50f-a076-4c52-aaf9-26de2b20d4ef" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 1: b.6 - резерв" />
+  <Parameter Key="param_001_003_reply_078" Identifier="db7b1989-33b8-4cc4-99b3-205b4363973b" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 1: b.7 - резерв" />
+  <Parameter Key="param_001_003_reply_079" Identifier="cda99361-4253-4e9b-9613-680d1b48d07b" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 2: b.0 - Проезд стрелки без тока (1 — режим проезда стрелки без тока)" />
+  <Parameter Key="param_001_003_reply_080" Identifier="fc3b5cfd-e5b4-4425-a8c8-cd5e05957b73" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 2: b.1 - резерв" />
+  <Parameter Key="param_001_003_reply_081" Identifier="17f79190-0915-4252-abfa-df3426b4976f" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 2: b.2 - резерв" />
+  <Parameter Key="param_001_003_reply_082" Identifier="b6edc7f2-9a11-4b4d-9bec-e260f55d4bc9" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 2: b.3 - резерв" />
+  <Parameter Key="param_001_003_reply_083" Identifier="e92dd04a-5582-4f64-b7ec-6a7adc688d81" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 2: b.4 - резерв" />
+  <Parameter Key="param_001_003_reply_084" Identifier="696d8af2-c55b-48d1-ae84-7abec9558487" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 2: b.5 - резерв" />
+  <Parameter Key="param_001_003_reply_085" Identifier="44c2995e-922a-42c9-bfc0-7407dfc247a4" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 2: b.6 - резерв" />
+  <Parameter Key="param_001_003_reply_086" Identifier="d17de528-12ab-4eea-98a8-6fd87d403118" Comment="между КСМ и РПД 03: ответ - СУ: Сигналы 2: b.7 - резерв" />
+  <Parameter Key="param_001_003_reply_087" Identifier="730b590c-a670-4dd9-ac4e-42d4d7483534" Comment="между КСМ и РПД 03: ответ - СУ: Уставка расхода воздуха, %" />
+  <Parameter Key="param_001_003_reply_088" Identifier="ac93fd8f-8861-4462-8990-4d12757b4be9" Comment="между КСМ и РПД 03: ответ - СУ: Целевая температура в пассажирском салоне, гр." />
+  <Parameter Key="param_001_003_reply_089" Identifier="8c9c2a94-f41d-4a8e-a31e-c151836a08a8" Comment="между КСМ и РПД 03: ответ - СУ: Режим работы климатической системы" />
+  <Parameter Key="param_001_003_reply_090" Identifier="45de12da-2251-4fad-8bfc-14924111dd7f" Comment="между КСМ и РПД 03: ответ - Уставка температуры по линии CAN" />
+  <Parameter Key="param_001_003_reply_091" Identifier="e86257d2-ae6f-46f0-ba94-530bb3fa1dd8" Comment="между КСМ и РПД 03: ответ - Версия ПО" />
+  <Parameter Key="param_001_003_reply_092" Identifier="652da10c-8ec2-4c95-a443-28676e44559d" Comment="между КСМ и РПД 03: ответ - Режим работы климатического контроллера" />
+  <Parameter Key="param_020_016_request_001" Identifier="b378f906-0a39-4fb7-be6b-09829b15c36a" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №1" />
+  <Parameter Key="param_020_016_request_002" Identifier="5c46dcc5-b637-40d8-851a-1cfd299bd13b" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №1" />
+  <Parameter Key="param_020_016_request_003" Identifier="044beaab-5bdc-46c3-b613-0e1b38504de3" Comment="КСМ, команда 16 (0x10): запрос - Температура наружного воздуха" />
+  <Parameter Key="param_020_016_request_004" Identifier="4b42957b-6895-483e-8003-e76162a4f96c" Comment="КСМ, команда 16 (0x10): запрос - Температура рециркуляционного воздуха" />
+  <Parameter Key="param_020_016_request_005" Identifier="d8d9c2f2-26c0-452d-a4a5-f871f0f8ae55" Comment="КСМ, команда 16 (0x10): запрос - Температура подаваемого воздуха" />
+  <Parameter Key="param_020_016_request_006" Identifier="0d1db45d-a570-44a6-8d3c-861504adb95c" Comment="КСМ, команда 16 (0x10): запрос - PС.4 Включение высоковольтного контактора" />
+  <Parameter Key="param_020_016_request_007" Identifier="31d74854-771a-4e94-ba26-a9aa9dbabe48" Comment="КСМ, команда 16 (0x10): запрос - PС.5 Управление воздушной заслонкой" />
+  <Parameter Key="param_020_016_request_008" Identifier="6a618eeb-231c-4a27-a2d4-014ab0631460" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.1 команда на включение кондиционера" />
+  <Parameter Key="param_020_016_request_009" Identifier="03b5077b-e3bc-4156-bc77-212ca440834e" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.2 авария компрессора №1 по максимальному давлению" />
+  <Parameter Key="param_020_016_request_010" Identifier="f7f51e76-691e-4bae-8aca-c2fe14db9ff1" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.3 авария компрессора №1 по минимальному давлению" />
+  <Parameter Key="param_020_016_request_011" Identifier="d76e093a-9d0f-41f7-8437-7a819ce09863" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.4 авария, останов вентилятора испарителя M1/1" />
+  <Parameter Key="param_020_016_request_012" Identifier="a97ba80d-c1ea-4f1c-a179-9bad761763fb" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.5 останов вентилятора конденсатора M2/1" />
+  <Parameter Key="param_020_016_request_013" Identifier="c5567d1f-bf48-4f54-9718-844b220b85c3" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.6 останов вентилятора конденсатора M3/1" />
+  <Parameter Key="param_020_016_request_014" Identifier="870556da-0a17-4ee9-bcf9-1eb1cdbc0f44" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.7 останов вентилятора конденсатора M4/1" />
+  <Parameter Key="param_020_016_request_015" Identifier="3b0c9c20-9e0e-4f07-84c9-c61fb1fd33eb" Comment="КСМ, команда 16 (0x10): запрос - порт IO 1.5 команда на назначение «Master»" />
+  <Parameter Key="param_020_016_request_016" Identifier="7c985813-1106-4fb0-beef-fd0c5f4ebb14" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D0 - нарушена связь с платой расширения, регистры IO" />
+  <Parameter Key="param_020_016_request_017" Identifier="3bf3b46e-80a3-4129-aa15-dbe7e00d4d87" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D1 - нарушена связь с датчиком температуры 1" />
+  <Parameter Key="param_020_016_request_018" Identifier="4df02be3-fa2e-4f77-a9b8-eafcd3b85b62" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D2 - нарушена связь с датчиком температуры 1" />
+  <Parameter Key="param_020_016_request_019" Identifier="eb6aa5d1-8b2f-4b3d-bf26-bda3bf263322" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D3 - нарушена связь с датчиком температуры 1" />
+  <Parameter Key="param_020_016_request_020" Identifier="04b307bd-2afc-4b5a-a064-53bc041b09fe" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D4 - нарушена связь с датчиком температуры 1" />
+  <Parameter Key="param_020_016_request_021" Identifier="bf0089b6-2bf4-4623-a913-c6ed01d4281b" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D5 - нарушена связь с датчиком температуры 1" />
+  <Parameter Key="param_020_016_request_022" Identifier="e51a11c2-8aba-4e0a-ab86-47c2f84fec9f" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D6 - нарушена связь с АЦП платы расширения" />
+  <Parameter Key="param_020_016_request_023" Identifier="279aa3aa-41f4-4f54-9f23-ee1439602d45" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D7 - нарушена связь с памятью FRAM" />
+  <Parameter Key="param_020_016_request_024" Identifier="79fd39a4-38e6-4f7b-8555-43a1592adfdf" Comment="КСМ, команда 16 (0x10): запрос - Этап работы" />
+  <Parameter Key="param_020_016_request_025" Identifier="efbba9cb-0688-4d41-9c97-12d6454f9ea6" Comment="КСМ, команда 16 (0x10): запрос - ОС воздушной заслонки, В" />
+  <Parameter Key="param_020_016_request_026" Identifier="057a3b0a-de15-41a9-a70b-afda7b70d567" Comment="КСМ, команда 16 (0x10): запрос - ОС МПБС, В" />
+  <Parameter Key="param_020_016_request_027" Identifier="c2efc792-0a66-44fc-916e-f219e4fd4059" Comment="КСМ, команда 16 (0x10): запрос - Датчик высокого давления, Бар" />
+  <Parameter Key="param_020_016_request_028" Identifier="0597b685-328c-4162-ae52-e4acf2e42655" Comment="КСМ, команда 16 (0x10): запрос - Датчик низкого давления, Бар" />
+  <Parameter Key="param_020_016_request_029" Identifier="d91a6cf9-4d23-48c9-b7a8-4959dea42845" Comment="КСМ, команда 16 (0x10): запрос - Уставка положения воздушной заслонки (ШИМ), %" />
+  <Parameter Key="param_020_016_request_030" Identifier="b528a947-0afe-466e-b3a1-e38c92bb5da9" Comment="КСМ, команда 16 (0x10): запрос - Уставка расхода вентилятора испарителя (ШИМ), %" />
+  <Parameter Key="param_020_016_request_031" Identifier="6f57422b-c55b-4bec-adbc-4f2cf9650882" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 1" />
+  <Parameter Key="param_020_016_request_032" Identifier="c3d5e503-1f5c-496b-a35e-82cadad60ce9" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 2" />
+  <Parameter Key="param_020_016_request_033" Identifier="ded4c62d-8299-491a-95a9-53b5bfa8b094" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 3" />
+  <Parameter Key="param_020_016_request_034" Identifier="ba366a75-e005-49f9-aa63-d3a512bb774a" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 4" />
+  <Parameter Key="param_020_016_request_035" Identifier="47c8862a-0267-4c78-868d-07f63e2a5f08" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 5" />
+  <Parameter Key="param_020_016_request_036" Identifier="eac9b146-2b9d-4294-98bb-be5b3cf63b94" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 1: открытие двери 6" />
+  <Parameter Key="param_020_016_request_037" Identifier="a2823b04-8d50-4f48-910b-033e18f8ef28" Comment="КСМ, команда 16 (0x10): запрос - СУ: Сигналы 2: проезд стрелки без тока" />
+  <Parameter Key="param_020_016_request_038" Identifier="a99eac52-5dab-4961-ae7b-5cf0e72b521b" Comment="КСМ, команда 16 (0x10): запрос - СУ: Уставка расхода воздуха, %" />
+  <Parameter Key="param_020_016_request_039" Identifier="6baaa9af-6875-4854-a945-47fa481ce448" Comment="КСМ, команда 16 (0x10): запрос - СУ: Целевая температура в пассажирском салоне, гр." />
+  <Parameter Key="param_020_016_request_040" Identifier="451fcb4a-4698-4fd6-a2fd-e813cb325d53" Comment="КСМ, команда 16 (0x10): запрос - СУ: Режим работы климатической системы" />
+  <Parameter Key="param_020_016_request_041" Identifier="643ea4a7-277c-423b-b62e-ee23daa38a36" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по RS магистралям: D0 — авария обмена «мастер — слейв»" />
+  <Parameter Key="param_020_016_request_042" Identifier="4000446d-6973-4ba0-b381-be5ce83226ef" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по RS магистралям: D1 — авария обмена с ПЧ" />
+  <Parameter Key="param_020_016_request_043" Identifier="bb60156f-5608-408b-9746-f3778823a3a8" Comment="КСМ, команда 16 (0x10): запрос - Состояние обмена по CAN линии: D0 – отсутствие связи с СУ" />
+  <Parameter Key="param_020_016_request_044" Identifier="43693dd7-918b-4967-abad-03f1aa25ae55" Comment="КСМ, команда 16 (0x10): запрос - Расчитанная уставка ПЧ, гц" />
+  <Parameter Key="param_020_016_request_045" Identifier="d49f1e80-130a-4a40-af3c-b57adeb7cbb2" Comment="КСМ, команда 16 (0x10): запрос - Рассчитаная уставка расхода воздуха, %" />
+  <Parameter Key="param_020_016_request_046" Identifier="d8270e1f-5020-4577-b44b-876d15f41cef" Comment="КСМ, команда 16 (0x10): запрос - Версия ПО" />
+  <Parameter Key="param_020_016_request_047" Identifier="09700400-445a-4946-85ae-2537606c9b37" Comment="КСМ, команда 16 (0x10): запрос - Максимальная уставка ПЧ, гц" />
+  <Parameter Key="param_020_016_request_048" Identifier="7f822dcf-881d-4cce-a311-8394fadb8e96" Comment="КСМ, команда 16 (0x10): запрос - Минимальная уставка ПЧ, гц" />
+  <Parameter Key="param_020_016_request_049" Identifier="bc13e029-b032-4f22-8dc2-5eddee1dfc32" Comment="КСМ, команда 16 (0x10): запрос - Дельта + рассогласования, гр" />
+  <Parameter Key="param_020_016_request_050" Identifier="41a7f881-f9d6-4d92-aeaf-a12fdd4966c7" Comment="КСМ, команда 16 (0x10): запрос - Дельта - рассогласования, гр" />
+  <Parameter Key="param_020_016_request_051" Identifier="8962d3e9-0850-4b74-946d-184756c3fc46" Comment="КСМ, команда 16 (0x10): запрос - Принудительный режим обогрев/охлаждение" />
+  <Parameter Key="param_020_016_request_052" Identifier="ec85f4d2-fb12-4f5a-8b6c-c8ec65234c87" Comment="КСМ, команда 16 (0x10): запрос - Дельта уставки температуры, отладка" />
+</Parameters>
