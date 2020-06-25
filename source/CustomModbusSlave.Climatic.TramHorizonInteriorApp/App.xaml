@@ -1,5 +1,5 @@
 ﻿<Application
-    x:Class="CustomModbusSlave.Climatic.TramUkvzM2App.App"
+    x:Class="CustomModbusSlave.Climatic.TramHorizonInteriorApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     ShutdownMode="OnMainWindowClose" Startup="App_OnStartup">

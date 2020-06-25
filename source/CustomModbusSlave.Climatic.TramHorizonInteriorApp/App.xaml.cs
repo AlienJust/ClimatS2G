@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
-namespace CustomModbusSlave.Climatic.TramUkvzM2App
+namespace CustomModbusSlave.Climatic.TramHorizonInteriorApp
 {
     /// <summary>
     /// Interaction logic for App.xaml

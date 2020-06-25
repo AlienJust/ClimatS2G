@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.Climatic.TramUkvzM2App
+namespace CustomModbusSlave.Climatic.TramHorizonInteriorApp
 {
     /// <summary>
     /// Interaction logic for CommandPartView.xaml

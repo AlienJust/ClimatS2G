@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CustomModbusSlave.Climatic.TramUkvzM2App.Properties {
+namespace CustomModbusSlave.Climatic.TramHorizonInteriorApp.Properties {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.Climatic.TramUkvzM2App
+namespace CustomModbusSlave.Climatic.TramHorizonInteriorApp
 {
     /// <summary>
     /// Логика взаимодействия для MainContent.xaml
