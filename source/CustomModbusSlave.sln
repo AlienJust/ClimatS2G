@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.Tgm6.CabinApp", "CustomModbusSlave.Climatic.Tgm6.CabinApp\CustomModbusSlave.Climatic.Tgm6.CabinApp.csproj", "{2E521F3F-005F-446A-974A-7081AC9B0549}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModbusSlave.Climatic.Tgm6CabinApp", "CustomModbusSlave.Climatic.Tgm6CabinApp\CustomModbusSlave.Climatic.Tgm6CabinApp.csproj", "{46CD1EF0-EDC8-412C-AA68-6A49DDA51AA9}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamCentric.Common.Contracts", "ParamCentric.Common.Contracts\ParamCentric.Common.Contracts.csproj", "{08B70D5B-732F-4EF5-9DDC-56B3561B9B83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParamCentric.Modbus.Contracts", "ParamCentric.Modbus.Contracts\ParamCentric.Modbus.Contracts.csproj", "{04A51B7C-BCA2-496F-94A5-DFC4119B7B44}"
