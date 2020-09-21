@@ -18,30 +18,138 @@
   <Parameter Key="param_008_240_reply_014" Identifier="665f29b0-72ee-409b-9fbf-7796ca00c291" Comment="КСМ и ПЧ 0xf0: ответ - Включен инвертор" />
   <Parameter Key="param_008_240_reply_015" Identifier="3e5459d9-479c-4e8f-8f8b-4d3d2b15d14b" Comment="КСМ и ПЧ 0xf0: ответ - Состояние инвертора: отказ" />
   <Parameter Key="param_008_240_reply_016" Identifier="f6bfded1-e8bc-4ef8-a288-8859dd0813d1" Comment="КСМ и ПЧ 0xf0: ответ - Состояние инвертора: наличие диагностической информации" />
-
-  <Parameter Key="param_001_003_reply_001" Identifier="5858e1bf-d209-4f80-9441-6684ed398694" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D0 - авария обмена «мастер — слейв»" />
-  <Parameter Key="param_001_003_reply_002" Identifier="cc9627a9-cff9-4a5c-8b58-7ab29768bf99" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D1 - авария обмена с ПЧ" />
-  <Parameter Key="param_001_003_reply_003" Identifier="d5161c57-9019-4ee5-9a83-95e048d4eab1" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D2 - отсутствие данных от СУ в обмене с слейвом КСМ" />
-  <Parameter Key="param_001_003_reply_004" Identifier="5e5742c4-c47b-4955-ab9b-098770788b0e" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D3 - отсутствие связи с СУ в линии CAN" />
-  <Parameter Key="param_001_003_reply_005" Identifier="fc6dc7e5-68b7-420a-a7c1-10788242c78b" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D4 - отсутствие данных от мастера КСМ в линии CAN" />
+  
+  <Parameter Key="param_001_003_reply_001" Identifier="5858e1bf-d209-4f80-9441-6684ed398694" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D0 - авария обмена «мастер — слейв»" >
+   <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Нет" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Есть" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_002" Identifier="cc9627a9-cff9-4a5c-8b58-7ab29768bf99" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D1 - авария обмена с ПЧ" >
+   <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Нет" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Есть" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_003" Identifier="d5161c57-9019-4ee5-9a83-95e048d4eab1" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D2 - отсутствие данных от СУ в обмене с слейвом КСМ" >
+   <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Нет" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Есть" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_004" Identifier="5e5742c4-c47b-4955-ab9b-098770788b0e" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D3 - отсутствие связи с СУ в линии CAN" >
+   <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Нет" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Есть" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_005" Identifier="fc6dc7e5-68b7-420a-a7c1-10788242c78b" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D4 - отсутствие данных от мастера КСМ в линии CAN" >
+   <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Нет" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Есть" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
   <Parameter Key="param_001_003_reply_006" Identifier="4eb3c483-8950-4067-ad03-e58d058dbd3b" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D5 - резерв" />
   <Parameter Key="param_001_003_reply_007" Identifier="e6e77913-024e-4535-b4d3-0434989cf442" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D6 - резерв" />
   <Parameter Key="param_001_003_reply_008" Identifier="6211415b-bfb5-4367-843a-cedc1d96572d" Comment="между КСМ и РПД 03: ответ - Регистр наличия связи: D7 - резерв" />
-
-  <Parameter Key="param_001_003_reply_009" Identifier="58cbbd10-c9e0-4b51-ae64-f40bc337967c" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D0 - нарушена связь с платой расширения, регистры IO" />
-  <Parameter Key="param_001_003_reply_010" Identifier="392f52dc-d706-4926-b8c7-2dcf2b3f81dc" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D1 - нарушена связь с датчиком температуры 1" />
-  <Parameter Key="param_001_003_reply_011" Identifier="f71072f5-9123-462a-a0df-7d32840528a0" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D2 - нарушена связь с датчиком температуры 2" />
-  <Parameter Key="param_001_003_reply_012" Identifier="931fef96-72b6-4e93-8ae5-e06c96a051b1" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D3 - нарушена связь с датчиком температуры 3" />
-  <Parameter Key="param_001_003_reply_013" Identifier="bc5795ea-ee9d-4e7b-82d9-fd8edcbcac4b" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D4 - нарушена связь с датчиком температуры 4" />
-  <Parameter Key="param_001_003_reply_014" Identifier="4fd52987-302b-4073-a573-37c0d24f2bd2" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D5 - нарушена связь с датчиком температуры 5" />
-  <Parameter Key="param_001_003_reply_015" Identifier="91ed0e6d-450d-4cd4-9d8c-fe2876870b77" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D6 - нарушена связь с АЦП платы расширения" />
-  <Parameter Key="param_001_003_reply_016" Identifier="f7f9450f-4b70-4559-84f9-5a5982bd5776" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D7 - нарушена связь с памятью FRAM" />
-
-  <Parameter Key="param_001_003_reply_017" Identifier="046e0578-7682-4b00-9bac-522019987b50" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D0 - порт IO 1.5=1 команда на назначение «Master»;" />
-  <Parameter Key="param_001_003_reply_018" Identifier="d8216620-4005-4842-9887-2cc8f6a43c92" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D1 - порт IO 0.1=1 команда на включение кондиционера" />
-  <Parameter Key="param_001_003_reply_019" Identifier="528848c3-778e-49b7-ad4d-c660464d0c22" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D2 - порт IO 0.2=0 авария компрессора №1 по максимальному давлению" />
-  <Parameter Key="param_001_003_reply_020" Identifier="28c828b6-161f-49b6-9242-aa6c2501ddea" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D3 - порт IO 0.3=0 авария компрессора №1 по минимальному давлению" />
-  <Parameter Key="param_001_003_reply_021" Identifier="3ad9e8a4-c0e9-4262-a27c-b00bbe9ac8c4" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D4 - порт IO 0.4=1 авария, останов вентилятора испарителя M " />
+  
+  <Parameter Key="param_001_003_reply_009" Identifier="58cbbd10-c9e0-4b51-ae64-f40bc337967c" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D0 - нарушена связь с платой расширения, регистры IO" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_010" Identifier="392f52dc-d706-4926-b8c7-2dcf2b3f81dc" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D1 - нарушена связь с датчиком температуры 1" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_011" Identifier="f71072f5-9123-462a-a0df-7d32840528a0" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D2 - нарушена связь с датчиком температуры 2" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_012" Identifier="931fef96-72b6-4e93-8ae5-e06c96a051b1" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D3 - нарушена связь с датчиком температуры 3" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_013" Identifier="bc5795ea-ee9d-4e7b-82d9-fd8edcbcac4b" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D4 - нарушена связь с датчиком температуры 4" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_014" Identifier="4fd52987-302b-4073-a573-37c0d24f2bd2" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D5 - нарушена связь с датчиком температуры 5" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_015" Identifier="91ed0e6d-450d-4cd4-9d8c-fe2876870b77" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D6 - нарушена связь с АЦП платы расширения" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_016" Identifier="f7f9450f-4b70-4559-84f9-5a5982bd5776" Comment="между КСМ и РПД 03: ответ - Статус климатического контроллера: D7 - нарушена связь с памятью FRAM" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  
+  <Parameter Key="param_001_003_reply_017" Identifier="046e0578-7682-4b00-9bac-522019987b50" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D0 - порт IO 1.5=1 команда на назначение «Master»;" >
+   <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Нет" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Есть" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_018" Identifier="d8216620-4005-4842-9887-2cc8f6a43c92" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D1 - порт IO 0.1=1 команда на включение кондиционера" >
+   <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Нет" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Есть" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_019" Identifier="528848c3-778e-49b7-ad4d-c660464d0c22" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D2 - порт IO 0.2=0 авария компрессора №1 по максимальному давлению" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Не в норме" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Норма" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_020" Identifier="28c828b6-161f-49b6-9242-aa6c2501ddea" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D3 - порт IO 0.3=0 авария компрессора №1 по минимальному давлению" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Не в норме" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Норма" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_001_003_reply_021" Identifier="3ad9e8a4-c0e9-4262-a27c-b00bbe9ac8c4" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D4 - порт IO 0.4=1 авария, останов вентилятора испарителя M " >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
   <Parameter Key="param_001_003_reply_022" Identifier="e26b7939-61cb-47b5-b465-c38285f2f97a" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D5 - порт IO 0.5=1 останов вентилятора конденсатора M2/1" />
   <Parameter Key="param_001_003_reply_023" Identifier="63a244e5-bcd5-46ce-8187-ed66cfff9200" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D6 - порт IO 0.6=1 останов вентилятора конденсатора M3/1" />
   <Parameter Key="param_001_003_reply_024" Identifier="b30b9c43-c024-4125-9ca3-bcf1b576f2f0" Comment="между КСМ и РПД 03: ответ - Дискретные входы: D7 - порт IO 0.7=1 останов вентилятора конденсатора M4/1" />
@@ -120,29 +228,140 @@
   <Parameter Key="param_001_003_reply_092" Identifier="652da10c-8ec2-4c95-a443-28676e44559d" Comment="между КСМ и РПД 03: ответ - Режим работы климатического контроллера" />
 
   <Parameter Key="param_020_016_request_001" Identifier="b378f906-0a39-4fb7-be6b-09829b15c36a" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №1" />
-  <Parameter Key="param_020_016_request_002" Identifier="5c46dcc5-b637-40d8-851a-1cfd299bd13b" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №1" />
+  <Parameter Key="param_020_016_request_002" Identifier="5c46dcc5-b637-40d8-851a-1cfd299bd13b" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №2" />
   <Parameter Key="param_020_016_request_003" Identifier="044beaab-5bdc-46c3-b613-0e1b38504de3" Comment="КСМ, команда 16 (0x10): запрос - Температура наружного воздуха" />
   <Parameter Key="param_020_016_request_004" Identifier="4b42957b-6895-483e-8003-e76162a4f96c" Comment="КСМ, команда 16 (0x10): запрос - Температура рециркуляционного воздуха" />
   <Parameter Key="param_020_016_request_005" Identifier="d8d9c2f2-26c0-452d-a4a5-f871f0f8ae55" Comment="КСМ, команда 16 (0x10): запрос - Температура подаваемого воздуха" />
-  <Parameter Key="param_020_016_request_006" Identifier="0d1db45d-a570-44a6-8d3c-861504adb95c" Comment="КСМ, команда 16 (0x10): запрос - PС.4 Включение высоковольтного контактора" />
+  <Parameter Key="param_020_016_request_006" Identifier="0d1db45d-a570-44a6-8d3c-861504adb95c" Comment="КСМ, команда 16 (0x10): запрос - PС.4 Включение высоковольтного контактора" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Отключён" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Включён" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
   <Parameter Key="param_020_016_request_007" Identifier="31d74854-771a-4e94-ba26-a9aa9dbabe48" Comment="КСМ, команда 16 (0x10): запрос - PС.5 Управление воздушной заслонкой" />
-  <Parameter Key="param_020_016_request_008" Identifier="6a618eeb-231c-4a27-a2d4-014ab0631460" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.1 команда на включение кондиционера" />
-  <Parameter Key="param_020_016_request_009" Identifier="03b5077b-e3bc-4156-bc77-212ca440834e" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.2 авария компрессора №1 по максимальному давлению" />
-  <Parameter Key="param_020_016_request_010" Identifier="f7f51e76-691e-4bae-8aca-c2fe14db9ff1" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.3 авария компрессора №1 по минимальному давлению" />
-  <Parameter Key="param_020_016_request_011" Identifier="d76e093a-9d0f-41f7-8437-7a819ce09863" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.4 авария, останов вентилятора испарителя M1/1" />
-  <Parameter Key="param_020_016_request_012" Identifier="a97ba80d-c1ea-4f1c-a179-9bad761763fb" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.5 останов вентилятора конденсатора M2/1" />
-  <Parameter Key="param_020_016_request_013" Identifier="c5567d1f-bf48-4f54-9718-844b220b85c3" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.6 останов вентилятора конденсатора M3/1" />
-  <Parameter Key="param_020_016_request_014" Identifier="870556da-0a17-4ee9-bcf9-1eb1cdbc0f44" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.7 останов вентилятора конденсатора M4/1" />
+  <Parameter Key="param_020_016_request_008" Identifier="6a618eeb-231c-4a27-a2d4-014ab0631460" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.1 команда на включение кондиционера" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Нет" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Есть" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_009" Identifier="03b5077b-e3bc-4156-bc77-212ca440834e" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.2 авария компрессора №1 по максимальному давлению" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Не в норме" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Норма" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_010" Identifier="f7f51e76-691e-4bae-8aca-c2fe14db9ff1" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.3 авария компрессора №1 по минимальному давлению" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Не в норме" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Норма" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_011" Identifier="d76e093a-9d0f-41f7-8437-7a819ce09863" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.4 авария, останов вентилятора испарителя M1/1" >
+    <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_012" Identifier="a97ba80d-c1ea-4f1c-a179-9bad761763fb" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.5 останов вентилятора конденсатора M2/1" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_013" Identifier="c5567d1f-bf48-4f54-9718-844b220b85c3" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.6 останов вентилятора конденсатора M3/1" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_014" Identifier="870556da-0a17-4ee9-bcf9-1eb1cdbc0f44" Comment="КСМ, команда 16 (0x10): запрос - порт IO 0.7 останов вентилятора конденсатора M4/1" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
   <Parameter Key="param_020_016_request_015" Identifier="3b0c9c20-9e0e-4f07-84c9-c61fb1fd33eb" Comment="КСМ, команда 16 (0x10): запрос - порт IO 1.5 команда на назначение «Master»" />
-  <Parameter Key="param_020_016_request_016" Identifier="7c985813-1106-4fb0-beef-fd0c5f4ebb14" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D0 - нарушена связь с платой расширения, регистры IO" />
-  <Parameter Key="param_020_016_request_017" Identifier="3bf3b46e-80a3-4129-aa15-dbe7e00d4d87" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D1 - нарушена связь с датчиком температуры 1" />
-  <Parameter Key="param_020_016_request_018" Identifier="4df02be3-fa2e-4f77-a9b8-eafcd3b85b62" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D2 - нарушена связь с датчиком температуры 1" />
-  <Parameter Key="param_020_016_request_019" Identifier="eb6aa5d1-8b2f-4b3d-bf26-bda3bf263322" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D3 - нарушена связь с датчиком температуры 1" />
-  <Parameter Key="param_020_016_request_020" Identifier="04b307bd-2afc-4b5a-a064-53bc041b09fe" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D4 - нарушена связь с датчиком температуры 1" />
-  <Parameter Key="param_020_016_request_021" Identifier="bf0089b6-2bf4-4623-a913-c6ed01d4281b" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D5 - нарушена связь с датчиком температуры 1" />
-  <Parameter Key="param_020_016_request_022" Identifier="e51a11c2-8aba-4e0a-ab86-47c2f84fec9f" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D6 - нарушена связь с АЦП платы расширения" />
-  <Parameter Key="param_020_016_request_023" Identifier="279aa3aa-41f4-4f54-9f23-ee1439602d45" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D7 - нарушена связь с памятью FRAM" />
-  <Parameter Key="param_020_016_request_024" Identifier="79fd39a4-38e6-4f7b-8555-43a1592adfdf" Comment="КСМ, команда 16 (0x10): запрос - Этап работы" />
+  <Parameter Key="param_020_016_request_016" Identifier="7c985813-1106-4fb0-beef-fd0c5f4ebb14" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D0 - нарушена связь с платой расширения, регистры IO" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_017" Identifier="3bf3b46e-80a3-4129-aa15-dbe7e00d4d87" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D1 - нарушена связь с датчиком температуры 1" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_018" Identifier="4df02be3-fa2e-4f77-a9b8-eafcd3b85b62" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D2 - нарушена связь с датчиком температуры 1" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_019" Identifier="eb6aa5d1-8b2f-4b3d-bf26-bda3bf263322" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D3 - нарушена связь с датчиком температуры 1" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_020" Identifier="04b307bd-2afc-4b5a-a064-53bc041b09fe" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D4 - нарушена связь с датчиком температуры 1" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_021" Identifier="bf0089b6-2bf4-4623-a913-c6ed01d4281b" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D5 - нарушена связь с датчиком температуры 1" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_022" Identifier="e51a11c2-8aba-4e0a-ab86-47c2f84fec9f" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D6 - нарушена связь с АЦП платы расширения" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_023" Identifier="279aa3aa-41f4-4f54-9f23-ee1439602d45" Comment="КСМ, команда 16 (0x10): запрос - Диагностика контроллера: D7 - нарушена связь с памятью FRAM" >
+  <MultiView Expression="{$value} - {$text0}{$text1}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Норма" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Не в норме" ResultFalse="" Name="{$text1}" />
+    </MultiView>
+  </Parameter>
+  <Parameter Key="param_020_016_request_024" Identifier="79fd39a4-38e6-4f7b-8555-43a1592adfdf" Comment="КСМ, команда 16 (0x10): запрос - Этап работы" >
+    <MultiView Expression="{$value} - {$text0}{$text1}{$text2}{$text3}{$text4}{$text5}{$text6}{$text7}{$text8}{$text9}" Name="{$root}">
+      <NumberView Expression="[value]" StringFormat="f0" Name="{$value}" />
+      <BooleanView Expression="[value] == 0" ResultTrue="Выключение - Формирование команд «выключение»" ResultFalse="" Name="{$text0}" />
+      <BooleanView Expression="[value] == 1" ResultTrue="Выключение - Выдержка паузы 5 секунд, контроль на выключено" ResultFalse="" Name="{$text1}" />
+      <BooleanView Expression="[value] == 2" ResultTrue="Выключение" ResultFalse="" Name="{$text2}" />
+      <BooleanView Expression="[value] == 3" ResultTrue="Выключение" ResultFalse="" Name="{$text3}" />
+      <BooleanView Expression="[value] == 4" ResultTrue="Выключение" ResultFalse="" Name="{$text4}" />
+
+      <BooleanView Expression="[value] == 5" ResultTrue="Включение - Формирование команд «включение»" ResultFalse="" Name="{$text5}" />
+      <BooleanView Expression="[value] == 6" ResultTrue="Включение - Выдержка паузы, контроль результатов тестов" ResultFalse="" Name="{$text6}" />
+      <BooleanView Expression="[value] == 7" ResultTrue="Включение - Режим обогрев" ResultFalse="" Name="{$text7}" />
+      <BooleanView Expression="[value] == 8" ResultTrue="Включение - Режим охлаждение" ResultFalse="" Name="{$text8}" />
+      <BooleanView Expression="[value] == 9" ResultTrue="Включение" ResultFalse="" Name="{$text9}" />
+    </MultiView>
+  </Parameter>
   <Parameter Key="param_020_016_request_025" Identifier="efbba9cb-0688-4d41-9c97-12d6454f9ea6" Comment="КСМ, команда 16 (0x10): запрос - ОС воздушной заслонки, В" />
   <Parameter Key="param_020_016_request_026" Identifier="057a3b0a-de15-41a9-a70b-afda7b70d567" Comment="КСМ, команда 16 (0x10): запрос - ОС МПБС, В" />
   <Parameter Key="param_020_016_request_027" Identifier="c2efc792-0a66-44fc-916e-f219e4fd4059" Comment="КСМ, команда 16 (0x10): запрос - Датчик высокого давления, Бар" />

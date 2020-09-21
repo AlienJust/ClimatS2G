@@ -176,7 +176,7 @@
         <VarVal Position="5.0" Length="8" Name="#Количество слов, младший байт" Id="5f652fca-0e22-4e25-afb2-7c3297172c07" />
         <VarVal Position="6.0" Length="8" Name="#Количество байт" Id="12f3ab9b-6957-4a17-83c4-2ce67c3bc963" />
         <CpzPrm Name="Температура салона №1" Expression="([s7] * 256.0 + [u8]) * 0.01" Id="b378f906-0a39-4fb7-be6b-09829b15c36a" />
-        <CpzPrm Name="Температура салона №1" Expression="([s9] * 256.0 + [u10]) * 0.01" Id="5c46dcc5-b637-40d8-851a-1cfd299bd13b" />
+        <CpzPrm Name="Температура салона №2" Expression="([s9] * 256.0 + [u10]) * 0.01" Id="5c46dcc5-b637-40d8-851a-1cfd299bd13b" />
         <CpzPrm Name="Температура наружного воздуха" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="044beaab-5bdc-46c3-b613-0e1b38504de3" />
         <CpzPrm Name="Температура рециркуляционного воздуха" Expression="([s13] * 256.0 + [u14]) * 0.01" Id="4b42957b-6895-483e-8003-e76162a4f96c" />
         <CpzPrm Name="Температура подаваемого воздуха" Expression="([s15] * 256.0 + [u16]) * 0.01" Id="d8d9c2f2-26c0-452d-a4a5-f871f0f8ae55" />
