@@ -19,5 +19,17 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation
     {
         string Name { get; }
         bool CheckForEvent(double value);
+
+        EventLevel Level { get; }
+    }
+
+    public enum EventLevel
+    {
+        Debug,
+        Info,
+        Warning,
+        Error,
+        Critical,
+        Fatal
     }
 }
