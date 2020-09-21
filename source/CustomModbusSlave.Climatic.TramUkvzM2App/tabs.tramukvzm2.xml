@@ -120,7 +120,7 @@
   <Parameter Key="param_001_003_reply_092" Identifier="652da10c-8ec2-4c95-a443-28676e44559d" Comment="между КСМ и РПД 03: ответ - Режим работы климатического контроллера" />
   
   <Parameter Key="param_020_016_request_001" Identifier="b378f906-0a39-4fb7-be6b-09829b15c36a" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №1" />
-  <Parameter Key="param_020_016_request_002" Identifier="5c46dcc5-b637-40d8-851a-1cfd299bd13b" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №1" />
+  <Parameter Key="param_020_016_request_002" Identifier="5c46dcc5-b637-40d8-851a-1cfd299bd13b" Comment="КСМ, команда 16 (0x10): запрос - Температура салона №2" />
   <Parameter Key="param_020_016_request_003" Identifier="044beaab-5bdc-46c3-b613-0e1b38504de3" Comment="КСМ, команда 16 (0x10): запрос - Температура наружного воздуха" />
   <Parameter Key="param_020_016_request_004" Identifier="4b42957b-6895-483e-8003-e76162a4f96c" Comment="КСМ, команда 16 (0x10): запрос - Температура рециркуляционного воздуха" />
   <Parameter Key="param_020_016_request_005" Identifier="d8d9c2f2-26c0-452d-a4a5-f871f0f8ae55" Comment="КСМ, команда 16 (0x10): запрос - Температура подаваемого воздуха" />
