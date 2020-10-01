@@ -253,6 +253,7 @@
     <Compile Include="ParameterPresentation\ParameterInjectionConfigNcalc.cs" />
     <Compile Include="ParameterPresentation\ParameterPreselectedValue.cs" />
     <Compile Include="ParameterPresentation\ParametersPresenterXmlSerializer.cs" />
+    
     <Compile Include="ParameterPresentation\Views\BooleanView.cs" />
     <Compile Include="ParameterPresentation\IParameterView.cs" />
     <Compile Include="ParameterPresentation\IParametersPresenter.cs" />
@@ -260,6 +261,9 @@
     <Compile Include="ParameterPresentation\Views\DefaultView.cs" />
     <Compile Include="ParameterPresentation\Views\MultiView.cs" />
     <Compile Include="ParameterPresentation\Views\NumberView.cs" />
+    
+    <Compile Include="ParameterPresentation\Events\BooleanEvent.cs" />
+
     <Compile Include="ParameterPresentation\ParameterDescriptionSimple.cs" />
     <Compile Include="ParameterPresentation\ParametersPresenterSimple.cs" />
     <Compile Include="ParameterPresentation\ParametersPresenterXmlBuilder.cs" />
