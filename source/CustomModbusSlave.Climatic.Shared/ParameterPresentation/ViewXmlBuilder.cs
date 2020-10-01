@@ -52,26 +52,4 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation
             return new MultiView(viewElement.Attribute("Expression").Value, subElements, viewElement.Attribute("Name").Value);
         }
     }
-
-    internal sealed class XmlBuilderEvents
-    {
-        public static IList<IParameterEvent> GetEvents(XElement parameterElement)
-        {
-            var resultList = new List<IParameterView>();
-            var boolViewElements = parameterElement.Elements("BooleanEvent");
-            foreach (var e in boolViewElements)
-            {
-                resultList.Add(GetBooleanEvent(e));
-            }
-        }
-
-        private static IParameterView GetBooleanEvent(XElement viewElement)
-        {
-            return new BooleanEvent(
-                viewElement.Attribute("Expression").Value,
-                viewElement.Attribute("Name").Value, 
-                bool.Parse(viewElement.Attribute("InvertCondition").Value),
-                (EventLevel)Enum.Parse(typeof(EventLevel), viewElement.Attribute("Level").Value));
-        }
-    }
 }

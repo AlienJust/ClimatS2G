@@ -18,7 +18,7 @@ namespace CustomModbusSlave.Es2gClimatic.Shared.ParameterPresentation
             Level = level;
         }
 
-        public bool CheckForEvent(double value)
+        bool CheckForEvent(double value)
         {
             var expr = new Expression(_expression);
             expr.Parameters.Add("value", value);
