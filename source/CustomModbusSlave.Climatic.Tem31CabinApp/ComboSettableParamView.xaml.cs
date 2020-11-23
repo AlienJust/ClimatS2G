@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CustomModbusSlave.Climatic.TramHorizonInteriorApp
+namespace CustomModbusSlave.Climatic.CabinTem31App
 {
     /// <summary>
     /// Interaction logic for ComboSettableParamView.xaml

@@ -8,7 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CustomModbusSlave.Climatic.TramHorizonInteriorApp.Properties {
+namespace CustomModbusSlave.Climatic.Tem31CabinApp.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -36,7 +39,7 @@ namespace CustomModbusSlave.Climatic.TramHorizonInteriorApp.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CustomModbusSlave.Climatic.Tram.InteriorApp.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CustomModbusSlave.Climatic.Tem31CabinApp.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
-namespace CustomModbusSlave.Climatic.TramHorizonInteriorApp
+namespace CustomModbusSlave.Climatic.CabinTem31App
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -17,9 +17,9 @@ namespace CustomModbusSlave.Climatic.TramHorizonInteriorApp
 
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            var appFactory = new AppFactory("psn.TGM-climatic-cabin_v2.xml");
+            var appFactory = new AppFactory("psn.TEM31-climatic-cabin_v1.xml");
             var appAbilities = appFactory.Abilities;
-            var paramPresenter = appAbilities.GetParametersPresentation("tabs.tgmclimaticcabin.xml");
+            var paramPresenter = appAbilities.GetParametersPresentation("tabs.tem31climaticcabin.xml");
 
             if (appAbilities.Version == AppVersion.Full)
             {
@@ -65,11 +65,11 @@ namespace CustomModbusSlave.Climatic.TramHorizonInteriorApp
             }
 
 
-            appFactory.ShowMainWindowInOwnThread("Технический абонент, ТГМ6 кабина", appAbilities, mainVm =>
+            appFactory.ShowMainWindowInOwnThread("Технический абонент, ТЭМ31 кабина", appAbilities, mainVm =>
             {
                 try
                 {
-                    ParametersPresenterXmlSerializer.Serialize("123_tramtgm6cabin.xml", appAbilities.PsnProtocolConfiguration, false);
+                    ParametersPresenterXmlSerializer.Serialize("123_tem31cabin.xml", appAbilities.PsnProtocolConfiguration, false);
 
                     mainVm.UseCustomContent = true;
                     var channel = mainVm.AddChannel("Single channel");
